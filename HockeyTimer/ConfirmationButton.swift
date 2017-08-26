@@ -79,15 +79,15 @@ extension ConfirmationButton {
     class func redButton() -> ConfirmationButton {
         
         let button = ConfirmationButton()
-        button.backgroundColor = COLOR.Negation
+        button.backgroundColor = COLOR.DarkRed
         button.setTitleColor(COLOR.White, for: .normal)
         return button
     }
     
-    class func yellowButton() -> ConfirmationButton {
+    class func orangeButton() -> ConfirmationButton {
         
         let button = ConfirmationButton()
-        button.backgroundColor = COLOR.Affirmation
+        button.backgroundColor = COLOR.DarkOrange
         button.setTitleColor(COLOR.Theme, for: .normal)
         return button
     }

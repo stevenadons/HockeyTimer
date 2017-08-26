@@ -71,18 +71,21 @@ class StopWatch: UIControl {
     // MARK: - Initializers
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         game = HockeyGame(duration: .TwentyFive)
         setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
         super.init(coder: aDecoder)
         game = HockeyGame(duration: .TwentyFive)
         setUp()
     }
     
     convenience init(delegate: StopWatchDelegate, game: HockeyGame) {
+        
         self.init()
         self.delegate = delegate
         self.game = game
@@ -105,11 +108,11 @@ class StopWatch: UIControl {
         
         progressZone = CAShapeLayer()
         progressZone.strokeColor = UIColor.clear.cgColor
-        progressZone.fillColor = COLOR.LightBackground.cgColor
+        progressZone.fillColor = COLOR.DarkOrange.cgColor
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = COLOR.White.cgColor
+        core.backgroundColor = COLOR.DarkRed.cgColor
         squareContainer.addSublayer(core)
         
         firstProgressBar = progressBarLayer(for: .First)
@@ -118,7 +121,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(secondProgressBar)
         
         icon = StopWatchControlIcon(icon: .PlayIcon)
-        icon.color = COLOR.LightBackground
+        icon.color = COLOR.LightOrange
         addSubview(icon)
         
         timer = StopWatchTimer(delegate: self, duration: duration)
@@ -189,6 +192,7 @@ class StopWatch: UIControl {
     // MARK: - User methods
     
     func stopWatchLabelTimeString() -> String {
+        
         var result: String = ""
         let total = (timer.state == .RunningCountUp || timer.state == .Overdue) ? timer.totalSecondsCountingUp : timer.totalSecondsToGo
         if minutes(totalSeconds: total) < 10 {
@@ -209,8 +213,8 @@ class StopWatch: UIControl {
         halfLabel.text = LS_FIRSTHALFLABEL
         halfLabel.alpha = 1.0
         updateProgressBars()
-        resetTimeLabel(withColor: COLOR.Theme, alpha: 1)
-        setProgressBarsColor(to: COLOR.Theme)
+        resetTimeLabel(withColor: COLOR.White, alpha: 1)
+        setProgressBarsColor(to: COLOR.White)
         icon.icon = .PlayIcon
         setNeedsLayout()
     }
@@ -262,7 +266,7 @@ class StopWatch: UIControl {
     
     private func progressBarLayer(for half: HALF) -> CAShapeLayer {
         let shape = CAShapeLayer()
-        shape.strokeColor = COLOR.Theme.cgColor
+        shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = progressBarWidth
         shape.lineCap = kCALineCapButt
         shape.lineJoin = kCALineJoinMiter
@@ -396,7 +400,7 @@ class StopWatch: UIControl {
                 game.half = .Second
                 halfLabel.text = LS_SECONDHALFLABEL
                 timer.reset()
-                setProgressBarsColor(to: COLOR.Theme)
+                setProgressBarsColor(to: COLOR.White)
                 if durationLabel.alpha > 0 {
                     halfLabel.alpha = 1.0
                 }
@@ -405,7 +409,7 @@ class StopWatch: UIControl {
                     self.icon.change(to: .PlayIcon)
                 })
             }
-            resetTimeLabel(withColor: COLOR.Theme, alpha: 1)
+            resetTimeLabel(withColor: COLOR.White, alpha: 1)
             
         case .NoIcon:
             delegate?.handleTappedForNewGame()
@@ -468,7 +472,7 @@ extension StopWatch: StopWatchTimerDelegate {
         prepareHapticIfNeeded()
         updateProgressBars()
         message = LS_OVERTIME
-        resetTimeLabel(withColor: COLOR.Negation, alpha: 1)
+        resetTimeLabel(withColor: COLOR.DarkOrange, alpha: 1)
         icon.change(to: .StopIcon)
         delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
     }

@@ -23,7 +23,7 @@ class StopWatchLabel: UIView {
             setNeedsLayout()
         }
     }
-    var textColor: UIColor = COLOR.Theme {
+    var textColor: UIColor = COLOR.White {
         didSet {
             label.textColor = textColor
             setNeedsDisplay()

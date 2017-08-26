@@ -50,7 +50,7 @@ class Ball: UIView {
     
     private func setup() {
         
-        layer.backgroundColor = COLOR.BallBody.cgColor
+        layer.backgroundColor = COLOR.LightYellow.cgColor // BallBody
         layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.5

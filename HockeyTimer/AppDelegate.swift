@@ -13,9 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Customized: chooses which viewcontroller to show first
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        self.window?.rootViewController = startViewController
+        self.window?.makeKeyAndVisible()
         return true
     }
 

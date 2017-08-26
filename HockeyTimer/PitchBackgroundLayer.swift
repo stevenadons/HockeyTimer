@@ -43,15 +43,18 @@ class PitchBackgroundLayer: CALayer {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
         super.init()
     }
     
     override init(layer: Any) {
+        
         super.init()
     }
     
     // Optional: set shape position relating to embedding view's bounds
     override func layoutSublayers() {
+        
         super.layoutSublayers()
         edge.bounds = bounds
         edge.position = position
@@ -72,24 +75,16 @@ class PitchBackgroundLayer: CALayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
-        shape.strokeColor = UIColor.clear.cgColor
-        shape.fillColor = COLOR.Theme.cgColor
+        shape.strokeColor = COLOR.LightYellow.cgColor
+        shape.lineWidth = 6.0
+        shape.fillColor = COLOR.DarkRed.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape
     }
     
     private func edgePath() -> UIBezierPath {
         
-        let width = bounds.width // Design width 380
-        let height = bounds.height // Design height 202
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addCurve(to: CGPoint(x: width/2, y: height * 52/202), controlPoint1: CGPoint(x: 0, y: 0), controlPoint2: CGPoint(x: width/4, y: height * 52/202))
-        path.addCurve(to: CGPoint(x: width, y: 0), controlPoint1: CGPoint(x: width * 3/4, y: height * 52/202), controlPoint2: CGPoint(x: width, y: 0))
-        path.addLine(to: CGPoint(x: width, y: height))
-        path.addCurve(to: CGPoint(x: width/2, y: height - height * 52/202), controlPoint1: CGPoint(x: width, y: height), controlPoint2: CGPoint(x: width * 3/4, y: height - height * 52/202))
-        path.addCurve(to: CGPoint(x: 0, y: height), controlPoint1: CGPoint(x: width/4, y: height - height * 52/202), controlPoint2: CGPoint(x: 0, y: height))
-        path.close()
+        let path = UIBezierPath(rect: CGRect(x: -5, y: 0, width: bounds.width + 10, height: bounds.height))
         return path
     }
     
@@ -97,27 +92,16 @@ class PitchBackgroundLayer: CALayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
-        shape.strokeColor = COLOR.White.cgColor
-        shape.fillColor = COLOR.PitchBlue.cgColor
+        shape.strokeColor = COLOR.LightBlue.cgColor
+        shape.lineWidth = 1.0
+        shape.fillColor = COLOR.DarkBlue.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape
     }
     
     private func centerPath() -> UIBezierPath {
         
-        let width = bounds.width
-        let height = bounds.height
-        let outerInset: CGFloat = 24
-        let innerInset: CGFloat = 12
-        let offScreen: CGFloat = 2
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: -offScreen, y: outerInset))
-        path.addCurve(to: CGPoint(x: width/2, y: height * 52/202 + innerInset), controlPoint1: CGPoint(x: -offScreen, y: outerInset), controlPoint2: CGPoint(x: width/4, y: height * 52/202 + innerInset))
-        path.addCurve(to: CGPoint(x: width + offScreen, y: outerInset), controlPoint1: CGPoint(x: width * 3/4, y: height * 52/202 + innerInset), controlPoint2: CGPoint(x: width + offScreen, y: outerInset))
-        path.addLine(to: CGPoint(x: width + offScreen, y: height - outerInset))
-        path.addCurve(to: CGPoint(x: width/2, y: height - height * 52/202 - innerInset), controlPoint1: CGPoint(x: width + offScreen, y: height - outerInset), controlPoint2: CGPoint(x: width * 3/4, y: height - height * 52/202 - innerInset))
-        path.addCurve(to: CGPoint(x: -offScreen, y: height - outerInset), controlPoint1: CGPoint(x: width/4, y: height - height * 52/202 - innerInset), controlPoint2: CGPoint(x: -offScreen, y: height - outerInset))
-        path.close()
+        let path = UIBezierPath(rect: CGRect(x: -5, y: 23, width: bounds.width + 10, height: bounds.height - (23 * 2)))
         return path
     }
     
@@ -125,32 +109,17 @@ class PitchBackgroundLayer: CALayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
-        shape.strokeColor = COLOR.White.cgColor
-        shape.fillColor = UIColor.clear.cgColor
+        shape.strokeColor = COLOR.LightBlue.cgColor
+        shape.lineWidth = 1.0
         shape.allowsEdgeAntialiasing = true
         return shape
     }
 
     private func stripingPath() -> UIBezierPath {
         
-        let width = bounds.width
-        let height = bounds.height
-        let outerInset: CGFloat = 24
         let path = UIBezierPath()
-        
-        path.move(to: CGPoint(x: width * 18.5/375, y: outerInset + height * 8.5/202))
-        path.addLine(to: CGPoint(x: width * 18.5/375, y: height - outerInset - height * 8.5/202))
-        path.move(to: CGPoint(x: width * 102.5/375, y: outerInset + height * 30/202))
-        path.addLine(to: CGPoint(x: width * 102.5/375, y: height - outerInset - height * 30/202))
-        
-        path.move(to: CGPoint(x: width / 2, y: outerInset + height * 40/202))
-        path.addLine(to: CGPoint(x: width / 2, y: height - outerInset - height * 40/202))
-       
-        path.move(to: CGPoint(x: width - width * 18.5/375, y: outerInset + height * 8.5/202))
-        path.addLine(to: CGPoint(x: width - width * 18.5/375, y: height - outerInset - height * 8.5/202))
-        path.move(to: CGPoint(x: width - width * 102.5/375, y: outerInset + height * 30/202))
-        path.addLine(to: CGPoint(x: width - width * 102.5/375, y: height - outerInset - height * 30/202))
-        
+        path.move(to: CGPoint(x: bounds.width / 2, y: 23))
+        path.addLine(to: CGPoint(x: bounds.width / 2, y: bounds.height - 23))
         return path
     }
 }

@@ -79,6 +79,13 @@ enum COLOR {
     static let Red = UIColor(hexString: "#F0505A")
     static let RedLight = UIColor(hexString: "#FCA1A8")
     static let RedDark = UIColor(hexString: "#B0121E")
+    
+    static let DarkRed = UIColor(hexString: "#6E070C")
+    static let DarkOrange = UIColor(hexString: "#BD5917")
+    static let DarkBlue = UIColor(hexString: "#0E2C6C")
+    static let LightOrange = UIColor(hexString: "#CD9958")
+    static let LightYellow = UIColor(hexString: "#F0EDA5")
+    static let LightBlue = UIColor(hexString: "#8FC0F2")
 }
 
 
