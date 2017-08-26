@@ -88,7 +88,7 @@ extension ConfirmationButton {
         
         let button = ConfirmationButton()
         button.backgroundColor = COLOR.DarkOrange
-        button.setTitleColor(COLOR.Theme, for: .normal)
+        button.setTitleColor(COLOR.White, for: .normal)
         return button
     }
     

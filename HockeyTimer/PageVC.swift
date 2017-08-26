@@ -35,6 +35,8 @@ extension PageVC: UIPageViewControllerDataSource {
                 nextVC = ScoreVC(game: timerVC.game)
                 timerVC.delegate = nextVC as! TimerVCDelegate?
             }
+        } else if viewController.isKind(of: ScoreVC.self) {
+            nextVC = DocumentMenuVC()
         }
         return nextVC
     }
@@ -44,12 +46,14 @@ extension PageVC: UIPageViewControllerDataSource {
         var earlierVC: UIViewController? = nil
         if viewController.isKind(of: ScoreVC.self) {
             earlierVC = TimerVC()
+        } else if viewController.isKind(of: DocumentMenuVC.self) {
+            earlierVC = ScoreVC()
         }
         return earlierVC
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 2
+        return 3
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {

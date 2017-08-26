@@ -36,6 +36,12 @@
 		4FB4BEBA1F515EEA003B1259 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEB91F515EEA003B1259 /* Color.swift */; };
 		4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */; };
 		4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF141F520D1C003B1259 /* PageVC.swift */; };
+		4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */; };
+		4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF191F521FBA003B1259 /* DocumentList.swift */; };
+		4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */; };
+		4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1D1F521FE3003B1259 /* Document.swift */; };
+		4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */; };
+		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +76,12 @@
 		4FB4BEB91F515EEA003B1259 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
 		4FB4BF141F520D1C003B1259 /* PageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
+		4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentMenuVC.swift; sourceTree = "<group>"; };
+		4FB4BF191F521FBA003B1259 /* DocumentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentList.swift; sourceTree = "<group>"; };
+		4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentButton.swift; sourceTree = "<group>"; };
+		4FB4BF1D1F521FE3003B1259 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentVC.swift; sourceTree = "<group>"; };
+		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +135,8 @@
 				4FB4BF141F520D1C003B1259 /* PageVC.swift */,
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
 				4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */,
+				4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */,
+				4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -130,6 +144,8 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
+				4FB4BF181F521FA1003B1259 /* DocumentList */,
 				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
 				4FB4BE951F515C89003B1259 /* IconButtons */,
 				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
@@ -228,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
+				4FB4BF1D1F521FE3003B1259 /* Document.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -238,6 +255,23 @@
 				4FB4BEB91F515EEA003B1259 /* Color.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		4FB4BF181F521FA1003B1259 /* DocumentList */ = {
+			isa = PBXGroup;
+			children = (
+				4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */,
+				4FB4BF191F521FBA003B1259 /* DocumentList.swift */,
+			);
+			name = DocumentList;
+			sourceTree = "<group>";
+		};
+		4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */,
+			);
+			name = MaskWithActivityIndicator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +351,7 @@
 				4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */,
 				4FB4BE921F515C49003B1259 /* Ball.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
+				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
 				4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
 				4FB4BEA71F515D87003B1259 /* DismissButtonLayer.swift in Sources */,
@@ -324,8 +359,10 @@
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
 				4FB4BEA61F515D87003B1259 /* DismissButtonIconOnly.swift in Sources */,
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
+				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BEA51F515D87003B1259 /* DismissButton.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
+				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
 				4FB4BE821F515BE6003B1259 /* StopWatchTimer.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
@@ -335,10 +372,13 @@
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
+				4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */,
 				4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */,
 				4FB4BE8E1F515C38003B1259 /* PitchBackgroundLayer.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
+				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
+				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
