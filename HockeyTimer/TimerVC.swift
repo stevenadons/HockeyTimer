@@ -194,7 +194,7 @@ class TimerVC: UIViewController {
     // MARK: - Private Methods
 
     
-    fileprivate func resetWithNewGame() {
+    func resetWithNewGame() {
         
         handleNewGame()
         delegate?.resetGame()
@@ -210,7 +210,7 @@ class TimerVC: UIViewController {
         }
         game = HockeyGame(duration: duration)
         stopWatch.reset(withGame: game)
-        delegate?.hideBall()
+//        delegate?.hideBall()
     }
 }
 
@@ -222,10 +222,10 @@ extension TimerVC: StopWatchDelegate {
         
         switch stopWatchTimer.state {
         case .WaitingToStart:
-            delegate?.hideBall()
+//            delegate?.hideBall()
             completionHandler?()
         case .RunningCountDown:
-            delegate?.showBall()
+//            delegate?.showBall()
             completionHandler?()
         case .RunningCountUp:
             completionHandler?()
@@ -234,7 +234,7 @@ extension TimerVC: StopWatchDelegate {
         case .Overdue:
             completionHandler?()
         case .Ended:
-            delegate?.hideBall()
+//            delegate?.hideBall()
             completionHandler?()
         }
     }

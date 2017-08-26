@@ -42,6 +42,10 @@
 		4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1D1F521FE3003B1259 /* Document.swift */; };
 		4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */; };
 		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
+		4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF241F5225B3003B1259 /* DurationVC.swift */; };
+		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
+		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
+		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +86,10 @@
 		4FB4BF1D1F521FE3003B1259 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentVC.swift; sourceTree = "<group>"; };
 		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
+		4FB4BF241F5225B3003B1259 /* DurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationVC.swift; sourceTree = "<group>"; };
+		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
+		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
+		4FB4BF2B1F52273B003B1259 /* AgeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BF141F520D1C003B1259 /* PageVC.swift */,
+				4FB4BF241F5225B3003B1259 /* DurationVC.swift */,
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
 				4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */,
 				4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */,
@@ -144,6 +153,7 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
 				4FB4BF181F521FA1003B1259 /* DocumentList */,
 				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
@@ -245,6 +255,7 @@
 			children = (
 				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
 				4FB4BF1D1F521FE3003B1259 /* Document.swift */,
+				4FB4BF2B1F52273B003B1259 /* AgeRange.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -272,6 +283,15 @@
 				4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */,
 			);
 			name = MaskWithActivityIndicator;
+			sourceTree = "<group>";
+		};
+		4FB4BF261F52261F003B1259 /* DurationCard */ = {
+			isa = PBXGroup;
+			children = (
+				4FB4BF271F522635003B1259 /* DurationCard.swift */,
+				4FB4BF291F522644003B1259 /* MiniStopWatch.swift */,
+			);
+			name = DurationCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +371,7 @@
 				4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */,
 				4FB4BE921F515C49003B1259 /* Ball.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
+				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
 				4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
@@ -363,6 +384,7 @@
 				4FB4BEA51F515D87003B1259 /* DismissButton.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
+				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
 				4FB4BE821F515BE6003B1259 /* StopWatchTimer.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
@@ -379,6 +401,8 @@
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
+				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
+				4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

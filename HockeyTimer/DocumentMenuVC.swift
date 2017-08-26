@@ -31,6 +31,12 @@ class DocumentMenuVC: UIViewController {
         setup()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        documentList.windUp()
+    }
+    
     private func setup() {
         
         view.backgroundColor = COLOR.LightRed

@@ -66,7 +66,7 @@ class DocumentList: UIView {
             } else if index == 3 {
                 button = DocumentButton.button(document: document, color: COLOR.LightOrange, titleColor: COLOR.White)
             } else if index == 4 || index == 5 {
-                button = DocumentButton.button(document: document, color: COLOR.DarkOrange, titleColor: COLOR.Theme)
+                button = DocumentButton.button(document: document, color: COLOR.DarkOrange, titleColor: COLOR.White)
             } else {
                 button = DocumentButton.button(document: document, color: COLOR.DarkRed, titleColor: COLOR.White)
             }
@@ -77,17 +77,6 @@ class DocumentList: UIView {
             buttons.append(button)
         }
         windUp()
-    }
-    
-    private func windUp() {
-        
-        for index in 0..<buttons.count {
-            if index == 3 || index == 6 {
-                buttons[index].transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
-            } else {
-                buttons[index].transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
-            }
-        }
     }
     
     
@@ -127,6 +116,17 @@ class DocumentList: UIView {
 
 
     // MARK: - User Methods
+    
+    func windUp() {
+        
+        for index in 0..<buttons.count {
+            if index == 3 || index == 6 {
+                buttons[index].transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
+            } else {
+                buttons[index].transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
+            }
+        }
+    }
 
     func animateFlyIn() {
         

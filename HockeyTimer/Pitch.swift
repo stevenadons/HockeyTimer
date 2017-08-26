@@ -134,25 +134,25 @@ class Pitch: UIView {
     
     // MARK: - User methods
     
-    func showBall() {
-        
-        ball.isUserInteractionEnabled = true
-        if ball.alpha < 1 {
-            UIView.animate(withDuration: 0.2) {
-                self.ball.alpha = 1
-            }
-        }
-    }
-    
-    func hideBall() {
-        
-        ball.isUserInteractionEnabled = false
-        if ball.alpha > 0 {
-            UIView.animate(withDuration: 0.2) {
-                self.ball.alpha = 0
-            }
-        }
-    }
+//    func showBall() {
+//        
+//        ball.isUserInteractionEnabled = true
+//        if ball.alpha < 1 {
+//            UIView.animate(withDuration: 0.2) {
+//                self.ball.alpha = 1
+//            }
+//        }
+//    }
+//    
+//    func hideBall() {
+//        
+//        ball.isUserInteractionEnabled = false
+//        if ball.alpha > 0 {
+//            UIView.animate(withDuration: 0.2) {
+//                self.ball.alpha = 0
+//            }
+//        }
+//    }
     
     func moveUp(completion: (() -> Void)?) {
         

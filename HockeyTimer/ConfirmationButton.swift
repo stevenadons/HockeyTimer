@@ -84,11 +84,17 @@ extension ConfirmationButton {
         return button
     }
     
-    class func orangeButton() -> ConfirmationButton {
+    class func orangeButton(shadow: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
         button.backgroundColor = COLOR.DarkOrange
         button.setTitleColor(COLOR.White, for: .normal)
+        if shadow {
+            button.layer.shadowColor = UIColor.lightGray.cgColor
+            button.layer.shadowOffset = CGSize(width: 0, height: 1)
+            button.layer.shadowOpacity = 0.8
+            button.layer.shadowRadius = 3
+        }
         return button
     }
     

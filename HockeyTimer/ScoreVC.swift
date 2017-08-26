@@ -11,8 +11,8 @@ import UIKit
 protocol TimerVCDelegate: class {
     
     func resetGame()
-    func showBall()
-    func hideBall()
+//    func showBall()
+//    func hideBall()
 }
 
 protocol PitchDelegate: class {
@@ -68,7 +68,7 @@ class ScoreVC: UIViewController {
         pitchContainer = PitchContainerView()
         view.addSubview(pitchContainer)
         pitch = Pitch(delegate: self)
-        pitch.hideBall()
+//        pitch.hideBall()
         pitch.isUserInteractionEnabled = true
         pitchContainer.addSubview(pitch)
         
@@ -126,7 +126,7 @@ class ScoreVC: UIViewController {
         dismissEditMode.hide()
         hideConfirmationButton()
         pitch.moveBack {
-            self.pitch.showBall()
+//            self.pitch.showBall()
 //            if self.stopWatch.timer.state != .WaitingToStart && self.stopWatch.timer.state != .Ended {
 //                self.pitch.showBall()
 //            }
@@ -182,13 +182,13 @@ extension ScoreVC: TimerVCDelegate {
         pitch.resetScores()
     }
     
-    func showBall() {
-        pitch.showBall()
-    }
+//    func showBall() {
+//        pitch.showBall()
+//    }
     
-    func hideBall() {
-        pitch.hideBall()
-    }
+//    func hideBall() {
+//        pitch.hideBall()
+//    }
 }
 
 
