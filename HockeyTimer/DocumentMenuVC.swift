@@ -15,7 +15,7 @@ protocol DocumentListDelegate: class {
 }
 
 
-class DocumentMenuVC: UIViewController {
+class DocumentMenuVC: PanArrowVC {
 
     
     // MARK: - Properties
@@ -39,11 +39,17 @@ class DocumentMenuVC: UIViewController {
     
     private func setup() {
         
-        view.backgroundColor = COLOR.LightRed
+        view.backgroundColor = COLOR.White
         
         documentList = DocumentList(delegate: self)
         documentList.backgroundColor = UIColor.clear
         view.addSubview(documentList)
+        
+        panArrowUp.color = COLOR.LightYellow
+        panArrowDown.alpha = 0.0
+        panArrowUpLabel.text = LS_TITLE_SCORE
+        panArrowDownLabel.alpha = 0.0
+        panArrowUpLabel.textColor = COLOR.DarkRed
         
         NSLayoutConstraint.activate([
             

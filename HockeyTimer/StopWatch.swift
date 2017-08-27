@@ -108,11 +108,11 @@ class StopWatch: UIControl {
         
         progressZone = CAShapeLayer()
         progressZone.strokeColor = UIColor.clear.cgColor
-        progressZone.fillColor = COLOR.DarkOrange.cgColor
+        progressZone.fillColor = COLOR.DarkGray.cgColor
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = COLOR.DarkRed.cgColor
+        core.backgroundColor = COLOR.DarkBlue.cgColor
         squareContainer.addSublayer(core)
         
         firstProgressBar = progressBarLayer(for: .First)
@@ -121,7 +121,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(secondProgressBar)
         
         icon = StopWatchControlIcon(icon: .PlayIcon)
-        icon.color = COLOR.LightOrange
+        icon.color = COLOR.DarkOrange
         addSubview(icon)
         
         timer = StopWatchTimer(delegate: self, duration: duration)
@@ -362,7 +362,7 @@ class StopWatch: UIControl {
             timer.startCountDown()
             game.status = .Running
             icon.change(to: .PauseIcon)
-            icon.stopPulsing()
+//            icon.stopPulsing()
             message = ""
             delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
 
@@ -371,7 +371,7 @@ class StopWatch: UIControl {
             timer.pause()
             game.status = .Pausing
             icon.change(to: .PlayIcon)
-            icon.startPulsing()
+//            icon.startPulsing()
             message = LS_GAMEPAUSED
             
         case .StopIcon:
@@ -472,7 +472,7 @@ extension StopWatch: StopWatchTimerDelegate {
         prepareHapticIfNeeded()
         updateProgressBars()
         message = LS_OVERTIME
-        resetTimeLabel(withColor: COLOR.DarkOrange, alpha: 1)
+        resetTimeLabel(withColor: COLOR.LightYellow, alpha: 1)
         icon.change(to: .StopIcon)
         delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
     }

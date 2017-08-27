@@ -29,6 +29,9 @@ class Pitch: UIView {
     fileprivate var homeScoreLabel: UILabel!
     fileprivate var awayScoreLabel: UILabel!
     
+    fileprivate var homeScoreStepper: ScoreStepper!
+    fileprivate var awayScoreStepper: ScoreStepper!
+
     fileprivate var delegate: PitchDelegate?
     fileprivate var homeScore: Int = 0
     fileprivate var awayScore: Int = 0
@@ -72,21 +75,15 @@ class Pitch: UIView {
         awayScoreLabel = scoreLabel()
         addSubview(awayScoreLabel)
         
+        homeScoreStepper = ScoreStepper()
+        homeScoreStepper.alpha = 0.0
+        addSubview(homeScoreStepper)
+        awayScoreStepper = ScoreStepper()
+        awayScoreStepper.alpha = 0.0
+        addSubview(awayScoreStepper)
+        
         ball = Ball(delegate: self)
         addSubview(ball)
-    }
-    
-    private func nameLabel(title: String) -> UILabel {
-        
-        let label = UILabel()
-        label.text = title
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
-        label.adjustsFontSizeToFitWidth = true
-        label.isUserInteractionEnabled = false
-        label.textAlignment = .center
-        label.textColor = COLOR.Theme
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }
     
     private func scoreLabel() -> UILabel {
@@ -123,6 +120,16 @@ class Pitch: UIView {
             awayScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 133 * bounds.width / 375),
             awayScoreLabel.trailingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 47 * bounds.width / 375),
             
+            homeScoreStepper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+            homeScoreStepper.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -24),
+            homeScoreStepper.heightAnchor.constraint(equalTo: homeScoreStepper.widthAnchor, multiplier: 46 / 136),
+            homeScoreStepper.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            awayScoreStepper.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 24),
+            awayScoreStepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            awayScoreStepper.heightAnchor.constraint(equalTo: awayScoreStepper.widthAnchor, multiplier: 46 / 136),
+            awayScoreStepper.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
             ball.centerXAnchor.constraint(equalTo: centerXAnchor),
             ball.centerYAnchor.constraint(equalTo: centerYAnchor),
             ball.heightAnchor.constraint(equalToConstant: 40),
@@ -134,44 +141,41 @@ class Pitch: UIView {
     
     // MARK: - User methods
     
-//    func showBall() {
+    
+    
+//    func moveUp(completion: (() -> Void)?) {
 //        
-//        ball.isUserInteractionEnabled = true
-//        if ball.alpha < 1 {
-//            UIView.animate(withDuration: 0.2) {
-//                self.ball.alpha = 1
-//            }
-//        }
+//        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction], animations: {
+//            self.transform = CGAffineTransform(translationX: 0, y: -110)
+//        }, completion: { (finished) in
+//            self.configureSwipes()
+//            completion?()
+//        })
 //    }
 //    
-//    func hideBall() {
+//    func moveBack(completion: (() -> Void)?) {
 //        
-//        ball.isUserInteractionEnabled = false
-//        if ball.alpha > 0 {
-//            UIView.animate(withDuration: 0.2) {
-//                self.ball.alpha = 0
-//            }
-//        }
+//        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction], animations: {
+//            self.transform = CGAffineTransform.identity
+//        }, completion: { (finished) in
+//            completion?()
+//        })
+//        disableSwipes()
 //    }
     
-    func moveUp(completion: (() -> Void)?) {
+    func steppers(show: Bool) {
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction], animations: {
-            self.transform = CGAffineTransform(translationX: 0, y: -110)
-        }, completion: { (finished) in
-            self.configureSwipes()
-            completion?()
-        })
-    }
-    
-    func moveBack(completion: (() -> Void)?) {
-        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction], animations: {
-            self.transform = CGAffineTransform.identity
-        }, completion: { (finished) in
-            completion?()
-        })
-        disableSwipes()
+        if show {
+            hideBall()
+            homeScoreStepper.setScore(value: homeScore)
+            awayScoreStepper.setScore(value: awayScore)
+        } else {
+            showBall()
+        }
+        homeScoreLabel.alpha = show ? 0.0 : 1.0
+        awayScoreLabel.alpha = show ? 0.0 : 1.0
+        homeScoreStepper.alpha = show ? 1.0 : 0.0
+        awayScoreStepper.alpha = show ? 1.0 : 0.0
     }
 
     func resetScores() {
@@ -183,8 +187,27 @@ class Pitch: UIView {
     }
     
     
-    
     // MARK: - Private Methods
+    
+    fileprivate func showBall() {
+        
+        ball.isUserInteractionEnabled = true
+        if ball.alpha < 1 {
+            UIView.animate(withDuration: 0.2) {
+                self.ball.alpha = 1
+            }
+        }
+    }
+    
+    fileprivate func hideBall() {
+        
+        ball.isUserInteractionEnabled = false
+        if ball.alpha > 0 {
+            UIView.animate(withDuration: 0.2) {
+                self.ball.alpha = 0
+            }
+        }
+    }
     
     fileprivate func updateScore(for game: HockeyGame) {
         

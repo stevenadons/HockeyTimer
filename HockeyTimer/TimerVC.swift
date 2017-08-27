@@ -16,7 +16,7 @@ protocol StopWatchDelegate: class {
 }
 
 
-class TimerVC: UIViewController {
+class TimerVC: PanArrowVC {
 
     
     // MARK: - Properties
@@ -26,13 +26,13 @@ class TimerVC: UIViewController {
     fileprivate var stopWatch: StopWatch!
     fileprivate var maskView: UIButton!
     fileprivate var confirmationButton: ConfirmationButton!
+
     fileprivate var duration: MINUTESINHALF = .TwentyFive
     var game: HockeyGame!
     var delegate: TimerVCDelegate?
     private var scorePanelCenterYConstraint: NSLayoutConstraint!
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
     fileprivate var messageTimer: Timer?
-    fileprivate let standardUndoButtonColor: UIColor = COLOR.Negation
     
     var message: String = "" {
         didSet {
@@ -47,7 +47,7 @@ class TimerVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.DarkRed
+        view.backgroundColor = COLOR.DarkBlue
         view.clipsToBounds = true
         if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
             if let enumCase = MINUTESINHALF(rawValue: minutes) {
@@ -83,17 +83,22 @@ class TimerVC: UIViewController {
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
+        panArrowUp.color = COLOR.DarkOrange
+        panArrowDown.color = COLOR.DarkOrange
+        panArrowUpLabel.text = LS_TITLE_GAMETIME
+        panArrowDownLabel.text = LS_TITLE_SCORE
+        
         NSLayoutConstraint.activate([
             
             resetButton.widthAnchor.constraint(equalToConstant: 44),
             resetButton.heightAnchor.constraint(equalToConstant: 44),
-            resetButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 36),
-            resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            resetButton.topAnchor.constraint(equalTo: stopWatch.bottomAnchor, constant: 20),
+            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 210/375),
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2),
+            stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2 - 30),
             stopWatch.widthAnchor.constraint(equalTo: stopWatchContainer.widthAnchor),
             stopWatch.heightAnchor.constraint(equalTo: stopWatchContainer.heightAnchor),
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
@@ -120,7 +125,7 @@ class TimerVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        showIcons()
+//        showIcons()
     }
     
     
@@ -155,12 +160,14 @@ class TimerVC: UIViewController {
     }
     
     fileprivate func hideIcons() {
+        
         UIView.animate(withDuration: 0.2) {
             self.resetButton.alpha = 0.0
         }
     }
     
     fileprivate func showIcons() {
+        
         UIView.animate(withDuration: 0.2) {
             self.resetButton.alpha = 1.0
         }
@@ -210,6 +217,7 @@ class TimerVC: UIViewController {
         }
         game = HockeyGame(duration: duration)
         stopWatch.reset(withGame: game)
+        hideIcons()
 //        delegate?.hideBall()
     }
 }
@@ -219,6 +227,10 @@ class TimerVC: UIViewController {
 extension TimerVC: StopWatchDelegate {
     
     func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?) {
+        
+        if stopWatchTimer.state != .WaitingToStart {
+            showIcons()
+        }
         
         switch stopWatchTimer.state {
         case .WaitingToStart:

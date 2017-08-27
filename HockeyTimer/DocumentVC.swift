@@ -44,7 +44,7 @@ class DocumentVC: UIViewController {
         webView.navigationDelegate = self
         webContainerView.addSubview(webView)
         
-        button = ConfirmationButton.orangeButton(shadow: true)
+        button = ConfirmationButton.redButton(shadow: true)
         button.alpha = 0.0
         button.setTitle(LS_BACKBUTTON, for: .normal)
         button.addTarget(self, action: #selector(backButtonTapped(sender:forEvent:)), for: [.touchUpInside])

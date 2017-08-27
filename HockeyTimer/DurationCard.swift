@@ -26,12 +26,16 @@ class DurationCard: UIButton {
             switch duration {
             case .Twenty:
                 backgroundColor = COLOR.LightYellow
+                miniStopWatch.color = COLOR.DarkBlue
             case .TwentyFive:
-                backgroundColor = COLOR.LightOrange
-            case .Thirty:
                 backgroundColor = COLOR.DarkOrange
-            case .ThirtyFive:
+                miniStopWatch.color = COLOR.DarkBlue
+            case .Thirty:
                 backgroundColor = COLOR.DarkRed
+                miniStopWatch.color = COLOR.DarkGray
+            case .ThirtyFive:
+                backgroundColor = COLOR.DarkBlue
+                miniStopWatch.color = COLOR.DarkGray
             default:
                 backgroundColor = COLOR.White
             }
@@ -85,6 +89,9 @@ class DurationCard: UIButton {
         addSubview(miniStopWatch)
         
         ageLabel = createAgeLabel(title: ageString)
+        if duration == .Twenty {
+            ageLabel.textColor = COLOR.DarkBlue
+        }
         addSubview(ageLabel)
         
         windUp()
@@ -143,6 +150,7 @@ class DurationCard: UIButton {
 
     func popup(delay: Double) {
         
+        guard transform != .identity else { return }
         let deadline = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delay * 1000))
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             self.alpha = 1.0

@@ -55,7 +55,7 @@ class DocumentList: UIView {
     
     private func setup() {
         
-        backgroundColor = UIColor.cyan
+        backgroundColor = UIColor.clear
         translatesAutoresizingMaskIntoConstraints = false
         
         for index in 0..<Document.allDocuments().count {
@@ -64,11 +64,11 @@ class DocumentList: UIView {
             if index < 3 {
                 button = DocumentButton.button(document: document, color: COLOR.LightYellow, titleColor: COLOR.DarkRed)
             } else if index == 3 {
-                button = DocumentButton.button(document: document, color: COLOR.LightOrange, titleColor: COLOR.White)
-            } else if index == 4 || index == 5 {
                 button = DocumentButton.button(document: document, color: COLOR.DarkOrange, titleColor: COLOR.White)
-            } else {
+            } else if index == 4 || index == 5 {
                 button = DocumentButton.button(document: document, color: COLOR.DarkRed, titleColor: COLOR.White)
+            } else {
+                button = DocumentButton.button(document: document, color: COLOR.DarkBlue, titleColor: COLOR.White)
             }
             button.addTarget(self, action: #selector(handleButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             button.heightAnchor.constraint(equalToConstant: DocumentButton.fixedHeight).isActive = true
@@ -134,20 +134,21 @@ class DocumentList: UIView {
             var extraDelay: Double
             switch index {
             case 3:
-                extraDelay = 0.2
+                extraDelay = 0.1
             case 4...5:
-                extraDelay = 0.4
+                extraDelay = 0.2
             case 6:
-                extraDelay = 0.6
+                extraDelay = 0.3
             default:
                 extraDelay = 0
             }
-            UIView.animate(withDuration: 0.2, delay: 0.05 * Double(index) + extraDelay, options: [.allowUserInteraction, .curveEaseOut], animations: {
-                self.buttons[index].transform = .identity
-            }, completion: nil)
+            if self.buttons[index].transform != .identity {
+                UIView.animate(withDuration: 0.2, delay: 0.05 * Double(index) + extraDelay, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                    self.buttons[index].transform = .identity
+                }, completion: nil)
+            }
         }
     }
-    
 }
 
 

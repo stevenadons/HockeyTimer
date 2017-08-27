@@ -17,7 +17,7 @@ class PageVC: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         delegate = self
-        view.backgroundColor = COLOR.LightRed // should be same color as onboarding screens
+        view.backgroundColor = COLOR.White // should be same color as onboarding screens
         
         let startVC = TimerVC()
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)

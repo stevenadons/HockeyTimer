@@ -60,7 +60,6 @@ enum COLOR {
     static let MenuCircleSmallOutside = UIColor(hexString: "#1E2460")
     static let MenuCircleSmallInside = UIColor(hexString: "#2E3694")
     
-    static let White = UIColor(hexString: "#FFFFFF")
     static let PitchBlue = UIColor(hexString: "#3D8FE5") // 4784C9
     static let PitchEdge = UIColor(hexString: "#8DBFF7")
     static let Striping = UIColor(hexString: "#FFFFFF") //6F7498
@@ -81,12 +80,15 @@ enum COLOR {
     static let RedDark = UIColor(hexString: "#B0121E")
     
     static let DarkRed = UIColor(hexString: "#6E070C")
-    static let DarkOrange = UIColor(hexString: "#BD5917")
-    static let DarkBlue = UIColor(hexString: "#0E2C6C")
+    static let DarkOrange = UIColor(hexString: "#A3402F")
+    static let DarkBlue = UIColor(hexString: "#0A1329")
+    static let DarkGray = UIColor(hexString: "#40434E")
     static let LightRed = UIColor(hexString: "#A6090E")
     static let LightOrange = UIColor(hexString: "#CD9958")
-    static let LightYellow = UIColor(hexString: "#F0EDA5")
+    static let LightYellow = UIColor(hexString: "#F9B82C")
     static let LightBlue = UIColor(hexString: "#8FC0F2")
+    static let White = UIColor(hexString: "#FBFAF8")
+
 }
 
 
@@ -124,8 +126,10 @@ let LS_MESSAGEEDITSCORES = NSLocalizedString("SWIPE SCORE UP OR DOWN", comment: 
 let LS_BACKBUTTON = NSLocalizedString("BACK", comment: "Message on button to back out from document")
 
 let LS_TITLE_EDITSCORE = NSLocalizedString("EDIT SCORE", comment: "title for edit score menu button")
-let LS_TITLE_SETGAMETIME = NSLocalizedString("SET GAME TIME", comment: "title for duration VC and menu button")
-let LS_TITLE_DOCUMENTS = NSLocalizedString("DOCUMENTS", comment: "Title for document list VC and menu button")
+let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navigating")
+let LS_TITLE_DOCUMENTS = NSLocalizedString("Documents", comment: "Title for navigating")
+let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
+let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
 
 
 let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("VHL PICTOGRAM U7-U8", comment: "Name for document")

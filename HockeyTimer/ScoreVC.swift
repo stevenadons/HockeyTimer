@@ -25,13 +25,16 @@ protocol PitchDelegate: class {
 }
 
 
-class ScoreVC: UIViewController {
+class ScoreVC: PanArrowVC {
     
     
     // MARK: - Properties
 
     fileprivate var pitchContainer: PitchContainerView!
     fileprivate var pitch: Pitch!
+    
+    fileprivate var editModeButton: NewGameButtonIconOnly!
+
     fileprivate var dismissEditMode: DismissButton!
     fileprivate var confirmationButton: ConfirmationButton!
 
@@ -58,7 +61,7 @@ class ScoreVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.DarkOrange
+        view.backgroundColor = COLOR.LightYellow
         view.clipsToBounds = true
         setupViews()
     }
@@ -68,20 +71,30 @@ class ScoreVC: UIViewController {
         pitchContainer = PitchContainerView()
         view.addSubview(pitchContainer)
         pitch = Pitch(delegate: self)
-//        pitch.hideBall()
         pitch.isUserInteractionEnabled = true
         pitchContainer.addSubview(pitch)
+        
+        editModeButton = NewGameButtonIconOnly()
+        editModeButton.addTarget(self, action: #selector(editModeButtonTapped(sender:forEvent:)), for: [.touchUpInside])
+        view.addSubview(editModeButton)
         
         dismissEditMode = DismissButton()
         dismissEditMode.addTarget(self, action: #selector(dismissButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         dismissEditMode.alpha = 0
         view.addSubview(dismissEditMode)
         
-        confirmationButton = ConfirmationButton.redButton()
+        confirmationButton = ConfirmationButton.redButton(shadow: true)
         confirmationButton.alpha = 0.0
         confirmationButton.setTitle(LS_BACKBUTTON, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
+        
+        panArrowUp.color = COLOR.White
+        panArrowDown.color = COLOR.White
+        panArrowUpLabel.text = LS_TITLE_STOPWATCH
+        panArrowDownLabel.text = LS_TITLE_DOCUMENTS
+        panArrowUpLabel.textColor = COLOR.DarkOrange
+        panArrowDownLabel.textColor = COLOR.DarkOrange
 
         NSLayoutConstraint.activate([
             
@@ -94,6 +107,11 @@ class ScoreVC: UIViewController {
             pitch.heightAnchor.constraint(equalTo: pitchContainer.heightAnchor),
             pitch.centerYAnchor.constraint(equalTo: pitchContainer.centerYAnchor),
             
+            editModeButton.widthAnchor.constraint(equalToConstant: 44),
+            editModeButton.heightAnchor.constraint(equalToConstant: 44),
+            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 20),
+            editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             dismissEditMode.heightAnchor.constraint(equalToConstant: 50),
             dismissEditMode.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
             dismissEditMode.widthAnchor.constraint(equalTo: dismissEditMode.heightAnchor, multiplier: 1),
@@ -102,7 +120,7 @@ class ScoreVC: UIViewController {
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
             
             ])
     }
@@ -120,20 +138,26 @@ class ScoreVC: UIViewController {
     
     // MARK: - Touch Methods
     
+    @objc private func editModeButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
+        
+        inEditMode = !inEditMode
+        pitch.steppers(show: inEditMode)
+    }
+    
     @objc private func dismissButtonTapped(sender: DismissButton, forEvent event: UIEvent) {
         
         inEditMode = false
         dismissEditMode.hide()
         hideConfirmationButton()
-        pitch.moveBack {
-//            self.pitch.showBall()
-//            if self.stopWatch.timer.state != .WaitingToStart && self.stopWatch.timer.state != .Ended {
-//                self.pitch.showBall()
-//            }
-//            self.stopWatch.comeFromBackground(completion: {
-////                self.showIcons()
-//            })
-        }
+//        pitch.moveBack {
+////            self.pitch.showBall()
+////            if self.stopWatch.timer.state != .WaitingToStart && self.stopWatch.timer.state != .Ended {
+////                self.pitch.showBall()
+////            }
+////            self.stopWatch.comeFromBackground(completion: {
+//////                self.showIcons()
+////            })
+//        }
     }
     
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */; };
+		4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D11F5332760003C2FF /* PanArrow.swift */; };
+		4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */; };
+		4F9FC5D81F53387D0003C2FF /* PanArrowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */; };
+		4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5DA1F53449A0003C2FF /* ScoreStepper.swift */; };
+		4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5DE1F5345D50003C2FF /* ScoreStepperButton.swift */; };
+		4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5E01F5346130003C2FF /* ScoreStepperButtonLayer.swift */; };
+		4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */; };
 		4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE691F515B3B003B1259 /* AppDelegate.swift */; };
 		4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE6B1F515B3B003B1259 /* ViewController.swift */; };
 		4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB4BE6D1F515B3B003B1259 /* Main.storyboard */; };
@@ -49,6 +57,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLayer.swift; sourceTree = "<group>"; };
+		4F9FC5D11F5332760003C2FF /* PanArrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrow.swift; sourceTree = "<group>"; };
+		4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLabelFactory.swift; sourceTree = "<group>"; };
+		4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowVC.swift; sourceTree = "<group>"; };
+		4F9FC5DA1F53449A0003C2FF /* ScoreStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepper.swift; sourceTree = "<group>"; };
+		4F9FC5DE1F5345D50003C2FF /* ScoreStepperButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperButton.swift; sourceTree = "<group>"; };
+		4F9FC5E01F5346130003C2FF /* ScoreStepperButtonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperButtonLayer.swift; sourceTree = "<group>"; };
+		4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperLabelFactory.swift; sourceTree = "<group>"; };
 		4FB4BE661F515B3B003B1259 /* HockeyTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HockeyTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4BE691F515B3B003B1259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FB4BE6B1F515B3B003B1259 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +119,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F9FC5CE1F5331840003C2FF /* PanArrow */ = {
+			isa = PBXGroup;
+			children = (
+				4F9FC5D11F5332760003C2FF /* PanArrow.swift */,
+				4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */,
+				4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */,
+			);
+			name = PanArrow;
+			sourceTree = "<group>";
+		};
+		4F9FC5D91F5344760003C2FF /* ScoreStepper */ = {
+			isa = PBXGroup;
+			children = (
+				4F9FC5DA1F53449A0003C2FF /* ScoreStepper.swift */,
+				4F9FC5DE1F5345D50003C2FF /* ScoreStepperButton.swift */,
+				4F9FC5E01F5346130003C2FF /* ScoreStepperButtonLayer.swift */,
+				4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */,
+			);
+			name = ScoreStepper;
+			sourceTree = "<group>";
+		};
 		4FB4BE5D1F515B3B003B1259 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +221,7 @@
 				4FB4BE8F1F515C3F003B1259 /* PitchContainerView.swift */,
 				4FB4BE911F515C49003B1259 /* Ball.swift */,
 				4FB4BE931F515C4F003B1259 /* BallShinySpot.swift */,
+				4F9FC5D91F5344760003C2FF /* ScoreStepper */,
 			);
 			name = Pitch;
 			sourceTree = "<group>";
@@ -191,6 +229,7 @@
 		4FB4BE951F515C89003B1259 /* IconButtons */ = {
 			isa = PBXGroup;
 			children = (
+				4F9FC5CE1F5331840003C2FF /* PanArrow */,
 				4FB4BEA11F515D6B003B1259 /* Dismiss */,
 				4FB4BE961F515C96003B1259 /* NewGame */,
 			);
@@ -220,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
+				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -390,19 +430,27 @@
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
 				4FB4BEBA1F515EEA003B1259 /* Color.swift in Sources */,
 				4FB4BE7D1F515B7D003B1259 /* TimerVC.swift in Sources */,
+				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
+				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
+				4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */,
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
 				4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */,
 				4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */,
 				4FB4BE8E1F515C38003B1259 /* PitchBackgroundLayer.swift in Sources */,
+				4F9FC5D81F53387D0003C2FF /* PanArrowVC.swift in Sources */,
+				4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */,
+				4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
+				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
 				4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */,
+				4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +612,7 @@
 				4FB4BE7A1F515B3B003B1259 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

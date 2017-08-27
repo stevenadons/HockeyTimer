@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DurationVC: UIViewController {
+class DurationVC: PanArrowVC {
 
     
     // MARK: - Properties
@@ -29,7 +29,7 @@ class DurationVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.LightRed
+        view.backgroundColor = COLOR.White
         setupViews()
     }
     
@@ -67,6 +67,12 @@ class DurationVC: UIViewController {
             $0.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
             view.addSubview($0)
         }
+        
+        panArrowUp.alpha = 0.0
+        panArrowDown.color = COLOR.LightYellow
+        panArrowUpLabel.alpha = 0.0
+        panArrowDownLabel.text = LS_TITLE_STOPWATCH
+        panArrowDownLabel.textColor = COLOR.DarkBlue
         
         NSLayoutConstraint.activate([
             
