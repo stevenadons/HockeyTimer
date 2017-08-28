@@ -25,6 +25,7 @@ protocol PitchDelegate: class {
 }
 
 
+
 class ScoreVC: PanArrowVC {
     
     
@@ -246,3 +247,6 @@ extension ScoreVC: PitchDelegate {
         messageTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideConfirmationButton), userInfo: nil, repeats: false)
     }
 }
+
+
+

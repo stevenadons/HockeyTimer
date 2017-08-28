@@ -18,6 +18,12 @@ protocol BallDelegate: class {
     func awayScored()
 }
 
+protocol ScoreStepperDelegate {
+    
+    func minusButtonTapped(stepper: ScoreStepper)
+    func plusButtonTapped(stepper: ScoreStepper)
+}
+
 
 class Pitch: UIView {
 
@@ -35,9 +41,6 @@ class Pitch: UIView {
     fileprivate var delegate: PitchDelegate?
     fileprivate var homeScore: Int = 0
     fileprivate var awayScore: Int = 0
-    
-    private var swipeUp: UISwipeGestureRecognizer?
-    private var swipeDown: UISwipeGestureRecognizer?
     
     
     
@@ -75,10 +78,10 @@ class Pitch: UIView {
         awayScoreLabel = scoreLabel()
         addSubview(awayScoreLabel)
         
-        homeScoreStepper = ScoreStepper()
+        homeScoreStepper = ScoreStepper(delegate: self, type: .Home)
         homeScoreStepper.alpha = 0.0
         addSubview(homeScoreStepper)
-        awayScoreStepper = ScoreStepper()
+        awayScoreStepper = ScoreStepper(delegate: self, type: .Away)
         awayScoreStepper.alpha = 0.0
         addSubview(awayScoreStepper)
         
@@ -140,28 +143,6 @@ class Pitch: UIView {
     
     
     // MARK: - User methods
-    
-    
-    
-//    func moveUp(completion: (() -> Void)?) {
-//        
-//        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction], animations: {
-//            self.transform = CGAffineTransform(translationX: 0, y: -110)
-//        }, completion: { (finished) in
-//            self.configureSwipes()
-//            completion?()
-//        })
-//    }
-//    
-//    func moveBack(completion: (() -> Void)?) {
-//        
-//        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction], animations: {
-//            self.transform = CGAffineTransform.identity
-//        }, completion: { (finished) in
-//            completion?()
-//        })
-//        disableSwipes()
-//    }
     
     func steppers(show: Bool) {
         
@@ -237,35 +218,6 @@ class Pitch: UIView {
         }
     }
     
-    func configureSwipes() {
-        
-        swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUp(swipe:)))
-        swipeUp?.direction = .up
-        addGestureRecognizer(swipeUp!)
-        swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown(swipe:)))
-        swipeDown?.direction = .down
-        addGestureRecognizer(swipeDown!)
-    }
-    
-    private func disableSwipes() {
-        
-        gestureRecognizers?.forEach { removeGestureRecognizer($0) }
-    }
-    
-    @objc private func swipeUp(swipe: UISwipeGestureRecognizer) {
-        
-        let location = swipe.location(in: self)
-        if location.x < bounds.width / 2 {
-            homeScore += 1
-            homeScoreLabel.text = "\(homeScore)"
-            delegate?.scoreHome()
-        } else {
-            awayScore += 1
-            awayScoreLabel.text = "\(awayScore)"
-            delegate?.scoreAway()
-        }
-    }
-    
     
     func homeMinusOne() {
         
@@ -283,40 +235,6 @@ class Pitch: UIView {
         delegate?.scoreAwayMinusOne()
     }
     
-    @objc private func swipeDown(swipe: UISwipeGestureRecognizer) {
-        
-        let location = swipe.location(in: self)
-        if location.x < bounds.width / 2 {
-            guard homeScore > 0 else { return }
-            homeMinusOne()
-        } else {
-            guard awayScore > 0 else { return }
-            awayMinusOne()
-        }
-    }
-    
-    // Extends the touchable area of the view in order to receive touches
-    // Swipe detection in score edit mode
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
-        if (!self.isUserInteractionEnabled || self.isHidden || self.alpha <= 0.01) {
-            return nil
-        }
-        let touchRect = CGRect(x: 0, y: -distanceMoveUp, width: bounds.width, height: bounds.height + distanceMoveUp)
-        if touchRect.contains(point) {
-            for subview in self.subviews.reversed() {
-                let convertedPoint = subview.convert(point, from: self)
-                let hitTestView = subview.hitTest(convertedPoint, with: event)
-                if hitTestView != nil {
-                    return hitTestView
-                }
-            }
-            return self
-        }
-        return nil
-    }
-    
-
 }
 
 
@@ -334,5 +252,40 @@ extension Pitch: BallDelegate {
         awayScore += 1
         update(label: awayScoreLabel, withText: "\(awayScore)")
         delegate?.scoreAway()
+    }
+}
+
+
+extension Pitch: ScoreStepperDelegate {
+    
+    func minusButtonTapped(stepper: ScoreStepper) {
+        
+        switch stepper.type {
+        case .Home:
+            guard homeScore > 0 else { return }
+            homeMinusOne()
+            print("Home: stepper \(stepper.type) tapped minus")
+        case .Away:
+            guard awayScore > 0 else { return }
+            awayMinusOne()
+            print("Away: stepper \(stepper.type) tapped minus")
+        }
+    }
+    
+    func plusButtonTapped(stepper: ScoreStepper) {
+        
+        switch stepper.type {
+        case .Home:
+            homeScore += 1
+            homeScoreLabel.text = "\(homeScore)"
+            delegate?.scoreHome()
+            print("Home: stepper \(stepper.type) tapped plus")
+        case .Away:
+            awayScore += 1
+            awayScoreLabel.text = "\(awayScore)"
+            delegate?.scoreAway()
+            print("Away: stepper \(stepper.type) tapped plus")
+            
+        }
     }
 }
