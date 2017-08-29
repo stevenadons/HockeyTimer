@@ -54,6 +54,7 @@
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
 		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
+		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
 		4FB4BF2B1F52273B003B1259 /* AgeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRange.swift; sourceTree = "<group>"; };
+		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				4F9FC5DE1F5345D50003C2FF /* ScoreStepperButton.swift */,
 				4F9FC5E01F5346130003C2FF /* ScoreStepperButtonLayer.swift */,
 				4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */,
+				4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */,
 			);
 			name = ScoreStepper;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
 				4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */,
+				4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */,
 				4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

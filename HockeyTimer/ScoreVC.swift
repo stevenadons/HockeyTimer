@@ -142,7 +142,8 @@ class ScoreVC: PanArrowVC {
     @objc private func editModeButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
         
         inEditMode = !inEditMode
-        pitch.steppers(show: inEditMode)
+//        pitch.steppers(show: inEditMode)
+        pitch.toggleEditMode(on: inEditMode)
     }
     
     @objc private func dismissButtonTapped(sender: DismissButton, forEvent event: UIEvent) {

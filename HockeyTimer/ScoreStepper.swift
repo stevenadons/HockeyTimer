@@ -20,6 +20,7 @@ class ScoreStepper: UIView {
 
     // MARK: - Properties
     
+    fileprivate var shape: ScoreStepperShape!
     fileprivate var minusButton: ScoreStepperButton!
     fileprivate var plusButton: ScoreStepperButton!
     fileprivate var scorelabel: UILabel!
@@ -27,6 +28,7 @@ class ScoreStepper: UIView {
     fileprivate(set) var type: ScoreStepperType = .Home
     
     private let designHeight: CGFloat = 46
+    private let inset: CGFloat = 1.0
 
     
     // MARK: - Initializing
@@ -52,11 +54,12 @@ class ScoreStepper: UIView {
     
     private func setup() {
         
-        backgroundColor = COLOR.LightYellow
-        layer.borderWidth = 2.0
-        layer.borderColor = COLOR.White.cgColor
+        backgroundColor = UIColor.clear
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
+        
+        shape = ScoreStepperShape()
+        addSubview(shape)
         
         minusButton = ScoreStepperButton(type: .Minus)
         minusButton.addTarget(self, action: #selector(minusButtonTapped(sender:)), for: [.touchUpInside])
@@ -74,29 +77,35 @@ class ScoreStepper: UIView {
     override func layoutSubviews() {
         
         super.layoutSubviews()
-        layer.cornerRadius = bounds.height / 2
         
-        let inset = CGFloat(2.0)
-        let multiplier = (designHeight - layer.borderWidth - (inset * 2)) / designHeight
+        let horizontalOffset: CGFloat = 24.0
+        let shapeWidth = bounds.width - (2 * horizontalOffset)
+        let shapeHeight = shapeWidth / 3
+        let verticalOffset = (bounds.height - shapeHeight) / 2
+        shape.frame = bounds.insetBy(dx: horizontalOffset, dy: verticalOffset)
+        shape.setNeedsLayout()
         
         NSLayoutConstraint.activate([
             
-            minusButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: multiplier),
-            minusButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            minusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
-            minusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: layer.borderWidth + inset),
-            
-            scorelabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: multiplier),
+            scorelabel.heightAnchor.constraint(equalToConstant: shapeHeight),
             scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            scorelabel.widthAnchor.constraint(equalTo: scorelabel.heightAnchor),
             scorelabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            plusButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: multiplier),
-            plusButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            plusButton.widthAnchor.constraint(equalTo: plusButton.heightAnchor),
-            plusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -layer.borderWidth - inset),
+            minusButton.heightAnchor.constraint(equalTo: scorelabel.heightAnchor, constant: -(shape.lineWidth + inset) * 2),
+            minusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor),
+            minusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
+            minusButton.trailingAnchor.constraint(equalTo: scorelabel.leadingAnchor, constant: -shape.lineWidth - inset),
+            
+            plusButton.heightAnchor.constraint(equalTo: minusButton.heightAnchor),
+            plusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor),
+            plusButton.leadingAnchor.constraint(equalTo: scorelabel.trailingAnchor, constant: inset + shape.lineWidth),
+            plusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
             
             ])
     }
+    
+    
     
     
     // MARK: - Private Methods
@@ -119,6 +128,14 @@ class ScoreStepper: UIView {
         scorelabel.text = "\(value)"
         scorelabel.setNeedsDisplay()
     }
+    
+    func toggleButtons(hide: Bool) {
+        
+        shape.alpha = hide ? 0.0 : 1.0
+        minusButton.alpha = hide ? 0.0 : 1.0
+        plusButton.alpha = hide ? 0.0 : 1.0
+    }
+ 
 
 
 

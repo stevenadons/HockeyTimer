@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 let distanceMoveUp: CGFloat = 110
-
 
 protocol BallDelegate: class {
     
@@ -78,11 +76,14 @@ class Pitch: UIView {
         awayScoreLabel = scoreLabel()
         addSubview(awayScoreLabel)
         
+        homeScoreLabel.alpha = 0.0
+        awayScoreLabel.alpha = 0.0
+        
         homeScoreStepper = ScoreStepper(delegate: self, type: .Home)
-        homeScoreStepper.alpha = 0.0
+        homeScoreStepper.toggleButtons(hide: true)
         addSubview(homeScoreStepper)
         awayScoreStepper = ScoreStepper(delegate: self, type: .Away)
-        awayScoreStepper.alpha = 0.0
+        awayScoreStepper.toggleButtons(hide: true)
         addSubview(awayScoreStepper)
         
         ball = Ball(delegate: self)
@@ -123,15 +124,15 @@ class Pitch: UIView {
             awayScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 133 * bounds.width / 375),
             awayScoreLabel.trailingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 47 * bounds.width / 375),
             
-            homeScoreStepper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            homeScoreStepper.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -24),
-            homeScoreStepper.heightAnchor.constraint(equalTo: homeScoreStepper.widthAnchor, multiplier: 46 / 136),
-            homeScoreStepper.centerYAnchor.constraint(equalTo: centerYAnchor),
+            homeScoreStepper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            homeScoreStepper.trailingAnchor.constraint(equalTo: centerXAnchor),
+            homeScoreStepper.topAnchor.constraint(equalTo: topAnchor, constant: background.edgeWidth),
+            homeScoreStepper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -background.edgeWidth),
             
-            awayScoreStepper.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 24),
-            awayScoreStepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            awayScoreStepper.heightAnchor.constraint(equalTo: awayScoreStepper.widthAnchor, multiplier: 46 / 136),
-            awayScoreStepper.centerYAnchor.constraint(equalTo: centerYAnchor),
+            awayScoreStepper.leadingAnchor.constraint(equalTo: centerXAnchor),
+            awayScoreStepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            awayScoreStepper.topAnchor.constraint(equalTo: topAnchor, constant: background.edgeWidth),
+            awayScoreStepper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -background.edgeWidth),
             
             ball.centerXAnchor.constraint(equalTo: centerXAnchor),
             ball.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -139,25 +140,13 @@ class Pitch: UIView {
             ball.widthAnchor.constraint(equalToConstant: 40),
             
             ])
+        
+        homeScoreStepper.setNeedsLayout()
+        awayScoreStepper.setNeedsLayout()
     }
     
     
     // MARK: - User methods
-    
-    func steppers(show: Bool) {
-        
-        if show {
-            hideBall()
-            homeScoreStepper.setScore(value: homeScore)
-            awayScoreStepper.setScore(value: awayScore)
-        } else {
-            showBall()
-        }
-        homeScoreLabel.alpha = show ? 0.0 : 1.0
-        awayScoreLabel.alpha = show ? 0.0 : 1.0
-        homeScoreStepper.alpha = show ? 1.0 : 0.0
-        awayScoreStepper.alpha = show ? 1.0 : 0.0
-    }
 
     func resetScores() {
         
@@ -165,6 +154,33 @@ class Pitch: UIView {
         homeScoreLabel.text = "\(homeScore)"
         awayScore = 0
         awayScoreLabel.text = "\(awayScore)"
+    }
+    
+    func homeMinusOne() {
+        
+        homeScoreLabel.layer.removeAllAnimations()
+        homeScore -= 1
+        homeScoreLabel.text = "\(homeScore)"
+        delegate?.scoreHomeMinusOne()
+    }
+    
+    func awayMinusOne() {
+        
+        awayScoreLabel.layer.removeAllAnimations()
+        awayScore -= 1
+        awayScoreLabel.text = "\(awayScore)"
+        delegate?.scoreAwayMinusOne()
+    }
+    
+    func toggleEditMode(on: Bool) {
+        
+        homeScoreStepper.toggleButtons(hide: !on)
+        awayScoreStepper.toggleButtons(hide: !on)
+        if on {
+            hideBall()
+        } else {
+            showBall()
+        }
     }
     
     
@@ -217,24 +233,6 @@ class Pitch: UIView {
             })
         }
     }
-    
-    
-    func homeMinusOne() {
-        
-        homeScoreLabel.layer.removeAllAnimations()
-        homeScore -= 1
-        homeScoreLabel.text = "\(homeScore)"
-        delegate?.scoreHomeMinusOne()
-    }
-    
-    func awayMinusOne() {
-        
-        awayScoreLabel.layer.removeAllAnimations()
-        awayScore -= 1
-        awayScoreLabel.text = "\(awayScore)"
-        delegate?.scoreAwayMinusOne()
-    }
-    
 }
 
 
