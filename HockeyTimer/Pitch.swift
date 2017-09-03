@@ -76,14 +76,9 @@ class Pitch: UIView {
         awayScoreLabel = scoreLabel()
         addSubview(awayScoreLabel)
         
-        homeScoreLabel.alpha = 0.0
-        awayScoreLabel.alpha = 0.0
-        
         homeScoreStepper = ScoreStepper(delegate: self, type: .Home)
-        homeScoreStepper.toggleButtons(hide: true)
         addSubview(homeScoreStepper)
         awayScoreStepper = ScoreStepper(delegate: self, type: .Away)
-        awayScoreStepper.toggleButtons(hide: true)
         addSubview(awayScoreStepper)
         
         ball = Ball(delegate: self)
@@ -174,12 +169,20 @@ class Pitch: UIView {
     
     func toggleEditMode(on: Bool) {
         
-        homeScoreStepper.toggleButtons(hide: !on)
-        awayScoreStepper.toggleButtons(hide: !on)
         if on {
             hideBall()
+            homeScoreLabel.alpha = 0.0
+            awayScoreLabel.alpha = 0.0
+            homeScoreStepper.appear(show: true, delay: 0.0, value: homeScore, completion: nil)
+            awayScoreStepper.appear(show: true, delay: 0.0, value: awayScore, completion: nil)
         } else {
-            showBall()
+            homeScoreStepper.appear(show: false, delay: 0.0, completion: {
+                self.homeScoreLabel.alpha = 1.0
+            })
+            awayScoreStepper.appear(show: false, delay: 0.0, completion: {
+                self.awayScoreLabel.alpha = 1.0
+                self.showBall()
+            })
         }
     }
     

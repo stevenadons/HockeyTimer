@@ -26,6 +26,7 @@ class PanArrowLabelFactory {
         if sizeToFit {
             label.sizeToFit()
         }
+        label.isUserInteractionEnabled = true
         return label
     }
     

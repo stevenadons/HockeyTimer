@@ -28,16 +28,12 @@
 		4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE891F515C1D003B1259 /* StopWatch.swift */; };
 		4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE8B1F515C30003B1259 /* Pitch.swift */; };
 		4FB4BE8E1F515C38003B1259 /* PitchBackgroundLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE8D1F515C38003B1259 /* PitchBackgroundLayer.swift */; };
-		4FB4BE901F515C3F003B1259 /* PitchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE8F1F515C3F003B1259 /* PitchContainerView.swift */; };
 		4FB4BE921F515C49003B1259 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE911F515C49003B1259 /* Ball.swift */; };
 		4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE931F515C4F003B1259 /* BallShinySpot.swift */; };
 		4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE971F515CCD003B1259 /* NewGameButton.swift */; };
 		4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE991F515CDA003B1259 /* NewGameButtonIconOnly.swift */; };
 		4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE9B1F515CEC003B1259 /* NewGameButtonLayer.swift */; };
 		4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */; };
-		4FB4BEA51F515D87003B1259 /* DismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEA21F515D87003B1259 /* DismissButton.swift */; };
-		4FB4BEA61F515D87003B1259 /* DismissButtonIconOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEA31F515D87003B1259 /* DismissButtonIconOnly.swift */; };
-		4FB4BEA71F515D87003B1259 /* DismissButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEA41F515D87003B1259 /* DismissButtonLayer.swift */; };
 		4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEA91F515DBE003B1259 /* ConfirmationButton.swift */; };
 		4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */; };
 		4FB4BEB01F515E2F003B1259 /* HockeyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */; };
@@ -81,16 +77,12 @@
 		4FB4BE891F515C1D003B1259 /* StopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		4FB4BE8B1F515C30003B1259 /* Pitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
 		4FB4BE8D1F515C38003B1259 /* PitchBackgroundLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchBackgroundLayer.swift; sourceTree = "<group>"; };
-		4FB4BE8F1F515C3F003B1259 /* PitchContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchContainerView.swift; sourceTree = "<group>"; };
 		4FB4BE911F515C49003B1259 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		4FB4BE931F515C4F003B1259 /* BallShinySpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallShinySpot.swift; sourceTree = "<group>"; };
 		4FB4BE971F515CCD003B1259 /* NewGameButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameButton.swift; sourceTree = "<group>"; };
 		4FB4BE991F515CDA003B1259 /* NewGameButtonIconOnly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameButtonIconOnly.swift; sourceTree = "<group>"; };
 		4FB4BE9B1F515CEC003B1259 /* NewGameButtonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameButtonLayer.swift; sourceTree = "<group>"; };
 		4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
-		4FB4BEA21F515D87003B1259 /* DismissButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissButton.swift; sourceTree = "<group>"; };
-		4FB4BEA31F515D87003B1259 /* DismissButtonIconOnly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissButtonIconOnly.swift; sourceTree = "<group>"; };
-		4FB4BEA41F515D87003B1259 /* DismissButtonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissButtonLayer.swift; sourceTree = "<group>"; };
 		4FB4BEA91F515DBE003B1259 /* ConfirmationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationButton.swift; sourceTree = "<group>"; };
 		4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HockeyGame.swift; sourceTree = "<group>"; };
@@ -200,6 +192,7 @@
 				4FB4BE951F515C89003B1259 /* IconButtons */,
 				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
 				4FB4BE801F515BB5003B1259 /* Pitch */,
+				4F9FC5D91F5344760003C2FF /* ScoreStepper */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -221,10 +214,8 @@
 			children = (
 				4FB4BE8B1F515C30003B1259 /* Pitch.swift */,
 				4FB4BE8D1F515C38003B1259 /* PitchBackgroundLayer.swift */,
-				4FB4BE8F1F515C3F003B1259 /* PitchContainerView.swift */,
 				4FB4BE911F515C49003B1259 /* Ball.swift */,
 				4FB4BE931F515C4F003B1259 /* BallShinySpot.swift */,
-				4F9FC5D91F5344760003C2FF /* ScoreStepper */,
 			);
 			name = Pitch;
 			sourceTree = "<group>";
@@ -233,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				4F9FC5CE1F5331840003C2FF /* PanArrow */,
-				4FB4BEA11F515D6B003B1259 /* Dismiss */,
 				4FB4BE961F515C96003B1259 /* NewGame */,
 			);
 			name = IconButtons;
@@ -265,16 +255,6 @@
 				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		4FB4BEA11F515D6B003B1259 /* Dismiss */ = {
-			isa = PBXGroup;
-			children = (
-				4FB4BEA21F515D87003B1259 /* DismissButton.swift */,
-				4FB4BEA31F515D87003B1259 /* DismissButtonIconOnly.swift */,
-				4FB4BEA41F515D87003B1259 /* DismissButtonLayer.swift */,
-			);
-			name = Dismiss;
 			sourceTree = "<group>";
 		};
 		4FB4BEA81F515D9D003B1259 /* ConfirmationButton */ = {
@@ -418,13 +398,9 @@
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
 				4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
-				4FB4BEA71F515D87003B1259 /* DismissButtonLayer.swift in Sources */,
-				4FB4BE901F515C3F003B1259 /* PitchContainerView.swift in Sources */,
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
-				4FB4BEA61F515D87003B1259 /* DismissButtonIconOnly.swift in Sources */,
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
-				4FB4BEA51F515D87003B1259 /* DismissButton.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,

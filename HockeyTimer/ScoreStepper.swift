@@ -69,6 +69,15 @@ class ScoreStepper: UIView {
         addSubview(plusButton)
         scorelabel = ScoreStepperLabelFactory.standardLabel(text: "5", textColor: COLOR.White, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
         addSubview(scorelabel)
+        
+        windUp()
+    }
+    
+    private func windUp() {
+        
+        scorelabel.alpha = 0.0
+        transform = CGAffineTransform(scaleX: 0.01, y: 1)
+        alpha = 0.0
     }
     
     
@@ -106,18 +115,20 @@ class ScoreStepper: UIView {
     }
     
     
-    
-    
     // MARK: - Private Methods
     
     func minusButtonTapped(sender: ScoreStepperButton) {
         
         delegate?.minusButtonTapped(stepper: self)
+        guard let score = Int(scorelabel.text!), score >= 1 else { return }
+        setScore(value: score - 1)
     }
     
     func plusButtonTapped(sender: ScoreStepperButton) {
         
         delegate?.plusButtonTapped(stepper: self)
+        guard let score = Int(scorelabel.text!) else { return }
+        setScore(value: score + 1)
     }
 
     
@@ -129,11 +140,21 @@ class ScoreStepper: UIView {
         scorelabel.setNeedsDisplay()
     }
     
-    func toggleButtons(hide: Bool) {
+    func appear(show: Bool = true, delay: Double, value: Int = 0, completion: (() -> Void)? = nil) {
         
-        shape.alpha = hide ? 0.0 : 1.0
-        minusButton.alpha = hide ? 0.0 : 1.0
-        plusButton.alpha = hide ? 0.0 : 1.0
+        setScore(value: value)
+        if show {
+            UIView.animate(withDuration: 0.3, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [.allowUserInteraction], animations: {
+                self.alpha = 1.0
+                self.transform = .identity
+                self.scorelabel.alpha = 1.0
+            }, completion: nil)
+        } else {
+            UIView.animate(withDuration: 0.15, delay: delay, options: [.curveEaseIn], animations: {
+                self.windUp()
+            }, completion: nil)
+        }
+        completion?()
     }
  
 

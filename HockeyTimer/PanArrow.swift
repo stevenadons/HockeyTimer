@@ -25,6 +25,7 @@ class PanArrow: UIView {
         }
     }
     
+    
     // MARK: - Initializing
     
     override init(frame: CGRect) {
@@ -43,7 +44,7 @@ class PanArrow: UIView {
         
         backgroundColor = UIColor.clear
         translatesAutoresizingMaskIntoConstraints = false
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
         shape = PanArrowLayer()
         layer.addSublayer(shape)
     }

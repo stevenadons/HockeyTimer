@@ -26,14 +26,6 @@ enum MINUTESINHALF: Int {
 }
 
 
-enum NIBNAME {
-    
-    static let Logo = "Logo"
-    static let DismissButton = "DismissButton"
-    static let Hamburger = "Hamburger"
-}
-
-
 enum COLOR {
     
     // Standard colors

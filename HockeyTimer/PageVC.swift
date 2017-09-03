@@ -19,7 +19,7 @@ class PageVC: UIPageViewController {
         delegate = self
         view.backgroundColor = COLOR.White // should be same color as onboarding screens
         
-        let startVC = TimerVC()
+        let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
     }
 
@@ -29,17 +29,18 @@ extension PageVC: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        var nextVC: UIViewController? = nil
+        var nextVC: PanArrowVC? = nil
         
         if viewController.isKind(of: DurationVC.self) {
-            nextVC = TimerVC()
+            nextVC = TimerVC(pageVC: self)
         } else if viewController.isKind(of: TimerVC.self) {
             if let timerVC = viewController as? TimerVC {
                 nextVC = ScoreVC(game: timerVC.game)
+                nextVC?.pageVC = self
                 timerVC.delegate = nextVC as! TimerVCDelegate?
             }
         } else if viewController.isKind(of: ScoreVC.self) {
-            nextVC = DocumentMenuVC()
+            nextVC = DocumentMenuVC(pageVC: self)
         }
         return nextVC
     }
@@ -49,15 +50,15 @@ extension PageVC: UIPageViewControllerDataSource {
         var earlierVC: UIViewController? = nil
         if viewController.isKind(of: TimerVC.self) {
             if let timerVC = viewController as? TimerVC {
-                earlierVC = DurationVC()
+                earlierVC = DurationVC(pageVC: self)
                 if let durationVC = earlierVC as? DurationVC {
                     durationVC.onCardTapped = { timerVC.resetWithNewGame() }
                 }
             }
         } else if viewController.isKind(of: ScoreVC.self) {
-            earlierVC = TimerVC()
+            earlierVC = TimerVC(pageVC: self)
         } else if viewController.isKind(of: DocumentMenuVC.self) {
-            earlierVC = ScoreVC()
+            earlierVC = ScoreVC(pageVC: self)
         }
         return earlierVC
     }

@@ -44,6 +44,7 @@ class DocumentMenuVC: PanArrowVC {
         documentList = DocumentList(delegate: self)
         documentList.backgroundColor = UIColor.clear
         view.addSubview(documentList)
+        view.sendSubview(toBack: documentList)
         
         panArrowUp.color = COLOR.LightYellow
         panArrowDown.alpha = 0.0

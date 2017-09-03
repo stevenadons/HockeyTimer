@@ -11,7 +11,6 @@ import UIKit
 class PanArrowVC: UIViewController {
 
     
-    
     // MARK: - Properties
 
     var panArrowUp: PanArrow!
@@ -19,9 +18,17 @@ class PanArrowVC: UIViewController {
     var panArrowUpLabel: UILabel!
     var panArrowDownLabel: UILabel!
     
-    
+    var pageVC: PageVC?
+
     
     // MARK: - Life Cycle Methods
+    
+    convenience init(pageVC: PageVC) {
+        
+        self.init()
+        self.pageVC = pageVC
+    }
+    
     
     override func viewDidLoad() {
         
@@ -63,7 +70,30 @@ class PanArrowVC: UIViewController {
             panArrowDownLabel.heightAnchor.constraint(equalToConstant: 16),
             
             ])
+        
+        panArrowUp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))
+        panArrowUpLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))
+        
+        panArrowDown.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
+        panArrowDownLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
     }
+    
+    
+    // MARK: - Touch Methods
+    
+    @objc private func upTapped(sender: UITapGestureRecognizer) {
+        
+        print("uptapped")
 
+        guard let pageVC = pageVC, let upVC = pageVC.pageViewController(pageVC, viewControllerBefore: self) else { return }
+        pageVC.setViewControllers([upVC], direction: .reverse, animated: true, completion: nil)
+    }
+    
+    @objc private func downTapped(sender: UITapGestureRecognizer) {
+        
+        print("downptapped")
 
+        guard let pageVC = pageVC, let downVC = pageVC.pageViewController(pageVC, viewControllerAfter: self) else { return }
+        pageVC.setViewControllers([downVC], direction: .forward, animated: true, completion: nil)
+    }
 }

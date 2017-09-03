@@ -11,8 +11,6 @@ import UIKit
 protocol TimerVCDelegate: class {
     
     func resetGame()
-//    func showBall()
-//    func hideBall()
 }
 
 protocol PitchDelegate: class {
@@ -30,17 +28,15 @@ class ScoreVC: PanArrowVC {
     
     
     // MARK: - Properties
-
-    fileprivate var pitchContainer: PitchContainerView!
-    fileprivate var pitch: Pitch!
     
-    fileprivate var editModeButton: NewGameButtonIconOnly!
+    var game: HockeyGame?
 
-    fileprivate var dismissEditMode: DismissButton!
+    fileprivate var pitchContainer: ContainerView!
+    fileprivate var pitch: Pitch!
+    fileprivate var editModeButton: NewGameButtonIconOnly!
     fileprivate var confirmationButton: ConfirmationButton!
 
     fileprivate var delegate: PitchDelegate?
-    var game: HockeyGame?
     fileprivate var inEditMode: Bool = false
     fileprivate var messageTimer: Timer?
     
@@ -69,7 +65,7 @@ class ScoreVC: PanArrowVC {
     
     private func setupViews() {
         
-        pitchContainer = PitchContainerView()
+        pitchContainer = ContainerView()
         view.addSubview(pitchContainer)
         pitch = Pitch(delegate: self)
         pitch.isUserInteractionEnabled = true
@@ -78,11 +74,6 @@ class ScoreVC: PanArrowVC {
         editModeButton = NewGameButtonIconOnly()
         editModeButton.addTarget(self, action: #selector(editModeButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(editModeButton)
-        
-        dismissEditMode = DismissButton()
-        dismissEditMode.addTarget(self, action: #selector(dismissButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-        dismissEditMode.alpha = 0
-        view.addSubview(dismissEditMode)
         
         confirmationButton = ConfirmationButton.redButton(shadow: true)
         confirmationButton.alpha = 0.0
@@ -113,11 +104,6 @@ class ScoreVC: PanArrowVC {
             editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 20),
             editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            dismissEditMode.heightAnchor.constraint(equalToConstant: 50),
-            dismissEditMode.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
-            dismissEditMode.widthAnchor.constraint(equalTo: dismissEditMode.heightAnchor, multiplier: 1),
-            dismissEditMode.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
@@ -133,7 +119,6 @@ class ScoreVC: PanArrowVC {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-//        showIcons()
     }
     
     
@@ -142,24 +127,7 @@ class ScoreVC: PanArrowVC {
     @objc private func editModeButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
         
         inEditMode = !inEditMode
-//        pitch.steppers(show: inEditMode)
         pitch.toggleEditMode(on: inEditMode)
-    }
-    
-    @objc private func dismissButtonTapped(sender: DismissButton, forEvent event: UIEvent) {
-        
-        inEditMode = false
-        dismissEditMode.hide()
-        hideConfirmationButton()
-//        pitch.moveBack {
-////            self.pitch.showBall()
-////            if self.stopWatch.timer.state != .WaitingToStart && self.stopWatch.timer.state != .Ended {
-////                self.pitch.showBall()
-////            }
-////            self.stopWatch.comeFromBackground(completion: {
-//////                self.showIcons()
-////            })
-//        }
     }
     
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
@@ -197,7 +165,6 @@ class ScoreVC: PanArrowVC {
         }
         confirmationButton.shrink()
     }
- 
 
 }
 
@@ -207,14 +174,6 @@ extension ScoreVC: TimerVCDelegate {
     func resetGame() {
         pitch.resetScores()
     }
-    
-//    func showBall() {
-//        pitch.showBall()
-//    }
-    
-//    func hideBall() {
-//        pitch.hideBall()
-//    }
 }
 
 
