@@ -83,17 +83,15 @@ class PanArrowVC: UIViewController {
     
     @objc private func upTapped(sender: UITapGestureRecognizer) {
         
-        print("uptapped")
-
         guard let pageVC = pageVC, let upVC = pageVC.pageViewController(pageVC, viewControllerBefore: self) else { return }
+        pageVC.pageViewController(pageVC, willTransitionTo: [upVC])
         pageVC.setViewControllers([upVC], direction: .reverse, animated: true, completion: nil)
     }
     
     @objc private func downTapped(sender: UITapGestureRecognizer) {
-        
-        print("downptapped")
 
         guard let pageVC = pageVC, let downVC = pageVC.pageViewController(pageVC, viewControllerAfter: self) else { return }
+        pageVC.pageViewController(pageVC, willTransitionTo: [downVC])
         pageVC.setViewControllers([downVC], direction: .forward, animated: true, completion: nil)
     }
 }

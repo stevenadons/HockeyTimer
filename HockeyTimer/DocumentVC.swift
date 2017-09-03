@@ -46,7 +46,7 @@ class DocumentVC: UIViewController {
         
         button = ConfirmationButton.redButton(shadow: true)
         button.alpha = 0.0
-        button.setTitle(LS_BACKBUTTON, for: .normal)
+        button.setTitle(LS_BUTTON_BACK, for: .normal)
         button.addTarget(self, action: #selector(backButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(button)
         

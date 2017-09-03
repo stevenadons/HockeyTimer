@@ -61,6 +61,7 @@ class TimerVC: PanArrowVC {
     private func setupViews() {
         
         resetButton = NewGameButtonIconOnly()
+        resetButton.alpha = 0.0
         resetButton.addTarget(self, action: #selector(resetButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(resetButton)
         
@@ -79,7 +80,7 @@ class TimerVC: PanArrowVC {
         
         confirmationButton = ConfirmationButton.orangeButton()
         confirmationButton.alpha = 0.0
-        confirmationButton.setTitle(LS_BACKBUTTON, for: .normal)
+        confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
@@ -112,7 +113,7 @@ class TimerVC: PanArrowVC {
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
             
             ])
         
@@ -125,7 +126,6 @@ class TimerVC: PanArrowVC {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-//        showIcons()
     }
     
     
@@ -162,14 +162,14 @@ class TimerVC: PanArrowVC {
     fileprivate func hideIcons() {
         
         UIView.animate(withDuration: 0.2) {
-            self.resetButton.alpha = 0.0
+            self.resetButton?.alpha = 0.0
         }
     }
     
     fileprivate func showIcons() {
         
         UIView.animate(withDuration: 0.2) {
-            self.resetButton.alpha = 1.0
+            self.resetButton?.alpha = 1.0
         }
     }
     
@@ -216,9 +216,8 @@ class TimerVC: PanArrowVC {
             }
         }
         game = HockeyGame(duration: duration)
-        stopWatch.reset(withGame: game)
+        stopWatch?.reset(withGame: game)
         hideIcons()
-//        delegate?.hideBall()
     }
 }
 

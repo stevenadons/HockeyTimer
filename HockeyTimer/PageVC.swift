@@ -30,16 +30,14 @@ extension PageVC: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         var nextVC: PanArrowVC? = nil
-        
-        if viewController.isKind(of: DurationVC.self) {
+        if let _ = viewController as? DurationVC {
             nextVC = TimerVC(pageVC: self)
-        } else if viewController.isKind(of: TimerVC.self) {
-            if let timerVC = viewController as? TimerVC {
-                nextVC = ScoreVC(game: timerVC.game)
-                nextVC?.pageVC = self
-                timerVC.delegate = nextVC as! TimerVCDelegate?
-            }
-        } else if viewController.isKind(of: ScoreVC.self) {
+        } else if let timerVC = viewController as? TimerVC {
+            let scoreVC = ScoreVC(game: timerVC.game)
+            scoreVC.pageVC = self
+            timerVC.delegate = scoreVC
+            nextVC = scoreVC
+        } else if let _ = viewController as? ScoreVC {
             nextVC = DocumentMenuVC(pageVC: self)
         }
         return nextVC
@@ -48,16 +46,13 @@ extension PageVC: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         var earlierVC: UIViewController? = nil
-        if viewController.isKind(of: TimerVC.self) {
-            if let timerVC = viewController as? TimerVC {
-                earlierVC = DurationVC(pageVC: self)
-                if let durationVC = earlierVC as? DurationVC {
-                    durationVC.onCardTapped = { timerVC.resetWithNewGame() }
-                }
-            }
-        } else if viewController.isKind(of: ScoreVC.self) {
+        if let timerVC = viewController as? TimerVC {
+            let durationVC = DurationVC(pageVC: self)
+            durationVC.currentDuration = timerVC.game.duration
+            earlierVC = durationVC
+        } else if let _ = viewController as? ScoreVC {
             earlierVC = TimerVC(pageVC: self)
-        } else if viewController.isKind(of: DocumentMenuVC.self) {
+        } else if let _ = viewController as? DocumentMenuVC {
             earlierVC = ScoreVC(pageVC: self)
         }
         return earlierVC
@@ -76,5 +71,15 @@ extension PageVC: UIPageViewControllerDataSource {
 
 extension PageVC: UIPageViewControllerDelegate {
     
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        
+        if let durationVC = pendingViewControllers.first as? DurationVC, let timerVC = pageViewController.viewControllers?.first as? TimerVC { durationVC.currentDuration = timerVC.game.duration
+        } else if let timerVC = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
+            if durationVC.selectedDuration != nil {
+                UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
+                timerVC.resetWithNewGame()
+            }
+        }
+    }
 }
 

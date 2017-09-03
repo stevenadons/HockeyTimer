@@ -13,12 +13,15 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Properties
     
-    var onCardTapped: (() -> Void)?
+    var currentDuration: MINUTESINHALF?
+    var selectedDuration: MINUTESINHALF?
     
+    fileprivate var cancelView: UIButton!
     fileprivate var cardOne: DurationCard!
     fileprivate var cardTwo: DurationCard!
     fileprivate var cardThree: DurationCard!
     fileprivate var cardFour: DurationCard!
+
     fileprivate var cards: [DurationCard] = []
     
     fileprivate let padding: CGFloat = 18
@@ -55,6 +58,13 @@ class DurationVC: PanArrowVC {
     
     private func setupViews() {
         
+        cancelView = UIButton()
+        cancelView.addTarget(self, action: #selector(cancelViewTapped(sender:forEvent:)), for: [.touchUpInside])
+        cancelView.translatesAutoresizingMaskIntoConstraints = false
+        cancelView.backgroundColor = UIColor.clear
+        cancelView.isUserInteractionEnabled = false
+        view.insertSubview(cancelView, at: 0)
+
         cardOne = DurationCard(duration: .Twenty)
         cardTwo = DurationCard(duration: .TwentyFive)
         cardThree = DurationCard(duration: .Thirty)
@@ -76,10 +86,15 @@ class DurationVC: PanArrowVC {
         
         NSLayoutConstraint.activate([
             
+            cancelView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cancelView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cancelView.topAnchor.constraint(equalTo: view.topAnchor),
+            cancelView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             cardOne.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -padding / 2),
             cardOne.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375),
             cardOne.heightAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardOne.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -25 - padding / 2),
+            cardOne.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -65 - padding / 2),
             
             cardTwo.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: padding / 2),
             cardTwo.widthAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
@@ -98,20 +113,33 @@ class DurationVC: PanArrowVC {
             
             ])
     }
+
     
     
     // MARK: - Touch Methods
     
-    @objc func handleCardTapped(sender: DurationCard, forEvent event: UIEvent) {
+    @objc private func handleCardTapped(sender: DurationCard, forEvent event: UIEvent) {
         
-        UserDefaults.standard.set(sender.duration.rawValue, forKey: USERDEFAULTSKEY.Duration)
-        onCardTapped?()
+        cancelView.isUserInteractionEnabled = true
+        if sender.duration != currentDuration {
+            selectedDuration = sender.duration
+        }
+        sender.alpha = 1.0
+        UIView.animate(withDuration: 0.2, animations: {
+            self.cards.forEach {
+                if !($0.isEqual(sender)) {
+                    $0.alpha = 0.3
+                }
+            }
+        })
     }
-
     
-    
-    // MARK: - Private Methods
-    
+    @objc private func cancelViewTapped(sender: UIButton, forEvent event: UIEvent) {
+        
+        cancelView.isUserInteractionEnabled = false
+        cards.forEach { $0.alpha = 1.0 }
+        selectedDuration = nil
+    }
     
 }
 

@@ -41,7 +41,7 @@ class MaskWithActivityIndicator: UIView {
         activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.frame = CGRect(x: 0, y: 0, width: activityIndicatorViewWidth, height: activityIndicatorViewHeight)
         activityIndicatorView.activityIndicatorViewStyle = activityIndicatorViewStyle
-        activityIndicatorView.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
+        activityIndicatorView.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height * 1 / 3)
         
         loadingView.addSubview(activityIndicatorView)
         self.addSubview(loadingView)

@@ -29,28 +29,13 @@ enum MINUTESINHALF: Int {
 enum COLOR {
     
     // Standard colors
-    static let Theme = UIColor.init(hexString: "#394560") // Dark Blue 1E2460         // Colours on Navigation Bar, Button Titles, Progress Indicator etc. "#ffcc00"
-//    static let Border = UIColor.init(hexString: "#333333")                    // Hair line separators in between views.
-//    static let Shadow = UIColor.init(hexString: "#ccccc")                     // Shadow colours for card like design.
-//    
+    static let Theme = UIColor.init(hexString: "#394560") // Dark Blue 1E2460         // Colours on Navigation Bar, Button Titles, Progress Indicator //
     static let DarkBackground = UIColor.init(hexString: "#989CB5") // Dark Grey // Dark background colour to group UI components with light colour. "#999966"
     static let LightBackground = UIColor.init(hexString: "#EAEBF0") // Light Grey // Light background colour to group UI components with dark colour.
-//    static let IntermediateBackground = UIColor.init(hexString: "#cccc99")    // Used for grouping UI elements with some other colour scheme.
-//
-//    static let DarkText = UIColor.init(hexString: "#333333")
-//    static let LightText = UIColor.init(hexString: "#cccccc")
-//    static let IntermediateText = UIColor.init(hexString: "#999999")
-//    
     static let Affirmation = UIColor.init(hexString: "#F7BD52") // F4AB23 // Colour to show success, something right for user. "#00ff66""
     static let Negation = UIColor.init(hexString: "#F0505A") // 980822             // Colour to show error, some danger zones for user. ff3300
     
     // Custom colors
-    static let MenuCircleBigOutside = UIColor(hexString: "#4C54A6")
-    static let MenuCircleBigInside = UIColor(hexString: "#6A74E6")
-    static let MenuCircleMediumOutside = UIColor(hexString: "#2D347B")
-    static let MenuCircleMediumInside = UIColor(hexString: "#4049AD")
-    static let MenuCircleSmallOutside = UIColor(hexString: "#1E2460")
-    static let MenuCircleSmallInside = UIColor(hexString: "#2E3694")
     
     static let PitchBlue = UIColor(hexString: "#3D8FE5") // 4784C9
     static let PitchEdge = UIColor(hexString: "#8DBFF7")
@@ -94,6 +79,7 @@ enum FONTNAME {
 enum USERDEFAULTSKEY {
     
     static let Duration = "Duration"
+    static let OldDuration = "OldDuration"
 }
 
 
@@ -102,7 +88,7 @@ enum USERDEFAULTSKEY {
 
 let LS_NEWGAME = NSLocalizedString("New Game", comment: "Overdue message")
 let LS_GAMEPAUSED = NSLocalizedString("Game Paused", comment: "Message when game is pausing")
-let LS_OVERTIME = NSLocalizedString("Time Over", comment: "Time over message")
+let LS_OVERTIME = NSLocalizedString("In Overtime", comment: "Time over message")
 let LS_HALFTIME = NSLocalizedString("Half Time", comment: "Half time message")
 let LS_READYFORH2 = NSLocalizedString("Ready for H2", comment: "H2 to begin message")
 let LS_FULLTIME = NSLocalizedString("Full Time", comment: "Full time message")
@@ -111,11 +97,9 @@ let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication 
 let LS_WARNINGRESETGAME = NSLocalizedString("RESET GAME", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch is tapped for new game")
 
-let LS_HOME = NSLocalizedString("HOME", comment: "Name for home team")
-let LS_AWAY = NSLocalizedString("AWAY", comment: "Name for away team")
-let LS_UNDOGOAL = NSLocalizedString("UNDO GOAL", comment: "Message for undoing goal")
 let LS_MESSAGEEDITSCORES = NSLocalizedString("SWIPE SCORE UP OR DOWN", comment: "Message to explain way to edit scores")
-let LS_BACKBUTTON = NSLocalizedString("BACK", comment: "Message on button to back out from document")
+let LS_BUTTON_BACK = NSLocalizedString("BACK", comment: "Message on button to back out from document")
+let LS_BUTTON_UNDOGOAL = NSLocalizedString("UNDO GOAL", comment: "Message for undoing goal")
 
 let LS_TITLE_EDITSCORE = NSLocalizedString("EDIT SCORE", comment: "title for edit score menu button")
 let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navigating")

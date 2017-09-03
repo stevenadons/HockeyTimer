@@ -87,6 +87,8 @@ class ScoreStepper: UIView {
         
         super.layoutSubviews()
         
+        guard bounds.width * bounds.height != 0 else { return }
+        
         let horizontalOffset: CGFloat = 24.0
         let shapeWidth = bounds.width - (2 * horizontalOffset)
         let shapeHeight = shapeWidth / 3

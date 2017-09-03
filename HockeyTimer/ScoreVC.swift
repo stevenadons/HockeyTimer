@@ -77,7 +77,7 @@ class ScoreVC: PanArrowVC {
         
         confirmationButton = ConfirmationButton.redButton(shadow: true)
         confirmationButton.alpha = 0.0
-        confirmationButton.setTitle(LS_BACKBUTTON, for: .normal)
+        confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
@@ -133,7 +133,7 @@ class ScoreVC: PanArrowVC {
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
         
         hideConfirmationButton()
-        if message == LS_UNDOGOAL {
+        if message == LS_BUTTON_UNDOGOAL {
             if messageTimer != nil {
                 messageTimer?.invalidate()
                 messageTimer = nil
@@ -197,7 +197,7 @@ extension ScoreVC: PitchDelegate {
     
     func scoreLabelChanged() {
         
-        message = LS_UNDOGOAL
+        message = LS_BUTTON_UNDOGOAL
         if confirmationButton.alpha == 0 {
             showConfirmationButton()
         }
