@@ -44,7 +44,7 @@ class DocumentVC: UIViewController {
         webView.navigationDelegate = self
         webContainerView.addSubview(webView)
         
-        button = ConfirmationButton.redButton(shadow: true)
+        button = ConfirmationButton.blueButton(shadow: true)
         button.alpha = 0.0
         button.setTitle(LS_BUTTON_BACK, for: .normal)
         button.addTarget(self, action: #selector(backButtonTapped(sender:forEvent:)), for: [.touchUpInside])
@@ -65,7 +65,7 @@ class DocumentVC: UIViewController {
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             button.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75),
+            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -admobHeight - 10),
             
             ])
     }

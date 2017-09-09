@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 
 protocol StopWatchTimerDelegate: class {
@@ -112,7 +113,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = COLOR.DarkBlue.cgColor
+        core.backgroundColor = COLOR.VeryDarkBlue.cgColor
         squareContainer.addSublayer(core)
         
         firstProgressBar = progressBarLayer(for: .First)
@@ -121,7 +122,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(secondProgressBar)
         
         icon = StopWatchControlIcon(icon: .PlayIcon)
-        icon.color = COLOR.DarkOrange
+        icon.color = COLOR.DarkBlue
         addSubview(icon)
         
         timer = StopWatchTimer(delegate: self, duration: duration)
@@ -362,7 +363,6 @@ class StopWatch: UIControl {
             timer.startCountDown()
             game.status = .Running
             icon.change(to: .PauseIcon)
-//            icon.stopPulsing()
             message = ""
             delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
 
@@ -371,7 +371,6 @@ class StopWatch: UIControl {
             timer.pause()
             game.status = .Pausing
             icon.change(to: .PlayIcon)
-//            icon.startPulsing()
             message = LS_GAMEPAUSED
             
         case .StopIcon:
@@ -455,7 +454,12 @@ extension StopWatch: StopWatchTimerDelegate {
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
         if message == LS_OVERTIME {
-            haptic?.notificationOccurred(.warning)
+            if #available(iOS 10.0, *) {
+                haptic?.notificationOccurred(.warning)
+                haptic = nil
+            } else {
+                AudioServicesPlaySystemSound(SystemSoundID(1521))
+            }
             prepareHapticIfNeeded()
         }
     }
@@ -468,7 +472,12 @@ extension StopWatch: StopWatchTimerDelegate {
     
     func handleReachedZero() {
         prepareHapticIfNeeded()
-        haptic?.notificationOccurred(.warning)
+        if #available(iOS 10.0, *) {
+            haptic?.notificationOccurred(.warning)
+            haptic = nil
+        } else {
+            AudioServicesPlaySystemSound(SystemSoundID(1521))
+        }
         prepareHapticIfNeeded()
         updateProgressBars()
         message = LS_OVERTIME

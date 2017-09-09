@@ -78,9 +78,9 @@ class PitchBackgroundLayer: CALayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
-        shape.strokeColor = COLOR.White.cgColor
+        shape.strokeColor = COLOR.LightYellow.cgColor
         shape.lineWidth = 6.0
-        shape.fillColor = COLOR.DarkGray.cgColor
+        shape.fillColor = COLOR.DarkBlue.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape
     }
@@ -95,9 +95,9 @@ class PitchBackgroundLayer: CALayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
-        shape.strokeColor = COLOR.LightBlue.cgColor
+        shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = 1.0
-        shape.fillColor = COLOR.DarkBlue.cgColor
+        shape.fillColor = COLOR.VeryDarkBlue.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape
     }
@@ -112,7 +112,7 @@ class PitchBackgroundLayer: CALayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
-        shape.strokeColor = COLOR.LightBlue.cgColor
+        shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = 1.0
         shape.allowsEdgeAntialiasing = true
         return shape

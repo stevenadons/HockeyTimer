@@ -62,13 +62,13 @@ class DocumentList: UIView {
             let document = Document.allDocuments()[index]
             let button: DocumentButton
             if index < 3 {
-                button = DocumentButton.button(document: document, color: COLOR.LightYellow, titleColor: COLOR.DarkRed)
+                button = DocumentButton.button(document: document, color: COLOR.LightYellow, titleColor: COLOR.VeryDarkBlue)
             } else if index == 3 {
-                button = DocumentButton.button(document: document, color: COLOR.DarkOrange, titleColor: COLOR.White)
+                button = DocumentButton.button(document: document, color: COLOR.LightBlue, titleColor: COLOR.VeryDarkBlue)
             } else if index == 4 || index == 5 {
-                button = DocumentButton.button(document: document, color: COLOR.DarkRed, titleColor: COLOR.White)
-            } else {
                 button = DocumentButton.button(document: document, color: COLOR.DarkBlue, titleColor: COLOR.White)
+            } else {
+                button = DocumentButton.button(document: document, color: COLOR.VeryDarkBlue, titleColor: COLOR.White)
             }
             button.addTarget(self, action: #selector(handleButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             button.heightAnchor.constraint(equalToConstant: DocumentButton.fixedHeight).isActive = true

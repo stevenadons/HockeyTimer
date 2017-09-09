@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */; };
+		4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */; };
+		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
 		4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */; };
 		4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D11F5332760003C2FF /* PanArrow.swift */; };
 		4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */; };
@@ -54,6 +57,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinusLayer.swift; sourceTree = "<group>"; };
+		4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinus.swift; sourceTree = "<group>"; };
+		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
+		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLayer.swift; sourceTree = "<group>"; };
 		4F9FC5D11F5332760003C2FF /* PanArrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrow.swift; sourceTree = "<group>"; };
 		4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLabelFactory.swift; sourceTree = "<group>"; };
@@ -113,6 +121,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F3F62671F64684100D8FEC5 /* PlusMinus */ = {
+			isa = PBXGroup;
+			children = (
+				4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */,
+				4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */,
+			);
+			name = PlusMinus;
+			sourceTree = "<group>";
+		};
 		4F9FC5CE1F5331840003C2FF /* PanArrow */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +240,7 @@
 		4FB4BE951F515C89003B1259 /* IconButtons */ = {
 			isa = PBXGroup;
 			children = (
+				4F3F62671F64684100D8FEC5 /* PlusMinus */,
 				4F9FC5CE1F5331840003C2FF /* PanArrow */,
 				4FB4BE961F515C96003B1259 /* NewGame */,
 			);
@@ -269,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */,
+				4F3F62721F64745A00D8FEC5 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -378,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
+				4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,
 			);
@@ -403,6 +423,7 @@
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
+				4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
 				4FB4BE821F515BE6003B1259 /* StopWatchTimer.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
@@ -424,6 +445,7 @@
 				4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
+				4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
@@ -437,10 +459,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4F3F62721F64745A00D8FEC5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4F3F62711F64745A00D8FEC5 /* nl */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		4FB4BE6D1F515B3B003B1259 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4FB4BE6E1F515B3B003B1259 /* Base */,
+				4F3F626E1F64745000D8FEC5 /* nl */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -449,6 +480,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4FB4BE731F515B3B003B1259 /* Base */,
+				4F3F626F1F64745000D8FEC5 /* nl */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -460,6 +492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -496,7 +529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -509,6 +542,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -539,7 +573,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

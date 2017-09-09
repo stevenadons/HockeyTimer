@@ -82,7 +82,7 @@ class DurationVC: PanArrowVC {
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.text = LS_TITLE_STOPWATCH
-        panArrowDownLabel.textColor = COLOR.DarkBlue
+        panArrowDownLabel.textColor = COLOR.VeryDarkBlue
         
         NSLayoutConstraint.activate([
             

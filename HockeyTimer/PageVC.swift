@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import AudioToolbox
 
 
 // Set this PageVC as initial viewcontroller in AppDelegate
 class PageVC: UIPageViewController {
+    
+    fileprivate var haptic: UISelectionFeedbackGenerator?
 
     override func viewDidLoad() {
         
@@ -79,6 +82,29 @@ extension PageVC: UIPageViewControllerDelegate {
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
                 timerVC.resetWithNewGame()
             }
+        }
+        prepareHapticIfNeeded()
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        if #available(iOS 10.0, *) {
+            haptic?.selectionChanged()
+            haptic = nil
+        } else {
+            AudioServicesPlaySystemSound(SystemSoundID(1519))
+        }
+    }
+    
+    
+    // MARK: - Haptic
+    
+    private func prepareHapticIfNeeded() {
+        
+        guard #available(iOS 10.0, *) else { return }
+        if haptic == nil {
+            haptic = UISelectionFeedbackGenerator()
+            haptic!.prepare()
         }
     }
 }

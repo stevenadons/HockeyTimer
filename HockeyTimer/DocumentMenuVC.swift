@@ -50,7 +50,7 @@ class DocumentMenuVC: PanArrowVC {
         panArrowDown.alpha = 0.0
         panArrowUpLabel.text = LS_TITLE_SCORE
         panArrowDownLabel.alpha = 0.0
-        panArrowUpLabel.textColor = COLOR.DarkRed
+        panArrowUpLabel.textColor = COLOR.VeryDarkBlue
         
         NSLayoutConstraint.activate([
             

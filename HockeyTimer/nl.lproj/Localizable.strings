@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  HockeyTimer
+
+  Created by Steven Adons on 9/09/17.
+  Copyright © 2017 StevenAdons. All rights reserved.
+*/
+
+
+"New Game" = "Start wedstrijd";
+"Game Paused" = "Onderbroken";
+"In Overtime" = "Over tijd";
+"Half Time" = "Rust";
+"Ready for H2" = "Klaar voor H2";
+"Full Time" = "Wedstrijd afgelopen";
+"H1" = "H1";
+"H2" = "H2";
+"RESET GAME" = "NIEUWE WEDSTRIJD";
+"NEW GAME" = "NIEUWE WEDSTRIJD";
+
+"BACK" = "TERUG";
+"UNDO GOAL" = "ANNULEER GOAL";
+
+"Game Time" = "Duurtijd";
+"Rules" = "Spelregels";
+"Score" = "Score";
+"Stopwatch" = "Stopwatch";
+
+"VHL PICTOGRAM U7-U8" = "VHL PICTOGRAM U7-U8";
+"VHL PICTOGRAM U9" = "VHL PICTOGRAM U9";
+"VHL PICTOGRAM U10-U12" = "VHL PICTOGRAM U10-U12";
+"VHL SHOOT-OUTS U10" = "VHL SHOOT-OUTS U10";
+"VHL RULES U7-U12" = "VHL SPELREGELS U7-U12";
+"VHL RULES U14-U19" = "VHL SPELREGELS U14-U19";
+"KBHB RULES" = "KBHB SPELREGELS";
+

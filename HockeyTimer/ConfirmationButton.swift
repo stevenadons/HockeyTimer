@@ -90,10 +90,10 @@ extension ConfirmationButton {
         return button
     }
     
-    class func orangeButton(shadow: Bool = false) -> ConfirmationButton {
+    class func blueButton(shadow: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
-        button.backgroundColor = COLOR.DarkOrange
+        button.backgroundColor = COLOR.DarkBlue
         button.setTitleColor(COLOR.White, for: .normal)
         if shadow {
             button.layer.shadowColor = UIColor.lightGray.cgColor

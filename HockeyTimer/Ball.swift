@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class Ball: UIView {
     
@@ -153,8 +154,12 @@ class Ball: UIView {
     
     private func handleScore(homeSide: Bool) {
         
-        haptic?.impactOccurred()
-        haptic = nil
+        if #available(iOS 10.0, *) {
+            haptic?.impactOccurred()
+            haptic = nil
+        } else {
+            AudioServicesPlaySystemSound(SystemSoundID(1520))
+        }
         guard shouldRecordGoal == true else { return }
         shouldRecordGoal = false
         isUserInteractionEnabled = false

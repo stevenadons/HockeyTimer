@@ -26,15 +26,15 @@ class DurationCard: UIButton {
             switch duration {
             case .Twenty:
                 backgroundColor = COLOR.LightYellow
-                miniStopWatch.color = COLOR.DarkBlue
+                miniStopWatch.color = COLOR.VeryDarkBlue
             case .TwentyFive:
-                backgroundColor = COLOR.DarkOrange
-                miniStopWatch.color = COLOR.DarkBlue
+                backgroundColor = COLOR.LightBlue
+                miniStopWatch.color = COLOR.VeryDarkBlue
             case .Thirty:
-                backgroundColor = COLOR.DarkRed
-                miniStopWatch.color = COLOR.DarkGray
-            case .ThirtyFive:
                 backgroundColor = COLOR.DarkBlue
+                miniStopWatch.color = COLOR.VeryDarkBlue
+            case .ThirtyFive:
+                backgroundColor = COLOR.VeryDarkBlue
                 miniStopWatch.color = COLOR.DarkGray
             default:
                 backgroundColor = COLOR.White

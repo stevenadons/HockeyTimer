@@ -58,12 +58,13 @@ enum COLOR {
     
     static let DarkRed = UIColor(hexString: "#6E070C")
     static let DarkOrange = UIColor(hexString: "#A3402F")
-    static let DarkBlue = UIColor(hexString: "#0A1329")
+    static let DarkBlue = UIColor(hexString: "#31728E") // 0A1329
     static let DarkGray = UIColor(hexString: "#40434E")
+    static let VeryDarkBlue = UIColor(hexString: "#0A1329")
     static let LightRed = UIColor(hexString: "#A6090E")
     static let LightOrange = UIColor(hexString: "#CD9958")
     static let LightYellow = UIColor(hexString: "#F9B82C")
-    static let LightBlue = UIColor(hexString: "#8FC0F2")
+    static let LightBlue = UIColor(hexString: "#9AD2CB") // 8FC0F2
     static let White = UIColor(hexString: "#FBFAF8")
 
 }
@@ -82,6 +83,8 @@ enum USERDEFAULTSKEY {
     static let OldDuration = "OldDuration"
 }
 
+let admobHeight: CGFloat = 65
+
 
 
 // Localized strings
@@ -97,16 +100,13 @@ let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication 
 let LS_WARNINGRESETGAME = NSLocalizedString("RESET GAME", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch is tapped for new game")
 
-let LS_MESSAGEEDITSCORES = NSLocalizedString("SWIPE SCORE UP OR DOWN", comment: "Message to explain way to edit scores")
 let LS_BUTTON_BACK = NSLocalizedString("BACK", comment: "Message on button to back out from document")
 let LS_BUTTON_UNDOGOAL = NSLocalizedString("UNDO GOAL", comment: "Message for undoing goal")
 
-let LS_TITLE_EDITSCORE = NSLocalizedString("EDIT SCORE", comment: "title for edit score menu button")
 let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navigating")
-let LS_TITLE_DOCUMENTS = NSLocalizedString("Documents", comment: "Title for navigating")
+let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
-
 
 let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("VHL PICTOGRAM U7-U8", comment: "Name for document")
 let LS_DOCUMENTNAME_PICTOGRAMU9 = NSLocalizedString("VHL PICTOGRAM U9", comment: "Name for document")

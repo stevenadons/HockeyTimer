@@ -33,7 +33,7 @@ class ScoreVC: PanArrowVC {
 
     fileprivate var pitchContainer: ContainerView!
     fileprivate var pitch: Pitch!
-    fileprivate var editModeButton: NewGameButtonIconOnly!
+    fileprivate var editModeButton: PlusMinus!
     fileprivate var confirmationButton: ConfirmationButton!
 
     fileprivate var delegate: PitchDelegate?
@@ -58,7 +58,7 @@ class ScoreVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.LightYellow
+        view.backgroundColor = COLOR.White
         view.clipsToBounds = true
         setupViews()
     }
@@ -71,22 +71,22 @@ class ScoreVC: PanArrowVC {
         pitch.isUserInteractionEnabled = true
         pitchContainer.addSubview(pitch)
         
-        editModeButton = NewGameButtonIconOnly()
+        editModeButton = PlusMinus()
         editModeButton.addTarget(self, action: #selector(editModeButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(editModeButton)
         
-        confirmationButton = ConfirmationButton.redButton(shadow: true)
+        confirmationButton = ConfirmationButton.blueButton(shadow: true)
         confirmationButton.alpha = 0.0
         confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
-        panArrowUp.color = COLOR.White
-        panArrowDown.color = COLOR.White
+        panArrowUp.color = COLOR.LightYellow
+        panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.text = LS_TITLE_STOPWATCH
         panArrowDownLabel.text = LS_TITLE_DOCUMENTS
-        panArrowUpLabel.textColor = COLOR.DarkOrange
-        panArrowDownLabel.textColor = COLOR.DarkOrange
+        panArrowUpLabel.textColor = COLOR.VeryDarkBlue
+        panArrowDownLabel.textColor = COLOR.VeryDarkBlue
 
         NSLayoutConstraint.activate([
             
@@ -107,7 +107,7 @@ class ScoreVC: PanArrowVC {
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95 - admobHeight),
             
             ])
     }

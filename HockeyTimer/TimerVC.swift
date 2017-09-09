@@ -47,7 +47,7 @@ class TimerVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.DarkBlue
+        view.backgroundColor = COLOR.VeryDarkBlue
         view.clipsToBounds = true
         if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
             if let enumCase = MINUTESINHALF(rawValue: minutes) {
@@ -78,14 +78,14 @@ class TimerVC: PanArrowVC {
         maskView.alpha = 0.0
         view.addSubview(maskView)
         
-        confirmationButton = ConfirmationButton.orangeButton()
+        confirmationButton = ConfirmationButton.blueButton()
         confirmationButton.alpha = 0.0
         confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
-        panArrowUp.color = COLOR.DarkOrange
-        panArrowDown.color = COLOR.DarkOrange
+        panArrowUp.color = COLOR.LightYellow
+        panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = LS_TITLE_SCORE
         
@@ -113,7 +113,7 @@ class TimerVC: PanArrowVC {
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95 - admobHeight),
             
             ])
         
