@@ -195,42 +195,7 @@ class StopWatchControlIcon: UIView {
     
     
     // MARK: - Animation methods
-    
-//    func startPulsing() {
-//        
-//        guard !isBeating else { return }
-//        if timer == nil {
-//            timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
-//                self.pulse()
-//            }
-//        }
-//        isBeating = true
-//    }
-//    
-//    func stopPulsing() {
-//        
-//        guard isBeating else { return }
-//        if timer != nil {
-//            timer!.invalidate()
-//            timer = nil
-//        }
-//        isBeating = false
-//    }
-//    
-//    private func pulse() {
-//        
-//        let duration = 0.2
-//        let scale: CGFloat = 0.90
-//        
-//        UIView.animate(withDuration: duration, delay: 0.0, animations: {
-//            self.transform = CGAffineTransform(scaleX: scale, y: scale)
-//        })  { (finished) in
-//            UIView.animate(withDuration: duration, delay: 0.0, animations: {
-//                self.transform = .identity
-//            })
-//        }
-//    }
-     
+
     
     
     // MARK: - Math methods
