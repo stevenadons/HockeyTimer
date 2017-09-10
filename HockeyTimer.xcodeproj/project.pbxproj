@@ -54,6 +54,8 @@
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
 		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
 		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
+		4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */; };
+		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,8 @@
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
 		4FB4BF2B1F52273B003B1259 /* AgeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRange.swift; sourceTree = "<group>"; };
 		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
+		4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JukeBox.swift; sourceTree = "<group>"; };
+		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +264,7 @@
 		4FB4BE9D1F515D30003B1259 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4FF7FB2C1F6549C3001D4ED1 /* JukeBox */,
 				4FB4BEB81F515EDB003B1259 /* Extensions */,
 				4FB4BE9E1F515D3B003B1259 /* Classes */,
 			);
@@ -286,6 +291,7 @@
 		4FB4BEAB1F515DE7003B1259 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4FF7FB2F1F6549DC001D4ED1 /* Sounds */,
 				4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */,
 				4F3F62721F64745A00D8FEC5 /* Localizable.strings */,
 			);
@@ -334,6 +340,22 @@
 				4FB4BF291F522644003B1259 /* MiniStopWatch.swift */,
 			);
 			name = DurationCard;
+			sourceTree = "<group>";
+		};
+		4FF7FB2C1F6549C3001D4ED1 /* JukeBox */ = {
+			isa = PBXGroup;
+			children = (
+				4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */,
+			);
+			name = JukeBox;
+			sourceTree = "<group>";
+		};
+		4FF7FB2F1F6549DC001D4ED1 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
+				4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */,
 				4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,
@@ -446,6 +469,7 @@
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
 				4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */,
+				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
