@@ -20,11 +20,17 @@
 
 "BACK" = "TERUG";
 "UNDO GOAL" = "ANNULEER GOAL";
+"OK got it" = "OK begrepen!";
+"Really easy to use" = "Heel eenvoudig";
+"Keep track of the score" = "Score bijhouden";
+"Just tap stopwatch to play or pause" = "Tik op de stopwatch voor start of pauze";
+"Drag the ball left or right" = "Sleep de bal naar links of rechts";
 
 "Game Time" = "Duurtijd";
 "Rules" = "Spelregels";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
+
 
 "VHL PICTOGRAM U7-U8" = "VHL PICTOGRAM U7-U8";
 "VHL PICTOGRAM U9" = "VHL PICTOGRAM U9";

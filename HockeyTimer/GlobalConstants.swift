@@ -81,6 +81,7 @@ enum USERDEFAULTSKEY {
     
     static let Duration = "Duration"
     static let OldDuration = "OldDuration"
+    static let StartViewController = "StartViewController"
 }
 
 let admobHeight: CGFloat = 65
@@ -102,11 +103,16 @@ let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch i
 
 let LS_BUTTON_BACK = NSLocalizedString("BACK", comment: "Message on button to back out from document")
 let LS_BUTTON_UNDOGOAL = NSLocalizedString("UNDO GOAL", comment: "Message for undoing goal")
+let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button for ending onboarding")
 
 let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navigating")
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
+let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Really easy to use", comment: "Onboarding screen")
+let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Just tap stopwatch to play or pause", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
 
 let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("VHL PICTOGRAM U7-U8", comment: "Name for document")
 let LS_DOCUMENTNAME_PICTOGRAMU9 = NSLocalizedString("VHL PICTOGRAM U9", comment: "Name for document")

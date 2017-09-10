@@ -208,6 +208,7 @@ class StopWatch: UIControl {
     }
     
     func reset(withGame game: HockeyGame) {
+        
         self.game = game
         timer.reset()
         message = LS_NEWGAME
@@ -220,28 +221,18 @@ class StopWatch: UIControl {
         setNeedsLayout()
     }
     
-    func goToBackground(completion: (() -> Void)?) {
+    func simplifyForOnboarding(bgColor: UIColor, iconColor: UIColor, timeColor: UIColor, progressZoneColor: UIColor) {
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction, .curveEaseIn], animations: {
-            self.transform = CGAffineTransform(translationX: 0, y: -(230 - 120) / 2).scaledBy(x: 120/230, y: 120/230)
-            self.messageLabel.alpha = 0
-            self.durationLabel.alpha = 0
-            self.halfLabel.alpha = 0
-        }, completion: { (finished) in
-            completion?()
-        })
-    }
-    
-    func comeFromBackground(completion: (() -> Void)?) {
-        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.allowUserInteraction, .curveEaseOut], animations: {
-            self.transform = CGAffineTransform.identity
-            self.messageLabel.alpha = 1
-            self.durationLabel.alpha = 1
-            self.halfLabel.alpha = 1
-        }, completion: { (finished) in
-            completion?()
-        })
+        let simpleGame = HockeyGame(duration: .Thirty)
+        reset(withGame: simpleGame)
+        messageLabel.alpha = 0.0
+        halfLabel.alpha = 0.0
+        durationLabel.alpha = 0.0
+        isUserInteractionEnabled = false
+        core.backgroundColor = bgColor.cgColor
+        icon.color = iconColor
+        timeLabel.textColor = timeColor
+        progressZone.fillColor = progressZoneColor.cgColor
     }
     
     

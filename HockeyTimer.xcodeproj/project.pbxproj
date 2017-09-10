@@ -56,6 +56,8 @@
 		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
 		4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */; };
 		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
+		4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */; };
+		4FF7FB361F6559E8001D4ED1 /* OnboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
 		4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JukeBox.swift; sourceTree = "<group>"; };
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
+		4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,7 @@
 		4FB4BE7B1F515B53003B1259 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */,
 				4FB4BF141F520D1C003B1259 /* PageVC.swift */,
 				4FB4BF241F5225B3003B1259 /* DurationVC.swift */,
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
@@ -206,6 +211,7 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
 				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
 				4FB4BF181F521FA1003B1259 /* DocumentList */,
@@ -358,6 +364,14 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		4FF7FB341F6559DB001D4ED1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,6 +466,7 @@
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
 				4FB4BEBA1F515EEA003B1259 /* Color.swift in Sources */,
+				4FF7FB361F6559E8001D4ED1 /* OnboardScreen.swift in Sources */,
 				4FB4BE7D1F515B7D003B1259 /* TimerVC.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
@@ -470,6 +485,7 @@
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
 				4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
+				4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,

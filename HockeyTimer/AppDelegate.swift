@@ -17,7 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        
+        var startViewController: UIViewController
+        startViewController = OnboardingVC()
+        
+//        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.StartViewController) as? String) == nil {
+//            startViewController = OnboardingVC()
+//        } else {
+//            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+//        }
+        
+//        let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
         return true
