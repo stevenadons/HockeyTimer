@@ -12,10 +12,6 @@ import UIKit
 class StopWatchLabel: UIView {
     
     
-    // MARK: - Helper Classes
-    
-    
-    
     // MARK: - Properties
     
     var text: String = "" {
@@ -102,10 +98,15 @@ class StopWatchLabel: UIView {
         return label
     }
     
+
+    // MARK: - User methods
     
-    
-    // MARK: - Math methods
-    
+    func setFont(font: UIFont) {
+        
+        label.font = font
+        setNeedsDisplay()
+    }
+
 
     
 }

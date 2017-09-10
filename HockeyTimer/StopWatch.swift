@@ -232,6 +232,7 @@ class StopWatch: UIControl {
         core.backgroundColor = bgColor.cgColor
         icon.color = iconColor
         timeLabel.textColor = timeColor
+        timeLabel.setFont(font: UIFont(name: FONTNAME.ThemeBold, size: 44)!)
         progressZone.fillColor = progressZoneColor.cgColor
     }
     

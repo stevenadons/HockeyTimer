@@ -97,6 +97,21 @@ class Ball: UIView {
     }
     
     
+    // MARK: - Onboarding
+    
+    func moveBallOnboarding(completion: (() -> Void)?) {
+        
+        xOffset = -UIScreen.main.bounds.width * 0.20
+        UIView.animate(withDuration: 0.4, delay: 0.4, options: [.curveEaseIn], animations: {
+            self.frame = self.centerFrame.offsetBy(dx: self.xOffset, dy: 0)
+        }) { (finished) in
+            self.alpha = 0.0
+            self.frame = self.centerFrame
+            self.repositionBall(withDelay: 1.0)
+            completion?()
+        }
+    }
+    
     
     // MARK: - Touch methods
     

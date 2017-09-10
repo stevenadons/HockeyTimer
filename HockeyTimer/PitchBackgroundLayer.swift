@@ -71,6 +71,15 @@ class PitchBackgroundLayer: CALayer {
     }
     
     
+    // MARK: - Public methods
+    
+    func hideEdge() {
+        
+        edge.opacity = 0.0
+        edge.setNeedsDisplay()
+    }
+    
+    
     
     // MARK: - Methods to create shapes (Class Methods)
     

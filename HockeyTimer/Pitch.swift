@@ -186,6 +186,23 @@ class Pitch: UIView {
         }
     }
     
+    func simplifyForOnboarding() {
+        
+        isUserInteractionEnabled = false
+        background.hideEdge()
+        homeScoreLabel.text = "2"
+        awayScoreLabel.text = "1"
+    }
+    
+    func animateScoreOnboarding(completion: (() -> Void)?) {
+        
+        guard homeScoreLabel.text == "2" else { return }
+        ball.moveBallOnboarding(completion: {
+            self.update(label: self.homeScoreLabel, withText: "3")
+            completion?()
+        })
+    }
+        
     
     // MARK: - Private Methods
     

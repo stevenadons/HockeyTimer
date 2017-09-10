@@ -19,6 +19,7 @@ class OnboardingVC: UIViewController {
     fileprivate var slide1: OnboardScreen!
     fileprivate var slide2: OnboardScreen!
     fileprivate var stopWatch: StopWatch!
+    fileprivate var pitch: Pitch!
     fileprivate var previousPage: Int = 0
     fileprivate let numberOfPages: Int = 2
     fileprivate var shouldShowButton: Bool = false
@@ -70,9 +71,9 @@ class OnboardingVC: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            pageControl.widthAnchor.constraint(equalToConstant: 33),
+            pageControl.widthAnchor.constraint(equalToConstant: 50),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageControl.heightAnchor.constraint(equalToConstant: 26),
+            pageControl.heightAnchor.constraint(equalToConstant: 35),
             pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             
             dismissButton.widthAnchor.constraint(equalToConstant: 130),
@@ -101,8 +102,11 @@ class OnboardingVC: UIViewController {
         slide2.title.text = LS_TITLE_ONBOARDINGSLIDE2
         slide2.body.text = LS_BODY_ONBOARDINGSLIDE2
         scrollView.addSubview(slide2)
+        
+        pitch = Pitch()
+        pitch.simplifyForOnboarding()
+        slide2.graphics.addSubview(pitch)
     }
-    
     
     
     override func viewDidLayoutSubviews() {
@@ -113,6 +117,7 @@ class OnboardingVC: UIViewController {
         slide1.frame = CGRect(x: 0, y: 0, width: SCREENWIDTH, height: SCREENHEIGHT)
         setStopWatchFrame()
         slide2.frame = CGRect(x: SCREENWIDTH, y: 0, width: SCREENWIDTH, height: SCREENHEIGHT)
+        setPitchFrame()
         view.bringSubview(toFront: pageControl)
         view.bringSubview(toFront: dismissButton)
     }
@@ -120,10 +125,22 @@ class OnboardingVC: UIViewController {
     private func setStopWatchFrame() {
         
         let graphicsSide = min(slide1.graphics.bounds.width, slide1.graphics.bounds.height)
-        let stopWatchSide = min(graphicsSide, 200)
+        let stopWatchSide = min(graphicsSide, 180)
         let xInset = (slide1.graphics.bounds.width - stopWatchSide) / 2.0
         let yInset = (slide1.graphics.bounds.height - stopWatchSide) / 2.0
         stopWatch.frame = slide1.graphics.bounds.insetBy(dx: xInset, dy: yInset)
+    }
+    
+    private func setPitchFrame() {
+        
+        NSLayoutConstraint.activate([
+            
+            pitch.widthAnchor.constraint(equalTo: slide2.widthAnchor, constant: -100),
+            pitch.heightAnchor.constraint(equalToConstant: 180),
+            pitch.centerXAnchor.constraint(equalTo: slide2.centerXAnchor),
+            pitch.bottomAnchor.constraint(equalTo: slide2.centerYAnchor),
+            
+            ])
     }
     
     
@@ -150,6 +167,15 @@ extension OnboardingVC: UIScrollViewDelegate {
         let page = Int(floor((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth)) + 1
         pageControl.currentPage = page
         pageChanged(page: page)
+        
+        // When new page is full screen or no screen
+        if scrollView.contentOffset.x == pageWidth {
+            pitch.animateScoreOnboarding(completion: {
+                self.showButton()
+            })
+        } else if scrollView.contentOffset.x == 0 {
+            pitch.simplifyForOnboarding()
+        }
     }
     
     
@@ -159,13 +185,9 @@ extension OnboardingVC: UIScrollViewDelegate {
         
         switch pageControl.currentPage {
         case 0:
-//            phones.animate()
-//            buttonView.stopAnimating()
             hideButton()
         case 1:
-//            phones.stopAnimating()
-//            buttonView.animate()
-            showButton()
+            print("no action")
         default:
             print("Error - Flipped to other page")
         }
