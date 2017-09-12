@@ -357,7 +357,7 @@ class StopWatch: UIControl {
             icon.change(to: .PauseIcon)
             message = ""
             delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
-            JukeBox.instance.prepareSound("StopWatchAlarmSound.mp3")
+            JukeBox.instance.prepareSound(SOUND.BeepBeep)
 
         case .PauseIcon:
             // Pause while counting down
@@ -403,7 +403,7 @@ class StopWatch: UIControl {
             }
             resetTimeLabel(withColor: COLOR.White, alpha: 1)
             JukeBox.instance.stopPlayingAll()
-            JukeBox.instance.removeSound("StopWatchAlarmSound.mp3")
+            JukeBox.instance.removeSound(SOUND.BeepBeep)
             
         case .NoIcon:
             delegate?.handleTappedForNewGame()
@@ -453,7 +453,7 @@ extension StopWatch: StopWatchTimerDelegate {
                 haptic?.notificationOccurred(.warning)
                 haptic = nil
             }
-            JukeBox.instance.playSound("StopWatchAlarmSound.mp3")
+            JukeBox.instance.playSound(SOUND.BeepBeep)
             prepareHapticIfNeeded()
         }
     }
@@ -470,7 +470,7 @@ extension StopWatch: StopWatchTimerDelegate {
             haptic?.notificationOccurred(.warning)
             haptic = nil
         } 
-        JukeBox.instance.playSound("StopWatchAlarmSound.mp3")
+        JukeBox.instance.playSound(SOUND.BeepBeep)
         prepareHapticIfNeeded()
         updateProgressBars()
         message = LS_OVERTIME

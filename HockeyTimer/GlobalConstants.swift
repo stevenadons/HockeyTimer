@@ -72,8 +72,8 @@ enum COLOR {
 
 enum FONTNAME {
     
-    static let ThemeBold = "HelveticaNeue-Bold"
-    static let ThemeRegular = "HelveticaNeue"
+    static let ThemeBold = "Exo2-Bold" // HelveticaNeue-Bold
+    static let ThemeRegular = "Exo2-Regular" // HelveticaNeue
 }
 
 
@@ -82,6 +82,13 @@ enum USERDEFAULTSKEY {
     static let Duration = "Duration"
     static let OldDuration = "OldDuration"
     static let StartViewController = "StartViewController"
+}
+
+
+enum SOUND {
+    
+    static let BeepBeep = "BeepBeep.wav"
+    static let Alarm = "StopWatchAlarmSound.mp3"
 }
 
 let admobHeight: CGFloat = 65

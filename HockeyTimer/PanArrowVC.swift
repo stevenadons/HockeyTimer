@@ -18,7 +18,7 @@ class PanArrowVC: UIViewController {
     var panArrowUpLabel: UILabel!
     var panArrowDownLabel: UILabel!
     
-    var pageVC: PageVC?
+    weak var pageVC: PageVC?
 
     
     // MARK: - Life Cycle Methods

@@ -36,7 +36,7 @@ class PitchBackgroundLayer: CALayer {
         
         // Set up sublayers
         edge = createEdge(path: edgePath())
-        center = createCenter(path: centerPath())
+        center = createCenter(path: centerPath(), color: COLOR.VeryDarkBlue)
         striping = createStriping(path: stripingPath())
         
         // Add sublayers
@@ -80,7 +80,6 @@ class PitchBackgroundLayer: CALayer {
     }
     
     
-    
     // MARK: - Methods to create shapes (Class Methods)
     
     private func createEdge(path: UIBezierPath) -> CAShapeLayer {
@@ -100,13 +99,13 @@ class PitchBackgroundLayer: CALayer {
         return path
     }
     
-    private func createCenter(path: UIBezierPath) -> CAShapeLayer {
+    private func createCenter(path: UIBezierPath, color: UIColor) -> CAShapeLayer {
         
         let shape = CAShapeLayer()
         shape.path = path.cgPath
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = 1.0
-        shape.fillColor = COLOR.VeryDarkBlue.cgColor
+        shape.fillColor = color.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape
     }

@@ -49,12 +49,13 @@ class TimerVC: PanArrowVC {
         super.viewDidLoad()
         view.backgroundColor = COLOR.VeryDarkBlue
         view.clipsToBounds = true
-        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
-            if let enumCase = MINUTESINHALF(rawValue: minutes) {
-                duration = enumCase
-            }
-        }
-        game = HockeyGame(duration: duration)
+        game = pageVC?.game
+//        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
+//            if let enumCase = MINUTESINHALF(rawValue: minutes) {
+//                duration = enumCase
+//            }
+//        }
+//        game = HockeyGame(duration: duration)
         setupViews()
     }
     
@@ -126,6 +127,7 @@ class TimerVC: PanArrowVC {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+        stopWatch.setNeedsDisplay()
     }
     
     
@@ -216,6 +218,7 @@ class TimerVC: PanArrowVC {
             }
         }
         game = HockeyGame(duration: duration)
+        pageVC?.game = game
         stopWatch?.reset(withGame: game)
         hideIcons()
     }
@@ -233,10 +236,8 @@ extension TimerVC: StopWatchDelegate {
         
         switch stopWatchTimer.state {
         case .WaitingToStart:
-//            delegate?.hideBall()
             completionHandler?()
         case .RunningCountDown:
-//            delegate?.showBall()
             completionHandler?()
         case .RunningCountUp:
             completionHandler?()
@@ -245,7 +246,6 @@ extension TimerVC: StopWatchDelegate {
         case .Overdue:
             completionHandler?()
         case .Ended:
-//            delegate?.hideBall()
             completionHandler?()
         }
     }

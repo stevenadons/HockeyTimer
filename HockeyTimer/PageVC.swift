@@ -13,6 +13,9 @@ import AudioToolbox
 // Set this PageVC as initial viewcontroller in AppDelegate
 class PageVC: UIPageViewController {
     
+    var game: HockeyGame!
+    var existingTimerVC: TimerVC?
+    var existingScoreVC: ScoreVC?
     fileprivate var haptic: UISelectionFeedbackGenerator?
 
     override func viewDidLoad() {
@@ -21,6 +24,14 @@ class PageVC: UIPageViewController {
         dataSource = self
         delegate = self
         view.backgroundColor = COLOR.White // should be same color as onboarding screens
+        
+        var duration: MINUTESINHALF = .TwentyFive
+        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
+            if let enumCase = MINUTESINHALF(rawValue: minutes) {
+                duration = enumCase
+            }
+        }
+        game = HockeyGame(duration: duration)
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
@@ -34,13 +45,21 @@ extension PageVC: UIPageViewControllerDataSource {
         
         var nextVC: PanArrowVC? = nil
         if let _ = viewController as? DurationVC {
-            nextVC = TimerVC(pageVC: self)
+            if existingTimerVC == nil {
+                existingTimerVC = TimerVC(pageVC: self)
+            }
+            nextVC = existingTimerVC
         } else if let timerVC = viewController as? TimerVC {
-            let scoreVC = ScoreVC(game: timerVC.game)
-            scoreVC.pageVC = self
-            timerVC.delegate = scoreVC
-            nextVC = scoreVC
-        } else if let _ = viewController as? ScoreVC {
+            existingTimerVC = timerVC
+            if existingScoreVC == nil  {
+                let scoreVC = ScoreVC(game: game)
+                scoreVC.pageVC = self
+                timerVC.delegate = scoreVC
+                existingScoreVC = scoreVC
+            }
+            nextVC = existingScoreVC
+        } else if let scoreVC = viewController as? ScoreVC {
+            existingScoreVC = scoreVC
             nextVC = DocumentMenuVC(pageVC: self)
         }
         return nextVC
@@ -53,10 +72,22 @@ extension PageVC: UIPageViewControllerDataSource {
             let durationVC = DurationVC(pageVC: self)
             durationVC.currentDuration = timerVC.game.duration
             earlierVC = durationVC
-        } else if let _ = viewController as? ScoreVC {
-            earlierVC = TimerVC(pageVC: self)
+        } else if let scoreVC = viewController as? ScoreVC {
+            if existingTimerVC == nil {
+                let timerVC = TimerVC(pageVC: self)
+                timerVC.delegate = scoreVC
+                timerVC.game = game
+                existingTimerVC = timerVC
+            }
+            earlierVC = existingTimerVC
         } else if let _ = viewController as? DocumentMenuVC {
-            earlierVC = ScoreVC(pageVC: self)
+            if existingScoreVC == nil {
+                let scoreVC = ScoreVC(game: game)
+                scoreVC.pageVC = self
+                scoreVC.game = game
+                existingScoreVC = scoreVC
+            }
+            earlierVC = existingScoreVC
         }
         return earlierVC
     }

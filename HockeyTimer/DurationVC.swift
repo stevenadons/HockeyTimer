@@ -21,7 +21,6 @@ class DurationVC: PanArrowVC {
     fileprivate var cardTwo: DurationCard!
     fileprivate var cardThree: DurationCard!
     fileprivate var cardFour: DurationCard!
-
     fileprivate var cards: [DurationCard] = []
     
     fileprivate let padding: CGFloat = 18

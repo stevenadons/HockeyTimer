@@ -10,6 +10,9 @@
 		4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */; };
 		4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
+		4F7AB4DE1F685837008F06DA /* Exo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */; };
+		4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */; };
+		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */; };
 		4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D11F5332760003C2FF /* PanArrow.swift */; };
 		4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */; };
@@ -66,6 +69,9 @@
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.ttf"; sourceTree = "<group>"; };
+		4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Bold.ttf"; sourceTree = "<group>"; };
+		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLayer.swift; sourceTree = "<group>"; };
 		4F9FC5D11F5332760003C2FF /* PanArrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrow.swift; sourceTree = "<group>"; };
 		4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLabelFactory.swift; sourceTree = "<group>"; };
@@ -136,6 +142,15 @@
 				4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */,
 			);
 			name = PlusMinus;
+			sourceTree = "<group>";
+		};
+		4F7AB4DC1F6857F8008F06DA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */,
+				4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		4F9FC5CE1F5331840003C2FF /* PanArrow */ = {
@@ -297,6 +312,7 @@
 		4FB4BEAB1F515DE7003B1259 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4F7AB4DC1F6857F8008F06DA /* Fonts */,
 				4FF7FB2F1F6549DC001D4ED1 /* Sounds */,
 				4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */,
 				4F3F62721F64745A00D8FEC5 /* Localizable.strings */,
@@ -360,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */,
+				4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -434,9 +451,12 @@
 			files = (
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
 				4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */,
+				4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */,
+				4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */,
 				4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,
+				4F7AB4DE1F685837008F06DA /* Exo2-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
