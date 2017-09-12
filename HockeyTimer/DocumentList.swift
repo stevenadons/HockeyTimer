@@ -23,7 +23,7 @@ class DocumentList: UIView {
         let totalButtonsHeight = 7 * DocumentButton.fixedHeight
         let totalsmallPadding = 3 * smallPadding
         let totalbigPadding = bounds.height - topInset - bottomInset - totalButtonsHeight - totalsmallPadding
-        return totalbigPadding / 3
+        return max(totalbigPadding / 3, smallPadding * 2)
     }
     
     
@@ -86,21 +86,22 @@ class DocumentList: UIView {
     override func layoutSubviews() {
         
         super.layoutSubviews()
+        let horInset = min((bounds.width - DocumentButton.fixedWidth) / 2 - 15, 55)
         NSLayoutConstraint.activate([
             
-            buttons[0].leadingAnchor.constraint(equalTo: leadingAnchor, constant: 55),
+            buttons[0].leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset),
             buttons[0].topAnchor.constraint(equalTo: topAnchor, constant: topInset),
-            buttons[1].leadingAnchor.constraint(equalTo: leadingAnchor, constant: 55),
+            buttons[1].leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset),
             buttons[1].topAnchor.constraint(equalTo: buttons[0].bottomAnchor, constant: smallPadding),
-            buttons[2].leadingAnchor.constraint(equalTo: leadingAnchor, constant: 55),
+            buttons[2].leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset),
             buttons[2].topAnchor.constraint(equalTo: buttons[1].bottomAnchor, constant: smallPadding),
-            buttons[3].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -55),
+            buttons[3].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horInset),
             buttons[3].topAnchor.constraint(equalTo: buttons[2].bottomAnchor, constant: bigPadding),
-            buttons[4].leadingAnchor.constraint(equalTo: leadingAnchor, constant: 55),
+            buttons[4].leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset),
             buttons[4].topAnchor.constraint(equalTo: buttons[3].bottomAnchor, constant: bigPadding),
-            buttons[5].leadingAnchor.constraint(equalTo: leadingAnchor, constant: 55),
+            buttons[5].leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset),
             buttons[5].topAnchor.constraint(equalTo: buttons[4].bottomAnchor, constant: smallPadding),
-            buttons[6].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -55),
+            buttons[6].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horInset),
             buttons[6].topAnchor.constraint(equalTo: buttons[5].bottomAnchor, constant: bigPadding),
             
             ])

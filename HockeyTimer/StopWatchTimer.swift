@@ -32,7 +32,7 @@ class StopWatchTimer {
         return CGFloat(totalSecondsInHalf - totalSecondsToGo) / CGFloat(totalSecondsInHalf)
     }
     
-    private var timer: Timer!
+    private var timer: Timer?
     private var delegate: StopWatchTimerDelegate!
     
     private var totalSecondsInHalf: Int = MINUTESINHALF.Twenty.rawValue
@@ -57,11 +57,12 @@ class StopWatchTimer {
     
     func set(duration: MINUTESINHALF) {
         
-//        totalSecondsInHalf = duration.rawValue * 60
-//        totalSecondsToGo = duration.rawValue * 60
+        totalSecondsInHalf = duration.rawValue * 60
+        totalSecondsToGo = duration.rawValue * 60
         
-        totalSecondsInHalf = 5
-        totalSecondsToGo = 5
+        // for testing purposes
+//        totalSecondsInHalf = 5
+//        totalSecondsToGo = 5
 
     }
     
@@ -82,14 +83,14 @@ class StopWatchTimer {
     func pause() {
         
         guard state == .RunningCountDown || state == .RunningCountUp else { return }
-        timer.invalidate()
+        timer?.invalidate()
         state = .Paused
     }
     
     func stopCountDown() {
         
         guard state == .Overdue || state == .RunningCountDown else { return }
-        timer.invalidate()
+        timer?.invalidate()
         totalSecondsOverdue = 0
         state = .Ended
     }
@@ -97,15 +98,15 @@ class StopWatchTimer {
     func stopCountUp() {
         
         guard state == .RunningCountUp else { return }
-        timer.invalidate()
+        timer?.invalidate()
         totalSecondsCountingUp = 0
         state = .Ended
     }
     
     func reset() {
         
-        guard state != .WaitingToStart else { return }
-        timer.invalidate()
+//        guard state != .WaitingToStart else { return }
+        timer?.invalidate()
         totalSecondsToGo = totalSecondsInHalf
         delegate.handleTimerReset()
         state = .WaitingToStart

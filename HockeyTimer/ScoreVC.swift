@@ -91,9 +91,9 @@ class ScoreVC: PanArrowVC {
         NSLayoutConstraint.activate([
             
             pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 10),
-            pitchContainer.heightAnchor.constraint(equalToConstant: 220),
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor),
+            pitchContainer.heightAnchor.constraint(equalToConstant: 220),
+            pitchContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 110),
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),
             pitch.heightAnchor.constraint(equalTo: pitchContainer.heightAnchor),
@@ -101,13 +101,13 @@ class ScoreVC: PanArrowVC {
             
             editModeButton.widthAnchor.constraint(equalToConstant: 44),
             editModeButton.heightAnchor.constraint(equalToConstant: 44),
-            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 20),
+            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 12),
             editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95 - admobHeight),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80 - admobHeight),
             
             ])
     }
@@ -128,6 +128,9 @@ class ScoreVC: PanArrowVC {
         
         inEditMode = !inEditMode
         pitch.toggleEditMode(on: inEditMode)
+        if confirmationButton.alpha > 0 {
+            hideConfirmationButton()
+        }
     }
     
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
@@ -198,7 +201,7 @@ extension ScoreVC: PitchDelegate {
     func scoreLabelChanged() {
         
         message = LS_BUTTON_UNDOGOAL
-        if confirmationButton.alpha == 0 {
+        if confirmationButton.alpha == 0 && !inEditMode {
             showConfirmationButton()
         }
         if messageTimer != nil {

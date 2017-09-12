@@ -150,13 +150,16 @@ class ScoreStepper: UIView {
                 self.alpha = 1.0
                 self.transform = .identity
                 self.scorelabel.alpha = 1.0
-            }, completion: nil)
+            }, completion: { (finished) in
+                completion?()
+            })
         } else {
             UIView.animate(withDuration: 0.15, delay: delay, options: [.curveEaseIn], animations: {
                 self.windUp()
-            }, completion: nil)
+            }, completion: { (finished) in
+                completion?()
+            })
         }
-        completion?()
     }
  
 

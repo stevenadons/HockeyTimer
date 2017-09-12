@@ -50,12 +50,6 @@ class TimerVC: PanArrowVC {
         view.backgroundColor = COLOR.VeryDarkBlue
         view.clipsToBounds = true
         game = pageVC?.game
-//        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
-//            if let enumCase = MINUTESINHALF(rawValue: minutes) {
-//                duration = enumCase
-//            }
-//        }
-//        game = HockeyGame(duration: duration)
         setupViews()
     }
     
@@ -127,7 +121,6 @@ class TimerVC: PanArrowVC {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        stopWatch.setNeedsDisplay()
     }
     
     

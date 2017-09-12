@@ -89,7 +89,7 @@ class Pitch: UIView {
         
         let label = UILabel()
         label.text = "0"
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 64)
+        label.font = UIFont(name: FONTNAME.Numbers, size: 64)
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center

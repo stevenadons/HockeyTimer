@@ -27,6 +27,7 @@ class StopWatch: UIControl {
     var game: HockeyGame! {
         didSet {
             updateDurationLabel()
+            resetTimeLabel(withColor: COLOR.White, alpha: 1)
         }
     }
     
@@ -210,7 +211,7 @@ class StopWatch: UIControl {
     func reset(withGame game: HockeyGame) {
         
         self.game = game
-        timer.reset()
+        timer.reset() //
         message = LS_NEWGAME
         halfLabel.text = LS_FIRSTHALFLABEL
         halfLabel.alpha = 1.0

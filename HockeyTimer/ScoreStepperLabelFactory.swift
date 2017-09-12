@@ -26,6 +26,8 @@ class ScoreStepperLabelFactory {
         if sizeToFit {
             label.sizeToFit()
         }
+        label.baselineAdjustment = .alignBaselines
+        label.numberOfLines = 1
         return label
     }
     

@@ -72,8 +72,9 @@ enum COLOR {
 
 enum FONTNAME {
     
-    static let ThemeBold = "Exo2-Bold" // HelveticaNeue-Bold
-    static let ThemeRegular = "Exo2-Regular" // HelveticaNeue
+    static let ThemeBold = "Exo2-Bold"
+    static let ThemeRegular = "Exo2-Regular"
+    static let Numbers = "HelveticaNeue-Bold" // NovaMono
 }
 
 

@@ -19,15 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         var startViewController: UIViewController
-        startViewController = OnboardingVC()
         
-//        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.StartViewController) as? String) == nil {
-//            startViewController = OnboardingVC()
-//        } else {
-//            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
-//        }
+        // For testing purposes to test onboarding
+//        startViewController = OnboardingVC()
         
-//        let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        // For testing purposes to avoid onboarding
+//        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        
+        // Standard
+        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.StartViewController) as? String) == nil {
+            startViewController = OnboardingVC()
+        } else {
+            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        }
+        
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
         return true
