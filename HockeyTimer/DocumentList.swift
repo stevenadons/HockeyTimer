@@ -67,7 +67,7 @@ class DocumentList: UIView {
                 button = DocumentButton.button(document: document, color: COLOR.LightBlue, titleColor: COLOR.VeryDarkBlue)
             } else if index == 4 || index == 5 {
                 button = DocumentButton.button(document: document, color: COLOR.DarkBlue, titleColor: COLOR.White)
-            } else {
+            } else  {
                 button = DocumentButton.button(document: document, color: COLOR.VeryDarkBlue, titleColor: COLOR.White)
             }
             button.addTarget(self, action: #selector(handleButtonTapped(sender:forEvent:)), for: [.touchUpInside])
@@ -103,6 +103,10 @@ class DocumentList: UIView {
             buttons[5].topAnchor.constraint(equalTo: buttons[4].bottomAnchor, constant: smallPadding),
             buttons[6].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horInset),
             buttons[6].topAnchor.constraint(equalTo: buttons[5].bottomAnchor, constant: bigPadding),
+            buttons[7].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horInset),
+            buttons[7].topAnchor.constraint(equalTo: buttons[6].bottomAnchor, constant: smallPadding),
+            buttons[8].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horInset),
+            buttons[8].topAnchor.constraint(equalTo: buttons[7].bottomAnchor, constant: smallPadding),
             
             ])
     }
@@ -121,7 +125,7 @@ class DocumentList: UIView {
     func windUp() {
         
         for index in 0..<buttons.count {
-            if index == 3 || index == 6 {
+            if index == 3 || index >= 6 {
                 buttons[index].transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
             } else {
                 buttons[index].transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
@@ -138,7 +142,7 @@ class DocumentList: UIView {
                 extraDelay = 0.1
             case 4...5:
                 extraDelay = 0.2
-            case 6:
+            case 6...8:
                 extraDelay = 0.3
             default:
                 extraDelay = 0

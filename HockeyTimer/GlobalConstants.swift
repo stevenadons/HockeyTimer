@@ -129,7 +129,8 @@ let LS_DOCUMENTNAME_VHLSHOOTOUTS = NSLocalizedString("VHL SHOOT-OUTS U10", comme
 let LS_DOCUMENTNAME_VHLRULESU7U12 = NSLocalizedString("VHL RULES U7-U12", comment: "Name for document")
 let LS_DOCUMENTNAME_VHLRULESU14U19 = NSLocalizedString("VHL RULES U14-U19", comment: "Name for document")
 let LS_DOCUMENTNAME_KBHBRULES = NSLocalizedString("KBHB RULES", comment: "Name for document")
-
+let LS_DOCUMENTNAME_LADIES = NSLocalizedString("KBHB LADIES RULES", comment: "Name for document")
+let LS_DOCUMENTNAME_GENTS = NSLocalizedString("KBHB GENTS RULES", comment: "Name for document")
 
 
 

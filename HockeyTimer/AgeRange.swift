@@ -17,9 +17,9 @@ struct AgeRange {
         case .Twenty:
             result = "U7 - U8"
         case .TwentyFive:
-            result = "U9 - U12"
+            result = "U9 - U10 - U11 - U12"
         case .Thirty:
-            result = "U14"
+            result = "U14 - Ladies - Gents"
         case .ThirtyFive:
             result = "U16 - U19"
         default:
