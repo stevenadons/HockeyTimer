@@ -51,6 +51,7 @@ class TimerVC: PanArrowVC {
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
+
     }
     
     private func setupViews() {
@@ -247,6 +248,7 @@ extension TimerVC: StopWatchDelegate {
         
         temporarilyShowConfButtonWithMask(message: LS_WARNINGNEWGAME)
     }
+
 }
 
 

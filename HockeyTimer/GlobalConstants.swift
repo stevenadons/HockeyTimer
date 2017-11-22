@@ -83,6 +83,7 @@ enum USERDEFAULTSKEY {
     static let Duration = "Duration"
     static let OldDuration = "OldDuration"
     static let StartViewController = "StartViewController"
+    static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
 }
 
 
@@ -94,6 +95,10 @@ enum SOUND {
 
 let admobHeight: CGFloat = 65
 
+var runningSecondsToGo: Int = 0
+var runningHalf: HALF = .First
+var runningDuration: MINUTESINHALF = .Twenty
+var shouldRestoreFromBackground: Bool = false
 
 
 // Localized strings

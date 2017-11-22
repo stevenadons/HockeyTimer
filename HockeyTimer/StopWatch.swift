@@ -56,7 +56,7 @@ class StopWatch: UIControl {
     fileprivate var firstProgressBar: CAShapeLayer!
     fileprivate var secondProgressBar: CAShapeLayer!
     private var messageLabel: UILabel!
-    private var halfLabel: UILabel!
+    fileprivate var halfLabel: UILabel!
     private var durationLabel: UILabel!
     
     fileprivate var haptic: UINotificationFeedbackGenerator?
@@ -215,6 +215,7 @@ class StopWatch: UIControl {
         message = LS_NEWGAME
         halfLabel.text = LS_FIRSTHALFLABEL
         halfLabel.alpha = 1.0
+        runningHalf = .First
         updateProgressBars()
         resetTimeLabel(withColor: COLOR.White, alpha: 1)
         setProgressBarsColor(to: COLOR.White)
@@ -392,6 +393,7 @@ class StopWatch: UIControl {
                 // Half time counter stopped
                 game.half = .Second
                 halfLabel.text = LS_SECONDHALFLABEL
+                runningHalf = .Second
                 timer.reset()
                 setProgressBarsColor(to: COLOR.White)
                 if durationLabel.alpha > 0 {
@@ -441,9 +443,19 @@ class StopWatch: UIControl {
 extension StopWatch: StopWatchTimerDelegate {
     
     func handleTickCountDown() {
-            timeLabel.text = stopWatchLabelTimeString()
-            timeLabel.setNeedsDisplay()
-            updateProgressBars()
+        
+        if shouldRestoreFromBackground {
+            timer.totalSecondsToGo = runningSecondsToGo
+            halfLabel.text = (runningHalf == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
+            shouldRestoreFromBackground = false
+        } else {
+            runningSecondsToGo = timer.totalSecondsToGo
+        }
+        
+        timeLabel.text = stopWatchLabelTimeString()
+        timeLabel.setNeedsDisplay()
+        
+        updateProgressBars()
     }
     
     func handleTickCountUp() {

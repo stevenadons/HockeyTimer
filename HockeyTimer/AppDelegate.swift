@@ -46,6 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        print("entering background")
+        let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
+        UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+        print("storing endtime \(endTime)")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -54,10 +59,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        print("will become active")
+        guard let storedEndTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground) as? NSDate else { return }
+        guard storedEndTime.timeIntervalSinceNow > 0 && storedEndTime.timeIntervalSinceNow < Double(MINUTESINHALF.ThirtyFive.rawValue * 60) else { return }
+        shouldRestoreFromBackground = true
+        runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow)
+        print("half is \(runningHalf) and secondstogo is \(runningSecondsToGo)")
+        print("storedEndTime = \(storedEndTime))")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        print("will terminate")
+        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+        runningSecondsToGo = 0
     }
 
 
