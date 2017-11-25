@@ -18,7 +18,7 @@ class PanArrowLabelFactory {
             label.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
         }
         label.text = text
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 11)
+        label.font = UIFont(name: FONTNAME.ThemeBold, size: 14)
         if let textAlignment = textAlignment {
             label.textAlignment = textAlignment
         }

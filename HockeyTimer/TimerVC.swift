@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AudioToolbox
 
 protocol StopWatchDelegate: class {
     
@@ -33,7 +33,8 @@ class TimerVC: PanArrowVC {
     private var scorePanelCenterYConstraint: NSLayoutConstraint!
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
     fileprivate var messageTimer: Timer?
-    
+    fileprivate var haptic: UISelectionFeedbackGenerator?
+
     var message: String = "" {
         didSet {
             confirmationButton.setTitle(message, for: .normal)
@@ -52,6 +53,12 @@ class TimerVC: PanArrowVC {
         game = pageVC?.game
         setupViews()
         NotificationCenter.default.addObserver(self, selector: #selector(updateTime), name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        prepareHapticIfNeeded()
     }
     
     private func setupViews() {
@@ -171,8 +178,16 @@ class TimerVC: PanArrowVC {
     
     @objc fileprivate func updateTime() {
         
-        print("will update time label")
         stopWatch.updateTimeLabel()
+    }
+    
+    private func prepareHapticIfNeeded() {
+        
+        guard #available(iOS 10.0, *) else { return }
+        if haptic == nil {
+            haptic = UISelectionFeedbackGenerator()
+            haptic!.prepare()
+        }
     }
     
     
@@ -229,6 +244,13 @@ class TimerVC: PanArrowVC {
 extension TimerVC: StopWatchDelegate {
     
     func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?) {
+        
+        if #available(iOS 10.0, *) {
+            haptic?.selectionChanged()
+            haptic = nil
+        } else {
+            AudioServicesPlaySystemSound(SystemSoundID(1519))
+        }
         
         if stopWatchTimer.state != .WaitingToStart {
             showIcons()

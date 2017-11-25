@@ -107,7 +107,7 @@ class ScoreVC: PanArrowVC {
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80 - admobHeight),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120 - admobHeight),
             
             ])
     }
