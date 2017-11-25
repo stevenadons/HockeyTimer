@@ -86,6 +86,10 @@ enum USERDEFAULTSKEY {
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
 }
 
+enum NOTIFICATIONNAME {
+    
+    static let AppWillEnterForeground = "AppWillEnterForeground"
+}
 
 enum SOUND {
     

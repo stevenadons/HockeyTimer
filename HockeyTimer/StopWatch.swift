@@ -188,7 +188,16 @@ class StopWatch: UIControl {
         durationLabel.setNeedsDisplay()
     }
     
-    
+    func updateTimeLabel() {
+        
+        if shouldRestoreFromBackground {
+            timer.totalSecondsToGo = runningSecondsToGo
+            timeLabel.text = stopWatchLabelTimeString()
+            timeLabel.setNeedsDisplay()
+            halfLabel.text = (runningHalf == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
+            shouldRestoreFromBackground = false
+        }
+    }
     
     
     // MARK: - User methods
@@ -444,17 +453,9 @@ extension StopWatch: StopWatchTimerDelegate {
     
     func handleTickCountDown() {
         
-        if shouldRestoreFromBackground {
-            timer.totalSecondsToGo = runningSecondsToGo
-            halfLabel.text = (runningHalf == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
-            shouldRestoreFromBackground = false
-        } else {
-            runningSecondsToGo = timer.totalSecondsToGo
-        }
-        
+        runningSecondsToGo = timer.totalSecondsToGo
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
-        
         updateProgressBars()
     }
     

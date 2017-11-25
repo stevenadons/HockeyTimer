@@ -51,7 +51,7 @@ class TimerVC: PanArrowVC {
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
-
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTime), name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground), object: nil)
     }
     
     private func setupViews() {
@@ -167,6 +167,12 @@ class TimerVC: PanArrowVC {
         UIView.animate(withDuration: 0.2) {
             self.resetButton?.alpha = 1.0
         }
+    }
+    
+    @objc fileprivate func updateTime() {
+        
+        print("will update time label")
+        stopWatch.updateTimeLabel()
     }
     
     
