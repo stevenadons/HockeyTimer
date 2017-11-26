@@ -60,6 +60,7 @@ class StopWatch: UIControl {
     private var durationLabel: UILabel!
     
     fileprivate var haptic: UINotificationFeedbackGenerator?
+    fileprivate var impactHaptic: UIImpactFeedbackGenerator?
     
     private let progressBarWidth: CGFloat = 18
     private let progressBarStrokeInsetRatio: CGFloat = 0.005
@@ -188,12 +189,25 @@ class StopWatch: UIControl {
         durationLabel.setNeedsDisplay()
     }
     
-    func updateTimeLabel() {
+    func updateAfterRestoringFromBackground() {
         
         if shouldRestoreFromBackground {
-            timer.totalSecondsToGo = runningSecondsToGo
-            timeLabel.text = stopWatchLabelTimeString()
-            timeLabel.setNeedsDisplay()
+            if runningSecondsToGo > 0 {
+                timer.totalSecondsToGo = runningSecondsToGo
+            } else if runningSecondsOverdue > 0 {
+                if timer.state != .Overdue {
+                    // Timer has gone overdue when app inactive
+                    timer.state = .Overdue
+                    timer.stopCountDown()
+                    timer.totalSecondsOverdue = runningSecondsOverdue
+                    timer.totalSecondsCountingUp = runningSecondsOverdue
+                    timer.startCountUp()
+                    handleReachedZero()
+                }
+            } else if runningSecondsCountingUp > 0 {
+                timer.totalSecondsCountingUp = runningSecondsCountingUp
+            }
+
             halfLabel.text = (runningHalf == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
             shouldRestoreFromBackground = false
         }
@@ -205,7 +219,15 @@ class StopWatch: UIControl {
     func stopWatchLabelTimeString() -> String {
         
         var result: String = ""
-        let total = (timer.state == .RunningCountUp || timer.state == .Overdue) ? timer.totalSecondsCountingUp : timer.totalSecondsToGo
+        var total: Int
+        switch timer.state {
+        case .Overdue:
+            total = timer.totalSecondsOverdue
+        case .RunningCountUp:
+            total = timer.totalSecondsCountingUp
+        default:
+            total = timer.totalSecondsToGo
+        }
         if minutes(totalSeconds: total) < 10 {
             result.append("0")
         }
@@ -359,6 +381,9 @@ class StopWatch: UIControl {
     
     private func handleTap() {
         
+        prepareImpactHapticIfNeeded()
+        impactHaptic?.impactOccurred()
+        
         switch icon.icon {
             
         case .PlayIcon:
@@ -445,14 +470,21 @@ class StopWatch: UIControl {
             haptic!.prepare()
         }
     }
-
+    
+    fileprivate func prepareImpactHapticIfNeeded() {
+        guard #available(iOS 10.0, *) else { return }
+        if impactHaptic == nil {
+            impactHaptic = UIImpactFeedbackGenerator(style: .medium)
+            impactHaptic!.prepare()
+        }
+    }
 }
 
 
 extension StopWatch: StopWatchTimerDelegate {
     
     func handleTickCountDown() {
-        
+        runningCountingUp = false
         runningSecondsToGo = timer.totalSecondsToGo
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
@@ -467,12 +499,19 @@ extension StopWatch: StopWatchTimerDelegate {
                 haptic?.notificationOccurred(.warning)
                 haptic = nil
             }
+            runningSecondsOverdue = timer.totalSecondsOverdue
             JukeBox.instance.playSound(SOUND.BeepBeep)
             prepareHapticIfNeeded()
+        } else {
+            runningCountingUp = true
+            runningSecondsCountingUp = timer.totalSecondsCountingUp
         }
     }
     
     func handleTimerReset() {
+        runningSecondsOverdue = 0
+        runningSecondsCountingUp = 0
+        runningCountingUp = false
         timer.set(duration: game.duration)
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
@@ -487,6 +526,7 @@ extension StopWatch: StopWatchTimerDelegate {
         JukeBox.instance.playSound(SOUND.BeepBeep)
         prepareHapticIfNeeded()
         updateProgressBars()
+        runningSecondsToGo = 0
         message = LS_OVERTIME
         resetTimeLabel(withColor: COLOR.LightYellow, alpha: 1)
         icon.change(to: .StopIcon)

@@ -32,7 +32,7 @@ class StopWatchTimer {
         return CGFloat(totalSecondsInHalf - totalSecondsToGo) / CGFloat(totalSecondsInHalf)
     }
     
-    private var timer: Timer?
+    var timer: Timer?
     private var delegate: StopWatchTimerDelegate!
     
     private var totalSecondsInHalf: Int = MINUTESINHALF.Twenty.rawValue
@@ -101,6 +101,7 @@ class StopWatchTimer {
         timer?.invalidate()
         totalSecondsCountingUp = 0
         state = .Ended
+        runningCountingUp = false
     }
     
     func reset() {

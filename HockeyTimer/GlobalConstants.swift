@@ -19,7 +19,7 @@ enum HALF {
 enum MINUTESINHALF: Int {
     
     case Fifteen = 15
-    case Twenty = 20
+    case Twenty = 1
     case TwentyFive = 25
     case Thirty = 30
     case ThirtyFive = 35
@@ -84,6 +84,8 @@ enum USERDEFAULTSKEY {
     static let OldDuration = "OldDuration"
     static let StartViewController = "StartViewController"
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
+    static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
+    static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
 }
 
 enum NOTIFICATIONNAME {
@@ -97,9 +99,12 @@ enum SOUND {
     static let Alarm = "StopWatchAlarmSound.mp3"
 }
 
-let admobHeight: CGFloat = 65
+let admobHeight: CGFloat = 0    // 65
 
 var runningSecondsToGo: Int = 0
+var runningSecondsOverdue: Int = 0
+var runningSecondsCountingUp: Int = 0
+var runningCountingUp: Bool = false
 var runningHalf: HALF = .First
 var runningDuration: MINUTESINHALF = .Twenty
 var shouldRestoreFromBackground: Bool = false
@@ -115,9 +120,11 @@ let LS_READYFORH2 = NSLocalizedString("Ready for H2", comment: "H2 to begin mess
 let LS_FULLTIME = NSLocalizedString("Full Time", comment: "Full time message")
 let LS_FIRSTHALFLABEL = NSLocalizedString("H1", comment: "Half time indication label")
 let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication label")
-let LS_WARNINGRESETGAME = NSLocalizedString("RESET GAME", comment: "When reset button tapped")
+let LS_WARNINGRESETGAME = NSLocalizedString("NEW GAME", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch is tapped for new game")
+let LS_WARNINGRESETPOPUP = NSLocalizedString("Are you sure to start a new game?", comment: "When reset button is tapped")
 
+let LS_BUTTON_CANCEL = NSLocalizedString("CANCEL", comment: "Cancel message")
 let LS_BUTTON_BACK = NSLocalizedString("BACK", comment: "Message on button to back out from document")
 let LS_BUTTON_UNDOGOAL = NSLocalizedString("UNDO GOAL", comment: "Message for undoing goal")
 let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button for ending onboarding")

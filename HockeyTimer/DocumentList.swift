@@ -148,7 +148,7 @@ class DocumentList: UIView {
                 extraDelay = 0
             }
             if self.buttons[index].transform != .identity {
-                UIView.animate(withDuration: 0.2, delay: 0.05 * Double(index) + extraDelay, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                UIView.animate(withDuration: 0.2, delay: 0.03 * Double(index) + extraDelay, options: [.allowUserInteraction, .curveEaseOut], animations: {
                     self.buttons[index].transform = .identity
                 }, completion: nil)
             }

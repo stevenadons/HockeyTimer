@@ -16,7 +16,9 @@
 "H1" = "H1";
 "H2" = "H2";
 "RESET GAME" = "NIEUWE WEDSTRIJD";
+"CANCEL" = "ANNULEER";
 "NEW GAME" = "NIEUWE WEDSTRIJD";
+"Are you sure to start a new game?" = "Nieuwe wedstrijd - ben je zeker?";
 
 "BACK" = "TERUG";
 "UNDO GOAL" = "ANNULEER GOAL";
@@ -30,7 +32,6 @@
 "Rules" = "Spelregels";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
-
 
 "VHL PICTOGRAM U7-U8" = "VHL PICTOGRAM U7-U8";
 "VHL PICTOGRAM U9" = "VHL PICTOGRAM U9";

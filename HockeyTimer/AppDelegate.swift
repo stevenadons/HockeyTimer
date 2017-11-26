@@ -47,17 +47,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-        let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
-        UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
+        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        
+        if runningSecondsToGo > 0 {
+            let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
+            UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+        } else if runningSecondsOverdue > 0 {
+            let startTime = NSDate().addingTimeInterval(Double(-runningSecondsOverdue))
+            UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
+        } else if runningSecondsCountingUp > 0 {
+            let startTime = NSDate().addingTimeInterval(Double(-runningSecondsCountingUp))
+            UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        guard let storedEndTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground) as? NSDate else { return }
-        guard storedEndTime.timeIntervalSinceNow > 0 && storedEndTime.timeIntervalSinceNow < Double(MINUTESINHALF.ThirtyFive.rawValue * 60) else { return }
-        shouldRestoreFromBackground = true
-        runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow)
+        runningSecondsToGo = 0
+        runningSecondsOverdue = 0
+        runningSecondsCountingUp = 0
+
+        if let storedEndTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground) as? NSDate {
+            // Restoring from formerly running countdown
+            if storedEndTime.timeIntervalSinceNow >= 0 && storedEndTime.timeIntervalSinceNow < Double(runningDuration.rawValue * 60) {
+                // Countdown should still be running
+                shouldRestoreFromBackground = true
+                runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow)
+                print("runningSecondsToGo is \(runningSecondsToGo)")
+            } else if storedEndTime.timeIntervalSinceNow < 0 {
+                // Should set overdue time
+                shouldRestoreFromBackground = true
+                runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date))
+                print("switched - runningSecondsOverdue is \(runningSecondsOverdue)")
+            }
+        } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeOverdue) as? NSDate {
+            // Restoring from formerly overdue countup
+            if storedStartTime.timeIntervalSinceNow < 0 {
+                // Overdue countup should resume
+                shouldRestoreFromBackground = true
+                runningSecondsOverdue = Int(Date().timeIntervalSince(storedStartTime as Date))
+                print("runningSecondsOverdue is \(runningSecondsOverdue)")
+            }
+        } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp) as? NSDate {
+            // Restoring from formerly counting up
+            if storedStartTime.timeIntervalSinceNow < 0 {
+                // Countup should resume
+                shouldRestoreFromBackground = true
+                runningSecondsCountingUp = Int(Date().timeIntervalSince(storedStartTime as Date))
+                print("runningSecondsCountingUp is \(runningSecondsCountingUp)")
+            }
+        }
         NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground), object: nil)
     }
 

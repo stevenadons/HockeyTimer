@@ -99,7 +99,7 @@ class ScoreStepper: UIView {
         NSLayoutConstraint.activate([
             
             scorelabel.heightAnchor.constraint(equalToConstant: shapeHeight),
-            scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -2),
             scorelabel.widthAnchor.constraint(equalTo: scorelabel.heightAnchor),
             scorelabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             

@@ -37,7 +37,11 @@ class HockeyGame {
     private(set) var awayScore: Int = 0
     var half: HALF = .First
     var status: Status = .WaitingToStart
-    var duration: MINUTESINHALF = .Twenty
+    var duration: MINUTESINHALF = .Twenty {
+        didSet {
+            runningDuration = duration
+        }
+    }
     private(set) var lastScored: Player?
     
     

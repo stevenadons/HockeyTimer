@@ -57,6 +57,7 @@
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
 		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
+		4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */; };
 		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
 		4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */; };
 		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
@@ -119,6 +120,7 @@
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
 		4FB4BF2B1F52273B003B1259 /* AgeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRange.swift; sourceTree = "<group>"; };
+		4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessageView.swift; sourceTree = "<group>"; };
 		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
 		4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JukeBox.swift; sourceTree = "<group>"; };
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
 				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
@@ -367,6 +370,14 @@
 			name = DurationCard;
 			sourceTree = "<group>";
 		};
+		4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */ = {
+			isa = PBXGroup;
+			children = (
+				4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */,
+			);
+			name = PopupMessage;
+			sourceTree = "<group>";
+		};
 		4FF7FB2C1F6549C3001D4ED1 /* JukeBox */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +485,7 @@
 				4FB4BEB01F515E2F003B1259 /* HockeyGame.swift in Sources */,
 				4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */,
 				4FB4BE921F515C49003B1259 /* Ball.swift in Sources */,
+				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,

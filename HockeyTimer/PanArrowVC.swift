@@ -66,7 +66,7 @@ class PanArrowVC: UIViewController {
             
             panArrowDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowDownLabel.widthAnchor.constraint(equalToConstant: 100),
-            panArrowDownLabel.bottomAnchor.constraint(equalTo: panArrowDown.topAnchor),
+            panArrowDownLabel.bottomAnchor.constraint(equalTo: panArrowDown.topAnchor, constant: -2),
             panArrowDownLabel.heightAnchor.constraint(equalToConstant: 16),
             
             ])
