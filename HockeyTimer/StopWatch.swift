@@ -390,10 +390,10 @@ class StopWatch: UIControl {
             // Start Half or Resume after pausing
             timer.startCountDown()
             game.status = .Running
+            JukeBox.instance.prepareSound(SOUND.BeepBeep)
             icon.change(to: .PauseIcon)
             message = ""
             delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
-            JukeBox.instance.prepareSound(SOUND.BeepBeep)
 
         case .PauseIcon:
             // Pause while counting down

@@ -35,6 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
+        
+        guard UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil else { return true }
+        let alert = UserNotificationHandler.sharedHandler.prePermissionAlert(title: "Notification permission", message: "You will need to give permission to be alerted when timer ends", confirmation: "OK", dismissal: "No thanks", handlerWhenConfirmed: {
+            print("CONFIRMED")
+            UserDefaults.standard.set(USERDEFAULTSKEY.PermissionGrantedNotifications, forKey: USERDEFAULTSKEY.PermissionGrantedNotifications)
+        })
+        startViewController.present(alert, animated: true, completion: nil)
+        
         return true
     }
 
@@ -54,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if runningSecondsToGo > 0 {
             let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
             UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+            UserNotificationHandler.sharedHandler.scheduleNotification(within: Double(runningSecondsToGo))
         } else if runningSecondsOverdue > 0 {
             let startTime = NSDate().addingTimeInterval(Double(-runningSecondsOverdue))
             UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
@@ -66,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
+        UserNotificationHandler.sharedHandler.cancelAllNotificationRequests()
+        
         runningSecondsToGo = 0
         runningSecondsOverdue = 0
         runningSecondsCountingUp = 0
@@ -76,12 +87,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Countdown should still be running
                 shouldRestoreFromBackground = true
                 runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow)
-                print("runningSecondsToGo is \(runningSecondsToGo)")
             } else if storedEndTime.timeIntervalSinceNow < 0 {
                 // Should set overdue time
                 shouldRestoreFromBackground = true
                 runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date))
-                print("switched - runningSecondsOverdue is \(runningSecondsOverdue)")
             }
         } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeOverdue) as? NSDate {
             // Restoring from formerly overdue countup
@@ -89,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Overdue countup should resume
                 shouldRestoreFromBackground = true
                 runningSecondsOverdue = Int(Date().timeIntervalSince(storedStartTime as Date))
-                print("runningSecondsOverdue is \(runningSecondsOverdue)")
             }
         } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp) as? NSDate {
             // Restoring from formerly counting up
@@ -97,7 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Countup should resume
                 shouldRestoreFromBackground = true
                 runningSecondsCountingUp = Int(Date().timeIntervalSince(storedStartTime as Date))
-                print("runningSecondsCountingUp is \(runningSecondsCountingUp)")
             }
         }
         NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground), object: nil)

@@ -86,6 +86,7 @@ enum USERDEFAULTSKEY {
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
+    static let PermissionGrantedNotifications = "PermissionGrantedNotifications"
 }
 
 enum NOTIFICATIONNAME {
@@ -123,6 +124,10 @@ let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication 
 let LS_WARNINGRESETGAME = NSLocalizedString("NEW GAME", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch is tapped for new game")
 let LS_WARNINGRESETPOPUP = NSLocalizedString("Are you sure to start a new game?", comment: "When reset button is tapped")
+let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notification when app in background")
+let LS_NOTIFICATION_DEFER = NSLocalizedString("+ 1 minute", comment: "To defer app to foreground in notification")
+let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
+let LS_NOTIFICATION_CONTENT = NSLocalizedString("Running in Overtime", comment: "Content for notification when app in background")
 
 let LS_BUTTON_CANCEL = NSLocalizedString("CANCEL", comment: "Cancel message")
 let LS_BUTTON_BACK = NSLocalizedString("BACK", comment: "Message on button to back out from document")

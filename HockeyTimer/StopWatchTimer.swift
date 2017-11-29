@@ -57,12 +57,12 @@ class StopWatchTimer {
     
     func set(duration: MINUTESINHALF) {
         
-        totalSecondsInHalf = duration.rawValue * 60
-        totalSecondsToGo = duration.rawValue * 60
+//        totalSecondsInHalf = duration.rawValue * 60
+//        totalSecondsToGo = duration.rawValue * 60
         
         // for testing purposes
-//        totalSecondsInHalf = 5
-//        totalSecondsToGo = 5
+        totalSecondsInHalf = 5
+        totalSecondsToGo = 5
 
     }
     

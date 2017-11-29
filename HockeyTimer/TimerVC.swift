@@ -18,7 +18,6 @@ protocol StopWatchDelegate: class {
 
 class TimerVC: PanArrowVC {
 
-    
     // MARK: - Properties
     
     fileprivate var resetButton: NewGameButtonIconOnly!
@@ -41,7 +40,6 @@ class TimerVC: PanArrowVC {
             confirmationButton.setTitle(message, for: .normal)
         }
     }
-    
     
     
     // MARK: - Loading
@@ -140,11 +138,6 @@ class TimerVC: PanArrowVC {
     
     
     // MARK: - Drawing and laying out
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-    }
     
     
     
@@ -254,7 +247,6 @@ class TimerVC: PanArrowVC {
 extension TimerVC: StopWatchDelegate {
     
     func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?) {
-        
         if stopWatchTimer.state != .WaitingToStart {
             showIcons()
         }

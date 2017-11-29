@@ -19,6 +19,10 @@
 "CANCEL" = "ANNULEER";
 "NEW GAME" = "NIEUWE WEDSTRIJD";
 "Are you sure to start a new game?" = "Nieuwe wedstrijd - ben je zeker?";
+"OK" = "OK";
+"+ 1 minute" = "+ 1 minuut";
+"Hockey Game" = "Hockey wedstrijd";
+"Running in Overtime" = "Over tijd";
 
 "BACK" = "TERUG";
 "UNDO GOAL" = "ANNULEER GOAL";
