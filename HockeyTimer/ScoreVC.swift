@@ -90,10 +90,11 @@ class ScoreVC: PanArrowVC {
 
         NSLayoutConstraint.activate([
             
-            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 10),
+            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40), // 10
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pitchContainer.heightAnchor.constraint(equalToConstant: 220),
-            pitchContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 110),
+            pitchContainer.heightAnchor.constraint(equalToConstant: 200), // 220
+            pitchContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 140), // 110
+            
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),
             pitch.heightAnchor.constraint(equalTo: pitchContainer.heightAnchor),

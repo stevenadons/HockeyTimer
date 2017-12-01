@@ -18,7 +18,7 @@ class PitchBackgroundLayer: CALayer {
     private var center: CAShapeLayer!
     private var striping: CAShapeLayer!
     
-    let outOfScreen: CGFloat = 5
+    let outOfScreen: CGFloat = 0 // 5
     let edgeWidth: CGFloat = 23
     
     
@@ -112,7 +112,7 @@ class PitchBackgroundLayer: CALayer {
     
     private func centerPath() -> UIBezierPath {
         
-        let path = UIBezierPath(rect: CGRect(x: -outOfScreen, y: edgeWidth, width: bounds.width + 2 * outOfScreen, height: bounds.height - (edgeWidth * 2)))
+        let path = UIBezierPath(rect: CGRect(x: -outOfScreen + edgeWidth, y: edgeWidth, width: bounds.width + 2 * outOfScreen - 2 * edgeWidth, height: bounds.height - (edgeWidth * 2)))
         return path
     }
     

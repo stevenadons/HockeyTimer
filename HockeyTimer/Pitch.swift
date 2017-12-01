@@ -112,20 +112,20 @@ class Pitch: UIView {
             homeScoreLabel.heightAnchor.constraint(equalToConstant: 75),
             homeScoreLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             homeScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 47 * bounds.width / 375),
-            homeScoreLabel.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 133 * bounds.width / 375),
+            homeScoreLabel.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 150 * bounds.width / 375), // 133
 
             awayScoreLabel.heightAnchor.constraint(equalTo: homeScoreLabel.heightAnchor),
             awayScoreLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            awayScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 133 * bounds.width / 375),
+            awayScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 150 * bounds.width / 375), // 133
             awayScoreLabel.trailingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width - 47 * bounds.width / 375),
             
-            homeScoreStepper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            homeScoreStepper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: background.edgeWidth), // 5
             homeScoreStepper.trailingAnchor.constraint(equalTo: centerXAnchor),
             homeScoreStepper.topAnchor.constraint(equalTo: topAnchor, constant: background.edgeWidth),
             homeScoreStepper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -background.edgeWidth),
             
             awayScoreStepper.leadingAnchor.constraint(equalTo: centerXAnchor),
-            awayScoreStepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            awayScoreStepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -background.edgeWidth), // 5
             awayScoreStepper.topAnchor.constraint(equalTo: topAnchor, constant: background.edgeWidth),
             awayScoreStepper.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -background.edgeWidth),
             

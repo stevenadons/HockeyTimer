@@ -147,17 +147,22 @@ class Ball: UIView {
                 animator.pauseAnimation()
             }
             animator.fractionComplete = translation.x / xOffset
-            if animator.fractionComplete > 0.60 || abs(pan.velocity(in: self.superview!).x) > 1000 {
+            if animator.fractionComplete > 0.45 || abs(pan.velocity(in: self.superview!).x) > 1000 { // 0.60
                 handleScore(homeSide: (translation.x < 0))
             }
+            
         case .ended:
             guard (animator.fractionComplete > 0.60 || abs(pan.velocity(in: self.superview!).x) > 1000) == false else {
                 return
             }
             haptic = nil
+            pan.isEnabled = false
             xOffset = 0
             animator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.5, animations: {
                 self.frame = self.centerFrame
+            })
+            animator.addCompletion({ (ended) in
+                pan.isEnabled = true
             })
             animator.startAnimation()
             

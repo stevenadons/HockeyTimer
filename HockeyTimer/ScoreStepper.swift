@@ -89,7 +89,7 @@ class ScoreStepper: UIView {
         
         guard bounds.width * bounds.height != 0 else { return }
         
-        let horizontalOffset: CGFloat = 24.0
+        let horizontalOffset: CGFloat = 12.0 // 24
         let shapeWidth = bounds.width - (2 * horizontalOffset)
         let shapeHeight = shapeWidth / 3
         let verticalOffset = (bounds.height - shapeHeight) / 2
@@ -99,17 +99,17 @@ class ScoreStepper: UIView {
         NSLayoutConstraint.activate([
             
             scorelabel.heightAnchor.constraint(equalToConstant: shapeHeight),
-            scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -2),
             scorelabel.widthAnchor.constraint(equalTo: scorelabel.heightAnchor),
             scorelabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             minusButton.heightAnchor.constraint(equalTo: scorelabel.heightAnchor, constant: -(shape.lineWidth + inset) * 2),
-            minusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor, constant: -2),
+            minusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor, constant: 2),
             minusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
             minusButton.trailingAnchor.constraint(equalTo: scorelabel.leadingAnchor, constant: -shape.lineWidth - inset),
             
             plusButton.heightAnchor.constraint(equalTo: minusButton.heightAnchor),
-            plusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor, constant: -2),
+            plusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor, constant: 2),
             plusButton.leadingAnchor.constraint(equalTo: scorelabel.trailingAnchor, constant: inset + shape.lineWidth),
             plusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
             
