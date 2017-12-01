@@ -11,6 +11,7 @@
 		4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */; };
 		4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
+		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4DE1F685837008F06DA /* Exo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */; };
 		4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
@@ -73,6 +74,7 @@
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.ttf"; sourceTree = "<group>"; };
 		4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Bold.ttf"; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
@@ -158,6 +160,14 @@
 			name = PlusMinus;
 			sourceTree = "<group>";
 		};
+		4F780A8B1FD0906D00DB1021 /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				4F780A8C1FD0909000DB1021 /* PhoneView.swift */,
+			);
+			name = Phone;
+			sourceTree = "<group>";
+		};
 		4F7AB4DC1F6857F8008F06DA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +251,7 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4F780A8B1FD0906D00DB1021 /* Phone */,
 				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
 				4FB4BF261F52261F003B1259 /* DurationCard */,
@@ -538,6 +549,7 @@
 				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
+				4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */,
 				4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */,
 				4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */,
 				4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */,

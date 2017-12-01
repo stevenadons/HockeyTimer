@@ -19,7 +19,7 @@ enum HALF {
 enum MINUTESINHALF: Int {
     
     case Fifteen = 15
-    case Twenty = 1
+    case Twenty = 20  // For testing purposes: 1
     case TwentyFive = 25
     case Thirty = 30
     case ThirtyFive = 35
@@ -82,7 +82,7 @@ enum USERDEFAULTSKEY {
     
     static let Duration = "Duration"
     static let OldDuration = "OldDuration"
-    static let StartViewController = "StartViewController"
+    static let ShouldNotOnboard = "ShouldNotOnboard"
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
@@ -140,8 +140,10 @@ let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
 let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Really easy to use", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", comment: "Onboarding screen")
+let LS_TITLE_ONBOARDINGSLIDE3 = NSLocalizedString("Notifications", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Just tap stopwatch to play or pause", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends. You will need to give access to notifications.", comment: "Onboarding screen")
 
 let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("VHL PICTOGRAM U7-U8", comment: "Name for document")
 let LS_DOCUMENTNAME_PICTOGRAMU9 = NSLocalizedString("VHL PICTOGRAM U9", comment: "Name for document")

@@ -31,6 +31,8 @@
 "Keep track of the score" = "Score bijhouden";
 "Just tap stopwatch to play or pause" = "Tik op de stopwatch voor start of pauze";
 "Drag the ball left or right" = "Sleep de bal naar links of rechts";
+"Notifications" = "Alarm";
+"Get notified when timer ends. You will need to give access to notifications." = "Ontvang een signaal wanneer de timer stopt. Je zal toegang moeten geven tot berichten";
 
 "Game Time" = "Duurtijd";
 "Rules" = "Spelregels";

@@ -99,17 +99,17 @@ class ScoreStepper: UIView {
         NSLayoutConstraint.activate([
             
             scorelabel.heightAnchor.constraint(equalToConstant: shapeHeight),
-            scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -2),
+            scorelabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             scorelabel.widthAnchor.constraint(equalTo: scorelabel.heightAnchor),
             scorelabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             minusButton.heightAnchor.constraint(equalTo: scorelabel.heightAnchor, constant: -(shape.lineWidth + inset) * 2),
-            minusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor),
+            minusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor, constant: -2),
             minusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
             minusButton.trailingAnchor.constraint(equalTo: scorelabel.leadingAnchor, constant: -shape.lineWidth - inset),
             
             plusButton.heightAnchor.constraint(equalTo: minusButton.heightAnchor),
-            plusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor),
+            plusButton.centerYAnchor.constraint(equalTo: scorelabel.centerYAnchor, constant: -2),
             plusButton.leadingAnchor.constraint(equalTo: scorelabel.trailingAnchor, constant: inset + shape.lineWidth),
             plusButton.widthAnchor.constraint(equalTo: minusButton.heightAnchor),
             

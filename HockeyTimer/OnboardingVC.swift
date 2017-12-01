@@ -18,10 +18,12 @@ class OnboardingVC: UIViewController {
     fileprivate var scrollView: UIScrollView!
     fileprivate var slide1: OnboardScreen!
     fileprivate var slide2: OnboardScreen!
+    fileprivate var slide3: OnboardScreen!
     fileprivate var stopWatch: StopWatch!
     fileprivate var pitch: Pitch!
+    fileprivate var phoneView: PhoneView!
     fileprivate var previousPage: Int = 0
-    fileprivate let numberOfPages: Int = 2
+    fileprivate let numberOfPages: Int = 3
     fileprivate var shouldShowButton: Bool = false
     
     fileprivate let SCREENWIDTH = UIScreen.main.bounds.size.width
@@ -31,9 +33,7 @@ class OnboardingVC: UIViewController {
     // MARK: - Public methods
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         setup()
         setupSlides()
     }
@@ -63,7 +63,7 @@ class OnboardingVC: UIViewController {
         dismissButton.addTarget(self, action: #selector(handleDismiss(sender:)), for: [.touchUpInside])
         dismissButton.alpha = 0.0
         dismissButton.backgroundColor = UIColor.clear
-        dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)
+        dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         dismissButton.setTitleColor(COLOR.VeryDarkBlue, for: .normal)
         dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +106,15 @@ class OnboardingVC: UIViewController {
         pitch = Pitch()
         pitch.simplifyForOnboarding()
         slide2.graphics.addSubview(pitch)
+        
+        slide3 = OnboardScreen()
+        slide3.backgroundColor = COLOR.White
+        slide3.title.text = LS_TITLE_ONBOARDINGSLIDE3
+        slide3.body.text = LS_BODY_ONBOARDINGSLIDE3
+        scrollView.addSubview(slide3)
+        
+        phoneView = PhoneView()
+        slide3.graphics.addSubview(phoneView)
     }
     
     
@@ -118,6 +127,8 @@ class OnboardingVC: UIViewController {
         setStopWatchFrame()
         slide2.frame = CGRect(x: SCREENWIDTH, y: 0, width: SCREENWIDTH, height: SCREENHEIGHT)
         setPitchFrame()
+        slide3.frame = CGRect(x: SCREENWIDTH * 2, y: 0, width: SCREENWIDTH, height: SCREENHEIGHT)
+        setPhoneViewFrame()
         view.bringSubview(toFront: pageControl)
         view.bringSubview(toFront: dismissButton)
     }
@@ -134,12 +145,20 @@ class OnboardingVC: UIViewController {
     private func setPitchFrame() {
         
         NSLayoutConstraint.activate([
-            
             pitch.widthAnchor.constraint(equalTo: slide2.widthAnchor, constant: -100),
             pitch.heightAnchor.constraint(equalToConstant: 180),
             pitch.centerXAnchor.constraint(equalTo: slide2.centerXAnchor),
             pitch.bottomAnchor.constraint(equalTo: slide2.centerYAnchor),
-            
+            ])
+    }
+    
+    private func setPhoneViewFrame() {
+        
+        NSLayoutConstraint.activate([
+            phoneView.widthAnchor.constraint(equalTo: slide3.graphics.widthAnchor),
+            phoneView.heightAnchor.constraint(equalTo: slide3.graphics.heightAnchor),
+            phoneView.centerXAnchor.constraint(equalTo: slide3.graphics.centerXAnchor),
+            phoneView.centerYAnchor.constraint(equalTo: slide3.graphics.centerYAnchor),
             ])
     }
     
@@ -148,13 +167,15 @@ class OnboardingVC: UIViewController {
     
     @objc private func handleDismiss(sender: UIButton) {
         
-        UserDefaults.standard.set("AppWasLaunchedBefore", forKey: USERDEFAULTSKEY.StartViewController)
+        UserDefaults.standard.set(USERDEFAULTSKEY.ShouldNotOnboard, forKey: USERDEFAULTSKEY.ShouldNotOnboard)
+        if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
+            UserNotificationHandler.sharedHandler.initialSetup()
+        }
         
         let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         startViewController.modalTransitionStyle = .crossDissolve
         present(startViewController, animated: true, completion: nil)
     }
-
 }
 
 
@@ -170,11 +191,12 @@ extension OnboardingVC: UIScrollViewDelegate {
         
         // When new page is full screen or no screen
         if scrollView.contentOffset.x == pageWidth {
-            pitch.animateScoreOnboarding(completion: {
-                self.showButton()
-            })
-        } else if scrollView.contentOffset.x == 0 {
+            pitch.animateScoreOnboarding(completion: nil)
+        } else if scrollView.contentOffset.x != 1 {
             pitch.simplifyForOnboarding()
+        }
+        if scrollView.contentOffset.x == pageWidth * 2 {
+            showButton()
         }
     }
     
@@ -187,6 +209,8 @@ extension OnboardingVC: UIScrollViewDelegate {
         case 0:
             hideButton()
         case 1:
+            hideButton()
+        case 2:
             print("no action")
         default:
             print("Error - Flipped to other page")

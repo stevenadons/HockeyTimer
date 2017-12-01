@@ -22,27 +22,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // For testing purposes to test onboarding
 //        startViewController = OnboardingVC()
-        
         // For testing purposes to avoid onboarding
 //        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
         // Standard
-        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.StartViewController) as? String) == nil {
+        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
             startViewController = OnboardingVC()
         } else {
             startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+            if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
+                UserNotificationHandler.sharedHandler.initialSetup()
+            }
         }
         
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
-        
-        guard UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil else { return true }
-        let alert = UserNotificationHandler.sharedHandler.prePermissionAlert(title: "Notification permission", message: "You will need to give permission to be alerted when timer ends", confirmation: "OK", dismissal: "No thanks", handlerWhenConfirmed: {
-            print("CONFIRMED")
-            UserDefaults.standard.set(USERDEFAULTSKEY.PermissionGrantedNotifications, forKey: USERDEFAULTSKEY.PermissionGrantedNotifications)
-        })
-        startViewController.present(alert, animated: true, completion: nil)
-        
         return true
     }
 

@@ -84,14 +84,14 @@ class OnboardScreen: UIView {
         graphics.translatesAutoresizingMaskIntoConstraints = false
         addSubview(graphics)
         
-        title = createLabel(bold: true, fontSize: 17)
-        title.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
+        title = createLabel(bold: true, fontSize: 18)
+        title.font = UIFont(name: FONTNAME.ThemeBold, size: 18)
         title.textColor = COLOR.VeryDarkBlue
         addSubview(title)
         
         body = UITextView()
         body.text = ""
-        body.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
+        body.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         body.isUserInteractionEnabled = false
         body.textAlignment = .center
         body.textColor = COLOR.VeryDarkBlue
