@@ -52,6 +52,7 @@ class HockeyGame {
         
         self.init()
         self.duration = duration
+        runningDuration = duration
     }
     
     

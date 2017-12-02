@@ -102,7 +102,7 @@ class TimerVC: PanArrowVC {
             resetButton.topAnchor.constraint(equalTo: stopWatch.bottomAnchor, constant: 20),
             resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 210/375),
+            stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), // 210
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2 - 30),
