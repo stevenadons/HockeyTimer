@@ -89,13 +89,9 @@ class DocumentVC: UIViewController {
             return
         }
         let request = URLRequest(url: url)
-        DispatchQueue.global(qos: .background).async {
-            guard self.webView.load(request) != nil else {
-                DispatchQueue.main.async {
-                    print("Error getting webpage")
-                }
-                return
-            }
+        guard self.webView.load(request) != nil else {
+            print("Error getting webpage")
+            return
         }
     }
     

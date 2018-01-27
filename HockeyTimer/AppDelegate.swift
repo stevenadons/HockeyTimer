@@ -116,7 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
-        runningSecondsToGo = 0
+        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
+        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        
+        UserNotificationHandler.sharedHandler.cancelAllNotificationRequests()
     }
 
 
