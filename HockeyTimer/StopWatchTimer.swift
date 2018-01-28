@@ -15,7 +15,6 @@ class StopWatchTimer {
     // MARK: - Helper classes
     
     enum State {
-        
         case WaitingToStart
         case RunningCountDown
         case RunningCountUp
@@ -27,7 +26,16 @@ class StopWatchTimer {
     
     // MARK: - Properties
     
-    var state: State = .WaitingToStart
+    var state: State = .WaitingToStart {
+        didSet {
+            switch state {
+            case .WaitingToStart, .Paused, .Ended:
+                timerIsRunning = false
+            case .RunningCountDown, .RunningCountUp, .Overdue:
+                timerIsRunning = true
+            }
+        }
+    }
     var progress: CGFloat {
         return CGFloat(totalSecondsInHalf - totalSecondsToGo) / CGFloat(totalSecondsInHalf)
     }

@@ -11,7 +11,6 @@ import AudioToolbox
 
 
 protocol StopWatchTimerDelegate: class {
-    
     func handleTickCountDown()
     func handleTickCountUp()
     func handleTimerReset()

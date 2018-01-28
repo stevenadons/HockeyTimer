@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
         
+        guard timerIsRunning else { return }
         if runningSecondsToGo > 0 {
             let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
             UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)

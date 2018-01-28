@@ -102,6 +102,7 @@ enum SOUND {
 
 let admobHeight: CGFloat = 0    // 65
 
+var timerIsRunning: Bool = false
 var runningSecondsToGo: Int = 0
 var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
