@@ -458,6 +458,7 @@
 					4FB4BE651F515B3B003B1259 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = EKD537MBRW;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -693,7 +694,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.HockeyTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -709,7 +711,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.HockeyTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

@@ -119,14 +119,14 @@ class ScoreStepper: UIView {
     
     // MARK: - Private Methods
     
-    func minusButtonTapped(sender: ScoreStepperButton) {
+    @objc func minusButtonTapped(sender: ScoreStepperButton) {
         
         delegate?.minusButtonTapped(stepper: self)
         guard let score = Int(scorelabel.text!), score >= 1 else { return }
         setScore(value: score - 1)
     }
     
-    func plusButtonTapped(sender: ScoreStepperButton) {
+    @objc func plusButtonTapped(sender: ScoreStepperButton) {
         
         delegate?.plusButtonTapped(stepper: self)
         guard let score = Int(scorelabel.text!) else { return }
