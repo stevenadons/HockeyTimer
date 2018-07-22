@@ -19,7 +19,7 @@ enum HALF {
 enum MINUTESINHALF: Int {
     
     case Fifteen = 15
-    case Twenty = 20  // For testing purposes: 1
+    case Twenty = 1  // For testing purposes: 1 // 20
     case TwentyFive = 25
     case Thirty = 30
     case ThirtyFive = 35

@@ -206,7 +206,7 @@ class StopWatch: UIControl {
             } else if runningSecondsCountingUp > 0 {
                 timer.totalSecondsCountingUp = runningSecondsCountingUp
             }
-
+            updateProgressBars()
             halfLabel.text = (runningHalf == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
             shouldRestoreFromBackground = false
         }
@@ -226,6 +226,9 @@ class StopWatch: UIControl {
             total = timer.totalSecondsCountingUp
         default:
             total = timer.totalSecondsToGo
+        }
+        if game.status == .Finished {
+            total = 0
         }
         if minutes(totalSeconds: total) < 10 {
             result.append("0")
@@ -276,12 +279,16 @@ class StopWatch: UIControl {
         
         firstProgressBar.removeFromSuperlayer()
         firstProgressBar = progressBarLayer(for: .First)
-        firstProgressBar.strokeEnd = (self.half == .Second) ? strokeEndPosition(progress: 1) : strokeEndPosition(progress: timer.progress)
+        firstProgressBar.strokeEnd = (self.half == .Second || timer.state == .Overdue || timer.state == .RunningCountUp) ? strokeEndPosition(progress: 1) : strokeEndPosition(progress: timer.progress)
         squareContainer.addSublayer(firstProgressBar)
         
         secondProgressBar.removeFromSuperlayer()
         secondProgressBar = progressBarLayer(for: .Second)
-        secondProgressBar.strokeEnd = (self.half == .First) ? strokeEndPosition(progress: 0) : strokeEndPosition(progress: timer.progress)
+        if self.half == .First {
+            secondProgressBar.strokeEnd = strokeEndPosition(progress: 0)
+        } else {
+            secondProgressBar.strokeEnd = (timer.state == .Overdue || timer.state == .RunningCountUp) ? strokeEndPosition(progress: 1) : strokeEndPosition(progress: timer.progress)
+        }
         squareContainer.addSublayer(secondProgressBar)
     }
     
