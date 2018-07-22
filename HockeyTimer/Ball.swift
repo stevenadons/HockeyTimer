@@ -81,8 +81,8 @@ class Ball: UIView {
     
     func repositionBall(withDelay delay: Double) {
         
-        isUserInteractionEnabled = true
-        pan.cancelsTouchesInView = false
+//        isUserInteractionEnabled = true
+//        pan.cancelsTouchesInView = false
         frame = self.centerFrame
 
         UIView.animate(withDuration: 0.2, delay: delay, options: [.curveEaseOut, .allowUserInteraction], animations: {
@@ -90,6 +90,8 @@ class Ball: UIView {
             self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }) { (finished) in
             self.shouldRecordGoal = true
+            self.isUserInteractionEnabled = true
+            self.pan.cancelsTouchesInView = false
             UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.allowUserInteraction], animations: {
                 self.transform = CGAffineTransform.identity
             }, completion: nil)
