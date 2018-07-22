@@ -119,6 +119,12 @@ class DurationVC: PanArrowVC {
     
     @objc private func handleCardTapped(sender: DurationCard, forEvent event: UIEvent) {
         
+        if sender.duration == selectedDuration {
+            // user tapped twice on same card
+            cards.forEach { $0.alpha = 1.0 }
+            selectedDuration = nil
+            return
+        }
         cancelView.isUserInteractionEnabled = true
         if sender.duration != currentDuration {
             selectedDuration = sender.duration

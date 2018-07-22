@@ -107,8 +107,11 @@ extension PageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
-        if let durationVC = pendingViewControllers.first as? DurationVC, let timerVC = pageViewController.viewControllers?.first as? TimerVC { durationVC.currentDuration = timerVC.game.duration
+        if let durationVC = pendingViewControllers.first as? DurationVC, let timerVC = pageViewController.viewControllers?.first as? TimerVC {
+            durationVC.currentDuration = timerVC.game.duration
+            durationVC.selectedDuration = nil
         } else if let timerVC = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
+            print("durationVC.selectedDuration is \(durationVC.selectedDuration)")
             if durationVC.selectedDuration != nil {
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
                 timerVC.resetWithNewGame()
