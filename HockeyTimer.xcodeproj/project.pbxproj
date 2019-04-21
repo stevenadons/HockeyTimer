@@ -468,8 +468,10 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
+				nl,
 			);
 			mainGroup = 4FB4BE5D1F515B3B003B1259;
 			productRefGroup = 4FB4BE671F515B3B003B1259 /* Products */;
