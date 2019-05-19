@@ -26,6 +26,7 @@ class ScoreStepper: UIView {
     fileprivate var scorelabel: UILabel!
     fileprivate var delegate: ScoreStepperDelegate?
     fileprivate(set) var type: ScoreStepperType = .Home
+    fileprivate var haptic: UISelectionFeedbackGenerator?
     
     private let designHeight: CGFloat = 46
     private let inset: CGFloat = 1.0
@@ -121,14 +122,24 @@ class ScoreStepper: UIView {
     
     @objc func minusButtonTapped(sender: ScoreStepperButton) {
         
+        doHaptic()
+        
         delegate?.minusButtonTapped(stepper: self)
+        
+        prepareHaptic()
+
         guard let score = Int(scorelabel.text!), score >= 1 else { return }
         setScore(value: score - 1)
     }
     
     @objc func plusButtonTapped(sender: ScoreStepperButton) {
         
+        doHaptic()
+        
         delegate?.plusButtonTapped(stepper: self)
+        
+        prepareHaptic()
+
         guard let score = Int(scorelabel.text!) else { return }
         setScore(value: score + 1)
     }
@@ -144,7 +155,10 @@ class ScoreStepper: UIView {
     
     func appear(show: Bool = true, delay: Double, value: Int = 0, completion: (() -> Void)? = nil) {
         
+        prepareHaptic()
+        
         setScore(value: value)
+        
         if show {
             UIView.animate(withDuration: 0.3, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [.allowUserInteraction], animations: {
                 self.alpha = 1.0
@@ -153,6 +167,7 @@ class ScoreStepper: UIView {
             }, completion: { (finished) in
                 completion?()
             })
+            
         } else {
             UIView.animate(withDuration: 0.15, delay: delay, options: [.curveEaseIn], animations: {
                 self.windUp()
@@ -162,7 +177,22 @@ class ScoreStepper: UIView {
         }
     }
  
-
-
-
+    
+    // MARK: - Haptic
+    
+    // UISelectionFeedbackGenerator
+    
+    private func prepareHaptic() {
+        
+        if haptic == nil {
+            haptic = UISelectionFeedbackGenerator()
+            haptic!.prepare()
+        }
+    }
+    
+    private func doHaptic() {
+        
+        haptic?.selectionChanged()
+        haptic = nil
+    }
 }

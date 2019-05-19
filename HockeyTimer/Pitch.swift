@@ -175,6 +175,7 @@ class Pitch: UIView {
             awayScoreLabel.alpha = 0.0
             homeScoreStepper.appear(show: true, delay: 0.0, value: homeScore, completion: nil)
             awayScoreStepper.appear(show: true, delay: 0.0, value: awayScore, completion: nil)
+            
         } else {
             homeScoreStepper.appear(show: false, delay: 0.0, completion: {
                 self.homeScoreLabel.alpha = 1.0
@@ -282,11 +283,9 @@ extension Pitch: ScoreStepperDelegate {
         case .Home:
             guard homeScore > 0 else { return }
             homeMinusOne()
-            print("Home: stepper \(stepper.type) tapped minus")
         case .Away:
             guard awayScore > 0 else { return }
             awayMinusOne()
-            print("Away: stepper \(stepper.type) tapped minus")
         }
     }
     
@@ -297,12 +296,10 @@ extension Pitch: ScoreStepperDelegate {
             homeScore += 1
             homeScoreLabel.text = "\(homeScore)"
             delegate?.scoreHome()
-            print("Home: stepper \(stepper.type) tapped plus")
         case .Away:
             awayScore += 1
             awayScoreLabel.text = "\(awayScore)"
             delegate?.scoreAway()
-            print("Away: stepper \(stepper.type) tapped plus")
             
         }
     }

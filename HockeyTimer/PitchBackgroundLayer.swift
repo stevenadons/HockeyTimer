@@ -85,52 +85,64 @@ class PitchBackgroundLayer: CALayer {
     private func createEdge(path: UIBezierPath) -> CAShapeLayer {
         
         let shape = CAShapeLayer()
+        
         shape.path = path.cgPath
         shape.strokeColor = UIColor.clear.cgColor //COLOR.LightYellow.cgColor
         shape.lineWidth = 6.0
         shape.fillColor = COLOR.DarkBlue.cgColor
         shape.allowsEdgeAntialiasing = true
+        
         return shape
     }
     
     private func edgePath() -> UIBezierPath {
         
-        let path = UIBezierPath(rect: CGRect(x: -outOfScreen, y: 0, width: bounds.width + 2 * outOfScreen, height: bounds.height))
+        let rect = CGRect(x: -outOfScreen, y: 0, width: bounds.width + 2 * outOfScreen, height: bounds.height)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 36)
+        
         return path
     }
     
     private func createCenter(path: UIBezierPath, color: UIColor) -> CAShapeLayer {
         
         let shape = CAShapeLayer()
+        
         shape.path = path.cgPath
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = 1.0
         shape.fillColor = color.cgColor
         shape.allowsEdgeAntialiasing = true
+        
         return shape
     }
     
     private func centerPath() -> UIBezierPath {
         
-        let path = UIBezierPath(rect: CGRect(x: -outOfScreen + edgeWidth, y: edgeWidth, width: bounds.width + 2 * outOfScreen - 2 * edgeWidth, height: bounds.height - (edgeWidth * 2)))
+        let rect = CGRect(x: -outOfScreen + edgeWidth, y: edgeWidth, width: bounds.width + 2 * outOfScreen - 2 * edgeWidth, height: bounds.height - (edgeWidth * 2))
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 20)
+        
         return path
     }
     
     private func createStriping(path: UIBezierPath) -> CAShapeLayer {
         
         let shape = CAShapeLayer()
+        
         shape.path = path.cgPath
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = 1.0
         shape.allowsEdgeAntialiasing = true
+        
         return shape
     }
 
     private func stripingPath() -> UIBezierPath {
         
         let path = UIBezierPath()
+        
         path.move(to: CGPoint(x: bounds.width / 2, y: 23))
         path.addLine(to: CGPoint(x: bounds.width / 2, y: bounds.height - 23))
+        
         return path
     }
 }

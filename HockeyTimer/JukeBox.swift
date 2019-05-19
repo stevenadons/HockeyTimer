@@ -67,7 +67,7 @@ class JukeBox {
             return
         }
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
             try AVAudioSession.sharedInstance().setActive(true)
             let player = try AVAudioPlayer(contentsOf: url)
             let sound = Sound(name: onlyName, player: player)
@@ -94,7 +94,7 @@ class JukeBox {
         if let sound = soundForKey(key: onlyName) {
             if !mute {
                 do {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
                     try AVAudioSession.sharedInstance().setActive(true)
                     let normalizedLevel = min(max(volume, 0), 1) // range between 0 and 1
                     sound.player.volume = normalizedLevel
@@ -241,4 +241,9 @@ class JukeBox {
     }
     
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class PanArrowLabelFactory {
     
-    class func standardLabel(text: String, textColor: UIColor, fontStyle: UIFontTextStyle, textAlignment: NSTextAlignment?, sizeToFit: Bool, adjustsFontSizeToFitWidth: Bool?) -> UILabel {
+    class func standardLabel(text: String, textColor: UIColor, fontStyle: UIFont.TextStyle, textAlignment: NSTextAlignment?, sizeToFit: Bool, adjustsFontSizeToFitWidth: Bool?) -> UILabel {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

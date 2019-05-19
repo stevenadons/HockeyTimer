@@ -142,7 +142,7 @@ class StopWatch: UIControl {
         addSubview(halfLabel)
         
         for subview in subviews {
-            bringSubview(toFront: subview)
+            bringSubviewToFront(subview)
         }
     }
     
@@ -300,8 +300,8 @@ class StopWatch: UIControl {
         let shape = CAShapeLayer()
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = progressBarWidth
-        shape.lineCap = kCALineCapButt
-        shape.lineJoin = kCALineJoinMiter
+        shape.lineCap = CAShapeLayerLineCap.butt
+        shape.lineJoin = CAShapeLayerLineJoin.miter
         shape.fillColor = UIColor.clear.cgColor
         shape.position = CGPoint.zero
         shape.strokeStart = progressBarStrokeInsetRatio

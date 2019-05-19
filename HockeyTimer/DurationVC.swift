@@ -39,7 +39,7 @@ class DurationVC: PanArrowVC {
         
         super.viewDidAppear(animated)
         for card in self.cards {
-            if let index = self.cards.index(of: card) {
+            if let index = self.cards.firstIndex(of: card) {
                 card.popup(delay: 0.1 * Double(index))
             } else {
                 card.popup(delay: 1.0)

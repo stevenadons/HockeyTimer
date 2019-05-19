@@ -20,7 +20,7 @@ class MaskWithActivityIndicator: UIView {
     private var activityIndicatorView: UIActivityIndicatorView!
     private let activityIndicatorViewWidth: Int = 40
     private let activityIndicatorViewHeight: Int = 40
-    private let activityIndicatorViewStyle: UIActivityIndicatorViewStyle = .whiteLarge
+    private let activityIndicatorViewStyle: UIActivityIndicatorView.Style = .whiteLarge
     
     convenience init(inView containingView: UIView) {
         
@@ -40,7 +40,7 @@ class MaskWithActivityIndicator: UIView {
         
         activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.frame = CGRect(x: 0, y: 0, width: activityIndicatorViewWidth, height: activityIndicatorViewHeight)
-        activityIndicatorView.activityIndicatorViewStyle = activityIndicatorViewStyle
+        activityIndicatorView.style = activityIndicatorViewStyle
         activityIndicatorView.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
         
         loadingView.addSubview(activityIndicatorView)

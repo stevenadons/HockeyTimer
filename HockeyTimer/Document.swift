@@ -29,9 +29,9 @@ let database: [String: (buttonTitle: String, urlString: String)] = [
     documentNames[3] : (LS_DOCUMENTNAME_VHLSHOOTOUTS, "https://www.hockey.be/app/uploads/2018/06/spelregels_jeugd_NL01092014.pdf"), // http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Documenten/Jeugdcommissie/2015/KBHB_SO_U10_officieeldoc.pdf"
     documentNames[4] : (LS_DOCUMENTNAME_VHLRULESU7U12, "https://www.hockey.be/app/uploads/2018/05/Table_Parents-Umpires_-_NL_-_less_U14_-_v1.5.pdf"), // http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2017/Table_Parents-Umpires_-_NL_-_less_U14_-_v1.5.pdf
     documentNames[5] : (LS_DOCUMENTNAME_VHLRULESU14U19, "https://www.hockey.be/app/uploads/2018/05/Table_Parents-Umpires_-_NL_-_above_U14_-_V1.2.pdf"), // http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2016/Spelregels_Jeugd/Table_Parents-Umpires_-_NL_-_above_U14_-_V1.1.pdf
-    documentNames[6] : (LS_DOCUMENTNAME_KBHBRULES, "http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2017/2017-2018_-_BEL_Outdoor_Rules_-_NL.pdf"), // http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2016/2016-2017_-_BEL_Outdoor_Rules_-_NL.pdf
-    documentNames[7] : (LS_DOCUMENTNAME_LADIES, "http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2017/Ladies_rules_NL_2017-2018.pdf"),
-    documentNames[8] : (LS_DOCUMENTNAME_GENTS, "http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2017/Gents_rules_NL_2017-2018.pdf")
+    documentNames[6] : (LS_DOCUMENTNAME_FIHRULES, "https://www.hockey.be/app/uploads/2019/04/fih-rules-of-hockey-2019-final-5.pdf"), // http://www.hockey.be/tiny_mce/plugins/filemanager/files/web/Spelregels/2016/2016-2017_-_BEL_Outdoor_Rules_-_NL.pdf
+    documentNames[7] : (LS_DOCUMENTNAME_LADIES, "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_NL_2017-2018.pdf"),
+    documentNames[8] : (LS_DOCUMENTNAME_GENTS, "https://www.hockey.be/app/uploads/2018/06/Gents_rules_NL_2017-2018-1.pdf")
 ]
 
 struct Document {

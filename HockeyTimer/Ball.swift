@@ -81,8 +81,6 @@ class Ball: UIView {
     
     func repositionBall(withDelay delay: Double) {
         
-//        isUserInteractionEnabled = true
-//        pan.cancelsTouchesInView = false
         frame = self.centerFrame
 
         UIView.animate(withDuration: 0.2, delay: delay, options: [.curveEaseOut, .allowUserInteraction], animations: {

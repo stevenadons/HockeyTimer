@@ -36,6 +36,22 @@ class PageVC: UIPageViewController {
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
     }
+    
+    // MARK: - Public Methods
+    
+    func scoreDidChange() {
+        
+        print("PageVC.scoreDidChange")
+        
+        if existingTimerVC == nil, let scoreVC = viewControllers?.first as? ScoreVC {
+            let timerVC = TimerVC(pageVC: self)
+            timerVC.delegate = scoreVC
+            timerVC.game = game
+            existingTimerVC = timerVC
+        }
+        existingTimerVC?.scoreDidChange()
+    }
+
 
 }
 
@@ -44,11 +60,13 @@ extension PageVC: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         var nextVC: PanArrowVC? = nil
+        
         if let _ = viewController as? DurationVC {
             if existingTimerVC == nil {
                 existingTimerVC = TimerVC(pageVC: self)
             }
             nextVC = existingTimerVC
+            
         } else if let timerVC = viewController as? TimerVC {
             existingTimerVC = timerVC
             if existingScoreVC == nil  {
@@ -58,20 +76,24 @@ extension PageVC: UIPageViewControllerDataSource {
                 existingScoreVC = scoreVC
             }
             nextVC = existingScoreVC
+            
         } else if let scoreVC = viewController as? ScoreVC {
             existingScoreVC = scoreVC
             nextVC = DocumentMenuVC(pageVC: self)
         }
+        
         return nextVC
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         var earlierVC: UIViewController? = nil
+        
         if let timerVC = viewController as? TimerVC {
             let durationVC = DurationVC(pageVC: self)
             durationVC.currentDuration = timerVC.game.duration
             earlierVC = durationVC
+            
         } else if let scoreVC = viewController as? ScoreVC {
             if existingTimerVC == nil {
                 let timerVC = TimerVC(pageVC: self)
@@ -80,6 +102,7 @@ extension PageVC: UIPageViewControllerDataSource {
                 existingTimerVC = timerVC
             }
             earlierVC = existingTimerVC
+            
         } else if let _ = viewController as? DocumentMenuVC {
             if existingScoreVC == nil {
                 let scoreVC = ScoreVC(game: game)
@@ -89,14 +112,17 @@ extension PageVC: UIPageViewControllerDataSource {
             }
             earlierVC = existingScoreVC
         }
+        
         return earlierVC
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        
         return 4
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        
         return 0
     }
     
@@ -110,11 +136,12 @@ extension PageVC: UIPageViewControllerDelegate {
         if let durationVC = pendingViewControllers.first as? DurationVC, let timerVC = pageViewController.viewControllers?.first as? TimerVC {
             durationVC.currentDuration = timerVC.game.duration
             durationVC.selectedDuration = nil
-        } else if let timerVC = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
-            print("durationVC.selectedDuration is \(durationVC.selectedDuration)")
+            
+        } else if let _ = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
             if durationVC.selectedDuration != nil {
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
-                timerVC.resetWithNewGame()
+                game = HockeyGame(duration: durationVC.selectedDuration!)
+                NotificationCenter.default.post(name: .NewGame, object: nil)
             }
         }
         prepareHapticIfNeeded()

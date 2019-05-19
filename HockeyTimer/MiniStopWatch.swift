@@ -108,8 +108,8 @@ class MiniStopWatch: UIView {
         let shape = CAShapeLayer()
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = progressBarWidth
-        shape.lineCap = kCALineCapButt
-        shape.lineJoin = kCALineJoinMiter
+        shape.lineCap = CAShapeLayerLineCap.butt
+        shape.lineJoin = CAShapeLayerLineJoin.miter
         shape.fillColor = UIColor.clear.cgColor
         shape.position = CGPoint.zero
         shape.strokeStart = 0.0
@@ -162,7 +162,7 @@ class MiniStopWatch: UIView {
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = duration * Double(self.duration.rawValue) / 30.0
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.fromValue = 0.0
         animation.toValue = CGFloat(Double(self.duration.rawValue) / 60.0)
         progressBar.add(animation, forKey: "timer effect")

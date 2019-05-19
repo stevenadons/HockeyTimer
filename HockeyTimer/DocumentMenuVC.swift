@@ -44,7 +44,7 @@ class DocumentMenuVC: PanArrowVC {
         documentList = DocumentList(delegate: self)
         documentList.backgroundColor = UIColor.clear
         view.addSubview(documentList)
-        view.sendSubview(toBack: documentList)
+        view.sendSubviewToBack(documentList)
         
         panArrowUp.color = COLOR.LightYellow
         panArrowDown.alpha = 0.0
@@ -80,11 +80,11 @@ class DocumentMenuVC: PanArrowVC {
 extension DocumentMenuVC: DocumentListDelegate {
     
     func handleButtonTapped(sender: DocumentButton) {
-        
-        let newVC = DocumentVC()
-        newVC.urlString = sender.document.url
-        newVC.modalTransitionStyle = .crossDissolve
-        present(newVC, animated: true, completion: nil)
+ 
+        if let url = URL(string: sender.document.url) {
+            UIApplication.shared.open(url)
+        }
     }
+    
     
 }

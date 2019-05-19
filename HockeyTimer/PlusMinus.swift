@@ -14,6 +14,7 @@ class PlusMinus: UIButton {
     // MARK: - Properties
     
     private var shape: PlusMinusLayer!
+    private var haptic: UISelectionFeedbackGenerator?
     
     
     // MARK: - Initializing
@@ -36,6 +37,20 @@ class PlusMinus: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         shape = PlusMinusLayer()
         layer.addSublayer(shape)
+        
+        prepareHaptic()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        super.touchesEnded(touches, with: event)
+        if touches.count == 1, let touch = touches.first {
+            if touch.tapCount == 1 {
+                doHaptic()
+                prepareHaptic()
+            }
+        }
+        
     }
     
     
@@ -46,6 +61,23 @@ class PlusMinus: UIButton {
         super.layoutSubviews()
         shape.frame = bounds
     }
-
-
+    
+    
+    
+    
+    // MARK: - Haptic
+    
+    private func prepareHaptic() {
+        
+        if haptic == nil {
+            haptic = UISelectionFeedbackGenerator()
+            haptic!.prepare()
+        }
+    }
+    
+    private func doHaptic() {
+        
+        haptic?.selectionChanged()
+        haptic = nil
+    }
 }

@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 runningSecondsCountingUp = Int(Date().timeIntervalSince(storedStartTime as Date))
             }
         }
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground), object: nil)
+        NotificationCenter.default.post(name: .AppWillEnterForeground, object: nil)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

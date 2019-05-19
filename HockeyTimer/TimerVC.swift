@@ -18,6 +18,7 @@ protocol StopWatchDelegate: class {
 
 class TimerVC: PanArrowVC {
 
+    
     // MARK: - Properties
     
     fileprivate var resetButton: NewGameButtonIconOnly!
@@ -51,7 +52,7 @@ class TimerVC: PanArrowVC {
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAfterRestoringFromBackground), name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground), object: nil)
+        addObservers()
     }
     
     private func setupViews() {
@@ -93,7 +94,8 @@ class TimerVC: PanArrowVC {
         panArrowUp.color = COLOR.LightYellow
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.text = LS_TITLE_GAMETIME
-        panArrowDownLabel.text = LS_TITLE_SCORE
+        panArrowDownLabel.text = "0 - 0" // LS_TITLE_SCORE
+        panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         
         NSLayoutConstraint.activate([
             
@@ -124,16 +126,34 @@ class TimerVC: PanArrowVC {
             cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cancelButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             cancelButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150 - admobHeight),
+            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180 - admobHeight),
             
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -16),
+            confirmationButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
             
             ])
         
         hideIcons()
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateAfterRestoringFromBackground),
+                                               name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleNewGame),
+                                               name: .NewGame,
+                                               object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -193,6 +213,26 @@ class TimerVC: PanArrowVC {
         stopWatch.updateAfterRestoringFromBackground()
     }
     
+    @objc fileprivate func handleNewGame() {
+        
+        game = pageVC?.game
+        stopWatch?.reset(withGame: game)
+        panArrowDownLabel.text = "0 - 0"
+        hideIcons()
+    }
+    
+    private func createNewGame() {
+        
+        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
+            if let enumCase = MINUTESINHALF(rawValue: minutes) {
+                duration = enumCase
+            }
+        }
+        game = HockeyGame(duration: duration)
+        pageVC?.game = game
+        NotificationCenter.default.post(name: .NewGame, object: nil)
+    }
+    
     
     // MARK: - Touch Methods
     
@@ -204,6 +244,7 @@ class TimerVC: PanArrowVC {
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
         
         hidePopup()
+        createNewGame()
         if message == LS_WARNINGRESETGAME {
             resetWithNewGame()
         } else if message == LS_WARNINGNEWGAME {
@@ -218,28 +259,19 @@ class TimerVC: PanArrowVC {
     
     
     
-    // MARK: - Private Methods
+    // MARK: - Public Methods
 
-    
     func resetWithNewGame() {
         
         handleNewGame()
         delegate?.resetGame()
     }
     
-    
-    fileprivate func handleNewGame() {
+    func scoreDidChange() {
         
-        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
-            if let enumCase = MINUTESINHALF(rawValue: minutes) {
-                duration = enumCase
-            }
-        }
-        game = HockeyGame(duration: duration)
-        pageVC?.game = game
-        stopWatch?.reset(withGame: game)
-        hideIcons()
+        panArrowDownLabel.text = "\(game.homeScore) - \(game.awayScore)"
     }
+    
 }
 
 

@@ -129,8 +129,8 @@ class OnboardingVC: UIViewController {
         setPitchFrame()
         slide3.frame = CGRect(x: SCREENWIDTH * 2, y: 0, width: SCREENWIDTH, height: SCREENHEIGHT)
         setPhoneViewFrame()
-        view.bringSubview(toFront: pageControl)
-        view.bringSubview(toFront: dismissButton)
+        view.bringSubviewToFront(pageControl)
+        view.bringSubviewToFront(dismissButton)
     }
     
     private func setStopWatchFrame() {

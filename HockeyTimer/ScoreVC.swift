@@ -36,7 +36,7 @@ class ScoreVC: PanArrowVC {
     fileprivate var editModeButton: PlusMinus!
     fileprivate var confirmationButton: ConfirmationButton!
 
-    fileprivate var delegate: PitchDelegate?
+//    fileprivate var delegate: PitchDelegate?
     fileprivate var inEditMode: Bool = false
     fileprivate var messageTimer: Timer?
     
@@ -61,6 +61,7 @@ class ScoreVC: PanArrowVC {
         view.backgroundColor = COLOR.White
         view.clipsToBounds = true
         setupViews()
+        addObservers()
     }
     
     private func setupViews() {
@@ -113,6 +114,26 @@ class ScoreVC: PanArrowVC {
             ])
     }
     
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleNewGame),
+                                               name: .NewGame,
+                                               object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        inEditMode = false
+        pitch.toggleEditMode(on: false)
+    }
+    
     
     
     // MARK: - Drawing and laying out
@@ -152,7 +173,7 @@ class ScoreVC: PanArrowVC {
         }
     }
     
-       
+    
     
     // MARK: - Private Methods
     
@@ -169,6 +190,12 @@ class ScoreVC: PanArrowVC {
         }
         confirmationButton.shrink()
     }
+    
+    @objc fileprivate func handleNewGame() {
+        
+        game = pageVC?.game
+        pitch.resetScores()
+    }
 
 }
 
@@ -184,19 +211,27 @@ extension ScoreVC: TimerVCDelegate {
 extension ScoreVC: PitchDelegate {
     
     func scoreHome() {
+        
         game?.homeScored()
+        pageVC?.scoreDidChange()
     }
     
     func scoreAway() {
+        
         game?.awayScored()
+        pageVC?.scoreDidChange()
     }
     
     func scoreHomeMinusOne() {
+        
         game?.homeScoreMinusOne()
+        pageVC?.scoreDidChange()
     }
     
     func scoreAwayMinusOne() {
+        
         game?.awayScoreMinusOne()
+        pageVC?.scoreDidChange()
     }
     
     func scoreLabelChanged() {

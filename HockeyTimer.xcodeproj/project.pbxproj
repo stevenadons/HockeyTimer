@@ -11,6 +11,7 @@
 		4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */; };
 		4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
+		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4DE1F685837008F06DA /* Exo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */; };
 		4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */; };
@@ -53,7 +54,6 @@
 		4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF191F521FBA003B1259 /* DocumentList.swift */; };
 		4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */; };
 		4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1D1F521FE3003B1259 /* Document.swift */; };
-		4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */; };
 		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
 		4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF241F5225B3003B1259 /* DurationVC.swift */; };
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
@@ -74,6 +74,7 @@
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4F6342A322916E0A002F49B4 /* NotificationNameX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameX.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.ttf"; sourceTree = "<group>"; };
 		4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Bold.ttf"; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		4FB4BF191F521FBA003B1259 /* DocumentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentList.swift; sourceTree = "<group>"; };
 		4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentButton.swift; sourceTree = "<group>"; };
 		4FB4BF1D1F521FE3003B1259 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentVC.swift; sourceTree = "<group>"; };
 		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
 		4FB4BF241F5225B3003B1259 /* DurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationVC.swift; sourceTree = "<group>"; };
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
@@ -239,11 +239,11 @@
 			children = (
 				4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */,
 				4FB4BF141F520D1C003B1259 /* PageVC.swift */,
+				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
 				4FB4BF241F5225B3003B1259 /* DurationVC.swift */,
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
 				4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */,
 				4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */,
-				4FB4BF1F1F52213D003B1259 /* DocumentVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -251,6 +251,7 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
 				4F780A8B1FD0906D00DB1021 /* Phone */,
 				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
@@ -315,18 +316,8 @@
 				4F28325C1FCF468600E67FF7 /* UserNotificationsHandler */,
 				4FF7FB2C1F6549C3001D4ED1 /* JukeBox */,
 				4FB4BEB81F515EDB003B1259 /* Extensions */,
-				4FB4BE9E1F515D3B003B1259 /* Classes */,
 			);
 			name = Utilities;
-			sourceTree = "<group>";
-		};
-		4FB4BE9E1F515D3B003B1259 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
-				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 		4FB4BEA81F515D9D003B1259 /* ConfirmationButton */ = {
@@ -362,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BEB91F515EEA003B1259 /* Color.swift */,
+				4F6342A322916E0A002F49B4 /* NotificationNameX.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -452,23 +444,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = StevenAdons;
 				TargetAttributes = {
 					4FB4BE651F515B3B003B1259 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = EKD537MBRW;
-						LastSwiftMigration = 0920;
+						DevelopmentTeam = SPB3WZT9KK;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 4FB4BE611F515B3B003B1259 /* Build configuration list for PBXProject "HockeyTimer" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				nl,
@@ -515,6 +506,7 @@
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
 				4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */,
+				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
@@ -549,7 +541,6 @@
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
 				4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
-				4FB4BF201F52213D003B1259 /* DocumentVC.swift in Sources */,
 				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
 				4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */,
@@ -605,6 +596,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -612,6 +604,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -661,6 +654,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -668,6 +662,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -702,14 +697,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EKD537MBRW;
+				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.HockeyTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -719,14 +713,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = EKD537MBRW;
+				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.HockeyTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
