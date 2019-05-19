@@ -43,10 +43,8 @@ class PopupMessageView: UIView {
     private func setup() {
         
         // Configuring self
-//        backgroundColor = UIColor.black
         backgroundColor = UIColor.clear
         translatesAutoresizingMaskIntoConstraints = false
-//        layer.cornerRadius = 15
         
         // Childviews - add
         label = UILabel()

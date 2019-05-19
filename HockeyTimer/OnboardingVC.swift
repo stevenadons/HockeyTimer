@@ -64,7 +64,7 @@ class OnboardingVC: UIViewController {
         dismissButton.alpha = 0.0
         dismissButton.backgroundColor = UIColor.clear
         dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
-        dismissButton.setTitleColor(COLOR.VeryDarkBlue, for: .normal)
+        dismissButton.setTitleColor(COLOR.DarkBlue, for: .normal)
         dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
@@ -79,7 +79,7 @@ class OnboardingVC: UIViewController {
             dismissButton.widthAnchor.constraint(equalToConstant: 130),
             dismissButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             dismissButton.heightAnchor.constraint(equalToConstant: 35),
-            dismissButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -10),
+            dismissButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -30),
             
             ])
         
@@ -168,9 +168,9 @@ class OnboardingVC: UIViewController {
     @objc private func handleDismiss(sender: UIButton) {
         
         UserDefaults.standard.set(USERDEFAULTSKEY.ShouldNotOnboard, forKey: USERDEFAULTSKEY.ShouldNotOnboard)
-        if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
-            UserNotificationHandler.sharedHandler.initialSetup()
-        }
+//        if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
+//            UserNotificationHandler.sharedHandler.initialSetup()
+//        }
         
         let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         startViewController.modalTransitionStyle = .crossDissolve

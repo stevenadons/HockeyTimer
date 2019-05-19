@@ -96,6 +96,7 @@ class TimerVC: PanArrowVC {
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0" // LS_TITLE_SCORE
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
+        liftPanArrowDownLabelUp()
         
         NSLayoutConstraint.activate([
             
@@ -108,6 +109,7 @@ class TimerVC: PanArrowVC {
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2 - 30),
+            
             stopWatch.widthAnchor.constraint(equalTo: stopWatchContainer.widthAnchor),
             stopWatch.heightAnchor.constraint(equalTo: stopWatchContainer.heightAnchor),
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
@@ -142,7 +144,7 @@ class TimerVC: PanArrowVC {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateAfterRestoringFromBackground),
-                                               name: Notification.Name(rawValue: NOTIFICATIONNAME.AppWillEnterForeground),
+                                               name: .AppWillEnterForeground,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,

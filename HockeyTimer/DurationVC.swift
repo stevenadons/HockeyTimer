@@ -114,6 +114,22 @@ class DurationVC: PanArrowVC {
     }
 
     
+    // MARK: - Private Methods
+    
+    private func handleSelection(card: DurationCard) {
+        
+        self.cancelView.isUserInteractionEnabled = true
+        selectedDuration = card.duration
+        card.alpha = 1.0
+        UIView.animate(withDuration: 0.2, animations: {
+            self.cards.forEach {
+                if !($0.isEqual(card)) {
+                    $0.alpha = 0.3
+                }
+            }
+        })
+    }
+    
     
     // MARK: - Touch Methods
     
@@ -125,18 +141,24 @@ class DurationVC: PanArrowVC {
             selectedDuration = nil
             return
         }
-        cancelView.isUserInteractionEnabled = true
-        if sender.duration != currentDuration {
-            selectedDuration = sender.duration
+        
+        let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        guard !inPremiumMode else {
+            handleSelection(card: sender)
+            return
         }
-        sender.alpha = 1.0
-        UIView.animate(withDuration: 0.2, animations: {
-            self.cards.forEach {
-                if !($0.isEqual(sender)) {
-                    $0.alpha = 0.3
-                }
+        
+        // App in Basic Mode: present option to buy premium or watch ad
+        let actions: (Bool) -> Void = { rewardEarned in
+            if rewardEarned {
+                self.handleSelection(card: sender)
             }
-        })
+        }
+        
+        let buyPremiumVC = BuyPremiumVC(afterDismiss: actions)
+        buyPremiumVC.modalPresentationStyle = .overCurrentContext
+        buyPremiumVC.modalTransitionStyle = .crossDissolve
+        present(buyPremiumVC, animated: true, completion: nil)
     }
     
     @objc private func cancelViewTapped(sender: UIButton, forEvent event: UIEvent) {

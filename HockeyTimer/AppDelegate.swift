@@ -7,13 +7,25 @@
 //
 
 import UIKit
+import StoreKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
+    // MARK: - Properties
+
     var window: UIWindow?
 
+    
+    // MARK: - Life Cycle
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        AppDelegate.checkIfInPremiumMode(ifNot: {
+            AppDelegate.downloadInAppProducts()
+        })
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -21,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // For testing purposes to test onboarding
 //        startViewController = OnboardingVC()
+        
         // For testing purposes to avoid onboarding
 //        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
@@ -29,9 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             startViewController = OnboardingVC()
         } else {
             startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
-            if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
-                UserNotificationHandler.sharedHandler.initialSetup()
-            }
         }
         
         self.window?.rootViewController = startViewController
@@ -42,11 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
         
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -122,7 +127,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UserNotificationHandler.sharedHandler.cancelAllNotificationRequests()
     }
-
-
+    
+    
+    // MARK: - In App Purchases
+    
+    class func checkIfInPremiumMode(ifNot completionHandler: () -> Void) {
+        
+        let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        if !inPremiumMode {
+            completionHandler()
+        }
+        
+    }
+    
+    class func downloadInAppProducts() {
+        
+        Products.store.requestProducts { (success, products) in
+            
+            // This is an escaping closure
+            
+            if success && products != nil {
+                appStoreProducts = products!
+                if products!.count > 0 {
+                    
+                    let productIdentifier = products![0].productIdentifier
+                    let productPurchased = Products.store.isProductPurchased(productIdentifier)
+                    if productPurchased {
+                        UserDefaults.standard.set(true, forKey: USERDEFAULTSKEY.PremiumMode)
+                    } else {
+                        #warning("to do")
+//                        GADMobileAds.sharedInstance().start(completionHandler: nil)
+                    }
+                    //                    #warning("test mode")
+                    //                    accessToPremium = true
+                }
+            }
+        }
+    }
 }
 

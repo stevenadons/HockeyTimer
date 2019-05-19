@@ -12,6 +12,8 @@ extension Notification.Name {
     
     static let NewGame = Notification.Name("NewGame")
     static let AppWillEnterForeground = Notification.Name("AppWillEnterForeground")
+    static let PurchaseNotification = Notification.Name("PurchaseNotification")
+    static let TransactionEndedNotification = Notification.Name("TransactionEndedNotification")
+//    static let AccessToPremiumNotification = Notification.Name("AccessToPremiumNotification")
+
 }
-
-

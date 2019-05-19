@@ -18,6 +18,8 @@ class PanArrowVC: UIViewController {
     var panArrowUpLabel: UILabel!
     var panArrowDownLabel: UILabel!
     
+    private var panArrowDownLabelPadding: CGFloat = 2
+    
     weak var pageVC: PageVC?
 
     
@@ -47,6 +49,18 @@ class PanArrowVC: UIViewController {
         panArrowDownLabel = PanArrowLabelFactory.standardLabel(text: "Foo", textColor: COLOR.White, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
         view.addSubview(panArrowDownLabel)
         
+        panArrowUp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))
+        panArrowUpLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))
+        
+        panArrowDown.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
+        panArrowDownLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
         NSLayoutConstraint.activate([
             
             panArrowUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -66,16 +80,10 @@ class PanArrowVC: UIViewController {
             
             panArrowDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowDownLabel.widthAnchor.constraint(equalToConstant: 100),
-            panArrowDownLabel.bottomAnchor.constraint(equalTo: panArrowDown.topAnchor, constant: -2),
+            panArrowDownLabel.bottomAnchor.constraint(equalTo: panArrowDown.topAnchor, constant: -panArrowDownLabelPadding),
             panArrowDownLabel.heightAnchor.constraint(equalToConstant: 16),
             
             ])
-        
-        panArrowUp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))
-        panArrowUpLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))
-        
-        panArrowDown.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
-        panArrowDownLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
     }
     
     
@@ -94,4 +102,14 @@ class PanArrowVC: UIViewController {
         pageVC.pageViewController(pageVC, willTransitionTo: [downVC])
         pageVC.setViewControllers([downVC], direction: .forward, animated: true, completion: nil)
     }
+    
+    
+    // MARK: - Public Methods
+    
+    func liftPanArrowDownLabelUp() {
+        
+        panArrowDownLabelPadding = 8
+        
+    }
+
 }

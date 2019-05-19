@@ -72,9 +72,10 @@ class ConfirmationButton: UIButton {
 
 extension ConfirmationButton {
     
-    class func redButton(shadow: Bool = false) -> ConfirmationButton {
+    class func redButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
+        
         button.backgroundColor = COLOR.DarkRed
         button.setTitleColor(COLOR.White, for: .normal)
         if shadow {
@@ -83,12 +84,18 @@ extension ConfirmationButton {
             button.layer.shadowOpacity = 0.8
             button.layer.shadowRadius = 3
         }
+        
+        if largeFont {
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        }
+        
         return button
     }
     
-    class func blueButton(shadow: Bool = false) -> ConfirmationButton {
+    class func blueButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
+        
         button.backgroundColor = COLOR.DarkBlue
         button.setTitleColor(COLOR.White, for: .normal)
         if shadow {
@@ -97,6 +104,31 @@ extension ConfirmationButton {
             button.layer.shadowOpacity = 0.8
             button.layer.shadowRadius = 3
         }
+        
+        if largeFont {
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        }
+        
+        return button
+    }
+    
+    class func yellowButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
+        
+        let button = ConfirmationButton()
+        
+        button.backgroundColor = COLOR.LightYellow
+        button.setTitleColor(COLOR.VeryDarkBlue, for: .normal)
+        if shadow {
+            button.layer.shadowColor = UIColor.lightGray.cgColor
+            button.layer.shadowOffset = CGSize(width: 0, height: 1)
+            button.layer.shadowOpacity = 0.8
+            button.layer.shadowRadius = 3
+        }
+        
+        if largeFont {
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        }
+        
         return button
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 
 enum HALF {
@@ -16,9 +17,8 @@ enum HALF {
 }
 
 
-enum MINUTESINHALF: Int {
+enum MINUTESINHALF: Int, CaseIterable {
     
-    case Fifteen = 15
     case Twenty = 20  // For testing purposes: 1
     case TwentyFive = 25
     case Thirty = 30
@@ -87,11 +87,8 @@ enum USERDEFAULTSKEY {
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
     static let PermissionGrantedNotifications = "PermissionGrantedNotifications"
-}
+    static let PremiumMode = "PremiumMode"
 
-enum NOTIFICATIONNAME {
-    
-    static let AppWillEnterForeground = "AppWillEnterForeground"
 }
 
 enum SOUND {
@@ -124,7 +121,7 @@ let LS_FIRSTHALFLABEL = NSLocalizedString("H1", comment: "Half time indication l
 let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication label")
 let LS_WARNINGRESETGAME = NSLocalizedString("NEW GAME", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch is tapped for new game")
-let LS_WARNINGRESETPOPUP = NSLocalizedString("Are you sure to start a new game?", comment: "When reset button is tapped")
+let LS_WARNINGRESETPOPUP = NSLocalizedString("Are you sure you want to start a new game?", comment: "When reset button is tapped")
 let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notification when app in background")
 let LS_NOTIFICATION_DEFER = NSLocalizedString("+ 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
@@ -139,12 +136,12 @@ let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navig
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
-let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Really easy to use", comment: "Onboarding screen")
+let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Easy to use", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE3 = NSLocalizedString("Notifications", comment: "Onboarding screen")
-let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Just tap stopwatch to play or pause", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Just tap the stopwatch to play or pause", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
-let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends. You will need to give access to notifications.", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends. You will receive a notification.", comment: "Onboarding screen")
 
 let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("PICTOGRAM U7-U8", comment: "Name for document")
 let LS_DOCUMENTNAME_PICTOGRAMU9 = NSLocalizedString("PICTOGRAM U9", comment: "Name for document")
@@ -157,6 +154,8 @@ let LS_DOCUMENTNAME_LADIES = NSLocalizedString("KBHB LADIES RULES", comment: "Na
 let LS_DOCUMENTNAME_GENTS = NSLocalizedString("KBHB GENTS RULES", comment: "Name for document")
 
 
+
+var appStoreProducts: [SKProduct] = []
 
 
 

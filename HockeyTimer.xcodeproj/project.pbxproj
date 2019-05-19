@@ -17,6 +17,11 @@
 		4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F7AB4E41F687D0E008F06DA /* NovaMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E31F687D0E008F06DA /* NovaMono.ttf */; };
+		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
+		4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE122918BB200D975A1 /* SKProductX.swift */; };
+		4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE422919D0F00D975A1 /* Store.swift */; };
+		4F8AFCE722919D1400D975A1 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE622919D1400D975A1 /* Products.swift */; };
+		4F8AFCE92291C84E00D975A1 /* SimpleAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */; };
 		4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */; };
 		4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D11F5332760003C2FF /* PanArrow.swift */; };
 		4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */; };
@@ -80,6 +85,11 @@
 		4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Bold.ttf"; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F7AB4E31F687D0E008F06DA /* NovaMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NovaMono.ttf; sourceTree = "<group>"; };
+		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
+		4F8AFCE122918BB200D975A1 /* SKProductX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductX.swift; sourceTree = "<group>"; };
+		4F8AFCE422919D0F00D975A1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		4F8AFCE622919D1400D975A1 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
+		4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertVC.swift; sourceTree = "<group>"; };
 		4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLayer.swift; sourceTree = "<group>"; };
 		4F9FC5D11F5332760003C2FF /* PanArrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrow.swift; sourceTree = "<group>"; };
 		4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLabelFactory.swift; sourceTree = "<group>"; };
@@ -178,6 +188,16 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		4F8AFCE322919CEA00D975A1 /* In App Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				4F8AFCE622919D1400D975A1 /* Products.swift */,
+				4F8AFCE422919D0F00D975A1 /* Store.swift */,
+				4F8AFCE122918BB200D975A1 /* SKProductX.swift */,
+			);
+			name = "In App Purchases";
+			sourceTree = "<group>";
+		};
 		4F9FC5CE1F5331840003C2FF /* PanArrow */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +264,8 @@
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
 				4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */,
 				4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */,
+				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
+				4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -313,6 +335,7 @@
 		4FB4BE9D1F515D30003B1259 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4F8AFCE322919CEA00D975A1 /* In App Purchases */,
 				4F28325C1FCF468600E67FF7 /* UserNotificationsHandler */,
 				4FF7FB2C1F6549C3001D4ED1 /* JukeBox */,
 				4FB4BEB81F515EDB003B1259 /* Extensions */,
@@ -499,11 +522,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB4BEB01F515E2F003B1259 /* HockeyGame.swift in Sources */,
+				4F8AFCE92291C84E00D975A1 /* SimpleAlertVC.swift in Sources */,
 				4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */,
 				4FB4BE921F515C49003B1259 /* Ball.swift in Sources */,
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
+				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
+				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
 				4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */,
 				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
@@ -513,6 +539,7 @@
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
+				4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */,
 				4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
 				4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */,
@@ -530,6 +557,7 @@
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
 				4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */,
+				4F8AFCE722919D1400D975A1 /* Products.swift in Sources */,
 				4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */,
 				4FB4BE8E1F515C38003B1259 /* PitchBackgroundLayer.swift in Sources */,
 				4F9FC5D81F53387D0003C2FF /* PanArrowVC.swift in Sources */,
@@ -631,7 +659,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -683,7 +711,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -700,7 +728,7 @@
 				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.HockeyTimer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.DimpleBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -716,7 +744,7 @@
 				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.HockeyTimer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.DimpleBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

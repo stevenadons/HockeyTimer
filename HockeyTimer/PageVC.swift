@@ -25,8 +25,8 @@ class PageVC: UIPageViewController {
         delegate = self
         view.backgroundColor = COLOR.White // should be same color as onboarding screens
         
-        var duration: MINUTESINHALF = .TwentyFive
-        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
+        var duration: MINUTESINHALF = MINUTESINHALF.allCases.randomElement()!
+        if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
             if let enumCase = MINUTESINHALF(rawValue: minutes) {
                 duration = enumCase
             }
@@ -35,6 +35,26 @@ class PageVC: UIPageViewController {
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
+            
+            let askPermissionVC = SimpleAlertVC(titleText: "Allow Notifications",
+                                                text: "DimpleBall will send you a notification when the hockey game ends. You should enable Notifications to get this warning.",
+                                                okButtonText: "OK, allow",
+                                                cancelButtonText: "Not now") { (confirmed) in
+                                                    if confirmed {
+                                                        UserNotificationHandler.sharedHandler.initialSetup()
+                                                    }
+            }
+            askPermissionVC.modalPresentationStyle = .overCurrentContext
+            askPermissionVC.modalTransitionStyle = .crossDissolve
+            present(askPermissionVC, animated: true, completion: nil)
+        }
     }
     
     // MARK: - Public Methods
@@ -137,8 +157,8 @@ extension PageVC: UIPageViewControllerDelegate {
             durationVC.currentDuration = timerVC.game.duration
             durationVC.selectedDuration = nil
             
-        } else if let _ = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
-            if durationVC.selectedDuration != nil {
+        } else if let timerVC = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
+            if durationVC.selectedDuration != nil && timerVC.game.duration != durationVC.selectedDuration {
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
                 game = HockeyGame(duration: durationVC.selectedDuration!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)

@@ -18,7 +18,7 @@
 "RESET GAME" = "NIEUWE WEDSTRIJD";
 "CANCEL" = "ANNULEER";
 "NEW GAME" = "NIEUWE WEDSTRIJD";
-"Are you sure to start a new game?" = "Nieuwe wedstrijd - ben je zeker?";
+"Are you sure you want to start a new game?" = "Nieuwe wedstrijd - ben je zeker?";
 "OK" = "OK";
 "+ 1 minute" = "+ 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
@@ -27,12 +27,12 @@
 "BACK" = "TERUG";
 "UNDO GOAL" = "ANNULEER GOAL";
 "OK got it" = "OK begrepen!";
-"Really easy to use" = "Heel eenvoudig";
+"Easy to use" = "Heel eenvoudig";
 "Keep track of the score" = "Score bijhouden";
-"Just tap stopwatch to play or pause" = "Tik op de stopwatch voor start of pauze";
+"Just tap the stopwatch to play or pause" = "Tik op de stopwatch voor start of pauze";
 "Drag the ball left or right" = "Sleep de bal naar links of rechts";
 "Notifications" = "Alarm";
-"Get notified when timer ends. You will need to give access to notifications." = "Ontvang een signaal wanneer de timer stopt. Je zal toegang moeten geven tot berichten";
+"Get notified when timer ends. You will receive a notification." = "Ontvang een verwittiging wanneer de timer stopt.";
 
 "Game Time" = "Duurtijd";
 "Rules" = "Spelregels";
