@@ -77,14 +77,28 @@ class StopWatchTimer {
     func startCountDown() {
         
         guard state == .WaitingToStart || state == .Paused else { return }
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(tickCountDown), userInfo: nil, repeats: true)
+        
+        // Create the timer without scheduling it directly, then add it by hand to a runloop
+        // Timers won’t fire when the user is interacting with your app
+        // https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
+        timer = Timer(timeInterval: 1.0, target: self, selector: #selector(tickCountDown), userInfo: nil, repeats: true)
+        timer!.tolerance = 0.1
+        RunLoop.current.add(timer!, forMode: .common)
+        
         state = .RunningCountDown
     }
     
     func startCountUp() {
         
         guard state == .Ended else { return }
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(tickCountUp), userInfo: nil, repeats: true)
+        
+        // Create the timer without scheduling it directly, then add it by hand to a runloop
+        // Timers won’t fire when the user is interacting with your app
+        // https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
+        timer = Timer(timeInterval: 1.0, target: self, selector: #selector(tickCountUp), userInfo: nil, repeats: true)
+        timer!.tolerance = 0.1
+        RunLoop.current.add(timer!, forMode: .common)
+        
         state = .RunningCountUp
     }
     
@@ -152,7 +166,7 @@ class StopWatchTimer {
         totalSecondsCountingUp += 1
         delegate.handleTickCountUp()
     }
-
-
     
 }
+
+

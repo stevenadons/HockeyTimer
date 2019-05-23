@@ -132,6 +132,28 @@ extension ConfirmationButton {
         return button
     }
     
+    class func invertedYellowButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
+        
+        let button = ConfirmationButton()
+        
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(COLOR.LightYellow, for: .normal)
+        button.layer.borderColor = COLOR.LightYellow.cgColor
+        button.layer.borderWidth = 1.0
+        if shadow {
+            button.layer.shadowColor = UIColor.lightGray.cgColor
+            button.layer.shadowOffset = CGSize(width: 0, height: 1)
+            button.layer.shadowOpacity = 0.8
+            button.layer.shadowRadius = 3
+        }
+        
+        if largeFont {
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        }
+        
+        return button
+    }
+    
     class func themeButton() -> ConfirmationButton {
         
         let button = ConfirmationButton()

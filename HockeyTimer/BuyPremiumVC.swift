@@ -81,7 +81,7 @@ class BuyPremiumVC: UIViewController {
         
         textLabel = UILabel()
         textLabel.numberOfLines = 0
-        textLabel.text = "Just watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time."
+        textLabel.text = "Watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time."
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textColor = COLOR.White
@@ -104,7 +104,7 @@ class BuyPremiumVC: UIViewController {
         watchAdButton.addTarget(self, action: #selector(watchAdTapped), for: [.touchUpInside])
         view.addSubview(watchAdButton)
         
-        cancelButton = ConfirmationButton.redButton(largeFont: true)
+        cancelButton = ConfirmationButton.invertedYellowButton(largeFont: true)
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: [.touchUpInside])
         view.addSubview(cancelButton)

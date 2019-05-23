@@ -490,6 +490,7 @@ class StopWatch: UIControl {
 extension StopWatch: StopWatchTimerDelegate {
     
     func handleTickCountDown() {
+        
         runningCountingUp = false
         runningSecondsToGo = timer.totalSecondsToGo
         timeLabel.text = stopWatchLabelTimeString()
