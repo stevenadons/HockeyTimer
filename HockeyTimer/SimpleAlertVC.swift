@@ -29,7 +29,11 @@ class SimpleAlertVC: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(titleText: String, text: String, okButtonText: String = "OK", cancelButtonText: String = "Cancel", afterDismiss: ((Bool) -> Void)? = nil) {
+    init(titleText: String,
+         text: String,
+         okButtonText: String = LS_BUYPREMIUM_OK,
+         cancelButtonText: String = LS_BUYPREMIUM_CANCELBUTTON,
+         afterDismiss: ((Bool) -> Void)? = nil) {
         
         self.titleText = titleText
         self.text = text
@@ -69,7 +73,7 @@ class SimpleAlertVC: UIViewController {
         
         textLabel = UILabel()
         textLabel.numberOfLines = 0
-        textLabel.text = text // "DimpleBall sends you a notification when the hockey game ends. You should enable Notifications to get warned."
+        textLabel.text = text
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textColor = COLOR.White

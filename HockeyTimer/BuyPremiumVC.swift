@@ -71,7 +71,7 @@ class BuyPremiumVC: UIViewController {
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
-        titleLabel.text = "Change Game Time"
+        titleLabel.text = LS_BUYPREMIUM_TITLE
         titleLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = COLOR.White
@@ -81,7 +81,7 @@ class BuyPremiumVC: UIViewController {
         
         textLabel = UILabel()
         textLabel.numberOfLines = 0
-        textLabel.text = "Watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time."
+        textLabel.text = LS_BUYPREMIUM_TEXT
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textColor = COLOR.White
@@ -90,22 +90,22 @@ class BuyPremiumVC: UIViewController {
         view.addSubview(textLabel)
         
         buyPremiumButton = ConfirmationButton.blueButton(largeFont: true)
-        buyPremiumButton.setTitle("Buy Premium", for: .normal)
+        buyPremiumButton.setTitle(LS_BUYPREMIUM_BUYBUTTON, for: .normal)
         buyPremiumButton.addTarget(self, action: #selector(buyPremiumTapped), for: [.touchUpInside])
         if products.count > 0 {
             let priceString = products[0].formattedPrice()
-            let titleString = "Buy Premium (" + priceString + ")"
+            let titleString = LS_BUYPREMIUM_BUYBUTTON + " (" + priceString + ")"
             buyPremiumButton.setTitle(titleString, for: .normal)
         }
         view.addSubview(buyPremiumButton)
         
         watchAdButton = ConfirmationButton.yellowButton(largeFont: true)
-        watchAdButton.setTitle("Watch One Ad", for: .normal)
+        watchAdButton.setTitle(LS_BUYPREMIUM_WATCHADBUTTON, for: .normal)
         watchAdButton.addTarget(self, action: #selector(watchAdTapped), for: [.touchUpInside])
         view.addSubview(watchAdButton)
         
         cancelButton = ConfirmationButton.invertedYellowButton(largeFont: true)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle(LS_BUYPREMIUM_CANCELBUTTON, for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: [.touchUpInside])
         view.addSubview(cancelButton)
         
@@ -114,7 +114,7 @@ class BuyPremiumVC: UIViewController {
         restorePurchaseButton.titleLabel?.numberOfLines = 0
         restorePurchaseButton.addTarget(self, action: #selector(restoreTapped), for: .touchUpInside)
         
-        let plainTitle = "Already paid for premium? Restore Purchase."
+        let plainTitle = LS_BUYPREMIUM_RESTORELABEL
         var lengthOfFirstRange = 26
         if Locale.current.languageCode == "nl" {
             lengthOfFirstRange = 24
@@ -133,13 +133,14 @@ class BuyPremiumVC: UIViewController {
     
     private func addConstraints() {
         
-        let buttonHeight: CGFloat = 54
-        let horInset: CGFloat = 35
+        let buttonHeight: CGFloat = UIScreen.main.bounds.height >= 600 ? 54 : 44
+        let horInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 35 : 20
+        let topInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 40 : 20
         
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topInset),
             titleLabel.heightAnchor.constraint(equalToConstant: 30),
 
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset * 1.5),
@@ -211,10 +212,10 @@ class BuyPremiumVC: UIViewController {
         
         if #available(iOS 12, *), networkMonitor.currentPath.status == .unsatisfied {
             
-            let alert = UIAlertController(title: "No Internet Connection",
-                                          message: "Please check your internet connection.",
+            let alert = UIAlertController(title: LS_BUYPREMIUM_NOINTERNET_TITLE,
+                                          message: LS_BUYPREMIUM_CHECKCONNECTION_TITLE,
                                           preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK",
+            let ok = UIAlertAction(title: LS_BUYPREMIUM_OK,
                                    style: .default,
                                    handler: nil)
             alert.addAction(ok)

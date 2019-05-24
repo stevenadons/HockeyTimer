@@ -34,7 +34,7 @@
 "Notifications" = "Alarm";
 "Get notified when timer ends. You will receive a notification." = "Ontvang een verwittiging wanneer de timer stopt.";
 
-"Game Time" = "Duurtijd";
+"Game Time" = "Wedstrijdduur";
 "Rules" = "Spelregels";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
@@ -48,4 +48,13 @@
 "FIH RULES" = "FIH SPELREGELS";
 "KBHB LADIES RULES" = "KBHB LADIES SPELREGELS";
 "KBHB GENTS RULES" = "KBHB GENTS SPELREGELS";
+
+"Change Game Time" = "Wedstrijdduur Wijzigen";
+"Watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium om de wedstrijdduur te wijzigen zonder advertenties. Bovendien wordt je favoriete wedstrijdduur dan onthouden.";
+"Buy Premium" = "Koop Premium";
+"Watch One Ad" = "Bekijk één advertentie";
+"Cancel" = "Annuleer";
+"Already paid for premium? Restore Purchase." = "Al betaald voor premium? Herinstalleer je aankoop.";
+"No Internet Connection" = "Geen internetverbinding";
+"Please check your internet connection." = "Controleer of je verbinding hebt met internet.";
 

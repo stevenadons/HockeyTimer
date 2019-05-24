@@ -88,13 +88,16 @@ class ScoreVC: PanArrowVC {
         panArrowDownLabel.text = LS_TITLE_DOCUMENTS
         panArrowUpLabel.textColor = COLOR.VeryDarkBlue
         panArrowDownLabel.textColor = COLOR.VeryDarkBlue
+        
+        let confirmationButtonConstant: CGFloat = UIScreen.main.bounds.height >= 600 ? 120 : 90
 
         NSLayoutConstraint.activate([
             
             pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40), // 10
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pitchContainer.heightAnchor.constraint(equalToConstant: 200), // 220
-            pitchContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 140), // 110
+//            pitchContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 140), // 110
+            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor),
             
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),
@@ -109,7 +112,7 @@ class ScoreVC: PanArrowVC {
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120 - admobHeight),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -confirmationButtonConstant - admobHeight),
             
             ])
     }

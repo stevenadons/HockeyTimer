@@ -69,6 +69,8 @@ class OnboardingVC: UIViewController {
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
         
+        let dismissButtonConstant: CGFloat = UIScreen.main.bounds.height >= 600 ? 30 : 10
+        
         NSLayoutConstraint.activate([
             
             pageControl.widthAnchor.constraint(equalToConstant: 50),
@@ -79,7 +81,7 @@ class OnboardingVC: UIViewController {
             dismissButton.widthAnchor.constraint(equalToConstant: 130),
             dismissButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             dismissButton.heightAnchor.constraint(equalToConstant: 35),
-            dismissButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -30),
+            dismissButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -dismissButtonConstant),
             
             ])
         

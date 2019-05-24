@@ -153,6 +153,15 @@ let LS_DOCUMENTNAME_FIHRULES = NSLocalizedString("FIH RULES", comment: "Name for
 let LS_DOCUMENTNAME_LADIES = NSLocalizedString("KBHB LADIES RULES", comment: "Name for document")
 let LS_DOCUMENTNAME_GENTS = NSLocalizedString("KBHB GENTS RULES", comment: "Name for document")
 
+let LS_BUYPREMIUM_TITLE = NSLocalizedString("Change Game Time", comment: "Title of buy premium VC")
+let LS_BUYPREMIUM_TEXT = NSLocalizedString("Watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time.", comment: "Text of buy premium VC")
+let LS_BUYPREMIUM_BUYBUTTON = NSLocalizedString("Buy Premium", comment: "Buy button in buypremium VC")
+let LS_BUYPREMIUM_WATCHADBUTTON = NSLocalizedString("Watch One Ad", comment: "Watch ad button in buypremium VC")
+let LS_BUYPREMIUM_CANCELBUTTON = NSLocalizedString("Cancel", comment: "Cancel button in buypremium VC")
+let LS_BUYPREMIUM_RESTORELABEL = NSLocalizedString("Already paid for premium? Restore Purchase.", comment: "textbutton to restore in buypremium VC")
+let LS_BUYPREMIUM_NOINTERNET_TITLE = NSLocalizedString("No Internet Connection", comment: "Error message title when no internet connection in buypremium VC")
+let LS_BUYPREMIUM_CHECKCONNECTION_TITLE = NSLocalizedString("Please check your internet connection.", comment: "Error message text when no internet connection in buypremium VC")
+let LS_BUYPREMIUM_OK = NSLocalizedString("OK", comment: "OK button when responding to error message when no internet connection in buypremium VC")
 
 
 var appStoreProducts: [SKProduct] = []

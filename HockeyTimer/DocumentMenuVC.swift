@@ -80,10 +80,10 @@ class DocumentMenuVC: PanArrowVC {
 extension DocumentMenuVC: DocumentListDelegate {
     
     func handleButtonTapped(sender: DocumentButton) {
- 
-        if let url = URL(string: sender.document.url) {
+        
+        if let encoded = sender.document.url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encoded) {
             UIApplication.shared.open(url)
-        }
+        } 
     }
     
     
