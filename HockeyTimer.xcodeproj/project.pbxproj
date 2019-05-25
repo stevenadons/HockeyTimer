@@ -66,6 +66,9 @@
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
 		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
 		4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */; };
+		4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */; };
+		4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */; };
+		4FE97DAD2299C78C00EC53F9 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FE97DAC2299C78C00EC53F9 /* Nunito-Regular.ttf */; };
 		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
 		4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */; };
 		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
@@ -139,6 +142,9 @@
 		4FC1857B22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		4FC1857C22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessageView.swift; sourceTree = "<group>"; };
+		4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButton.swift; sourceTree = "<group>"; };
+		4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButtonLayer.swift; sourceTree = "<group>"; };
+		4FE97DAC2299C78C00EC53F9 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
 		4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JukeBox.swift; sourceTree = "<group>"; };
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 				4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */,
 				4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */,
 				4F7AB4E31F687D0E008F06DA /* NovaMono.ttf */,
+				4FE97DAC2299C78C00EC53F9 /* Nunito-Regular.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -319,6 +326,7 @@
 		4FB4BE951F515C89003B1259 /* IconButtons */ = {
 			isa = PBXGroup;
 			children = (
+				4FE97DA52299BE4400EC53F9 /* EditScore */,
 				4F3F62671F64684100D8FEC5 /* PlusMinus */,
 				4F9FC5CE1F5331840003C2FF /* PanArrow */,
 				4FB4BE961F515C96003B1259 /* NewGame */,
@@ -420,6 +428,15 @@
 			name = PopupMessage;
 			sourceTree = "<group>";
 		};
+		4FE97DA52299BE4400EC53F9 /* EditScore */ = {
+			isa = PBXGroup;
+			children = (
+				4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */,
+				4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */,
+			);
+			name = EditScore;
+			sourceTree = "<group>";
+		};
 		4FF7FB2C1F6549C3001D4ED1 /* JukeBox */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FE97DAD2299C78C00EC53F9 /* Nunito-Regular.ttf in Resources */,
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
 				4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */,
 				4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */,
@@ -534,6 +552,7 @@
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
+				4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */,
 				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
 				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
@@ -541,6 +560,7 @@
 				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
+				4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */,
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,

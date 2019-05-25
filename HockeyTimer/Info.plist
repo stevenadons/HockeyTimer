@@ -32,6 +32,7 @@
 		<string>Exo2-Regular.ttf</string>
 		<string>Exo2-Bold.ttf</string>
 		<string>NovaMono.ttf</string>
+		<string>Nunito-Regular.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

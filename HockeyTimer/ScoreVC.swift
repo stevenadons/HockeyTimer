@@ -33,7 +33,7 @@ class ScoreVC: PanArrowVC {
 
     fileprivate var pitchContainer: ContainerView!
     fileprivate var pitch: Pitch!
-    fileprivate var editModeButton: PlusMinus!
+    fileprivate var editModeButton: EditScoreButton!
     fileprivate var confirmationButton: ConfirmationButton!
 
 //    fileprivate var delegate: PitchDelegate?
@@ -72,7 +72,7 @@ class ScoreVC: PanArrowVC {
         pitch.isUserInteractionEnabled = true
         pitchContainer.addSubview(pitch)
         
-        editModeButton = PlusMinus()
+        editModeButton = EditScoreButton()
         editModeButton.addTarget(self, action: #selector(editModeButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(editModeButton)
         
@@ -96,7 +96,6 @@ class ScoreVC: PanArrowVC {
             pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40), // 10
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pitchContainer.heightAnchor.constraint(equalToConstant: 200), // 220
-//            pitchContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 140), // 110
             pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor),
             
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
@@ -106,7 +105,7 @@ class ScoreVC: PanArrowVC {
             
             editModeButton.widthAnchor.constraint(equalToConstant: 44),
             editModeButton.heightAnchor.constraint(equalToConstant: 44),
-            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 12),
+            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 18),
             editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
