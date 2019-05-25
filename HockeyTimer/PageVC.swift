@@ -16,6 +16,9 @@ class PageVC: UIPageViewController {
     var game: HockeyGame!
     var existingTimerVC: TimerVC?
     var existingScoreVC: ScoreVC?
+    private var mask: Mask?
+    
+    fileprivate var askToNotificationsAlreadyShown: Bool = false
     fileprivate var haptic: UISelectionFeedbackGenerator?
 
     override func viewDidLoad() {
@@ -23,7 +26,7 @@ class PageVC: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         delegate = self
-        view.backgroundColor = COLOR.White // should be same color as onboarding screens
+        view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
         
         var duration: MINUTESINHALF = MINUTESINHALF.allCases.randomElement()!
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
@@ -37,25 +40,67 @@ class PageVC: UIPageViewController {
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        super.viewDidAppear(animated)
-        
-        if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
-            
-            let askPermissionVC = SimpleAlertVC(titleText: "Allow Notifications",
-                                                text: "DimpleBall will send you a notification when the hockey game ends. You should enable Notifications to get this warning.",
-                                                okButtonText: "OK, allow",
-                                                cancelButtonText: "Not now") { (confirmed) in
-                                                    if confirmed {
-                                                        UserNotificationHandler.sharedHandler.initialSetup()
-                                                    }
-            }
-            askPermissionVC.modalPresentationStyle = .overCurrentContext
-            askPermissionVC.modalTransitionStyle = .crossDissolve
-            present(askPermissionVC, animated: true, completion: nil)
+        super.viewWillAppear(animated)
+        if !askToNotificationsAlreadyShown {
+            mask = Mask(color: COLOR.VeryDarkBlue, inView: view)
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+
+        super.viewDidAppear(animated)
+        askToAllowNotifications()
+    }
+    
+    private func askToAllowNotifications() {
+        
+        guard !askToNotificationsAlreadyShown else {
+            mask?.removeFromSuperview()
+            return
+        }
+        askToNotificationsAlreadyShown = true
+        
+        UserNotificationHandler.sharedHandler.ifNotAuthorized(then: {
+            
+            // User has denied notifications before
+            // Allowing notification will not prompt user
+            UserNotificationHandler.sharedHandler.ifAuthorizationIsDenied(then: {
+                let askPermissionVC = SimpleAlertVC(titleText: "Allow Notifications",
+                                                    text: "DimpleBall will send you a notification at the exact time the hockey game ends. You should go to Settings and enable Notifications to get this warning.",
+                                                    okButtonText: "OK")
+                DispatchQueue.main.async {
+                    self.present(askPermissionVC, animated: true, completion: {
+                        self.mask?.removeFromSuperview()
+                    })
+                }
+                
+            }, else: {
+                // User has not denied before
+                // Ask for notifications will prompt user
+                let askPermissionVC = SimpleAlertVC(titleText: "Allow Notifications",
+                                                    text: "DimpleBall will send you a notification at the exact time the hockey game ends. You should enable Notifications to get this warning.",
+                                                    okButtonText: "OK, let me allow",
+                                                    cancelButtonText: "Not now",
+                                                    okAction: {
+                                                        UserNotificationHandler.sharedHandler.initialSetup()
+                })
+                DispatchQueue.main.async {
+                    self.present(askPermissionVC, animated: true, completion: {
+                        self.mask?.removeFromSuperview()
+                    })
+                }
+            })
+            
+        }, else: {
+            // User has authorized before
+            DispatchQueue.main.async {
+                self.mask?.removeFromSuperview()
+            }
+        })
+    }
+    
     
     // MARK: - Public Methods
     

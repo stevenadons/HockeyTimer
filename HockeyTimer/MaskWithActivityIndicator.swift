@@ -6,6 +6,18 @@
 //  Copyright © 2017 StevenAdons. All rights reserved.
 //
 
+// HOW TO USE
+// -------------------------------------------------------------------------------------------
+// Property:
+// private var maskWithActivityIndicator: MaskWithActivityIndicator?
+//
+// To add:
+// maskWithActivityIndicator = MaskWithActivityIndicator.init(inView: view)
+//
+// To remove:
+// maskWithActivityIndicator?.removeFromSuperview()
+// -------------------------------------------------------------------------------------------
+
 import UIKit
 
 class MaskWithActivityIndicator: UIView {

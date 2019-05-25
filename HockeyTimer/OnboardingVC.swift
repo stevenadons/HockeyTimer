@@ -170,9 +170,6 @@ class OnboardingVC: UIViewController {
     @objc private func handleDismiss(sender: UIButton) {
         
         UserDefaults.standard.set(USERDEFAULTSKEY.ShouldNotOnboard, forKey: USERDEFAULTSKEY.ShouldNotOnboard)
-//        if UserDefaults.standard.value(forKey: USERDEFAULTSKEY.PermissionGrantedNotifications) == nil {
-//            UserNotificationHandler.sharedHandler.initialSetup()
-//        }
         
         let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         startViewController.modalTransitionStyle = .crossDissolve
@@ -225,7 +222,7 @@ extension OnboardingVC: UIScrollViewDelegate {
     func showButton() {
         
         shouldShowButton = true
-        UIView.animate(withDuration: 0.4, delay: 0.3, options: [.curveEaseIn], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.15, options: [.curveEaseIn], animations: {
             guard self.shouldShowButton else { return }
             self.dismissButton.alpha = 1.0
         })

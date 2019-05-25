@@ -16,30 +16,29 @@ class SimpleAlertVC: UIViewController {
     private var titleLabel: UILabel!
     private var textLabel: UILabel!
     private var okButton: UIButton!
-    private var cancelButton: UIButton!
+    private var cancelButton: UIButton?
     
     private var titleText: String!
     private var text: String!
     private var okButtonText: String!
-    private var cancelButtonText: String!
+    private var cancelButtonText: String?
     
-    private var afterDismiss: ((Bool) -> Void)?
-    private var confirmation: Bool = false
+    private var okAction: (() -> Void)?
     
     
     // MARK: - Life Cycle
     
     init(titleText: String,
          text: String,
-         okButtonText: String = LS_BUYPREMIUM_OK,
-         cancelButtonText: String = LS_BUYPREMIUM_CANCELBUTTON,
-         afterDismiss: ((Bool) -> Void)? = nil) {
+         okButtonText: String = "OK",
+         cancelButtonText: String? = nil,
+         okAction: (() -> Void)? = nil) {
         
         self.titleText = titleText
         self.text = text
         self.okButtonText = okButtonText
         self.cancelButtonText = cancelButtonText
-        self.afterDismiss = afterDismiss
+        self.okAction = okAction
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,6 +51,9 @@ class SimpleAlertVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        modalPresentationStyle = .overCurrentContext
+        modalTransitionStyle = .crossDissolve
         
         setupUI()
         addConstraints()
@@ -86,10 +88,13 @@ class SimpleAlertVC: UIViewController {
         okButton.addTarget(self, action: #selector(okTapped), for: [.touchUpInside])
         view.addSubview(okButton)
         
-        cancelButton = ConfirmationButton.redButton(largeFont: true)
-        cancelButton.setTitle(cancelButtonText, for: .normal)
-        cancelButton.addTarget(self, action: #selector(cancelTapped), for: [.touchUpInside])
-        view.addSubview(cancelButton)
+        if cancelButtonText != nil {
+            
+            cancelButton = ConfirmationButton.redButton(largeFont: true)
+            cancelButton!.setTitle(cancelButtonText, for: .normal)
+            cancelButton!.addTarget(self, action: #selector(cancelTapped), for: [.touchUpInside])
+            view.addSubview(cancelButton!)
+        }
     }
     
     private func addConstraints() {
@@ -108,23 +113,35 @@ class SimpleAlertVC: UIViewController {
             textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             textLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -40),
             
-            okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
-            okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
-            okButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -18),
-            okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-            
-            cancelButton.leadingAnchor.constraint(equalTo: okButton.leadingAnchor),
-            cancelButton.trailingAnchor.constraint(equalTo: okButton.trailingAnchor),
-            cancelButton.heightAnchor.constraint(equalTo: okButton.heightAnchor),
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            
             ])
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
         
-        super.viewDidDisappear(animated)
-        afterDismiss?(confirmation)
+        if cancelButton != nil {
+            
+            NSLayoutConstraint.activate([
+                
+                okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
+                okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
+                okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -18),
+                okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+                
+                cancelButton!.leadingAnchor.constraint(equalTo: okButton.leadingAnchor),
+                cancelButton!.trailingAnchor.constraint(equalTo: okButton.trailingAnchor),
+                cancelButton!.heightAnchor.constraint(equalTo: okButton.heightAnchor),
+                cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+                
+                ])
+        
+        } else {
+            
+            NSLayoutConstraint.activate([
+                
+                okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
+                okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
+                okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+                okButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+                
+                ])
+        }
     }
     
     
@@ -132,9 +149,10 @@ class SimpleAlertVC: UIViewController {
     
     @objc private func okTapped() {
         
-        confirmation = true
         DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: {
+                self?.okAction?()
+            })
         }
     }
     

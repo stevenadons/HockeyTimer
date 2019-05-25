@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = COLOR.VeryDarkBlue
         var startViewController: UIViewController
         
         // For testing purposes to test onboarding
@@ -165,4 +166,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-

@@ -86,7 +86,6 @@ enum USERDEFAULTSKEY {
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
-    static let PermissionGrantedNotifications = "PermissionGrantedNotifications"
     static let PremiumMode = "PremiumMode"
 
 }
