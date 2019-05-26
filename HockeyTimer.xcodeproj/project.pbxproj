@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */; };
-		4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */; };
-		4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
@@ -32,7 +30,6 @@
 		4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */; };
 		4FAFB20A2299539800CE11EE /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFB2092299539800CE11EE /* Mask.swift */; };
 		4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE691F515B3B003B1259 /* AppDelegate.swift */; };
-		4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE6B1F515B3B003B1259 /* ViewController.swift */; };
 		4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB4BE6D1F515B3B003B1259 /* Main.storyboard */; };
 		4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB4BE701F515B3B003B1259 /* Assets.xcassets */; };
 		4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB4BE721F515B3B003B1259 /* LaunchScreen.storyboard */; };
@@ -78,8 +75,6 @@
 
 /* Begin PBXFileReference section */
 		4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationsHandler.swift; path = "../../../Swift-files/Services/UserNotificationsHandler.swift"; sourceTree = "<group>"; };
-		4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinusLayer.swift; sourceTree = "<group>"; };
-		4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusMinus.swift; sourceTree = "<group>"; };
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -105,7 +100,6 @@
 		4FAFB2092299539800CE11EE /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		4FB4BE661F515B3B003B1259 /* HockeyTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HockeyTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB4BE691F515B3B003B1259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4FB4BE6B1F515B3B003B1259 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4FB4BE6E1F515B3B003B1259 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FB4BE701F515B3B003B1259 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FB4BE731F515B3B003B1259 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -169,15 +163,6 @@
 				4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */,
 			);
 			name = UserNotificationsHandler;
-			sourceTree = "<group>";
-		};
-		4F3F62671F64684100D8FEC5 /* PlusMinus */ = {
-			isa = PBXGroup;
-			children = (
-				4F3F626A1F64697F00D8FEC5 /* PlusMinus.swift */,
-				4F3F62681F64686700D8FEC5 /* PlusMinusLayer.swift */,
-			);
-			name = PlusMinus;
 			sourceTree = "<group>";
 		};
 		4F780A8B1FD0906D00DB1021 /* Phone */ = {
@@ -255,8 +240,6 @@
 				4FB4BEAE1F515E11003B1259 /* Model */,
 				4FB4BE7E1F515B9C003B1259 /* Views */,
 				4FB4BE7B1F515B53003B1259 /* Controllers */,
-				4FB4BE691F515B3B003B1259 /* AppDelegate.swift */,
-				4FB4BE6B1F515B3B003B1259 /* ViewController.swift */,
 				4FB4BE6D1F515B3B003B1259 /* Main.storyboard */,
 				4FB4BE701F515B3B003B1259 /* Assets.xcassets */,
 				4FB4BE721F515B3B003B1259 /* LaunchScreen.storyboard */,
@@ -268,6 +251,7 @@
 		4FB4BE7B1F515B53003B1259 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4FB4BE691F515B3B003B1259 /* AppDelegate.swift */,
 				4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */,
 				4FB4BF141F520D1C003B1259 /* PageVC.swift */,
 				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
@@ -327,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				4FE97DA52299BE4400EC53F9 /* EditScore */,
-				4F3F62671F64684100D8FEC5 /* PlusMinus */,
 				4F9FC5CE1F5331840003C2FF /* PanArrow */,
 				4FB4BE961F515C96003B1259 /* NewGame */,
 			);
@@ -556,7 +539,6 @@
 				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
 				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
 				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
-				4FB4BE6C1F515B3B003B1259 /* ViewController.swift in Sources */,
 				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
@@ -566,7 +548,6 @@
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
 				4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */,
-				4F3F626B1F64697F00D8FEC5 /* PlusMinus.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
 				4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */,
 				4FB4BE821F515BE6003B1259 /* StopWatchTimer.swift in Sources */,
@@ -592,7 +573,6 @@
 				4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
-				4F3F62691F64686700D8FEC5 /* PlusMinusLayer.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
 				4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
