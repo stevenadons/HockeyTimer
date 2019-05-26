@@ -90,13 +90,15 @@ class ScoreVC: PanArrowVC {
         panArrowDownLabel.textColor = COLOR.VeryDarkBlue
         
         let confirmationButtonConstant: CGFloat = UIScreen.main.bounds.height >= 600 ? 120 : 90
+        let pitchContainerHeight: CGFloat = UIScreen.main.bounds.height >= 600 ? 200 : 175
+        let pitchContainerOffset: CGFloat = UIScreen.main.bounds.height >= 600 ? 0 : 20
 
         NSLayoutConstraint.activate([
             
-            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40), // 10
+            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pitchContainer.heightAnchor.constraint(equalToConstant: 200), // 220
-            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor),
+            pitchContainer.heightAnchor.constraint(equalToConstant: pitchContainerHeight), // 220
+            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: pitchContainerOffset),
             
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),

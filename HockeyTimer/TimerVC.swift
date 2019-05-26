@@ -34,7 +34,6 @@ class TimerVC: PanArrowVC {
     var delegate: TimerVCDelegate?
     private var scorePanelCenterYConstraint: NSLayoutConstraint!
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
-    fileprivate var messageTimer: Timer?
 
     var message: String = "" {
         didSet {
@@ -173,10 +172,6 @@ class TimerVC: PanArrowVC {
     
     @objc fileprivate func hidePopup() {
         
-        if messageTimer != nil {
-            messageTimer!.invalidate()
-            messageTimer = nil
-        }
         confirmationButton.shrink()
         cancelButton.shrink()
         UIView.animate(withDuration: 0.2) {
@@ -193,7 +188,6 @@ class TimerVC: PanArrowVC {
             self.maskView.alpha = 0.80
             self.popupMessage.alpha = 1.0
         }
-        messageTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hidePopup), userInfo: nil, repeats: false)
     }
     
     fileprivate func hideIcons() {
@@ -235,6 +229,23 @@ class TimerVC: PanArrowVC {
         NotificationCenter.default.post(name: .NewGame, object: nil)
     }
     
+    private func showBuyPremiumVC(onProgressionEarned: ((Bool) -> Void)?) {
+    
+        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_NEW_GAME, text: LS_BUYPREMIUM_TEXT_NEW_GAME, afterDismiss: onProgressionEarned)
+        present(buyPremiumVC, animated: true, completion: nil)
+    }
+    
+    private func handleConfirmationNewGame() {
+        
+        hidePopup()
+        createNewGame()
+        if message == LS_WARNINGRESETGAME {
+            resetWithNewGame()
+        } else if message == LS_WARNINGNEWGAME {
+            handleNewGame()
+        }
+    }
+    
     
     // MARK: - Touch Methods
     
@@ -245,12 +256,16 @@ class TimerVC: PanArrowVC {
     
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
         
-        hidePopup()
-        createNewGame()
-        if message == LS_WARNINGRESETGAME {
-            resetWithNewGame()
-        } else if message == LS_WARNINGNEWGAME {
-            handleNewGame()
+        let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        if inPremiumMode {
+            handleConfirmationNewGame()
+            
+        } else {
+            showBuyPremiumVC(onProgressionEarned: { earned in
+                if earned {
+                    self.handleConfirmationNewGame()
+                }
+            })
         }
     }
     

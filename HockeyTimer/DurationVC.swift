@@ -23,6 +23,8 @@ class DurationVC: PanArrowVC {
     fileprivate var cardFour: DurationCard!
     fileprivate var cards: [DurationCard] = []
     
+    fileprivate var skipAnimations: Bool = false
+    
     fileprivate let padding: CGFloat = 18
     
     
@@ -38,6 +40,8 @@ class DurationVC: PanArrowVC {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+        
+        guard !skipAnimations else { return }
         for card in self.cards {
             if let index = self.cards.firstIndex(of: card) {
                 card.popup(delay: 0.1 * Double(index))
@@ -50,6 +54,8 @@ class DurationVC: PanArrowVC {
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
+        
+        guard !skipAnimations else { return }
         for card in self.cards {
             card.windUp()
         }
@@ -149,15 +155,15 @@ class DurationVC: PanArrowVC {
         }
         
         // App in Basic Mode: present option to buy premium or watch ad
-        let actions: (Bool) -> Void = { rewardEarned in
+        let actions: (Bool) -> Void = { [sender] rewardEarned in
             if rewardEarned {
                 self.handleSelection(card: sender)
+                self.skipAnimations = false
             }
         }
         
-        let buyPremiumVC = BuyPremiumVC(afterDismiss: actions)
-        buyPremiumVC.modalPresentationStyle = .overCurrentContext
-        buyPremiumVC.modalTransitionStyle = .crossDissolve
+        skipAnimations = true
+        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME , text: LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME, afterDismiss: actions)
         present(buyPremiumVC, animated: true, completion: nil)
     }
     

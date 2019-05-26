@@ -24,6 +24,7 @@ class PageVC: UIPageViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         dataSource = self
         delegate = self
         view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
@@ -116,7 +117,6 @@ class PageVC: UIPageViewController {
         }
         existingTimerVC?.scoreDidChange()
     }
-
 
 }
 

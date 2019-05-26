@@ -34,18 +34,11 @@ class EditScoreButton: UIButton {
     
     private func setup() {
         
-        backgroundColor = COLOR.VeryDarkBlue
+        backgroundColor = COLOR.DarkBlue
         translatesAutoresizingMaskIntoConstraints = false
         
-        innerCircle = UIView()
-        innerCircle.isUserInteractionEnabled = false
-        innerCircle.backgroundColor = COLOR.DarkBlue
-        innerCircle.layer.borderWidth = 1.0
-        innerCircle.layer.borderColor = UIColor.white.cgColor
-        addSubview(innerCircle)
-        
         shape = EditScoreButtonLayer()
-        innerCircle.layer.addSublayer(shape)
+        layer.addSublayer(shape)
     }
     
     
@@ -56,10 +49,6 @@ class EditScoreButton: UIButton {
         super.layoutSubviews()
         
         layer.cornerRadius = bounds.height / 2
-        
-        innerCircle.frame = bounds.insetBy(dx: 2, dy: 2)
-        innerCircle.layer.cornerRadius = innerCircle.bounds.width / 2
-        
-        shape.frame = innerCircle.bounds.inset(by: UIEdgeInsets(top: 7, left: 7, bottom: 9, right: 7))
+        shape.frame = bounds.inset(by: UIEdgeInsets(top: 8, left: 8, bottom: 10, right: 9))
     }
 }

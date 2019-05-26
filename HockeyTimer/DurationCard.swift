@@ -143,7 +143,7 @@ class DurationCard: UIButton {
     
     func windUp() {
         
-        transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         alpha = 0.0
         miniStopWatch.setProgressToZero()
     }

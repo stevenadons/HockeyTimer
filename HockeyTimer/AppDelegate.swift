@@ -8,6 +8,7 @@
 
 import UIKit
 import StoreKit
+import GoogleMobileAds
 
 
 @UIApplicationMain
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AppDelegate.checkIfInPremiumMode(ifNot: {
             AppDelegate.downloadInAppProducts()
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
         })
         
         // Customized: chooses which viewcontroller to show first

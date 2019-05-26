@@ -152,8 +152,11 @@ let LS_DOCUMENTNAME_FIHRULES = NSLocalizedString("FIH RULES", comment: "Name for
 let LS_DOCUMENTNAME_LADIES = NSLocalizedString("KBHB LADIES RULES", comment: "Name for document")
 let LS_DOCUMENTNAME_GENTS = NSLocalizedString("KBHB GENTS RULES", comment: "Name for document")
 
-let LS_BUYPREMIUM_TITLE = NSLocalizedString("Change Game Time", comment: "Title of buy premium VC")
-let LS_BUYPREMIUM_TEXT = NSLocalizedString("Watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time.", comment: "Text of buy premium VC")
+let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Change Game Time", comment: "Title of buy premium VC")
+let LS_BUYPREMIUM_TITLE_NEW_GAME = NSLocalizedString("New Game", comment: "Title of buy premium VC")
+let LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME = NSLocalizedString("Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode will hold track of your last game time.", comment: "Text of buy premium VC")
+let LS_BUYPREMIUM_TEXT_NEW_GAME = NSLocalizedString("Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode.", comment: "Text of buy premium VC")
+
 let LS_BUYPREMIUM_BUYBUTTON = NSLocalizedString("Buy Premium", comment: "Buy button in buypremium VC")
 let LS_BUYPREMIUM_WATCHADBUTTON = NSLocalizedString("Watch One Ad", comment: "Watch ad button in buypremium VC")
 let LS_BUYPREMIUM_CANCELBUTTON = NSLocalizedString("Cancel", comment: "Cancel button in buypremium VC")

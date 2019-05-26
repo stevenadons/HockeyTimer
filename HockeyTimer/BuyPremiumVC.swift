@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 import Network
+import GoogleMobileAds
 
 
 class BuyPremiumVC: UIViewController {
@@ -27,6 +28,12 @@ class BuyPremiumVC: UIViewController {
     private var afterDismiss: ((Bool) -> Void)?
     private var rewardEarned: Bool = false
     private var products: [SKProduct] = []
+    private var titleText: String!
+    private var text: String!
+    
+    private var interstitial: GADInterstitial?
+    private var isShowingInterstitial: Bool = false
+
     
     @available(iOS 12,*)
     var networkMonitor: NWPathMonitor! {
@@ -42,9 +49,11 @@ class BuyPremiumVC: UIViewController {
 
     // MARK: - Life Cycle
     
-    init(afterDismiss: ((Bool) -> Void)? = nil) {
+    init(title: String, text: String, afterDismiss: ((Bool) -> Void)? = nil) {
         
         self.afterDismiss = afterDismiss
+        self.titleText = title
+        self.text = text
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,12 +66,30 @@ class BuyPremiumVC: UIViewController {
         
         super.viewDidLoad()
         
+        modalPresentationStyle = .overCurrentContext
+        modalTransitionStyle = .coverVertical
+        
         products = appStoreProducts
+        
+        AppDelegate.checkIfInPremiumMode(ifNot: {
+            self.interstitial = self.createAndLoadInterstitial()
+        })
         
         setupUI()
         addConstraints()
         addNetworkMonitor()
         addObservers()
+    }
+    
+    private func createAndLoadInterstitial() -> GADInterstitial {
+        
+        // For testing
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        // For real
+        //        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2043391878522550/9706444069")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
     }
     
     private func setupUI() {
@@ -71,7 +98,7 @@ class BuyPremiumVC: UIViewController {
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
-        titleLabel.text = LS_BUYPREMIUM_TITLE
+        titleLabel.text = titleText
         titleLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = COLOR.White
@@ -81,13 +108,24 @@ class BuyPremiumVC: UIViewController {
         
         textLabel = UILabel()
         textLabel.numberOfLines = 0
-        textLabel.text = LS_BUYPREMIUM_TEXT
+        textLabel.text = text
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textColor = COLOR.White
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textLabel)
+        
+        watchAdButton = ConfirmationButton.yellowButton(largeFont: true)
+        let price: NSNumber = 0.0
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.formatterBehavior = .behavior10_4
+        let formattedPrice = formatter.string(from: price) ?? "\(price)"
+        let buttonTitle = LS_BUYPREMIUM_WATCHADBUTTON + " (" + formattedPrice + ")"
+        watchAdButton.setTitle(buttonTitle, for: .normal)
+        watchAdButton.addTarget(self, action: #selector(watchAdTapped), for: [.touchUpInside])
+        view.addSubview(watchAdButton)
         
         buyPremiumButton = ConfirmationButton.blueButton(largeFont: true)
         buyPremiumButton.setTitle(LS_BUYPREMIUM_BUYBUTTON, for: .normal)
@@ -98,11 +136,6 @@ class BuyPremiumVC: UIViewController {
             buyPremiumButton.setTitle(titleString, for: .normal)
         }
         view.addSubview(buyPremiumButton)
-        
-        watchAdButton = ConfirmationButton.yellowButton(largeFont: true)
-        watchAdButton.setTitle(LS_BUYPREMIUM_WATCHADBUTTON, for: .normal)
-        watchAdButton.addTarget(self, action: #selector(watchAdTapped), for: [.touchUpInside])
-        view.addSubview(watchAdButton)
         
         cancelButton = ConfirmationButton.invertedYellowButton(largeFont: true)
         cancelButton.setTitle(LS_BUYPREMIUM_CANCELBUTTON, for: .normal)
@@ -135,33 +168,38 @@ class BuyPremiumVC: UIViewController {
         
         let buttonHeight: CGFloat = UIScreen.main.bounds.height >= 600 ? 54 : 44
         let horInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 35 : 20
-        let topInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 40 : 20
+        var topInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 50 : 30
+        // Referring to view.safeAreaLayoutGuide will cause glitch for titleLabel
+        // When newVC is being presented
+        if UIScreen.main.bounds.height >= 700 {
+            topInset = 75
+        }
         
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topInset),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: topInset),
             titleLabel.heightAnchor.constraint(equalToConstant: 30),
 
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset * 1.5),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset * 1.5),
             textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            textLabel.bottomAnchor.constraint(equalTo: buyPremiumButton.topAnchor, constant: -40),
-            
-            buyPremiumButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
-            buyPremiumButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
-            buyPremiumButton.bottomAnchor.constraint(equalTo: watchAdButton.topAnchor, constant: -18),
-            buyPremiumButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-            
+            textLabel.bottomAnchor.constraint(equalTo: watchAdButton.topAnchor, constant: -40),
+
             watchAdButton.leadingAnchor.constraint(equalTo: buyPremiumButton.leadingAnchor),
             watchAdButton.trailingAnchor.constraint(equalTo: buyPremiumButton.trailingAnchor),
             watchAdButton.heightAnchor.constraint(equalTo: buyPremiumButton.heightAnchor),
-            watchAdButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -18),
+            watchAdButton.bottomAnchor.constraint(equalTo: buyPremiumButton.topAnchor, constant: -16),
+            
+            buyPremiumButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
+            buyPremiumButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
+            buyPremiumButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -16),
+            buyPremiumButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             cancelButton.leadingAnchor.constraint(equalTo: buyPremiumButton.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: buyPremiumButton.trailingAnchor),
             cancelButton.heightAnchor.constraint(equalTo: buyPremiumButton.heightAnchor),
-            cancelButton.bottomAnchor.constraint(equalTo: restorePurchaseButton.topAnchor, constant: -44),
+            cancelButton.bottomAnchor.constraint(equalTo: restorePurchaseButton.topAnchor, constant: -20),
             
             restorePurchaseButton.leadingAnchor.constraint(equalTo: buyPremiumButton.leadingAnchor),
             restorePurchaseButton.trailingAnchor.constraint(equalTo: buyPremiumButton.trailingAnchor),
@@ -197,10 +235,19 @@ class BuyPremiumVC: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
+    
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
-        afterDismiss?(rewardEarned)
+
+        if !isShowingInterstitial {
+            afterDismiss?(rewardEarned)
+        }
     }
     
     
@@ -230,10 +277,9 @@ class BuyPremiumVC: UIViewController {
     
     @objc private func watchAdTapped() {
         
-        print("Displaying ad")
-        DispatchQueue.main.async { [weak self] in
-            self?.rewardEarned = true
-            self?.dismiss(animated: true, completion: nil)
+        rewardEarned = true
+        DispatchQueue.main.async {
+            self.showInterstitial()
         }
     }
     
@@ -248,6 +294,17 @@ class BuyPremiumVC: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
     }
+    
+    
+    // MARK: - GAD Interstitial
+    
+    private func showInterstitial() {
+        
+        if let interstitial = interstitial, interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        }
+    }
+    
     
     
     // MARK: - Notification Methods
@@ -268,8 +325,26 @@ class BuyPremiumVC: UIViewController {
         
         maskWithActivityIndicator?.removeFromSuperview()
     }
-    
-    
-    
-    
 }
+
+
+
+extension BuyPremiumVC: GADInterstitialDelegate {
+    
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+        
+        isShowingInterstitial = true
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+
+        isShowingInterstitial = false
+
+        // Most use cases: load a new interstitial here
+//        interstitial = createAndLoadInterstitial()
+
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33AFC4AB40F48A92D2F8DF98 /* Pods_HockeyTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */; };
 		4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
@@ -144,6 +145,9 @@
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
 		4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardScreen.swift; sourceTree = "<group>"; };
+		B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HockeyTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer.release.xcconfig"; sourceTree = "<group>"; };
+		D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33AFC4AB40F48A92D2F8DF98 /* Pods_HockeyTimer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +226,8 @@
 			children = (
 				4FB4BE681F515B3B003B1259 /* HockeyTimer */,
 				4FB4BE671F515B3B003B1259 /* Products */,
+				DCA6DE515CB7D518DA4B6954 /* Pods */,
+				CA1336AFD4D7B8F7C806EDB2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,6 +452,23 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
+		CA1336AFD4D7B8F7C806EDB2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCA6DE515CB7D518DA4B6954 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */,
+				C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -452,9 +476,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FB4BE781F515B3B003B1259 /* Build configuration list for PBXNativeTarget "HockeyTimer" */;
 			buildPhases = (
+				791C3F78CF7AFD95276D6669 /* [CP] Check Pods Manifest.lock */,
 				4FB4BE621F515B3B003B1259 /* Sources */,
 				4FB4BE631F515B3B003B1259 /* Frameworks */,
 				4FB4BE641F515B3B003B1259 /* Resources */,
+				A10F81FD9B924721C2FA85BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -522,6 +548,55 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		791C3F78CF7AFD95276D6669 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HockeyTimer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A10F81FD9B924721C2FA85BA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4FB4BE621F515B3B003B1259 /* Sources */ = {
@@ -730,6 +805,7 @@
 		};
 		4FB4BE791F515B3B003B1259 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -746,6 +822,7 @@
 		};
 		4FB4BE7A1F515B3B003B1259 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

@@ -49,8 +49,10 @@
 "KBHB LADIES RULES" = "KBHB LADIES SPELREGELS";
 "KBHB GENTS RULES" = "KBHB GENTS SPELREGELS";
 
-"Change Game Time" = "Wedstrijdduur Wijzigen";
-"Watch one ad to continue.\n\nTo change game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode saves your favorite game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium om de wedstrijdduur te wijzigen zonder advertenties. Bovendien wordt je favoriete wedstrijdduur dan onthouden.";
+"Change Game Time" = "Wedstrijdduur wijzigen";
+"New Game" = "Nieuwe wedstrijd";
+"Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium om de wedstrijdduur te wijzigen zonder advertenties. Bovendien wordt je laatste wedstrijdduur dan steeds onthouden.";
+"Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode." = "Bekijk één advertentie om een nieuwe wedstrijd te starten.\n\nUpgrade naar Premium om nieuwe wedstrijden te starten zonder advertenties.";
 "Buy Premium" = "Koop Premium";
 "Watch One Ad" = "Bekijk één advertentie";
 "Cancel" = "Annuleer";
