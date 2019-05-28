@@ -29,10 +29,10 @@
 "OK got it" = "OK begrepen!";
 "Easy to use" = "Heel eenvoudig";
 "Keep track of the score" = "Score bijhouden";
-"Just tap the stopwatch to play or pause" = "Tik op de stopwatch voor start of pauze";
+"Just tap the stopwatch to play or pause" = "Duw op de stopwatch voor start of pauze";
 "Drag the ball left or right" = "Sleep de bal naar links of rechts";
-"Notifications" = "Alarm";
-"Get notified when timer ends. You will receive a notification." = "Ontvang een verwittiging wanneer de timer stopt.";
+"Notifications" = "Meldingen";
+"Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
 
 "Game Time" = "Wedstrijdduur";
 "Rules" = "Spelregels";
@@ -56,7 +56,11 @@
 "Buy Premium" = "Koop Premium";
 "Watch One Ad" = "Bekijk één advertentie";
 "Cancel" = "Annuleer";
-"Already paid for premium? Restore Purchase." = "Al betaald voor premium? Herinstalleer je aankoop.";
+"Already paid for premium? Restore Purchase." = "Al betaald voor premium? Aankoop herstellen.";
 "No Internet Connection" = "Geen internetverbinding";
 "Please check your internet connection." = "Controleer of je verbinding hebt met internet.";
 
+"Allow Notifications" = "Activeer meldingen";
+"HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Open Instellingen en activeer meldingen voor HockeyUpp.";
+"HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
+"OK, let me allow" = "OK, activeer meldingen";

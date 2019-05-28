@@ -140,7 +140,7 @@ let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", com
 let LS_TITLE_ONBOARDINGSLIDE3 = NSLocalizedString("Notifications", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Just tap the stopwatch to play or pause", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
-let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends. You will receive a notification.", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends.", comment: "Onboarding screen")
 
 let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("PICTOGRAM U7-U8", comment: "Name for document")
 let LS_DOCUMENTNAME_PICTOGRAMU9 = NSLocalizedString("PICTOGRAM U9", comment: "Name for document")
@@ -164,6 +164,12 @@ let LS_BUYPREMIUM_RESTORELABEL = NSLocalizedString("Already paid for premium? Re
 let LS_BUYPREMIUM_NOINTERNET_TITLE = NSLocalizedString("No Internet Connection", comment: "Error message title when no internet connection in buypremium VC")
 let LS_BUYPREMIUM_CHECKCONNECTION_TITLE = NSLocalizedString("Please check your internet connection.", comment: "Error message text when no internet connection in buypremium VC")
 let LS_BUYPREMIUM_OK = NSLocalizedString("OK", comment: "OK button when responding to error message when no internet connection in buypremium VC")
+
+let LS_ALLOW_NOTIFICATIONS_TITLE = NSLocalizedString("Allow Notifications", comment: "Title of modal VC")
+let LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS = NSLocalizedString("HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
+let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
+let LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW = NSLocalizedString("OK, let me allow", comment: "Confirmation button when enabling notifications.")
+let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Cancel button when enabling notifications.")
 
 
 var appStoreProducts: [SKProduct] = []

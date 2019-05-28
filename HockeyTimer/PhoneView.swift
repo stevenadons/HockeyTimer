@@ -13,8 +13,7 @@ class PhoneView: UIView {
     
     // MARK: - Properties
     
-//    private var phone: UIImageView!
-    private var signal: UIImageView!
+    private var notification: UIImageView!
 
     
     // MARK: - Initializing
@@ -34,14 +33,14 @@ class PhoneView: UIView {
         backgroundColor = UIColor.clear
         translatesAutoresizingMaskIntoConstraints = false
         
-        signal = UIImageView()
-        if let signalImage = UIImage(named: "wifi") {
-            signal.image = signalImage
+        notification = UIImageView()
+        if let signalImage = UIImage(named: "notification") {
+            notification.image = signalImage
         }
-        signal.tintColor = COLOR.DarkBlue
-        signal.contentMode = .scaleAspectFit
-        signal.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(signal)
+//        notification.tintColor = COLOR.DarkBlue
+        notification.contentMode = .scaleAspectFit
+        notification.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(notification)
         
         
     }
@@ -51,10 +50,12 @@ class PhoneView: UIView {
         super.layoutSubviews()
         
         NSLayoutConstraint.activate([
-            signal.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            signal.centerYAnchor.constraint(equalTo: centerYAnchor),
-            signal.centerXAnchor.constraint(equalTo: centerXAnchor),
-            signal.widthAnchor.constraint(equalTo: signal.heightAnchor),
+            
+            notification.heightAnchor.constraint(equalToConstant: 140),
+            notification.centerYAnchor.constraint(equalTo: centerYAnchor),
+            notification.centerXAnchor.constraint(equalTo: centerXAnchor),
+            notification.widthAnchor.constraint(equalTo: notification.heightAnchor),
+            
             ])
     }
     

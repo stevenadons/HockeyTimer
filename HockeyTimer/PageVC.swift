@@ -68,9 +68,9 @@ class PageVC: UIPageViewController {
             // User has denied notifications before
             // Allowing notification will not prompt user
             UserNotificationHandler.sharedHandler.ifAuthorizationIsDenied(then: {
-                let askPermissionVC = SimpleAlertVC(titleText: "Allow Notifications",
-                                                    text: "DimpleBall will send you a notification at the exact time the hockey game ends. You should go to Settings and enable Notifications to get this warning.",
-                                                    okButtonText: "OK")
+                let askPermissionVC = SimpleAlertVC(titleText: LS_ALLOW_NOTIFICATIONS_TITLE,
+                                                    text: LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS,
+                                                    okButtonText: LS_BUYPREMIUM_OK)
                 DispatchQueue.main.async {
                     self.present(askPermissionVC, animated: true, completion: {
                         self.mask?.removeFromSuperview()
@@ -80,10 +80,10 @@ class PageVC: UIPageViewController {
             }, else: {
                 // User has not denied before
                 // Ask for notifications will prompt user
-                let askPermissionVC = SimpleAlertVC(titleText: "Allow Notifications",
-                                                    text: "DimpleBall will send you a notification at the exact time the hockey game ends. You should enable Notifications to get this warning.",
-                                                    okButtonText: "OK, let me allow",
-                                                    cancelButtonText: "Not now",
+                let askPermissionVC = SimpleAlertVC(titleText: LS_ALLOW_NOTIFICATIONS_TITLE,
+                                                    text: LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS,
+                                                    okButtonText: LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW,
+                                                    cancelButtonText: LS_ALLOW_NOTIFICATIONS_NOT_NOW,
                                                     okAction: {
                                                         UserNotificationHandler.sharedHandler.initialSetup()
                 })
@@ -106,8 +106,6 @@ class PageVC: UIPageViewController {
     // MARK: - Public Methods
     
     func scoreDidChange() {
-        
-        print("PageVC.scoreDidChange")
         
         if existingTimerVC == nil, let scoreVC = viewControllers?.first as? ScoreVC {
             let timerVC = TimerVC(pageVC: self)
