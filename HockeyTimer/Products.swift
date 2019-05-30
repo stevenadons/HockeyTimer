@@ -11,7 +11,7 @@ import StoreKit
 
 struct Products {
     
-    private static let productIdentifier = "com.stevenadons.DimpleBall.inapp.testpremium"
+    private static let productIdentifier = "com.stevenadons.DimpleBall.realpremium"
     private static let productIdentifiers: Set<ProductIdentifier> = [Products.productIdentifier]
     
     static let store = Store(productIdentifiers: Products.productIdentifiers)
