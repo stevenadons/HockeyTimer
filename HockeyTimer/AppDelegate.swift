@@ -35,17 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var startViewController: UIViewController
         
         // For testing purposes to test onboarding
-        startViewController = OnboardingVC()
+//        startViewController = OnboardingVC()
         
         // For testing purposes to avoid onboarding
 //        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
         // Standard
-//        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
-//            startViewController = OnboardingVC()
-//        } else {
-//            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
-//        }
+        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
+            startViewController = OnboardingVC()
+        } else {
+            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        }
         
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()

@@ -138,7 +138,7 @@ let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navi
 let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Easy to use", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE3 = NSLocalizedString("Notifications", comment: "Onboarding screen")
-let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Just tap the stopwatch to play or pause", comment: "Onboarding screen")
+let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Tap the stopwatch to play or pause", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends.", comment: "Onboarding screen")
 

@@ -22,14 +22,14 @@
 "OK" = "OK";
 "+ 1 minute" = "+ 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
-"Running in Overtime" = "Over tijd";
+"Running in Overtime" = "Tijd is verstreken";
 
 "BACK" = "TERUG";
 "UNDO GOAL" = "ANNULEER GOAL";
 "OK got it" = "OK begrepen!";
 "Easy to use" = "Heel eenvoudig";
 "Keep track of the score" = "Score bijhouden";
-"Just tap the stopwatch to play or pause" = "Duw op de stopwatch voor start of pauze";
+"Tap the stopwatch to play or pause" = "Duw op de stopwatch voor start of pauze";
 "Drag the ball left or right" = "Sleep de bal naar links of rechts";
 "Notifications" = "Meldingen";
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";

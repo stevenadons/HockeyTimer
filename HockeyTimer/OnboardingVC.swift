@@ -222,7 +222,7 @@ extension OnboardingVC: UIScrollViewDelegate {
     func showButton() {
         
         shouldShowButton = true
-        UIView.animate(withDuration: 0.2, delay: 0.15, options: [.curveEaseIn], animations: {
+        UIView.animate(withDuration: 0.15, delay: 0.15, options: [.curveEaseIn], animations: {
             guard self.shouldShowButton else { return }
             self.dismissButton.alpha = 1.0
         })

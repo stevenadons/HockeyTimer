@@ -51,7 +51,7 @@ class PhoneView: UIView {
         
         NSLayoutConstraint.activate([
             
-            notification.heightAnchor.constraint(equalToConstant: 140),
+            notification.heightAnchor.constraint(equalToConstant: 100),
             notification.centerYAnchor.constraint(equalTo: centerYAnchor),
             notification.centerXAnchor.constraint(equalTo: centerXAnchor),
             notification.widthAnchor.constraint(equalTo: notification.heightAnchor),
