@@ -84,9 +84,11 @@ class BuyPremiumVC: UIViewController {
     private func createAndLoadInterstitial() -> GADInterstitial {
         
         // For testing
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        #warning("interstitial in test mode")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         // For real
-        //        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2043391878522550/9706444069")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2043391878522550/9706444069")
+        
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
