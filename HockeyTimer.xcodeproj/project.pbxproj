@@ -12,10 +12,7 @@
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
-		4F7AB4DE1F685837008F06DA /* Exo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */; };
-		4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
-		4F7AB4E41F687D0E008F06DA /* NovaMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E31F687D0E008F06DA /* NovaMono.ttf */; };
 		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
 		4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE122918BB200D975A1 /* SKProductX.swift */; };
 		4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE422919D0F00D975A1 /* Store.swift */; };
@@ -63,10 +60,17 @@
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
 		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
+		4FD3721122A4030200A45757 /* DotMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3720C22A4017F00A45757 /* DotMenu.swift */; };
+		4FD3721622A4030E00A45757 /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3720D22A4017F00A45757 /* ButtonLabel.swift */; };
+		4FD3721C22A41C4800A45757 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721B22A41C4800A45757 /* Country.swift */; };
+		4FD3721E22A4267C00A45757 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721D22A4267C00A45757 /* Duration.swift */; };
+		4FD3722022A6C7D900A45757 /* OvalCountryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721F22A6C7D900A45757 /* OvalCountryButton.swift */; };
+		4FD3722222A6C85600A45757 /* OvalCountryLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722122A6C85600A45757 /* OvalCountryLayer.swift */; };
+		4FD3722422A6CE2700A45757 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */; };
+		4FD3722622A6CEC000A45757 /* OvalCountryCross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */; };
 		4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */; };
 		4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */; };
 		4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */; };
-		4FE97DAD2299C78C00EC53F9 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FE97DAC2299C78C00EC53F9 /* Nunito-Regular.ttf */; };
 		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
 		4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */; };
 		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
@@ -81,10 +85,7 @@
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4F6342A322916E0A002F49B4 /* NotificationNameX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameX.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
-		4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.ttf"; sourceTree = "<group>"; };
-		4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Bold.ttf"; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
-		4F7AB4E31F687D0E008F06DA /* NovaMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NovaMono.ttf; sourceTree = "<group>"; };
 		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
 		4F8AFCE122918BB200D975A1 /* SKProductX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductX.swift; sourceTree = "<group>"; };
 		4F8AFCE422919D0F00D975A1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -136,10 +137,17 @@
 		4FB4BF2B1F52273B003B1259 /* AgeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRange.swift; sourceTree = "<group>"; };
 		4FC1857B22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		4FC1857C22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4FD3720C22A4017F00A45757 /* DotMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotMenu.swift; sourceTree = "<group>"; };
+		4FD3720D22A4017F00A45757 /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabel.swift; sourceTree = "<group>"; };
+		4FD3721B22A41C4800A45757 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		4FD3721D22A4267C00A45757 /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		4FD3721F22A6C7D900A45757 /* OvalCountryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalCountryButton.swift; sourceTree = "<group>"; };
+		4FD3722122A6C85600A45757 /* OvalCountryLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalCountryLayer.swift; sourceTree = "<group>"; };
+		4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalCountryCross.swift; sourceTree = "<group>"; };
 		4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessageView.swift; sourceTree = "<group>"; };
 		4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButton.swift; sourceTree = "<group>"; };
 		4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButtonLayer.swift; sourceTree = "<group>"; };
-		4FE97DAC2299C78C00EC53F9 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
 		4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JukeBox.swift; sourceTree = "<group>"; };
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
@@ -181,10 +189,7 @@
 		4F7AB4DC1F6857F8008F06DA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				4F7AB4DD1F685837008F06DA /* Exo2-Regular.ttf */,
-				4F7AB4DF1F685843008F06DA /* Exo2-Bold.ttf */,
-				4F7AB4E31F687D0E008F06DA /* NovaMono.ttf */,
-				4FE97DAC2299C78C00EC53F9 /* Nunito-Regular.ttf */,
+				4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
+				4FD3720A22A4016900A45757 /* DotMenu */,
 				4F780A8B1FD0906D00DB1021 /* Phone */,
 				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
@@ -370,6 +376,8 @@
 				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
 				4FB4BF1D1F521FE3003B1259 /* Document.swift */,
 				4FB4BF2B1F52273B003B1259 /* AgeRange.swift */,
+				4FD3721B22A41C4800A45757 /* Country.swift */,
+				4FD3721D22A4267C00A45757 /* Duration.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -408,6 +416,18 @@
 				4FB4BF291F522644003B1259 /* MiniStopWatch.swift */,
 			);
 			name = DurationCard;
+			sourceTree = "<group>";
+		};
+		4FD3720A22A4016900A45757 /* DotMenu */ = {
+			isa = PBXGroup;
+			children = (
+				4FD3720C22A4017F00A45757 /* DotMenu.swift */,
+				4FD3720D22A4017F00A45757 /* ButtonLabel.swift */,
+				4FD3721F22A6C7D900A45757 /* OvalCountryButton.swift */,
+				4FD3722122A6C85600A45757 /* OvalCountryLayer.swift */,
+				4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */,
+			);
+			name = DotMenu;
 			sourceTree = "<group>";
 		};
 		4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */ = {
@@ -534,16 +554,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FE97DAD2299C78C00EC53F9 /* Nunito-Regular.ttf in Resources */,
+				4FD3722422A6CE2700A45757 /* Lato-Bold.ttf in Resources */,
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
 				4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */,
-				4F7AB4E01F685843008F06DA /* Exo2-Bold.ttf in Resources */,
 				4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */,
 				4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,
-				4F7AB4E41F687D0E008F06DA /* NovaMono.ttf in Resources */,
-				4F7AB4DE1F685837008F06DA /* Exo2-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,9 +621,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB4BEB01F515E2F003B1259 /* HockeyGame.swift in Sources */,
+				4FD3722622A6CEC000A45757 /* OvalCountryCross.swift in Sources */,
 				4F8AFCE92291C84E00D975A1 /* SimpleAlertVC.swift in Sources */,
 				4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */,
 				4FB4BE921F515C49003B1259 /* Ball.swift in Sources */,
+				4FD3721122A4030200A45757 /* DotMenu.swift in Sources */,
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
@@ -619,6 +638,7 @@
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
 				4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */,
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
+				4FD3721C22A41C4800A45757 /* Country.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
@@ -627,6 +647,7 @@
 				4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */,
 				4FB4BE821F515BE6003B1259 /* StopWatchTimer.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
+				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
 				4FB4BEBA1F515EEA003B1259 /* Color.swift in Sources */,
 				4FF7FB361F6559E8001D4ED1 /* OnboardScreen.swift in Sources */,
@@ -635,17 +656,20 @@
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
+				4FD3721622A4030E00A45757 /* ButtonLabel.swift in Sources */,
 				4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */,
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FAFB20A2299539800CE11EE /* Mask.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
 				4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */,
 				4F8AFCE722919D1400D975A1 /* Products.swift in Sources */,
+				4FD3722022A6C7D900A45757 /* OvalCountryButton.swift in Sources */,
 				4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */,
 				4FB4BE8E1F515C38003B1259 /* PitchBackgroundLayer.swift in Sources */,
 				4F9FC5D81F53387D0003C2FF /* PanArrowVC.swift in Sources */,
 				4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */,
 				4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */,
+				4FD3722222A6C85600A45757 /* OvalCountryLayer.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,

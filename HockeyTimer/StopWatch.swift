@@ -45,7 +45,7 @@ class StopWatch: UIControl {
     private var half: HALF {
         return game.half
     }
-    private var duration: MINUTESINHALF {
+    private var duration: Duration {
         return game.duration
     }
 

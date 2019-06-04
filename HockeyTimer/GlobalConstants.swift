@@ -10,21 +10,25 @@ import UIKit
 import StoreKit
 
 
+var SELECTED_COUNTRY: Country {
+    set {
+        UserDefaults.standard.set(newValue.rawValue, forKey: USERDEFAULTSKEY.Country)
+    }
+    get {
+        if let selectedCountry = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Country) as? String, let selected = Country(rawValue: selectedCountry) {
+            return selected
+        } else {
+            return Country.defaultValue()
+        }
+    }
+}
+
+
 enum HALF {
     
     case First
     case Second
 }
-
-
-enum MINUTESINHALF: Int, CaseIterable {
-    
-    case Twenty = 20  // For testing purposes: 1
-    case TwentyFive = 25
-    case Thirty = 30
-    case ThirtyFive = 35
-}
-
 
 enum COLOR {
     
@@ -72,9 +76,9 @@ enum COLOR {
 
 enum FONTNAME {
     
-    static let ThemeBold = "Exo2-Bold"
-    static let ThemeRegular = "Exo2-Regular"
-    static let Numbers = "HelveticaNeue-Bold" // NovaMono
+    static let ThemeBold = "Lato-Bold"
+    static let ThemeRegular = "Lato-Bold" 
+    static let Numbers = "HelveticaNeue-Bold"
 }
 
 
@@ -87,6 +91,8 @@ enum USERDEFAULTSKEY {
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
     static let PremiumMode = "PremiumMode"
+    static let Country = "Country"
+
 
 }
 
@@ -104,7 +110,7 @@ var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
 var runningCountingUp: Bool = false
 var runningHalf: HALF = .First
-var runningDuration: MINUTESINHALF = .Twenty
+var runningDuration: Duration = .Twenty
 var shouldRestoreFromBackground: Bool = false
 
 
@@ -172,7 +178,9 @@ let LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW = NSLocalizedString("OK, let me allow
 let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Cancel button when enabling notifications.")
 
 
+
 var appStoreProducts: [SKProduct] = []
+var shadowed: Bool = false
 
 
 

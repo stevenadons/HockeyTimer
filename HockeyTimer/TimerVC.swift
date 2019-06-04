@@ -29,7 +29,7 @@ class TimerVC: PanArrowVC {
     fileprivate var confirmationButton: ConfirmationButton!
     fileprivate var cancelButton: ConfirmationButton!
 
-    fileprivate var duration: MINUTESINHALF = .TwentyFive
+    fileprivate var duration: Duration = .TwentyFive
     var game: HockeyGame!
     var delegate: TimerVCDelegate?
     private var scorePanelCenterYConstraint: NSLayoutConstraint!
@@ -220,7 +220,7 @@ class TimerVC: PanArrowVC {
     private func createNewGame() {
         
         if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
-            if let enumCase = MINUTESINHALF(rawValue: minutes) {
+            if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
             }
         }

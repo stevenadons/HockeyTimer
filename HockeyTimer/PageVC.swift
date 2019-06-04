@@ -29,9 +29,9 @@ class PageVC: UIPageViewController {
         delegate = self
         view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
         
-        var duration: MINUTESINHALF = MINUTESINHALF.allCases.randomElement()!
+        var duration: Duration = Duration.allCases.randomElement()!
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
-            if let enumCase = MINUTESINHALF(rawValue: minutes) {
+            if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
             }
         }

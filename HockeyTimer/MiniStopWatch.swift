@@ -13,7 +13,7 @@ class MiniStopWatch: UIView {
     
     // MARK: - Properties
     
-    var duration: MINUTESINHALF = .TwentyFive {
+    var duration: Duration = .TwentyFive {
         didSet {
             durationLabel.text = AgeRange.durationString(for: duration)
             durationLabel.setNeedsDisplay()
@@ -96,7 +96,8 @@ class MiniStopWatch: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         if bold {
-            label.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            let size: CGFloat = UIScreen.main.bounds.height > 600 ? 17 : 16
+            label.font = UIFont(name: FONTNAME.ThemeBold, size: size)
         } else {
             label.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
         }
@@ -175,6 +176,11 @@ class MiniStopWatch: UIView {
         
         progressBar.strokeEnd = 0.0
         progressBar.setNeedsDisplay()
+    }
+    
+    func setDuration(_ duration: Duration) {
+        
+        durationLabel.text = AgeRange.durationString(for: duration)
     }
     
     

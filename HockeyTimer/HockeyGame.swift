@@ -37,7 +37,7 @@ class HockeyGame {
     private(set) var awayScore: Int = 0
     var half: HALF = .First
     var status: Status = .WaitingToStart
-    var duration: MINUTESINHALF = .Twenty {
+    var duration: Duration = .Twenty {
         didSet {
             runningDuration = duration
         }
@@ -48,7 +48,7 @@ class HockeyGame {
     
     // MARK: - Initializing
 
-    convenience init(duration: MINUTESINHALF) {
+    convenience init(duration: Duration) {
         
         self.init()
         self.duration = duration

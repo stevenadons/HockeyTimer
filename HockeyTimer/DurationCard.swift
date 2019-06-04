@@ -21,9 +21,12 @@ class DurationCard: UIButton {
             ageLabel.setNeedsDisplay()
         }
     }
-    var duration: MINUTESINHALF = .TwentyFive {
+    var duration: Duration = .TwentyFive {
         didSet {
             switch duration {
+            case .Fifteen:
+                backgroundColor = COLOR.LightYellow
+                miniStopWatch.color = COLOR.VeryDarkBlue
             case .Twenty:
                 backgroundColor = COLOR.LightYellow
                 miniStopWatch.color = COLOR.VeryDarkBlue
@@ -36,10 +39,8 @@ class DurationCard: UIButton {
             case .ThirtyFive:
                 backgroundColor = COLOR.VeryDarkBlue
                 miniStopWatch.color = COLOR.DarkGray
-            default:
-                backgroundColor = COLOR.White
             }
-            ageString = AgeRange.uString(for: duration)
+            ageString = SELECTED_COUNTRY.stringForDuration(duration)
             miniStopWatch.duration = duration
             miniStopWatch.setNeedsDisplay()
         }
@@ -60,13 +61,13 @@ class DurationCard: UIButton {
         setup()
     }
     
-    convenience init(duration: MINUTESINHALF) {
+    convenience init(duration: Duration) {
         
         self.init()
         convenienceSet(duration: duration)
     }
     
-    private func convenienceSet(duration: MINUTESINHALF) {
+    private func convenienceSet(duration: Duration) {
         
         self.duration = duration
     }
@@ -80,7 +81,7 @@ class DurationCard: UIButton {
         layer.borderWidth = 0
         layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowOpacity = 0.8
+        layer.shadowOpacity = shadowed ? 0.8 : 0.0
         layer.shadowRadius = 3
         
         miniStopWatch = MiniStopWatch()
@@ -100,13 +101,15 @@ class DurationCard: UIButton {
     private func createAgeLabel(title: String) -> UILabel {
         
         let label = UILabel()
+        
         label.text = title
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 14)
+        label.font = UIFont(name: FONTNAME.ThemeBold, size: 15)
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
-        label.textColor = COLOR.White
+        label.textColor = (backgroundColor == COLOR.LightBlue) ? COLOR.VeryDarkBlue : COLOR.White
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }
     
@@ -162,36 +165,20 @@ class DurationCard: UIButton {
         }
     }
     
-//    func shrink(delay: Double) {
-//        
-//        let deadline = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delay * 1000))
-//        DispatchQueue.main.asyncAfter(deadline: deadline) {
-//            UIView.animate(withDuration: 0.15, delay: delay, options: [.curveEaseIn], animations: {
-//                self.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-//            }, completion: { (finished) in
-//                self.alpha = 0.0
-//            })
-//        }
-//    }
-//    
-//    func fadeOut(delay: Double, completion: (() -> Void)?) {
-//        
-//        UIView.animate(withDuration: 0.3, delay: delay, options: [.allowUserInteraction, .curveEaseIn], animations: {
-//            self.alpha = 0.0
-//        }, completion: { (finished) in
-//            completion?()
-//        })
-//    }
-//    
-//    func highlight() {
-//        
-//        let animation = CABasicAnimation(keyPath: "borderWidth")
-//        animation.duration = 0.2
-//        animation.fromValue = 0.0
-//        animation.toValue = 6.0
-//        layer.add(animation, forKey: "border")
-//        layer.borderWidth = 6.0
-//    }
+    func setDuration(_ duration: Duration, durationString: String, animated: Bool, delay: Double) {
+        
+        if animated {
+            windUp()
+        }
+        
+        self.duration = duration
+        miniStopWatch.setDuration(duration)
+        ageString = durationString
+        
+        if animated {
+            popup(delay: delay)
+        }
+    }
     
     
     // MARK: - Private Methods

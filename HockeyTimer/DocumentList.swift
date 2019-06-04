@@ -23,11 +23,11 @@ class DocumentList: UIView {
         }
         return inset
     }
-    fileprivate let bottomInset: CGFloat = 185
-    fileprivate let smallPadding: CGFloat = 8
+    fileprivate let bottomInset: CGFloat = 130
+    fileprivate let smallPadding: CGFloat = 10
     var bigPadding: CGFloat {
-        let totalButtonsHeight = 7 * DocumentButton.fixedHeight
-        let totalsmallPadding = 3 * smallPadding
+        let totalButtonsHeight = CGFloat(buttons.count) * DocumentButton.fixedHeight
+        let totalsmallPadding = 5 * smallPadding
         let totalbigPadding = bounds.height - topInset - bottomInset - totalButtonsHeight - totalsmallPadding
         return min(max(totalbigPadding / 3, smallPadding * 2), DocumentButton.fixedHeight * 0.75)
     }

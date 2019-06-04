@@ -10,7 +10,7 @@ import Foundation
 
 struct AgeRange {
     
-    static func uString(for duration: MINUTESINHALF) -> String {
+    static func uString(for duration: Duration) -> String {
         
         var result = ""
         switch duration {
@@ -28,7 +28,7 @@ struct AgeRange {
         return result
     }
     
-    static func durationString(for duration: MINUTESINHALF) -> String {
+    static func durationString(for duration: Duration) -> String {
         
         return "\(duration.rawValue)m"
     }

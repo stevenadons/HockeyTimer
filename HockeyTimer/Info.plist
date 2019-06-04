@@ -31,10 +31,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Exo2-Regular.ttf</string>
-		<string>Exo2-Bold.ttf</string>
-		<string>NovaMono.ttf</string>
-		<string>Nunito-Regular.otf</string>
+		<string>Lato-Bold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

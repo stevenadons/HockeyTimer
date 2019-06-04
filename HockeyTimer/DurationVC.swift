@@ -13,8 +13,8 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Properties
     
-    var currentDuration: MINUTESINHALF?
-    var selectedDuration: MINUTESINHALF?
+    var currentDuration: Duration?
+    var selectedDuration: Duration?
     
     fileprivate var cancelView: UIButton!
     fileprivate var cardOne: DurationCard!
@@ -22,6 +22,7 @@ class DurationVC: PanArrowVC {
     fileprivate var cardThree: DurationCard!
     fileprivate var cardFour: DurationCard!
     fileprivate var cards: [DurationCard] = []
+    fileprivate var dotMenu: DotMenu!
     
     fileprivate var skipAnimations: Bool = false
     
@@ -70,10 +71,10 @@ class DurationVC: PanArrowVC {
         cancelView.isUserInteractionEnabled = false
         view.insertSubview(cancelView, at: 0)
 
-        cardOne = DurationCard(duration: .Twenty)
-        cardTwo = DurationCard(duration: .TwentyFive)
-        cardThree = DurationCard(duration: .Thirty)
-        cardFour = DurationCard(duration: .ThirtyFive)
+        cardOne = DurationCard(duration: SELECTED_COUNTRY.durations()[0])
+        cardTwo = DurationCard(duration: SELECTED_COUNTRY.durations()[1])
+        cardThree = DurationCard(duration: SELECTED_COUNTRY.durations()[2])
+        cardFour = DurationCard(duration: SELECTED_COUNTRY.durations()[3])
         cards.append(cardOne)
         cards.append(cardTwo)
         cards.append(cardThree)
@@ -99,7 +100,7 @@ class DurationVC: PanArrowVC {
             cardOne.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -padding / 2),
             cardOne.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375),
             cardOne.heightAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardOne.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -65 - padding / 2),
+            cardOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 135),
             
             cardTwo.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: padding / 2),
             cardTwo.widthAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
@@ -117,7 +118,18 @@ class DurationVC: PanArrowVC {
             cardFour.topAnchor.constraint(equalTo: cardThree.topAnchor),
             
             ])
+        
+        dotMenu = DotMenu(inView: view,
+                          delegate: self,
+                          labelNames: Country.allCountryNames(),
+                          capitalsStrings: Country.allCapitals(),
+                          selected: Country.indexOf(SELECTED_COUNTRY))
     }
+
+    
+    // MARK: - Public Methods
+    
+    
 
     
     // MARK: - Private Methods
@@ -174,6 +186,35 @@ class DurationVC: PanArrowVC {
         selectedDuration = nil
     }
     
+}
+
+
+extension DurationVC: DotMenuDelegate {
+    
+    func handleDotMenuButtonTapped(buttonNumber: Int) {
+        
+        guard SELECTED_COUNTRY.rawValue != Country.allCases[buttonNumber].rawValue else { return }
+        
+        SELECTED_COUNTRY = Country.allCases[buttonNumber]
+        
+        cardOne.setDuration(SELECTED_COUNTRY.durations()[0],
+                            durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[0]),
+                            animated: true,
+                            delay: 0)
+        cardTwo.setDuration(SELECTED_COUNTRY.durations()[1],
+                            durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[1]),
+                            animated: true,
+                            delay: 0.1)
+        cardThree.setDuration(SELECTED_COUNTRY.durations()[2],
+                              durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[2]),
+                              animated: true,
+                              delay: 0.2)
+        cardFour.setDuration(SELECTED_COUNTRY.durations()[3],
+                             durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[3]),
+                             animated: true,
+                             delay: 0.3)
+        
+    }
 }
 
 

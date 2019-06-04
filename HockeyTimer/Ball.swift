@@ -54,7 +54,7 @@ class Ball: UIView {
         layer.backgroundColor = COLOR.LightYellow.cgColor 
         layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = shadowed ? 0.5 : 0.0
         layer.shadowRadius = 10
         
         translatesAutoresizingMaskIntoConstraints = false
