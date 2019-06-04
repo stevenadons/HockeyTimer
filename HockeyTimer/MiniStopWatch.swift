@@ -15,7 +15,7 @@ class MiniStopWatch: UIView {
     
     var duration: Duration = .TwentyFive {
         didSet {
-            durationLabel.text = AgeRange.durationString(for: duration)
+            durationLabel.text = duration.abbreviation
             durationLabel.setNeedsDisplay()
         }
     }
@@ -81,7 +81,7 @@ class MiniStopWatch: UIView {
         
         timesLabel = stopWatchLabel(text: "2x", bold: false)
         addSubview(timesLabel)
-        durationLabel = stopWatchLabel(text: AgeRange.durationString(for: duration), bold: true)
+        durationLabel = stopWatchLabel(text: duration.abbreviation, bold: true)
         addSubview(durationLabel)
     }
     
@@ -180,7 +180,7 @@ class MiniStopWatch: UIView {
     
     func setDuration(_ duration: Duration) {
         
-        durationLabel.text = AgeRange.durationString(for: duration)
+        durationLabel.text = duration.abbreviation
     }
     
     

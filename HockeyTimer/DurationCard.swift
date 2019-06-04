@@ -40,7 +40,7 @@ class DurationCard: UIButton {
                 backgroundColor = COLOR.VeryDarkBlue
                 miniStopWatch.color = COLOR.DarkGray
             }
-            ageString = SELECTED_COUNTRY.stringForDuration(duration)
+            ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? ""
             miniStopWatch.duration = duration
             miniStopWatch.setNeedsDisplay()
         }

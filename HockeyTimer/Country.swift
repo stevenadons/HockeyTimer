@@ -2,120 +2,102 @@
 //  Country.swift
 //  HockeyTimer
 //
-//  Created by Steven Adons on 02/06/2019.
+//  Created by Steven Adons on 04/06/2019.
 //  Copyright © 2019 StevenAdons. All rights reserved.
 //
 
 import Foundation
 
-enum Country: String, CaseIterable {
+
+struct Country {
     
     
-    // MARK: - Cases
+    // MARK: - Properties
     
-    case Belgium
-    case Netherlands
-    case France
+    private (set) var capitals: String!
+    private (set) var name: String!
+    private (set) var durations: [Duration]!
+    private (set) var durationStrings: [String]!
+    
+    
+    // MARK: - Init
+    
+    init(capitals: String, name: String, durations: [Duration], durationStrings: [String]) {
+        
+        self.capitals = capitals
+        self.name = name
+        self.durations = durations
+        self.durationStrings = durationStrings
+    }
+    
+    
+    // MARK: - Static methods
+    
+    static func allCapitals() -> [String] {
+        
+        return countries.map {
+            $0.capitals
+        }
+    }
+    
+    static func allNames() -> [String] {
+        
+        return countries.map {
+            $0.name
+        }
+    }
     
     
     // MARK: - Public Methods
     
-    func capitals() -> String {
+    func durationStringFor(_ duration: Duration) -> String? {
         
-        switch self {
-        case .Belgium:
-            return "B"
-        case .Netherlands:
-            return "NL"
-        case .France:
-            return "FR"
-        }
-    }
-    
-    func durations() -> [Duration] {
-        
-        switch self {
-        case .Belgium:
-            return [.Twenty,
-                    .TwentyFive,
-                    .Thirty,
-                    .ThirtyFive]
-        case .Netherlands:
-            return [.Fifteen,
-                    .TwentyFive,
-                    .Thirty,
-                    .ThirtyFive]
-        case .France:
-            return [.Twenty,
-                    .TwentyFive,
-                    .Thirty,
-                    .ThirtyFive]
-        }
-    }
-    
-    func stringForDuration(_ duration: Duration) -> String {
-        
-        var strings: [String]
-        switch self {
-        case .Belgium:
-            strings = ["U7 - U8",
-                       "U9 - U10 - U11 - U12",
-                       "U14 - Ladies - Gents",
-                       "U16 - U19"]
-            
-        case .Netherlands:
-            strings = ["Teams of 3",
-                       "Teams of 6",
-                       "Teams of 8",
-                       "General"]
-            
-        case .France:
-            strings = ["U7 - U8",
-                       "U9 - U10 - U11 - U12",
-                       "U14 - Ladies - Gents",
-                       "U16 - U19"]
-        }
-        
-        if let index = durations().firstIndex(of: duration), index < strings.count {
-            return strings[index]
-        } else {
-            return ""
-        }
-    }
-    
-    
-    // MARK: - Static Methods
-    
-    static func defaultValue() -> Country {
-        
-        return Country.Belgium
-    }
-   
-    static func allCountryNames() -> [String] {
-        
-        var countryNames: [String] = []
-        for country in Country.allCases {
-            countryNames.append(country.rawValue)
-        }
-        return countryNames
-    }
-    
-    static func allCapitals() -> [String] {
-        
-        var capitalsStrings: [String] = []
-        for country in Country.allCases {
-            capitalsStrings.append(country.capitals())
-        }
-        return capitalsStrings
-    }
-    
-    static func indexOf(_ country: Country) -> Int? {
-        
-        for index in 0..<Country.allCountryNames().count {
-            if Country.allCases[index].rawValue == country.rawValue {
-                return index
-            }
+        if let index = durations.firstIndex(of: duration), index < durationStrings.count {
+            return durationStrings[index]
         }
         return nil
     }
+
+    
+
+}
+
+
+// MARK: - Equatable
+
+extension Country: Equatable {
+    
+    static func == (lhs: Country, rhs: Country) -> Bool {
+        
+        return lhs.capitals == rhs.capitals
+    }
+}
+
+
+var countries: [Country] {
+    
+    let belgium = Country(capitals: "B",
+                          name: "Belgium",
+                          durations: [.Twenty,
+                                      .TwentyFive,
+                                      .Thirty,
+                                      .ThirtyFive],
+                          durationStrings: ["U7 - U8",
+                                            "U9 - U10 - U11 - U12",
+                                            "U14 - Ladies - Gents",
+                                            "U16 - U19"])
+    
+    let netherlands = Country(capitals: "NL",
+                              name: "Netherlands",
+                              durations: [.Fifteen,
+                                          .TwentyFive,
+                                          .Thirty,
+                                          .ThirtyFive],
+                              durationStrings: ["Teams of 3",
+                                                "Teams of 6",
+                                                "Teams of 8",
+                                                "General"])
+    
+    return [belgium, netherlands]
+    
 }

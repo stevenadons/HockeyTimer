@@ -16,5 +16,9 @@ enum Duration: Int, CaseIterable {
     case TwentyFive = 25
     case Thirty = 30
     case ThirtyFive = 35
+    
+    var abbreviation: String {
+        return "\(rawValue)m"
+    }
 }
 

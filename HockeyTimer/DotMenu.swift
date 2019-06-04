@@ -129,8 +129,8 @@ class DotMenu: UIView {
     @objc private func handleMenuButtonTapped(sender: OvalCountryButton, forEvent event: UIEvent) {
         
         if buttons[0].transform == .identity {
-            hideButtons()
             menuButton.hideCross()
+            hideButtons()
             
         } else {
             menuButton.showCross()

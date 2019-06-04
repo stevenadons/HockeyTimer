@@ -71,10 +71,10 @@ class DurationVC: PanArrowVC {
         cancelView.isUserInteractionEnabled = false
         view.insertSubview(cancelView, at: 0)
 
-        cardOne = DurationCard(duration: SELECTED_COUNTRY.durations()[0])
-        cardTwo = DurationCard(duration: SELECTED_COUNTRY.durations()[1])
-        cardThree = DurationCard(duration: SELECTED_COUNTRY.durations()[2])
-        cardFour = DurationCard(duration: SELECTED_COUNTRY.durations()[3])
+        cardOne = DurationCard(duration: SELECTED_COUNTRY.durations[0])
+        cardTwo = DurationCard(duration: SELECTED_COUNTRY.durations[1])
+        cardThree = DurationCard(duration: SELECTED_COUNTRY.durations[2])
+        cardFour = DurationCard(duration: SELECTED_COUNTRY.durations[3])
         cards.append(cardOne)
         cards.append(cardTwo)
         cards.append(cardThree)
@@ -121,9 +121,9 @@ class DurationVC: PanArrowVC {
         
         dotMenu = DotMenu(inView: view,
                           delegate: self,
-                          labelNames: Country.allCountryNames(),
+                          labelNames: Country.allNames(),
                           capitalsStrings: Country.allCapitals(),
-                          selected: Country.indexOf(SELECTED_COUNTRY))
+                          selected: countries.firstIndex(of: SELECTED_COUNTRY))
     }
 
     
@@ -193,24 +193,24 @@ extension DurationVC: DotMenuDelegate {
     
     func handleDotMenuButtonTapped(buttonNumber: Int) {
         
-        guard SELECTED_COUNTRY.rawValue != Country.allCases[buttonNumber].rawValue else { return }
+        guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
         
-        SELECTED_COUNTRY = Country.allCases[buttonNumber]
+        SELECTED_COUNTRY = countries[buttonNumber]
         
-        cardOne.setDuration(SELECTED_COUNTRY.durations()[0],
-                            durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[0]),
+        cardOne.setDuration(SELECTED_COUNTRY.durations[0],
+                            durationString: SELECTED_COUNTRY.durationStrings[0],
                             animated: true,
                             delay: 0)
-        cardTwo.setDuration(SELECTED_COUNTRY.durations()[1],
-                            durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[1]),
+        cardTwo.setDuration(SELECTED_COUNTRY.durations[1],
+                            durationString: SELECTED_COUNTRY.durationStrings[1],
                             animated: true,
                             delay: 0.1)
-        cardThree.setDuration(SELECTED_COUNTRY.durations()[2],
-                              durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[2]),
+        cardThree.setDuration(SELECTED_COUNTRY.durations[2],
+                              durationString: SELECTED_COUNTRY.durationStrings[2],
                               animated: true,
                               delay: 0.2)
-        cardFour.setDuration(SELECTED_COUNTRY.durations()[3],
-                             durationString: SELECTED_COUNTRY.stringForDuration(SELECTED_COUNTRY.durations()[3]),
+        cardFour.setDuration(SELECTED_COUNTRY.durations[3],
+                             durationString: SELECTED_COUNTRY.durationStrings[3],
                              animated: true,
                              delay: 0.3)
         

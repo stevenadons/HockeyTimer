@@ -12,13 +12,14 @@ import StoreKit
 
 var SELECTED_COUNTRY: Country {
     set {
-        UserDefaults.standard.set(newValue.rawValue, forKey: USERDEFAULTSKEY.Country)
+        let index = countries.firstIndex(of: newValue) ?? 0
+        UserDefaults.standard.set(index, forKey: USERDEFAULTSKEY.CountryIndex)
     }
     get {
-        if let selectedCountry = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Country) as? String, let selected = Country(rawValue: selectedCountry) {
-            return selected
+        if let index = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.CountryIndex) as? Int, index < countries.count {
+            return countries[index]
         } else {
-            return Country.defaultValue()
+            return countries[0]
         }
     }
 }
@@ -91,7 +92,8 @@ enum USERDEFAULTSKEY {
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
     static let PremiumMode = "PremiumMode"
-    static let Country = "Country"
+//    static let Country = "Country"
+    static let CountryIndex = "CountryIndex"
 
 
 }
