@@ -77,16 +77,14 @@ extension DocumentMenuVC: RulesListDelegate {
     
     func handleButtonTapped(sender: RulesButton) {
         
-        if let specificUrls = sender.rules.specificLocaleUrls {
-            if let currentLanguage = Locale.current.languageCode {
-                if let specificUrl = specificUrls[currentLanguage] as? URL {
-                    UIApplication.shared.open(specificUrl)
-                }
-            }
+        var url: URL? = sender.rules.url
+        
+        if let specificUrls = sender.rules.specificLocaleUrls, let currentLanguage = Locale.current.languageCode, let specificUrl = specificUrls[currentLanguage] as? URL {
+            url = specificUrl
         }
         
-        if let url = sender.rules.url {
-            UIApplication.shared.open(url)
+        if url != nil {
+            UIApplication.shared.open(url!)
         }
     }
     

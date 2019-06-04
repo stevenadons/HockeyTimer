@@ -13,6 +13,9 @@ import AudioToolbox
 // Set this PageVC as initial viewcontroller in AppDelegate
 class PageVC: UIPageViewController {
     
+    
+    // MARK: - Properties
+    
     var game: HockeyGame!
     var existingTimerVC: TimerVC?
     var existingScoreVC: ScoreVC?
@@ -20,6 +23,9 @@ class PageVC: UIPageViewController {
     
     fileprivate var askToNotificationsAlreadyShown: Bool = false
     fileprivate var haptic: UISelectionFeedbackGenerator?
+    
+    
+    // MARK: - Init
 
     override func viewDidLoad() {
         
@@ -29,7 +35,7 @@ class PageVC: UIPageViewController {
         delegate = self
         view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
         
-        var duration: Duration = Duration.allCases.randomElement()!
+        var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
             if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
@@ -54,6 +60,9 @@ class PageVC: UIPageViewController {
         super.viewDidAppear(animated)
         askToAllowNotifications()
     }
+    
+    
+    // MARK: - Private Methods
     
     private func askToAllowNotifications() {
         
@@ -115,7 +124,14 @@ class PageVC: UIPageViewController {
         }
         existingTimerVC?.scoreDidChange()
     }
-
+    
+    func countryChanged() {
+        
+        if !UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode) {
+            let duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
+            game = HockeyGame(duration: duration)
+        }
+    }
 }
 
 extension PageVC: UIPageViewControllerDataSource {

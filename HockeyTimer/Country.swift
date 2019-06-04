@@ -120,6 +120,12 @@ var countries: [Country] {
                                             "U16 - U19"],
                           groupsOfRules: [group1, group2, group3, group4, group5])
     
+    
+    let test1 = Rules(name: "TEST", url: "https://stackoverflow.com/questions/41631854/count-items-in-an-array-of-arrays")
+    let test2 = Rules(name: "TEST2", url: "https://www.google.be/?client=safari")
+    
+    let nlGroup1 = GroupOfRules(rulesArray: [test1, test2])
+    
     let netherlands = Country(capitals: "NL",
                               name: "Netherlands",
                               durations: [.Fifteen,
@@ -130,7 +136,7 @@ var countries: [Country] {
                                                 "Teams of 6",
                                                 "Teams of 8",
                                                 "General"],
-                              groupsOfRules: [group1, group2, group3, group4, group5])
+                              groupsOfRules: [nlGroup1])
     
     return [belgium, netherlands]
     
