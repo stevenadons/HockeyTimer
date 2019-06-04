@@ -9,18 +9,14 @@
 import UIKit
 
 
-protocol DocumentListDelegate: class {
-    
-    func handleButtonTapped(sender: DocumentButton)
-}
-
-
 class DocumentMenuVC: PanArrowVC {
 
     
     // MARK: - Properties
     
-    fileprivate var documentList: DocumentList!
+//    fileprivate var documentList: DocumentList!
+    private var rulesList: RulesList!
+    
     
     
     // MARK: - Life Cycle Methods
@@ -34,17 +30,17 @@ class DocumentMenuVC: PanArrowVC {
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
-        documentList.windUp()
+        rulesList.windUp()
     }
     
     private func setup() {
         
         view.backgroundColor = COLOR.White
         
-        documentList = DocumentList(delegate: self)
-        documentList.backgroundColor = UIColor.clear
-        view.addSubview(documentList)
-        view.sendSubviewToBack(documentList)
+        rulesList = RulesList(delegate: self, country: SELECTED_COUNTRY)
+        rulesList.backgroundColor = UIColor.clear
+        view.addSubview(rulesList)
+        view.sendSubviewToBack(rulesList)
         
         panArrowUp.color = COLOR.LightYellow
         panArrowDown.alpha = 0.0
@@ -54,10 +50,10 @@ class DocumentMenuVC: PanArrowVC {
         
         NSLayoutConstraint.activate([
             
-            documentList.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            documentList.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            documentList.topAnchor.constraint(equalTo: view.topAnchor),
-            documentList.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            rulesList.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            rulesList.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            rulesList.topAnchor.constraint(equalTo: view.topAnchor),
+            rulesList.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             ])
     }
@@ -66,7 +62,7 @@ class DocumentMenuVC: PanArrowVC {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        documentList.animateFlyIn()
+        rulesList.animateFlyIn()
     }
     
     
@@ -77,13 +73,21 @@ class DocumentMenuVC: PanArrowVC {
 }
 
 
-extension DocumentMenuVC: DocumentListDelegate {
+extension DocumentMenuVC: RulesListDelegate {
     
-    func handleButtonTapped(sender: DocumentButton) {
+    func handleButtonTapped(sender: RulesButton) {
         
-        if let encoded = sender.document.url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encoded) {
+        if let specificUrls = sender.rules.specificLocaleUrls {
+            if let currentLanguage = Locale.current.languageCode {
+                if let specificUrl = specificUrls[currentLanguage] as? URL {
+                    UIApplication.shared.open(specificUrl)
+                }
+            }
+        }
+        
+        if let url = sender.rules.url {
             UIApplication.shared.open(url)
-        } 
+        }
     }
     
     

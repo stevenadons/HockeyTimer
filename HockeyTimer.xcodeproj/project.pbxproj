@@ -52,14 +52,10 @@
 		4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */; };
 		4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF141F520D1C003B1259 /* PageVC.swift */; };
 		4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */; };
-		4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF191F521FBA003B1259 /* DocumentList.swift */; };
-		4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */; };
-		4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF1D1F521FE3003B1259 /* Document.swift */; };
 		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
 		4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF241F5225B3003B1259 /* DurationVC.swift */; };
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
-		4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF2B1F52273B003B1259 /* AgeRange.swift */; };
 		4FD3721122A4030200A45757 /* DotMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3720C22A4017F00A45757 /* DotMenu.swift */; };
 		4FD3721622A4030E00A45757 /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3720D22A4017F00A45757 /* ButtonLabel.swift */; };
 		4FD3721E22A4267C00A45757 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721D22A4267C00A45757 /* Duration.swift */; };
@@ -68,6 +64,10 @@
 		4FD3722422A6CE2700A45757 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */; };
 		4FD3722622A6CEC000A45757 /* OvalCountryCross.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */; };
 		4FD3722822A6D61000A45757 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722722A6D61000A45757 /* Country.swift */; };
+		4FD3722A22A6EC1D00A45757 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722922A6EC1D00A45757 /* Rules.swift */; };
+		4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */; };
+		4FD3722F22A6F5E700A45757 /* RulesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722E22A6F5E700A45757 /* RulesList.swift */; };
+		4FD3723122A6F5F400A45757 /* RulesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3723022A6F5F400A45757 /* RulesButton.swift */; };
 		4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */; };
 		4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */; };
 		4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */; };
@@ -127,14 +127,10 @@
 		4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
 		4FB4BF141F520D1C003B1259 /* PageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 		4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentMenuVC.swift; sourceTree = "<group>"; };
-		4FB4BF191F521FBA003B1259 /* DocumentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentList.swift; sourceTree = "<group>"; };
-		4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentButton.swift; sourceTree = "<group>"; };
-		4FB4BF1D1F521FE3003B1259 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
 		4FB4BF241F5225B3003B1259 /* DurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationVC.swift; sourceTree = "<group>"; };
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
-		4FB4BF2B1F52273B003B1259 /* AgeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRange.swift; sourceTree = "<group>"; };
 		4FC1857B22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		4FC1857C22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FD3720C22A4017F00A45757 /* DotMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotMenu.swift; sourceTree = "<group>"; };
@@ -145,6 +141,10 @@
 		4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalCountryCross.swift; sourceTree = "<group>"; };
 		4FD3722722A6D61000A45757 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		4FD3722922A6EC1D00A45757 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOfRules.swift; sourceTree = "<group>"; };
+		4FD3722E22A6F5E700A45757 /* RulesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesList.swift; sourceTree = "<group>"; };
+		4FD3723022A6F5F400A45757 /* RulesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesButton.swift; sourceTree = "<group>"; };
 		4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessageView.swift; sourceTree = "<group>"; };
 		4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButton.swift; sourceTree = "<group>"; };
 		4FE97DA82299BE6A00EC53F9 /* EditScoreButtonLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButtonLayer.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
 				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
-				4FB4BF181F521FA1003B1259 /* DocumentList */,
+				4FD3722D22A6F5D800A45757 /* RulesList */,
 				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
 				4FB4BE951F515C89003B1259 /* IconButtons */,
 				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
@@ -374,10 +374,10 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
-				4FB4BF1D1F521FE3003B1259 /* Document.swift */,
-				4FB4BF2B1F52273B003B1259 /* AgeRange.swift */,
 				4FD3721D22A4267C00A45757 /* Duration.swift */,
 				4FD3722722A6D61000A45757 /* Country.swift */,
+				4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */,
+				4FD3722922A6EC1D00A45757 /* Rules.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -389,15 +389,6 @@
 				4F6342A322916E0A002F49B4 /* NotificationNameX.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		4FB4BF181F521FA1003B1259 /* DocumentList */ = {
-			isa = PBXGroup;
-			children = (
-				4FB4BF1B1F521FD0003B1259 /* DocumentButton.swift */,
-				4FB4BF191F521FBA003B1259 /* DocumentList.swift */,
-			);
-			name = DocumentList;
 			sourceTree = "<group>";
 		};
 		4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */ = {
@@ -428,6 +419,15 @@
 				4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */,
 			);
 			name = DotMenu;
+			sourceTree = "<group>";
+		};
+		4FD3722D22A6F5D800A45757 /* RulesList */ = {
+			isa = PBXGroup;
+			children = (
+				4FD3722E22A6F5E700A45757 /* RulesList.swift */,
+				4FD3723022A6F5F400A45757 /* RulesButton.swift */,
+			);
+			name = RulesList;
 			sourceTree = "<group>";
 		};
 		4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */ = {
@@ -630,9 +630,9 @@
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */,
+				4FD3722A22A6EC1D00A45757 /* Rules.swift in Sources */,
 				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
 				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
-				4FB4BF1A1F521FBA003B1259 /* DocumentList.swift in Sources */,
 				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
@@ -640,7 +640,6 @@
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
-				4FB4BF1E1F521FE4003B1259 /* Document.swift in Sources */,
 				4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
 				4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */,
@@ -659,6 +658,7 @@
 				4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */,
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FAFB20A2299539800CE11EE /* Mask.swift in Sources */,
+				4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
 				4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */,
 				4F8AFCE722919D1400D975A1 /* Products.swift in Sources */,
@@ -669,18 +669,18 @@
 				4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */,
 				4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */,
 				4FD3722222A6C85600A45757 /* OvalCountryLayer.swift in Sources */,
+				4FD3723122A6F5F400A45757 /* RulesButton.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
 				4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
-				4FB4BF1C1F521FD0003B1259 /* DocumentButton.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
 				4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */,
-				4FB4BF2C1F52273B003B1259 /* AgeRange.swift in Sources */,
 				4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */,
 				4FD3722822A6D61000A45757 /* Country.swift in Sources */,
 				4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */,
+				4FD3722F22A6F5E700A45757 /* RulesList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

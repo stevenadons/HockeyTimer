@@ -1,24 +1,25 @@
 //
-//  DocumentButton.swift
-//  WhatsTheTime
+//  RulesButton.swift
+//  HockeyTimer
 //
-//  Created by Steven Adons on 12/08/17.
-//  Copyright © 2017 StevenAdons. All rights reserved.
+//  Created by Steven Adons on 04/06/2019.
+//  Copyright © 2019 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class DocumentButton: UIButton {
-
+class RulesButton: UIButton {
+    
     
     // MARK: - Properties
     
-    private(set) var document: Document! {
+    private(set) var rules: Rules! {
         didSet {
-            setTitle(document.buttonTitle, for: .normal)
+            setTitle(rules.name, for: .normal)
             setNeedsDisplay()
         }
     }
+    
     
     static let fixedWidth: CGFloat = 220
     static var fixedHeight: CGFloat {
@@ -40,15 +41,15 @@ class DocumentButton: UIButton {
         setup()
     }
     
-    convenience init(document: Document) {
+    convenience init(rules: Rules) {
         
         self.init()
-        convenienceSet(document: document)
+        convenienceSet(rules: rules)
     }
     
-    private func convenienceSet(document: Document) {
+    private func convenienceSet(rules: Rules) {
         
-        self.document = document
+        self.rules = rules
     }
     
     private func setup() {
@@ -71,20 +72,16 @@ class DocumentButton: UIButton {
 }
 
 
-extension DocumentButton {
+extension RulesButton {
     
-    class func button(document: Document, color: UIColor, titleColor: UIColor) -> DocumentButton {
-        let button = DocumentButton(document: document)
+    class func button(rules: Rules, color: UIColor, titleColor: UIColor) -> RulesButton {
+        
+        let button = RulesButton(rules: rules)
+        
         button.backgroundColor = color
         button.setTitleColor(titleColor, for: .normal)
+        
         return button
     }
 }
 
-
-
-extension DocumentButton {
-    
-    // MARK: - User Methods
-    
-}
