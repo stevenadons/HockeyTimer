@@ -64,6 +64,7 @@ class RulesList: UIView {
         self.delegate = delegate
         self.country = country
         setup()
+        windUp()
     }
     
     private func setup() {
@@ -72,6 +73,7 @@ class RulesList: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         buttons = []
+        
         for outerIndex in 0..<country.groupsOfRules.count {
             if let groupOfRulesArray = country.groupsOfRules[outerIndex].rulesArray {
                 
@@ -98,7 +100,6 @@ class RulesList: UIView {
                 buttons.append(buttonGroup)
             }
         }
-        windUp()
     }
     
     
@@ -167,7 +168,35 @@ class RulesList: UIView {
         }
     }
     
-    func animateFlyIn() {
+    func windUpAnimated(then handler: ((Bool) -> Void)? = nil) {
+        
+        for outerIndex in 0..<buttons.count {
+            let buttonGroup = buttons[outerIndex]
+            for innerIndex in 0..<buttonGroup.count {
+                
+                if outerIndex % 2 == 0 {
+                    UIView.animate(withDuration: 0.2, delay: 0, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                        buttonGroup[innerIndex].transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
+                    }) { (finished) in
+                        if outerIndex == self.buttons.count - 1 && innerIndex == buttonGroup.count - 1 {
+                            handler?(finished)
+                        }
+                    }
+                    
+                } else {
+                    UIView.animate(withDuration: 0.2, delay: 0, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                        buttonGroup[innerIndex].transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
+                    }) { (finished) in
+                        if outerIndex == self.buttons.count - 1 && innerIndex == buttonGroup.count - 1 {
+                            handler?(finished)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func animateFlyIn(then handler: ((Bool) -> Void)? = nil) {
         
         var delay: Double = 0.0
         for outerIndex in 0..<buttons.count {
@@ -180,10 +209,34 @@ class RulesList: UIView {
                 if buttonGroup[innerIndex].transform != .identity {
                     UIView.animate(withDuration: 0.2, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
                         buttonGroup[innerIndex].transform = .identity
-                    }, completion: nil)
+                    }, completion: { finished in
+                        handler?(finished)
+                    })
                 }
             }
         }
+    }
+    
+    func setCountry(_ country: Country) {
+        
+        guard country != self.country else { return }
+        
+        windUp()
+        for button in buttons.joined() {
+            button.removeFromSuperview()
+        }
+        self.country = country
+        setup()
+        animateFlyIn()
+        
+//        windUpAnimated { [weak self] (finished) in
+//            for button in (self?.buttons.joined())! {
+//                button.removeFromSuperview()
+//            }
+//            self?.country = country
+//            self?.setup()
+//            self?.animateFlyIn()
+//        }
     }
 }
 

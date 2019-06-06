@@ -129,11 +129,9 @@ class DotMenu: UIView {
     @objc private func handleMenuButtonTapped(sender: OvalCountryButton, forEvent event: UIEvent) {
         
         if buttons[0].transform == .identity {
-            menuButton.hideCross()
             hideButtons()
             
         } else {
-            menuButton.showCross()
             showButtons()
         }
     }
@@ -145,50 +143,80 @@ class DotMenu: UIView {
             menuButton.setCapitals(capitalsStrings[selected])
         }
         
-        menuButton.hideCross()
         hideButtons()
         
         delegate?.handleDotMenuButtonTapped(buttonNumber: sender.tag)
     }
     
-    private func showButtons() {
+    private func showButtons(animated: Bool = true) {
+        
+        menuButton.showCross()
         
         buttons.forEach {
             $0.alpha = 1.0
         }
-        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-            self.buttons.forEach {
+        
+        if animated {
+            UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
+                self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+                self.buttons.forEach {
+                    $0.transform = .identity
+                }
+                
+            }, completion: {(finished) in
+                for index in 0..<self.labels.count {
+                    self.labels[index].grow(text: self.labelNames[index], duration: 0.1)
+                }
+            })
+            
+        } else {
+            backgroundColor = UIColor.black.withAlphaComponent(0.8)
+            buttons.forEach {
                 $0.transform = .identity
             }
-            
-        }, completion: {(finished) in
             for index in 0..<self.labels.count {
                 self.labels[index].grow(text: self.labelNames[index], duration: 0.1)
             }
-        })
+        }
+        
     }
     
     
     // MARK: - Public Methods
 
-    @objc func hideButtons() {
+    @objc func hideButtons(animated: Bool = true) {
+        
+        menuButton.hideCross()
         
         labels.forEach {
             $0.title = ""
         }
-        UIView.animate(withDuration: 0.1) {
-            self.buttons.forEach {
+        
+        if animated {
+            UIView.animate(withDuration: 0.1) {
+                self.buttons.forEach {
+                    $0.alpha = 0.0
+                }
+            }
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.0, options: [], animations: {
+                self.backgroundColor = UIColor.clear
+                for index in 0..<self.buttons.count {
+                    let y = -CGFloat(index + 1) * (self.padding + self.buttons[0].bounds.height)
+                    self.buttons[index].transform = CGAffineTransform(translationX: 0, y: y)
+                }
+            }, completion: nil)
+            
+        } else {
+            buttons.forEach {
                 $0.alpha = 0.0
             }
-        }
-        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.0, options: [], animations: {
             self.backgroundColor = UIColor.clear
             for index in 0..<self.buttons.count {
                 let y = -CGFloat(index + 1) * (self.padding + self.buttons[0].bounds.height)
                 self.buttons[index].transform = CGAffineTransform(translationX: 0, y: y)
             }
-        }, completion: nil)
+        }
+        
     }
    
     

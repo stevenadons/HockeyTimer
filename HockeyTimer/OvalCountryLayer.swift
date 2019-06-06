@@ -69,7 +69,7 @@ class OvalCountryLayer: CALayer {
         
         shape.path = createPath().cgPath
         shape.lineWidth = 1
-        shape.strokeColor = COLOR.VeryDarkBlue.cgColor
+        shape.strokeColor = COLOR.DarkBlue.cgColor
         shape.fillColor = COLOR.White.cgColor
         shape.allowsEdgeAntialiasing = true
         
@@ -82,9 +82,9 @@ class OvalCountryLayer: CALayer {
         let heightScale = bounds.height / designHeight
         
         let ovalRect = CGRect(x: 2 * widthScale,
-                              y: 7 * heightScale,
+                              y: 9 * heightScale,
                               width: 40 * widthScale,
-                              height: 30 * heightScale)
+                              height: 26 * heightScale)
         
         return UIBezierPath(ovalIn: ovalRect)
     }

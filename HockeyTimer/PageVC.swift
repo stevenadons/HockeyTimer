@@ -33,7 +33,12 @@ class PageVC: UIPageViewController {
         
         dataSource = self
         delegate = self
-        view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
+        
+        if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.ShouldNotOnboard) {
+            view.backgroundColor = COLOR.VeryDarkBlue
+        } else {
+            view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
+        }
         
         var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
@@ -123,14 +128,6 @@ class PageVC: UIPageViewController {
             existingTimerVC = timerVC
         }
         existingTimerVC?.scoreDidChange()
-    }
-    
-    func countryChanged() {
-        
-        if !UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode) {
-            let duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
-            game = HockeyGame(duration: duration)
-        }
     }
 }
 

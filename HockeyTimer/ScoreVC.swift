@@ -36,7 +36,6 @@ class ScoreVC: PanArrowVC {
     fileprivate var editModeButton: EditScoreButton!
     fileprivate var confirmationButton: ConfirmationButton!
 
-//    fileprivate var delegate: PitchDelegate?
     fileprivate var inEditMode: Bool = false
     fileprivate var messageTimer: Timer?
     

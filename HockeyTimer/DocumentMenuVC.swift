@@ -14,8 +14,8 @@ class DocumentMenuVC: PanArrowVC {
     
     // MARK: - Properties
     
-//    fileprivate var documentList: DocumentList!
     private var rulesList: RulesList!
+    private var dotMenu: DotMenu!
     
     
     
@@ -27,10 +27,18 @@ class DocumentMenuVC: PanArrowVC {
         setup()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        dotMenu.hideButtons(animated: false)
+        
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         
-        super.viewDidDisappear(animated)
         rulesList.windUp()
+        
+        super.viewDidDisappear(animated)
     }
     
     private func setup() {
@@ -56,6 +64,12 @@ class DocumentMenuVC: PanArrowVC {
             rulesList.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             ])
+        
+        dotMenu = DotMenu(inView: view,
+                          delegate: self,
+                          labelNames: Country.allNames(),
+                          capitalsStrings: Country.allCapitals(),
+                          selected: countries.firstIndex(of: SELECTED_COUNTRY))
     }
     
     
@@ -87,6 +101,16 @@ extension DocumentMenuVC: RulesListDelegate {
             UIApplication.shared.open(url!)
         }
     }
+}
+
+
+extension DocumentMenuVC: DotMenuDelegate {
     
-    
+    func handleDotMenuButtonTapped(buttonNumber: Int) {
+        
+        guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
+        
+        SELECTED_COUNTRY = countries[buttonNumber]
+        rulesList.setCountry(SELECTED_COUNTRY)
+    }
 }

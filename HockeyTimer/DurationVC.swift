@@ -52,6 +52,13 @@ class DurationVC: PanArrowVC {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        
+        dotMenu.hideButtons(animated: false)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
