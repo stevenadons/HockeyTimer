@@ -35,9 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var startViewController: UIViewController
         
         // For testing purposes to test onboarding
+//        #warning("testing")
 //        startViewController = OnboardingVC()
         
         // For testing purposes to avoid onboarding
+//        #warning("testing")
 //        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
         // Standard

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		33AFC4AB40F48A92D2F8DF98 /* Pods_HockeyTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */; };
 		4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */; };
+		4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationsHandler.swift; path = "../../../Swift-files/Services/UserNotificationsHandler.swift"; sourceTree = "<group>"; };
+		4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */,
+				4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
 				4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */,
 				4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */,
+				4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */,
 				4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,

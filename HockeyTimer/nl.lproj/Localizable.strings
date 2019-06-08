@@ -17,15 +17,15 @@
 "H2" = "H2";
 "RESET GAME" = "NIEUWE WEDSTRIJD";
 "CANCEL" = "ANNULEER";
-"NEW GAME" = "NIEUWE WEDSTRIJD";
-"Are you sure you want to start a new game?" = "Nieuwe wedstrijd - ben je zeker?";
+"New Game" = "Nieuwe wedstrijd";
+"Are you sure you want to start a new game?" = "Nieuwe wedstrijd.\nBen je zeker?";
 "OK" = "OK";
 "+ 1 minute" = "+ 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
 "Running in Overtime" = "Tijd is verstreken";
 
 "BACK" = "TERUG";
-"UNDO GOAL" = "ANNULEER GOAL";
+"Undo Goal" = "Annuleer doelpunt";
 "OK got it" = "OK begrepen!";
 "Easy to use" = "Heel eenvoudig";
 "Keep track of the score" = "Score bijhouden";
@@ -39,15 +39,28 @@
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
 
-"PICTOGRAM U7-U8" = "PICTOGRAM U7-U8";
-"PICTOGRAM U9" = "PICTOGRAM U9";
-"PICTOGRAM U10-U12" = "PICTOGRAM U10-U12";
-"VHL OVERVIEW YOUTH" = "VHL OVERZICHT JEUGD";
-"RULES U7-U12" = "SPELREGELS U7-U12";
-"RULES U14-U19" = "SPELREGELS U14-U19";
-"FIH RULES" = "FIH SPELREGELS";
-"KBHB LADIES RULES" = "KBHB LADIES SPELREGELS";
-"KBHB GENTS RULES" = "KBHB GENTS SPELREGELS";
+"Pictogram U7-U8" = "Pictogram U7-U8";
+"Pictogram U9" = "Pictogram U9";
+"Pictogram U10-U12" = "Pictogram U10-U12";
+"VHL Overview Youth" = "VHL Overzicht jeugd";
+"Indoor Pictogram U7-U10" = "Indoor Pictogram U7-U10";
+"Indoor Rules U9-U19" = "Indoor Spelregels U9-U19";
+"Indoor FIH Rules" = "Indoor Spelregels FIH";
+"Rules U7-U12" = "Spelregels U7-U12";
+"Rules U14-U19" = "Spelregels U14-U19";
+"FIH Rules" = "FIH Spelregels";
+"KBHB Ladies Rules" = "KBHB Spelregels Ladies";
+"KBHB Gents Rules" = "KBHB Spelregels Gents";
+"Rules Outdoor" = "Spelreglement";
+"Rules Indoor" = "Zaalhockey";
+"Youth  -  Teams of 3" = "Jeugd  -  3-tallen";
+"Youth  -  Teams of 6" = "Jeugd  -  6-tallen";
+"Youth  -  Teams of 8" = "Jeugd  -  8-tallen";
+"E-Hockey  -  HK / OK" = "E-Hockey  -  Hoofd en Overgang";
+"E-Hockey  -  Regional" = "E-Hockey  -  Regioklasse";
+"H-Hockey  -  HK / OK" = "H-Hockey  -  Hoofd en Overgang";
+"H-Hockey  -  1st to 4th class" = "H-Hockey  -  Klasse 1 tot 4";
+"Website KNHB" = "Website KNHB";
 
 "Change Game Time" = "Wedstrijdduur wijzigen";
 "New Game" = "Nieuwe wedstrijd";
@@ -64,3 +77,11 @@
 "HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Open Instellingen en activeer meldingen voor HockeyUpp.";
 "HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
 "OK, let me allow" = "OK, activeer meldingen";
+
+"Belgium" = "België";
+"Netherlands" = "Nederland";
+"Teams of 3" = "3-tallen";
+"Teams of 6" = "6-tallen";
+"Teams of 8" = "8-tallen";
+"General" = "Algemeen";
+

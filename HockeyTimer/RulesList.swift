@@ -26,15 +26,18 @@ class RulesList: UIView {
     fileprivate var country: Country!
     
     fileprivate var topInset: CGFloat {
-        var inset: CGFloat = UIScreen.main.bounds.height >= 600 ? 135 : 105
+        var inset: CGFloat = UIScreen.main.bounds.height >= 600 ? 120 : 90
         if UIScreen.main.bounds.height >= 750 {
-            inset = 180
+            inset = 175
+        }
+        if buttons.joined().count <= 10 {
+            inset += 20
         }
         return inset
     }
     
     fileprivate let bottomInset: CGFloat = 130
-    fileprivate let smallPadding: CGFloat = 10
+    fileprivate let smallPadding: CGFloat = 8
     
     fileprivate var totalButtonsHeight: CGFloat {
         return CGFloat(buttons.joined().count) * RulesButton.fixedHeight
@@ -50,7 +53,7 @@ class RulesList: UIView {
     }
     var bigPadding: CGFloat {
         let totalbigPadding = bounds.height - topInset - bottomInset - totalButtonsHeight - totalSmallPadding
-        return min(max(totalbigPadding / 3, smallPadding * 2), RulesButton.fixedHeight * 0.75)
+        return min(max(totalbigPadding / CGFloat(buttons.count - 1), smallPadding * 1.25), RulesButton.fixedHeight * 0.4)
     }
     
     
@@ -197,46 +200,44 @@ class RulesList: UIView {
     }
     
     func animateFlyIn(then handler: ((Bool) -> Void)? = nil) {
-        
-        var delay: Double = 0.0
-        for outerIndex in 0..<buttons.count {
-            
-            delay += (outerIndex > 0) ? 0.1 : 0.0
-            let buttonGroup = buttons[outerIndex]
-            for innerIndex in 0..<buttonGroup.count {
                 
-                delay += 0.03
-                if buttonGroup[innerIndex].transform != .identity {
-                    UIView.animate(withDuration: 0.2, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
-                        buttonGroup[innerIndex].transform = .identity
-                    }, completion: { finished in
-                        handler?(finished)
-                    })
+        DispatchQueue.main.async {
+            var delay: Double = 0.0
+            for outerIndex in 0..<self.buttons.count {
+                
+                delay += (outerIndex > 0) ? 0.1 : 0.0
+                let buttonGroup = self.buttons[outerIndex]
+                for innerIndex in 0..<buttonGroup.count {
+                    
+                    delay += 0.03
+                    if buttonGroup[innerIndex].transform != .identity {
+                        UIView.animate(withDuration: 0.2, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                            buttonGroup[innerIndex].transform = .identity
+                        }, completion: { finished in
+                            if outerIndex == self.buttons.count - 1 && innerIndex == buttonGroup.count {
+                                handler?(finished)
+                            }
+                        })
+                    }
                 }
             }
         }
+        
+        
     }
     
     func setCountry(_ country: Country) {
         
         guard country != self.country else { return }
         
-        windUp()
         for button in buttons.joined() {
             button.removeFromSuperview()
         }
         self.country = country
         setup()
+        windUp()
         animateFlyIn()
         
-//        windUpAnimated { [weak self] (finished) in
-//            for button in (self?.buttons.joined())! {
-//                button.removeFromSuperview()
-//            }
-//            self?.country = country
-//            self?.setup()
-//            self?.animateFlyIn()
-//        }
     }
 }
 

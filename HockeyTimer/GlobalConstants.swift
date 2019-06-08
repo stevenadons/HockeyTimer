@@ -77,7 +77,7 @@ enum COLOR {
 
 enum FONTNAME {
     
-    static let ThemeBold = "Lato-Bold"
+    static let ThemeBold = "Lato-Black"
     static let ThemeRegular = "Lato-Bold" 
     static let Numbers = "HelveticaNeue-Bold"
 }
@@ -126,17 +126,17 @@ let LS_READYFORH2 = NSLocalizedString("Ready for H2", comment: "H2 to begin mess
 let LS_FULLTIME = NSLocalizedString("Full Time", comment: "Full time message")
 let LS_FIRSTHALFLABEL = NSLocalizedString("H1", comment: "Half time indication label")
 let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication label")
-let LS_WARNINGRESETGAME = NSLocalizedString("NEW GAME", comment: "When reset button tapped")
-let LS_WARNINGNEWGAME = NSLocalizedString("NEW GAME", comment: "When stopwatch is tapped for new game")
+let LS_WARNINGRESETGAME = NSLocalizedString("New Game", comment: "When reset button tapped")
+let LS_WARNINGNEWGAME = NSLocalizedString("New Game", comment: "When stopwatch is tapped for new game")
 let LS_WARNINGRESETPOPUP = NSLocalizedString("Are you sure you want to start a new game?", comment: "When reset button is tapped")
 let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notification when app in background")
 let LS_NOTIFICATION_DEFER = NSLocalizedString("+ 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
 let LS_NOTIFICATION_CONTENT = NSLocalizedString("Running in Overtime", comment: "Content for notification when app in background")
 
-let LS_BUTTON_CANCEL = NSLocalizedString("CANCEL", comment: "Cancel message")
-let LS_BUTTON_BACK = NSLocalizedString("BACK", comment: "Message on button to back out from document")
-let LS_BUTTON_UNDOGOAL = NSLocalizedString("UNDO GOAL", comment: "Message for undoing goal")
+let LS_BUTTON_CANCEL = NSLocalizedString("Cancel", comment: "Cancel message")
+let LS_BUTTON_BACK = NSLocalizedString("Back", comment: "Message on button to back out from document")
+let LS_BUTTON_UNDOGOAL = NSLocalizedString("Undo Goal", comment: "Message for undoing goal")
 let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button for ending onboarding")
 
 let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navigating")
@@ -150,15 +150,29 @@ let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Tap the stopwatch to play or p
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends.", comment: "Onboarding screen")
 
-let LS_DOCUMENTNAME_PICTOGRAMU7U8 = NSLocalizedString("PICTOGRAM U7-U8", comment: "Name for document")
-let LS_DOCUMENTNAME_PICTOGRAMU9 = NSLocalizedString("PICTOGRAM U9", comment: "Name for document")
-let LS_DOCUMENTNAME_PICTOGRAMU10U12 = NSLocalizedString("PICTOGRAM U10-U12", comment: "Name for document")
-let LS_DOCUMENTNAME_VHLSHOOTOUTS = NSLocalizedString("VHL OVERVIEW YOUTH", comment: "Name for document")
-let LS_DOCUMENTNAME_VHLRULESU7U12 = NSLocalizedString("RULES U7-U12", comment: "Name for document")
-let LS_DOCUMENTNAME_VHLRULESU14U19 = NSLocalizedString("RULES U14-U19", comment: "Name for document")
-let LS_DOCUMENTNAME_FIHRULES = NSLocalizedString("FIH RULES", comment: "Name for document")
-let LS_DOCUMENTNAME_LADIES = NSLocalizedString("KBHB LADIES RULES", comment: "Name for document")
-let LS_DOCUMENTNAME_GENTS = NSLocalizedString("KBHB GENTS RULES", comment: "Name for document")
+let DOC_PICTOGRAMU7U8 = NSLocalizedString("Pictogram U7-U8", comment: "Name for document")
+let DOC_PICTOGRAMU9 = NSLocalizedString("Pictogram U9", comment: "Name for document")
+let DOC_PICTOGRAMU10U12 = NSLocalizedString("Pictogram U10-U12", comment: "Name for document")
+let DOC_VHL_OVERVIEW_YOUTH = NSLocalizedString("VHL Overview Youth", comment: "Name for document")
+let DOC_INDOOR_U7_U10 = NSLocalizedString("Indoor Pictogram U7-U10", comment: "Name for document")
+let DOC_INDOOR_U9_U19 = NSLocalizedString("Indoor Rules U9-U19", comment: "Name for document")
+let DOC_INDOOR_FIH = NSLocalizedString("Indoor FIH Rules", comment: "Name for document")
+let DOC_VHLRULESU7U12 = NSLocalizedString("Rules U7-U12", comment: "Name for document")
+let DOC_VHLRULESU14U19 = NSLocalizedString("Rules U14-U19", comment: "Name for document")
+let DOC_FIHRULES = NSLocalizedString("FIH Rules", comment: "Name for document")
+let DOC_LADIES = NSLocalizedString("KBHB Ladies Rules", comment: "Name for document")
+let DOC_GENTS = NSLocalizedString("KBHB Gents Rules", comment: "Name for document")
+let DOC_NL_SPELREGLEMENT = NSLocalizedString("Rules Outdoor", comment: "Name for document")
+let DOC_NL_INDOOR = NSLocalizedString("Rules Indoor", comment: "Name for document")
+let DOC_NL_3TALLEN = NSLocalizedString("Youth  -  Teams of 3", comment: "Name for document")
+let DOC_NL_6TALLEN = NSLocalizedString("Youth  -  Teams of 6", comment: "Name for document")
+let DOC_NL_8TALLEN = NSLocalizedString("Youth  -  Teams of 8", comment: "Name for document")
+let DOC_NL_E_HKOK = NSLocalizedString("E-Hockey  -  HK / OK", comment: "Name for document")
+let DOC_NL_E_REGIONAL = NSLocalizedString("E-Hockey  -  Regional", comment: "Name for document")
+let DOC_NL_H_HKOK = NSLocalizedString("H-Hockey  -  HK / OK", comment: "Name for document")
+let DOC_NL_H_1TO4 = NSLocalizedString("H-Hockey  -  1st to 4th class", comment: "Name for document")
+let DOC_NL_WEBPAGE = NSLocalizedString("Website KNHB", comment: "Name for document")
+
 
 let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Change Game Time", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TITLE_NEW_GAME = NSLocalizedString("New Game", comment: "Title of buy premium VC")
@@ -179,6 +193,12 @@ let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp se
 let LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW = NSLocalizedString("OK, let me allow", comment: "Confirmation button when enabling notifications.")
 let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Cancel button when enabling notifications.")
 
+let LS_COUNTRY_BELGIUM = NSLocalizedString("Belgium", comment: "Country name in picker")
+let LS_COUNTRY_NETHERLANDS = NSLocalizedString("Netherlands", comment: "Country name in picker")
+let LS_COUNTRY_TEAMS_OF_3 = NSLocalizedString("Teams of 3", comment: "Durationcard description")
+let LS_COUNTRY_TEAMS_OF_6 = NSLocalizedString("Teams of 6", comment: "Durationcard description")
+let LS_COUNTRY_TEAMS_OF_8 = NSLocalizedString("Teams of 8", comment: "Durationcard description")
+let LS_COUNTRY_GENERAL = NSLocalizedString("General", comment: "Durationcard description")
 
 
 var appStoreProducts: [SKProduct] = []

@@ -27,6 +27,13 @@ class DocumentMenuVC: PanArrowVC {
         setup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+                
+        super.viewDidAppear(animated)
+        rulesList.animateFlyIn()
+    }
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         
         dotMenu.hideButtons(animated: false)
@@ -72,12 +79,6 @@ class DocumentMenuVC: PanArrowVC {
                           selected: countries.firstIndex(of: SELECTED_COUNTRY))
     }
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        rulesList.animateFlyIn()
-    }
     
     
     

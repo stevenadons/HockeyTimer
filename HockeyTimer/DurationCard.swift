@@ -160,7 +160,7 @@ class DurationCard: UIButton {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.allowUserInteraction], animations: {
                 self.transform = .identity
             }) { (finished) in
-                self.animateMiniStopWatch(duration: 0.4)
+                self.animateMiniStopWatch(duration: 0.3)
             }
         }
     }

@@ -174,7 +174,9 @@ class MiniStopWatch: UIView {
     
     func setProgressToZero() {
         
+        CATransaction.setDisableActions(true)
         progressBar.strokeEnd = 0.0
+        CATransaction.setDisableActions(false)
         progressBar.setNeedsDisplay()
     }
     

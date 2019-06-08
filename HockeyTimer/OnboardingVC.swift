@@ -141,7 +141,8 @@ class OnboardingVC: UIViewController {
         let stopWatchSide = min(graphicsSide, 180)
         let xInset = (slide1.graphics.bounds.width - stopWatchSide) / 2.0
         let yInset = (slide1.graphics.bounds.height - stopWatchSide) / 2.0
-        stopWatch.frame = slide1.graphics.bounds.insetBy(dx: xInset, dy: yInset)
+        let insets = UIEdgeInsets(top: yInset * 0.75, left: xInset, bottom: yInset * 1.25, right: xInset)
+        stopWatch.frame = slide1.graphics.bounds.inset(by: insets)
     }
     
     private func setPitchFrame() {
@@ -150,7 +151,7 @@ class OnboardingVC: UIViewController {
             pitch.widthAnchor.constraint(equalTo: slide2.widthAnchor, constant: -100),
             pitch.heightAnchor.constraint(equalToConstant: 180),
             pitch.centerXAnchor.constraint(equalTo: slide2.centerXAnchor),
-            pitch.bottomAnchor.constraint(equalTo: slide2.centerYAnchor),
+            pitch.bottomAnchor.constraint(equalTo: slide2.centerYAnchor, constant: -20),
             ])
     }
     
@@ -160,7 +161,7 @@ class OnboardingVC: UIViewController {
             phoneView.widthAnchor.constraint(equalTo: slide3.graphics.widthAnchor),
             phoneView.heightAnchor.constraint(equalTo: slide3.graphics.heightAnchor),
             phoneView.centerXAnchor.constraint(equalTo: slide3.graphics.centerXAnchor),
-            phoneView.centerYAnchor.constraint(equalTo: slide3.graphics.centerYAnchor),
+            phoneView.centerYAnchor.constraint(equalTo: slide3.graphics.centerYAnchor, constant: -20),
             ])
     }
     

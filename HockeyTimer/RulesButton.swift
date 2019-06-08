@@ -57,7 +57,7 @@ class RulesButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.clear
         setTitleColor(UIColor.black, for: .normal)
-        titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)
+        titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
         layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowOpacity = shadowed ? 0.8 : 0.0

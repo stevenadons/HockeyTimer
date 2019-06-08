@@ -39,7 +39,7 @@ class DurationVC: PanArrowVC {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+                
         super.viewDidAppear(animated)
         
         guard !skipAnimations else { return }

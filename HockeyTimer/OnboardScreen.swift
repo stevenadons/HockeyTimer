@@ -84,8 +84,8 @@ class OnboardScreen: UIView {
         graphics.translatesAutoresizingMaskIntoConstraints = false
         addSubview(graphics)
         
-        title = createLabel(bold: true, fontSize: 18)
-        title.font = UIFont(name: FONTNAME.ThemeBold, size: 18)
+        title = createLabel(bold: true, fontSize: 24)
+        title.font = UIFont(name: FONTNAME.ThemeBold, size: 24)
         title.textColor = COLOR.VeryDarkBlue
         addSubview(title)
         
@@ -128,7 +128,7 @@ class OnboardScreen: UIView {
             
             graphics.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             graphics.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            graphics.topAnchor.constraint(equalTo: topAnchor, constant: 90),
+            graphics.topAnchor.constraint(equalTo: topAnchor, constant: 80),
             graphics.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 300/667),
             
             title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
