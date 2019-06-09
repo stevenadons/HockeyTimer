@@ -86,7 +86,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         }
         
         return button
@@ -106,7 +106,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         }
         
         return button
@@ -126,7 +126,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         }
         
         return button

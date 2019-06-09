@@ -17,16 +17,14 @@ class DurationVC: PanArrowVC {
     var selectedDuration: Duration?
     
     fileprivate var cancelView: UIButton!
-    fileprivate var cardOne: DurationCard!
-    fileprivate var cardTwo: DurationCard!
-    fileprivate var cardThree: DurationCard!
-    fileprivate var cardFour: DurationCard!
     fileprivate var cards: [DurationCard] = []
     fileprivate var dotMenu: DotMenu!
     
     fileprivate var skipAnimations: Bool = false
     
-    fileprivate let padding: CGFloat = 18
+    fileprivate var padding: CGFloat {
+        return (UIScreen.main.bounds.height > 600 && cards.count > 4) ? 18 : 12
+    }
     
     
     // MARK: - Life Cycle Methods
@@ -77,25 +75,21 @@ class DurationVC: PanArrowVC {
         cancelView.backgroundColor = UIColor.clear
         cancelView.isUserInteractionEnabled = false
         view.insertSubview(cancelView, at: 0)
-
-        cardOne = DurationCard(duration: SELECTED_COUNTRY.durations[0])
-        cardTwo = DurationCard(duration: SELECTED_COUNTRY.durations[1])
-        cardThree = DurationCard(duration: SELECTED_COUNTRY.durations[2])
-        cardFour = DurationCard(duration: SELECTED_COUNTRY.durations[3])
-        cards.append(cardOne)
-        cards.append(cardTwo)
-        cards.append(cardThree)
-        cards.append(cardFour)
-        cards.forEach {
-            $0.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            view.addSubview($0)
-        }
         
         panArrowUp.alpha = 0.0
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.text = LS_TITLE_STOPWATCH
         panArrowDownLabel.textColor = COLOR.VeryDarkBlue
+        
+        dotMenu = DotMenu(inView: view, delegate: self, labelNames: Country.allNames(), capitalsStrings: Country.allCapitals(), selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        
+        for index in 0..<SELECTED_COUNTRY.durations.count {
+            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
+            cards.append(card)
+            card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
+            view.insertSubview(card, belowSubview: dotMenu)
+        }
         
         NSLayoutConstraint.activate([
             
@@ -104,35 +98,46 @@ class DurationVC: PanArrowVC {
             cancelView.topAnchor.constraint(equalTo: view.topAnchor),
             cancelView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            cardOne.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -padding / 2),
-            cardOne.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375),
-            cardOne.heightAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 135),
-            
-            cardTwo.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: padding / 2),
-            cardTwo.widthAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardTwo.heightAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardTwo.bottomAnchor.constraint(equalTo: cardOne.bottomAnchor),
-            
-            cardThree.trailingAnchor.constraint(equalTo: cardOne.trailingAnchor),
-            cardThree.widthAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardThree.heightAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardThree.topAnchor.constraint(equalTo: cardOne.bottomAnchor, constant: padding),
-            
-            cardFour.leadingAnchor.constraint(equalTo: cardTwo.leadingAnchor),
-            cardFour.widthAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardFour.heightAnchor.constraint(equalTo: cardOne.widthAnchor, multiplier: 1),
-            cardFour.topAnchor.constraint(equalTo: cardThree.topAnchor),
-            
             ])
         
-        dotMenu = DotMenu(inView: view,
-                          delegate: self,
-                          labelNames: Country.allNames(),
-                          capitalsStrings: Country.allCapitals(),
-                          selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        addCardConstraints()
     }
-
+    
+    private func addCardConstraints() {
+        
+        var topInset: CGFloat = UIScreen.main.bounds.height > 600 ? 130 : 100
+        if cards.count > 4 {
+            if UIScreen.main.bounds.height < 600 {
+                topInset = 75
+            } else if UIScreen.main.bounds.height > 800 {
+                topInset = 160
+            } else {
+                topInset = 85
+            }
+        }
+        
+        for index in 0..<cards.count {
+            
+            cards[index].widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375).isActive = true
+            cards[index].heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375).isActive = true
+            
+            // Horizontal
+            if index == cards.count - 1 && index % 2 == 0 { // Last card in the middle
+                cards[index].centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            } else if index % 2 == 0 { // Left column
+                cards[index].trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -padding / 2).isActive = true
+            } else { // Right column
+                cards[index].leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: padding / 2).isActive = true
+            }
+            
+            // Vertical
+            if index == 0 || index == 1 { // Top row
+                cards[index].topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topInset).isActive = true
+            } else { // Other rows
+                cards[index].topAnchor.constraint(equalTo: cards[index - 2].bottomAnchor, constant: padding).isActive = true
+            }
+        }
+    }
     
     // MARK: - Public Methods
     
@@ -201,26 +206,23 @@ extension DurationVC: DotMenuDelegate {
     func handleDotMenuButtonTapped(buttonNumber: Int) {
         
         guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
-        
         SELECTED_COUNTRY = countries[buttonNumber]
         
-        cardOne.setDuration(SELECTED_COUNTRY.durations[0],
-                            durationString: SELECTED_COUNTRY.durationStrings[0],
-                            animated: true,
-                            delay: 0)
-        cardTwo.setDuration(SELECTED_COUNTRY.durations[1],
-                            durationString: SELECTED_COUNTRY.durationStrings[1],
-                            animated: true,
-                            delay: 0.1)
-        cardThree.setDuration(SELECTED_COUNTRY.durations[2],
-                              durationString: SELECTED_COUNTRY.durationStrings[2],
-                              animated: true,
-                              delay: 0.2)
-        cardFour.setDuration(SELECTED_COUNTRY.durations[3],
-                             durationString: SELECTED_COUNTRY.durationStrings[3],
-                             animated: true,
-                             delay: 0.3)
+        for card in cards {
+            card.removeFromSuperview()
+        }
         
+        cards = []
+        
+        for index in 0..<SELECTED_COUNTRY.durations.count {
+            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
+            cards.append(card)
+            card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
+            card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
+            view.insertSubview(card, belowSubview: dotMenu)
+        }
+        
+        addCardConstraints()
     }
 }
 

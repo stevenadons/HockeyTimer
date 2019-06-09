@@ -28,10 +28,10 @@ class DurationCard: UIButton {
                 backgroundColor = COLOR.LightYellow
                 miniStopWatch.color = COLOR.VeryDarkBlue
             case .Twenty:
-                backgroundColor = COLOR.LightYellow
+                backgroundColor = COLOR.LightBlue
                 miniStopWatch.color = COLOR.VeryDarkBlue
             case .TwentyFive:
-                backgroundColor = COLOR.LightBlue
+                backgroundColor = COLOR.Olive
                 miniStopWatch.color = COLOR.VeryDarkBlue
             case .Thirty:
                 backgroundColor = COLOR.DarkBlue
@@ -40,7 +40,7 @@ class DurationCard: UIButton {
                 backgroundColor = COLOR.VeryDarkBlue
                 miniStopWatch.color = COLOR.DarkGray
             }
-            ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? ""
+            ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? "error"
             miniStopWatch.duration = duration
             miniStopWatch.setNeedsDisplay()
         }
@@ -86,7 +86,6 @@ class DurationCard: UIButton {
         
         miniStopWatch = MiniStopWatch()
         miniStopWatch.duration = duration
-        miniStopWatch.translatesAutoresizingMaskIntoConstraints = false
         addSubview(miniStopWatch)
         
         ageLabel = createAgeLabel(title: ageString)
@@ -128,7 +127,7 @@ class DurationCard: UIButton {
             miniStopWatch.centerXAnchor.constraint(equalTo: centerXAnchor),
             miniStopWatch.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 80 / 140),
             miniStopWatch.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -12 * bounds.height / 140),
-            miniStopWatch.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 80 / 140),
+            miniStopWatch.heightAnchor.constraint(equalTo: miniStopWatch.widthAnchor),
             
             ageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             ageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 120 / 140),
@@ -184,6 +183,7 @@ class DurationCard: UIButton {
     // MARK: - Private Methods
     
     fileprivate func animateMiniStopWatch(duration: Double) {
+        
         miniStopWatch.animateProgress(duration: duration)
     }
     

@@ -88,6 +88,7 @@ class MiniStopWatch: UIView {
     private func stopWatchLabel(text: String, bold: Bool) -> UILabel {
         
         let label = UILabel()
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = false
         label.backgroundColor = UIColor.clear
@@ -96,17 +97,19 @@ class MiniStopWatch: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         if bold {
-            let size: CGFloat = UIScreen.main.bounds.height > 600 ? 17 : 16
+            let size: CGFloat = UIScreen.main.bounds.height > 600 ? 17 : 15
             label.font = UIFont(name: FONTNAME.ThemeBold, size: size)
         } else {
             label.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
         }
+        
         return label
     }
     
     private func progressBarLayer() -> CAShapeLayer {
         
         let shape = CAShapeLayer()
+        
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = progressBarWidth
         shape.lineCap = CAShapeLayerLineCap.butt
@@ -117,14 +120,17 @@ class MiniStopWatch: UIView {
         shape.strokeEnd = 0.0
         shape.contentsScale = UIScreen.main.scale
         shape.path = progressBarPath().cgPath
+        
         return shape
     }
     
     private func progressBarPath() -> UIBezierPath {
         
         let path = UIBezierPath()
+        
         path.move(to: CGPoint(x: bounds.width / 2, y: progressBarWidth / 2))
-        path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
+        path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (bounds.height / 2 - progressBarWidth / 2), startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
+        
         return path
     }
     
@@ -140,7 +146,7 @@ class MiniStopWatch: UIView {
         core.cornerRadius = core.bounds.width / 2
         
         progressBar.path = progressBarPath().cgPath
-        
+                
         NSLayoutConstraint.activate([
             
             timesLabel.centerXAnchor.constraint(equalTo: centerXAnchor),

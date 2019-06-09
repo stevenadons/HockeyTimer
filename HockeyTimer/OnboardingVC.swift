@@ -148,10 +148,10 @@ class OnboardingVC: UIViewController {
     private func setPitchFrame() {
         
         NSLayoutConstraint.activate([
-            pitch.widthAnchor.constraint(equalTo: slide2.widthAnchor, constant: -100),
+            pitch.widthAnchor.constraint(equalToConstant: 275),
             pitch.heightAnchor.constraint(equalToConstant: 180),
-            pitch.centerXAnchor.constraint(equalTo: slide2.centerXAnchor),
-            pitch.bottomAnchor.constraint(equalTo: slide2.centerYAnchor, constant: -20),
+            pitch.centerXAnchor.constraint(equalTo: slide2.graphics.centerXAnchor),
+            pitch.centerYAnchor.constraint(equalTo: slide2.graphics.centerYAnchor, constant: -20),
             ])
     }
     

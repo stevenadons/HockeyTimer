@@ -85,10 +85,10 @@ var countries: [Country] {
     let rulesU14U19 = Rules(name: DOC_VHLRULESU14U19, url: "https://www.hockey.be/app/uploads/2018/05/Table_Parents-Umpires_-_NL_-_above_U14_-_V1.2.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Règles-de-jeu-Jeunes-U14-U19.pdf"])
     let rulesYouth = GroupOfRules(rulesArray: [rulesU7U12, rulesU14U19])
 
+    let indoorFIH = Rules(name: DOC_INDOOR_FIH, url: "https://www.hockey.be/app/uploads/2018/06/rules-of-indoor-hockey-2017-1.pdf")
     let indoorU7U10 = Rules(name: DOC_INDOOR_U7_U10, url: "https://www.hockey.be/app/uploads/2018/06/2017-007-KBHB-Pictos_NL_HR.pdf")
     let indoorU9U19 = Rules(name: DOC_INDOOR_U9_U19, url: "https://www.hockey.be/app/uploads/2019/01/Indoor-Hockey-Spelregels-U9-U19-2019.pdf")
-    let indoorFIH = Rules(name: DOC_INDOOR_FIH, url: "https://www.hockey.be/app/uploads/2018/06/rules-of-indoor-hockey-2017-1.pdf")
-    let indoorGroupBelgium = GroupOfRules(rulesArray: [indoorU7U10, indoorU9U19, indoorFIH])
+    let indoorGroupBelgium = GroupOfRules(rulesArray: [indoorFIH, indoorU7U10, indoorU9U19])
 
     let ladiesRules = Rules(name: DOC_LADIES, url: "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_NL_2017-2018.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_FR_2017-2018.pdf"])
     let gentsRules = Rules(name: DOC_GENTS, url: "https://www.hockey.be/app/uploads/2018/06/Gents_rules_NL_2017-2018-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Gents_rules_FR_2017-2018.pdf"])
@@ -124,11 +124,13 @@ var countries: [Country] {
     
     let netherlands = Country(capitals: "NL",
                               name: LS_COUNTRY_NETHERLANDS,
-                              durations: [.Fifteen, 
+                              durations: [.Fifteen,
+                                          .Twenty,
                                           .TwentyFive,
                                           .Thirty,
                                           .ThirtyFive],
                               durationStrings: [LS_COUNTRY_TEAMS_OF_3,
+                                                LS_COUNTRY_INDOOR,
                                                 LS_COUNTRY_TEAMS_OF_6,
                                                 LS_COUNTRY_TEAMS_OF_8,
                                                 LS_COUNTRY_GENERAL],

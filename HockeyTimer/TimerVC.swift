@@ -127,7 +127,7 @@ class TimerVC: PanArrowVC {
             cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cancelButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             cancelButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180 - admobHeight),
+            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
             
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),

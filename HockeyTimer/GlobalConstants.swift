@@ -70,6 +70,7 @@ enum COLOR {
     static let LightOrange = UIColor(hexString: "#CD9958")
     static let LightYellow = UIColor(hexString: "#F9B82C")
     static let LightBlue = UIColor(hexString: "#9AD2CB") // 8FC0F2
+    static let Olive = UIColor(hexString: "#A4B494") 
     static let White = UIColor(hexString: "#FBFAF8")
 
 }
@@ -103,8 +104,6 @@ enum SOUND {
     static let BeepBeep = "BeepBeep.wav"
     static let Alarm = "StopWatchAlarmSound.mp3"
 }
-
-let admobHeight: CGFloat = 0    // 65
 
 var timerIsRunning: Bool = false
 var runningSecondsToGo: Int = 0
@@ -193,11 +192,11 @@ let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Canc
 
 let LS_COUNTRY_BELGIUM = NSLocalizedString("Belgium", comment: "Country name in picker")
 let LS_COUNTRY_NETHERLANDS = NSLocalizedString("Netherlands", comment: "Country name in picker")
-let LS_COUNTRY_TEAMS_OF_3 = NSLocalizedString("Teams of 3", comment: "Durationcard description")
+let LS_COUNTRY_TEAMS_OF_3 = NSLocalizedString("Teams of 3 & H", comment: "Durationcard description")
 let LS_COUNTRY_TEAMS_OF_6 = NSLocalizedString("Teams of 6", comment: "Durationcard description")
 let LS_COUNTRY_TEAMS_OF_8 = NSLocalizedString("Teams of 8", comment: "Durationcard description")
 let LS_COUNTRY_GENERAL = NSLocalizedString("General", comment: "Durationcard description")
-
+let LS_COUNTRY_INDOOR = NSLocalizedString("Indoor & H", comment: "Durationcard description")
 
 var appStoreProducts: [SKProduct] = []
 var shadowed: Bool = false

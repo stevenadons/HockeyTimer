@@ -134,6 +134,8 @@ class StopWatch: UIControl {
         durationLabel = StopWatchSmallLabel()
         addSubview(durationLabel)
         messageLabel = StopWatchSmallLabel()
+        messageLabel.adjustsFontSizeToFitWidth = false
+        messageLabel.numberOfLines = 0
         message = LS_NEWGAME
         messageLabel.font = UIFont(name: FONTNAME.ThemeBold, size: durationLabel.font.pointSize)
         addSubview(messageLabel)
@@ -163,9 +165,9 @@ class StopWatch: UIControl {
         NSLayoutConstraint.activate([
             
             messageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 80/230),
-            messageLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 20/230),
+            messageLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 40/230),
             messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 34),
+            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 28),
             
             durationLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 80/230),
             durationLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 20/230),
@@ -297,7 +299,9 @@ class StopWatch: UIControl {
     // MARK: - Progress Bar Methods
     
     private func progressBarLayer(for half: HALF) -> CAShapeLayer {
+        
         let shape = CAShapeLayer()
+        
         shape.strokeColor = COLOR.White.cgColor
         shape.lineWidth = progressBarWidth
         shape.lineCap = CAShapeLayerLineCap.butt
@@ -308,11 +312,14 @@ class StopWatch: UIControl {
         shape.strokeEnd = progressBarStrokeInsetRatio
         shape.contentsScale = UIScreen.main.scale
         shape.path = progressBarPath(for: half).cgPath
+        
         return shape
     }
     
     private func progressBarPath(for half: HALF) -> UIBezierPath {
+        
         let path = UIBezierPath()
+        
         switch half {
         case .First:
             path.move(to: CGPoint(x: bounds.width / 2, y: progressBarWidth / 2))
@@ -321,10 +328,12 @@ class StopWatch: UIControl {
             path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressBarWidth / 2))
             path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: .pi/2, endAngle: -.pi/2, clockwise: true)
         }
+        
         return path
     }
     
     private func strokeEndPosition(progress: CGFloat) -> CGFloat {
+        
         let strokeField = 1.0 - progressBarStrokeInsetRatio * 2
         return progressBarStrokeInsetRatio + strokeField * progress
     }
@@ -346,6 +355,7 @@ class StopWatch: UIControl {
     // MARK: - Touch methods
     
     private func isInsideCore(event: UIEvent) -> Bool {
+        
         if let point: CGPoint = event.allTouches?.first?.location(in: self.superview) {
             let distance: CGFloat = sqrt(CGFloat(powf((Float(self.center.x - point.x)), 2) + powf((Float(self.center.y - point.y)), 2)))
             if (distance < (squareSide / 2 - progressBarWidth)) {
@@ -356,6 +366,7 @@ class StopWatch: UIControl {
     }
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        
         super.beginTracking(touch, with: event)
         if let event = event {
             if isInsideCore(event: event) {
@@ -366,6 +377,7 @@ class StopWatch: UIControl {
     }
     
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        
         super.continueTracking(touch, with: event)
         if let event = event {
             if isInsideCore(event: event) {
@@ -376,6 +388,7 @@ class StopWatch: UIControl {
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        
         super.endTracking(touch, with: event)
         if let event = event {
             if isInsideCore(event: event) {

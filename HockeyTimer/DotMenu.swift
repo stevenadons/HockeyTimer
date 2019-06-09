@@ -41,7 +41,7 @@ class DotMenu: UIView {
     private let buttonWidth: CGFloat = 44
     private let buttonHeight: CGFloat = 44
     private let horInset: CGFloat = 40
-    private let topInset: CGFloat = 44
+    private var topInset: CGFloat = 44
     private let labelHeight: CGFloat = 25
     private let padding: CGFloat = 20
     private let labelInset: CGFloat = 20
@@ -54,6 +54,8 @@ class DotMenu: UIView {
         self.init()
         self.frame = containingView.frame
         self.center = containingView.center
+        let extraOffset: CGFloat = UIScreen.main.bounds.height > 600 ? 50 : 32
+        self.topInset = containingView.safeAreaLayoutGuide.layoutFrame.origin.y + extraOffset
         self.backgroundColor = UIColor.clear
         self.delegate = delegate
         self.labelNames = labelNames
@@ -93,7 +95,7 @@ class DotMenu: UIView {
             buttons.append(button)
         }
         
-        let labelWidth = UIScreen.main.bounds.width / 2 - buttonWidth - labelInset - horInset
+        let labelWidth = UIScreen.main.bounds.width * 0.75 - buttonWidth - labelInset - horInset
         
         labels = []
         
@@ -102,7 +104,7 @@ class DotMenu: UIView {
             let label = ButtonLabel()
             label.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
             let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - label.bounds.height) / 2
-            label.frame.origin = CGPoint(x: UIScreen.main.bounds.width / 2, y: y)
+            label.frame.origin = CGPoint(x: UIScreen.main.bounds.width * 0.25, y: y)
             if index == 0 {
                 insertSubview(label, belowSubview: menuButton)
             } else {

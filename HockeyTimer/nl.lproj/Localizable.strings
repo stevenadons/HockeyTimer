@@ -8,7 +8,7 @@
 
 
 "New Game" = "Start wedstrijd";
-"Game Paused" = "Onderbroken";
+"Game Paused" = "Pauze";
 "In Overtime" = "Over tijd";
 "Half Time" = "Rust";
 "Ready for H2" = "Klaar voor H2";
@@ -27,9 +27,9 @@
 "BACK" = "TERUG";
 "Undo Goal" = "Annuleer doelpunt";
 "OK got it" = "OK begrepen!";
-"Easy to use" = "Heel eenvoudig";
-"Keep track of the score" = "Score bijhouden";
-"Tap the stopwatch to play or pause" = "Duw op de stopwatch voor start of pauze";
+"Easy to use" = "Gemakkelijk";
+"Keep track of the score" = "Scores";
+"Tap the stopwatch to play or pause" = "Druk op de stopwatch\nvoor start of pauze";
 "Drag the ball left or right" = "Sleep de bal naar links of rechts";
 "Notifications" = "Meldingen";
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
@@ -60,11 +60,11 @@
 "H-Hockey  -  1-4 class" = "H-Hockey  -  Klasse 1 tot 4";
 "More" = "Meer";
 
-"Change Game Time" = "Wedstrijdduur wijzigen";
+"Change Game Time" = "Duurtijd wijzigen";
 "New Game" = "Nieuwe wedstrijd";
 "Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium om de wedstrijdduur te wijzigen zonder advertenties. Bovendien wordt je laatste wedstrijdduur dan steeds onthouden.";
 "Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode." = "Bekijk één advertentie om een nieuwe wedstrijd te starten.\n\nUpgrade naar Premium om nieuwe wedstrijden te starten zonder advertenties.";
-"Buy Premium" = "Koop Premium";
+"Buy Premium" = "Koop premium";
 "Watch One Ad" = "Bekijk één advertentie";
 "Cancel" = "Annuleer";
 "Already paid for premium? Restore Purchase." = "Al betaald voor premium? Aankoop herstellen.";
@@ -75,11 +75,13 @@
 "HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Open Instellingen en activeer meldingen voor HockeyUpp.";
 "HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
 "OK, let me allow" = "OK, activeer meldingen";
+"Not now" = "Later";
 
 "Belgium" = "België";
 "Netherlands" = "Nederland";
-"Teams of 3" = "3-tallen";
+"Teams of 3 & H" = "3-tallen & H";
 "Teams of 6" = "6-tallen";
 "Teams of 8" = "8-tallen";
 "General" = "Algemeen";
+"Indoor & H" = "Indoor & H";
 

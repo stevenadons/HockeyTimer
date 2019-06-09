@@ -89,14 +89,17 @@ class ScoreVC: PanArrowVC {
         panArrowDownLabel.textColor = COLOR.VeryDarkBlue
         
         let confirmationButtonConstant: CGFloat = UIScreen.main.bounds.height >= 600 ? 120 : 90
-        let pitchContainerHeight: CGFloat = UIScreen.main.bounds.height >= 600 ? 200 : 175
-        let pitchContainerOffset: CGFloat = UIScreen.main.bounds.height >= 600 ? 0 : 20
+        var pitchContainerOffset: CGFloat = UIScreen.main.bounds.height >= 600 ? 0 : 20
+        if UIScreen.main.bounds.height >= 800 {
+            pitchContainerOffset = -50
+        }
+        let editModeOffset: CGFloat = UIScreen.main.bounds.height >= 800 ? 30 : 18
 
         NSLayoutConstraint.activate([
             
-            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
+            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -60),
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pitchContainer.heightAnchor.constraint(equalToConstant: pitchContainerHeight), // 220
+            pitchContainer.heightAnchor.constraint(equalTo: pitchContainer.widthAnchor, multiplier: 0.6),
             pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: pitchContainerOffset),
             
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
@@ -106,13 +109,13 @@ class ScoreVC: PanArrowVC {
             
             editModeButton.widthAnchor.constraint(equalToConstant: 44),
             editModeButton.heightAnchor.constraint(equalToConstant: 44),
-            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: 18),
+            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: editModeOffset),
             editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
             confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -confirmationButtonConstant - admobHeight),
+            confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -confirmationButtonConstant),
             
             ])
     }

@@ -18,10 +18,12 @@ class ScoreStepperLabelFactory {
             label.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
         }
         label.text = text
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 36)
+        let fontSize: CGFloat = UIScreen.main.bounds.height >= 675 ? 36 : 28
+        label.font = UIFont(name: FONTNAME.ThemeBold, size: fontSize)
         if let textAlignment = textAlignment {
             label.textAlignment = textAlignment
         }
+        label.baselineAdjustment = .alignCenters
         label.textColor = textColor
         if sizeToFit {
             label.sizeToFit()
