@@ -30,14 +30,21 @@ class RulesList: UIView {
         if UIScreen.main.bounds.height >= 750 {
             inset = 175
         }
-        if buttons.joined().count <= 10 {
+        if buttons.joined().count <= 7 {
+            inset += 40
+        } else if buttons.joined().count <= 10 {
             inset += 20
         }
         return inset
     }
     
     fileprivate let bottomInset: CGFloat = 130
-    fileprivate let smallPadding: CGFloat = 8
+    fileprivate var smallPadding: CGFloat {
+        if buttons.joined().count >= 10 {
+            return 8
+        }
+        return 10
+    }
     
     fileprivate var totalButtonsHeight: CGFloat {
         return CGFloat(buttons.joined().count) * RulesButton.fixedHeight
@@ -53,7 +60,7 @@ class RulesList: UIView {
     }
     var bigPadding: CGFloat {
         let totalbigPadding = bounds.height - topInset - bottomInset - totalButtonsHeight - totalSmallPadding
-        return min(max(totalbigPadding / CGFloat(buttons.count - 1), smallPadding * 1.25), RulesButton.fixedHeight * 0.4)
+        return min(max(totalbigPadding / CGFloat(buttons.count - 1), smallPadding * 1.5), RulesButton.fixedHeight * 0.5)
     }
     
     

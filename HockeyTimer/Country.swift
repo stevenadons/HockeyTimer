@@ -85,11 +85,6 @@ var countries: [Country] {
     let rulesU14U19 = Rules(name: DOC_VHLRULESU14U19, url: "https://www.hockey.be/app/uploads/2018/05/Table_Parents-Umpires_-_NL_-_above_U14_-_V1.2.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Règles-de-jeu-Jeunes-U14-U19.pdf"])
     let rulesYouth = GroupOfRules(rulesArray: [rulesU7U12, rulesU14U19])
 
-    let pictogramU7U8 = Rules(name: DOC_PICTOGRAMU7U8, url: "https://www.hockey.be/app/uploads/2018/05/Pictogram_spelregels_U7-U8-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/05/Pictos-Règles-du-jeu-U7-U8.pdf"])
-    let pictogramU9 = Rules(name: DOC_PICTOGRAMU9, url: "https://www.hockey.be/app/uploads/2018/05/Pictogram_spelregels_U9-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/05/Pictos-Règles-du-Jeu-U9-1.pdf"])
-    let pictogramU10U12 = Rules(name: DOC_PICTOGRAMU10U12, url: "https://www.hockey.be/app/uploads/2018/05/Pictogram_spelregels_U10-U12-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Pictos-Règles-du-Jeu-U10-U12-1.pdf"])
-    let pictogramYouth = GroupOfRules(rulesArray: [pictogramU7U8, pictogramU9, pictogramU10U12])
-    
     let indoorU7U10 = Rules(name: DOC_INDOOR_U7_U10, url: "https://www.hockey.be/app/uploads/2018/06/2017-007-KBHB-Pictos_NL_HR.pdf")
     let indoorU9U19 = Rules(name: DOC_INDOOR_U9_U19, url: "https://www.hockey.be/app/uploads/2019/01/Indoor-Hockey-Spelregels-U9-U19-2019.pdf")
     let indoorFIH = Rules(name: DOC_INDOOR_FIH, url: "https://www.hockey.be/app/uploads/2018/06/rules-of-indoor-hockey-2017-1.pdf")
@@ -98,6 +93,10 @@ var countries: [Country] {
     let ladiesRules = Rules(name: DOC_LADIES, url: "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_NL_2017-2018.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_FR_2017-2018.pdf"])
     let gentsRules = Rules(name: DOC_GENTS, url: "https://www.hockey.be/app/uploads/2018/06/Gents_rules_NL_2017-2018-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Gents_rules_FR_2017-2018.pdf"])
     let gentsLadies = GroupOfRules(rulesArray: [ladiesRules, gentsRules])
+    
+    let moreOutdoorB = Rules(name: DOC_MORE_OUTDOOR, url: "https://www.hockey.be/nl/categorie/competitie/outdoor-hockey/")
+    let moreIndoorB = Rules(name: DOC_MORE_INDOOR, url: "https://www.hockey.be/nl/categorie/competitie/indoor-hockey/")
+    let moreBGroup = GroupOfRules(rulesArray: [moreOutdoorB, moreIndoorB])
 
     let belgium = Country(capitals: "B",
                           name: LS_COUNTRY_BELGIUM,
@@ -106,7 +105,7 @@ var countries: [Country] {
                                             "U9 - U10 - U11 - U12",
                                             "U14 - Ladies - Gents",
                                             "U16 - U19"],
-                          groupsOfRules: [internationalGroup, rulesYouth, pictogramYouth, indoorGroupBelgium, gentsLadies])
+                          groupsOfRules: [internationalGroup, rulesYouth, indoorGroupBelgium, gentsLadies, moreBGroup])
     
     
     let rules = Rules(name: DOC_NL_SPELREGLEMENT, url: "https://www.knhb.nl/app/uploads/2018/08/Spelreglement-Veldhockey-per-1-augustus-2018-1.pdf")
@@ -118,16 +117,10 @@ var countries: [Country] {
     let nlYouth = GroupOfRules(rulesArray: [teamsOf3, teamsOf6, teamsOf8])
     
     let indoorHolland = Rules(name: DOC_NL_INDOOR, url: "https://www.knhb.nl/app/uploads/2017/01/Spelreglement-Zaalhockey-2016-2017.pdf")
-    let indoorGroupHolland = GroupOfRules(rulesArray: [indoorHolland, indoorFIH])
+    let indoorGroupHolland = GroupOfRules(rulesArray: [indoorHolland])
     
-    let eHead = Rules(name: DOC_NL_E_HKOK, url: "https://www.knhb.nl/app/uploads/2017/01/wijzigingen-spelregels-Hoofdklasse-Overgangsklasse.pdf")
-    let eRegional = Rules(name: DOC_NL_E_REGIONAL, url: "https://www.knhb.nl/app/uploads/2017/01/wijzigingen-spelregels-Regiocompetititie.pdf")
-    let hHead = Rules(name: DOC_NL_H_HKOK, url: "https://www.knhb.nl/app/uploads/2018/09/Spelregels-Hk-Ok-H-Hockey-2018-2019-1.pdf")
-    let h1to4 = Rules(name: DOC_NL_H_1TO4, url: "https://www.knhb.nl/app/uploads/2018/09/1e-tot-4e-klasse-H-Hockey-2018-2019-1.pdf")
-    let aangepastHockey = GroupOfRules(rulesArray: [eHead, eRegional, hHead, h1to4])
-    
-    let overview = Rules(name: DOC_NL_WEBPAGE, url: "https://www.knhb.nl/kenniscentrum/scheidsrechters/alles-over-de-spelregels")
-    let overviewGroup = GroupOfRules(rulesArray: [overview])
+    let moreNL = Rules(name: DOC_NL_WEBPAGE, url: "https://www.knhb.nl/kenniscentrum/scheidsrechters/alles-over-de-spelregels")
+    let moreNLGroup = GroupOfRules(rulesArray: [moreNL])
     
     let netherlands = Country(capitals: "NL",
                               name: LS_COUNTRY_NETHERLANDS,
@@ -139,7 +132,7 @@ var countries: [Country] {
                                                 LS_COUNTRY_TEAMS_OF_6,
                                                 LS_COUNTRY_TEAMS_OF_8,
                                                 LS_COUNTRY_GENERAL],
-                              groupsOfRules: [basicNL, nlYouth, indoorGroupHolland , aangepastHockey, overviewGroup])
+                              groupsOfRules: [basicNL, nlYouth, indoorGroupHolland, moreNLGroup])
     
     return [belgium, netherlands]
     
