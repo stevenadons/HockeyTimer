@@ -69,7 +69,7 @@ class OnboardingVC: UIViewController {
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
         
-        let dismissButtonConstant: CGFloat = UIScreen.main.bounds.height >= 600 ? 30 : 10
+        let dismissButtonConstant = UIDevice.whenDeviceIs(small: 10, normal: 30, big: 30)
         
         NSLayoutConstraint.activate([
             

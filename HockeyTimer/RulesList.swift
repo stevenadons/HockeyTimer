@@ -26,10 +26,7 @@ class RulesList: UIView {
     fileprivate var country: Country!
     
     fileprivate var topInset: CGFloat {
-        var inset: CGFloat = UIScreen.main.bounds.height >= 600 ? 120 : 90
-        if UIScreen.main.bounds.height >= 750 {
-            inset = 175
-        }
+        var inset = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 175)
         if buttons.joined().count <= 7 {
             inset += 40
         } else if buttons.joined().count <= 10 {

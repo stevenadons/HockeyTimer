@@ -54,7 +54,7 @@ class DotMenu: UIView {
         self.init()
         self.frame = containingView.frame
         self.center = containingView.center
-        let extraOffset: CGFloat = UIScreen.main.bounds.height > 600 ? 50 : 32
+        let extraOffset = UIDevice.whenDeviceIs(small: 32, normal: 40, big: 60)
         self.topInset = containingView.safeAreaLayoutGuide.layoutFrame.origin.y + extraOffset
         self.backgroundColor = UIColor.clear
         self.delegate = delegate

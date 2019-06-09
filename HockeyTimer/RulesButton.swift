@@ -22,7 +22,7 @@ class RulesButton: UIButton {
     
     static let fixedWidth: CGFloat = 220
     static var fixedHeight: CGFloat {
-        return UIScreen.main.bounds.height > 600 ? 38 : 32
+        return UIDevice.whenDeviceIs(small: 32, normal: 38, big: 38)
     }
     
     

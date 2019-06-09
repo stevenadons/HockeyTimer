@@ -23,7 +23,7 @@ class DurationVC: PanArrowVC {
     fileprivate var skipAnimations: Bool = false
     
     fileprivate var padding: CGFloat {
-        return (UIScreen.main.bounds.height > 600 && cards.count > 4) ? 18 : 12
+        return (UIDevice.deviceSize != .small && cards.count > 4) ? 18 : 12
     }
     
     
@@ -105,17 +105,11 @@ class DurationVC: PanArrowVC {
     
     private func addCardConstraints() {
         
-        var topInset: CGFloat = UIScreen.main.bounds.height > 600 ? 130 : 100
+        var topInset = UIDevice.whenDeviceIs(small: 100, normal: 130, big: 140)
         if cards.count > 4 {
-            if UIScreen.main.bounds.height < 600 {
-                topInset = 75
-            } else if UIScreen.main.bounds.height > 800 {
-                topInset = 160
-            } else {
-                topInset = 85
-            }
+            topInset = UIDevice.whenDeviceIs(small: 75, normal: 85, big: 140)
         }
-        
+                
         for index in 0..<cards.count {
             
             cards[index].widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375).isActive = true
