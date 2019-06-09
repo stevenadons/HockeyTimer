@@ -223,14 +223,16 @@ extension PageVC: UIPageViewControllerDelegate {
         prepareHapticIfNeeded()
     }
     
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
-        if #available(iOS 10.0, *) {
-            haptic?.selectionChanged()
-            haptic = nil
-        } else {
-            AudioServicesPlaySystemSound(SystemSoundID(1519))
+        haptic?.selectionChanged()
+        haptic = nil
+        
+        if let viewControllers = viewControllers, !viewControllers.isEmpty, let documentVC = viewControllers[0] as? DocumentMenuVC {
+            documentVC.animateFlyIn()
         }
+        
     }
     
     

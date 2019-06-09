@@ -28,23 +28,21 @@ class DocumentMenuVC: PanArrowVC {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-                
+        
         super.viewDidAppear(animated)
-        rulesList.animateFlyIn()
+        animateFlyIn()
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         
         dotMenu.hideButtons(animated: false)
-        
         super.viewWillAppear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         
         rulesList.windUp()
-        
         super.viewDidDisappear(animated)
     }
     
@@ -82,7 +80,12 @@ class DocumentMenuVC: PanArrowVC {
     
     
     
-    // MARK: - Private Methods
+    // MARK: - Public Methods
+    
+    func animateFlyIn() {
+        
+        rulesList.animateFlyIn()
+    }
     
     
 }

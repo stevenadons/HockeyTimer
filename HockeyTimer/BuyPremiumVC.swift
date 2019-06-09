@@ -168,14 +168,12 @@ class BuyPremiumVC: UIViewController {
     
     private func addConstraints() {
         
-        let buttonHeight: CGFloat = UIScreen.main.bounds.height >= 600 ? 54 : 44
-        let horInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 35 : 20
-        var topInset: CGFloat = UIScreen.main.bounds.height >= 600 ? 50 : 30
+        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 54, big: 54)
+        let horInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
+        let topInset = UIDevice.whenDeviceIs(small: 30, normal: 50, big: 75)
+        
         // Referring to view.safeAreaLayoutGuide will cause glitch for titleLabel
         // When newVC is being presented
-        if UIScreen.main.bounds.height >= 700 {
-            topInset = 75
-        }
         
         NSLayoutConstraint.activate([
             

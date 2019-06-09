@@ -89,14 +89,16 @@ class RulesList: UIView {
                     
                     // Color
                     var button = RulesButton(rules: groupOfRulesArray[innerIndex])
-                    if outerIndex % 4 == 0 {
+                    if outerIndex % 5 == 0 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.LightYellow, titleColor: COLOR.VeryDarkBlue)
-                    } else if outerIndex % 4 == 1 {
+                    } else if outerIndex % 5 == 1 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.LightBlue, titleColor: COLOR.VeryDarkBlue)
-                    } else if outerIndex % 4 == 2 {
+                    } else if outerIndex % 5 == 2 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.DarkBlue, titleColor: COLOR.White)
-                    } else if outerIndex % 4 == 3 {
+                    } else if outerIndex % 5 == 3 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.VeryDarkBlue, titleColor: COLOR.White)
+                    } else if outerIndex % 5 == 4 {
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.Olive, titleColor: COLOR.VeryDarkBlue)
                     }
                     button.addTarget(self, action: #selector(handleButtonTapped(sender:forEvent:)), for: [.touchUpInside])
                     button.heightAnchor.constraint(equalToConstant: RulesButton.fixedHeight).isActive = true
