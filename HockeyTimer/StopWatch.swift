@@ -11,6 +11,7 @@ import AudioToolbox
 
 
 protocol StopWatchTimerDelegate: class {
+    
     func handleTickCountDown()
     func handleTickCountUp()
     func handleTimerReset()
@@ -406,6 +407,7 @@ class StopWatch: UIControl {
         switch icon.icon {
             
         case .PlayIcon:
+            
             // Start Half or Resume after pausing
             timer.startCountDown()
             game.status = .Running
@@ -415,6 +417,7 @@ class StopWatch: UIControl {
             delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
 
         case .PauseIcon:
+            
             // Pause while counting down
             timer.pause()
             game.status = .Pausing
@@ -422,9 +425,11 @@ class StopWatch: UIControl {
             message = LS_GAMEPAUSED
             
         case .StopIcon:
+            
             timer.stopCountUp()
             haptic = nil
             if game.status == .Running {
+                
                 // Game running in overtime
                 if game.half == .First {
                     // End of first half - will enter half time count up mode
@@ -432,13 +437,28 @@ class StopWatch: UIControl {
                     timer.startCountUp()
                     halfLabel.alpha = 0.0
                     message = LS_HALFTIME
+                    
+                    let twoSecondsFromNow = DispatchTime.now() + 2.0
+                    DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) { [weak self] in
+                        guard self != nil else { return }
+                        AppStoreReviewManager.requestReviewAtHurdle()
+                    }
+                    
                 } else {
+                    
                     // End of second half
                     game.status = .Finished
                     setProgressBarsColor(to: UIColor.clear)
                     halfLabel.alpha = 0.0
                     icon.change(to: .NoIcon)
                     message = LS_FULLTIME
+                    
+                    let twoSecondsFromNow = DispatchTime.now() + 2.0
+                    DispatchQueue.main.asyncAfter(deadline: twoSecondsFromNow) { [weak self] in
+                        guard self != nil else { return }
+                        AppStoreReviewManager.requestReviewAtHurdle()
+                    }
+                    
                 }
                 delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
 
@@ -512,6 +532,7 @@ extension StopWatch: StopWatchTimerDelegate {
     }
     
     func handleTickCountUp() {
+        
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
         if message == LS_OVERTIME {
@@ -529,6 +550,7 @@ extension StopWatch: StopWatchTimerDelegate {
     }
     
     func handleTimerReset() {
+        
         runningSecondsOverdue = 0
         runningSecondsCountingUp = 0
         runningCountingUp = false
@@ -538,6 +560,7 @@ extension StopWatch: StopWatchTimerDelegate {
     }
     
     func handleReachedZero() {
+        
         prepareHapticIfNeeded()
         if #available(iOS 10.0, *) {
             haptic?.notificationOccurred(.warning)

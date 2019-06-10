@@ -63,13 +63,13 @@ class OnboardingVC: UIViewController {
         dismissButton.addTarget(self, action: #selector(handleDismiss(sender:)), for: [.touchUpInside])
         dismissButton.alpha = 0.0
         dismissButton.backgroundColor = UIColor.clear
-        dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
         dismissButton.setTitleColor(COLOR.DarkBlue, for: .normal)
         dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
         
-        let dismissButtonConstant = UIDevice.whenDeviceIs(small: 10, normal: 30, big: 30)
+        let dismissButtonConstant = UIDevice.whenDeviceIs(small: 10, normal: 40, big: 60)
         
         NSLayoutConstraint.activate([
             

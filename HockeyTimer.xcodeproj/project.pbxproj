@@ -15,6 +15,7 @@
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
+		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
 		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
 		4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE122918BB200D975A1 /* SKProductX.swift */; };
 		4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE422919D0F00D975A1 /* Store.swift */; };
@@ -90,6 +91,7 @@
 		4F6342A322916E0A002F49B4 /* NotificationNameX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameX.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
+		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
 		4F8AFCE122918BB200D975A1 /* SKProductX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductX.swift; sourceTree = "<group>"; };
 		4F8AFCE422919D0F00D975A1 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		4FB4BE9D1F515D30003B1259 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */,
 				4F8AFCE322919CEA00D975A1 /* In App Purchases */,
 				4F28325C1FCF468600E67FF7 /* UserNotificationsHandler */,
 				4FF7FB2C1F6549C3001D4ED1 /* JukeBox */,
@@ -659,6 +662,7 @@
 				4FB4BE7D1F515B7D003B1259 /* TimerVC.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
+				4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
 				4FD3721622A4030E00A45757 /* ButtonLabel.swift in Sources */,
