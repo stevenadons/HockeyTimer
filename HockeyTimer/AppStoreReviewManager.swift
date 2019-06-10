@@ -15,8 +15,7 @@ enum AppStoreReviewManager {
     
     // MARK: - Static Properties
     
-    #warning("test")
-    static let actionHurdleForReviewRequest = 2 // 6
+    static let actionHurdleForReviewRequest = 6
     static let keyReviewRequest = "keyReviewRequest"
     static let keyAppVersionLastReviewRequest = "keyAppVersionLastReviewRequest"
     

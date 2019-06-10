@@ -210,6 +210,7 @@ extension PageVC: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
         if let durationVC = pendingViewControllers.first as? DurationVC, let timerVC = pageViewController.viewControllers?.first as? TimerVC {
+            view.backgroundColor = COLOR.White
             durationVC.currentDuration = timerVC.game.duration
             durationVC.selectedDuration = nil
             
@@ -219,7 +220,11 @@ extension PageVC: UIPageViewControllerDelegate {
                 game = HockeyGame(duration: durationVC.selectedDuration!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             }
+            
+        } else if let _ = pendingViewControllers.first as? DocumentMenuVC, let _ = pageViewController.viewControllers?.first as? ScoreVC {
+            view.backgroundColor = COLOR.Olive
         }
+        
         prepareHapticIfNeeded()
     }
     

@@ -48,7 +48,7 @@ class DocumentMenuVC: PanArrowVC {
     
     private func setup() {
         
-        view.backgroundColor = COLOR.White
+        view.backgroundColor = COLOR.Olive
         
         rulesList = RulesList(delegate: self, country: SELECTED_COUNTRY)
         rulesList.backgroundColor = UIColor.clear
