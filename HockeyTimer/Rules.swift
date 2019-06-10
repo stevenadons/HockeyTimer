@@ -25,12 +25,15 @@ struct Rules {
     init(name: String, url: String, specificLocaleUrls: [String: String]? = nil) {
         
         self.name = name
-        self.url = URL(string: url)
+        let customAllowedSet = NSCharacterSet(charactersIn: "\"#<>@\\^`{|}").inverted
+        if let encodedUrlString = url.addingPercentEncoding(withAllowedCharacters: customAllowedSet) {
+            self.url = URL(string: encodedUrlString)
+        }
         self.specificLocaleUrls = [:]
         if specificLocaleUrls != nil {
             for key in specificLocaleUrls!.keys {
                 if let urlString = specificLocaleUrls![key] {
-                    if let encodedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) {
+                    if let encodedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: customAllowedSet) {
                         self.specificLocaleUrls![key] = URL(string: encodedUrlString)
                     }
                 }

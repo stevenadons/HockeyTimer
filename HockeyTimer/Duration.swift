@@ -11,6 +11,7 @@ import Foundation
 
 enum Duration: Int, CaseIterable {
     
+    case Ten = 10
     case Fifteen = 15
     case Twenty = 20  // For testing purposes: 1
     case TwentyFive = 25

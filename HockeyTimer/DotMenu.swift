@@ -43,7 +43,7 @@ class DotMenu: UIView {
     private let horInset: CGFloat = 40
     private var topInset: CGFloat = 44
     private let labelHeight: CGFloat = 25
-    private let padding: CGFloat = 20
+    private let padding: CGFloat = 18
     private let labelInset: CGFloat = 20
     
     

@@ -40,8 +40,8 @@
 "Stopwatch" = "Stopwatch";
 
 "Rules FIH" = "Spelregels FIH";
-"Indoor U7-U10" = "Indoor U7-U10";
-"Indoor U9-U19" = "Indoor U9-U19";
+"Indoor U7-U10 (VHL)" = "Indoor U7-U10 (VHL)";
+"Indoor U9-U19 (VHL)" = "Indoor U9-U19 (VHL)";
 "Indoor FIH Rules" = "Indoor Spelregels FIH";
 "Rules U7-U12" = "Spelregels U7-U12";
 "Rules U14-U19" = "Spelregels U14-U19";
@@ -49,6 +49,7 @@
 "Gents Rules KBHB" = "Spelregels Gents KBHB";
 "More (outdoor)" = "Meer (outdoor)";
 "More (indoor)" = "Meer (indoor)";
+
 "Rules Outdoor" = "Spelreglement";
 "Rules Indoor" = "Zaalhockey";
 "Teams of 3" = "3-tallen";
@@ -59,6 +60,14 @@
 "H-Hockey  -  HK / OK" = "H-Hockey  -  Hoofd en Overgang";
 "H-Hockey  -  1-4 class" = "H-Hockey  -  Klasse 1 tot 4";
 "More" = "Meer";
+
+"General Rules (2019)" = "Algemene regels (2019)";
+"Changes (01.04.2019)" = "Wijzigingen (01/04/2019)";
+"Indoor Rules (2017/2018)" = "Zaal (2017/2018)";
+"Indoor Changes (2017/2018)" = "Zaal wijzigingen (2017/2018)";
+"International Rules" = "Internationaal";
+"Youth (2017/2018)" = "Jeugd (2017/2018)";
+"Recommendations U8-U12" = "Aanbevelingen U8-U12";
 
 "Change Game Time" = "Duurtijd wijzigen";
 "New Game" = "Nieuwe wedstrijd";
@@ -79,9 +88,12 @@
 
 "Belgium" = "België";
 "Netherlands" = "Nederland";
+"Germany" = "Duitsland";
 "Teams of 3 & H" = "3-tallen & H";
 "Teams of 6" = "6-tallen";
 "Teams of 8" = "8-tallen";
 "General" = "Algemeen";
 "Indoor & H" = "Indoor & H";
-
+"Youth" = "Jeugd";
+"Indoor" = "Indoor";
+"International" = "Internationaal";
