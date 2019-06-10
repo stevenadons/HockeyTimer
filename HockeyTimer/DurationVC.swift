@@ -18,7 +18,7 @@ class DurationVC: PanArrowVC {
     
     fileprivate var cancelView: UIButton!
     fileprivate var cards: [DurationCard] = []
-    fileprivate var dotMenu: DotMenu!
+    fileprivate var countryMenu: CountryMenu!
     
     fileprivate var skipAnimations: Bool = false
     
@@ -54,7 +54,7 @@ class DurationVC: PanArrowVC {
         
         super.viewWillDisappear(animated)
         
-        dotMenu.hideButtons(animated: false)
+        countryMenu.hideButtons(animated: false)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -82,13 +82,17 @@ class DurationVC: PanArrowVC {
         panArrowDownLabel.text = LS_TITLE_STOPWATCH
         panArrowDownLabel.textColor = COLOR.VeryDarkBlue
         
-        dotMenu = DotMenu(inView: view, delegate: self, labelNames: Country.allNames(), capitalsStrings: Country.allCapitals(), selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        countryMenu = CountryMenu(inView: view,
+                                  delegate: self,
+                                  labelNames: Country.allNames(),
+                                  capitalsStrings: Country.allCapitals(),
+                                  selected: countries.firstIndex(of: SELECTED_COUNTRY))
         
         for index in 0..<SELECTED_COUNTRY.durations.count {
             let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            view.insertSubview(card, belowSubview: dotMenu)
+            view.insertSubview(card, belowSubview: countryMenu)
         }
         
         NSLayoutConstraint.activate([
@@ -195,9 +199,11 @@ class DurationVC: PanArrowVC {
 }
 
 
-extension DurationVC: DotMenuDelegate {
+extension DurationVC: CountryMenuDelegate {
     
-    func handleDotMenuButtonTapped(buttonNumber: Int) {
+    func handleCountryMenuMainButtonTapped() { }
+    
+    func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
         
         guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
         SELECTED_COUNTRY = countries[buttonNumber]
@@ -213,7 +219,7 @@ extension DurationVC: DotMenuDelegate {
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
             card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
-            view.insertSubview(card, belowSubview: dotMenu)
+            view.insertSubview(card, belowSubview: countryMenu)
         }
         
         addCardConstraints()

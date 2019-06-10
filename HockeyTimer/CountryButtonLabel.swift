@@ -1,15 +1,15 @@
 //
-//  ButtonLabel.swift
-//  DotMenu
+//  CountryButtonLabel.swift
+//  HockeyTimer
 //
-//  Created by Steven Adons on 14/08/17.
-//  Copyright © 2017 StevenAdons. All rights reserved.
+//  Created by Steven Adons on 10/06/2019.
+//  Copyright © 2019 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class ButtonLabel: UILabel {
-
+class CountryButtonLabel: UILabel {
+    
     
     // MARK: - Properties
     

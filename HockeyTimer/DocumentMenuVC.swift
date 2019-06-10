@@ -15,7 +15,8 @@ class DocumentMenuVC: PanArrowVC {
     // MARK: - Properties
     
     private var rulesList: RulesList!
-    private var dotMenu: DotMenu!
+    private var countryMenu: CountryMenu!
+    private var settingsMenu: DotMenu!
     
     
     
@@ -36,7 +37,7 @@ class DocumentMenuVC: PanArrowVC {
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        dotMenu.hideButtons(animated: false)
+        countryMenu.hideButtons(animated: false)
         super.viewWillAppear(animated)
     }
     
@@ -55,7 +56,7 @@ class DocumentMenuVC: PanArrowVC {
         view.addSubview(rulesList)
         view.sendSubviewToBack(rulesList)
         
-        panArrowUp.color = COLOR.LightYellow
+        panArrowUp.color = UIColor.white
         panArrowDown.alpha = 0.0
         panArrowUpLabel.text = LS_TITLE_SCORE
         panArrowDownLabel.alpha = 0.0
@@ -70,11 +71,15 @@ class DocumentMenuVC: PanArrowVC {
             
             ])
         
-        dotMenu = DotMenu(inView: view,
-                          delegate: self,
-                          labelNames: Country.allNames(),
-                          capitalsStrings: Country.allCapitals(),
-                          selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        countryMenu = CountryMenu(inView: view,
+                                  delegate: self,
+                                  labelNames: Country.allNames(),
+                                  capitalsStrings: Country.allCapitals(),
+                                  selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        
+        settingsMenu = DotMenu(inView: view,
+                               delegate: self,
+                               labelNames: ["Review", "Share", "Contact"])
     }
     
     
@@ -108,13 +113,38 @@ extension DocumentMenuVC: RulesListDelegate {
 }
 
 
-extension DocumentMenuVC: DotMenuDelegate {
+
+extension DocumentMenuVC: CountryMenuDelegate {
     
-    func handleDotMenuButtonTapped(buttonNumber: Int) {
+    func handleCountryMenuMainButtonTapped() {
+        
+        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex > countryIndex {
+            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
+        }
+        
+    }
+    
+    func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
         
         guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
         
         SELECTED_COUNTRY = countries[buttonNumber]
         rulesList.setCountry(SELECTED_COUNTRY)
+    }
+}
+
+
+extension DocumentMenuVC: DotMenuDelegate {
+    
+    func handleDotMenuMainButtonTapped() {
+        
+        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex < countryIndex {
+            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
+        }
+    }
+    
+    func handleDotMenuOtherButtonTapped(buttonNumber: Int) {
+        
+        print("number \(buttonNumber) tapped")
     }
 }

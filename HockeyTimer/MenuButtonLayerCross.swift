@@ -1,17 +1,30 @@
 //
-//  OvalCountryLayer.swift
+//  MenuButtonLayerCross.swift
 //  HockeyTimer
 //
-//  Created by Steven Adons on 04/06/2019.
+//  Created by Steven Adons on 10/06/2019.
 //  Copyright © 2019 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class OvalCountryLayer: CALayer {
+class MenuButtonLayerCross: CALayer {
     
     
     // MARK: - Properties
+    
+    var shapeColor: UIColor = UIColor.white {
+        didSet {
+            shape.strokeColor = shapeColor.cgColor
+            shape.setNeedsDisplay()
+        }
+    }
+    var bgColor: UIColor = UIColor.clear {
+        didSet {
+            backgroundColor = bgColor.cgColor
+            setNeedsDisplay()
+        }
+    }
     
     private var shape: CAShapeLayer!
     private let designWidth: CGFloat = 44
@@ -41,7 +54,7 @@ class OvalCountryLayer: CALayer {
     
     private func setup() {
         
-        backgroundColor = UIColor.clear.cgColor
+        backgroundColor = bgColor.cgColor
         shape = createShape()
         addSublayer(shape)
         bounds = CGRect(x: 0, y: 0, width: designWidth, height: designHeight)
@@ -54,6 +67,7 @@ class OvalCountryLayer: CALayer {
     override func layoutSublayers() {
         
         super.layoutSublayers()
+        cornerRadius = min(bounds.width, bounds.height) / 2
         shape.position = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         shape.bounds = bounds
         shape.path = createPath().cgPath
@@ -68,9 +82,9 @@ class OvalCountryLayer: CALayer {
         let shape = CAShapeLayer()
         
         shape.path = createPath().cgPath
-        shape.lineWidth = 1
-        shape.strokeColor = UIColor.clear.cgColor
-        shape.fillColor = COLOR.White.cgColor
+        shape.lineWidth = 2
+        shape.strokeColor = shapeColor.cgColor
+        shape.fillColor = UIColor.clear.cgColor
         shape.allowsEdgeAntialiasing = true
         
         return shape
@@ -80,13 +94,13 @@ class OvalCountryLayer: CALayer {
         
         let widthScale = bounds.width / designWidth
         let heightScale = bounds.height / designHeight
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 14 * widthScale, y: 14 * heightScale))
+        path.addLine(to: CGPoint(x: 30 * widthScale, y: 30 * heightScale))
+        path.move(to: CGPoint(x: 30 * widthScale, y: 14 * heightScale))
+        path.addLine(to: CGPoint(x: 14 * widthScale, y: 30 * heightScale))
         
-        let ovalRect = CGRect(x: 2 * widthScale,
-                              y: 9 * heightScale,
-                              width: 40 * widthScale,
-                              height: 26 * heightScale)
-        
-        return UIBezierPath(ovalIn: ovalRect)
+        return path
     }
-
+    
 }

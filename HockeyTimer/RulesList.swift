@@ -26,7 +26,7 @@ class RulesList: UIView {
     fileprivate var country: Country!
     
     fileprivate var topInset: CGFloat {
-        var inset = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 175)
+        var inset = UIDevice.whenDeviceIs(small: 90, normal: 110, big: 175)
         if buttons.joined().count <= 7 {
             inset += 40
         } else if buttons.joined().count <= 10 {
@@ -92,9 +92,9 @@ class RulesList: UIView {
                     if outerIndex % 5 == 0 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.LightYellow, titleColor: COLOR.VeryDarkBlue)
                     } else if outerIndex % 5 == 1 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.White, titleColor: COLOR.VeryDarkBlue)
-                    } else if outerIndex % 5 == 2 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.DarkBlue, titleColor: COLOR.White)
+                    } else if outerIndex % 5 == 2 {
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.White, titleColor: COLOR.VeryDarkBlue)
                     } else if outerIndex % 5 == 3 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.VeryDarkBlue, titleColor: COLOR.White)
                     } else if outerIndex % 5 == 4 {
