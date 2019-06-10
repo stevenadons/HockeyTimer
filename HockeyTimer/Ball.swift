@@ -174,12 +174,9 @@ class Ball: UIView {
     
     private func handleScore(homeSide: Bool) {
         
-        if #available(iOS 10.0, *) {
-            haptic?.impactOccurred()
-            haptic = nil
-        } else {
-            AudioServicesPlaySystemSound(SystemSoundID(1520))
-        }
+        haptic?.impactOccurred()
+        haptic = nil
+        
         guard shouldRecordGoal == true else { return }
         shouldRecordGoal = false
         isUserInteractionEnabled = false
