@@ -13,6 +13,8 @@ protocol DotMenuDelegate: class {
     
     func handleDotMenuMainButtonTapped()
     func handleDotMenuOtherButtonTapped(buttonNumber: Int)
+    func dotMenuDidShowButtons()
+    func dotMenuWillHideButtons()
 }
 
 
@@ -179,12 +181,18 @@ class DotMenu: UIView {
             }
         }
         
+        delegate?.dotMenuDidShowButtons()
+        
     }
     
     
     // MARK: - Public Methods
 
     @objc func hideButtons(animated: Bool = true) {
+        
+        guard buttons[0].transform == .identity else { return }
+        
+        delegate?.dotMenuWillHideButtons()
         
         labels.forEach {
             $0.title = ""

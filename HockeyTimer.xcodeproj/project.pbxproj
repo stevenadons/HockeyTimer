@@ -151,8 +151,6 @@
 		4FB4BF241F5225B3003B1259 /* DurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationVC.swift; sourceTree = "<group>"; };
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
-		4FC1857B22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		4FC1857C22986A11007E840F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FD3720C22A4017F00A45757 /* DotMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotMenu.swift; sourceTree = "<group>"; };
 		4FD3720D22A4017F00A45757 /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabel.swift; sourceTree = "<group>"; };
 		4FD3721D22A4267C00A45757 /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
@@ -575,7 +573,6 @@
 				en,
 				Base,
 				nl,
-				fr,
 			);
 			mainGroup = 4FB4BE5D1F515B3B003B1259;
 			productRefGroup = 4FB4BE671F515B3B003B1259 /* Products */;
@@ -748,7 +745,6 @@
 			children = (
 				4FB4BE6E1F515B3B003B1259 /* Base */,
 				4F3F626E1F64745000D8FEC5 /* nl */,
-				4FC1857B22986A11007E840F /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -758,7 +754,6 @@
 			children = (
 				4FB4BE731F515B3B003B1259 /* Base */,
 				4F3F626F1F64745000D8FEC5 /* nl */,
-				4FC1857C22986A11007E840F /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

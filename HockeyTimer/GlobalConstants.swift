@@ -142,7 +142,7 @@ let LS_BUTTON_BACK = NSLocalizedString("Back", comment: "Message on button to ba
 let LS_BUTTON_UNDOGOAL = NSLocalizedString("Undo Goal", comment: "Message for undoing goal")
 let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button for ending onboarding")
 
-let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "title for navigating")
+let LS_TITLE_GAMETIME = NSLocalizedString("Set Time", comment: "title for navigating")
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
@@ -216,6 +216,10 @@ let LS_COUNTRY_INDOOR_AND_H = NSLocalizedString("Indoor & H", comment: "Duration
 let LS_COUNTRY_YOUTH = NSLocalizedString("Youth", comment: "Durationcard description")
 let LS_COUNTRY_INDOOR = NSLocalizedString("Indoor", comment: "Durationcard description")
 let LS_COUNTRY_INTERNATIONAL = NSLocalizedString("International", comment: "Durationcard description")
+
+let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "Setting")
+let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
+let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
 
 
 var appStoreProducts: [SKProduct] = []

@@ -61,13 +61,14 @@ class PanArrowVC: UIViewController {
         
         super.viewDidLayoutSubviews()
         
-        let arrowPadding: CGFloat = 18 
+        let arrowPaddingTop: CGFloat = 12
+        let arrowPaddingBottom: CGFloat = 18
         
         NSLayoutConstraint.activate([
             
             panArrowUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowUp.widthAnchor.constraint(equalToConstant: 44),
-            panArrowUp.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: arrowPadding),
+            panArrowUp.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: arrowPaddingTop),
             panArrowUp.heightAnchor.constraint(equalToConstant: 22),
             
             panArrowUpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -77,7 +78,7 @@ class PanArrowVC: UIViewController {
             
             panArrowDown.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowDown.widthAnchor.constraint(equalToConstant: 44),
-            panArrowDown.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -arrowPadding),
+            panArrowDown.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -arrowPaddingBottom),
             panArrowDown.heightAnchor.constraint(equalToConstant: 22),
             
             panArrowDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

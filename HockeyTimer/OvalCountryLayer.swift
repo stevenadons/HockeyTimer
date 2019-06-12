@@ -14,6 +14,7 @@ class OvalCountryLayer: CALayer {
     // MARK: - Properties
     
     private var shape: CAShapeLayer!
+    private var hasBorder: Bool!
     private let designWidth: CGFloat = 44
     private let designHeight: CGFloat = 44
     
@@ -21,22 +22,16 @@ class OvalCountryLayer: CALayer {
     
     // MARK: - Initializing
     
-    override init() {
+    convenience init(hasBorder: Bool = false) {
         
-        super.init()
+        self.init()
+        convenienceSet(hasBorder: hasBorder)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    private func convenienceSet(hasBorder: Bool = false) {
         
-        super.init()
-        setup()
-    }
-    
-    override init(layer: Any) {
-        
-        super.init()
-        setup()
+        self.hasBorder = hasBorder
     }
     
     private func setup() {
@@ -69,7 +64,7 @@ class OvalCountryLayer: CALayer {
         
         shape.path = createPath().cgPath
         shape.lineWidth = 1
-        shape.strokeColor = UIColor.clear.cgColor
+        shape.strokeColor = hasBorder ? COLOR.Olive.darker(by: 40).cgColor : UIColor.clear.cgColor
         shape.fillColor = COLOR.White.cgColor
         shape.allowsEdgeAntialiasing = true
         

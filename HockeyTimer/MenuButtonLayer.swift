@@ -98,12 +98,12 @@ class MenuButtonLayer: CALayer {
         
         let path = UIBezierPath()
         
-        path.move(to: CGPoint(x: 10 * widthScale, y: 14 * heightScale))
-        path.addLine(to: CGPoint(x: 34 * widthScale, y: 14 * heightScale))
-        path.move(to: CGPoint(x: 10 * widthScale, y: 22 * heightScale))
-        path.addLine(to: CGPoint(x: 34 * widthScale, y: 22 * heightScale))
-        path.move(to: CGPoint(x: 10 * widthScale, y: 30 * heightScale))
-        path.addLine(to: CGPoint(x: 34 * widthScale, y: 30 * heightScale))
+        path.move(to: CGPoint(x: 11 * widthScale, y: 15 * heightScale))
+        path.addLine(to: CGPoint(x: 33 * widthScale, y: 15 * heightScale))
+        path.move(to: CGPoint(x: 11 * widthScale, y: 22 * heightScale))
+        path.addLine(to: CGPoint(x: 33 * widthScale, y: 22 * heightScale))
+        path.move(to: CGPoint(x: 11 * widthScale, y: 29 * heightScale))
+        path.addLine(to: CGPoint(x: 33 * widthScale, y: 29 * heightScale))
         
         return path
     }

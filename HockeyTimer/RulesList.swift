@@ -211,13 +211,13 @@ class RulesList: UIView {
             var delay: Double = 0.0
             for outerIndex in 0..<self.buttons.count {
                 
-                delay += (outerIndex > 0) ? 0.1 : 0.0
+                delay += (outerIndex > 0) ? 0.02 : 0.0
                 let buttonGroup = self.buttons[outerIndex]
                 for innerIndex in 0..<buttonGroup.count {
                     
-                    delay += 0.03
+                    delay += 0.02
                     if buttonGroup[innerIndex].transform != .identity {
-                        UIView.animate(withDuration: 0.2, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
+                        UIView.animate(withDuration: 0.15, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
                             buttonGroup[innerIndex].transform = .identity
                         }, completion: { finished in
                             if outerIndex == self.buttons.count - 1 && innerIndex == buttonGroup.count {

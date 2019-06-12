@@ -33,13 +33,7 @@ class DocumentMenuVC: PanArrowVC {
         super.viewDidAppear(animated)
         animateFlyIn()
     }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        countryMenu.hideButtons(animated: false)
-        super.viewWillAppear(animated)
-    }
+
     
     override func viewDidDisappear(_ animated: Bool) {
         
@@ -58,7 +52,7 @@ class DocumentMenuVC: PanArrowVC {
         
         panArrowUp.color = UIColor.white
         panArrowDown.alpha = 0.0
-        panArrowUpLabel.text = LS_TITLE_SCORE
+        panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
         panArrowUpLabel.textColor = COLOR.VeryDarkBlue
         
@@ -79,19 +73,23 @@ class DocumentMenuVC: PanArrowVC {
         
         settingsMenu = DotMenu(inView: view,
                                delegate: self,
-                               labelNames: ["Review", "Share", "Contact"])
+                               labelNames: [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT])
     }
-    
     
     
     
     // MARK: - Public Methods
     
+    func hideMenus() {
+        
+        countryMenu.hideButtons(animated: false)
+        settingsMenu.hideButtons(animated: false)
+    }
+    
     func animateFlyIn() {
         
         rulesList.animateFlyIn()
     }
-    
     
 }
 
@@ -131,6 +129,17 @@ extension DocumentMenuVC: CountryMenuDelegate {
         SELECTED_COUNTRY = countries[buttonNumber]
         rulesList.setCountry(SELECTED_COUNTRY)
     }
+    
+    func didShowButtons() {
+        
+        pageVC?.showBackgroundMask()
+        
+    }
+    
+    func willHideButtons() {
+        
+        pageVC?.hideBackgroundMask()
+    }
 }
 
 
@@ -145,6 +154,66 @@ extension DocumentMenuVC: DotMenuDelegate {
     
     func handleDotMenuOtherButtonTapped(buttonNumber: Int) {
         
-        print("number \(buttonNumber) tapped")
+        switch buttonNumber {
+        case 0:
+            // Write a review
+            guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return }
+            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+            components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
+            guard let writeReviewURL = components?.url else { return }
+            UIApplication.shared.open(writeReviewURL)
+            
+        case 1:
+            // Share the app
+            // Conform to UIActivityItemSource for custom activityItems
+            let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+            present(activityViewController, animated: true, completion: nil)
+        
+        case 2:
+            print("2")
+        
+        default:
+            print("default")
+        }
     }
+    
+    func dotMenuDidShowButtons() {
+        
+        pageVC?.showBackgroundMask()
+        
+    }
+    
+    func dotMenuWillHideButtons() {
+        
+        pageVC?.hideBackgroundMask()
+    }
+}
+
+
+extension DocumentMenuVC: UIActivityItemSource {
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        
+        guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return "" }
+        return productURL
+
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        
+        if activityType == .postToTwitter {
+            return "Download #HockeyUpp on the App Store"
+        }
+        
+        guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return nil }
+        return productURL
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        
+        return "HockeyUpp - Your field hockey companion"
+    }
+    
+    
+    
 }

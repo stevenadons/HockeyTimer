@@ -55,6 +55,7 @@ class DurationVC: PanArrowVC {
         super.viewWillDisappear(animated)
         
         countryMenu.hideButtons(animated: false)
+        pageVC?.hideBackgroundMask()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,13 +80,14 @@ class DurationVC: PanArrowVC {
         panArrowUp.alpha = 0.0
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.alpha = 0.0
-        panArrowDownLabel.text = LS_TITLE_STOPWATCH
+        panArrowDownLabel.alpha = 0.0
         panArrowDownLabel.textColor = COLOR.VeryDarkBlue
         
         countryMenu = CountryMenu(inView: view,
                                   delegate: self,
                                   labelNames: Country.allNames(),
                                   capitalsStrings: Country.allCapitals(),
+                                  hasBorder: true,
                                   selected: countries.firstIndex(of: SELECTED_COUNTRY))
         
         for index in 0..<SELECTED_COUNTRY.durations.count {
@@ -223,6 +225,16 @@ extension DurationVC: CountryMenuDelegate {
         }
         
         addCardConstraints()
+    }
+    
+    func didShowButtons() {
+        
+        pageVC?.showBackgroundMask()
+    }
+    
+    func willHideButtons() {
+        
+        pageVC?.hideBackgroundMask()
     }
 }
 

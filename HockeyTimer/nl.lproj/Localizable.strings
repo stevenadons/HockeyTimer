@@ -34,7 +34,7 @@
 "Notifications" = "Meldingen";
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
 
-"Game Time" = "Wedstrijdduur";
+"Set Time" = "Tijd instellen";
 "Rules" = "Spelregels";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
@@ -97,3 +97,7 @@
 "Youth" = "Jeugd";
 "Indoor" = "Indoor";
 "International" = "Internationaal";
+
+"Write a review" = "Schrijf een recensie";
+"Share the app" = "Delen";
+"Contact us" = "Contacteer ons";

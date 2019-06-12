@@ -93,7 +93,7 @@ class TimerVC: PanArrowVC {
         panArrowUp.color = COLOR.LightYellow
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.text = LS_TITLE_GAMETIME
-        panArrowDownLabel.text = "0 - 0" // LS_TITLE_SCORE
+        panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()
         

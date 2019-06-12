@@ -13,6 +13,8 @@ protocol CountryMenuDelegate: class {
     
     func handleCountryMenuMainButtonTapped()
     func handleCountryMenuOtherButtonTapped(buttonNumber: Int)
+    func didShowButtons()
+    func willHideButtons()
 }
 
 
@@ -32,6 +34,7 @@ class CountryMenu: UIView {
     private var labelNames: [String]!
     private var capitalsStrings: [String]!
     private var selected: Int!
+    private var hasBorder: Bool!
     
     private var menuButton: OvalCountryButton!
     private var buttons: [OvalCountryButton]!
@@ -50,7 +53,7 @@ class CountryMenu: UIView {
     
     // MARK: - Initializing
     
-    convenience init(inView containingView: UIView, delegate: CountryMenuDelegate, labelNames: [String], capitalsStrings: [String], selected: Int? = 0) {
+    convenience init(inView containingView: UIView, delegate: CountryMenuDelegate, labelNames: [String], capitalsStrings: [String], hasBorder: Bool = false, selected: Int? = 0) {
         
         self.init()
         
@@ -62,6 +65,7 @@ class CountryMenu: UIView {
         self.delegate = delegate
         self.labelNames = labelNames
         self.capitalsStrings = capitalsStrings
+        self.hasBorder = hasBorder
         self.selected = selected
         
         tap = UITapGestureRecognizer(target: self, action: #selector(hideButtons))
@@ -71,7 +75,7 @@ class CountryMenu: UIView {
         if let selectedInt = selected, selectedInt < capitalsStrings.count {
             menuButtonCapitals = capitalsStrings[selectedInt]
         }
-        menuButton = OvalCountryButton(capitals: menuButtonCapitals)
+        menuButton = OvalCountryButton(capitals: menuButtonCapitals, hasBorder: self.hasBorder)
         menuButton.addTarget(self, action: #selector(handleMenuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         menuButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         menuButton.frame.origin = CGPoint(x: UIScreen.main.bounds.width - horInset - buttonWidth, y: topInset)
@@ -185,6 +189,8 @@ class CountryMenu: UIView {
             }
         }
         
+        delegate?.didShowButtons()
+        
     }
     
     
@@ -193,6 +199,7 @@ class CountryMenu: UIView {
     @objc func hideButtons(animated: Bool = true) {
         
         menuButton.hideCross()
+        delegate?.willHideButtons()
         
         labels.forEach {
             $0.title = ""

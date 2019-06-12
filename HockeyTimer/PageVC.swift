@@ -20,6 +20,7 @@ class PageVC: UIPageViewController {
     var existingTimerVC: TimerVC?
     var existingScoreVC: ScoreVC?
     private var mask: Mask?
+    private var backgroundMask: UIView!
     
     fileprivate var askToNotificationsAlreadyShown: Bool = false
     fileprivate var haptic: UISelectionFeedbackGenerator?
@@ -50,6 +51,13 @@ class PageVC: UIPageViewController {
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
+        
+        backgroundMask = UIView()
+        backgroundMask.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        backgroundMask.frame = view.bounds
+        view.addSubview(backgroundMask)
+        view.sendSubviewToBack(backgroundMask)
+        hideBackgroundMask()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +136,16 @@ class PageVC: UIPageViewController {
             existingTimerVC = timerVC
         }
         existingTimerVC?.scoreDidChange()
+    }
+    
+    func showBackgroundMask() {
+        
+        backgroundMask.alpha = 1.0
+    }
+    
+    func hideBackgroundMask() {
+        
+        backgroundMask.alpha = 0.0
     }
 }
 
@@ -209,20 +227,24 @@ extension PageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
-        if let durationVC = pendingViewControllers.first as? DurationVC, let timerVC = pageViewController.viewControllers?.first as? TimerVC {
+        if let timerVC = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             view.backgroundColor = COLOR.White
             durationVC.currentDuration = timerVC.game.duration
             durationVC.selectedDuration = nil
             
-        } else if let timerVC = pendingViewControllers.first as? TimerVC, let durationVC = pageViewController.viewControllers?.first as? DurationVC {
+        } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
             if durationVC.selectedDuration != nil && timerVC.game.duration != durationVC.selectedDuration {
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
                 game = HockeyGame(duration: durationVC.selectedDuration!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             }
             
-        } else if let _ = pendingViewControllers.first as? DocumentMenuVC, let _ = pageViewController.viewControllers?.first as? ScoreVC {
+        } else if let _ = pageViewController.viewControllers?.first as? ScoreVC, let _ = pendingViewControllers.first as? DocumentMenuVC {
             view.backgroundColor = COLOR.Olive
+        }
+        
+        if let documentVC = pageViewController.viewControllers?.first as? DocumentMenuVC {
+            documentVC.hideMenus()
         }
         
         prepareHapticIfNeeded()
