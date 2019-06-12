@@ -45,7 +45,7 @@ class DotMenu: UIView {
     private var topInset: CGFloat = 44
     private let labelHeight: CGFloat = 25
     private let padding: CGFloat = 18
-    private let labelInset: CGFloat = 20
+    private let labelInset: CGFloat = 18
     
     
     // MARK: - Initializing
@@ -78,9 +78,9 @@ class DotMenu: UIView {
             var path: UIBezierPath
             switch index % 3 {
             case 0:
-                path = pathEditButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
+                path = pathReviewButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
             case 1:
-                path = pathTimeButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
+                path = pathShareButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
             default:
                 path = pathDocumentButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
             }
@@ -274,21 +274,72 @@ class DotMenu: UIView {
         
         let widthScale = buttonWidth / 44
         let heightScale = buttonHeight / 44
+        
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: 24.5 * widthScale, y: 10.5 * heightScale))
-        path.addLine(to: CGPoint(x: 14.5 * widthScale, y: 10.5 * heightScale))
-        path.addLine(to: CGPoint(x: 14.5 * widthScale, y: 34.5 * heightScale))
-        path.addLine(to: CGPoint(x: 30.5 * widthScale, y: 34.5 * heightScale))
-        path.addLine(to: CGPoint(x: 30.5 * widthScale, y: 16.5 * heightScale))
-        path.addLine(to: CGPoint(x: 24.5 * widthScale, y: 10.5 * heightScale))
-        path.addLine(to: CGPoint(x: 24.5 * widthScale, y: 16.5 * heightScale))
-        path.addLine(to: CGPoint(x: 30.5 * widthScale, y: 16.5 * heightScale))
-        path.move(to: CGPoint(x: 17.5 * widthScale, y: 20.5 * heightScale))
-        path.addLine(to: CGPoint(x: 27.5 * widthScale, y: 20.5 * heightScale))
-        path.move(to: CGPoint(x: 17.5 * widthScale, y: 24.5 * heightScale))
-        path.addLine(to: CGPoint(x: 25.5 * widthScale, y: 24.5 * heightScale))
-        path.move(to: CGPoint(x: 17.5 * widthScale, y: 28.5 * heightScale))
-        path.addLine(to: CGPoint(x: 27.5 * widthScale, y: 28.5 * heightScale))
+        
+        path.move(to: CGPoint(x: 25 * widthScale, y: 10.5 * heightScale))
+        path.addLine(to: CGPoint(x: 13 * widthScale, y: 10.5 * heightScale))
+        path.addLine(to: CGPoint(x: 13 * widthScale, y: 34.5 * heightScale))
+        path.addLine(to: CGPoint(x: 31 * widthScale, y: 34.5 * heightScale))
+        path.addLine(to: CGPoint(x: 31 * widthScale, y: 16.5 * heightScale))
+        path.addLine(to: CGPoint(x: 25 * widthScale, y: 10.5 * heightScale))
+        path.addLine(to: CGPoint(x: 25 * widthScale, y: 16.5 * heightScale))
+        path.addLine(to: CGPoint(x: 31 * widthScale, y: 16.5 * heightScale))
+        path.move(to: CGPoint(x: 17 * widthScale, y: 21 * heightScale))
+        path.addLine(to: CGPoint(x: 28 * widthScale, y: 21 * heightScale))
+        path.move(to: CGPoint(x: 17 * widthScale, y: 25 * heightScale))
+        path.addLine(to: CGPoint(x: 28 * widthScale, y: 25 * heightScale))
+        path.move(to: CGPoint(x: 17 * widthScale, y: 29 * heightScale))
+        path.addLine(to: CGPoint(x: 28 * widthScale, y: 29 * heightScale))
+        
+        return path
+    }
+    
+    private func pathShareButton(buttonWidth: CGFloat, buttonHeight: CGFloat) -> UIBezierPath {
+        
+        let widthScale = buttonWidth / 44
+        let heightScale = buttonHeight / 44
+        
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x: 16 * widthScale, y: 17 * heightScale))
+        path.addLine(to: CGPoint(x: 12 * widthScale, y: 17 * heightScale))
+        path.addLine(to: CGPoint(x: 12 * widthScale, y: 33 * heightScale))
+        path.addLine(to: CGPoint(x: 32 * widthScale, y: 33 * heightScale))
+        path.addLine(to: CGPoint(x: 32 * widthScale, y: 17 * heightScale))
+        path.addLine(to: CGPoint(x: 28 * widthScale, y: 17 * heightScale))
+        
+        path.move(to: CGPoint(x: 16 * widthScale, y: 11 * heightScale))
+        path.addLine(to: CGPoint(x: 22 * widthScale, y: 5 * heightScale))
+        path.addLine(to: CGPoint(x: 28 * widthScale, y: 11 * heightScale))
+        
+        path.move(to: CGPoint(x: 22 * widthScale, y: 5 * heightScale))
+        path.addLine(to: CGPoint(x: 22 * widthScale, y: 23 * heightScale))
+        
+        return path
+    }
+    
+    private func pathReviewButton(buttonWidth: CGFloat, buttonHeight: CGFloat) -> UIBezierPath {
+        
+        let widthScale = buttonWidth / 44
+        let heightScale = buttonHeight / 44
+        
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x: 20 * widthScale, y: 16 * heightScale))
+        path.addLine(to: CGPoint(x: 13 * widthScale, y: 16 * heightScale))
+        path.addLine(to: CGPoint(x: 13 * widthScale, y: 34 * heightScale))
+        path.addLine(to: CGPoint(x: 31 * widthScale, y: 34 * heightScale))
+        path.addLine(to: CGPoint(x: 31 * widthScale, y: 20 * heightScale))
+        
+        path.move(to: CGPoint(x: 29 * widthScale, y: 14 * heightScale))
+        path.addLine(to: CGPoint(x: 21.5 * widthScale, y: 21 * heightScale))
+        path.addLine(to: CGPoint(x: 19.5 * widthScale, y: 26 * heightScale))
+        path.addLine(to: CGPoint(x: 23 * widthScale, y: 22.5 * heightScale))
+        path.addLine(to: CGPoint(x: 31.5 * widthScale, y: 11.5 * heightScale))
+        path.addLine(to: CGPoint(x: 29 * widthScale, y: 14 * heightScale))
+
+        
         
         return path
     }
