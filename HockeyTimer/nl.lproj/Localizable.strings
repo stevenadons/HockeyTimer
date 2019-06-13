@@ -47,8 +47,8 @@
 "Rules U14-U19" = "Spelregels U14-U19";
 "Ladies Rules KBHB" = "Spelregels Ladies KBHB";
 "Gents Rules KBHB" = "Spelregels Gents KBHB";
-"More (outdoor)" = "Meer (outdoor)";
-"More (indoor)" = "Meer (indoor)";
+"More (Outdoor)" = "Meer (outdoor)";
+"More (Indoor)" = "Meer (indoor)";
 
 "Rules Outdoor" = "Spelreglement";
 "Rules Indoor" = "Zaalhockey";
@@ -102,6 +102,9 @@
 "Share the app" = "Delen";
 "Contact us" = "Contacteer ons";
 
+"Report error" = "Meld een fout";
+
+"HockeyUpp - Remark" = "HockeyUpp - Bemerking";
 "We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users." = "Laat je opmerking of suggestie weten. Zo draag je bij tot een verbetering van HockeyUpp voor alle gebruikers.";
 "Version " = "Versie ";
 "Build " = "Build ";

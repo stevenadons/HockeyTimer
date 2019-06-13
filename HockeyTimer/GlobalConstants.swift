@@ -177,10 +177,10 @@ let DOC_NL_WEBPAGE = NSLocalizedString("More", comment: "Name for document")
 
 let DOC_D_GENERAL_RULES = NSLocalizedString("General Rules (2019)", comment: "Name for document")
 let DOC_D_GENERAL_RULES_CHANGES = NSLocalizedString("Changes (01.04.2019)", comment: "Name for document")
-let DOC_D_GENERAL_MORE = NSLocalizedString("More (outdoor)", comment: "Name for document")
+let DOC_D_GENERAL_MORE = NSLocalizedString("More (Outdoor)", comment: "Name for document")
 let DOC_D_INDOOR_GENERAL = NSLocalizedString("Indoor Rules (2017/2018)", comment: "Name for document")
 let DOC_D_INDOOR_GENERAL_CHANGES = NSLocalizedString("Indoor Changes (2017/2018)", comment: "Name for document")
-let DOC_D_INDOOR_MORE = NSLocalizedString("More (indoor)", comment: "Name for document")
+let DOC_D_INDOOR_MORE = NSLocalizedString("More (Indoor)", comment: "Name for document")
 let DOC_D_INTERNATIONAL = NSLocalizedString("International Rules", comment: "Name for document")
 let DOC_D_YOUTH = NSLocalizedString("Youth (2017/2018)", comment: "Name for document")
 let DOC_D_YOUTH_RECOMMENDATIONS = NSLocalizedString("Recommendations U8-U12", comment: "Name for document")
@@ -221,12 +221,16 @@ let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "S
 let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
 let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
 
+let LS_REPORT_ERROR = NSLocalizedString("Report an error", comment: "Setting")
+
+let LS_EMAIL_SUBJECT = NSLocalizedString("HockeyUpp - Remark", comment: "Subject in feedback email")
 let LS_EMAIL_SENTENCE = NSLocalizedString("We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users.", comment: "First sentence in feedback email")
 let LS_EMAIL_VERSION = NSLocalizedString("Version ", comment: "Feedback email")
 let LS_EMAIL_BUILD = NSLocalizedString("Build ", comment: "Feedback email")
 let LS_EMAIL_IOS = NSLocalizedString("iOS ", comment: "Feedback email")
 let LS_EMAIL_EMAILERROR_TITLE = NSLocalizedString("Email Error", comment: "Alert when error in email")
 let LS_EMAIL_EMAILERROR_TEXT = NSLocalizedString("An error occurred. Unable to open your email client.", comment: "Alert when error in email")
+
 
 
 var appStoreProducts: [SKProduct] = []

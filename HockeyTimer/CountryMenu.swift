@@ -199,6 +199,8 @@ class CountryMenu: UIView {
     
     @objc func hideButtons(animated: Bool = true) {
         
+        guard buttons[0].transform == .identity else { return }
+
         menuButton.hideCross()
         delegate?.willHideButtons()
         

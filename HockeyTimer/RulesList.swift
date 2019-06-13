@@ -26,11 +26,11 @@ class RulesList: UIView {
     fileprivate var country: Country!
     
     fileprivate var topInset: CGFloat {
-        var inset = UIDevice.whenDeviceIs(small: 90, normal: 110, big: 175)
+        var inset = UIDevice.whenDeviceIs(small: 75, normal: 95, big: 175)
         if buttons.joined().count <= 7 {
-            inset += 40
+            inset += 55
         } else if buttons.joined().count <= 10 {
-            inset += 20
+            inset += 30
         }
         return inset
     }

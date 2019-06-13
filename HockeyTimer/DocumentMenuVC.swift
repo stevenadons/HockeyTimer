@@ -18,7 +18,7 @@ class DocumentMenuVC: PanArrowVC {
     private var rulesList: RulesList!
     private var countryMenu: CountryMenu!
     private var settingsMenu: DotMenu!
-    
+    private var reportButton: UIButton!
     
     
     // MARK: - Life Cycle Methods
@@ -57,12 +57,38 @@ class DocumentMenuVC: PanArrowVC {
         panArrowDownLabel.alpha = 0.0
         panArrowUpLabel.textColor = COLOR.VeryDarkBlue
         
+        reportButton = UIButton()
+        reportButton.translatesAutoresizingMaskIntoConstraints = false
+        reportButton.titleLabel?.numberOfLines = 0
+        reportButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
+        
+        let plainTitle = LS_REPORT_ERROR
+        var lengthOfFirstRange = 6
+        if Locale.current.languageCode == "nl" {
+            lengthOfFirstRange = 4
+        }
+        let attributedTitle = NSMutableAttributedString(string: plainTitle)
+        let firstRange = NSRange(location: 0, length: lengthOfFirstRange)
+        attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeBold, size: 13)!, range: firstRange)
+        let lastRange = NSRange(location: firstRange.length, length: plainTitle.count - firstRange.length)
+        attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeRegular, size: 13)!, range: lastRange)
+        let fullRange = NSRange(location: 0, length: plainTitle.count)
+        attributedTitle.addAttribute(.foregroundColor, value: UIColor.white, range: fullRange)
+        reportButton.setAttributedTitle(attributedTitle, for: .normal)
+        
+        view.addSubview(reportButton)
+        
+        let reportConstant: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 16, big: 20)
+        
         NSLayoutConstraint.activate([
             
             rulesList.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             rulesList.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             rulesList.topAnchor.constraint(equalTo: view.topAnchor),
             rulesList.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            reportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reportButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -reportConstant),
             
             ])
         
@@ -93,6 +119,15 @@ class DocumentMenuVC: PanArrowVC {
     }
     
     
+    // MARK: - Touch
+    
+    @objc private func reportButtonTapped() {
+        
+        sendEmail()
+    }
+
+    
+    
 }
 
 
@@ -116,7 +151,7 @@ extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
         let version = LS_EMAIL_VERSION + appVersion
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
         let build = " - " + LS_EMAIL_BUILD + buildNumber
-        let iOS = " -" + LS_EMAIL_IOS + UIDevice.current.systemVersion
+        let iOS = " - " + LS_EMAIL_IOS + UIDevice.current.systemVersion
         
         return sentence + version + build + iOS
     }
@@ -126,6 +161,7 @@ extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self
         mail.setToRecipients(["tocommit.appbuilders@gmail.com"])
+        mail.setSubject(LS_EMAIL_SUBJECT)
         mail.setMessageBody(body, isHTML: true)
         
         present(mail, animated: true)
