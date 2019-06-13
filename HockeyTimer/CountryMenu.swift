@@ -44,7 +44,7 @@ class CountryMenu: UIView {
     
     private let buttonWidth: CGFloat = 44
     private let buttonHeight: CGFloat = 44
-    private let horInset: CGFloat = 40
+    private let horInset: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 40, big: 40)
     private var topInset: CGFloat = 44
     private let labelHeight: CGFloat = 25
     private let padding: CGFloat = 18
@@ -100,7 +100,7 @@ class CountryMenu: UIView {
             buttons.append(button)
         }
         
-        let labelWidth = UIScreen.main.bounds.width * 0.75 - buttonWidth - labelInset - horInset
+        let labelWidth = UIScreen.main.bounds.width * 0.9 - buttonWidth - labelInset - horInset
         
         labels = []
         
@@ -111,7 +111,7 @@ class CountryMenu: UIView {
             labelButton.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             labelButton.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
             let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labelButton.bounds.height) / 2
-            labelButton.frame.origin = CGPoint(x: UIScreen.main.bounds.width * 0.25, y: y)
+            labelButton.frame.origin = CGPoint(x: UIScreen.main.bounds.width * 0.1, y: y)
             if index == 0 {
                 insertSubview(labelButton, belowSubview: menuButton)
             } else {

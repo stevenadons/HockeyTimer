@@ -74,7 +74,7 @@ class PanArrowVC: UIViewController {
             panArrowUpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowUpLabel.widthAnchor.constraint(equalToConstant: 100),
             panArrowUpLabel.topAnchor.constraint(equalTo: panArrowUp.bottomAnchor),
-            panArrowUpLabel.heightAnchor.constraint(equalToConstant: 16),
+            panArrowUpLabel.heightAnchor.constraint(equalToConstant: 20),
             
             panArrowDown.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowDown.widthAnchor.constraint(equalToConstant: 44),
@@ -84,7 +84,7 @@ class PanArrowVC: UIViewController {
             panArrowDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             panArrowDownLabel.widthAnchor.constraint(equalToConstant: 100),
             panArrowDownLabel.bottomAnchor.constraint(equalTo: panArrowDown.topAnchor, constant: -panArrowDownLabelPadding),
-            panArrowDownLabel.heightAnchor.constraint(equalToConstant: 16),
+            panArrowDownLabel.heightAnchor.constraint(equalToConstant: 20),
             
             ])
     }

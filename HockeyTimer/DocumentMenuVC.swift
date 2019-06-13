@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 
 class DocumentMenuVC: PanArrowVC {
@@ -91,6 +92,58 @@ class DocumentMenuVC: PanArrowVC {
         rulesList.animateFlyIn()
     }
     
+    
+}
+
+
+extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
+    
+    func sendEmail() {
+        
+        if MFMailComposeViewController.canSendMail() {
+            let body = emailBody()
+            presentEmail(body: body)
+
+        } else {
+            showEmailAlert()
+        }
+    }
+    
+    private func emailBody() -> String {
+        
+        let sentence = "<p>" + LS_EMAIL_SENTENCE + "</p><br><br><br><br><hr>"
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0"
+        let version = LS_EMAIL_VERSION + appVersion
+        let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
+        let build = " - " + LS_EMAIL_BUILD + buildNumber
+        let iOS = " -" + LS_EMAIL_IOS + UIDevice.current.systemVersion
+        
+        return sentence + version + build + iOS
+    }
+    
+    private func presentEmail(body: String) {
+        
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setToRecipients(["tocommit.appbuilders@gmail.com"])
+        mail.setMessageBody(body, isHTML: true)
+        
+        present(mail, animated: true)
+    }
+    
+    private func showEmailAlert() {
+        
+        let alert = UIAlertController(title: LS_EMAIL_EMAILERROR_TITLE, message: LS_EMAIL_EMAILERROR_TEXT, preferredStyle: .alert)
+        let ok = UIAlertAction(title: LS_BUYPREMIUM_OK, style: .default, handler: nil)
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        controller.dismiss(animated: true)
+    }
 }
 
 
@@ -170,7 +223,8 @@ extension DocumentMenuVC: DotMenuDelegate {
             present(activityViewController, animated: true, completion: nil)
         
         case 2:
-            print("2")
+            // Send email
+            sendEmail()
         
         default:
             print("default")

@@ -41,7 +41,7 @@ class DotMenu: UIView {
    
     private let buttonWidth: CGFloat = 44
     private let buttonHeight: CGFloat = 44
-    private let horInset: CGFloat = 40
+    private let horInset: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 40, big: 40)
     private var topInset: CGFloat = 44
     private let labelHeight: CGFloat = 25
     private let padding: CGFloat = 18
@@ -100,7 +100,7 @@ class DotMenu: UIView {
             buttons.append(button)
         }
         
-        let labelWidth = UIScreen.main.bounds.width * 0.75 - buttonWidth - labelInset - horInset
+        let labelWidth = UIScreen.main.bounds.width * 0.9 - buttonWidth - labelInset - horInset
         let xLabel = horInset + buttonWidth + labelInset
         
         labels = []

@@ -221,6 +221,13 @@ let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "S
 let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
 let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
 
+let LS_EMAIL_SENTENCE = NSLocalizedString("We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users.", comment: "First sentence in feedback email")
+let LS_EMAIL_VERSION = NSLocalizedString("Version ", comment: "Feedback email")
+let LS_EMAIL_BUILD = NSLocalizedString("Build ", comment: "Feedback email")
+let LS_EMAIL_IOS = NSLocalizedString("iOS ", comment: "Feedback email")
+let LS_EMAIL_EMAILERROR_TITLE = NSLocalizedString("Email Error", comment: "Alert when error in email")
+let LS_EMAIL_EMAILERROR_TEXT = NSLocalizedString("An error occurred. Unable to open your email client.", comment: "Alert when error in email")
+
 
 var appStoreProducts: [SKProduct] = []
 var shadowed: Bool = false
