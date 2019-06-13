@@ -15,9 +15,10 @@
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
+		4F7C876122B2CDB400828B8A /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C876022B2CDB400828B8A /* LabelButton.swift */; };
+		4F7C876322B2CDC300828B8A /* CountryLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C876222B2CDC300828B8A /* CountryLabelButton.swift */; };
 		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
 		4F8470CB22AEA12200D71989 /* CountryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470CA22AEA12200D71989 /* CountryMenu.swift */; };
-		4F8470CD22AEA1E000D71989 /* CountryButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470CC22AEA1E000D71989 /* CountryButtonLabel.swift */; };
 		4F8470D022AEA34E00D71989 /* ItemButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470CE22AEA34E00D71989 /* ItemButtonLayer.swift */; };
 		4F8470D122AEA34E00D71989 /* ItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470CF22AEA34E00D71989 /* ItemButton.swift */; };
 		4F8470D422AEA39200D71989 /* MenuButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470D322AEA39200D71989 /* MenuButtonLayer.swift */; };
@@ -98,9 +99,10 @@
 		4F6342A322916E0A002F49B4 /* NotificationNameX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameX.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
+		4F7C876022B2CDB400828B8A /* LabelButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
+		4F7C876222B2CDC300828B8A /* CountryLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryLabelButton.swift; sourceTree = "<group>"; };
 		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		4F8470CA22AEA12200D71989 /* CountryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryMenu.swift; sourceTree = "<group>"; };
-		4F8470CC22AEA1E000D71989 /* CountryButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryButtonLabel.swift; sourceTree = "<group>"; };
 		4F8470CE22AEA34E00D71989 /* ItemButtonLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButtonLayer.swift; sourceTree = "<group>"; };
 		4F8470CF22AEA34E00D71989 /* ItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemButton.swift; sourceTree = "<group>"; };
 		4F8470D222AEA39200D71989 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -217,7 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8470CA22AEA12200D71989 /* CountryMenu.swift */,
-				4F8470CC22AEA1E000D71989 /* CountryButtonLabel.swift */,
+				4F7C876222B2CDC300828B8A /* CountryLabelButton.swift */,
 				4FD3721F22A6C7D900A45757 /* OvalCountryButton.swift */,
 				4FD3722122A6C85600A45757 /* OvalCountryLayer.swift */,
 				4FD3722522A6CEC000A45757 /* OvalCountryCross.swift */,
@@ -448,6 +450,7 @@
 			children = (
 				4FD3720C22A4017F00A45757 /* DotMenu.swift */,
 				4FD3720D22A4017F00A45757 /* ButtonLabel.swift */,
+				4F7C876022B2CDB400828B8A /* LabelButton.swift */,
 				4F8470D222AEA39200D71989 /* MenuButton.swift */,
 				4F8470D322AEA39200D71989 /* MenuButtonLayer.swift */,
 				4F8470D622AEB2FB00D71989 /* MenuButtonLayerCross.swift */,
@@ -666,7 +669,6 @@
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */,
-				4F8470CD22AEA1E000D71989 /* CountryButtonLabel.swift in Sources */,
 				4FD3722A22A6EC1D00A45757 /* Rules.swift in Sources */,
 				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
 				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
@@ -689,6 +691,7 @@
 				4FF7FB361F6559E8001D4ED1 /* OnboardScreen.swift in Sources */,
 				4FB4BE7D1F515B7D003B1259 /* TimerVC.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
+				4F7C876122B2CDB400828B8A /* LabelButton.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
@@ -714,6 +717,7 @@
 				4FD3723122A6F5F400A45757 /* RulesButton.swift in Sources */,
 				4FB4BE981F515CCD003B1259 /* NewGameButton.swift in Sources */,
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
+				4F7C876322B2CDC300828B8A /* CountryLabelButton.swift in Sources */,
 				4F8470CB22AEA12200D71989 /* CountryMenu.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
 				4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */,

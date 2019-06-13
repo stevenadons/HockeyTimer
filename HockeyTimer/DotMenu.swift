@@ -35,7 +35,7 @@ class DotMenu: UIView {
    
     private var menuButton: MenuButton!
     private var buttons: [ItemButton]!
-    private var labels: [ButtonLabel]!
+    private var labels: [LabelButton]!
     
     private var tap: UITapGestureRecognizer!
    
@@ -107,17 +107,18 @@ class DotMenu: UIView {
         
         for index in 0..<labelNames.count {
             
-            let label = ButtonLabel()
-            label.textAlignment = .left
-            label.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
-            let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - label.bounds.height) / 2
-            label.frame.origin = CGPoint(x: xLabel, y: y)
+            let labelButton = LabelButton()
+            labelButton.tag = index
+            labelButton.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
+            labelButton.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
+            let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labelButton.bounds.height) / 2
+            labelButton.frame.origin = CGPoint(x: xLabel, y: y)
             if index == 0 {
-                insertSubview(label, belowSubview: menuButton)
+                insertSubview(labelButton, belowSubview: menuButton)
             } else {
-                insertSubview(label, belowSubview: labels[index - 1])
+                insertSubview(labelButton, belowSubview: labels[index - 1])
             }
-            labels.append(label)
+            labels.append(labelButton)
         }
         
         windUp()
@@ -245,7 +246,9 @@ class DotMenu: UIView {
         
         let widthScale = buttonWidth / 44
         let heightScale = buttonHeight / 44
+        
         let path = UIBezierPath()
+        
         path.move(to: CGPoint(x: 15.5 * widthScale, y: 19 * heightScale))
         path.addLine(to: CGPoint(x: 22 * widthScale, y: 12 * heightScale))
         path.addLine(to: CGPoint(x: 28.5 * widthScale, y: 19 * heightScale))
@@ -260,7 +263,9 @@ class DotMenu: UIView {
         
         let widthScale = buttonWidth / 44
         let heightScale = buttonHeight / 44
+        
         let path = UIBezierPath()
+        
         path.move(to: CGPoint(x: 22 * widthScale, y: 10 * heightScale))
         path.addArc(withCenter: CGPoint(x: 22 * widthScale, y: 22 * widthScale), radius: 12 * min(widthScale, heightScale), startAngle: -.pi/2, endAngle: .pi * 3 / 2, clockwise: true)
         path.move(to: CGPoint(x: 22 * widthScale, y: 14.5 * heightScale))

@@ -227,6 +227,13 @@ extension PageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
+        if let documentVC = pageViewController.viewControllers?.first as? DocumentMenuVC {
+            documentVC.hideMenus()
+        }
+        if let timerVC = pageViewController.viewControllers?.first as? TimerVC {
+            timerVC.hidePopup()
+        }
+        
         if let timerVC = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             view.backgroundColor = COLOR.White
             durationVC.currentDuration = timerVC.game.duration
@@ -241,10 +248,6 @@ extension PageVC: UIPageViewControllerDelegate {
             
         } else if let _ = pageViewController.viewControllers?.first as? ScoreVC, let _ = pendingViewControllers.first as? DocumentMenuVC {
             view.backgroundColor = COLOR.Olive
-        }
-        
-        if let documentVC = pageViewController.viewControllers?.first as? DocumentMenuVC {
-            documentVC.hideMenus()
         }
         
         prepareHapticIfNeeded()

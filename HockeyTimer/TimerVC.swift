@@ -78,13 +78,13 @@ class TimerVC: PanArrowVC {
         popupMessage.alpha = 0.0
         view.addSubview(popupMessage)
         
-        confirmationButton = ConfirmationButton.blueButton()
+        confirmationButton = ConfirmationButton.blueButton(largeFont: true)
         confirmationButton.alpha = 0.0
         confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
-        cancelButton = ConfirmationButton.redButton()
+        cancelButton = ConfirmationButton.redButton(largeFont: true)
         cancelButton.alpha = 0.0
         cancelButton.setTitle(LS_BUTTON_CANCEL, for: .normal)
         cancelButton.addTarget(self, action: #selector(maskViewTapped(sender:forEvent:)), for: [.touchUpInside])
@@ -168,16 +168,6 @@ class TimerVC: PanArrowVC {
         
         confirmationButton.grow()
         cancelButton.grow()
-    }
-    
-    @objc fileprivate func hidePopup() {
-        
-        confirmationButton.shrink()
-        cancelButton.shrink()
-        UIView.animate(withDuration: 0.2) {
-            self.maskView.alpha = 0.0
-            self.popupMessage.alpha = 0.0
-        }
     }
     
     fileprivate func temporarilyShowPopupWithMask(message: String) {
@@ -287,6 +277,18 @@ class TimerVC: PanArrowVC {
     func scoreDidChange() {
         
         panArrowDownLabel.text = "\(game.homeScore) - \(game.awayScore)"
+    }
+    
+    @objc func hidePopup() {
+        
+        guard popupMessage.alpha == 1.0 else { return }
+        
+        confirmationButton.shrink()
+        cancelButton.shrink()
+        UIView.animate(withDuration: 0.2) {
+            self.maskView.alpha = 0.0
+            self.popupMessage.alpha = 0.0
+        }
     }
     
 }

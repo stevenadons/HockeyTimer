@@ -38,7 +38,7 @@ class CountryMenu: UIView {
     
     private var menuButton: OvalCountryButton!
     private var buttons: [OvalCountryButton]!
-    private var labels: [CountryButtonLabel]!
+    private var labels: [CountryLabelButton]!
     
     private var tap: UITapGestureRecognizer!
     
@@ -106,17 +106,18 @@ class CountryMenu: UIView {
         
         for index in 0..<labelNames.count {
             
-            let label = CountryButtonLabel()
-            label.textAlignment = .right
-            label.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
-            let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - label.bounds.height) / 2
-            label.frame.origin = CGPoint(x: UIScreen.main.bounds.width * 0.25, y: y)
+            let labelButton = CountryLabelButton()
+            labelButton.tag = index
+            labelButton.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
+            labelButton.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
+            let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labelButton.bounds.height) / 2
+            labelButton.frame.origin = CGPoint(x: UIScreen.main.bounds.width * 0.25, y: y)
             if index == 0 {
-                insertSubview(label, belowSubview: menuButton)
+                insertSubview(labelButton, belowSubview: menuButton)
             } else {
-                insertSubview(label, belowSubview: labels[index - 1])
+                insertSubview(labelButton, belowSubview: labels[index - 1])
             }
-            labels.append(label)
+            labels.append(labelButton)
         }
         
         windUp()
