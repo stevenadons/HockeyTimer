@@ -11,7 +11,9 @@ import Foundation
 
 enum Duration: Int, CaseIterable {
     
+    case Nine = 9
     case Ten = 10
+    case Twelve = 12
     case Fifteen = 15
 //    #warning("test")
     case Twenty = 20  // For testing purposes: 1

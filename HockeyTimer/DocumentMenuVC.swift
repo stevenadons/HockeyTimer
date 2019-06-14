@@ -151,9 +151,10 @@ extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
         let version = LS_EMAIL_VERSION + appVersion
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
         let build = " - " + LS_EMAIL_BUILD + buildNumber
+        let country = " - " + SELECTED_COUNTRY.capitals
         let iOS = " - " + LS_EMAIL_IOS + UIDevice.current.systemVersion
         
-        return sentence + version + build + iOS
+        return sentence + version + build + country + iOS
     }
     
     private func presentEmail(body: String) {

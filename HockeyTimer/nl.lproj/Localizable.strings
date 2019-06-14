@@ -69,10 +69,25 @@
 "Youth (2017/2018)" = "Jeugd (2017/2018)";
 "Recommendations U8-U12" = "Aanbevelingen U8-U12";
 
-"Change Game Time" = "Duurtijd wijzigen";
+"Rules Outdoor 2019" = "Outdoor regels (2019)";
+"Changes Outdoor 2019" = "Outdoor wijzigingen (2019)";
+"Rules Indoor 2017" = "Indoor regels (2017)";
+"Changes Indoor 2019" = "Indoor wijzigingen (2019)";
+"España Master" = "Master";
+"Mamis & Papis" = "Mamis & Papis";
+
+"Rules Outdoor 2017" = "Outdoor regels (2017)";
+"Rules Indoor 2017" = "Indoor regels (2017)";
+"In2Hockey 6-a-side" = "In2Hockey (6 spelers)";
+"In2Hockey 7-a-side" = "In2Hockey (7 spelers)";
+"In2Hockey (more)" = "In2Hockey (meer)";
+"Regional Leagues" = "Regionale competities";
+"Masters Regional" = "Masters regionale competities";
+"Senior County" = "Senior County";
+
 "New Game" = "Nieuwe wedstrijd";
-"Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium om de wedstrijdduur te wijzigen zonder advertenties. Bovendien wordt je laatste wedstrijdduur dan steeds onthouden.";
-"Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode." = "Bekijk één advertentie om een nieuwe wedstrijd te starten.\n\nUpgrade naar Premium om nieuwe wedstrijden te starten zonder advertenties.";
+"Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium (eenmalige betaling) om de tijd te wijzigen zonder advertenties.\n\nBovendien wordt je laatste wedstrijdduur dan steeds onthouden.";
+"Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment." = "Bekijk één advertentie om een nieuwe wedstrijd te starten.\n\nUpgrade naar Premium (eenmalige betaling) om nieuwe wedstrijden te starten zonder advertenties.";
 "Buy Premium" = "Koop premium";
 "Watch One Ad" = "Bekijk één advertentie";
 "Cancel" = "Annuleer";
@@ -89,6 +104,9 @@
 "Belgium" = "België";
 "Netherlands" = "Nederland";
 "Germany" = "Duitsland";
+"England" = "Engeland";
+"Spain" = "Spanje";
+
 "Teams of 3 & H" = "3-tallen & H";
 "Teams of 6" = "6-tallen";
 "Teams of 8" = "8-tallen";
@@ -96,13 +114,16 @@
 "Indoor & H" = "Indoor & H";
 "Youth" = "Jeugd";
 "Indoor" = "Indoor";
+"Outdoor" = "Outdoor";
 "International" = "Internationaal";
+"In2Hockey" = "In2Hockey";
+"Master & M/P" = "Master en M/P";
 
 "Write a review" = "Schrijf een recensie";
 "Share the app" = "Delen";
 "Contact us" = "Contacteer ons";
 
-"Report error" = "Meld een fout";
+"Report a broken link" = "Meld een foute link";
 
 "HockeyUpp - Remark" = "HockeyUpp - Bemerking";
 "We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users." = "Laat je opmerking of suggestie weten. Zo draag je bij tot een verbetering van HockeyUpp voor alle gebruikers.";

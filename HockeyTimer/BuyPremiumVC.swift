@@ -124,7 +124,7 @@ class BuyPremiumVC: UIViewController {
         formatter.numberStyle = .currency
         formatter.formatterBehavior = .behavior10_4
         let formattedPrice = formatter.string(from: price) ?? "\(price)"
-        let buttonTitle = LS_BUYPREMIUM_WATCHADBUTTON + "   (" + formattedPrice + ")"
+        let buttonTitle = LS_BUYPREMIUM_WATCHADBUTTON + " (" + formattedPrice + ")"
         watchAdButton.setTitle(buttonTitle, for: .normal)
         watchAdButton.addTarget(self, action: #selector(watchAdTapped), for: [.touchUpInside])
         view.addSubview(watchAdButton)
@@ -134,7 +134,7 @@ class BuyPremiumVC: UIViewController {
         buyPremiumButton.addTarget(self, action: #selector(buyPremiumTapped), for: [.touchUpInside])
         if products.count > 0 {
             let priceString = products[0].formattedPrice()
-            let titleString = LS_BUYPREMIUM_BUYBUTTON + "   (" + priceString + ")"
+            let titleString = LS_BUYPREMIUM_BUYBUTTON + " (" + priceString + ")"
             buyPremiumButton.setTitle(titleString, for: .normal)
         }
         view.addSubview(buyPremiumButton)

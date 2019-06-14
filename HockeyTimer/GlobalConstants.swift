@@ -185,10 +185,31 @@ let DOC_D_INTERNATIONAL = NSLocalizedString("International Rules", comment: "Nam
 let DOC_D_YOUTH = NSLocalizedString("Youth (2017/2018)", comment: "Name for document")
 let DOC_D_YOUTH_RECOMMENDATIONS = NSLocalizedString("Recommendations U8-U12", comment: "Name for document")
 
-let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Change Game Time", comment: "Title of buy premium VC")
+let DOC_E_OUTDOOR_GENERAL = NSLocalizedString("Rules Outdoor 2019", comment: "Name for document")
+let DOC_E_OUTDOOR_GENERAL_CHANGES = NSLocalizedString("Changes Outdoor 2019", comment: "Name for document")
+let DOC_E_INDOOR_GENERAL = NSLocalizedString("Rules Indoor 2017", comment: "Name for document")
+let DOC_E_INDOOR_GENERAL_CHANGES = NSLocalizedString("Changes Indoor 2019", comment: "Name for document")
+let DOC_E_ESPANA_MASTER = NSLocalizedString("España Master", comment: "Name for document")
+let DOC_E_MAMIS_PAPIS = NSLocalizedString("Mamis & Papis", comment: "Name for document")
+let DOC_E_MORE = NSLocalizedString("More", comment: "Name for document")
+
+
+let DOC_ENG_OUTDOOR_GENERAL = NSLocalizedString("Rules Outdoor 2017", comment: "Name for document")
+let DOC_ENG_INDOOR_GENERAL = NSLocalizedString("Rules Indoor 2017", comment: "Name for document")
+let DOC_ENG_IN2HOCKEY_6 = NSLocalizedString("In2Hockey 6-a-side", comment: "Name for document")
+let DOC_ENG_IN2HOCKEY_7 = NSLocalizedString("In2Hockey 7-a-side", comment: "Name for document")
+let DOC_ENG_IN2HOCKEY_MORE = NSLocalizedString("In2Hockey (more)", comment: "Name for document")
+let DOC_ENG_REGIONAL = NSLocalizedString("Regional Leagues", comment: "Name for document")
+let DOC_ENG_MASTERS_REGIONAL = NSLocalizedString("Masters Regional", comment: "Name for document")
+let DOC_ENG_SENIOR_COUNTY = NSLocalizedString("Senior County", comment: "Name for document")
+let DOC_ENG_MORE = NSLocalizedString("More", comment: "Name for document")
+
+
+
+let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Set Time", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TITLE_NEW_GAME = NSLocalizedString("New Game", comment: "Title of buy premium VC")
-let LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME = NSLocalizedString("Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode. In addition, Premium Mode will hold track of your last game time.", comment: "Text of buy premium VC")
-let LS_BUYPREMIUM_TEXT_NEW_GAME = NSLocalizedString("Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode.", comment: "Text of buy premium VC")
+let LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME = NSLocalizedString("Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time.", comment: "Text of buy premium VC")
+let LS_BUYPREMIUM_TEXT_NEW_GAME = NSLocalizedString("Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment.", comment: "Text of buy premium VC")
 
 let LS_BUYPREMIUM_BUYBUTTON = NSLocalizedString("Buy Premium", comment: "Buy button in buypremium VC")
 let LS_BUYPREMIUM_WATCHADBUTTON = NSLocalizedString("Watch One Ad", comment: "Watch ad button in buypremium VC")
@@ -207,6 +228,8 @@ let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Canc
 let LS_COUNTRY_BELGIUM = NSLocalizedString("Belgium", comment: "Country name in picker")
 let LS_COUNTRY_NETHERLANDS = NSLocalizedString("Netherlands", comment: "Country name in picker")
 let LS_COUNTRY_GERMANY = NSLocalizedString("Germany", comment: "Country name in picker")
+let LS_COUNTRY_ENGLAND = NSLocalizedString("England", comment: "Country name in picker")
+let LS_COUNTRY_SPAIN = NSLocalizedString("Spain", comment: "Country name in picker")
 
 let LS_COUNTRY_TEAMS_OF_3 = NSLocalizedString("Teams of 3 & H", comment: "Durationcard description")
 let LS_COUNTRY_TEAMS_OF_6 = NSLocalizedString("Teams of 6", comment: "Durationcard description")
@@ -215,13 +238,16 @@ let LS_COUNTRY_GENERAL = NSLocalizedString("General", comment: "Durationcard des
 let LS_COUNTRY_INDOOR_AND_H = NSLocalizedString("Indoor & H", comment: "Durationcard description")
 let LS_COUNTRY_YOUTH = NSLocalizedString("Youth", comment: "Durationcard description")
 let LS_COUNTRY_INDOOR = NSLocalizedString("Indoor", comment: "Durationcard description")
+let LS_COUNTRY_OUTDOOR = NSLocalizedString("Outdoor", comment: "Durationcard description")
 let LS_COUNTRY_INTERNATIONAL = NSLocalizedString("International", comment: "Durationcard description")
+let LS_COUNTRY_IN2HOCKEY = NSLocalizedString("In2Hockey", comment: "Durationcard description")
+let LS_COUNTRY_MASTERS_MAMIS_PAPIS = NSLocalizedString("Master & M/P", comment: "Durationcard description")
 
 let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "Setting")
 let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
 let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
 
-let LS_REPORT_ERROR = NSLocalizedString("Report an error", comment: "Setting")
+let LS_REPORT_ERROR = NSLocalizedString("Report a broken link", comment: "Setting")
 
 let LS_EMAIL_SUBJECT = NSLocalizedString("HockeyUpp - Remark", comment: "Subject in feedback email")
 let LS_EMAIL_SENTENCE = NSLocalizedString("We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users.", comment: "First sentence in feedback email")

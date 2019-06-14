@@ -110,6 +110,7 @@ class DotMenu: UIView {
             let labelButton = LabelButton()
             labelButton.tag = index
             labelButton.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
+            labelButton.isUserInteractionEnabled = false
             labelButton.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
             let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labelButton.bounds.height) / 2
             labelButton.frame.origin = CGPoint(x: xLabel, y: y)
@@ -168,6 +169,7 @@ class DotMenu: UIView {
             }, completion: {(finished) in
                 for index in 0..<self.labels.count {
                     self.labels[index].grow(text: self.labelNames[index], duration: 0.1)
+                    self.labels[index].isUserInteractionEnabled = true
                 }
             })
             
@@ -179,6 +181,7 @@ class DotMenu: UIView {
             }
             for index in 0..<self.labels.count {
                 self.labels[index].grow(text: self.labelNames[index], duration: 0.1)
+                self.labels[index].isUserInteractionEnabled = true
             }
         }
         
@@ -197,6 +200,7 @@ class DotMenu: UIView {
         
         labels.forEach {
             $0.title = ""
+            $0.isUserInteractionEnabled = false
         }
         
         if animated {

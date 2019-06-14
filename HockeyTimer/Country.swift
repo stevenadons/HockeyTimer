@@ -138,6 +138,59 @@ var countries: [Country] {
                           durationStrings: [LS_COUNTRY_YOUTH, LS_COUNTRY_YOUTH, LS_COUNTRY_INDOOR, LS_COUNTRY_YOUTH, LS_COUNTRY_GENERAL, LS_COUNTRY_INTERNATIONAL],
                           groupsOfRules: [DGeneralGroup, DIndoorGroup, DInternationalGroup, DYouthGroup])
     
+    // Spain
+    
+    let E_Outdoor = Rules(name: DOC_E_OUTDOOR_GENERAL, url: "https://www.rfeh.es/rfehbackend/normativas/4359dc7466c78678f6945d9002a79787.pdf")
+    let E_OutdoorChanges = Rules(name: DOC_E_OUTDOOR_GENERAL_CHANGES, url: "https://www.rfeh.es/rfehbackend/normativas/a2d8fe154fb84fee85a2d7bb478c8d1a.pdf")
+    let E_OutdoorGroup = GroupOfRules(rulesArray: [E_Outdoor, E_OutdoorChanges])
+    
+    let E_Indoor = Rules(name: DOC_E_INDOOR_GENERAL, url: "https://www.rfeh.es/rfehbackend/normativas/f45a8d01063a18e519cc2431a504d549.pdf")
+    let E_IndoorChanges = Rules(name: DOC_E_INDOOR_GENERAL_CHANGES, url: "https://www.rfeh.es/rfehbackend/normativas/8c7d20a4ef88ec00db45aeabe01d69a6.pdf")
+    let E_IndoorGroup = GroupOfRules(rulesArray: [E_Indoor, E_IndoorChanges])
+    
+    let E_Master = Rules(name: DOC_E_ESPANA_MASTER, url: "https://www.rfeh.es/rfehbackend/normativas/8a7facde0918a074e1bdfb0fcfda5a32.pdf")
+    let E_MamisPapis = Rules(name: DOC_E_MAMIS_PAPIS, url: "https://www.rfeh.es/rfehbackend/normativas/b38ff998ba77d5bb454acf6b71e38731.pdf")
+    let E_SeniorGroup = GroupOfRules(rulesArray: [E_Master, E_MamisPapis])
+    
+    let E_More = Rules(name: DOC_E_MORE, url: "https://www.rfeh.es/normativas/")
+    let E_MoreGroup = GroupOfRules(rulesArray: [E_More])
+    
+    let spain = Country(capitals: "E",
+                        localeRegionCode: "ES",
+                        name: LS_COUNTRY_SPAIN,
+                        durations: [.Twenty, .TwentyFive, .Thirty],
+                        durationStrings: [LS_COUNTRY_INDOOR, LS_COUNTRY_MASTERS_MAMIS_PAPIS, LS_COUNTRY_OUTDOOR],
+                        groupsOfRules: [E_OutdoorGroup, E_IndoorGroup, E_SeniorGroup, E_MoreGroup])
+    
+    // England
+    
+    let ENG_Outdoor = Rules(name: DOC_ENG_OUTDOOR_GENERAL, url: "http://www.englandhockey.co.uk/core/core_picker/download.asp?id=16515&filetitle=Rules+of+outdoor+hockey+2017&log_stat=true")
+    let ENG_OutdoorGroup = GroupOfRules(rulesArray: [ENG_Outdoor])
+    
+    let ENG_Indoor = Rules(name: DOC_ENG_INDOOR_GENERAL, url: "http://www.englandhockey.co.uk/core/core_picker/download.asp?id=15072&filetitle=rules%2Dof%2Dindoorhockey%2D2017&log_stat=true")
+    let ENG_IndoorGroup = GroupOfRules(rulesArray: [ENG_Indoor])
+    
+    let ENG_In2Hockey_6 = Rules(name: DOC_ENG_IN2HOCKEY_6, url: "http://in2hockey.englandhockey.co.uk/downloads/In2HockeyRules2015_6ASIDE.pdf")
+    let ENG_In2Hockey_7 = Rules(name: DOC_ENG_IN2HOCKEY_7, url: "http://in2hockey.englandhockey.co.uk/downloads/In2HockeyRules2015_7ASIDE.pdf")
+    let ENG_In2Hockey_More = Rules(name: DOC_ENG_IN2HOCKEY_MORE, url: "http://in2hockey.englandhockey.co.uk/SitePage.aspx?SitePageID=14")
+    let ENG_In2HockeyGroup = GroupOfRules(rulesArray: [ENG_In2Hockey_6, ENG_In2Hockey_7, ENG_In2Hockey_More])
+    
+    let ENG_Regional = Rules(name: DOC_ENG_REGIONAL, url: "http://www.englandhockey.co.uk/page.asp?section=1332&sectionTitle=Regional+%26+Other+Leagues&l=43")
+    let ENG_RegionalGroup = GroupOfRules(rulesArray: [ENG_Regional])
+    
+    let ENG_MastersRegional = Rules(name: DOC_ENG_MASTERS_REGIONAL, url: "http://www.englandhockey.co.uk/core/core_picker/download.asp?id=17383&filetitle=Masters+Regional+Competitions+Regulations+17%2D18&log_stat=true")
+    let ENG_SeniorCounty = Rules(name: DOC_ENG_SENIOR_COUNTY, url: "http://www.englandhockey.co.uk/core/core_picker/download.asp?id=17382&filetitle=Regulations+Senior+County+Championships+17%2D18&log_stat=true")
+    let ENG_Other = GroupOfRules(rulesArray: [ENG_MastersRegional, ENG_SeniorCounty])
+    
+    let ENG_More = Rules(name: DOC_ENG_MORE, url: "http://www.englandhockey.co.uk/page.asp?section=1146")
+    let ENG_MoreGroup = GroupOfRules(rulesArray: [ENG_More])
+    
+    let england = Country(capitals: "ENG",
+                          localeRegionCode: "GB",
+                          name: LS_COUNTRY_ENGLAND,
+                          durations: [.Nine, .Twelve, .Fifteen, .Twenty, .Thirty, .ThirtyFive],
+                          durationStrings: [LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_INDOOR, LS_COUNTRY_OUTDOOR, LS_COUNTRY_OUTDOOR],
+                          groupsOfRules: [ENG_OutdoorGroup, ENG_IndoorGroup, ENG_In2HockeyGroup, ENG_RegionalGroup, ENG_Other, ENG_MoreGroup])
     
     // Netherlands
     
@@ -170,6 +223,8 @@ var countries: [Country] {
                                                 LS_COUNTRY_GENERAL],
                               groupsOfRules: [basicNL, nlYouth, indoorGroupHolland, moreNLGroup])
     
-    return [belgium, germany, netherlands]
+    return [belgium, germany, spain, england, netherlands]
+    
+    
     
 }

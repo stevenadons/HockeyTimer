@@ -215,7 +215,6 @@ class RulesList: UIView {
                 let buttonGroup = self.buttons[outerIndex]
                 for innerIndex in 0..<buttonGroup.count {
                     
-                    delay += 0.02
                     if buttonGroup[innerIndex].transform != .identity {
                         UIView.animate(withDuration: 0.15, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
                             buttonGroup[innerIndex].transform = .identity
@@ -225,6 +224,7 @@ class RulesList: UIView {
                             }
                         })
                     }
+                    delay += 0.02
                 }
             }
         }
