@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        #warning("testing")
 //        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
-        // Standard
+        // Standard one time onboarding
         if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
             startViewController = OnboardingVC()
         } else {

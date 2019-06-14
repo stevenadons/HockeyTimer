@@ -97,7 +97,6 @@ enum USERDEFAULTSKEY {
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
     static let PremiumMode = "PremiumMode"
-//    static let Country = "Country"
     static let CountryIndex = "CountryIndex"
 
 
