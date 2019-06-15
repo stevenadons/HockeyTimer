@@ -160,8 +160,8 @@ let DOC_B_VHLRULESU7U12 = NSLocalizedString("Rules U7-U12", comment: "Name for d
 let DOC_B_VHLRULESU14U19 = NSLocalizedString("Rules U14-U19", comment: "Name for document")
 let DOC_B_LADIES = NSLocalizedString("Ladies Rules KBHB", comment: "Name for document")
 let DOC_B_GENTS = NSLocalizedString("Gents Rules KBHB", comment: "Name for document")
-let DOC_B_MORE_INDOOR = NSLocalizedString("More (indoor)", comment: "Name for document")
-let DOC_B_MORE_OUTDOOR = NSLocalizedString("More (outdoor)", comment: "Name for document")
+let DOC_B_MORE_INDOOR = NSLocalizedString("More (Indoor)", comment: "Name for document")
+let DOC_B_MORE_OUTDOOR = NSLocalizedString("More (Outdoor)", comment: "Name for document")
 
 let DOC_NL_SPELREGLEMENT = NSLocalizedString("Rules Outdoor", comment: "Name for document")
 let DOC_NL_INDOOR = NSLocalizedString("Rules Indoor", comment: "Name for document")
