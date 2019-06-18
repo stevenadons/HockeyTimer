@@ -101,6 +101,11 @@
 "OK, let me allow" = "OK, activeer meldingen";
 "Not now" = "Later";
 
+"New Version Available" = "Nieuwe versie beschikbaar";
+"A new version of HockeyUpp is available. Please update to have the latest user experience." = "Een nieuwe versie van HockeyUpp is beschikbaar in de App Store. Update nu om de laatste versie te installeren.";
+"Update" = "Update";
+"Skip new version" = "Overslaan";
+
 "Belgium" = "België";
 "Netherlands" = "Nederland";
 "Germany" = "Duitsland";

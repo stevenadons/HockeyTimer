@@ -192,7 +192,6 @@ let DOC_E_ESPANA_MASTER = NSLocalizedString("España Master", comment: "Name for
 let DOC_E_MAMIS_PAPIS = NSLocalizedString("Mamis & Papis", comment: "Name for document")
 let DOC_E_MORE = NSLocalizedString("More", comment: "Name for document")
 
-
 let DOC_ENG_OUTDOOR_GENERAL = NSLocalizedString("Rules Outdoor 2017", comment: "Name for document")
 let DOC_ENG_INDOOR_GENERAL = NSLocalizedString("Rules Indoor 2017", comment: "Name for document")
 let DOC_ENG_IN2HOCKEY_6 = NSLocalizedString("In2Hockey 6-a-side", comment: "Name for document")
@@ -202,7 +201,6 @@ let DOC_ENG_REGIONAL = NSLocalizedString("Regional Leagues", comment: "Name for 
 let DOC_ENG_MASTERS_REGIONAL = NSLocalizedString("Masters Regional", comment: "Name for document")
 let DOC_ENG_SENIOR_COUNTY = NSLocalizedString("Senior County", comment: "Name for document")
 let DOC_ENG_MORE = NSLocalizedString("More", comment: "Name for document")
-
 
 
 let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Set Time", comment: "Title of buy premium VC")
@@ -223,6 +221,11 @@ let LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS = NSLocalizedString("HockeyUpp sends n
 let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
 let LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW = NSLocalizedString("OK, let me allow", comment: "Confirmation button when enabling notifications.")
 let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Cancel button when enabling notifications.")
+
+let LS_NEW_APP_VERSION_POPUP_TITLE = NSLocalizedString("New Version Available", comment: "Title in popup")
+let LS_NEW_APP_VERSION_POPUP_TEXT = NSLocalizedString("A new version of HockeyUpp is available. Please update to have the latest user experience.", comment: "text in popup")
+let LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON = NSLocalizedString("Update", comment: "Button in popup")
+let LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON = NSLocalizedString("Skip new version", comment: "Button in popup")
 
 let LS_COUNTRY_BELGIUM = NSLocalizedString("Belgium", comment: "Country name in picker")
 let LS_COUNTRY_NETHERLANDS = NSLocalizedString("Netherlands", comment: "Country name in picker")
