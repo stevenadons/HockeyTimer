@@ -90,7 +90,7 @@ class ScoreVC: PanArrowVC {
         
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
         let pitchContainerOffset = UIDevice.whenDeviceIs(small: 20, normal: 0, big: -50)
-        let editModeOffset = UIDevice.whenDeviceIs(small: 18, normal: 18, big: 30)
+        let editModeOffset = UIDevice.whenDeviceIs(small: 18, normal: 24, big: 36)
 
         NSLayoutConstraint.activate([
             

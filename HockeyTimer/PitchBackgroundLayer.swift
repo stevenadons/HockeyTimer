@@ -98,7 +98,7 @@ class PitchBackgroundLayer: CALayer {
     private func edgePath() -> UIBezierPath {
         
         let rect = CGRect(x: -outOfScreen, y: 0, width: bounds.width + 2 * outOfScreen, height: bounds.height)
-        let path = UIBezierPath(roundedRect: rect, cornerRadius: 36)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 18) // 36
         
         return path
     }
@@ -119,7 +119,7 @@ class PitchBackgroundLayer: CALayer {
     private func centerPath() -> UIBezierPath {
         
         let rect = CGRect(x: -outOfScreen + edgeWidth, y: edgeWidth, width: bounds.width + 2 * outOfScreen - 2 * edgeWidth, height: bounds.height - (edgeWidth * 2))
-        let path = UIBezierPath(roundedRect: rect, cornerRadius: 20)
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 10) // 20
         
         return path
     }

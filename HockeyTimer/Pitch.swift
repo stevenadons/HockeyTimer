@@ -88,6 +88,7 @@ class Pitch: UIView {
     private func scoreLabel() -> UILabel {
         
         let label = UILabel()
+        
         label.text = "0"
         label.font = UIFont(name: FONTNAME.Numbers, size: 64)
         label.adjustsFontSizeToFitWidth = true
@@ -95,6 +96,7 @@ class Pitch: UIView {
         label.textAlignment = .center
         label.textColor = COLOR.White
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }
     

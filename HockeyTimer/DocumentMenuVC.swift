@@ -246,7 +246,7 @@ extension DocumentMenuVC: DotMenuDelegate {
         
         switch buttonNumber {
         case 0:
-            // Write a review
+            // Write review
             guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return }
             var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
             components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
@@ -254,7 +254,7 @@ extension DocumentMenuVC: DotMenuDelegate {
             UIApplication.shared.open(writeReviewURL)
             
         case 1:
-            // Share the app
+            // Share app
             // Conform to UIActivityItemSource for custom activityItems
             let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
             present(activityViewController, animated: true, completion: nil)

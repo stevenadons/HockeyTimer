@@ -245,8 +245,8 @@ let LS_COUNTRY_INTERNATIONAL = NSLocalizedString("International", comment: "Dura
 let LS_COUNTRY_IN2HOCKEY = NSLocalizedString("In2Hockey", comment: "Durationcard description")
 let LS_COUNTRY_MASTERS_MAMIS_PAPIS = NSLocalizedString("Master & M/P", comment: "Durationcard description")
 
-let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "Setting")
-let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
+let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write review", comment: "Setting")
+let LS_SETTINGS_SHARE = NSLocalizedString("Share app", comment: "Setting")
 let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
 
 let LS_REPORT_ERROR = NSLocalizedString("Report a broken link", comment: "Setting")

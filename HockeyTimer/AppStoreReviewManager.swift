@@ -17,6 +17,7 @@ enum AppStoreReviewManager {
     
     static let actionHurdleForReviewRequest = 6
     static let keyReviewRequest = "keyReviewRequest"
+    
     static let keyAppVersionLastReviewRequest = "keyAppVersionLastReviewRequest"
     
     

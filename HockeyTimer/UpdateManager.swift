@@ -26,6 +26,7 @@ class UpdateManager {
     
     // MARK: - Init
     
+    // AppURL is in format "https://apps.apple.com/app/id1464432452"
     init(fromViewcontroller fromVC: UIViewController, appURL: String) {
         
         self.presentingViewController = fromVC
