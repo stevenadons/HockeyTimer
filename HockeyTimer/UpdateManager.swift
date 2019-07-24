@@ -26,7 +26,10 @@ class UpdateManager {
     
     // MARK: - Init
     
-    // AppURL is in format "https://apps.apple.com/app/id1464432452"
+    // AppURL is in format "https://itunes.apple.com/app/apple-store/id1436430225?mt=8"
+    // Note: Used to used apps.apple.com but:
+    // When Apple reviewed this feature in Gift Linker (1.4 build 1) they stated that:
+    // "Update button or alert does not link directly to the app’s page on the App Store"
     init(fromViewcontroller fromVC: UIViewController, appURL: String) {
         
         self.presentingViewController = fromVC
@@ -67,8 +70,6 @@ class UpdateManager {
             throw VersionError.invalidResponse
         }
         if let result = (json["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String {
-            #warning("testing")
-            return true
             return version != currentVersion
         }
         throw VersionError.invalidResponse

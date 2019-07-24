@@ -72,7 +72,7 @@ class PageVC: UIPageViewController {
 
         super.viewDidAppear(animated)
         askToAllowNotifications()
-        let updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://apps.apple.com/app/id1464432452")
+        let updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
         updateManager.checkForUpdates()
     }
     
