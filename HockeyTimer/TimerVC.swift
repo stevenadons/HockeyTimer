@@ -97,7 +97,6 @@ class TimerVC: PanArrowVC {
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()  
         
-        
         NSLayoutConstraint.activate([
             
             resetButton.widthAnchor.constraint(equalToConstant: 44),
@@ -272,6 +271,8 @@ class TimerVC: PanArrowVC {
     func resetWithNewGame() {
         
         handleNewGame()
+        
+        // Warn delegate (which is ScoreVC)
         delegate?.resetGame()
     }
     
@@ -299,24 +300,11 @@ class TimerVC: PanArrowVC {
 extension TimerVC: StopWatchDelegate {
     
     func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?) {
+        
         if stopWatchTimer.state != .WaitingToStart {
             showIcons()
         }
-        
-        switch stopWatchTimer.state {
-        case .WaitingToStart:
-            completionHandler?()
-        case .RunningCountDown:
-            completionHandler?()
-        case .RunningCountUp:
-            completionHandler?()
-        case .Paused:
-            completionHandler?()
-        case .Overdue:
-            completionHandler?()
-        case .Ended:
-            completionHandler?()
-        }
+        completionHandler?()
     }
     
     func handleTappedForNewGame() {

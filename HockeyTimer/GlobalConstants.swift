@@ -28,13 +28,6 @@ var SELECTED_COUNTRY: Country {
     }
 }
 
-
-enum HALF {
-    
-    case First
-    case Second
-}
-
 enum COLOR {
     
     // Standard colors
@@ -108,12 +101,16 @@ enum SOUND {
     static let Alarm = "StopWatchAlarmSound.mp3"
 }
 
+extension Notification.Name {
+    
+    static let AwakeFromNotification = Notification.Name("AwakeFromNotification")
+}
+
 var timerIsRunning: Bool = false
 var runningSecondsToGo: Int = 0
 var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
 var runningCountingUp: Bool = false
-var runningHalf: HALF = .First
 var runningDuration: Duration = .Twenty
 var shouldRestoreFromBackground: Bool = false
 
@@ -124,7 +121,12 @@ let LS_NEWGAME = NSLocalizedString("New Game", comment: "Overdue message")
 let LS_GAMEPAUSED = NSLocalizedString("Game Paused", comment: "Message when game is pausing")
 let LS_OVERTIME = NSLocalizedString("In Overtime", comment: "Time over message")
 let LS_HALFTIME = NSLocalizedString("Half Time", comment: "Half time message")
+let LS_ENDOFFIRSTQUARTER = NSLocalizedString("Q1 Ended", comment: "Half time message")
+let LS_ENDOFTHIRDQUARTER = NSLocalizedString("Q3 Ended", comment: "Half time message")
 let LS_READYFORH2 = NSLocalizedString("Ready for H2", comment: "H2 to begin message")
+let LS_READYFORQ2 = NSLocalizedString("Ready for Q2", comment: "Q2 to begin message")
+let LS_READYFORQ3 = NSLocalizedString("Ready for Q3", comment: "Q2 to begin message")
+let LS_READYFORQ4 = NSLocalizedString("Ready for Q4", comment: "H2 to begin message")
 let LS_FULLTIME = NSLocalizedString("Full Time", comment: "Full time message")
 let LS_FIRSTHALFLABEL = NSLocalizedString("H1", comment: "Half time indication label")
 let LS_SECONDHALFLABEL = NSLocalizedString("H2", comment: "Half time indication label")
@@ -132,7 +134,7 @@ let LS_WARNINGRESETGAME = NSLocalizedString("New Game", comment: "When reset but
 let LS_WARNINGNEWGAME = NSLocalizedString("New Game", comment: "When stopwatch is tapped for new game")
 let LS_WARNINGRESETPOPUP = NSLocalizedString("Are you sure you want to start a new game?", comment: "When reset button is tapped")
 let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notification when app in background")
-let LS_NOTIFICATION_DEFER = NSLocalizedString("+ 1 minute", comment: "To defer app to foreground in notification")
+let LS_NOTIFICATION_DEFER = NSLocalizedString("Remind me in 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
 let LS_NOTIFICATION_CONTENT = NSLocalizedString("Running in Overtime", comment: "Content for notification when app in background")
 

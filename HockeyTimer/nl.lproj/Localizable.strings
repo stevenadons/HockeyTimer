@@ -10,8 +10,13 @@
 "New Game" = "Start wedstrijd";
 "Game Paused" = "Pauze";
 "In Overtime" = "Over tijd";
-"Half Time" = "Rust";
+"Half Time" = "Halftime";
+"Q1 Ended" = "Einde Q1";
+"Q3 Ended" = "Einde Q3";
 "Ready for H2" = "Klaar voor H2";
+"Ready for Q2" = "Klaar voor Q2";
+"Ready for Q3" = "Klaar voor Q3";
+"Ready for Q4" = "Klaar voor Q4";
 "Full Time" = "Wedstrijd afgelopen";
 "H1" = "H1";
 "H2" = "H2";
@@ -20,7 +25,7 @@
 "New Game" = "Nieuwe wedstrijd";
 "Are you sure you want to start a new game?" = "Nieuwe wedstrijd.\nBen je zeker?";
 "OK" = "OK";
-"+ 1 minute" = "+ 1 minuut";
+"Remind me in 1 minute" = "Herinner me na 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
 "Running in Overtime" = "Tijd is verstreken";
 

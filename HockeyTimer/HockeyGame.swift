@@ -11,8 +11,20 @@ import Foundation
 
 enum Player {
     
-    case Home
-    case Away
+    case Home, Away
+}
+
+enum HalfGame {
+    
+    case First, Second
+}
+
+enum QuarterGame: Int {
+    
+    case First = 1
+    case Second = 2
+    case Third = 3
+    case Fourth = 4
 }
 
 
@@ -27,6 +39,9 @@ class HockeyGame {
         case Running
         case Pausing
         case HalfTime
+        case EndOfQuarter1
+        case EndOfQuarter2
+        case EndOfQuarter3
         case Finished
     }
     
@@ -35,7 +50,9 @@ class HockeyGame {
     
     private(set) var homeScore: Int = 0
     private(set) var awayScore: Int = 0
-    var half: HALF = .First
+    private(set) var pausesOnQuarters: Bool = false
+    var half: HalfGame = .First
+    var quarter: QuarterGame = .First
     var status: Status = .WaitingToStart
     var duration: Duration = .Twenty {
         didSet {
@@ -48,10 +65,11 @@ class HockeyGame {
     
     // MARK: - Initializing
 
-    convenience init(duration: Duration) {
+    convenience init(duration: Duration, pausesOnQuarters: Bool = false) {
         
         self.init()
         self.duration = duration
+        self.pausesOnQuarters = pausesOnQuarters
         runningDuration = duration
     }
     

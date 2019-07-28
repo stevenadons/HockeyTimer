@@ -39,6 +39,9 @@ class StopWatchTimer {
     var progress: CGFloat {
         return CGFloat(totalSecondsInHalf - totalSecondsToGo) / CGFloat(totalSecondsInHalf)
     }
+    var progressCappedAt1: CGFloat {
+        return min(progress, 1)
+    }
     
     var timer: Timer?
     private var delegate: StopWatchTimerDelegate!

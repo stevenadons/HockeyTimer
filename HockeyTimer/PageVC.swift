@@ -41,13 +41,15 @@ class PageVC: UIPageViewController {
             view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
         }
         
-        var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
+        #warning("testing")
+        var duration: Duration = .One
+//        var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
             if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
             }
         }
-        game = HockeyGame(duration: duration)
+        game = HockeyGame(duration: duration, pausesOnQuarters: true)
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
