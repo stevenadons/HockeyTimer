@@ -95,7 +95,8 @@ class TimerVC: PanArrowVC {
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
-        liftPanArrowDownLabelUp()
+        liftPanArrowDownLabelUp()  
+        
         
         NSLayoutConstraint.activate([
             
