@@ -73,14 +73,14 @@ class StopWatch: UIControl {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        game = HockeyGame(duration: .TwentyFive)
+        game = HockeyGame(duration: .TwentyFive, pausesOnQuarters: false)
         setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        game = HockeyGame(duration: .TwentyFive)
+        game = HockeyGame(duration: .TwentyFive, pausesOnQuarters: false)
         setUp()
     }
     
@@ -89,7 +89,8 @@ class StopWatch: UIControl {
         self.init()
         self.delegate = delegate
         self.game = game
-        timer.set(duration: game.duration)
+        timer.set(game: game)
+        runningSecondsToGo = timer.totalSecondsToGo
         timeLabel.text = stopWatchLabelTimeString()
         updateDurationLabel()
         periodLabel.text = game.pausesOnQuarters ? "Q1" : LS_FIRSTHALFLABEL
@@ -133,7 +134,7 @@ class StopWatch: UIControl {
         icon.color = COLOR.DarkBlue
         addSubview(icon)
         
-        timer = StopWatchTimer(delegate: self, duration: game.duration)
+        timer = StopWatchTimer(delegate: self, game: game)
         
         timeLabel = StopWatchLabel(text: stopWatchLabelTimeString())
         addSubview(timeLabel)
@@ -153,15 +154,7 @@ class StopWatch: UIControl {
         for subview in subviews {
             bringSubviewToFront(subview)
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(afterAwake), name: .AppWillEnterForeground, object: nil)
     }
-    
-    deinit {
-        
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     
     
     // MARK: - Layout and draw methods
@@ -207,21 +200,34 @@ class StopWatch: UIControl {
     
     func updateAfterRestoringFromBackground() {
         
+        print("SW - updateAfterRestoringFromBackground")
         if shouldRestoreFromBackground {
             if runningSecondsToGo > 0 {
                 timer.totalSecondsToGo = runningSecondsToGo
+                print("SW - case 1 - did set timer.totalSecondsToGo to \(timer.totalSecondsToGo)")
             } else if runningSecondsOverdue > 0 {
+                print("SW - case 2 - this is the one")
                 if timer.state != .Overdue {
                     // Timer has gone overdue when app inactive
                     timer.state = .Overdue
                     timer.stopCountDown()
+                    print("SW - case 2a - calling timer.stopCountDown")
                     timer.totalSecondsOverdue = runningSecondsOverdue
-                    timer.totalSecondsCountingUp = runningSecondsOverdue
-                    timer.startCountUp()
+                    timer.totalSecondsCountingUp = runningSecondsCountingUp
+                    print("SW - case 2a - did set timer.totalSecondsOverdue to \(timer.totalSecondsOverdue)")
+                    print("SW - case 2a - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
+                    timer.startOverdueCountUp()
+                    print("SW - case 2a - calling timer.startOverdueCountUp")
                     handleReachedZero()
+                } else {
+                    timer.totalSecondsOverdue = runningSecondsOverdue
+                    timer.totalSecondsCountingUp = runningSecondsCountingUp
+                    print("SW - case 2b - did set timer.totalSecondsOverdue to \(timer.totalSecondsOverdue)")
+                    print("SW - case 2b - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
                 }
             } else if runningSecondsCountingUp > 0 {
                 timer.totalSecondsCountingUp = runningSecondsCountingUp
+                print("SW - case 3 - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
             }
             updateProgressBars()
             if game.pausesOnQuarters {
@@ -265,7 +271,7 @@ class StopWatch: UIControl {
     func reset(withGame game: HockeyGame) {
         
         self.game = game
-        timer.reset() //
+        timer.reset(withGame: game) //
         message = LS_NEWGAME
         periodLabel.text = game.pausesOnQuarters ? "Q1" : LS_FIRSTHALFLABEL
         periodLabel.alpha = 1.0
@@ -278,7 +284,7 @@ class StopWatch: UIControl {
     
     func simplifyForOnboarding(bgColor: UIColor, iconColor: UIColor, timeColor: UIColor, progressZoneColor: UIColor) {
         
-        let simpleGame = HockeyGame(duration: .Thirty)
+        let simpleGame = HockeyGame(duration: .Thirty, pausesOnQuarters: false)
         reset(withGame: simpleGame)
         messageLabel.alpha = 0.0
         periodLabel.alpha = 0.0
@@ -295,18 +301,8 @@ class StopWatch: UIControl {
     
     // MARK: - Private methods
     
-    @objc private func afterAwake() {
-        
-        timer.totalSecondsToGo = runningSecondsToGo
-        timer.totalSecondsOverdue = runningSecondsOverdue
-        timer.totalSecondsCountingUp = runningSecondsCountingUp
-        
-        updateProgressBars()
-    }
-    
     @objc fileprivate func updateProgressBars() {
         
-        print("** updateProgressBars")
         if game.pausesOnQuarters {
             updateProgressBarsQuarterGame()
         } else {
@@ -337,7 +333,6 @@ class StopWatch: UIControl {
         progressBarFirstQuarter = progressBarLayer(for: QuarterGame.First)
         switch game.quarter {
         case .First:
-            print("*** timer.progressCappedAt1 is \(timer.progressCappedAt1)")
             progressBarFirstQuarter.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
         case .Second, .Third, .Fourth:
             progressBarFirstQuarter.strokeEnd = strokeEndPosition(progress: 1)
@@ -646,7 +641,7 @@ class StopWatch: UIControl {
         
         game.half = .Second
         periodLabel.text = LS_SECONDHALFLABEL
-        timer.reset()
+        timer.reset(withGame: game)
         setProgressBarsColor(to: COLOR.White)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
@@ -661,7 +656,7 @@ class StopWatch: UIControl {
         
         game.quarter = .Second
         periodLabel.text = "Q2"
-        timer.reset()
+        timer.reset(withGame: game)
         setProgressBarsColor(to: COLOR.White)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
@@ -676,7 +671,7 @@ class StopWatch: UIControl {
         
         game.quarter = .Third
         periodLabel.text = "Q3"
-        timer.reset()
+        timer.reset(withGame: game)
         setProgressBarsColor(to: COLOR.White)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
@@ -691,7 +686,7 @@ class StopWatch: UIControl {
         
         game.quarter = .Fourth
         periodLabel.text = "Q4"
-        timer.reset()
+        timer.reset(withGame: game)
         setProgressBarsColor(to: COLOR.White)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
@@ -711,8 +706,6 @@ class StopWatch: UIControl {
         }
     }
     
-    
-    
     fileprivate func resetTimeLabel(withColor color: UIColor, alpha: CGFloat) {
         timeLabel.textColor = color
         timeLabel.alpha = alpha
@@ -726,6 +719,13 @@ class StopWatch: UIControl {
             $0?.strokeColor = newColor.cgColor
             $0?.setNeedsDisplay()
         }
+    }
+    
+    private func syncTimerPosition() {
+        
+        runningSecondsToGo = timer.totalSecondsToGo
+        runningSecondsOverdue = timer.totalSecondsOverdue
+        runningSecondsCountingUp = timer.totalSecondsCountingUp
     }
     
     // MARK: - Haptic
@@ -753,7 +753,7 @@ extension StopWatch: StopWatchTimerDelegate {
     func handleTickCountDown() {
         
         runningCountingUp = false
-        runningSecondsToGo = timer.totalSecondsToGo
+        syncTimerPosition()
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
         updateProgressBars()
@@ -766,12 +766,13 @@ extension StopWatch: StopWatchTimerDelegate {
         if message == LS_OVERTIME {
             haptic?.notificationOccurred(.warning)
             haptic = nil
-            runningSecondsOverdue = timer.totalSecondsOverdue
+            syncTimerPosition()
+            print("StopWatch - handleTickCountUp - runningSecondsOverdue is \(runningSecondsOverdue)")
             JukeBox.instance.playSound(SOUND.BeepBeep)
             prepareHapticIfNeeded()
         } else {
             runningCountingUp = true
-            runningSecondsCountingUp = timer.totalSecondsCountingUp
+            syncTimerPosition()
         }
     }
     
@@ -780,7 +781,7 @@ extension StopWatch: StopWatchTimerDelegate {
         runningSecondsOverdue = 0
         runningSecondsCountingUp = 0
         runningCountingUp = false
-        timer.set(duration: game.duration)
+        timer.set(game: game)
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
     }

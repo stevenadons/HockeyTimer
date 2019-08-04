@@ -24,7 +24,7 @@ class DurationCard: UIButton {
     var duration: Duration = .TwentyFive {
         didSet {
             switch duration {
-            case .One, .Nine:
+            case .Nine:
                 backgroundColor = COLOR.Olive
                 miniStopWatch.color = COLOR.VeryDarkBlue
             case .Ten:

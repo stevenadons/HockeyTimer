@@ -143,7 +143,7 @@ class TimerVC: PanArrowVC {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateAfterRestoringFromBackground),
-                                               name: .AppWillEnterForeground,
+                                               name: .CurrentTimerPositionLoaded,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,

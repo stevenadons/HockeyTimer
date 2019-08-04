@@ -13,12 +13,13 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Properties
     
-    var currentDuration: Duration?
     var selectedDuration: Duration?
     
+    
     fileprivate var cancelView: UIButton!
-    fileprivate var cards: [DurationCard] = []
     fileprivate var countryMenu: CountryMenu!
+    fileprivate var quarterSelector: UISegmentedControl!
+    fileprivate var cards: [DurationCard] = []
     
     fileprivate var skipAnimations: Bool = false
     
@@ -89,6 +90,10 @@ class DurationVC: PanArrowVC {
                                   capitalsStrings: Country.allCapitals(),
                                   hasBorder: true,
                                   selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        
+        quarterSelector = UISegmentedControl(items: [LS_HALVES, LS_QUARTERS])
+        quarterSelector.translatesAutoresizingMaskIntoConstraints = false
+        quarterSelector.selectedSegmentIndex = 0
         
         for index in 0..<SELECTED_COUNTRY.durations.count {
             let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])

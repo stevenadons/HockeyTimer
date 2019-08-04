@@ -41,9 +41,9 @@ class PageVC: UIPageViewController {
             view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
         }
         
-        #warning("testing")
-        var duration: Duration = .One
-//        var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
+//        #warning("testing")
+//        var duration: Duration = .One
+        var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
             if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
@@ -189,7 +189,6 @@ extension PageVC: UIPageViewControllerDataSource {
         
         if let timerVC = viewController as? TimerVC {
             let durationVC = DurationVC(pageVC: self)
-            durationVC.currentDuration = timerVC.game.duration
             earlierVC = durationVC
             
         } else if let scoreVC = viewController as? ScoreVC {
@@ -240,7 +239,6 @@ extension PageVC: UIPageViewControllerDelegate {
         
         if let timerVC = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             view.backgroundColor = COLOR.White
-            durationVC.currentDuration = timerVC.game.duration
             durationVC.selectedDuration = nil
             
         } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {

@@ -107,11 +107,12 @@ extension Notification.Name {
 }
 
 var timerIsRunning: Bool = false
-var runningSecondsToGo: Int = 0
+var runningSecondsToGo: Int = 0 
 var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
 var runningCountingUp: Bool = false
 var runningDuration: Duration = .Twenty
+var runningNumberOfPeriods: 
 var shouldRestoreFromBackground: Bool = false
 
 
@@ -142,6 +143,9 @@ let LS_BUTTON_CANCEL = NSLocalizedString("Cancel", comment: "Cancel message")
 let LS_BUTTON_BACK = NSLocalizedString("Back", comment: "Message on button to back out from document")
 let LS_BUTTON_UNDOGOAL = NSLocalizedString("Undo Goal", comment: "Message for undoing goal")
 let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button for ending onboarding")
+
+let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
+let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")
 
 let LS_TITLE_GAMETIME = NSLocalizedString("Set Time", comment: "title for navigating")
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")

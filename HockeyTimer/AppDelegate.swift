@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
-        
+
         return true
     }
 
@@ -63,46 +63,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
+        print("applicationDidEnterBackground runningSecondsToGo is \(runningSecondsToGo)")
+        
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
         UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        
+        print("applicationDidEnterBackground runningSecondsOverdue is \(runningSecondsOverdue)")
         
         guard timerIsRunning else { return }
         if runningSecondsToGo > 0 {
             let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
             UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+            print("applicationDidEnterBackground did store endTime in \(runningSecondsToGo) seconds")
             UserNotificationHandler.sharedHandler.scheduleNotification(within: Double(runningSecondsToGo))
             
         } else if runningSecondsOverdue > 0 {
             let startTime = NSDate().addingTimeInterval(Double(-runningSecondsOverdue))
             UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
+            print("applicationDidEnterBackground did store startTime \(runningSecondsOverdue) ago - runningSecondsOverdue")
             
         } else if runningSecondsCountingUp > 0 {
             let startTime = NSDate().addingTimeInterval(Double(-runningSecondsCountingUp))
             UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+            print("applicationDidEnterBackground did store startTime \(runningSecondsCountingUp) ago - runningSecondsCountingUp")
         }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
+//        NotificationCenter.default.post(name: .AppWillEnterForeground, object: nil)
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
         UserNotificationHandler.sharedHandler.cancelAllNotificationRequests()
         
         runningSecondsToGo = 0
         runningSecondsOverdue = 0
         runningSecondsCountingUp = 0
-
+        
         if let storedEndTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground) as? NSDate {
             // Restoring from formerly running countdown
             if storedEndTime.timeIntervalSinceNow >= 0 && storedEndTime.timeIntervalSinceNow < Double(runningDuration.rawValue * 60) {
                 // Countdown should still be running
                 shouldRestoreFromBackground = true
-                runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow)
+                runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow) + 1
+                print("applicationDidBecomeActive - case 1 - did set runningSecondsToGo to \(runningSecondsToGo)")
                 
             } else if storedEndTime.timeIntervalSinceNow < 0 {
                 // Should set overdue time
                 shouldRestoreFromBackground = true
-                runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date))
+                runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date)) - 1
+                print("applicationDidBecomeActive - case 2 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
             
         } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeOverdue) as? NSDate {
@@ -110,7 +125,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Overdue countup should resume
                 shouldRestoreFromBackground = true
-                runningSecondsOverdue = Int(Date().timeIntervalSince(storedStartTime as Date))
+                runningSecondsOverdue = Int(Date().timeIntervalSince(storedStartTime as Date)) - 1
+                print("applicationDidBecomeActive - case 3 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
             
         } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp) as? NSDate {
@@ -118,14 +134,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Countup should resume
                 shouldRestoreFromBackground = true
-                runningSecondsCountingUp = Int(Date().timeIntervalSince(storedStartTime as Date))
+                runningSecondsCountingUp = Int(Date().timeIntervalSince(storedStartTime as Date)) - 1
+                print("applicationDidBecomeActive - case 4 - did set runningSecondsCountingUp to \(runningSecondsCountingUp)")
             }
         }
-        NotificationCenter.default.post(name: .AppWillEnterForeground, object: nil)
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        print("applicationDidBecomeActive - will post CurrentTimerPositionLoaded")
+        NotificationCenter.default.post(name: .CurrentTimerPositionLoaded, object: nil)
+        print("applicationDidBecomeActive - did post CurrentTimerPositionLoaded")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

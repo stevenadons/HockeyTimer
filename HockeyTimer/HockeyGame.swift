@@ -31,21 +31,6 @@ enum QuarterGame: Int {
 class HockeyGame {
     
     
-    // MARK: - Helpers
-    
-    enum Status {
-        
-        case WaitingToStart
-        case Running
-        case Pausing
-        case HalfTime
-        case EndOfQuarter1
-        case EndOfQuarter2
-        case EndOfQuarter3
-        case Finished
-    }
-    
-    
     // MARK: - Properties
     
     private(set) var homeScore: Int = 0
@@ -53,7 +38,7 @@ class HockeyGame {
     private(set) var pausesOnQuarters: Bool = false
     var half: HalfGame = .First
     var quarter: QuarterGame = .First
-    var status: Status = .WaitingToStart
+    var status: HockeyGameStatus = .WaitingToStart
     var duration: Duration = .Twenty {
         didSet {
             runningDuration = duration
@@ -65,7 +50,7 @@ class HockeyGame {
     
     // MARK: - Initializing
 
-    convenience init(duration: Duration, pausesOnQuarters: Bool = false) {
+    convenience init(duration: Duration, pausesOnQuarters: Bool) {
         
         self.init()
         self.duration = duration

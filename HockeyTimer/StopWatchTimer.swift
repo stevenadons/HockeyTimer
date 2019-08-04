@@ -12,32 +12,40 @@ import UIKit
 class StopWatchTimer {
     
     
-    // MARK: - Helper classes
-    
-    enum State {
-        case WaitingToStart
-        case RunningCountDown
-        case RunningCountUp
-        case Paused
-        case Overdue
-        case Ended
-    }
-    
-    
     // MARK: - Properties
     
-    var state: State = .WaitingToStart {
+    var state: StopWatchTimerState = .WaitingToStart {
         didSet {
             switch state {
-            case .WaitingToStart, .Paused, .Ended:
+            case .WaitingToStart:
                 timerIsRunning = false
-            case .RunningCountDown, .RunningCountUp, .Overdue:
+                totalSecondsToGo = game.duration.rawValue * 60
+                totalSecondsOverdue = 0
+                totalSecondsCountingUp = 0
+            case .RunningCountDown:
                 timerIsRunning = true
+            case .Paused:
+                timerIsRunning = false
+            case .Overdue:
+                timerIsRunning = true
+                totalSecondsToGo = 0
+            case .RunningCountUp:
+                timerIsRunning = true
+                totalSecondsOverdue = 0
+            case .Ended:
+                timerIsRunning = false
             }
         }
     }
     var progress: CGFloat {
-        return CGFloat(totalSecondsInHalf - totalSecondsToGo) / CGFloat(totalSecondsInHalf)
+        switch state {
+        case .WaitingToStart:
+            return 0
+        case .RunningCountDown, .Paused:
+            return CGFloat(totalSecondsInPeriod - totalSecondsToGo) / CGFloat(totalSecondsInPeriod)
+        case .RunningCountUp, .Overdue, .Ended:
+            return 1
+        }
     }
     var progressCappedAt1: CGFloat {
         return min(progress, 1)
@@ -45,8 +53,14 @@ class StopWatchTimer {
     
     var timer: Timer?
     private var delegate: StopWatchTimerDelegate!
+    private var game: HockeyGame! {
+        didSet {
+            self.totalSecondsInPeriod = game.duration.rawValue * 60
+            self.totalSecondsToGo = game.duration.rawValue * 60
+        }
+    }
     
-    private var totalSecondsInHalf: Int = Duration.Twenty.rawValue
+    private var totalSecondsInPeriod: Int = Duration.Twenty.rawValue
     var totalSecondsToGo: Int = Duration.Twenty.rawValue
     var totalSecondsOverdue: Int = 0
     var totalSecondsCountingUp: Int = 0
@@ -55,85 +69,80 @@ class StopWatchTimer {
     
     // MARK: - Initializing
     
-    required init(delegate: StopWatchTimerDelegate, duration: Duration) {
+    required init(delegate: StopWatchTimerDelegate, game: HockeyGame) {
         
         self.delegate = delegate
-        self.totalSecondsInHalf = duration.rawValue * 60
-        self.totalSecondsToGo = duration.rawValue * 60
+        self.game = game
     }
     
     
     
     // MARK: - Public Methods
     
-    func set(duration: Duration) {
+    func set(game: HockeyGame) {
         
-        totalSecondsInHalf = duration.rawValue * 60
-        totalSecondsToGo = duration.rawValue * 60
+        totalSecondsInPeriod = game.duration.rawValue * 60
+        totalSecondsToGo = game.duration.rawValue * 60
         
-        // for testing purposes
-//        totalSecondsInHalf = 5
-//        totalSecondsToGo = 5
-
+//        #warning("testing")
+//        totalSecondsInPeriod = game.duration.rawValue * 5
+//        totalSecondsToGo = game.duration.rawValue * 5
     }
     
     func startCountDown() {
         
         guard state == .WaitingToStart || state == .Paused else { return }
-        
-        // Create the timer without scheduling it directly, then add it by hand to a runloop
-        // Timers won’t fire when the user is interacting with your app
-        // https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
-        timer = Timer(timeInterval: 1.0, target: self, selector: #selector(tickCountDown), userInfo: nil, repeats: true)
-        timer!.tolerance = 0.1
-        RunLoop.current.add(timer!, forMode: .common)
-        
+        timer?.invalidate()
         state = .RunningCountDown
+        startTimer(with: #selector(tickCountDown))
+    }
+    
+    func startOverdueCountUp() {
+        
+        guard state == .RunningCountDown else { return }
+        timer?.invalidate()
+        state = .Overdue
+        startTimer(with: #selector(tickCountUp))
     }
     
     func startCountUp() {
         
-        guard state == .Ended else { return }
-        
-        // Create the timer without scheduling it directly, then add it by hand to a runloop
-        // Timers won’t fire when the user is interacting with your app
-        // https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
-        timer = Timer(timeInterval: 1.0, target: self, selector: #selector(tickCountUp), userInfo: nil, repeats: true)
-        timer!.tolerance = 0.1
-        RunLoop.current.add(timer!, forMode: .common)
-        
+        guard state == .Overdue else { return }
+        timer?.invalidate()
         state = .RunningCountUp
+        startTimer(with: #selector(tickCountUp))
     }
     
     func pause() {
         
-        guard state == .RunningCountDown || state == .RunningCountUp else { return }
+        guard state == .RunningCountDown else { return }
         timer?.invalidate()
         state = .Paused
     }
     
     func stopCountDown() {
         
-        guard state == .Overdue || state == .RunningCountDown else { return }
+        guard state == .RunningCountDown else { return }
         timer?.invalidate()
-        totalSecondsOverdue = 0
-        state = .Ended
     }
     
     func stopCountUp() {
         
-        guard state == .RunningCountUp else { return }
+        guard state == .Overdue || state == .RunningCountUp else { return }
         timer?.invalidate()
-        totalSecondsCountingUp = 0
-        state = .Ended
+        
+        if state == .Overdue {
+            totalSecondsOverdue = 0
+        } else if state == .RunningCountUp {
+            totalSecondsCountingUp = 0
+        }
         runningCountingUp = false
     }
     
-    func reset() {
+    func reset(withGame game: HockeyGame) {
         
-//        guard state != .WaitingToStart else { return }
         timer?.invalidate()
-        totalSecondsToGo = totalSecondsInHalf
+        self.game = game
         delegate.handleTimerReset()
         state = .WaitingToStart
     }
@@ -144,14 +153,16 @@ class StopWatchTimer {
 
     @objc private func tickCountDown() {
         
+        guard UIApplication.shared.applicationState != .background else { return }
+        print("SWTimer - tickCountDown - StopWatchTimer.totalSecondsToGo is \(totalSecondsToGo)")
+        
         if totalSecondsToGo >= 1 {
             // Count down
             totalSecondsToGo -= 1
             if totalSecondsToGo < 1 {
                 // Reached zero
-                state = .Overdue
                 stopCountDown()
-                startCountUp()
+                startOverdueCountUp()
                 delegate.handleReachedZero()
             } else {
                 // Keep on counting down
@@ -160,16 +171,33 @@ class StopWatchTimer {
         } else {
             // Overdue - count up
             totalSecondsOverdue += 1
+            print("StopWatchTimer.totalSecondsOverdue set to \(totalSecondsOverdue)")
             delegate.handleTickCountDown()
         }
     }
     
     @objc private func tickCountUp() {
         
-        totalSecondsCountingUp += 1
+        guard UIApplication.shared.applicationState != .background else { return }
+        print("SWTimer - tickCountUp - StopWatchTimer.totalSecondsOverdue is \(totalSecondsOverdue) - totalSecondsCountingUp is \(totalSecondsCountingUp)")
+
+        if state == .Overdue {
+            totalSecondsOverdue += 1
+        } else if state == .RunningCountUp {
+            totalSecondsCountingUp += 1
+        }
         delegate.handleTickCountUp()
     }
     
+    private func startTimer(with selector: Selector) {
+        
+        // Create the timer without scheduling it directly, then add it by hand to a runloop
+        // Timers won’t fire when the user is interacting with your app
+        // https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
+        timer = Timer(timeInterval: 1.0, target: self, selector: selector, userInfo: nil, repeats: true)
+        timer!.tolerance = 0.1
+        RunLoop.current.add(timer!, forMode: .common)
+    }
 }
 
 
