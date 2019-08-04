@@ -69,7 +69,7 @@ class DocumentMenuVC: PanArrowVC {
         }
         let attributedTitle = NSMutableAttributedString(string: plainTitle)
         let firstRange = NSRange(location: 0, length: lengthOfFirstRange)
-        attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeBold, size: 13)!, range: firstRange)
+        attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeBlack, size: 13)!, range: firstRange)
         let lastRange = NSRange(location: firstRange.length, length: plainTitle.count - firstRange.length)
         attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeRegular, size: 13)!, range: lastRange)
         let fullRange = NSRange(location: 0, length: plainTitle.count)

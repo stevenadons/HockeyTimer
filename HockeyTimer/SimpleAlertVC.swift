@@ -66,7 +66,7 @@ class SimpleAlertVC: UIViewController {
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText // "Allow Notifications"
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 28)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = COLOR.White
         titleLabel.textAlignment = .center
@@ -76,7 +76,7 @@ class SimpleAlertVC: UIViewController {
         textLabel = UILabel()
         textLabel.numberOfLines = 0
         textLabel.text = text
-        textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
+        textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 17)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textColor = COLOR.White
         textLabel.textAlignment = .center

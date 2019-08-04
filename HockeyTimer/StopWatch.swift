@@ -26,7 +26,8 @@ class StopWatch: UIControl {
     
     var game: HockeyGame! {
         didSet {
-            updateDurationLabel()
+            print("StopWatch - game set with numberOfPeriods \(game.numberOfPeriods) - will call updateLabels")
+            updateLabels()
             resetTimeLabel(withColor: COLOR.White, alpha: 1)
         }
     }
@@ -73,14 +74,14 @@ class StopWatch: UIControl {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        game = HockeyGame(duration: .TwentyFive, pausesOnQuarters: false)
+        game = HockeyGame(duration: .TwentyFive, numberOfPeriods: .Halves)
         setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        game = HockeyGame(duration: .TwentyFive, pausesOnQuarters: false)
+        game = HockeyGame(duration: .TwentyFive, numberOfPeriods: .Halves)
         setUp()
     }
     
@@ -89,11 +90,11 @@ class StopWatch: UIControl {
         self.init()
         self.delegate = delegate
         self.game = game
+        print("SW init will call timer.set with game \(game.numberOfPeriods)")
         timer.set(game: game)
         runningSecondsToGo = timer.totalSecondsToGo
-        timeLabel.text = stopWatchLabelTimeString()
-        updateDurationLabel()
-        periodLabel.text = game.pausesOnQuarters ? "Q1" : LS_FIRSTHALFLABEL
+        updateLabels()
+        periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
         setNeedsLayout()
     }
     
@@ -142,13 +143,13 @@ class StopWatch: UIControl {
         durationLabel = StopWatchSmallLabel()
         addSubview(durationLabel)
         messageLabel = StopWatchSmallLabel()
-        messageLabel.adjustsFontSizeToFitWidth = false
+        messageLabel.adjustsFontSizeToFitWidth = true
         messageLabel.numberOfLines = 0
         message = LS_NEWGAME
-        messageLabel.font = UIFont(name: FONTNAME.ThemeBold, size: durationLabel.font.pointSize)
+        messageLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
         addSubview(messageLabel)
         periodLabel = StopWatchSmallLabel()
-        periodLabel.font = UIFont(name: FONTNAME.ThemeBold, size: durationLabel.font.pointSize)
+        periodLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
         addSubview(periodLabel)
         
         for subview in subviews {
@@ -171,7 +172,7 @@ class StopWatch: UIControl {
         timeLabel.frame = bounds.insetBy(dx: bounds.width * 0.15, dy: bounds.height * 0.35)
         NSLayoutConstraint.activate([
             
-            messageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 80/230),
+            messageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 90/230),
             messageLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 40/230),
             messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 28),
@@ -179,23 +180,43 @@ class StopWatch: UIControl {
             durationLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 80/230),
             durationLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 20/230),
             durationLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            durationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
+            durationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -41),
             
             periodLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 80/230),
             periodLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 20/230),
             periodLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            periodLabel.topAnchor.constraint(equalTo: durationLabel.topAnchor, constant: durationLabel.font.pointSize),
+            periodLabel.topAnchor.constraint(equalTo: durationLabel.topAnchor, constant: durationLabel.font.pointSize + 2),
             
             ])
         
+        updateLabels()
+    }
+    
+    private func updateLabels() {
+        
         updateDurationLabel()
+        updateTimeLabel()
     }
     
     private func updateDurationLabel() {
         
-        let numberOfPeriods = game.pausesOnQuarters ? "4" : "2"
-        durationLabel.text = numberOfPeriods + "x\(game.duration.rawValue)min"
+        let numberOfPeriods = "\(game.numberOfPeriods.rawValue)"
+        var minutesString = ""
+        if game.numberOfPeriods == .Halves {
+            minutesString = "\(game.duration.rawValue)"
+            
+        } else {
+            let denominator = game.numberOfPeriods.rawValue / 2
+            let minutes = game.duration.withOneDecimalWhenDividedBy(denominator: denominator)
+            minutesString = (minutes - minutes.rounded() == 0) ? "\(Int(minutes.rounded()))" : "\(minutes)"
+        }
+        durationLabel.text = numberOfPeriods + " x " + minutesString
         durationLabel.setNeedsDisplay()
+    }
+    
+    private func updateTimeLabel() {
+        
+        timeLabel.text = stopWatchLabelTimeString()
     }
     
     func updateAfterRestoringFromBackground() {
@@ -230,7 +251,7 @@ class StopWatch: UIControl {
                 print("SW - case 3 - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
             }
             updateProgressBars()
-            if game.pausesOnQuarters {
+            if game.numberOfPeriods == .Quarters {
                 periodLabel.text = "Q\(game.quarter.rawValue)"
             } else {
                 periodLabel.text = (game.half == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
@@ -252,11 +273,13 @@ class StopWatch: UIControl {
         case .RunningCountUp:
             total = timer.totalSecondsCountingUp
         default:
+            print("SW stopWatchLabelTimeString with totalSecondsToGo \(timer.totalSecondsToGo)")
             total = timer.totalSecondsToGo
         }
         if game.status == .Finished {
             total = 0
         }
+        
         if minutes(totalSeconds: total) < 10 {
             result.append("0")
         }
@@ -271,9 +294,12 @@ class StopWatch: UIControl {
     func reset(withGame game: HockeyGame) {
         
         self.game = game
+        print("Stopwatch - game set to \(game.numberOfPeriods)")
         timer.reset(withGame: game) //
+        print("Stopwatch - will updateLabels")
+        updateLabels()
         message = LS_NEWGAME
-        periodLabel.text = game.pausesOnQuarters ? "Q1" : LS_FIRSTHALFLABEL
+        periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
         periodLabel.alpha = 1.0
         updateProgressBars()
         resetTimeLabel(withColor: COLOR.White, alpha: 1)
@@ -284,7 +310,7 @@ class StopWatch: UIControl {
     
     func simplifyForOnboarding(bgColor: UIColor, iconColor: UIColor, timeColor: UIColor, progressZoneColor: UIColor) {
         
-        let simpleGame = HockeyGame(duration: .Thirty, pausesOnQuarters: false)
+        let simpleGame = HockeyGame(duration: .Thirty, numberOfPeriods: .Halves)
         reset(withGame: simpleGame)
         messageLabel.alpha = 0.0
         periodLabel.alpha = 0.0
@@ -293,7 +319,7 @@ class StopWatch: UIControl {
         core.backgroundColor = bgColor.cgColor
         icon.color = iconColor
         timeLabel.textColor = timeColor
-        timeLabel.setFont(font: UIFont(name: FONTNAME.ThemeBold, size: 44)!)
+        timeLabel.setFont(font: UIFont(name: FONTNAME.ThemeBlack, size: 44)!)
         progressZone.fillColor = progressZoneColor.cgColor
     }
     
@@ -303,7 +329,7 @@ class StopWatch: UIControl {
     
     @objc fileprivate func updateProgressBars() {
         
-        if game.pausesOnQuarters {
+        if game.numberOfPeriods == .Quarters {
             updateProgressBarsQuarterGame()
         } else {
             updateProgressBarsHalfGame()
@@ -542,7 +568,7 @@ class StopWatch: UIControl {
             
             if game.status == .Running {
                 // Game running in overtime
-                if game.pausesOnQuarters {
+                if game.numberOfPeriods == .Quarters {
                     switch game.quarter {
                     case .First:
                         endQ1RunningInOvertime()

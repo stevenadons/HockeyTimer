@@ -76,7 +76,7 @@ class OnboardScreen: UIView {
         backgroundColor = UIColor.white
         
         logo = createLabel(bold: true, fontSize: 24)
-        logo.font = UIFont(name: FONTNAME.ThemeBold, size: 24)
+        logo.font = UIFont(name: FONTNAME.ThemeBlack, size: 24)
         logo.textColor = COLOR.VeryDarkBlue
         addSubview(logo)
         
@@ -85,13 +85,13 @@ class OnboardScreen: UIView {
         addSubview(graphics)
         
         title = createLabel(bold: true, fontSize: 24)
-        title.font = UIFont(name: FONTNAME.ThemeBold, size: 24)
+        title.font = UIFont(name: FONTNAME.ThemeBlack, size: 24)
         title.textColor = COLOR.VeryDarkBlue
         addSubview(title)
         
         body = UITextView()
         body.text = ""
-        body.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
+        body.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
         body.isUserInteractionEnabled = false
         body.textAlignment = .center
         body.textColor = COLOR.VeryDarkBlue

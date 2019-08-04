@@ -26,6 +26,7 @@ class MiniStopWatch: UIView {
         }
     }
     
+    
     private var squareContainer: CALayer!
     private var progressZone: CAShapeLayer!
     private var core: CALayer!
@@ -98,7 +99,7 @@ class MiniStopWatch: UIView {
         label.adjustsFontSizeToFitWidth = true
         if bold {
             let size = UIDevice.whenDeviceIs(small: 15, normal: 17, big: 17)
-            label.font = UIFont(name: FONTNAME.ThemeBold, size: size)
+            label.font = UIFont(name: FONTNAME.ThemeBlack, size: size)
         } else {
             label.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
         }

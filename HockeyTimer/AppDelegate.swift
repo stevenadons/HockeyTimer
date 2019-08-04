@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+//        #warning("testing")
+//        UserDefaults.standard.set(true, forKey: USERDEFAULTSKEY.PremiumMode)
+        
         AppDelegate.checkIfInPremiumMode(ifNot: {
             AppDelegate.downloadInAppProducts()
             GADMobileAds.sharedInstance().start(completionHandler: nil)
@@ -39,15 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        startViewController = OnboardingVC()
         
         // For testing purposes to avoid onboarding
-        #warning("testing")
-        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+//        #warning("testing")
+//        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
         // Standard one time onboarding
-//        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
-//            startViewController = OnboardingVC()
-//        } else {
-//            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
-//        }
+        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
+            startViewController = OnboardingVC()
+        } else {
+            startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        }
         
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()

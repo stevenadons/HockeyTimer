@@ -49,7 +49,14 @@ class PageVC: UIPageViewController {
                 duration = enumCase
             }
         }
-        game = HockeyGame(duration: duration, pausesOnQuarters: true)
+        var numberOfPeriods: NumberOfPeriods = .Halves
+        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.NumberOfPeriods) as? Int {
+            if let enumCase = NumberOfPeriods(rawValue: savedNumberOfPeriods) {
+                numberOfPeriods = enumCase
+            }
+        }
+        game = HockeyGame(duration: duration, numberOfPeriods: numberOfPeriods)
+        print("PageVC did set game with numberOfPeriods: \(numberOfPeriods)")
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
@@ -187,7 +194,7 @@ extension PageVC: UIPageViewControllerDataSource {
         
         var earlierVC: UIViewController? = nil
         
-        if let timerVC = viewController as? TimerVC {
+        if let _ = viewController as? TimerVC {
             let durationVC = DurationVC(pageVC: self)
             earlierVC = durationVC
             
@@ -237,14 +244,24 @@ extension PageVC: UIPageViewControllerDelegate {
             timerVC.hidePopup()
         }
         
-        if let timerVC = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
+        if let _ = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             view.backgroundColor = COLOR.White
             durationVC.selectedDuration = nil
+            durationVC.selectedNumberOfPeriods = nil
             
         } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
             if durationVC.selectedDuration != nil && timerVC.game.duration != durationVC.selectedDuration {
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
-                game = HockeyGame(duration: durationVC.selectedDuration!)
+                if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
+                    UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: USERDEFAULTSKEY.NumberOfPeriods)
+                    game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
+                } else {
+                    game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: game.numberOfPeriods)
+                }
+                NotificationCenter.default.post(name: .NewGame, object: nil)
+            } else if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
+                UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: USERDEFAULTSKEY.NumberOfPeriods)
+                game = HockeyGame(duration: timerVC.game.duration, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             }
             

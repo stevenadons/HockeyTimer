@@ -50,7 +50,7 @@ class PopupMessageView: UIView {
         label = UILabel()
         label.numberOfLines = 0
         label.text = message
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 22)
+        label.font = UIFont(name: FONTNAME.ThemeBlack, size: 22)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = COLOR.White
         label.textAlignment = .center

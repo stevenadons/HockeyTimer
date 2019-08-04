@@ -75,8 +75,9 @@ enum COLOR {
 
 enum FONTNAME {
     
-    static let ThemeBold = "Lato-Black"
-    static let ThemeRegular = "Lato-Bold" 
+    static let ThemeBlack = "Lato-Black"
+    static let ThemeBold = "Lato-Bold"
+    static let ThemeRegular = "Lato-Regular" 
     static let Numbers = "HelveticaNeue-Bold"
 }
 
@@ -84,7 +85,7 @@ enum FONTNAME {
 enum USERDEFAULTSKEY {
     
     static let Duration = "Duration"
-    static let OldDuration = "OldDuration"
+    static let NumberOfPeriods = "NumberOfPeriods"
     static let ShouldNotOnboard = "ShouldNotOnboard"
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
@@ -112,7 +113,6 @@ var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
 var runningCountingUp: Bool = false
 var runningDuration: Duration = .Twenty
-var runningNumberOfPeriods: 
 var shouldRestoreFromBackground: Bool = false
 
 
@@ -147,7 +147,7 @@ let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button f
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")
 
-let LS_TITLE_GAMETIME = NSLocalizedString("Set Time", comment: "title for navigating")
+let LS_TITLE_GAMETIME = NSLocalizedString("Set New Time", comment: "title for navigating")
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
@@ -158,16 +158,16 @@ let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Tap the stopwatch to play or p
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends.", comment: "Onboarding screen")
 
-let DOC_B_FIHRULES = NSLocalizedString("Rules FIH", comment: "Name for document")
+let DOC_B_FIHRULES = NSLocalizedString("General outdoor rules", comment: "Name for document")
 let DOC_B_INDOOR_U7_U10 = NSLocalizedString("Indoor U7-U10 (VHL)", comment: "Name for document")
 let DOC_B_INDOOR_U9_U19 = NSLocalizedString("Indoor U9-U19 (VHL)", comment: "Name for document")
-let DOC_B_INDOOR_FIH = NSLocalizedString("Indoor FIH Rules", comment: "Name for document")
-let DOC_B_VHLRULESU7U12 = NSLocalizedString("Rules U7-U12", comment: "Name for document")
-let DOC_B_VHLRULESU14U19 = NSLocalizedString("Rules U14-U19", comment: "Name for document")
+let DOC_B_INDOOR_FIH = NSLocalizedString("General indoor rules", comment: "Name for document")
+let DOC_B_VHLRULESU7U12 = NSLocalizedString("Outdoor U7-U12", comment: "Name for document")
+let DOC_B_VHLRULESU14U19 = NSLocalizedString("Outdoor U14-U19", comment: "Name for document")
 let DOC_B_LADIES = NSLocalizedString("Ladies Rules KBHB", comment: "Name for document")
 let DOC_B_GENTS = NSLocalizedString("Gents Rules KBHB", comment: "Name for document")
-let DOC_B_MORE_INDOOR = NSLocalizedString("More (Indoor)", comment: "Name for document")
-let DOC_B_MORE_OUTDOOR = NSLocalizedString("More (Outdoor)", comment: "Name for document")
+let DOC_B_MORE_INDOOR = NSLocalizedString("More (indoor)", comment: "Name for document")
+let DOC_B_MORE_OUTDOOR = NSLocalizedString("More (outdoor)", comment: "Name for document")
 
 let DOC_NL_SPELREGLEMENT = NSLocalizedString("Rules Outdoor", comment: "Name for document")
 let DOC_NL_INDOOR = NSLocalizedString("Rules Indoor", comment: "Name for document")
@@ -209,7 +209,7 @@ let DOC_ENG_SENIOR_COUNTY = NSLocalizedString("Senior County", comment: "Name fo
 let DOC_ENG_MORE = NSLocalizedString("More", comment: "Name for document")
 
 
-let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Set Time", comment: "Title of buy premium VC")
+let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Set New Time", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TITLE_NEW_GAME = NSLocalizedString("New Game", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME = NSLocalizedString("Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time.", comment: "Text of buy premium VC")
 let LS_BUYPREMIUM_TEXT_NEW_GAME = NSLocalizedString("Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment.", comment: "Text of buy premium VC")
@@ -224,7 +224,7 @@ let LS_BUYPREMIUM_OK = NSLocalizedString("OK", comment: "OK button when respondi
 
 let LS_ALLOW_NOTIFICATIONS_TITLE = NSLocalizedString("Allow Notifications", comment: "Title of modal VC")
 let LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS = NSLocalizedString("HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
-let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
+let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp will send a notification at the exact time the game ends. Enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
 let LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW = NSLocalizedString("OK, let me allow", comment: "Confirmation button when enabling notifications.")
 let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Cancel button when enabling notifications.")
 

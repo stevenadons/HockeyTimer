@@ -14,17 +14,22 @@ class DurationVC: PanArrowVC {
     // MARK: - Properties
     
     var selectedDuration: Duration?
-    
+    var selectedNumberOfPeriods: NumberOfPeriods?
     
     fileprivate var cancelView: UIButton!
     fileprivate var countryMenu: CountryMenu!
-    fileprivate var quarterSelector: UISegmentedControl!
+    fileprivate var pauseAtQuarterSwitch: UISwitch!
+    fileprivate var pauseAtQuarterLabel: UILabel!
     fileprivate var cards: [DurationCard] = []
     
     fileprivate var skipAnimations: Bool = false
-    
+    fileprivate var pauseSwitchLeadingConstraint: NSLayoutConstraint!
+
     fileprivate var padding: CGFloat {
         return (UIDevice.deviceSize != .small && cards.count > 4) ? 18 : 12
+    }
+    fileprivate  var cardWidth: CGFloat {
+        return view.bounds.width * 140 / 375
     }
     
     
@@ -35,6 +40,18 @@ class DurationVC: PanArrowVC {
         super.viewDidLoad()
         view.backgroundColor = COLOR.White
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        if pageVC?.game.numberOfPeriods == NumberOfPeriods.Quarters {
+            pauseAtQuarterSwitch.setOn(true, animated: false)
+        } else {
+            pauseAtQuarterSwitch.setOn(false, animated: false)
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +86,12 @@ class DurationVC: PanArrowVC {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        pauseSwitchLeadingConstraint.constant = -(view.bounds.width / 2 - cardWidth - (padding / 2))
+    }
+    
     private func setupViews() {
         
         cancelView = UIButton()
@@ -89,11 +112,31 @@ class DurationVC: PanArrowVC {
                                   labelNames: Country.allNames(),
                                   capitalsStrings: Country.allCapitals(),
                                   hasBorder: true,
+                                  leftSide: true,
                                   selected: countries.firstIndex(of: SELECTED_COUNTRY))
+        countryMenu.translatesAutoresizingMaskIntoConstraints = false
         
-        quarterSelector = UISegmentedControl(items: [LS_HALVES, LS_QUARTERS])
-        quarterSelector.translatesAutoresizingMaskIntoConstraints = false
-        quarterSelector.selectedSegmentIndex = 0
+        pauseAtQuarterSwitch = UISwitch()
+        pauseAtQuarterSwitch.translatesAutoresizingMaskIntoConstraints = false
+        if pageVC?.game.numberOfPeriods == NumberOfPeriods.Quarters {
+            pauseAtQuarterSwitch.setOn(true, animated: false)
+        } else {
+            pauseAtQuarterSwitch.setOn(false, animated: false)
+        }
+        pauseAtQuarterSwitch.addTarget(self, action: #selector(handleSwitch(pauseSwitch:)), for: [.valueChanged])
+        pauseAtQuarterSwitch.tintColor = COLOR.Olive
+        pauseAtQuarterSwitch.thumbTintColor = COLOR.Olive
+        pauseAtQuarterSwitch.onTintColor = COLOR.LightYellow
+        view.insertSubview(pauseAtQuarterSwitch, belowSubview: countryMenu)
+        
+        pauseAtQuarterLabel = UILabel()
+        pauseAtQuarterLabel.translatesAutoresizingMaskIntoConstraints = false
+        pauseAtQuarterLabel.textColor = COLOR.Olive.darker(by: 40)
+        pauseAtQuarterLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 15)
+        pauseAtQuarterLabel.text = "Pause at quarters"
+        pauseAtQuarterLabel.numberOfLines = 0
+        pauseAtQuarterLabel.textAlignment = .right
+        view.insertSubview(pauseAtQuarterLabel, belowSubview: countryMenu)
         
         for index in 0..<SELECTED_COUNTRY.durations.count {
             let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
@@ -102,12 +145,26 @@ class DurationVC: PanArrowVC {
             view.insertSubview(card, belowSubview: countryMenu)
         }
         
+        pauseSwitchLeadingConstraint = NSLayoutConstraint(item: pauseAtQuarterSwitch as Any, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -42)
+        let switchTopInset: CGFloat = UIDevice.whenDeviceIs(small: 36, normal: 51, big: 51)
+        
         NSLayoutConstraint.activate([
+            
+            countryMenu.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            countryMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            countryMenu.topAnchor.constraint(equalTo: view.topAnchor),
+            countryMenu.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             cancelView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cancelView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cancelView.topAnchor.constraint(equalTo: view.topAnchor),
             cancelView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            pauseAtQuarterSwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: switchTopInset),
+            pauseSwitchLeadingConstraint,
+            
+            pauseAtQuarterLabel.trailingAnchor.constraint(equalTo: pauseAtQuarterSwitch.leadingAnchor, constant: -11),
+            pauseAtQuarterLabel.centerYAnchor.constraint(equalTo: pauseAtQuarterSwitch.centerYAnchor, constant: 0),
             
             ])
         
@@ -116,15 +173,15 @@ class DurationVC: PanArrowVC {
     
     private func addCardConstraints() {
         
-        var topInset = UIDevice.whenDeviceIs(small: 100, normal: 130, big: 140)
+        var topInset = UIDevice.whenDeviceIs(small: 130, normal: 150, big: 190)
         if cards.count > 4 {
-            topInset = UIDevice.whenDeviceIs(small: 75, normal: 85, big: 140)
+            topInset = UIDevice.whenDeviceIs(small: 85, normal: 95, big: 140)
         }
                 
         for index in 0..<cards.count {
             
-            cards[index].widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375).isActive = true
-            cards[index].heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 140 / 375).isActive = true
+            cards[index].widthAnchor.constraint(equalToConstant: cardWidth).isActive = true
+            cards[index].heightAnchor.constraint(equalToConstant: cardWidth).isActive = true
             
             // Horizontal
             if index == cards.count - 1 && index % 2 == 0 { // Last card in the middle
@@ -165,6 +222,11 @@ class DurationVC: PanArrowVC {
         })
     }
     
+    @objc private func handleSwitch(pauseSwitch: UISwitch) {
+        
+        selectedNumberOfPeriods = pauseSwitch.isOn ? .Quarters : .Halves
+    }
+   
     
     // MARK: - Touch Methods
     

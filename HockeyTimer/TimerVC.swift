@@ -30,9 +30,13 @@ class TimerVC: PanArrowVC {
     fileprivate var cancelButton: ConfirmationButton!
 
     fileprivate var duration: Duration = .TwentyFive
-    var game: HockeyGame!
+    fileprivate var numberOfPeriods: NumberOfPeriods = .Halves
+    var game: HockeyGame! {
+        didSet {
+            duration = game.duration
+        }
+    }
     var delegate: TimerVCDelegate?
-    private var scorePanelCenterYConstraint: NSLayoutConstraint!
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
 
     var message: String = "" {
@@ -63,6 +67,7 @@ class TimerVC: PanArrowVC {
         
         stopWatchContainer = ContainerView()
         view.addSubview(stopWatchContainer)
+        
         stopWatch = StopWatch(delegate: self, game: game)
         stopWatch.translatesAutoresizingMaskIntoConstraints = false
         stopWatchContainer.addSubview(stopWatch)
@@ -94,7 +99,7 @@ class TimerVC: PanArrowVC {
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
-        panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
+        panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)
         liftPanArrowDownLabelUp()  
         
         NSLayoutConstraint.activate([
@@ -202,6 +207,7 @@ class TimerVC: PanArrowVC {
     @objc fileprivate func handleNewGame() {
         
         game = pageVC?.game
+        print("TimerVC - handleNewGame - will reset stopwatch with game \(game.numberOfPeriods)")
         stopWatch?.reset(withGame: game)
         panArrowDownLabel.text = "0 - 0"
         hideIcons()
@@ -214,7 +220,13 @@ class TimerVC: PanArrowVC {
                 duration = enumCase
             }
         }
-        game = HockeyGame(duration: duration)
+        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.NumberOfPeriods) as? Int {
+            if let enumCase = NumberOfPeriods(rawValue: savedNumberOfPeriods) {
+                numberOfPeriods = enumCase
+            }
+        }
+        game = HockeyGame(duration: duration, numberOfPeriods: numberOfPeriods)
+        print("TimerVC.createNewGame created game with numberOfPeriods \(numberOfPeriods)")
         pageVC?.game = game
         NotificationCenter.default.post(name: .NewGame, object: nil)
     }

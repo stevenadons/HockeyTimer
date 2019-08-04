@@ -36,7 +36,7 @@ class ConfirmationButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.clear
         setTitleColor(UIColor.black, for: .normal)
-        titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)
+        titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 14)
     }
     
     override func layoutSubviews() {
@@ -86,7 +86,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         }
         
         return button
@@ -106,7 +106,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         }
         
         return button
@@ -126,7 +126,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         }
         
         return button
@@ -148,7 +148,7 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 16)
         }
         
         return button

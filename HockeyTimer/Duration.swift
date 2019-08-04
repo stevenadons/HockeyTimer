@@ -25,5 +25,9 @@ enum Duration: Int, CaseIterable {
     var abbreviation: String {
         return "\(rawValue)m"
     }
+    func withOneDecimalWhenDividedBy(denominator: Int) -> Double {
+        let dividedDouble = Double(self.rawValue) / Double(denominator)
+        return (dividedDouble * 10).rounded() / 10
+    }
 }
 

@@ -19,7 +19,8 @@ class StopWatchTimer {
             switch state {
             case .WaitingToStart:
                 timerIsRunning = false
-                totalSecondsToGo = game.duration.rawValue * 60
+                print("SWT - didSet state - willl call resetTime")
+                resetTime()
                 totalSecondsOverdue = 0
                 totalSecondsCountingUp = 0
             case .RunningCountDown:
@@ -55,8 +56,8 @@ class StopWatchTimer {
     private var delegate: StopWatchTimerDelegate!
     private var game: HockeyGame! {
         didSet {
-            self.totalSecondsInPeriod = game.duration.rawValue * 60
-            self.totalSecondsToGo = game.duration.rawValue * 60
+            print("SWT - didSet game - willl call resetTime")
+            resetTime()
         }
     }
     
@@ -81,12 +82,9 @@ class StopWatchTimer {
     
     func set(game: HockeyGame) {
         
-        totalSecondsInPeriod = game.duration.rawValue * 60
-        totalSecondsToGo = game.duration.rawValue * 60
-        
-//        #warning("testing")
-//        totalSecondsInPeriod = game.duration.rawValue * 5
-//        totalSecondsToGo = game.duration.rawValue * 5
+        print("SWT - set(game) with game \(game.numberOfPeriods) - will call resetTime")
+        self.game = game
+        resetTime()
     }
     
     func startCountDown() {
@@ -145,11 +143,25 @@ class StopWatchTimer {
         self.game = game
         delegate.handleTimerReset()
         state = .WaitingToStart
+        print("SWTimer - game set with \(game.numberOfPeriods)")
     }
     
     
     
     // MARK: - Private Methods
+    
+    private func resetTime() {
+        
+//        #warning("testing")
+//        let normalMinutesInHalf = Double(game.duration.rawValue * 5)
+        
+        let normalMinutesInHalf = Double(game.duration.rawValue * 60)
+        let multiplier = 2.0 / Double(game.numberOfPeriods.rawValue)
+        let newMinutesInPeriod = Int(normalMinutesInHalf * multiplier)
+        self.totalSecondsInPeriod = newMinutesInPeriod
+        self.totalSecondsToGo = newMinutesInPeriod
+        print("SWTimer - resetTime - totalSecondsToGo set to \(totalSecondsToGo)")
+    }
 
     @objc private func tickCountDown() {
         

@@ -41,8 +41,8 @@ class DotMenu: UIView {
    
     private let buttonWidth: CGFloat = 44
     private let buttonHeight: CGFloat = 44
-    private let horInset: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 40, big: 40)
-    private var topInset: CGFloat = 44
+    private let horInset: CGFloat = UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
+    private var topInset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 45, big: 45)
     private let labelHeight: CGFloat = 25
     private let padding: CGFloat = 18
     private let labelInset: CGFloat = 18
@@ -56,8 +56,6 @@ class DotMenu: UIView {
         
         self.frame = containingView.frame
         self.center = containingView.center
-        let extraOffset = UIDevice.whenDeviceIs(small: 32, normal: 40, big: 60)
-        self.topInset = containingView.safeAreaLayoutGuide.layoutFrame.origin.y + extraOffset
         self.backgroundColor = UIColor.clear
         self.delegate = delegate
         self.labelNames = labelNames

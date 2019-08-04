@@ -84,10 +84,10 @@ class BuyPremiumVC: UIViewController {
     private func createAndLoadInterstitial() -> GADInterstitial {
         
         // For testing
-//        #warning("interstitial in test mode")
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        #warning("interstitial in test mode")
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         // For real
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2043391878522550/9706444069")
+//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2043391878522550/9706444069")
         
         interstitial.delegate = self
         interstitial.load(GADRequest())
@@ -101,7 +101,7 @@ class BuyPremiumVC: UIViewController {
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 28)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = COLOR.White
         titleLabel.textAlignment = .center
@@ -158,7 +158,7 @@ class BuyPremiumVC: UIViewController {
         let firstRange = NSRange(location: 0, length: lengthOfFirstRange)
         attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeRegular, size: 13)!, range: firstRange)
         let lastRange = NSRange(location: firstRange.length, length: plainTitle.count - firstRange.length)
-        attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeBold, size: 13)!, range: lastRange)
+        attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeBlack, size: 13)!, range: lastRange)
         let fullRange = NSRange(location: 0, length: plainTitle.count)
         attributedTitle.addAttribute(.foregroundColor, value: UIColor.lightGray.lighter(), range: fullRange)
         restorePurchaseButton.setAttributedTitle(attributedTitle, for: .normal)

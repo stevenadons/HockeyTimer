@@ -35,7 +35,7 @@ class HockeyGame {
     
     private(set) var homeScore: Int = 0
     private(set) var awayScore: Int = 0
-    private(set) var pausesOnQuarters: Bool = false
+    private(set) var numberOfPeriods: NumberOfPeriods = .Halves
     var half: HalfGame = .First
     var quarter: QuarterGame = .First
     var status: HockeyGameStatus = .WaitingToStart
@@ -50,11 +50,11 @@ class HockeyGame {
     
     // MARK: - Initializing
 
-    convenience init(duration: Duration, pausesOnQuarters: Bool) {
+    convenience init(duration: Duration, numberOfPeriods: NumberOfPeriods) {
         
         self.init()
         self.duration = duration
-        self.pausesOnQuarters = pausesOnQuarters
+        self.numberOfPeriods = numberOfPeriods
         runningDuration = duration
     }
     

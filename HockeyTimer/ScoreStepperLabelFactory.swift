@@ -19,7 +19,7 @@ class ScoreStepperLabelFactory {
         }
         label.text = text
         let fontSize: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 36, big: 36)
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: fontSize)
+        label.font = UIFont(name: FONTNAME.ThemeBlack, size: fontSize)
         if let textAlignment = textAlignment {
             label.textAlignment = textAlignment
         }

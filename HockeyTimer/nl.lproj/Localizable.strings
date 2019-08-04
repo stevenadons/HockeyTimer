@@ -42,21 +42,21 @@
 "Notifications" = "Meldingen";
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
 
-"Set Time" = "Tijd instellen";
+"Set New Time" = "Tijd instellen";
 "Rules" = "Spelregels";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
 
-"Rules FIH" = "Spelregels FIH";
+"General outdoor rules" = "Spelregels veld";
 "Indoor U7-U10 (VHL)" = "Indoor U7-U10 (VHL)";
 "Indoor U9-U19 (VHL)" = "Indoor U9-U19 (VHL)";
-"Indoor FIH Rules" = "Indoor Spelregels FIH";
-"Rules U7-U12" = "Spelregels U7-U12";
-"Rules U14-U19" = "Spelregels U14-U19";
-"Ladies Rules KBHB" = "Spelregels Ladies KBHB";
-"Gents Rules KBHB" = "Spelregels Gents KBHB";
-"More (Outdoor)" = "Meer (outdoor)";
-"More (Indoor)" = "Meer (indoor)";
+"General indoor rules" = "Spelregels zaal";
+"Outdoor U7-U12" = "Veld U7-U12";
+"Outdoor U14-U19" = "Veld U14-U19";
+"Ladies Rules KBHB" = "Veld Ladies KBHB";
+"Gents Rules KBHB" = "Veld Gents KBHB";
+"More (outdoor)" = "Meer (veld)";
+"More (indoor)" = "Meer (zaal)";
 
 "Rules Outdoor" = "Spelreglement";
 "Rules Indoor" = "Zaalhockey";
@@ -72,20 +72,20 @@
 "General Rules (2019)" = "Algemene regels (2019)";
 "Changes (01.04.2019)" = "Wijzigingen (01/04/2019)";
 "Indoor Rules (2017/2018)" = "Zaal (2017/2018)";
-"Indoor Changes (2017/2018)" = "Zaal wijzigingen (2017/2018)";
+"Indoor Changes (2017/2018)" = "Wijzigingen zaal (2017/2018)";
 "International Rules" = "Internationaal";
 "Youth (2017/2018)" = "Jeugd (2017/2018)";
 "Recommendations U8-U12" = "Aanbevelingen U8-U12";
 
-"Rules Outdoor 2019" = "Outdoor regels (2019)";
-"Changes Outdoor 2019" = "Outdoor wijzigingen (2019)";
-"Rules Indoor 2017" = "Indoor regels (2017)";
-"Changes Indoor 2019" = "Indoor wijzigingen (2019)";
+"Rules Outdoor 2019" = "Spelregels veld (2019)";
+"Changes Outdoor 2019" = "Wijzigingen veld (2019)";
+"Rules Indoor 2017" = "Spelregels zaal (2017)";
+"Changes Indoor 2019" = "Wijzigingen zaal (2019)";
 "España Master" = "Master";
 "Mamis & Papis" = "Mamis & Papis";
 
-"Rules Outdoor 2017" = "Outdoor regels (2017)";
-"Rules Indoor 2017" = "Indoor regels (2017)";
+"Rules Outdoor 2017" = "Spelregels veld (2017)";
+"Rules Indoor 2017" = "Spelregels zaal (2017)";
 "In2Hockey 6-a-side" = "In2Hockey (6 spelers)";
 "In2Hockey 7-a-side" = "In2Hockey (7 spelers)";
 "In2Hockey (more)" = "In2Hockey (meer)";
@@ -104,7 +104,7 @@
 "Please check your internet connection." = "Controleer of je verbinding hebt met internet.";
 
 "Allow Notifications" = "Activeer meldingen";
-"HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Open Instellingen en activeer meldingen voor HockeyUpp.";
+"HockeyUpp will send a notification at the exact time the game ends. Open Settings and enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Open Instellingen en activeer meldingen voor HockeyUpp.";
 "HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
 "OK, let me allow" = "OK, activeer meldingen";
 "Not now" = "Later";

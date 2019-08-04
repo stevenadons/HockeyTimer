@@ -50,7 +50,7 @@ class StopWatchSmallLabel: UILabel {
         text = ""
         textAlignment = .center
         adjustsFontSizeToFitWidth = true
-        font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
+        font = UIFont(name: FONTNAME.ThemeBold, size: 15)
     }
 
     

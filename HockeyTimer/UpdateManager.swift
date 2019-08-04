@@ -23,6 +23,8 @@ class UpdateManager {
     private weak var presentingViewController: UIViewController!
     private var appURL: String!
     
+    static var alreadyAskedSinceLaunch: Bool = false
+    
     
     // MARK: - Init
     
@@ -44,10 +46,10 @@ class UpdateManager {
         DispatchQueue.global().async {
             do {
                 let update = try self.isUpdateAvailable()
-                print("update",update)
                 DispatchQueue.main.async {
-                    if update {
+                    if update && !UpdateManager.alreadyAskedSinceLaunch {
                         self.popupUpdateDialogue()
+                        UpdateManager.alreadyAskedSinceLaunch = true
                     }
                 }
             } catch {

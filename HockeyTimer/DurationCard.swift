@@ -111,7 +111,7 @@ class DurationCard: UIButton {
         let label = UILabel()
         
         label.text = title
-        label.font = UIFont(name: FONTNAME.ThemeBold, size: 15)
+        label.font = UIFont(name: FONTNAME.ThemeBlack, size: 15)
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
