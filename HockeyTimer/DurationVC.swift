@@ -40,6 +40,19 @@ class DurationVC: PanArrowVC {
         super.viewDidLoad()
         view.backgroundColor = COLOR.White
         setupViews()
+        
+        #warning("testing")
+        let testTap = UITapGestureRecognizer(target: self, action: #selector(showTestSettings))
+        testTap.numberOfTouchesRequired = 3
+        testTap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(testTap)
+    }
+    
+    #warning("testing")
+    @objc private func showTestSettings() {
+        
+        let testingVC = TestingVC()
+        present(testingVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,7 +146,7 @@ class DurationVC: PanArrowVC {
         pauseAtQuarterLabel.translatesAutoresizingMaskIntoConstraints = false
         pauseAtQuarterLabel.textColor = COLOR.Olive.darker(by: 40)
         pauseAtQuarterLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 15)
-        pauseAtQuarterLabel.text = "Pause at quarters"
+        pauseAtQuarterLabel.text = LS_GAME_IN_QUARTERS
         pauseAtQuarterLabel.numberOfLines = 0
         pauseAtQuarterLabel.textAlignment = .right
         view.insertSubview(pauseAtQuarterLabel, belowSubview: countryMenu)
@@ -203,6 +216,12 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Public Methods
     
+    func clearSelectedDuration() {
+        
+        cards.forEach { $0.alpha = 1.0 }
+        selectedDuration = nil
+    }
+    
     
 
     
@@ -234,8 +253,7 @@ class DurationVC: PanArrowVC {
         
         if sender.duration == selectedDuration {
             // user tapped twice on same card
-            cards.forEach { $0.alpha = 1.0 }
-            selectedDuration = nil
+            clearSelectedDuration()
             return
         }
         

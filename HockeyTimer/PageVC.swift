@@ -245,21 +245,29 @@ extension PageVC: UIPageViewControllerDelegate {
         }
         
         if let _ = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
+            
+            // From TimerVC to DurationVC
             view.backgroundColor = COLOR.White
             durationVC.selectedDuration = nil
             durationVC.selectedNumberOfPeriods = nil
             
         } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
+            
+            // From DurationVC to TimerVC
             if durationVC.selectedDuration != nil && timerVC.game.duration != durationVC.selectedDuration {
+                // Duration changed
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
                 if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
+                    // Number of Periods also changed
                     UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: USERDEFAULTSKEY.NumberOfPeriods)
                     game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
                 } else {
+                    // Only Duration changed
                     game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: game.numberOfPeriods)
                 }
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             } else if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
+                // Only Number of Periods changed
                 UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: USERDEFAULTSKEY.NumberOfPeriods)
                 game = HockeyGame(duration: timerVC.game.duration, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)
@@ -278,8 +286,14 @@ extension PageVC: UIPageViewControllerDelegate {
         haptic?.selectionChanged()
         haptic = nil
         
+        // To DocumentMenuVC
         if let viewControllers = viewControllers, !viewControllers.isEmpty, let documentVC = viewControllers[0] as? DocumentMenuVC {
             documentVC.animateFlyIn()
+        }
+        
+        // Away from DurationVC
+        if !previousViewControllers.isEmpty, let durationVC = previousViewControllers[0] as? DurationVC {
+            durationVC.clearSelectedDuration()
         }
         
     }

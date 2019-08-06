@@ -138,6 +138,7 @@ let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notifica
 let LS_NOTIFICATION_DEFER = NSLocalizedString("Remind me in 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
 let LS_NOTIFICATION_CONTENT = NSLocalizedString("Running in Overtime", comment: "Content for notification when app in background")
+let LS_GAME_IN_QUARTERS = NSLocalizedString("Game in quarters", comment: "Title for switch")
 
 let LS_BUTTON_CANCEL = NSLocalizedString("Cancel", comment: "Cancel message")
 let LS_BUTTON_BACK = NSLocalizedString("Back", comment: "Message on button to back out from document")

@@ -12,6 +12,7 @@
 		4F1C321922F75BA000DC8D3A /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */; };
 		4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */; };
 		4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F37FBF122AD3FD200D2E236 /* UIDevice.swift */; };
+		4F3A11D922F89FE600E643CB /* TestingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3A11D822F89FE600E643CB /* TestingVC.swift */; };
 		4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */; };
 		4F3F397B22B9673000BC0141 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F397A22B9673000BC0141 /* UpdateManager.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
@@ -99,6 +100,7 @@
 		4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationsHandler.swift; path = "../../../Swift-files/Services/UserNotificationsHandler.swift"; sourceTree = "<group>"; };
 		4F37FBF122AD3FD200D2E236 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		4F3A11D822F89FE600E643CB /* TestingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingVC.swift; sourceTree = "<group>"; };
 		4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		4F3F397A22B9673000BC0141 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */,
 				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
 				4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */,
+				4F3A11D822F89FE600E643CB /* TestingVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4F4D5E5522F3554D00701504 /* HockeyGameStatus.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
+				4F3A11D922F89FE600E643CB /* TestingVC.swift in Sources */,
 				4F8470D422AEA39200D71989 /* MenuButtonLayer.swift in Sources */,
 				4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */,
 				4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */,

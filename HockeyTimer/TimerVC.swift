@@ -146,15 +146,9 @@ class TimerVC: PanArrowVC {
     
     private func addObservers() {
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateAfterRestoringFromBackground),
-                                               name: .CurrentTimerPositionLoaded,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleNewGame),
-                                               name: .NewGame,
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAfterRestoringFromBackground), name: .CurrentTimerPositionLoaded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNewGame), name: .NewGame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleGoToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     deinit {
@@ -207,10 +201,16 @@ class TimerVC: PanArrowVC {
     @objc fileprivate func handleNewGame() {
         
         game = pageVC?.game
-        print("TimerVC - handleNewGame - will reset stopwatch with game \(game.numberOfPeriods)")
         stopWatch?.reset(withGame: game)
         panArrowDownLabel.text = "0 - 0"
         hideIcons()
+    }
+    
+    @objc private func handleGoToBackground() {
+        
+        if timerIsRunning {
+            stopWatch.hideTimeLabel()
+        }
     }
     
     private func createNewGame() {

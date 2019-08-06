@@ -203,52 +203,43 @@ class StopWatch: UIControl {
         let numberOfPeriods = "\(game.numberOfPeriods.rawValue)"
         var minutesString = ""
         if game.numberOfPeriods == .Halves {
-            minutesString = "\(game.duration.rawValue)"
+            minutesString = "\(game.duration.rawValue) min"
             
         } else {
             let denominator = game.numberOfPeriods.rawValue / 2
             let minutes = game.duration.withOneDecimalWhenDividedBy(denominator: denominator)
-            minutesString = (minutes - minutes.rounded() == 0) ? "\(Int(minutes.rounded()))" : "\(minutes)"
+            minutesString = (minutes - minutes.rounded() == 0) ? "\(Int(minutes.rounded())) min" : "\(minutes) min"
         }
-        durationLabel.text = numberOfPeriods + " x " + minutesString
+        durationLabel.text = numberOfPeriods + "x" + minutesString
         durationLabel.setNeedsDisplay()
     }
     
     private func updateTimeLabel() {
         
+        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
     }
     
     func updateAfterRestoringFromBackground() {
         
-        print("SW - updateAfterRestoringFromBackground")
         if shouldRestoreFromBackground {
             if runningSecondsToGo > 0 {
                 timer.totalSecondsToGo = runningSecondsToGo
-                print("SW - case 1 - did set timer.totalSecondsToGo to \(timer.totalSecondsToGo)")
             } else if runningSecondsOverdue > 0 {
-                print("SW - case 2 - this is the one")
                 if timer.state != .Overdue {
                     // Timer has gone overdue when app inactive
                     timer.state = .Overdue
                     timer.stopCountDown()
-                    print("SW - case 2a - calling timer.stopCountDown")
                     timer.totalSecondsOverdue = runningSecondsOverdue
                     timer.totalSecondsCountingUp = runningSecondsCountingUp
-                    print("SW - case 2a - did set timer.totalSecondsOverdue to \(timer.totalSecondsOverdue)")
-                    print("SW - case 2a - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
                     timer.startOverdueCountUp()
-                    print("SW - case 2a - calling timer.startOverdueCountUp")
                     handleReachedZero()
                 } else {
                     timer.totalSecondsOverdue = runningSecondsOverdue
                     timer.totalSecondsCountingUp = runningSecondsCountingUp
-                    print("SW - case 2b - did set timer.totalSecondsOverdue to \(timer.totalSecondsOverdue)")
-                    print("SW - case 2b - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
                 }
             } else if runningSecondsCountingUp > 0 {
                 timer.totalSecondsCountingUp = runningSecondsCountingUp
-                print("SW - case 3 - did set timer.totalSecondsCountingUp to \(timer.totalSecondsCountingUp)")
             }
             updateProgressBars()
             if game.numberOfPeriods == .Quarters {
@@ -273,7 +264,6 @@ class StopWatch: UIControl {
         case .RunningCountUp:
             total = timer.totalSecondsCountingUp
         default:
-            print("SW stopWatchLabelTimeString with totalSecondsToGo \(timer.totalSecondsToGo)")
             total = timer.totalSecondsToGo
         }
         if game.status == .Finished {
@@ -294,9 +284,7 @@ class StopWatch: UIControl {
     func reset(withGame game: HockeyGame) {
         
         self.game = game
-        print("Stopwatch - game set to \(game.numberOfPeriods)")
-        timer.reset(withGame: game) //
-        print("Stopwatch - will updateLabels")
+        timer.reset(withGame: game)
         updateLabels()
         message = LS_NEWGAME
         periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
@@ -323,6 +311,20 @@ class StopWatch: UIControl {
         progressZone.fillColor = progressZoneColor.cgColor
     }
     
+    func hideTimeLabel() {
+        
+        timeLabel.alpha = 0.0
+    }
+    
+    func showTimeLabel() {
+        
+        if timeLabel.alpha == 0.0 {
+            UIView.animate(withDuration: 0.3) {
+                self.timeLabel.alpha = 1.0
+            }
+        }
+    }
+    
     
     
     // MARK: - Private methods
@@ -338,8 +340,9 @@ class StopWatch: UIControl {
     
     private func updateProgressBarsHalfGame() {
         
-        progressBarFirstHalf.removeFromSuperlayer()
-        progressBarSecondHalf.removeFromSuperlayer()
+        [progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter, progressBarFirstHalf, progressBarSecondHalf].forEach {
+            $0?.removeFromSuperlayer()
+        }
         
         progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
         progressBarFirstHalf.strokeEnd = (game.half == .Second) ? strokeEndPosition(progress: 1) : strokeEndPosition(progress: timer.progressCappedAt1)
@@ -352,7 +355,7 @@ class StopWatch: UIControl {
     
     private func updateProgressBarsQuarterGame() {
         
-        [progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter].forEach {
+        [progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter, progressBarFirstHalf, progressBarSecondHalf].forEach {
             $0?.removeFromSuperlayer()
         }
         
@@ -733,8 +736,10 @@ class StopWatch: UIControl {
     }
     
     fileprivate func resetTimeLabel(withColor color: UIColor, alpha: CGFloat) {
+        
         timeLabel.textColor = color
         timeLabel.alpha = alpha
+        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
     }
@@ -780,6 +785,7 @@ extension StopWatch: StopWatchTimerDelegate {
         
         runningCountingUp = false
         syncTimerPosition()
+        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
         updateProgressBars()
@@ -787,13 +793,13 @@ extension StopWatch: StopWatchTimerDelegate {
     
     func handleTickCountUp() {
         
+        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
         if message == LS_OVERTIME {
             haptic?.notificationOccurred(.warning)
             haptic = nil
             syncTimerPosition()
-            print("StopWatch - handleTickCountUp - runningSecondsOverdue is \(runningSecondsOverdue)")
             JukeBox.instance.playSound(SOUND.BeepBeep)
             prepareHapticIfNeeded()
         } else {
@@ -808,6 +814,7 @@ extension StopWatch: StopWatchTimerDelegate {
         runningSecondsCountingUp = 0
         runningCountingUp = false
         timer.set(game: game)
+        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
         timeLabel.setNeedsDisplay()
     }
