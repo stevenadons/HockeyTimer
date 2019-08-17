@@ -61,9 +61,6 @@ struct Country {
         }
         return nil
     }
-
-    
-
 }
 
 
@@ -79,6 +76,26 @@ extension Country: Equatable {
 
 
 var countries: [Country] {
+    
+    // Australia
+    
+    let AUSOutdoorRules = Rules(name: DOC_AUS_OUTDOORRULES, url: "http://www.fih.ch/media/13164482/fih-rules-of-hockey-2019-final.pdf")
+    let AUSOutdoorGroup = GroupOfRules(rulesArray: [AUSOutdoorRules])
+    
+    let AUSIndoorRules = Rules(name: DOC_AUS_INDOORRULES, url: "http://www.fih.ch/media/12236439/rules-of-indoor-hockey-2017.pdf")
+    let AUSIndoorGroup = GroupOfRules(rulesArray: [AUSIndoorRules])
+    
+    let AUSBluffersGuide = Rules(name: DOC_AUS_BLUFFERSGUIDE, url: "http://www.hockey.org.au/Portals/2/Game%20Development/Hockey%20Australia%20Bluffer's%20Guide%20to%20Hockey.pdf")
+    let AUSBluffersGroup = GroupOfRules(rulesArray: [AUSBluffersGuide])
+    
+    let australia = Country(capitals: "AUS",
+                            localeRegionCode: "AU",
+                            name: LS_COUNTRY_AUSTRALIA,
+                            durations: [.Twenty, .ThirtyFive],
+                            durationStrings: ["Indoor", "Outdoor"],
+                            groupsOfRules: [AUSOutdoorGroup, AUSIndoorGroup, AUSBluffersGroup])
+
+    
     
     // Belgium
     
@@ -194,7 +211,8 @@ var countries: [Country] {
     
     // Netherlands
     
-    let rules = Rules(name: DOC_NL_SPELREGLEMENT, url: "https://www.knhb.nl/app/uploads/2018/08/Spelreglement-Veldhockey-per-1-augustus-2018-1.pdf")
+    let rules = Rules(name: DOC_NL_SPELREGLEMENT, url: "https://www.knhb.nl/app/uploads/2019/08/VELDREGLEMENT-2019_DEF.pdf")
+     // https://www.knhb.nl/app/uploads/2018/08/Spelreglement-Veldhockey-per-1-augustus-2018-1.pdf
     let basicNL = GroupOfRules(rulesArray: [rules])
     
     let teamsOf3 = Rules(name: DOC_NL_3TALLEN, url: "https://www.knhb.nl/kenniscentrum/artikel/spelregels-3-tallen")
@@ -203,7 +221,11 @@ var countries: [Country] {
     let nlYouth = GroupOfRules(rulesArray: [teamsOf3, teamsOf6, teamsOf8])
     
     let indoorHolland = Rules(name: DOC_NL_INDOOR, url: "https://www.knhb.nl/app/uploads/2017/01/Spelreglement-Zaalhockey-2016-2017.pdf")
-    let indoorGroupHolland = GroupOfRules(rulesArray: [indoorHolland])
+    let indoorDifferencesOutdoorHolland = Rules(name: DOC_NL_INDOOR_DIFFERENCES_OUTDOOR, url: "https://www.knhb.nl/app/uploads/2018/12/Verschillen-spelregels-veld-en-zaalhockey-2018-2019.docx")
+    let indoorGroupHolland = GroupOfRules(rulesArray: [indoorHolland, indoorDifferencesOutdoorHolland])
+    
+    let disabilityHolland = Rules(name: DOC_NL_DISABILITY, url: "https://www.knhb.nl/kenniscentrum/scheidsrechters/alles-over-de-spelregels")
+    let disabilityGroupHolland = GroupOfRules(rulesArray: [disabilityHolland])
     
     let moreNL = Rules(name: DOC_NL_WEBPAGE, url: "https://www.knhb.nl/kenniscentrum/scheidsrechters/alles-over-de-spelregels")
     let moreNLGroup = GroupOfRules(rulesArray: [moreNL])
@@ -221,9 +243,9 @@ var countries: [Country] {
                                                 LS_COUNTRY_TEAMS_OF_6,
                                                 LS_COUNTRY_TEAMS_OF_8,
                                                 LS_COUNTRY_GENERAL],
-                              groupsOfRules: [basicNL, nlYouth, indoorGroupHolland, moreNLGroup])
+                              groupsOfRules: [basicNL, nlYouth, indoorGroupHolland, disabilityGroupHolland, moreNLGroup])
     
-    return [belgium, germany, spain, england, netherlands]
+    return [australia, belgium, germany, spain, england, netherlands]
     
     
     

@@ -58,7 +58,6 @@ class DurationVC: PanArrowVC {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
         setPauseAtQuarterSwitch()
     }
     
@@ -253,10 +252,14 @@ class DurationVC: PanArrowVC {
     
     private func showAlertNewGame() {
         
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: nil, cancelAction: {
+        skipAnimations = true
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+            self.skipAnimations = false
+        }, cancelAction: {
             let newSwitchPosition = self.pauseAtQuarterSwitch.isOn
             self.pauseAtQuarterSwitch.setOn(!newSwitchPosition, animated: true)
             self.selectedNumberOfPeriods = nil
+            self.skipAnimations = false
         })
         
         DispatchQueue.main.async {

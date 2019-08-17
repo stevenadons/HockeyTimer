@@ -152,9 +152,9 @@ class StopWatchTimer {
     
     private func resetTime() {
         
-        #warning("testing")
-        let normalMinutesInHalf = Double(game.duration.rawValue * 3)
-//        let normalMinutesInHalf = Double(game.duration.rawValue * 60)
+//        #warning("testing")
+//        let normalMinutesInHalf = Double(game.duration.rawValue * 6)
+        let normalMinutesInHalf = Double(game.duration.rawValue * 60)
         
         let multiplier = 2.0 / Double(game.numberOfPeriods.rawValue)
         let newMinutesInPeriod = Int(normalMinutesInHalf * multiplier)

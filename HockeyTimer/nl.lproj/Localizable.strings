@@ -49,10 +49,14 @@
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
 
-"General outdoor rules" = "Spelregels veld";
+"Outdoor Rules" = "Veldhockey";
+"Indoor Rules" = "Zaalhockey";
+"Bluffer's Guide" = "Bluffer's Guide";
+
+"General outdoor rules" = "Veldhockey";
 "Indoor U7-U10 (VHL)" = "Indoor U7-U10 (VHL)";
 "Indoor U9-U19 (VHL)" = "Indoor U9-U19 (VHL)";
-"General indoor rules" = "Spelregels zaal";
+"General indoor rules" = "Zaalhockey";
 "Outdoor U7-U12" = "Veld U7-U12";
 "Outdoor U14-U19" = "Veld U14-U19";
 "Ladies Rules KBHB" = "Veld Ladies KBHB";
@@ -60,15 +64,13 @@
 "More (outdoor)" = "Meer (veld)";
 "More (indoor)" = "Meer (zaal)";
 
-"Rules Outdoor" = "Spelreglement";
+"Rules Outdoor" = "Veldhockey";
 "Rules Indoor" = "Zaalhockey";
 "Teams of 3" = "3-tallen";
 "Teams of 6" = "6-tallen";
 "Teams of 8" = "8-tallen";
-"E-Hockey  -  HK / OK" = "E-Hockey  -  Hoofd en Overgang";
-"E-Hockey  -  Regional" = "E-Hockey  -  Regioklasse";
-"H-Hockey  -  HK / OK" = "H-Hockey  -  Hoofd en Overgang";
-"H-Hockey  -  1-4 class" = "H-Hockey  -  Klasse 1 tot 4";
+"Differences to Outdoor" = "Verschillen met veld";
+"Disability Hockey" = "Aangepast hockey";
 "More" = "Meer";
 
 "General Rules (2019)" = "Algemene regels (2019)";
@@ -116,6 +118,7 @@
 "Update" = "Update";
 "Skip new version" = "Overslaan";
 
+"Australia" = "Australië";
 "Belgium" = "België";
 "Netherlands" = "Nederland";
 "Germany" = "Duitsland";

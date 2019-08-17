@@ -160,6 +160,10 @@ let LS_BODY_ONBOARDINGSLIDE1 = NSLocalizedString("Tap the stopwatch to play or p
 let LS_BODY_ONBOARDINGSLIDE2 = NSLocalizedString("Drag the ball left or right", comment: "Onboarding screen")
 let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends.", comment: "Onboarding screen")
 
+let DOC_AUS_OUTDOORRULES = NSLocalizedString("Outdoor Rules", comment: "Name for document")
+let DOC_AUS_INDOORRULES = NSLocalizedString("Indoor Rules", comment: "Name for document")
+let DOC_AUS_BLUFFERSGUIDE = NSLocalizedString("Bluffer's Guide", comment: "Name for document")
+
 let DOC_B_FIHRULES = NSLocalizedString("General outdoor rules", comment: "Name for document")
 let DOC_B_INDOOR_U7_U10 = NSLocalizedString("Indoor U7-U10 (VHL)", comment: "Name for document")
 let DOC_B_INDOOR_U9_U19 = NSLocalizedString("Indoor U9-U19 (VHL)", comment: "Name for document")
@@ -173,13 +177,11 @@ let DOC_B_MORE_OUTDOOR = NSLocalizedString("More (outdoor)", comment: "Name for 
 
 let DOC_NL_SPELREGLEMENT = NSLocalizedString("Rules Outdoor", comment: "Name for document")
 let DOC_NL_INDOOR = NSLocalizedString("Rules Indoor", comment: "Name for document")
+let DOC_NL_INDOOR_DIFFERENCES_OUTDOOR = NSLocalizedString("Differences to Outdoor", comment: "Name for document")
 let DOC_NL_3TALLEN = NSLocalizedString("Teams of 3", comment: "Name for document")
 let DOC_NL_6TALLEN = NSLocalizedString("Teams of 6", comment: "Name for document")
 let DOC_NL_8TALLEN = NSLocalizedString("Teams of 8", comment: "Name for document")
-let DOC_NL_E_HKOK = NSLocalizedString("E-Hockey  -  HK / OK", comment: "Name for document")
-let DOC_NL_E_REGIONAL = NSLocalizedString("E-Hockey  -  Regional", comment: "Name for document")
-let DOC_NL_H_HKOK = NSLocalizedString("H-Hockey  -  HK / OK", comment: "Name for document")
-let DOC_NL_H_1TO4 = NSLocalizedString("H-Hockey  -  1-4 class", comment: "Name for document")
+let DOC_NL_DISABILITY = NSLocalizedString("Disability Hockey", comment: "Name for document")
 let DOC_NL_WEBPAGE = NSLocalizedString("More", comment: "Name for document")
 
 let DOC_D_GENERAL_RULES = NSLocalizedString("General Rules (2019)", comment: "Name for document")
@@ -235,6 +237,7 @@ let LS_NEW_APP_VERSION_POPUP_TEXT = NSLocalizedString("A new version of HockeyUp
 let LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON = NSLocalizedString("Update", comment: "Button in popup")
 let LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON = NSLocalizedString("Skip new version", comment: "Button in popup")
 
+let LS_COUNTRY_AUSTRALIA = NSLocalizedString("Australia", comment: "Country name in picker")
 let LS_COUNTRY_BELGIUM = NSLocalizedString("Belgium", comment: "Country name in picker")
 let LS_COUNTRY_NETHERLANDS = NSLocalizedString("Netherlands", comment: "Country name in picker")
 let LS_COUNTRY_GERMANY = NSLocalizedString("Germany", comment: "Country name in picker")
