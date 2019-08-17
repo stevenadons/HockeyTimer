@@ -238,9 +238,6 @@ extension PageVC: UIPageViewControllerDelegate {
         if let documentVC = pageViewController.viewControllers?.first as? DocumentMenuVC {
             documentVC.hideMenus()
         }
-        if let timerVC = pageViewController.viewControllers?.first as? TimerVC {
-            timerVC.hidePopup()
-        }
         
         if let _ = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             

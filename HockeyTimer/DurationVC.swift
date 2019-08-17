@@ -59,12 +59,7 @@ class DurationVC: PanArrowVC {
         
         super.viewWillAppear(animated)
         
-        if pageVC?.game.numberOfPeriods == NumberOfPeriods.Quarters {
-            pauseAtQuarterSwitch.setOn(true, animated: false)
-        } else {
-            pauseAtQuarterSwitch.setOn(false, animated: false)
-        }
-
+        setPauseAtQuarterSwitch()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -131,11 +126,7 @@ class DurationVC: PanArrowVC {
         
         pauseAtQuarterSwitch = UISwitch()
         pauseAtQuarterSwitch.translatesAutoresizingMaskIntoConstraints = false
-        if pageVC?.game.numberOfPeriods == NumberOfPeriods.Quarters {
-            pauseAtQuarterSwitch.setOn(true, animated: false)
-        } else {
-            pauseAtQuarterSwitch.setOn(false, animated: false)
-        }
+        setPauseAtQuarterSwitch()
         pauseAtQuarterSwitch.addTarget(self, action: #selector(handleSwitch(pauseSwitch:)), for: [.valueChanged])
         pauseAtQuarterSwitch.tintColor = COLOR.Olive
         pauseAtQuarterSwitch.thumbTintColor = COLOR.Olive
@@ -227,6 +218,17 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Private Methods
     
+    private func setPauseAtQuarterSwitch() {
+        
+        let nop = selectedNumberOfPeriods ?? pageVC?.game.numberOfPeriods
+        
+        if nop == NumberOfPeriods.Quarters {
+            pauseAtQuarterSwitch.setOn(true, animated: false)
+        } else {
+            pauseAtQuarterSwitch.setOn(false, animated: false)
+        }
+    }
+    
     private func handleSelection(card: DurationCard) {
         
         self.cancelView.isUserInteractionEnabled = true
@@ -244,6 +246,22 @@ class DurationVC: PanArrowVC {
     @objc private func handleSwitch(pauseSwitch: UISwitch) {
         
         selectedNumberOfPeriods = pauseSwitch.isOn ? .Quarters : .Halves
+        if pageVC?.game.status != HockeyGameStatus.WaitingToStart {
+            showAlertNewGame()
+        }
+    }
+    
+    private func showAlertNewGame() {
+        
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: nil, cancelAction: {
+            let newSwitchPosition = self.pauseAtQuarterSwitch.isOn
+            self.pauseAtQuarterSwitch.setOn(!newSwitchPosition, animated: true)
+            self.selectedNumberOfPeriods = nil
+        })
+        
+        DispatchQueue.main.async {
+            self.present(askConfirmationVC, animated: true, completion: nil)
+        }
     }
    
     

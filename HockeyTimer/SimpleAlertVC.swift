@@ -18,27 +18,30 @@ class SimpleAlertVC: UIViewController {
     private var okButton: UIButton!
     private var cancelButton: UIButton?
     
-    private var titleText: String!
+    private var titleText: String?
     private var text: String!
-    private var okButtonText: String!
+    private var okButtonText: String?
     private var cancelButtonText: String?
     
     private var okAction: (() -> Void)?
+    private var cancelAction: (() -> Void)?
     
     
     // MARK: - Life Cycle
     
-    init(titleText: String,
+    init(titleText: String? = nil,
          text: String,
-         okButtonText: String = "OK",
+         okButtonText: String? = "OK",
          cancelButtonText: String? = nil,
-         okAction: (() -> Void)? = nil) {
+         okAction: (() -> Void)? = nil,
+         cancelAction: (() -> Void)? = nil) {
         
         self.titleText = titleText
         self.text = text
         self.okButtonText = okButtonText
         self.cancelButtonText = cancelButtonText
         self.okAction = okAction
+        self.cancelAction = cancelAction
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -65,7 +68,7 @@ class SimpleAlertVC: UIViewController {
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
-        titleLabel.text = titleText // "Allow Notifications"
+        titleLabel.text = titleText ?? ""
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = COLOR.White
@@ -76,15 +79,24 @@ class SimpleAlertVC: UIViewController {
         textLabel = UILabel()
         textLabel.numberOfLines = 0
         textLabel.text = text
-        textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 17)
+        textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 18)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.textColor = COLOR.White
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textLabel)
         
-        okButton = ConfirmationButton.yellowButton(largeFont: true)
-        okButton.setTitle(okButtonText, for: .normal)
+        let attributedString = NSMutableAttributedString(string: text)
+        let range = NSRange(location: 0, length: text.count)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        paragraphStyle.alignment = .center
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        textLabel.attributedText = attributedString
+        
+        okButton = ConfirmationButton.blueButton(largeFont: true)
+        let okButtonTitle = okButtonText ?? "OK"
+        okButton.setTitle(okButtonTitle, for: .normal)
         okButton.addTarget(self, action: #selector(okTapped), for: [.touchUpInside])
         view.addSubview(okButton)
         
@@ -111,7 +123,7 @@ class SimpleAlertVC: UIViewController {
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset * 1.5),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset * 1.5),
             textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            textLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -40),
+            textLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -60),
             
             ])
         
@@ -159,10 +171,11 @@ class SimpleAlertVC: UIViewController {
     @objc private func cancelTapped() {
         
         DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: {
+                self?.cancelAction?()
+            })
         }
     }
-    
 }
 
 

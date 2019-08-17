@@ -24,6 +24,7 @@
 "CANCEL" = "ANNULEER";
 "New Game" = "Nieuwe wedstrijd";
 "Are you sure you want to start a new game?" = "Nieuwe wedstrijd.\nBen je zeker?";
+"Changing the pause setting is not allowed for running games. Do you want to start a new game?" = "Dit is niet mogelijk voor lopende wedstrijden. Wil je een nieuwe wedstrijd starten?";
 "OK" = "OK";
 "Remind me in 1 minute" = "Herinner me na 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";

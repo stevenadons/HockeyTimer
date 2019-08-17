@@ -24,10 +24,6 @@ class TimerVC: PanArrowVC {
     fileprivate var resetButton: NewGameButtonIconOnly!
     fileprivate var stopWatchContainer: ContainerView!
     fileprivate var stopWatch: StopWatch!
-    fileprivate var maskView: UIButton!
-    fileprivate var popupMessage: PopupMessageView!
-    fileprivate var confirmationButton: ConfirmationButton!
-    fileprivate var cancelButton: ConfirmationButton!
 
     fileprivate var duration: Duration = .TwentyFive
     fileprivate var numberOfPeriods: NumberOfPeriods = .Halves
@@ -39,11 +35,7 @@ class TimerVC: PanArrowVC {
     var delegate: TimerVCDelegate?
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
 
-    var message: String = "" {
-        didSet {
-            confirmationButton.setTitle(message, for: .normal)
-        }
-    }
+    var message: String = "" 
     
     
     // MARK: - Loading
@@ -72,29 +64,6 @@ class TimerVC: PanArrowVC {
         stopWatch.translatesAutoresizingMaskIntoConstraints = false
         stopWatchContainer.addSubview(stopWatch)
 
-        maskView = UIButton()
-        maskView.addTarget(self, action: #selector(maskViewTapped(sender:forEvent:)), for: [.touchUpInside])
-        maskView.translatesAutoresizingMaskIntoConstraints = false
-        maskView.backgroundColor = UIColor.black
-        maskView.alpha = 0.0
-        view.addSubview(maskView)
-        
-        popupMessage = PopupMessageView(message: LS_WARNINGRESETPOPUP)
-        popupMessage.alpha = 0.0
-        view.addSubview(popupMessage)
-        
-        confirmationButton = ConfirmationButton.blueButton(largeFont: true)
-        confirmationButton.alpha = 0.0
-        confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
-        confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-        view.addSubview(confirmationButton)
-        
-        cancelButton = ConfirmationButton.redButton(largeFont: true)
-        cancelButton.alpha = 0.0
-        cancelButton.setTitle(LS_BUTTON_CANCEL, for: .normal)
-        cancelButton.addTarget(self, action: #selector(maskViewTapped(sender:forEvent:)), for: [.touchUpInside])
-        view.addSubview(cancelButton)
-        
         panArrowUp.color = COLOR.LightYellow
         panArrowDown.color = COLOR.LightYellow
         panArrowUpLabel.text = LS_TITLE_GAMETIME
@@ -119,26 +88,6 @@ class TimerVC: PanArrowVC {
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
             stopWatch.centerYAnchor.constraint(equalTo: stopWatchContainer.centerYAnchor),
             
-            maskView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            maskView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            maskView.topAnchor.constraint(equalTo: view.topAnchor),
-            maskView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            popupMessage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            popupMessage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            popupMessage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
-            popupMessage.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.1),
-            
-            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cancelButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
-            cancelButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
-            
-            confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
-            confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
-            confirmationButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            
             ])
         
         hideIcons()
@@ -162,22 +111,6 @@ class TimerVC: PanArrowVC {
     
     
     // MARK: - Private Methods
-    
-    fileprivate func showButtons() {
-        
-        confirmationButton.grow()
-        cancelButton.grow()
-    }
-    
-    fileprivate func temporarilyShowPopupWithMask(message: String) {
-        
-        self.message = message
-        showButtons()
-        UIView.animate(withDuration: 0.2) {
-            self.maskView.alpha = 0.80
-            self.popupMessage.alpha = 1.0
-        }
-    }
     
     fileprivate func hideIcons() {
         
@@ -237,26 +170,18 @@ class TimerVC: PanArrowVC {
         present(buyPremiumVC, animated: true, completion: nil)
     }
     
-    private func handleConfirmationNewGame() {
+    private func showAlertNewGame() {
         
-        hidePopup()
-        createNewGame()
-        if message == LS_WARNINGRESETGAME {
-            resetWithNewGame()
-        } else if message == LS_WARNINGNEWGAME {
-            handleNewGame()
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGNEWGAME_TEXT, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+            self.handleRequestNewGameConfirmed()
+        }, cancelAction: nil)
+        
+        DispatchQueue.main.async {
+            self.present(askConfirmationVC, animated: true, completion: nil)
         }
     }
     
-    
-    // MARK: - Touch Methods
-    
-    @objc private func resetButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
-        
-        temporarilyShowPopupWithMask(message: LS_WARNINGRESETGAME)
-    }
-    
-    @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
+    private func handleRequestNewGameConfirmed() {
         
         let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
         if inPremiumMode {
@@ -271,11 +196,23 @@ class TimerVC: PanArrowVC {
         }
     }
     
-    @objc private func maskViewTapped(sender: UIView, forEvent event: UIEvent) {
+    private func handleConfirmationNewGame() {
         
-        hidePopup()
+        createNewGame()
+        if message == LS_WARNINGRESETGAME {
+            resetWithNewGame()
+        } else if message == LS_WARNINGNEWGAME_TITLE {
+            handleNewGame()
+        }
     }
     
+    
+    // MARK: - Touch Methods
+    
+    @objc private func resetButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
+        
+        showAlertNewGame()
+    }
     
     
     // MARK: - Public Methods
@@ -292,19 +229,6 @@ class TimerVC: PanArrowVC {
         
         panArrowDownLabel.text = "\(game.homeScore) - \(game.awayScore)"
     }
-    
-    @objc func hidePopup() {
-        
-        guard popupMessage.alpha == 1.0 else { return }
-        
-        confirmationButton.shrink()
-        cancelButton.shrink()
-        UIView.animate(withDuration: 0.2) {
-            self.maskView.alpha = 0.0
-            self.popupMessage.alpha = 0.0
-        }
-    }
-    
 }
 
 
@@ -321,7 +245,7 @@ extension TimerVC: StopWatchDelegate {
     
     func handleTappedForNewGame() {
         
-        temporarilyShowPopupWithMask(message: LS_WARNINGNEWGAME)
+        showAlertNewGame()
     }
 
 }
