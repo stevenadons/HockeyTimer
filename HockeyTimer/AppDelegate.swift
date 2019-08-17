@@ -113,13 +113,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if storedEndTime.timeIntervalSinceNow >= 0 && storedEndTime.timeIntervalSinceNow < Double(runningDuration.rawValue * 60) {
                 // Countdown should still be running
                 shouldRestoreFromBackground = true
-                runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow) + 1
+                runningSecondsToGo = Int(storedEndTime.timeIntervalSinceNow)
                 print("applicationDidBecomeActive - case 1 - did set runningSecondsToGo to \(runningSecondsToGo)")
                 
             } else if storedEndTime.timeIntervalSinceNow < 0 {
                 // Should set overdue time
                 shouldRestoreFromBackground = true
-                runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date)) - 1
+                runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date))
                 print("applicationDidBecomeActive - case 2 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
             
@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Overdue countup should resume
                 shouldRestoreFromBackground = true
-                runningSecondsOverdue = Int(Date().timeIntervalSince(storedStartTime as Date)) - 1
+                runningSecondsOverdue = Int(Date().timeIntervalSince(storedStartTime as Date))
                 print("applicationDidBecomeActive - case 3 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
             

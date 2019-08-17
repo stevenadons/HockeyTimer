@@ -216,8 +216,8 @@ class StopWatch: UIControl {
     
     private func updateTimeLabel() {
         
-        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
+        showTimeLabel()
     }
     
     func updateAfterRestoringFromBackground() {
@@ -739,9 +739,8 @@ class StopWatch: UIControl {
         
         timeLabel.textColor = color
         timeLabel.alpha = alpha
-        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
-        timeLabel.setNeedsDisplay()
+        showTimeLabel()
     }
     
     fileprivate func setProgressBarsColor(to newColor: UIColor) {
@@ -757,6 +756,16 @@ class StopWatch: UIControl {
         runningSecondsToGo = timer.totalSecondsToGo
         runningSecondsOverdue = timer.totalSecondsOverdue
         runningSecondsCountingUp = timer.totalSecondsCountingUp
+    }
+    
+    private func beepInOvertime() {
+        
+        guard message == LS_OVERTIME else { return }
+        
+        haptic?.notificationOccurred(.warning)
+        haptic = nil
+        JukeBox.instance.playSound(SOUND.BeepBeep)
+        prepareHapticIfNeeded()
     }
     
     // MARK: - Haptic
@@ -785,27 +794,21 @@ extension StopWatch: StopWatchTimerDelegate {
         
         runningCountingUp = false
         syncTimerPosition()
-        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
-        timeLabel.setNeedsDisplay()
+        showTimeLabel()
         updateProgressBars()
+        beepInOvertime()
     }
     
     func handleTickCountUp() {
         
-        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
-        timeLabel.setNeedsDisplay()
-        if message == LS_OVERTIME {
-            haptic?.notificationOccurred(.warning)
-            haptic = nil
-            syncTimerPosition()
-            JukeBox.instance.playSound(SOUND.BeepBeep)
-            prepareHapticIfNeeded()
-        } else {
+        showTimeLabel()
+        beepInOvertime()
+        if message != LS_OVERTIME {
             runningCountingUp = true
-            syncTimerPosition()
         }
+        syncTimerPosition()
     }
     
     func handleTimerReset() {
@@ -814,9 +817,8 @@ extension StopWatch: StopWatchTimerDelegate {
         runningSecondsCountingUp = 0
         runningCountingUp = false
         timer.set(game: game)
-        showTimeLabel()
         timeLabel.text = stopWatchLabelTimeString()
-        timeLabel.setNeedsDisplay()
+        showTimeLabel()
     }
     
     func handleReachedZero() {
