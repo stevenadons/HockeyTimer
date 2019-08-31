@@ -8,9 +8,7 @@
 
 import UIKit
 
-#warning("testing")
 class TestingVC: UIViewController {
-    
     
     // MARK: - Properties
     

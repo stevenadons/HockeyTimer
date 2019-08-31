@@ -24,6 +24,9 @@ class RulesButton: UIButton {
     static var fixedHeight: CGFloat {
         return UIDevice.whenDeviceIs(small: 32, normal: 38, big: 38)
     }
+    static var fixedHeightSmaller: CGFloat {
+        return UIDevice.whenDeviceIs(small: 29, normal: 35, big: 35)
+    }
     
     
     // MARK: - Initializing

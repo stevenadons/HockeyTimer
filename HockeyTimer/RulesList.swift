@@ -101,8 +101,6 @@ class RulesList: UIView {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: COLOR.LightBlue, titleColor: COLOR.VeryDarkBlue)
                     }
                     button.addTarget(self, action: #selector(handleButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-                    button.heightAnchor.constraint(equalToConstant: RulesButton.fixedHeight).isActive = true
-                    button.widthAnchor.constraint(equalToConstant: RulesButton.fixedWidth).isActive = true
                     addSubview(button)
                     buttonGroup.append(button)
                 }
@@ -125,7 +123,7 @@ class RulesList: UIView {
 
                 let button = buttonGroup[innerIndex]
                 
-                // Leading and trailing constraints
+                // Leading and trailing
                 if outerIndex % 2 == 0 {
                     button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset).isActive = true
                     
@@ -133,7 +131,7 @@ class RulesList: UIView {
                     button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horInset).isActive = true
                 }
                 
-                // Top constraints
+                // Top
                 if outerIndex == 0 && innerIndex == 0 {
                     button.topAnchor.constraint(equalTo: topAnchor, constant: topInset).isActive = true
                     
@@ -146,6 +144,13 @@ class RulesList: UIView {
                 } else if innerIndex > 0 {
                     button.topAnchor.constraint(equalTo: buttonGroup[innerIndex - 1].bottomAnchor, constant: smallPadding).isActive = true
                 }
+                
+                // Height
+                let buttonHeight = buttons.joined().count > 10 ? RulesButton.fixedHeightSmaller : RulesButton.fixedHeight
+                button.heightAnchor.constraint(equalToConstant: buttonHeight).isActive = true
+
+                // Width
+                button.widthAnchor.constraint(equalToConstant: RulesButton.fixedWidth).isActive = true
             }
         }
     }

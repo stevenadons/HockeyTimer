@@ -52,12 +52,15 @@
 "Outdoor Rules" = "Veldhockey";
 "Indoor Rules" = "Zaalhockey";
 "Bluffer's Guide" = "Bluffer's Guide";
+"More" = "Meer";
 
-"General outdoor rules" = "Veldhockey";
+"Rules Outdoor" = "Veldhockey";
+"Changes Outdoor" = "Veld wijzigingen";
 "Indoor U7-U10 (VHL)" = "Indoor U7-U10 (VHL)";
 "Indoor U9-U19 (VHL)" = "Indoor U9-U19 (VHL)";
-"General indoor rules" = "Zaalhockey";
+"Rules Indoor" = "Zaalhockey";
 "Outdoor U7-U12" = "Veld U7-U12";
+"U7-U12 changes" = "U7-U12 wijzigingen";
 "Outdoor U14-U19" = "Veld U14-U19";
 "Ladies Rules KBHB" = "Veld Ladies KBHB";
 "Gents Rules KBHB" = "Veld Gents KBHB";
@@ -88,8 +91,8 @@
 "España Master" = "Master";
 "Mamis & Papis" = "Mamis & Papis";
 
-"Rules Outdoor 2017" = "Spelregels veld (2017)";
-"Rules Indoor 2017" = "Spelregels zaal (2017)";
+"Rules Outdoor" = "Veldhockey";
+"Rules Indoor" = "Zaalhockey";
 "In2Hockey 6-a-side" = "In2Hockey (6 spelers)";
 "In2Hockey 7-a-side" = "In2Hockey (7 spelers)";
 "In2Hockey (more)" = "In2Hockey (meer)";

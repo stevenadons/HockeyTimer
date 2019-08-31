@@ -41,18 +41,18 @@ class DurationVC: PanArrowVC {
         view.backgroundColor = COLOR.White
         setupViews()
         
-        #warning("testing")
         let testTap = UITapGestureRecognizer(target: self, action: #selector(showTestSettings))
         testTap.numberOfTouchesRequired = 3
         testTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(testTap)
     }
     
-    #warning("testing")
+    
     @objc private func showTestSettings() {
         
-        let testingVC = TestingVC()
-        present(testingVC, animated: true)
+//        #warning("testing")
+//        let testingVC = TestingVC()
+//        present(testingVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

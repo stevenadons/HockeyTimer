@@ -88,23 +88,28 @@ var countries: [Country] {
     let AUSBluffersGuide = Rules(name: DOC_AUS_BLUFFERSGUIDE, url: "http://www.hockey.org.au/Portals/2/Game%20Development/Hockey%20Australia%20Bluffer's%20Guide%20to%20Hockey.pdf")
     let AUSBluffersGroup = GroupOfRules(rulesArray: [AUSBluffersGuide])
     
+    let AUSMore = Rules(name: DOC_AUS_MORE, url: "http://www.hockey.org.au/rules")
+    let AUSMoreGroup = GroupOfRules(rulesArray: [AUSMore])
+    
     let australia = Country(capitals: "AUS",
                             localeRegionCode: "AU",
                             name: LS_COUNTRY_AUSTRALIA,
                             durations: [.Twenty, .ThirtyFive],
                             durationStrings: ["Indoor", "Outdoor"],
-                            groupsOfRules: [AUSOutdoorGroup, AUSIndoorGroup, AUSBluffersGroup])
+                            groupsOfRules: [AUSOutdoorGroup, AUSIndoorGroup, AUSBluffersGroup, AUSMoreGroup])
 
     
     
     // Belgium
     
-    let internationalRules = Rules(name: DOC_B_FIHRULES, url: "https://www.hockey.be/app/uploads/2019/04/fih-rules-of-hockey-2019-final-5.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2019/04/fih-rules-of-hockey-2019-final.pdf"])
-    let internationalGroup = GroupOfRules(rulesArray: [internationalRules])
+    let outdoorRules = Rules(name: DOC_B_FIHRULES, url: "https://www.hockey.be/app/uploads/2019/04/fih-rules-of-hockey-2019-final-5.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2019/04/fih-rules-of-hockey-2019-final.pdf"])
+    let outdoorChanges = Rules(name: DOC_B_RULES_CHANGES, url: "https://www.hockey.be/nl/nieuws/wijzigingen-spelregels-2019-2020-op-volledig-veld/", specificLocaleUrls: ["fr": "https://www.hockey.be/fr/nouvelle/modification-des-regles-de-jeu-2019-2020-sur-grand-terrain/"])
+    let outdoorGroup = GroupOfRules(rulesArray: [outdoorRules, outdoorChanges])
     
     let rulesU7U12 = Rules(name: DOC_B_VHLRULESU7U12, url: "https://www.hockey.be/app/uploads/2018/05/Table_Parents-Umpires_-_NL_-_less_U14_-_v1.5.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/05/Règles-de-jeu-Jeunes-U7-U12-1.pdf"])
+    let rulesU7U12Changes = Rules(name: DOC_B_VHLRULESU7U12_CHANGES, url: "https://www.hockey.be/nl/nieuws/nieuwe-regels-u7-u12/", specificLocaleUrls: ["fr": "https://www.hockey.be/fr/nouvelle/nouvelles-regles-u7-u12/"])
     let rulesU14U19 = Rules(name: DOC_B_VHLRULESU14U19, url: "https://www.hockey.be/app/uploads/2018/05/Table_Parents-Umpires_-_NL_-_above_U14_-_V1.2.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Règles-de-jeu-Jeunes-U14-U19.pdf"])
-    let rulesYouth = GroupOfRules(rulesArray: [rulesU7U12, rulesU14U19])
+    let rulesYouth = GroupOfRules(rulesArray: [rulesU7U12, rulesU7U12Changes, rulesU14U19])
 
     let indoorFIH = Rules(name: DOC_B_INDOOR_FIH, url: "https://www.hockey.be/app/uploads/2018/06/rules-of-indoor-hockey-2017-1.pdf")
     let indoorU7U10 = Rules(name: DOC_B_INDOOR_U7_U10, url: "https://www.hockey.be/app/uploads/2018/06/2017-007-KBHB-Pictos_NL_HR.pdf")
@@ -112,7 +117,8 @@ var countries: [Country] {
     let indoorGroupBelgium = GroupOfRules(rulesArray: [indoorFIH, indoorU7U10, indoorU9U19])
 
     let ladiesRules = Rules(name: DOC_B_LADIES, url: "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_NL_2017-2018.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Ladies_rules_FR_2017-2018.pdf"])
-    let gentsRules = Rules(name: DOC_B_GENTS, url: "https://www.hockey.be/app/uploads/2018/06/Gents_rules_NL_2017-2018-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Gents_rules_FR_2017-2018.pdf"])
+    let gentsRules = Rules(name: DOC_B_GENTS, url: "local pdf", specificLocaleUrls: ["fr": "local pdf"])
+//    let gentsRules = Rules(name: DOC_B_GENTS, url: "https://www.hockey.be/app/uploads/2018/06/Gents_rules_NL_2017-2018-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Gents_rules_FR_2017-2018.pdf"])
     let gentsLadies = GroupOfRules(rulesArray: [ladiesRules, gentsRules])
     
     let moreOutdoorB = Rules(name: DOC_B_MORE_OUTDOOR, url: "https://www.hockey.be/nl/categorie/competitie/outdoor-hockey/", specificLocaleUrls: ["fr": "https://www.hockey.be/fr/categorie/competition/outdoor-hockey/"])
@@ -127,7 +133,7 @@ var countries: [Country] {
                                             "U9 - U10 - U11 - U12",
                                             "U14 - Ladies - Gents",
                                             "U16 - U19"],
-                          groupsOfRules: [internationalGroup, rulesYouth, indoorGroupBelgium, gentsLadies, moreBGroup])
+                          groupsOfRules: [outdoorGroup, rulesYouth, indoorGroupBelgium, gentsLadies, moreBGroup])
     
     // Germany
     
@@ -181,7 +187,8 @@ var countries: [Country] {
     
     // England
     
-    let ENG_Outdoor = Rules(name: DOC_ENG_OUTDOOR_GENERAL, url: "http://www.englandhockey.co.uk/core/core_picker/download.asp?id=16515&filetitle=Rules+of+outdoor+hockey+2017&log_stat=true")
+    let ENG_Outdoor = Rules(name: DOC_ENG_OUTDOOR_GENERAL, url: "http://www.fih.ch/media/13164482/fih-rules-of-hockey-2019-final.pdf")
+    // http://www.englandhockey.co.uk/core/core_picker/download.asp?id=16515&filetitle=Rules+of+outdoor+hockey+2017&log_stat=true
     let ENG_OutdoorGroup = GroupOfRules(rulesArray: [ENG_Outdoor])
     
     let ENG_Indoor = Rules(name: DOC_ENG_INDOOR_GENERAL, url: "http://www.englandhockey.co.uk/core/core_picker/download.asp?id=15072&filetitle=rules%2Dof%2Dindoorhockey%2D2017&log_stat=true")
@@ -211,8 +218,8 @@ var countries: [Country] {
     
     // Netherlands
     
-    let rules = Rules(name: DOC_NL_SPELREGLEMENT, url: "https://www.knhb.nl/app/uploads/2019/08/VELDREGLEMENT-2019_DEF.pdf")
-     // https://www.knhb.nl/app/uploads/2018/08/Spelreglement-Veldhockey-per-1-augustus-2018-1.pdf
+    let rules = Rules(name: DOC_NL_SPELREGLEMENT, url: "https://www.knhb.nl/app/uploads/2019/08/KNHB-Spelreglement-Veldhockey-2019.pdf")
+    // https://www.knhb.nl/app/uploads/2019/08/VELDREGLEMENT-2019_DEF.pdf
     let basicNL = GroupOfRules(rulesArray: [rules])
     
     let teamsOf3 = Rules(name: DOC_NL_3TALLEN, url: "https://www.knhb.nl/kenniscentrum/artikel/spelregels-3-tallen")
