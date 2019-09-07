@@ -97,7 +97,7 @@ class DocumentMenuVC: PanArrowVC {
                                   delegate: self,
                                   labelNames: Country.allNames(),
                                   capitalsStrings: Country.allCapitals(),
-                                  selected: countries.firstIndex(of: SELECTED_COUNTRY))
+                                  selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
         
         settingsMenu = DotMenu(inView: view,
                                delegate: self,
@@ -215,9 +215,9 @@ extension DocumentMenuVC: CountryMenuDelegate {
     
     func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
         
-        guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
+        guard CountryDataManager.shared.countries[buttonNumber] != SELECTED_COUNTRY else { return }
         
-        SELECTED_COUNTRY = countries[buttonNumber]
+        SELECTED_COUNTRY = CountryDataManager.shared.countries[buttonNumber]
         rulesList.setCountry(SELECTED_COUNTRY)
     }
     

@@ -55,12 +55,12 @@
 "More" = "Meer";
 
 "Rules Outdoor" = "Veldhockey";
-"Changes Outdoor" = "Veld wijzigingen";
+"Changes Outdoor" = "Wijzigingen";
 "Indoor U7-U10 (VHL)" = "Indoor U7-U10 (VHL)";
 "Indoor U9-U19 (VHL)" = "Indoor U9-U19 (VHL)";
 "Rules Indoor" = "Zaalhockey";
 "Outdoor U7-U12" = "Veld U7-U12";
-"U7-U12 changes" = "U7-U12 wijzigingen";
+"U7-U12 Changes" = "U7-U12 Wijzigingen";
 "Outdoor U14-U19" = "Veld U14-U19";
 "Ladies Rules KBHB" = "Veld Ladies KBHB";
 "Gents Rules KBHB" = "Veld Gents KBHB";
@@ -76,18 +76,18 @@
 "Disability Hockey" = "Aangepast hockey";
 "More" = "Meer";
 
-"General Rules (2019)" = "Algemene regels (2019)";
-"Changes (01.04.2019)" = "Wijzigingen (01/04/2019)";
-"Indoor Rules (2017/2018)" = "Zaal (2017/2018)";
-"Indoor Changes (2017/2018)" = "Wijzigingen zaal (2017/2018)";
+"General Rules" = "Veldhockey";
+"Changes" = "Wijzigingen";
+"Indoor Rules" = "Zaalhockey";
+"Indoor Changes" = "Wijzigingen";
 "International Rules" = "Internationaal";
-"Youth (2017/2018)" = "Jeugd (2017/2018)";
+"Youth" = "Jeugd";
 "Recommendations U8-U12" = "Aanbevelingen U8-U12";
 
-"Rules Outdoor 2019" = "Spelregels veld (2019)";
-"Changes Outdoor 2019" = "Wijzigingen veld (2019)";
-"Rules Indoor 2017" = "Spelregels zaal (2017)";
-"Changes Indoor 2019" = "Wijzigingen zaal (2019)";
+"Rules Outdoor" = "Veldhockey";
+"Changes Outdoor" = "Wijzigingen";
+"Rules Indoor" = "Zaalhockey";
+"Changes Indoor" = "Wijzigingen";
 "España Master" = "Master";
 "Mamis & Papis" = "Mamis & Papis";
 
@@ -98,7 +98,6 @@
 "In2Hockey (more)" = "In2Hockey (meer)";
 "Regional Leagues" = "Regionale competities";
 "Masters Regional" = "Masters regionale competities";
-"Senior County" = "Senior County";
 
 "New Game" = "Nieuwe wedstrijd";
 "Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium (eenmalige betaling) om de tijd te wijzigen zonder advertenties.\n\nBovendien wordt je laatste wedstrijdduur dan steeds onthouden.";

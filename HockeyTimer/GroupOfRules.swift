@@ -15,6 +15,7 @@ struct GroupOfRules {
     // MARK: - Properties
     
     private (set) var rulesArray: [Rules]!
+    private var id: UUID!
     
     
     // MARK: - Init
@@ -22,7 +23,21 @@ struct GroupOfRules {
     init(rulesArray: [Rules]) {
         
         self.rulesArray = rulesArray
+        self.id = UUID()
     }
+}
 
 
+extension GroupOfRules: Codable, Hashable {
+    
+    static func == (lhs: GroupOfRules, rhs: GroupOfRules) -> Bool {
+        
+        return lhs.id == rhs.id
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        
+        hasher.combine(id)
+    }
 }

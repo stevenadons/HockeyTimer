@@ -12,18 +12,18 @@ import StoreKit
 
 var SELECTED_COUNTRY: Country {
     set {
-        let index = countries.firstIndex(of: newValue) ?? 0
+        let index = CountryDataManager.shared.countries.firstIndex(of: newValue) ?? 0
         UserDefaults.standard.set(index, forKey: USERDEFAULTSKEY.CountryIndex)
     }
     get {
-        if let index = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.CountryIndex) as? Int, index < countries.count {
-            return countries[index]
+        if let index = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.CountryIndex) as? Int, index < CountryDataManager.shared.countries.count {
+            return CountryDataManager.shared.countries[index]
         } else {
-            let localeCountries = countries.filter { $0.localeRegionCode == Locale.current.regionCode }
+            let localeCountries = CountryDataManager.shared.countries.filter { $0.localeRegionCode == Locale.current.regionCode }
             if !localeCountries.isEmpty {
                 return localeCountries[0]
             }
-            return countries[0]
+            return CountryDataManager.shared.countries[0]
         }
     }
 }
@@ -171,7 +171,7 @@ let DOC_B_INDOOR_U7_U10 = NSLocalizedString("Indoor U7-U10 (VHL)", comment: "Nam
 let DOC_B_INDOOR_U9_U19 = NSLocalizedString("Indoor U9-U19 (VHL)", comment: "Name for document")
 let DOC_B_INDOOR_FIH = NSLocalizedString("Rules Indoor", comment: "Name for document")
 let DOC_B_VHLRULESU7U12 = NSLocalizedString("Outdoor U7-U12", comment: "Name for document")
-let DOC_B_VHLRULESU7U12_CHANGES = NSLocalizedString("U7-U12 changes", comment: "Name for document")
+let DOC_B_VHLRULESU7U12_CHANGES = NSLocalizedString("U7-U12 Changes", comment: "Name for document")
 let DOC_B_VHLRULESU14U19 = NSLocalizedString("Outdoor U14-U19", comment: "Name for document")
 let DOC_B_LADIES = NSLocalizedString("Ladies Rules KBHB", comment: "Name for document")
 let DOC_B_GENTS = NSLocalizedString("Gents Rules KBHB", comment: "Name for document")
@@ -187,20 +187,20 @@ let DOC_NL_8TALLEN = NSLocalizedString("Teams of 8", comment: "Name for document
 let DOC_NL_DISABILITY = NSLocalizedString("Disability Hockey", comment: "Name for document")
 let DOC_NL_WEBPAGE = NSLocalizedString("More", comment: "Name for document")
 
-let DOC_D_GENERAL_RULES = NSLocalizedString("General Rules (2019)", comment: "Name for document")
-let DOC_D_GENERAL_RULES_CHANGES = NSLocalizedString("Changes (01.04.2019)", comment: "Name for document")
+let DOC_D_GENERAL_RULES = NSLocalizedString("General Rules", comment: "Name for document")
+let DOC_D_GENERAL_RULES_CHANGES = NSLocalizedString("Changes", comment: "Name for document")
 let DOC_D_GENERAL_MORE = NSLocalizedString("More (outdoor)", comment: "Name for document")
-let DOC_D_INDOOR_GENERAL = NSLocalizedString("Indoor Rules (2017/2018)", comment: "Name for document")
-let DOC_D_INDOOR_GENERAL_CHANGES = NSLocalizedString("Indoor Changes (2017/2018)", comment: "Name for document")
+let DOC_D_INDOOR_GENERAL = NSLocalizedString("Indoor Rules", comment: "Name for document")
+let DOC_D_INDOOR_GENERAL_CHANGES = NSLocalizedString("Indoor Changes", comment: "Name for document")
 let DOC_D_INDOOR_MORE = NSLocalizedString("More (indoor)", comment: "Name for document")
 let DOC_D_INTERNATIONAL = NSLocalizedString("International Rules", comment: "Name for document")
-let DOC_D_YOUTH = NSLocalizedString("Youth (2017/2018)", comment: "Name for document")
+let DOC_D_YOUTH = NSLocalizedString("Youth", comment: "Name for document")
 let DOC_D_YOUTH_RECOMMENDATIONS = NSLocalizedString("Recommendations U8-U12", comment: "Name for document")
 
-let DOC_E_OUTDOOR_GENERAL = NSLocalizedString("Rules Outdoor 2019", comment: "Name for document")
-let DOC_E_OUTDOOR_GENERAL_CHANGES = NSLocalizedString("Changes Outdoor 2019", comment: "Name for document")
-let DOC_E_INDOOR_GENERAL = NSLocalizedString("Rules Indoor 2017", comment: "Name for document")
-let DOC_E_INDOOR_GENERAL_CHANGES = NSLocalizedString("Changes Indoor 2019", comment: "Name for document")
+let DOC_E_OUTDOOR_GENERAL = NSLocalizedString("Rules Outdoor", comment: "Name for document")
+let DOC_E_OUTDOOR_GENERAL_CHANGES = NSLocalizedString("Changes Outdoor", comment: "Name for document")
+let DOC_E_INDOOR_GENERAL = NSLocalizedString("Rules Indoor", comment: "Name for document")
+let DOC_E_INDOOR_GENERAL_CHANGES = NSLocalizedString("Changes Indoor", comment: "Name for document")
 let DOC_E_ESPANA_MASTER = NSLocalizedString("España Master", comment: "Name for document")
 let DOC_E_MAMIS_PAPIS = NSLocalizedString("Mamis & Papis", comment: "Name for document")
 let DOC_E_MORE = NSLocalizedString("More", comment: "Name for document")
@@ -212,7 +212,6 @@ let DOC_ENG_IN2HOCKEY_7 = NSLocalizedString("In2Hockey 7-a-side", comment: "Name
 let DOC_ENG_IN2HOCKEY_MORE = NSLocalizedString("In2Hockey (more)", comment: "Name for document")
 let DOC_ENG_REGIONAL = NSLocalizedString("Regional Leagues", comment: "Name for document")
 let DOC_ENG_MASTERS_REGIONAL = NSLocalizedString("Masters Regional", comment: "Name for document")
-let DOC_ENG_SENIOR_COUNTY = NSLocalizedString("Senior County", comment: "Name for document")
 let DOC_ENG_MORE = NSLocalizedString("More", comment: "Name for document")
 
 

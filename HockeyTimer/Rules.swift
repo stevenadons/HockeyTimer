@@ -18,6 +18,14 @@ struct Rules {
     private (set) var url: URL?
     private (set) var specificLocaleUrls: [String: URL?]?
     
+    var id: String {
+        var result: String = name
+        if let descr = url?.description {
+            result += descr
+        }
+        return result
+    }
+    
     
     // MARK: - Init
 
@@ -40,5 +48,20 @@ struct Rules {
                 }
             }
         }
+    }
+}
+
+
+extension Rules: Codable, Hashable {
+    
+    static func == (lhs: Rules, rhs: Rules) -> Bool {
+        
+        return lhs.id == rhs.id
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        
+        hasher.combine(id)
     }
 }

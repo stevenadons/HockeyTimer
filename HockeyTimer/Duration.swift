@@ -29,3 +29,11 @@ enum Duration: Int, CaseIterable {
     }
 }
 
+extension Duration: Codable, Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        
+        hasher.combine(rawValue)
+    }
+}
+

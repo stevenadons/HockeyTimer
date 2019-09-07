@@ -120,7 +120,7 @@ class DurationVC: PanArrowVC {
                                   capitalsStrings: Country.allCapitals(),
                                   hasBorder: true,
                                   leftSide: true,
-                                  selected: countries.firstIndex(of: SELECTED_COUNTRY))
+                                  selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
         countryMenu.translatesAutoresizingMaskIntoConstraints = false
         
         pauseAtQuarterSwitch = UISwitch()
@@ -313,8 +313,8 @@ extension DurationVC: CountryMenuDelegate {
     
     func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
         
-        guard countries[buttonNumber] != SELECTED_COUNTRY else { return }
-        SELECTED_COUNTRY = countries[buttonNumber]
+        guard CountryDataManager.shared.countries[buttonNumber] != SELECTED_COUNTRY else { return }
+        SELECTED_COUNTRY = CountryDataManager.shared.countries[buttonNumber]
         
         for card in cards {
             card.removeFromSuperview()
