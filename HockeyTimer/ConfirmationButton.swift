@@ -77,7 +77,7 @@ extension ConfirmationButton {
         let button = ConfirmationButton()
         
         button.backgroundColor = COLOR.DarkRed
-        button.setTitleColor(COLOR.White, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         if shadow {
             button.layer.shadowColor = UIColor.lightGray.cgColor
             button.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -96,8 +96,8 @@ extension ConfirmationButton {
         
         let button = ConfirmationButton()
         
-        button.backgroundColor = COLOR.DarkBlue
-        button.setTitleColor(COLOR.White, for: .normal)
+        button.backgroundColor = UIColor(named: "DarkBlue")!
+        button.setTitleColor(UIColor.white, for: .normal)
         if shadow {
             button.layer.shadowColor = UIColor.lightGray.cgColor
             button.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -116,8 +116,8 @@ extension ConfirmationButton {
         
         let button = ConfirmationButton()
         
-        button.backgroundColor = COLOR.LightYellow
-        button.setTitleColor(COLOR.VeryDarkBlue, for: .normal)
+        button.backgroundColor = UIColor(named: "LightYellow")!
+        button.setTitleColor(UIColor(named: "VeryDarkBlue")!, for: .normal)
         if shadow {
             button.layer.shadowColor = UIColor.lightGray.cgColor
             button.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -137,8 +137,8 @@ extension ConfirmationButton {
         let button = ConfirmationButton()
         
         button.backgroundColor = UIColor.clear
-        button.setTitleColor(COLOR.LightYellow, for: .normal)
-        button.layer.borderColor = COLOR.LightYellow.cgColor
+        button.setTitleColor(UIColor(named: "LightYellow")!, for: .normal)
+        button.layer.borderColor = UIColor(named: "LightYellow")!.cgColor
         button.layer.borderWidth = 1.0
         if shadow {
             button.layer.shadowColor = UIColor.lightGray.cgColor
@@ -158,7 +158,7 @@ extension ConfirmationButton {
         
         let button = ConfirmationButton()
         button.backgroundColor = COLOR.Theme
-        button.setTitleColor(COLOR.White, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         return button
     }
 }

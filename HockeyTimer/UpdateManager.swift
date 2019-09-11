@@ -58,7 +58,6 @@ class UpdateManager {
         }
     }
     
-    
     private func isUpdateAvailable() throws -> Bool {
         
         guard let info = Bundle.main.infoDictionary,
@@ -76,6 +75,7 @@ class UpdateManager {
         }
         throw VersionError.invalidResponse
     }
+    
     
     
     private func popupUpdateDialogue() {

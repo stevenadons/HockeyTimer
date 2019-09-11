@@ -36,9 +36,9 @@ class PageVC: UIPageViewController {
         delegate = self
         
         if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.ShouldNotOnboard) {
-            view.backgroundColor = COLOR.VeryDarkBlue
+            view.backgroundColor = UIColor(named: "VeryDarkBlue")!
         } else {
-            view.backgroundColor = COLOR.White // should be same color as underlying onboarding screens
+            view.backgroundColor = UIColor.white // should be same color as underlying onboarding screens
         }
         
         var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
@@ -71,16 +71,21 @@ class PageVC: UIPageViewController {
         
         super.viewWillAppear(animated)
         if !askToNotificationsAlreadyShown {
-            mask = Mask(color: COLOR.VeryDarkBlue, inView: view)
+            mask = Mask(color: UIColor(named: "VeryDarkBlue")!, inView: view)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
 
         super.viewDidAppear(animated)
+        
         askToAllowNotifications()
+        
         let updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
         updateManager.checkForUpdates()
+        
+        let minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
+        minimumIOSManager.checkIOSVersion()
     }
     
     
@@ -242,7 +247,7 @@ extension PageVC: UIPageViewControllerDelegate {
         if let _ = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             
             // From TimerVC to DurationVC
-            view.backgroundColor = COLOR.White
+            view.backgroundColor = UIColor.white
             durationVC.selectedDuration = nil
             durationVC.selectedNumberOfPeriods = nil
             
@@ -269,7 +274,7 @@ extension PageVC: UIPageViewControllerDelegate {
             }
             
         } else if let _ = pageViewController.viewControllers?.first as? ScoreVC, let _ = pendingViewControllers.first as? DocumentMenuVC {
-            view.backgroundColor = COLOR.Olive
+            view.backgroundColor = UIColor(named: "Olive")
         }
         
         prepareHapticIfNeeded()

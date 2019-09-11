@@ -77,9 +77,6 @@ class CountryMenu: UIView {
         }
         menuButton = OvalCountryButton(capitals: menuButtonCapitals, hasBorder: self.hasBorder)
         menuButton.addTarget(self, action: #selector(handleMenuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-        menuButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
-        let x = leftSide ? horInset : UIScreen.main.bounds.width - horInset - buttonWidth
-        menuButton.frame.origin = CGPoint(x: x, y: topInset)
         addSubview(menuButton)
         
         buttons = []
@@ -89,10 +86,6 @@ class CountryMenu: UIView {
             let button = OvalCountryButton(capitals: capitalsStrings[index])
             button.tag = index
             button.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-            button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
-            let baseY = menuButton.frame.origin.y + menuButton.bounds.height + padding
-            let y = baseY + CGFloat(index) * (button.bounds.height + padding)
-            button.frame.origin = CGPoint(x: x, y: y)
             if index == 0 {
                 insertSubview(button, belowSubview: menuButton)
             } else {
@@ -100,9 +93,6 @@ class CountryMenu: UIView {
             }
             buttons.append(button)
         }
-        
-        let labelWidth = UIScreen.main.bounds.width * 0.9 - buttonWidth - labelInset - horInset
-        let xLabel = leftSide ? horInset + buttonWidth + labelInset : UIScreen.main.bounds.width * 0.1
         
         labels = []
         
@@ -113,9 +103,6 @@ class CountryMenu: UIView {
             labelButton.tag = index
             labelButton.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             labelButton.isUserInteractionEnabled = false
-            labelButton.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
-            let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labelButton.bounds.height) / 2
-            labelButton.frame.origin = CGPoint(x: xLabel, y: y)
             if index == 0 {
                 insertSubview(labelButton, belowSubview: menuButton)
             } else {
@@ -127,6 +114,30 @@ class CountryMenu: UIView {
         windUp()
         
         containingView.addSubview(self)
+    }
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        menuButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+        let x = leftSide ? horInset : UIScreen.main.bounds.width - horInset - buttonWidth
+        menuButton.frame.origin = CGPoint(x: x, y: topInset)
+        
+        for index in 0..<buttons.count {
+            buttons[index].frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
+            let baseY = menuButton.frame.origin.y + menuButton.bounds.height + padding
+            let y = baseY + CGFloat(index) * (buttons[index].bounds.height + padding)
+            buttons[index].frame.origin = CGPoint(x: x, y: y)
+        }
+        
+        let labelWidth = UIScreen.main.bounds.width * 0.9 - buttonWidth - labelInset - horInset
+        let xLabel = leftSide ? horInset + buttonWidth + labelInset : UIScreen.main.bounds.width * 0.1
+        for index in 0..<labels.count {
+            labels[index].frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
+            let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labels[index].bounds.height) / 2
+            labels[index].frame.origin = CGPoint(x: xLabel, y: y)
+        }
     }
     
     private func windUp() {

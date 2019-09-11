@@ -43,10 +43,10 @@ class PanArrowVC: UIViewController {
         panArrowDown.transform = CGAffineTransform(rotationAngle: .pi)
         view.addSubview(panArrowDown)
         
-        panArrowUpLabel = PanArrowLabelFactory.standardLabel(text: "Foo", textColor: COLOR.White, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
+        panArrowUpLabel = PanArrowLabelFactory.standardLabel(text: "Foo", textColor: UIColor.white, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
         view.addSubview(panArrowUpLabel)
         
-        panArrowDownLabel = PanArrowLabelFactory.standardLabel(text: "Foo", textColor: COLOR.White, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
+        panArrowDownLabel = PanArrowLabelFactory.standardLabel(text: "Foo", textColor: UIColor.white, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
         view.addSubview(panArrowDownLabel)
         
         panArrowUp.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(upTapped(sender:))))

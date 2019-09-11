@@ -63,7 +63,7 @@ class ScoreStepperButtonLayer: CALayer {
         let shape = CAShapeLayer()
         shape.path = createPath().cgPath
         shape.lineWidth = 2
-        shape.strokeColor = COLOR.White.cgColor
+        shape.strokeColor = UIColor.white.cgColor
         shape.fillColor = UIColor.clear.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape

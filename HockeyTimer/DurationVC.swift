@@ -38,7 +38,8 @@ class DurationVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.White
+        view.backgroundColor = UIColor.white
+
         setupViews()
         
         let testTap = UITapGestureRecognizer(target: self, action: #selector(showTestSettings))
@@ -109,10 +110,10 @@ class DurationVC: PanArrowVC {
         view.insertSubview(cancelView, at: 0)
         
         panArrowUp.alpha = 0.0
-        panArrowDown.color = COLOR.LightYellow
+        panArrowDown.color = UIColor(named: "LightYellow")!
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
-        panArrowDownLabel.textColor = COLOR.VeryDarkBlue
+        panArrowDownLabel.textColor = UIColor(named: "VeryDarkBlue")!
         
         countryMenu = CountryMenu(inView: view,
                                   delegate: self,
@@ -127,9 +128,9 @@ class DurationVC: PanArrowVC {
         pauseAtQuarterSwitch.translatesAutoresizingMaskIntoConstraints = false
         setPauseAtQuarterSwitch()
         pauseAtQuarterSwitch.addTarget(self, action: #selector(handleSwitch(pauseSwitch:)), for: [.valueChanged])
-        pauseAtQuarterSwitch.tintColor = COLOR.Olive
-        pauseAtQuarterSwitch.thumbTintColor = COLOR.Olive
-        pauseAtQuarterSwitch.onTintColor = COLOR.LightYellow
+        pauseAtQuarterSwitch.tintColor = UIColor(named: "Olive")
+        pauseAtQuarterSwitch.thumbTintColor = UIColor(named: "Olive")
+        pauseAtQuarterSwitch.onTintColor = UIColor(named: "LightYellow")!
         view.insertSubview(pauseAtQuarterSwitch, belowSubview: countryMenu)
         
         pauseAtQuarterLabel = UILabel()

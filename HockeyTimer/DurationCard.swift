@@ -25,29 +25,29 @@ class DurationCard: UIButton {
         didSet {
             switch duration {
             case .Nine:
-                backgroundColor = COLOR.Olive
-                miniStopWatch.color = COLOR.VeryDarkBlue
+                backgroundColor = UIColor(named: "Olive")
+                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
             case .Ten:
-                backgroundColor = COLOR.DarkBlue
-                miniStopWatch.color = COLOR.VeryDarkBlue
+                backgroundColor = UIColor(named: "DarkBlue")
+                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
             case .Twelve:
-                backgroundColor = COLOR.VeryDarkBlue
-                miniStopWatch.color = COLOR.DarkGray
+                backgroundColor = UIColor(named: "VeryDarkBlue")!
+                miniStopWatch.color = UIColor(named: "DarkGray")!
             case .Fifteen:
-                backgroundColor = COLOR.LightYellow
-                miniStopWatch.color = COLOR.VeryDarkBlue
+                backgroundColor = UIColor(named: "LightYellow")!
+                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
             case .Twenty:
-                backgroundColor = COLOR.LightBlue
-                miniStopWatch.color = COLOR.VeryDarkBlue
+                backgroundColor = UIColor(named: "LightBlue")!
+                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
             case .TwentyFive:
-                backgroundColor = COLOR.Olive
-                miniStopWatch.color = COLOR.VeryDarkBlue
+                backgroundColor = UIColor(named: "Olive")
+                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
             case .Thirty:
-                backgroundColor = COLOR.DarkBlue
-                miniStopWatch.color = COLOR.VeryDarkBlue
+                backgroundColor = UIColor(named: "DarkBlue")
+                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
             case .ThirtyFive:
-                backgroundColor = COLOR.VeryDarkBlue
-                miniStopWatch.color = COLOR.DarkGray
+                backgroundColor = UIColor(named: "VeryDarkBlue")!
+                miniStopWatch.color = UIColor(named: "DarkGray")!
             }
             ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? "error"
             miniStopWatch.duration = duration
@@ -81,6 +81,11 @@ class DurationCard: UIButton {
         self.duration = duration
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        miniStopWatch.setNeedsLayout()
+    }
     private func setup() {
         
         backgroundColor = UIColor.cyan
@@ -88,7 +93,7 @@ class DurationCard: UIButton {
         
         layer.borderColor = COLOR.Theme.cgColor
         layer.borderWidth = 0
-        layer.shadowColor = UIColor.darkGray.cgColor
+        layer.shadowColor = UIColor(named: "DarkGray")!.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowOpacity = shadowed ? 0.8 : 0.0
         layer.shadowRadius = 3
@@ -99,7 +104,7 @@ class DurationCard: UIButton {
         
         ageLabel = createAgeLabel(title: ageString)
         if duration == .Twenty {
-            ageLabel.textColor = COLOR.DarkBlue
+            ageLabel.textColor = UIColor(named: "DarkBlue")
         }
         addSubview(ageLabel)
         
@@ -115,7 +120,7 @@ class DurationCard: UIButton {
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
-        label.textColor = (backgroundColor == COLOR.LightBlue) ? COLOR.VeryDarkBlue : COLOR.White
+        label.textColor = (backgroundColor == UIColor(named: "LightBlue")!) ? UIColor(named: "VeryDarkBlue")! : UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

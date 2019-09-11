@@ -65,7 +65,7 @@ class OvalCountryLayer: CALayer {
         shape.path = createPath().cgPath
         shape.lineWidth = 1
         shape.strokeColor = hasBorder ? COLOR.Olive.darker(by: 40).cgColor : UIColor.clear.cgColor
-        shape.fillColor = COLOR.White.cgColor
+        shape.fillColor = UIColor.white.cgColor
         shape.allowsEdgeAntialiasing = true
         
         return shape

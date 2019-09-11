@@ -46,7 +46,9 @@ class CountryLabelButton: UIButton {
         backgroundColor = UIColor.clear
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
-        titleLabel?.font = UIFont(name: "Lato-Bold", size: 16)
+        if let font = UIFont(name: FONTNAME.ThemeBold, size: 16) {
+            titleLabel?.font = font
+        }
         contentHorizontalAlignment = .right
     }
     

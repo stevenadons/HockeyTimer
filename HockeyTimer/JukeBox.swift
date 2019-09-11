@@ -233,7 +233,7 @@ class JukeBox {
     private func fixedSoundFileName(_ fileName: String) -> String {
         
         var fixedSoundFileName = fileName.trimmingCharacters(in: .whitespacesAndNewlines)
-        var soundFileComponents = fixedSoundFileName.components(separatedBy: ".")
+        let soundFileComponents = fixedSoundFileName.components(separatedBy: ".")
         if soundFileComponents.count == 1 {
             fixedSoundFileName = "\(soundFileComponents[0]).\(kDefaultExtension)"
         }

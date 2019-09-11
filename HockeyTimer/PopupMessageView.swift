@@ -52,7 +52,7 @@ class PopupMessageView: UIView {
         label.text = message
         label.font = UIFont(name: FONTNAME.ThemeBlack, size: 22)
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = COLOR.White
+        label.textColor = UIColor.white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)

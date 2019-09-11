@@ -68,7 +68,7 @@ class ScoreStepper: UIView {
         plusButton = ScoreStepperButton(type: .Plus)
         plusButton.addTarget(self, action: #selector(plusButtonTapped(sender:)), for: [.touchUpInside])
         addSubview(plusButton)
-        scorelabel = ScoreStepperLabelFactory.standardLabel(text: "5", textColor: COLOR.White, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
+        scorelabel = ScoreStepperLabelFactory.standardLabel(text: "5", textColor: UIColor.white, fontStyle: .headline, textAlignment: .center, sizeToFit: false, adjustsFontSizeToFitWidth: true)
         addSubview(scorelabel)
         
         windUp()

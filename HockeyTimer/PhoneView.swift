@@ -37,7 +37,6 @@ class PhoneView: UIView {
         if let signalImage = UIImage(named: "notification") {
             notification.image = signalImage
         }
-//        notification.tintColor = COLOR.DarkBlue
         notification.contentMode = .scaleAspectFit
         notification.translatesAutoresizingMaskIntoConstraints = false
         addSubview(notification)

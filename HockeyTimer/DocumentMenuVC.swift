@@ -45,7 +45,7 @@ class DocumentMenuVC: PanArrowVC {
     
     private func setup() {
         
-        view.backgroundColor = COLOR.Olive
+        view.backgroundColor = UIColor(named: "Olive")
         
         rulesList = RulesList(delegate: self, country: SELECTED_COUNTRY)
         rulesList.backgroundColor = UIColor.clear
@@ -56,7 +56,7 @@ class DocumentMenuVC: PanArrowVC {
         panArrowDown.alpha = 0.0
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
-        panArrowUpLabel.textColor = COLOR.VeryDarkBlue
+        panArrowUpLabel.textColor = UIColor(named: "VeryDarkBlue")!
         
         reportButton = UIButton()
         reportButton.translatesAutoresizingMaskIntoConstraints = false
@@ -154,8 +154,9 @@ extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
         let build = " - " + LS_EMAIL_BUILD + buildNumber
         let country = " - " + SELECTED_COUNTRY.capitals
         let iOS = " - " + LS_EMAIL_IOS + UIDevice.current.systemVersion
+        let dataStatus = "<br>" + CountryDataManager.shared.statusString()
         
-        return sentence + version + build + country + iOS
+        return sentence + version + build + country + iOS + dataStatus
     }
     
     private func presentEmail(body: String) {

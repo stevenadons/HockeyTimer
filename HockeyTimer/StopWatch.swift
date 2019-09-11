@@ -28,7 +28,7 @@ class StopWatch: UIControl {
         didSet {
             print("StopWatch - game set with numberOfPeriods \(game.numberOfPeriods) - will call updateLabels")
             updateLabels()
-            resetTimeLabel(withColor: COLOR.White, alpha: 1)
+            resetTimeLabel(withColor: UIColor.white, alpha: 1)
         }
     }
     
@@ -110,11 +110,11 @@ class StopWatch: UIControl {
         
         progressZone = CAShapeLayer()
         progressZone.strokeColor = UIColor.clear.cgColor
-        progressZone.fillColor = COLOR.DarkGray.cgColor
+        progressZone.fillColor = UIColor(named: "DarkGray")!.cgColor
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = COLOR.VeryDarkBlue.cgColor
+        core.backgroundColor = UIColor(named: "VeryDarkBlue")!.cgColor
         squareContainer.addSublayer(core)
         
         progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
@@ -132,7 +132,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(progressBarFourthQuarter)
         
         icon = StopWatchControlIcon(icon: .PlayIcon)
-        icon.color = COLOR.DarkBlue
+        icon.color = UIColor(named: "DarkBlue")!
         addSubview(icon)
         
         timer = StopWatchTimer(delegate: self, game: game)
@@ -290,8 +290,8 @@ class StopWatch: UIControl {
         periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
         periodLabel.alpha = 1.0
         updateProgressBars()
-        resetTimeLabel(withColor: COLOR.White, alpha: 1)
-        setProgressBarsColor(to: COLOR.White)
+        resetTimeLabel(withColor: UIColor.white, alpha: 1)
+        setProgressBarsColor(to: UIColor.white)
         icon.icon = .PlayIcon
         setNeedsLayout()
     }
@@ -421,7 +421,7 @@ class StopWatch: UIControl {
         
         let shape = CAShapeLayer()
         
-        shape.strokeColor = COLOR.White.cgColor
+        shape.strokeColor = UIColor.white.cgColor
         shape.lineWidth = progressBarWidth
         shape.lineCap = CAShapeLayerLineCap.butt
         shape.lineJoin = CAShapeLayerLineJoin.miter
@@ -603,7 +603,7 @@ class StopWatch: UIControl {
                 
             }
             
-            resetTimeLabel(withColor: COLOR.White, alpha: 1)
+            resetTimeLabel(withColor: UIColor.white, alpha: 1)
             JukeBox.instance.stopPlayingAll()
             JukeBox.instance.removeSound(SOUND.BeepBeep)
             
@@ -671,7 +671,7 @@ class StopWatch: UIControl {
         game.half = .Second
         periodLabel.text = LS_SECONDHALFLABEL
         timer.reset(withGame: game)
-        setProgressBarsColor(to: COLOR.White)
+        setProgressBarsColor(to: UIColor.white)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -686,7 +686,7 @@ class StopWatch: UIControl {
         game.quarter = .Second
         periodLabel.text = "Q2"
         timer.reset(withGame: game)
-        setProgressBarsColor(to: COLOR.White)
+        setProgressBarsColor(to: UIColor.white)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -701,7 +701,7 @@ class StopWatch: UIControl {
         game.quarter = .Third
         periodLabel.text = "Q3"
         timer.reset(withGame: game)
-        setProgressBarsColor(to: COLOR.White)
+        setProgressBarsColor(to: UIColor.white)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -716,7 +716,7 @@ class StopWatch: UIControl {
         game.quarter = .Fourth
         periodLabel.text = "Q4"
         timer.reset(withGame: game)
-        setProgressBarsColor(to: COLOR.White)
+        setProgressBarsColor(to: UIColor.white)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -832,7 +832,7 @@ extension StopWatch: StopWatchTimerDelegate {
         updateProgressBars()
         runningSecondsToGo = 0
         message = LS_OVERTIME
-        resetTimeLabel(withColor: COLOR.LightYellow, alpha: 1)
+        resetTimeLabel(withColor: UIColor(named: "LightYellow")!, alpha: 1)
         icon.change(to: .StopIcon)
         delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
     }

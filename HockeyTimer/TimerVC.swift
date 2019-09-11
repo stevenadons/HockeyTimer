@@ -15,7 +15,6 @@ protocol StopWatchDelegate: class {
     func handleTappedForNewGame()
 }
 
-
 class TimerVC: PanArrowVC {
 
     
@@ -29,6 +28,7 @@ class TimerVC: PanArrowVC {
     fileprivate var numberOfPeriods: NumberOfPeriods = .Halves
     var game: HockeyGame! {
         didSet {
+            guard game != nil else { return }
             duration = game.duration
         }
     }
@@ -43,7 +43,7 @@ class TimerVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.VeryDarkBlue
+        view.backgroundColor = UIColor(named: "VeryDarkBlue")!
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
@@ -64,8 +64,8 @@ class TimerVC: PanArrowVC {
         stopWatch.translatesAutoresizingMaskIntoConstraints = false
         stopWatchContainer.addSubview(stopWatch)
 
-        panArrowUp.color = COLOR.LightYellow
-        panArrowDown.color = COLOR.LightYellow
+        panArrowUp.color = UIColor(named: "LightYellow")!
+        panArrowDown.color = UIColor(named: "LightYellow")!
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)

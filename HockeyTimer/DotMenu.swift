@@ -63,7 +63,7 @@ class DotMenu: UIView {
         tap = UITapGestureRecognizer(target: self, action: #selector(hideButtons))
         addGestureRecognizer(tap)
         
-        menuButton = MenuButton(shapeColor: COLOR.White, bgColor: UIColor.clear)
+        menuButton = MenuButton(shapeColor: UIColor.white, bgColor: UIColor.clear)
         menuButton.addTarget(self, action: #selector(handleMenuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         menuButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         menuButton.frame.origin = CGPoint(x: horInset, y: topInset)
@@ -83,7 +83,7 @@ class DotMenu: UIView {
                 path = pathDocumentButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
             }
             
-            let button = ItemButton(shapeColor: COLOR.White, bgColor: UIColor.clear, path: path)
+            let button = ItemButton(shapeColor: UIColor.white, bgColor: UIColor.clear, path: path)
             button.tag = index
             button.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)

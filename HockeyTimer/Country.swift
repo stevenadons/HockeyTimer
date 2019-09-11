@@ -159,7 +159,9 @@ extension Country: Codable, Hashable {
 //    let gentsRules = Rules(name: DOC_B_GENTS, url: "https://www.hockey.be/app/uploads/2018/06/Gents_rules_NL_2017-2018-1.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2018/06/Gents_rules_FR_2017-2018.pdf"])
 //    let gentsLadies = GroupOfRules(rulesArray: [ladiesRules, gentsRules])
 //
-//    let moreOutdoorB = Rules(name: DOC_B_MORE_OUTDOOR, url: "https://www.hockey.be/nl/categorie/competitie/outdoor-hockey/", specificLocaleUrls: ["fr": "https://www.hockey.be/fr/categorie/competition/outdoor-hockey/"])
+//    let moreOutdoorB = Rules(name: DOC_B_MORE_OUTDOOR, url: "https://www.hockey.be/app/uploads/2019/08/2019-2020-BEL-Outdoor-Rules-NL.pdf", specificLocaleUrls: ["fr": "https://www.hockey.be/app/uploads/2019/08/2019-2020-BEL-Outdoor-Rules-FR-1.pdf"])
+    // https://www.hockey.be/nl/categorie/competitie/outdoor-hockey/
+    // https://www.hockey.be/fr/categorie/competition/outdoor-hockey/
 //    let moreIndoorB = Rules(name: DOC_B_MORE_INDOOR, url: "https://www.hockey.be/nl/categorie/competitie/indoor-hockey/", specificLocaleUrls: ["fr": "https://www.hockey.be/fr/categorie/competition/indoor-hockey3/"])
 //    let moreBGroup = GroupOfRules(rulesArray: [moreOutdoorB, moreIndoorB])
 //

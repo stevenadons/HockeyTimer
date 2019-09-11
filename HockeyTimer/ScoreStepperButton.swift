@@ -45,12 +45,12 @@ class ScoreStepperButton: UIButton {
         case .Minus:
             bgColor = COLOR.LightRed
         case .Plus:
-            bgColor = COLOR.DarkBlue
+            bgColor = UIColor(named: "DarkBlue")!
         }
         backgroundColor = bgColor
         translatesAutoresizingMaskIntoConstraints = false
         layer.borderWidth = 1.0
-        layer.borderColor = COLOR.White.cgColor
+        layer.borderColor = UIColor.white.cgColor
         
         shape = ScoreStepperButtonLayer(type: type)
         layer.addSublayer(shape)

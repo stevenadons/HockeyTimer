@@ -94,7 +94,7 @@ class Pitch: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
-        label.textColor = COLOR.White
+        label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -245,13 +245,13 @@ class Pitch: UIView {
         }) { (finished) in
             label.text = text
             label.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
-            label.textColor = COLOR.LightYellow
+            label.textColor = UIColor(named: "LightYellow")!
             UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [], animations: {
                 label.transform = CGAffineTransform.identity
             }, completion: { (finished) in
                 self.delegate?.scoreLabelChanged()
                 UIView.transition(with: label, duration: 1, options: .transitionCrossDissolve, animations: {
-                    label.textColor = COLOR.White
+                    label.textColor = UIColor.white
                 }, completion: nil)
             })
         }

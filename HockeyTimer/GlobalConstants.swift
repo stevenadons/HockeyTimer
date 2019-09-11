@@ -239,6 +239,11 @@ let LS_NEW_APP_VERSION_POPUP_TEXT = NSLocalizedString("A new version of HockeyUp
 let LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON = NSLocalizedString("Update", comment: "Button in popup")
 let LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON = NSLocalizedString("Skip new version", comment: "Button in popup")
 
+let LS_IOS_VERSION_TOO_LOW_POPUP_TITLE = NSLocalizedString("Unsupported iOS version", comment: "Title in popup")
+let LS_IOS_VERSION_TOO_LOW_POPUP_TEXT_1 = NSLocalizedString("You are currently running iOS version ", comment: "text in popup")
+let LS_IOS_VERSION_TOO_LOW_POPUP_TEXT_2 = NSLocalizedString(" which is no longer supported. Please update your iOS device to be minimum ", comment: "text in popup")
+let LS_IOS_VERSION_TOO_LOW_POPUP_TEXT_3 = NSLocalizedString(".", comment: "text in popup")
+
 let LS_COUNTRY_AUSTRALIA = NSLocalizedString("Australia", comment: "Country name in picker")
 let LS_COUNTRY_BELGIUM = NSLocalizedString("Belgium", comment: "Country name in picker")
 let LS_COUNTRY_NETHERLANDS = NSLocalizedString("Netherlands", comment: "Country name in picker")

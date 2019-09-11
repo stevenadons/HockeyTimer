@@ -19,7 +19,7 @@ class MiniStopWatch: UIView {
             durationLabel.setNeedsDisplay()
         }
     }
-    var color: UIColor = COLOR.DarkBlue {
+    var color: UIColor = UIColor(named: "DarkBlue")! {
         didSet {
             core.backgroundColor = color.cgColor
             core.setNeedsDisplay()
@@ -93,7 +93,7 @@ class MiniStopWatch: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = false
         label.backgroundColor = UIColor.clear
-        label.textColor = COLOR.White
+        label.textColor = UIColor.white
         label.text = text
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -111,7 +111,7 @@ class MiniStopWatch: UIView {
         
         let shape = CAShapeLayer()
         
-        shape.strokeColor = COLOR.White.cgColor
+        shape.strokeColor = UIColor.white.cgColor
         shape.lineWidth = progressBarWidth
         shape.lineCap = CAShapeLayerLineCap.butt
         shape.lineJoin = CAShapeLayerLineJoin.miter
@@ -139,6 +139,8 @@ class MiniStopWatch: UIView {
     // MARK: - Layout and draw methods
     
     override func layoutSubviews() {
+        
+        core.backgroundColor = color.cgColor
         
         squareContainer.frame = bounds.insetBy(dx: (bounds.width - squareSide) / 2, dy: (bounds.height - squareSide) / 2)
         progressZone.frame = squareContainer.bounds

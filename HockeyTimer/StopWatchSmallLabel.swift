@@ -46,7 +46,7 @@ class StopWatchSmallLabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
         backgroundColor = UIColor.clear
-        textColor = COLOR.White
+        textColor = UIColor.white
         text = ""
         textAlignment = .center
         adjustsFontSizeToFitWidth = true

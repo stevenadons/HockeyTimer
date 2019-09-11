@@ -19,18 +19,58 @@ class CountryDataManager {
     }
     
     private (set) var countries: [Country]!
+    private (set) var status: DataStatus = .Blank
     
     private let urlScheme = "https"
     private let urlHost = "raw.githubusercontent.com"
     private let urlPath = "/stevenadons/RemoteJSON/master"
     
     
+    // MARK: - Local Types
+    
+    enum DataStatus {
+        
+        case Blank
+        case Initialized
+        case UpdatedLocally
+        case CheckedRemotely(date: Date)
+        case UpdatedRemotely(date: Date)
+    }
+    
+    
     // MARK: - Public Methods
+    
+    func statusString() -> String {
+        
+        var result: String
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        
+        switch status {
+        case .Blank:
+            result = "Links not initialized"
+        case .Initialized:
+            result = "Links initialized from code"
+        case .UpdatedLocally:
+            result = "Links from device"
+        case .CheckedRemotely(let date):
+            let dateString = formatter.string(from: date)
+            result = "Links remotely checked " + dateString
+        case .UpdatedRemotely(let date):
+            let dateString = formatter.string(from: date)
+            result = "Links updated " + dateString
+        }
+        
+        return result
+    }
     
     func updateLocally() {
         
         if countries == nil {
             countries = initialCountriesFromCodeBase()
+            status = .Initialized
         }
         let locallyStoredCountries = Country.loadAll(sorted: false)
         
@@ -44,6 +84,7 @@ class CountryDataManager {
                 if storedCountry == countries[index] {
                     countries.remove(at: index)
                     countries.insert(storedCountry, at: index)
+                    status = .UpdatedLocally
                 }
             }
         }
@@ -54,6 +95,7 @@ class CountryDataManager {
         
         if countries == nil {
             countries = initialCountriesFromCodeBase()
+            status = .Initialized
         }
         let countriesToUpdate = countries
         
@@ -62,6 +104,8 @@ class CountryDataManager {
             switch result {
                 
             case .success(let jsonObject):
+                
+                self.status = .CheckedRemotely(date: Date())
                 
                 if let storedCountries = jsonObject["data"] as? [AnyObject] {
                     var resultCountries: [Country] = countriesToUpdate!
@@ -133,6 +177,7 @@ class CountryDataManager {
                         $0.saveItem()
                     }
                     self.countries = resultCountries
+                    self.status = .UpdatedRemotely(date: Date())
                     handler?(resultCountries)
                 }
                 

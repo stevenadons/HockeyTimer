@@ -96,7 +96,7 @@ class BuyPremiumVC: UIViewController {
     
     private func setupUI() {
         
-        view.backgroundColor = COLOR.VeryDarkBlue
+        view.backgroundColor = UIColor(named: "VeryDarkBlue")!
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0

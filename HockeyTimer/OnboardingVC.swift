@@ -40,7 +40,7 @@ class OnboardingVC: UIViewController {
     
     private func setup() {
         
-        view.backgroundColor = COLOR.White
+        view.backgroundColor = UIColor.white
         
         scrollView = UIScrollView()
         scrollView.frame = self.view.bounds
@@ -53,8 +53,8 @@ class OnboardingVC: UIViewController {
         pageControl = UIPageControl()
         pageControl.numberOfPages = numberOfPages
         pageControl.currentPage = previousPage
-        pageControl.pageIndicatorTintColor = COLOR.DarkBlue
-        pageControl.currentPageIndicatorTintColor = COLOR.LightYellow
+        pageControl.pageIndicatorTintColor = UIColor(named: "DarkBlue")!
+        pageControl.currentPageIndicatorTintColor = UIColor(named: "LightYellow")!
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pageControl)
         
@@ -64,7 +64,7 @@ class OnboardingVC: UIViewController {
         dismissButton.alpha = 0.0
         dismissButton.backgroundColor = UIColor.clear
         dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 17)
-        dismissButton.setTitleColor(COLOR.DarkBlue, for: .normal)
+        dismissButton.setTitleColor(UIColor(named: "DarkBlue")!, for: .normal)
         dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
@@ -90,17 +90,17 @@ class OnboardingVC: UIViewController {
     private func setupSlides() {
         
         slide1 = OnboardScreen()
-        slide1.backgroundColor = COLOR.White
+        slide1.backgroundColor = UIColor.white
         slide1.title.text = LS_TITLE_ONBOARDINGSLIDE1
         slide1.body.text = LS_BODY_ONBOARDINGSLIDE1
         scrollView.addSubview(slide1)
         
         stopWatch = StopWatch()
-        stopWatch.simplifyForOnboarding(bgColor: COLOR.White, iconColor: COLOR.LightYellow, timeColor: COLOR.VeryDarkBlue, progressZoneColor: COLOR.DarkBlue)
+        stopWatch.simplifyForOnboarding(bgColor: UIColor.white, iconColor: UIColor(named: "LightYellow")!, timeColor: UIColor(named: "VeryDarkBlue")!, progressZoneColor: UIColor(named: "DarkBlue")!)
         slide1.graphics.addSubview(stopWatch)
         
         slide2 = OnboardScreen()
-        slide2.backgroundColor = COLOR.White
+        slide2.backgroundColor = UIColor.white
         slide2.title.text = LS_TITLE_ONBOARDINGSLIDE2
         slide2.body.text = LS_BODY_ONBOARDINGSLIDE2
         scrollView.addSubview(slide2)
@@ -110,7 +110,7 @@ class OnboardingVC: UIViewController {
         slide2.graphics.addSubview(pitch)
         
         slide3 = OnboardScreen()
-        slide3.backgroundColor = COLOR.White
+        slide3.backgroundColor = UIColor.white
         slide3.title.text = LS_TITLE_ONBOARDINGSLIDE3
         slide3.body.text = LS_BODY_ONBOARDINGSLIDE3
         scrollView.addSubview(slide3)
@@ -174,6 +174,7 @@ class OnboardingVC: UIViewController {
         
         let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         startViewController.modalTransitionStyle = .crossDissolve
+        startViewController.modalPresentationStyle = .fullScreen
         present(startViewController, animated: true, completion: nil)
     }
 }

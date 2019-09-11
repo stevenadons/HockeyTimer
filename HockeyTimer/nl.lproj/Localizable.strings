@@ -120,6 +120,11 @@
 "Update" = "Update";
 "Skip new version" = "Overslaan";
 
+"Unsupported iOS version" = "iOS versie te laag";
+"You are currently running iOS version " = "Je huidige iOS versie is ";
+" which is no longer supported. Please update your iOS device to be minimum " = ". Dit wordt niet meer ondersteund. Update naar minstens iOS ";
+"." = ".";
+
 "Australia" = "Australië";
 "Belgium" = "België";
 "Netherlands" = "Nederland";

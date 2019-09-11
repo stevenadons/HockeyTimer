@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.backgroundColor = COLOR.VeryDarkBlue
+        self.window?.backgroundColor = UIColor(named: "VeryDarkBlue")!
         var startViewController: UIViewController
         
         // For testing purposes to test onboarding
@@ -54,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         }
+        
+        
         
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()

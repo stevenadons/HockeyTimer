@@ -81,12 +81,12 @@ class ScoreVC: PanArrowVC {
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
-        panArrowUp.color = COLOR.LightYellow
-        panArrowDown.color = COLOR.LightYellow
+        panArrowUp.color = UIColor(named: "LightYellow")!
+        panArrowDown.color = UIColor(named: "LightYellow")!
         panArrowUpLabel.text = LS_TITLE_STOPWATCH
         panArrowDownLabel.text = LS_TITLE_DOCUMENTS
-        panArrowUpLabel.textColor = COLOR.VeryDarkBlue
-        panArrowDownLabel.textColor = COLOR.VeryDarkBlue
+        panArrowUpLabel.textColor = UIColor(named: "VeryDarkBlue")!
+        panArrowDownLabel.textColor = UIColor(named: "VeryDarkBlue")!
         
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
         let pitchContainerOffset = UIDevice.whenDeviceIs(small: 20, normal: 0, big: -50)
