@@ -79,7 +79,7 @@ class DocumentMenuVC: PanArrowVC {
         
         view.addSubview(reportButton)
         
-        let reportConstant: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 16, big: 20)
+        let reportConstant: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 12, big: 18)
         
         NSLayoutConstraint.activate([
             

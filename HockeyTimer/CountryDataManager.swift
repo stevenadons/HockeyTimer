@@ -93,6 +93,10 @@ class CountryDataManager {
     
     func updateRemote(then handler: (([Country]) -> Void)?) {
         
+        for loc in Bundle.main.preferredLocalizations {
+            print("localization: \(loc)")
+        }
+        
         if countries == nil {
             countries = initialCountriesFromCodeBase()
             status = .Initialized
@@ -131,8 +135,20 @@ class CountryDataManager {
                                                 var name: String? = nil
                                                 var urlString: String? = nil
                                                 var specificLocaleUrls: [String: String]?
-                                                if let storedName = set["name"] as? String {
-                                                    name = storedName
+                                                if let storedNames = set["names"] as? [String: String] {
+                                                    
+                                                    // Look up rules, language (in preference): app language, system language, english, first value, "Rules"
+                                                    if let appLanguage = Bundle.main.preferredLocalizations.first, let appPreferredName = storedNames[appLanguage] {
+                                                        name = appPreferredName
+                                                    } else if let language = Locale.current.languageCode, let preferredName = storedNames[language] {
+                                                        name = preferredName
+                                                    } else if let englishName = storedNames["en"] {
+                                                        name = englishName
+                                                    } else if !(storedNames.isEmpty), let firstName = storedNames.first?.value {
+                                                        name = firstName
+                                                    } else {
+                                                        name = "Rules"
+                                                    }
                                                 }
                                                 if let storedURLString = set["url"] as? String {
                                                     urlString = storedURLString
