@@ -32,13 +32,23 @@ class CountryDataManager {
         
         case Blank
         case Initialized
-        case UpdatedLocally
+        case UpdatedWithSourceData
+        case UpdateWithLocallyStoredData
         case CheckedRemotely(date: Date)
-        case UpdatedRemotely(date: Date)
+        case UpdatedWithRemoteData(date: Date)
     }
     
     
     // MARK: - Public Methods
+    
+    func getData() {
+        
+        initializeCountries()
+        updateWithSourceData()
+        updateWithLocallyStoredData()
+        updateWithRemoteData()
+    }
+    
     
     func statusString() -> String {
         
@@ -53,12 +63,14 @@ class CountryDataManager {
             result = "Links not initialized"
         case .Initialized:
             result = "Links initialized from code"
-        case .UpdatedLocally:
+        case .UpdatedWithSourceData:
+            result = "Links updated with local json"
+        case .UpdateWithLocallyStoredData:
             result = "Links from device"
         case .CheckedRemotely(let date):
             let dateString = formatter.string(from: date)
             result = "Links remotely checked " + dateString
-        case .UpdatedRemotely(let date):
+        case .UpdatedWithRemoteData(let date):
             let dateString = formatter.string(from: date)
             result = "Links updated " + dateString
         }
@@ -66,149 +78,11 @@ class CountryDataManager {
         return result
     }
     
-    func updateLocally() {
-        
-        if countries == nil {
-            countries = initialCountriesFromCodeBase()
-            status = .Initialized
-        }
-        let locallyStoredCountries = Country.loadAll(sorted: false)
-        
-        // Iterate over countries in memory
-        for index in 0..<countries.count {
-            
-            // Iterate over locally stored countries
-            for storedCountry in locallyStoredCountries {
-                
-                // Match
-                if storedCountry == countries[index] {
-                    countries.remove(at: index)
-                    countries.insert(storedCountry, at: index)
-                    status = .UpdatedLocally
-                }
-            }
-        }
-    }
-    
-    
-    func updateRemote(then handler: (([Country]) -> Void)?) {
-        
-        for loc in Bundle.main.preferredLocalizations {
-            print("localization: \(loc)")
-        }
-        
-        if countries == nil {
-            countries = initialCountriesFromCodeBase()
-            status = .Initialized
-        }
-        let countriesToUpdate = countries
-        
-        DataService.instance.getJSON(urlComponentsScheme: urlScheme, urlComponentsHost: urlHost, urlComponentsPath: urlPath + "/data") { (result) in
-            
-            switch result {
-                
-            case .success(let jsonObject):
-                
-                self.status = .CheckedRemotely(date: Date())
-                
-                if let storedCountries = jsonObject["data"] as? [AnyObject] {
-                    var resultCountries: [Country] = countriesToUpdate!
-                    
-                    // Iterate over stored countries
-                    for country in storedCountries {
-                        
-                        var resultGroupsOfRules: [GroupOfRules] = []
-                        var resultArrayOfRules: [Rules] = []
-                        if let country = country as? [String: AnyObject] {
-                            
-                            if let capitals = country["countryCapitals"] as? String, let groupsOfRules = country["groups"] as? [AnyObject] {
-                                
-                                // Iterate over groups of rules in stored country
-                                for groupOfRules in groupsOfRules {
-                                    
-                                    if let groupOfRules = groupOfRules as? [String: AnyObject], let setsOfRules = groupOfRules["rules"] as? [AnyObject] {
-                                        
-                                        // Iterate over rules within groupOfRules
-                                        for set in setsOfRules {
-                                            
-                                            if let set = set as? [String: AnyObject] {
-                                                var name: String? = nil
-                                                var urlString: String? = nil
-                                                var specificLocaleUrls: [String: String]?
-                                                if let storedNames = set["names"] as? [String: String] {
-                                                    
-                                                    // Look up rules, language (in preference): app language, system language, english, first value, "Rules"
-                                                    if let appLanguage = Bundle.main.preferredLocalizations.first, let appPreferredName = storedNames[appLanguage] {
-                                                        name = appPreferredName
-                                                    } else if let language = Locale.current.languageCode, let preferredName = storedNames[language] {
-                                                        name = preferredName
-                                                    } else if let englishName = storedNames["en"] {
-                                                        name = englishName
-                                                    } else if !(storedNames.isEmpty), let firstName = storedNames.first?.value {
-                                                        name = firstName
-                                                    } else {
-                                                        name = "Rules"
-                                                    }
-                                                }
-                                                if let storedURLString = set["url"] as? String {
-                                                    urlString = storedURLString
-                                                }
-                                                if let storedSpecificLocaleURLS = set["specificLocaleURLs"] as? [String: String] {
-                                                    specificLocaleUrls = storedSpecificLocaleURLS
-                                                }
-                                                if name != nil && urlString != nil {
-                                                    // Make new Rules and add to result array
-                                                    let rules = Rules(name: name!, url: urlString!, specificLocaleUrls: specificLocaleUrls)
-                                                    resultArrayOfRules.append(rules)
-                                                }
-                                            }
-                                        }
-                                    }
-                                    // Make new GroupOfRules and add to result array for this array of GroupOfRules
-                                    if !resultArrayOfRules.isEmpty {
-                                        let groupOfRules = GroupOfRules(rulesArray: resultArrayOfRules)
-                                        resultGroupsOfRules.append(groupOfRules)
-                                    }
-                                    resultArrayOfRules = []
-                                }
-                                
-                                // Make new country with updated groupsOfRules and add to result
-                                if !resultGroupsOfRules.isEmpty {
-                                    for index in 0..<countriesToUpdate!.count {
-                                        if countriesToUpdate![index].capitals == capitals {
-                                            let currentCountry = countriesToUpdate![index]
-                                            let updatedCountry = Country(capitals: capitals, localeRegionCode: currentCountry.localeRegionCode, name: currentCountry.name, durations: currentCountry.durations, durationStrings: currentCountry.durationStrings, groupsOfRules: resultGroupsOfRules)
-                                            resultCountries.remove(at: index)
-                                            resultCountries.insert(updatedCountry, at: index)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    // Update persistence
-                    Country.deleteAllFromStorage()
-                    resultCountries.forEach {
-                        $0.saveItem()
-                    }
-                    self.countries = resultCountries
-                    self.status = .UpdatedRemotely(date: Date())
-                    handler?(resultCountries)
-                }
-                
-            case .failure(let error):
-                print("error \(error)")
-                handler?(countriesToUpdate!)
-            }
-        }
-    }
-    
     
     // MARK: - Private Methods
     
-    private func initialCountriesFromCodeBase() -> [Country] {
-        
+    private func initializeCountries() {
+
         let australia = Country(capitals: "AUS",
                                 localeRegionCode: "AU",
                                 name: "Australia",
@@ -245,8 +119,204 @@ class CountryDataManager {
                                   durations: [.Fifteen, .Twenty, .TwentyFive, .Thirty, .ThirtyFive],
                                   durationStrings: [LS_COUNTRY_TEAMS_OF_3, LS_COUNTRY_INDOOR_AND_H, LS_COUNTRY_TEAMS_OF_6, LS_COUNTRY_TEAMS_OF_8, LS_COUNTRY_GENERAL],
                                   groupsOfRules: [])
-        
-        return [australia, belgium, germany, spain, england, netherlands]
+
+        countries = [australia, belgium, germany, spain, england, netherlands]
+        status = .Initialized
     }
+    
+    
+    private func updateWithSourceData() {
+        
+        if countries.isEmpty {
+            initializeCountries()
+        }
+        
+        guard let jsonURL = Bundle.main.url(forResource: "HockeyUppLinks", withExtension: "json") else {
+            return
+        }
+        
+        var data = Data()
+        do {
+            data = try Data(contentsOf: jsonURL)
+            let jsonFile = try JSONSerialization.jsonObject(with: data, options: [])
+            if let jsonObject = jsonFile as? [String: AnyObject] {
+                handleJSON(jsonObject) { (countriesFromLocalJSON) in
+                    self.countries = countriesFromLocalJSON
+                }
+                status = .UpdatedWithSourceData
+            }
+        } catch {
+            print("error reading json from HockeyUppLinks.json")
+        }
+    }
+    
+    
+    private func updateWithLocallyStoredData() {
+        
+        if countries.isEmpty {
+            initializeCountries()
+        }
+        
+        let locallyStoredCountries = Country.loadAll(sorted: false)
+        
+        // Iterate over countries in memory
+        for index in 0..<countries.count {
+            
+            // Iterate over locally stored countries
+            for storedCountry in locallyStoredCountries {
+                
+                // Match
+                if storedCountry == countries[index] {
+                    countries.remove(at: index)
+                    countries.insert(storedCountry, at: index)
+                    status = .UpdateWithLocallyStoredData
+                }
+            }
+        }
+    }
+    
+    
+    private func updateWithRemoteData(then handler: (([Country]) -> Void)? = nil) {
+        
+        if countries.isEmpty {
+            initializeCountries()
+        }
+        
+        let countriesToUpdate = countries
+        
+        DataService.instance.getJSON(urlComponentsScheme: urlScheme, urlComponentsHost: urlHost, urlComponentsPath: urlPath + "/data") { (result) in
+            
+            switch result {
+                
+            case .success(let jsonObject):
+                
+                self.status = .CheckedRemotely(date: Date())
+                self.handleJSON(jsonObject) { (countriesFromRemoteJSON) in
+                    
+                    self.status = .UpdatedWithRemoteData(date: Date())
+                    self.countries = countriesFromRemoteJSON
+                    
+                    // Update persistence
+                    Country.deleteAllFromStorage()
+                    self.countries.forEach {
+                        $0.saveItem()
+                    }
+                    
+                    handler?(countriesFromRemoteJSON)
+                }
+                
+            case .failure( _):
+
+                handler?(countriesToUpdate!)
+            }
+        }
+    }
+    
+    
+    private func handleJSON(_ jsonObject: [String: AnyObject], then handler: (([Country]) -> Void)?) {
+        
+        let countriesToUpdate = countries
+        
+        if let storedCountries = jsonObject["data"] as? [AnyObject] {
+            var resultCountries: [Country] = countriesToUpdate!
+            
+            // Iterate over stored countries
+            for country in storedCountries {
+                
+                var resultGroupsOfRules: [GroupOfRules] = []
+                var resultArrayOfRules: [Rules] = []
+                if let country = country as? [String: AnyObject] {
+                    
+                    if let capitals = country["countryCapitals"] as? String, let groupsOfRules = country["groups"] as? [AnyObject] {
+                        
+                        // Iterate over groups of rules in stored country
+                        for groupOfRules in groupsOfRules {
+                            
+                            if let groupOfRules = groupOfRules as? [String: AnyObject], let setsOfRules = groupOfRules["rules"] as? [AnyObject] {
+                                
+                                // Iterate over rules within groupOfRules
+                                for set in setsOfRules {
+                                    
+                                    if let set = set as? [String: AnyObject] {
+                                        var name: String? = nil
+                                        var urlString: String? = nil
+                                        var specificLocaleUrls: [String: String]?
+                                        if let storedNames = set["names"] as? [String: String] {
+                                            
+                                            // Look up rules, language (in preference): app language, system language, english, first value, "Rules"
+                                            if let appLanguage = Bundle.main.preferredLocalizations.first, let appPreferredName = storedNames[appLanguage] {
+                                                name = appPreferredName
+                                            } else if let language = Locale.current.languageCode, let preferredName = storedNames[language] {
+                                                name = preferredName
+                                            } else if let englishName = storedNames["en"] {
+                                                name = englishName
+                                            } else if !(storedNames.isEmpty), let firstName = storedNames.first?.value {
+                                                name = firstName
+                                            } else {
+                                                name = "Rules"
+                                            }
+                                        }
+                                        if let storedURLString = set["url"] as? String {
+                                            urlString = storedURLString
+                                        }
+                                        if let storedSpecificLocaleURLS = set["specificLocaleURLs"] as? [String: String] {
+                                            specificLocaleUrls = storedSpecificLocaleURLS
+                                        }
+                                        if name != nil && urlString != nil {
+                                            // Make new Rules and add to result array
+                                            let rules = Rules(name: name!, url: urlString!, specificLocaleUrls: specificLocaleUrls)
+                                            resultArrayOfRules.append(rules)
+                                        }
+                                    }
+                                }
+                            }
+                            // Make new GroupOfRules and add to result array for this array of GroupOfRules
+                            if !resultArrayOfRules.isEmpty {
+                                let groupOfRules = GroupOfRules(rulesArray: resultArrayOfRules)
+                                resultGroupsOfRules.append(groupOfRules)
+                            }
+                            resultArrayOfRules = []
+                        }
+                        
+                        // Make new country with updated groupsOfRules and add to result
+                        if !resultGroupsOfRules.isEmpty {
+                            for index in 0..<countriesToUpdate!.count {
+                                if countriesToUpdate![index].capitals == capitals {
+                                    let currentCountry = countriesToUpdate![index]
+                                    let updatedCountry = Country(capitals: capitals, localeRegionCode: currentCountry.localeRegionCode, name: currentCountry.name, durations: currentCountry.durations, durationStrings: currentCountry.durationStrings, groupsOfRules: resultGroupsOfRules)
+                                    resultCountries.remove(at: index)
+                                    resultCountries.insert(updatedCountry, at: index)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Handler
+            handler?(resultCountries)
+        }
+        
+    }
+    
+    private func checkOutdoorRulesURLForAustralia() {
+        
+        for country in countries {
+            if country.capitals == "AUS" {
+                if let gor = country.groupsOfRules {
+                    for group in gor {
+                        for rules in group.rulesArray {
+                            if rules.name == "Outdoor Rules" {
+                                if let url = rules.url {
+                                    print("Checking AUS - Outdoor Rules: \(url)")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     
 }

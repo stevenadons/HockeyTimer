@@ -69,7 +69,6 @@ enum COLOR {
     static let LightBlue = UIColor(hexString: "#9AD2CB") // 8FC0F2
     static let Olive = UIColor(hexString: "#A4B494") 
     static let White = UIColor(hexString: "#FBFAF8")
-
 }
 
 
@@ -92,8 +91,6 @@ enum USERDEFAULTSKEY {
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
     static let PremiumMode = "PremiumMode"
     static let CountryIndex = "CountryIndex"
-
-
 }
 
 enum SOUND {

@@ -32,8 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GADMobileAds.sharedInstance().start(completionHandler: nil)
         })
         
-        CountryDataManager.shared.updateLocally()
-        CountryDataManager.shared.updateRemote(then: nil)
+        CountryDataManager.shared.getData()
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)

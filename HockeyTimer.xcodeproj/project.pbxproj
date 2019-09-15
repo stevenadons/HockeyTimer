@@ -38,6 +38,7 @@
 		4F8D08B823243A7A0062A58F /* CountryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D08B723243A7A0062A58F /* CountryDataManager.swift */; };
 		4F8D08BA23243A8A0062A58F /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D08B923243A8A0062A58F /* LocalDataManager.swift */; };
 		4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D08BB23243A900062A58F /* DataServiceURL.swift */; };
+		4F8DB70B232D0D0000BFB156 /* HockeyUppLinks.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F8DB70A232D0D0000BFB156 /* HockeyUppLinks.json */; };
 		4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */; };
 		4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D11F5332760003C2FF /* PanArrow.swift */; };
 		4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */; };
@@ -132,6 +133,7 @@
 		4F8D08B723243A7A0062A58F /* CountryDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataManager.swift; sourceTree = "<group>"; };
 		4F8D08B923243A8A0062A58F /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		4F8D08BB23243A900062A58F /* DataServiceURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServiceURL.swift; sourceTree = "<group>"; };
+		4F8DB70A232D0D0000BFB156 /* HockeyUppLinks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HockeyUppLinks.json; sourceTree = "<group>"; };
 		4F9FC5CF1F5331B30003C2FF /* PanArrowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLayer.swift; sourceTree = "<group>"; };
 		4F9FC5D11F5332760003C2FF /* PanArrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrow.swift; sourceTree = "<group>"; };
 		4F9FC5D51F5335410003C2FF /* PanArrowLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanArrowLabelFactory.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				4FF7FB2F1F6549DC001D4ED1 /* Sounds */,
 				4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */,
 				4F3F62721F64745A00D8FEC5 /* Localizable.strings */,
+				4F8DB70A232D0D0000BFB156 /* HockeyUppLinks.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */,
 				4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
+				4F8DB70B232D0D0000BFB156 /* HockeyUppLinks.json in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -921,7 +925,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -940,7 +944,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;

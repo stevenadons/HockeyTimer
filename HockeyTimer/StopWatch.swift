@@ -26,7 +26,6 @@ class StopWatch: UIControl {
     
     var game: HockeyGame! {
         didSet {
-            print("StopWatch - game set with numberOfPeriods \(game.numberOfPeriods) - will call updateLabels")
             updateLabels()
             resetTimeLabel(withColor: UIColor.white, alpha: 1)
         }
@@ -247,6 +246,8 @@ class StopWatch: UIControl {
             } else {
                 periodLabel.text = (game.half == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
             }
+            updateTimeLabel()
+            showTimeLabel()
             shouldRestoreFromBackground = false
         }
     }
@@ -256,8 +257,13 @@ class StopWatch: UIControl {
     
     func stopWatchLabelTimeString() -> String {
         
+        if game.status == .Finished {
+            return "\(game.homeScore)-\(game.awayScore)"
+        }
+        
         var result: String = ""
         var total: Int
+        
         switch timer.state {
         case .Overdue:
             total = timer.totalSecondsOverdue
@@ -265,9 +271,6 @@ class StopWatch: UIControl {
             total = timer.totalSecondsCountingUp
         default:
             total = timer.totalSecondsToGo
-        }
-        if game.status == .Finished {
-            total = 0
         }
         
         if minutes(totalSeconds: total) < 10 {

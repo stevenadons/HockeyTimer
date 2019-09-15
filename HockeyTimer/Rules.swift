@@ -43,7 +43,6 @@ struct Rules {
                 if let urlString = specificLocaleUrls![key] {
                     if let encodedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: customAllowedSet) {
                         self.specificLocaleUrls![key] = URL(string: encodedUrlString)
-                        print("** didset specificLocaleUrls for key \(key) for button \(name)")
                     }
                 }
             }
