@@ -5,6 +5,15 @@
 //  Created by Steven Adons on 11/09/2019.
 //  Copyright © 2019 StevenAdons. All rights reserved.
 //
+//  --------------------------------------------------------------------------------
+//  How to use
+//
+//  On first screen show up:
+//
+//  let minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
+//  minimumIOSManager.checkIOSVersion()
+//
+//  --------------------------------------------------------------------------------
 
 import UIKit
 

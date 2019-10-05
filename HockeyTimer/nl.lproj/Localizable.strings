@@ -60,13 +60,13 @@
 "Please check your internet connection." = "Controleer of je verbinding hebt met internet.";
 
 "Allow Notifications" = "Activeer meldingen";
-"HockeyUpp will send a notification at the exact time the game ends. Open Settings and enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Open Instellingen en activeer meldingen voor HockeyUpp.";
-"HockeyUpp sends a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
+"HockeyUpp will send a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
 "OK, let me allow" = "OK, activeer meldingen";
 "Not now" = "Later";
 
 "New Version Available" = "Nieuwe versie beschikbaar";
 "A new version of HockeyUpp is available. Please update to have the latest user experience." = "Een nieuwe versie van HockeyUpp is beschikbaar in de App Store. Update nu om de laatste versie te installeren.";
+"Changes include:" = "Wijzigingen:";
 "Update" = "Update";
 "Skip new version" = "Overslaan";
 

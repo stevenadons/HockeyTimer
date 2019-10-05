@@ -19,7 +19,6 @@ class StopWatchTimer {
             switch state {
             case .WaitingToStart:
                 timerIsRunning = false
-                print("SWT - didSet state - willl call resetTime")
                 resetTime()
                 totalSecondsOverdue = 0
                 totalSecondsCountingUp = 0

@@ -5,6 +5,15 @@
 //  Created by Steven Adons on 18/06/2019.
 //  Copyright © 2019 StevenAdons. All rights reserved.
 //
+//  --------------------------------------------------------------------------------
+//  How to use
+//
+//  On first screen show up:
+//
+//  let updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1461703535?mt=8")
+//  updateManager.checkForUpdates()
+//
+//  --------------------------------------------------------------------------------
 
 import UIKit
 
@@ -45,7 +54,7 @@ class UpdateManager {
         
         DispatchQueue.global().async {
             do {
-                let update = try self.isUpdateAvailable()
+                let update = try self.isUpdateAvailable().0
                 DispatchQueue.main.async {
                     if update && !UpdateManager.alreadyAskedSinceLaunch {
                         self.popupUpdateDialogue()
@@ -58,7 +67,7 @@ class UpdateManager {
         }
     }
     
-    private func isUpdateAvailable() throws -> Bool {
+    private func isUpdateAvailable() throws -> (Bool, String?) {
         
         guard let info = Bundle.main.infoDictionary,
             let currentVersion = info["CFBundleShortVersionString"] as? String,
@@ -66,29 +75,58 @@ class UpdateManager {
             let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(identifier)") else {
                 throw VersionError.invalidBundleInfo
         }
+        
         let data = try Data(contentsOf: url)
         guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
             throw VersionError.invalidResponse
         }
-        if let result = (json["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String {
-            return version != currentVersion
+        if let result = (json["results"] as? [Any])?.first as? [String: Any], let appStoreVersion = result["version"] as? String {
+            
+            var shouldPromptForUpdate = false
+            let isVersionDifferent = (appStoreVersion != currentVersion)
+            if isVersionDifferent {
+                let isCurrentVersionBelowAppStoreVersion = (currentVersion.compare(appStoreVersion, options: .numeric) == .orderedAscending)
+                if isCurrentVersionBelowAppStoreVersion {
+                    shouldPromptForUpdate = true
+                }
+            }
+            
+            if let releaseNotes = result["releaseNotes"] as? String, releaseNotes.count > 5 {
+                return (shouldPromptForUpdate, releaseNotes)
+            } else {
+                return (shouldPromptForUpdate, nil)
+            }
+            
         }
         throw VersionError.invalidResponse
     }
     
     
-    
     private func popupUpdateDialogue() {
         
-        let alert = UIAlertController(title: LS_NEW_APP_VERSION_POPUP_TITLE, message: LS_NEW_APP_VERSION_POPUP_TEXT, preferredStyle: UIAlertController.Style.alert)
-        let okBtn = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON, style: .default, handler: {(_ action: UIAlertAction) -> Void in
-            guard let productURL = URL(string: self.appURL) else { return } // "https://apps.apple.com/app/id1464432452"
-            UIApplication.shared.open(productURL)
-        })
-        let noBtn = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON, style: .destructive, handler: {(_ action: UIAlertAction) -> Void in
-        })
-        alert.addAction(okBtn)
-        alert.addAction(noBtn)
-        presentingViewController.present(alert, animated: true, completion: nil)
+        do {
+            let releaseNotes = try self.isUpdateAvailable().1
+            DispatchQueue.main.async {
+                var message = LS_NEW_APP_VERSION_POPUP_TEXT
+                if releaseNotes != nil {
+                    message += "\n\n"
+                    message += LS_NEW_APP_VERSION_POPUP_TEXT_RELEASENOTES_INTRO
+                    message += "\n"
+                    message += releaseNotes!
+                }
+                let alert = UIAlertController(title: LS_NEW_APP_VERSION_POPUP_TITLE, message: message, preferredStyle: UIAlertController.Style.actionSheet)
+                let okBtn = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON, style: .default, handler: {(_ action: UIAlertAction) -> Void in
+                    guard let productURL = URL(string: self.appURL) else { return }
+                    UIApplication.shared.open(productURL)
+                })
+                let noBtn = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON, style: .cancel, handler: {(_ action: UIAlertAction) -> Void in
+                })
+                alert.addAction(okBtn)
+                alert.addAction(noBtn)
+                self.presentingViewController.present(alert, animated: true, completion: nil)
+            }
+        } catch {
+            print(error)
+        }
     }
 }

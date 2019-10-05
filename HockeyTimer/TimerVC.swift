@@ -35,9 +35,9 @@ class TimerVC: PanArrowVC {
     var delegate: TimerVCDelegate?
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
 
-    var message: String = "" 
+    var message: String = ""
     
-    
+        
     // MARK: - Loading
     
     override func viewDidLoad() {
@@ -69,7 +69,7 @@ class TimerVC: PanArrowVC {
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)
-        liftPanArrowDownLabelUp()  
+        liftPanArrowDownLabelUp()
         
         NSLayoutConstraint.activate([
             

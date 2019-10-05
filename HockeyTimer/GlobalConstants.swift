@@ -178,6 +178,7 @@ let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Canc
 
 let LS_NEW_APP_VERSION_POPUP_TITLE = NSLocalizedString("New Version Available", comment: "Title in popup")
 let LS_NEW_APP_VERSION_POPUP_TEXT = NSLocalizedString("A new version of HockeyUpp is available. Please update to have the latest user experience.", comment: "text in popup")
+let LS_NEW_APP_VERSION_POPUP_TEXT_RELEASENOTES_INTRO = NSLocalizedString("Changes include:", comment: "text in popup")
 let LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON = NSLocalizedString("Update", comment: "Button in popup")
 let LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON = NSLocalizedString("Skip new version", comment: "Button in popup")
 
