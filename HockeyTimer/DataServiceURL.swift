@@ -46,6 +46,18 @@ class DataService {
         performDataTaskWith(session: URLSession.shared, request: request, handler: handler)
     }
     
+    func getJSON(urlString: String, then handler: Handler?) {
+        
+        guard let url = URL(string: urlString) else {
+            handler?(.failure(LoadingError.invalidURL))
+            return
+        }
+        print("getting JSON for url: \(url)")
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        performDataTaskWith(session: URLSession.shared, request: request, handler: handler)
+    }
+    
     
     // MARK: - Private methods
     

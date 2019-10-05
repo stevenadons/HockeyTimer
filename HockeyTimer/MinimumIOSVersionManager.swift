@@ -10,8 +10,9 @@
 //
 //  On first screen show up:
 //
-//  let minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
-//  minimumIOSManager.checkIOSVersion()
+//  private var minimumIOSManager: MinimumIOSVersionManager!
+//  minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
+//  minimumIOSManager.checkIOSVersion(then: {...})
 //
 //  --------------------------------------------------------------------------------
 
@@ -46,19 +47,22 @@ class MinimumIOSVersionManager {
     
     // MARK: - Public Methods
     
-    func checkIOSVersion() {
+    func checkIOSVersion(then handler: (() -> Void)?) {
         
         DispatchQueue.global().async {
             do {
                 let ok = try self.currentIOSVersionAboveMinimum()
                 DispatchQueue.main.async {
                     if !ok && !MinimumIOSVersionManager.alreadyAskedSinceLaunch {
-                        self.popupUpdateDialogue()
+                        self.popupUpdateDialogue(then: handler)
                         MinimumIOSVersionManager.alreadyAskedSinceLaunch = true
                     }
                 }
             } catch {
                 print(error)
+                DispatchQueue.main.async {
+                    handler?()
+                }
             }
         }
     }
@@ -80,7 +84,7 @@ class MinimumIOSVersionManager {
     }
     
     
-    private func popupUpdateDialogue() {
+    private func popupUpdateDialogue(then handler: (() -> Void)?) {
         
         var message = LS_IOS_VERSION_TOO_LOW_POPUP_TEXT_1
         message += MinimumIOSVersionManager.currentIOSVersion
@@ -89,8 +93,10 @@ class MinimumIOSVersionManager {
         message += LS_IOS_VERSION_TOO_LOW_POPUP_TEXT_3
         
         let alert = UIAlertController(title: LS_IOS_VERSION_TOO_LOW_POPUP_TITLE, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okBtn = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okBtn)
+        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            handler?()
+        }
+        alert.addAction(ok)
         presentingViewController.present(alert, animated: true, completion: nil)
     }
 }

@@ -98,6 +98,7 @@
 		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
 		4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */; };
 		4FF7FB361F6559E8001D4ED1 /* OnboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */; };
+		4FFC758B2348F8760049C815 /* RemoteMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC758A2348F8760049C815 /* RemoteMessageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +196,7 @@
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
 		4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardScreen.swift; sourceTree = "<group>"; };
+		4FFC758A2348F8760049C815 /* RemoteMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessageManager.swift; sourceTree = "<group>"; };
 		B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HockeyTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer.release.xcconfig"; sourceTree = "<group>"; };
 		D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				4F8D08B923243A8A0062A58F /* LocalDataManager.swift */,
 				4F8D08BB23243A900062A58F /* DataServiceURL.swift */,
 				4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */,
+				4FFC758A2348F8760049C815 /* RemoteMessageManager.swift */,
 				4F3F397A22B9673000BC0141 /* UpdateManager.swift */,
 				4FB042E2232979DF00EBEC99 /* MinimumIOSVersionManager.swift */,
 				4F8AFCE322919CEA00D975A1 /* In App Purchases */,
@@ -728,6 +731,7 @@
 				4FF7FB361F6559E8001D4ED1 /* OnboardScreen.swift in Sources */,
 				4FB4BE7D1F515B7D003B1259 /* TimerVC.swift in Sources */,
 				4FB042E3232979DF00EBEC99 /* MinimumIOSVersionManager.swift in Sources */,
+				4FFC758B2348F8760049C815 /* RemoteMessageManager.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
 				4F7C876122B2CDB400828B8A /* LabelButton.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,

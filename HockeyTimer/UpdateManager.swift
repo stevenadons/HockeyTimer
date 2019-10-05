@@ -10,8 +10,9 @@
 //
 //  On first screen show up:
 //
-//  let updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1461703535?mt=8")
-//  updateManager.checkForUpdates()
+//  private var updateManager: UpdateManager!
+//  updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1461703535?mt=8")
+//  updateManager.checkForUpdates(then: {...})
 //
 //  --------------------------------------------------------------------------------
 
@@ -50,18 +51,21 @@ class UpdateManager {
     
     // MARK: - Public Methods
     
-    func checkForUpdates() {
+    func checkForUpdates(then handler: (() -> Void)?) {
         
         DispatchQueue.global().async {
             do {
                 let update = try self.isUpdateAvailable().0
                 DispatchQueue.main.async {
                     if update && !UpdateManager.alreadyAskedSinceLaunch {
-                        self.popupUpdateDialogue()
+                        self.popupUpdateDialogue(then: handler)
                         UpdateManager.alreadyAskedSinceLaunch = true
                     }
                 }
             } catch {
+                DispatchQueue.main.async {
+                    handler?()
+                }
                 print(error)
             }
         }
@@ -102,7 +106,7 @@ class UpdateManager {
     }
     
     
-    private func popupUpdateDialogue() {
+    private func popupUpdateDialogue(then handler: (() -> Void)?) {
         
         do {
             let releaseNotes = try self.isUpdateAvailable().1
@@ -115,18 +119,23 @@ class UpdateManager {
                     message += releaseNotes!
                 }
                 let alert = UIAlertController(title: LS_NEW_APP_VERSION_POPUP_TITLE, message: message, preferredStyle: UIAlertController.Style.actionSheet)
-                let okBtn = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON, style: .default, handler: {(_ action: UIAlertAction) -> Void in
+                let ok = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON, style: .default) { (action) in
                     guard let productURL = URL(string: self.appURL) else { return }
                     UIApplication.shared.open(productURL)
-                })
-                let noBtn = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON, style: .cancel, handler: {(_ action: UIAlertAction) -> Void in
-                })
-                alert.addAction(okBtn)
-                alert.addAction(noBtn)
+                    handler?()
+                }
+                let cancel = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_SKIP_BUTTON, style: .cancel) { (action) in
+                    handler?()
+                }
+                alert.addAction(ok)
+                alert.addAction(cancel)
                 self.presentingViewController.present(alert, animated: true, completion: nil)
             }
         } catch {
             print(error)
+            DispatchQueue.main.async {
+                handler?()
+            }
         }
     }
 }

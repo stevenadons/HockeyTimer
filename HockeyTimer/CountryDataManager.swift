@@ -184,7 +184,7 @@ class CountryDataManager {
         
         let countriesToUpdate = countries
         
-        DataService.instance.getJSON(urlComponentsScheme: urlScheme, urlComponentsHost: urlHost, urlComponentsPath: urlPath + "/data") { (result) in
+        DataService.instance.getJSON(urlComponentsScheme: urlScheme, urlComponentsHost: urlHost, urlComponentsPath: urlPath + "/hockeyUppRules") { (result) in
             
             switch result {
                 

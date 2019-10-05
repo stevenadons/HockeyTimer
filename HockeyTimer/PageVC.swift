@@ -22,6 +22,10 @@ class PageVC: UIPageViewController {
     private var mask: Mask?
     private var backgroundMask: UIView!
     
+    private var messageManager: RemoteMessageManager!
+    private var updateManager: UpdateManager!
+    private var minimumIOSManager: MinimumIOSVersionManager!
+    
     fileprivate var askToNotificationsAlreadyShown: Bool = false
     fileprivate var haptic: UISelectionFeedbackGenerator?
     
@@ -81,11 +85,22 @@ class PageVC: UIPageViewController {
         
         askToAllowNotifications()
         
-        let updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
-        updateManager.checkForUpdates()
-        
-        let minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
-        minimumIOSManager.checkIOSVersion()
+        messageManager = RemoteMessageManager(fromViewcontroller: self, messageURL: "https://raw.githubusercontent.com/stevenadons/RemoteJSON/master/hockeyUppMessage")
+        messageManager.showMessage(then: { [weak self] in
+            
+            guard let self = self else {
+                return
+            }
+            self.updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
+            self.updateManager.checkForUpdates(then: { [weak self] in
+                
+                guard let self = self else {
+                    return
+                }
+                self.minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
+                self.minimumIOSManager.checkIOSVersion(then: nil)
+            })
+        })
     }
     
     
@@ -104,10 +119,9 @@ class PageVC: UIPageViewController {
             // User has denied notifications before
             // Allowing notification will not prompt user
             UserNotificationHandler.sharedHandler.ifAuthorizationIsDenied(then: {
-                let askPermissionVC = SimpleAlertVC(titleText: LS_ALLOW_NOTIFICATIONS_TITLE,
-                                                    text: LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS,
-                                                    okButtonText: LS_BUYPREMIUM_OK)
                 DispatchQueue.main.async {
+                    let askPermissionVC = SimpleAlertVC(titleText: LS_ALLOW_NOTIFICATIONS_TITLE, text: LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS, okButtonText: LS_BUYPREMIUM_OK)
+                    askPermissionVC.modalPresentationStyle = .fullScreen
                     self.present(askPermissionVC, animated: true, completion: {
                         self.mask?.removeFromSuperview()
                     })
@@ -116,14 +130,15 @@ class PageVC: UIPageViewController {
             }, else: {
                 // User has not denied before
                 // Ask for notifications will prompt user
-                let askPermissionVC = SimpleAlertVC(titleText: LS_ALLOW_NOTIFICATIONS_TITLE,
-                                                    text: LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS,
-                                                    okButtonText: LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW,
-                                                    cancelButtonText: LS_ALLOW_NOTIFICATIONS_NOT_NOW,
-                                                    okAction: {
-                                                        UserNotificationHandler.sharedHandler.initialSetup()
-                })
                 DispatchQueue.main.async {
+                    let askPermissionVC = SimpleAlertVC(titleText: LS_ALLOW_NOTIFICATIONS_TITLE,
+                                                        text: LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS,
+                                                        okButtonText: LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW,
+                                                        cancelButtonText: LS_ALLOW_NOTIFICATIONS_NOT_NOW,
+                                                        okAction: {
+                                                            UserNotificationHandler.sharedHandler.initialSetup()
+                    })
+                    askPermissionVC.modalPresentationStyle = .fullScreen
                     self.present(askPermissionVC, animated: true, completion: {
                         self.mask?.removeFromSuperview()
                     })

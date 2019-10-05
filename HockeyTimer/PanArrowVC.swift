@@ -61,7 +61,7 @@ class PanArrowVC: UIViewController {
         
         super.viewDidLayoutSubviews()
         
-        let arrowPaddingTop: CGFloat = 12
+        let arrowPaddingTop: CGFloat = 16
         let arrowPaddingBottom: CGFloat = 18
         
         NSLayoutConstraint.activate([
