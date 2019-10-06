@@ -104,6 +104,11 @@ extension Notification.Name {
     static let AwakeFromNotification = Notification.Name("AwakeFromNotification")
 }
 
+struct FeatureFlags {
+    
+    static let secretGestureToTestingVC = false
+}
+
 var timerIsRunning: Bool = false
 var runningSecondsToGo: Int = 0 
 var runningSecondsOverdue: Int = 0

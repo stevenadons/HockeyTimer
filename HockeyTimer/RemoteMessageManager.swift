@@ -24,8 +24,8 @@
       "nl": "Mededeling"
    },
    "messageText": {
-      "en": "...",
-      "nl": "..."
+      "en": "We noticed in version 1.8 the stopwatch did not always count down when the phone was in standby. We apologise for any inconvenience this may have caused. As from version 1.9 the bug has been fixed.",
+      "nl": "In versie 1.8 hebben we gemerkt dat de stopwatch niet altijd aftelde met de iPhone in standby. Excuses voor de tijdelijke hinder. Vanaf versie 1.9 is de bug gefixt."
    },
    "maxViews": 1
 }
@@ -113,6 +113,7 @@ class RemoteMessageManager {
             }
             alert.addAction(ok)
             self.presentingViewController.present(alert, animated: true, completion: nil)
+            
         }
     }
     
@@ -130,7 +131,7 @@ class RemoteMessageManager {
         
         let title = extractContent(from: titleDict)
         let text = extractContent(from: messageDict)
-        if title != nil || text != nil {
+        if text != nil {
             
             let message = Message(title: title, text: text)
             
@@ -149,6 +150,8 @@ class RemoteMessageManager {
             handler?(message)
             
         } else {
+            
+            // No message text
             handler?(nil)
         }
     }
@@ -165,6 +168,10 @@ class RemoteMessageManager {
             result = englishContent
         } else if !(dict.isEmpty), let first = dict.first?.value {
             result = first
+        }
+        
+        if result == "" {
+            result = nil
         }
         
         return result

@@ -87,15 +87,11 @@ class PageVC: UIPageViewController {
 
         super.viewDidAppear(animated)
         
-        askToAllowNotifications()
-        
-        messageManager.showMessage(then: { [weak self] in
-            
-            guard let self = self else { return }
-            self.updateManager.showUpdate(style: .alert, then: { [weak self] in
-                
-                guard let self = self else { return }
-                self.minimumIOSManager.checkIOSVersion(then: nil)
+        askToAllowNotifications(then: { [weak self] in
+            self?.messageManager.showMessage(then: { [weak self] in
+                self?.updateManager.showUpdate(style: .alert, then: { [weak self] in
+                    self?.minimumIOSManager.checkIOSVersion(then: nil)
+                })
             })
         })
     }
@@ -103,10 +99,11 @@ class PageVC: UIPageViewController {
     
     // MARK: - Private Methods
     
-    private func askToAllowNotifications() {
+    private func askToAllowNotifications(then handler: (() -> Void)?) {
         
         guard !askToNotificationsAlreadyShown else {
             mask?.removeFromSuperview()
+            handler?()
             return
         }
         askToNotificationsAlreadyShown = true
@@ -121,6 +118,7 @@ class PageVC: UIPageViewController {
                     askPermissionVC.modalPresentationStyle = .fullScreen
                     self.present(askPermissionVC, animated: true, completion: {
                         self.mask?.removeFromSuperview()
+                        handler?()
                     })
                 }
                 
@@ -133,8 +131,13 @@ class PageVC: UIPageViewController {
                                                         okButtonText: LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW,
                                                         cancelButtonText: LS_ALLOW_NOTIFICATIONS_NOT_NOW,
                                                         okAction: {
-                                                            UserNotificationHandler.sharedHandler.initialSetup()
-                    })
+                                                            UserNotificationHandler.sharedHandler.initialSetup(then: {
+                                                                handler?()
+                                                            })
+                                                        },
+                                                        cancelAction: {
+                                                            handler?()
+                                                        })
                     askPermissionVC.modalPresentationStyle = .fullScreen
                     self.present(askPermissionVC, animated: true, completion: {
                         self.mask?.removeFromSuperview()
@@ -146,6 +149,7 @@ class PageVC: UIPageViewController {
             // User has authorized before
             DispatchQueue.main.async {
                 self.mask?.removeFromSuperview()
+                handler?()
             }
         })
     }

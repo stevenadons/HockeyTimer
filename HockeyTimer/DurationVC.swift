@@ -51,9 +51,10 @@ class DurationVC: PanArrowVC {
     
     @objc private func showTestSettings() {
         
-//        #warning("testing")
-//        let testingVC = TestingVC()
-//        present(testingVC, animated: true)
+        if FeatureFlags.secretGestureToTestingVC {
+            let testingVC = TestingVC()
+            present(testingVC, animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
