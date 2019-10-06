@@ -14,6 +14,22 @@
 //
 //  --------------------------------------------------------------------------------
 //
+//
+//  Remote data should be like:
+/*
+{
+   "appName": "HockeyUpp",
+   "messageTitle": {
+      "en": "Message",
+      "nl": "Mededeling"
+   },
+   "messageText": {
+      "en": "...",
+      "nl": "..."
+   },
+   "maxViews": 1
+}
+*/
 
 import UIKit
 
@@ -23,6 +39,17 @@ class RemoteMessageManager {
         
         var title: String?
         var text: String?
+        
+        var id: String {
+            var result: String = ""
+            if title != nil {
+                result += title!
+            }
+            if text != nil {
+                result += text!
+            }
+            return result
+        }
     }
     
     // MARK: - Properties
@@ -75,6 +102,7 @@ class RemoteMessageManager {
     private func popup(_ message: Message?, then handler: (() -> Void)?) {
         
         guard let message = message else {
+            handler?()
             return
         }
         
@@ -102,9 +130,24 @@ class RemoteMessageManager {
         
         let title = extractContent(from: titleDict)
         let text = extractContent(from: messageDict)
-        if title != nil && text != nil {
+        if title != nil || text != nil {
+            
             let message = Message(title: title, text: text)
+            
+            // Check if maxViews is exceeded
+            if let maxViews = extractMaxViews(from: jsonObject) {
+                var counter = UserDefaults.standard.integer(forKey: message.id)
+                counter += 1
+                UserDefaults.standard.set(counter, forKey: message.id)
+                if counter > maxViews {
+                    handler?(nil)
+                    return
+                }
+            }
+            
+            // No maxViews or maxViews is not exceeded
             handler?(message)
+            
         } else {
             handler?(nil)
         }
@@ -122,6 +165,17 @@ class RemoteMessageManager {
             result = englishContent
         } else if !(dict.isEmpty), let first = dict.first?.value {
             result = first
+        }
+        
+        return result
+    }
+    
+    private func extractMaxViews(from jsonObject: [String: AnyObject]) -> Int? {
+        
+        var result: Int?
+        
+        if let maxViews = jsonObject["maxViews"] as? Int {
+            result = maxViews
         }
         
         return result

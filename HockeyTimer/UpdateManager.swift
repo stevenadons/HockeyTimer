@@ -51,14 +51,14 @@ class UpdateManager {
     
     // MARK: - Public Methods
     
-    func checkForUpdates(then handler: (() -> Void)?) {
+    func showUpdate(style: UIAlertController.Style, then handler: (() -> Void)?) {
         
         DispatchQueue.global().async {
             do {
                 let update = try self.isUpdateAvailable().0
                 DispatchQueue.main.async {
                     if update && !UpdateManager.alreadyAskedSinceLaunch {
-                        self.popupUpdateDialogue(then: handler)
+                        self.popupUpdateDialogue(style: style, then: handler)
                         UpdateManager.alreadyAskedSinceLaunch = true
                     }
                 }
@@ -106,7 +106,7 @@ class UpdateManager {
     }
     
     
-    private func popupUpdateDialogue(then handler: (() -> Void)?) {
+    private func popupUpdateDialogue(style: UIAlertController.Style, then handler: (() -> Void)?) {
         
         do {
             let releaseNotes = try self.isUpdateAvailable().1
@@ -118,7 +118,7 @@ class UpdateManager {
                     message += "\n"
                     message += releaseNotes!
                 }
-                let alert = UIAlertController(title: LS_NEW_APP_VERSION_POPUP_TITLE, message: message, preferredStyle: UIAlertController.Style.actionSheet)
+                let alert = UIAlertController(title: LS_NEW_APP_VERSION_POPUP_TITLE, message: message, preferredStyle: style)
                 let ok = UIAlertAction(title: LS_NEW_APP_VERSION_POPUP_UPDATE_BUTTON, style: .default) { (action) in
                     guard let productURL = URL(string: self.appURL) else { return }
                     UIApplication.shared.open(productURL)

@@ -69,6 +69,10 @@ class PageVC: UIPageViewController {
         view.addSubview(backgroundMask)
         view.sendSubviewToBack(backgroundMask)
         hideBackgroundMask()
+        
+        messageManager = RemoteMessageManager(fromViewcontroller: self, messageURL: "https://raw.githubusercontent.com/stevenadons/RemoteJSON/master/hockeyUppMessage")
+        updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
+        minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,19 +89,12 @@ class PageVC: UIPageViewController {
         
         askToAllowNotifications()
         
-        messageManager = RemoteMessageManager(fromViewcontroller: self, messageURL: "https://raw.githubusercontent.com/stevenadons/RemoteJSON/master/hockeyUppMessage")
         messageManager.showMessage(then: { [weak self] in
             
-            guard let self = self else {
-                return
-            }
-            self.updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
-            self.updateManager.checkForUpdates(then: { [weak self] in
+            guard let self = self else { return }
+            self.updateManager.showUpdate(style: .alert, then: { [weak self] in
                 
-                guard let self = self else {
-                    return
-                }
-                self.minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
+                guard let self = self else { return }
                 self.minimumIOSManager.checkIOSVersion(then: nil)
             })
         })
