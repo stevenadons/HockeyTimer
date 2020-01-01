@@ -56,6 +56,8 @@ class MinimumIOSVersionManager {
                     if !ok && !MinimumIOSVersionManager.alreadyAskedSinceLaunch {
                         self.popupUpdateDialogue(then: handler)
                         MinimumIOSVersionManager.alreadyAskedSinceLaunch = true
+                    } else {
+                        handler?()
                     }
                 }
             } catch {

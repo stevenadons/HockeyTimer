@@ -20,12 +20,12 @@ class TimerVC: PanArrowVC {
     
     // MARK: - Properties
     
-    fileprivate var resetButton: NewGameButtonIconOnly!
-    fileprivate var stopWatchContainer: ContainerView!
-    fileprivate var stopWatch: StopWatch!
+    private var resetButton: NewGameButtonIconOnly!
+    private var stopWatchContainer: ContainerView!
+    private var stopWatch: StopWatch!
 
-    fileprivate var duration: Duration = .TwentyFive
-    fileprivate var numberOfPeriods: NumberOfPeriods = .Halves
+    private var duration: Duration = .TwentyFive
+    private var numberOfPeriods: NumberOfPeriods = .Halves
     var game: HockeyGame! {
         didSet {
             guard game != nil else { return }
@@ -36,6 +36,8 @@ class TimerVC: PanArrowVC {
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
 
     var message: String = ""
+    
+    private var button: UIButton!
     
         
     // MARK: - Loading
@@ -71,6 +73,12 @@ class TimerVC: PanArrowVC {
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)
         liftPanArrowDownLabelUp()
         
+        button = UIButton(type: .roundedRect)
+        button.setTitle("Card", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        view.addSubview(button)
+        
         NSLayoutConstraint.activate([
             
             resetButton.widthAnchor.constraint(equalToConstant: 44),
@@ -88,9 +96,20 @@ class TimerVC: PanArrowVC {
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
             stopWatch.centerYAnchor.constraint(equalTo: stopWatchContainer.centerYAnchor),
             
+            button.topAnchor.constraint(equalTo: stopWatch.bottomAnchor, constant: 20),
+            button.heightAnchor.constraint(equalToConstant: 50),
+            button.widthAnchor.constraint(equalToConstant: 150),
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            
             ])
         
         hideIcons()
+    }
+    
+    @objc private func buttonTapped() {
+        
+        let addCardTimerVC = AddCardTimerVC(title: "Add timer for a card")
+        present(addCardTimerVC, animated: true, completion: nil)
     }
     
     private func addObservers() {

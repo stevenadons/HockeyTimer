@@ -10,7 +10,7 @@
 //
 //  private var messageManager: RemoteMessageManager!
 //  messageManager = RemoteMessageManager(fromViewcontroller: self, messageURL: "https://raw.githubusercontent.com/stevenadons/RemoteJSON/master/hockeyUppMessage")
-//  messageManager.showMessage(then: { ... })
+//  messageManager.showMessage(then: { [weak self] in ... })
 //
 //  --------------------------------------------------------------------------------
 //

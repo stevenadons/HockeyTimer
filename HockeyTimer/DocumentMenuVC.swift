@@ -8,7 +8,8 @@
 
 import UIKit
 import MessageUI
-import PDFKit
+import LinkPresentation
+//import PDFKit
 
 
 class DocumentMenuVC: PanArrowVC {
@@ -20,6 +21,9 @@ class DocumentMenuVC: PanArrowVC {
     private var countryMenu: CountryMenu!
     private var settingsMenu: DotMenu!
     private var reportButton: UIButton!
+    
+    private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
+
     
     
     // MARK: - Life Cycle Methods
@@ -250,7 +254,6 @@ extension DocumentMenuVC: DotMenuDelegate {
         switch buttonNumber {
         case 0:
             // Write review
-            guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return }
             var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
             components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
             guard let writeReviewURL = components?.url else { return }
@@ -288,7 +291,6 @@ extension DocumentMenuVC: UIActivityItemSource {
     
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         
-        guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return "" }
         return productURL
 
     }
@@ -298,14 +300,23 @@ extension DocumentMenuVC: UIActivityItemSource {
         if activityType == .postToTwitter {
             return "Download #HockeyUpp on the App Store"
         }
-        
-        guard let productURL = URL(string: "https://apps.apple.com/app/id1464432452") else { return nil }
         return productURL
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
         
         return "HockeyUpp - Your field hockey companion"
+    }
+    
+    @available(iOS 13.0, *)
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        
+        let metadata = LPLinkMetadata()
+        metadata.originalURL = productURL
+        metadata.url = metadata.originalURL
+        metadata.title = "Share Simonitron"
+        metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-Spotlight-40@3x", withExtension: "png"))
+        return metadata
     }
     
     
