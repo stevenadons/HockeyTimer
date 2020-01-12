@@ -36,13 +36,13 @@ class ConfirmationButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.clear
         setTitleColor(UIColor.black, for: .normal)
-        titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 14)
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline) // UIFont(name: FONTNAME.ThemeBlack, size: 14)
+        layer.cornerRadius = 8
     }
     
     override func layoutSubviews() {
         
         super.layoutSubviews()
-        layer.cornerRadius = bounds.height / 2
     }
     
     
@@ -76,7 +76,7 @@ extension ConfirmationButton {
         
         let button = ConfirmationButton()
         
-        button.backgroundColor = COLOR.DarkRed
+        button.backgroundColor = UIColor(named: ColorName.PantoneRed)!
         button.setTitleColor(UIColor.white, for: .normal)
         if shadow {
             button.layer.shadowColor = UIColor.lightGray.cgColor
@@ -86,69 +86,51 @@ extension ConfirmationButton {
         }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline) // UIFont(name: FONTNAME.ThemeBold, size: 16)
         }
         
         return button
     }
     
-    class func blueButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
+    class func blueButton(largeFont: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
         
-        button.backgroundColor = UIColor(named: "DarkBlue")!
+        button.backgroundColor = UIColor(named: ColorName.DarkBlue)!
         button.setTitleColor(UIColor.white, for: .normal)
-        if shadow {
-            button.layer.shadowColor = UIColor.lightGray.cgColor
-            button.layer.shadowOffset = CGSize(width: 0, height: 1)
-            button.layer.shadowOpacity = shadowed ? 0.8 : 0.0
-            button.layer.shadowRadius = 3
-        }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline) // UIFont(name: FONTNAME.ThemeBold, size: 16)
         }
         
         return button
     }
     
-    class func yellowButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
+    class func yellowButton(largeFont: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
         
-        button.backgroundColor = UIColor(named: "LightYellow")!
-        button.setTitleColor(UIColor(named: "VeryDarkBlue")!, for: .normal)
-        if shadow {
-            button.layer.shadowColor = UIColor.lightGray.cgColor
-            button.layer.shadowOffset = CGSize(width: 0, height: 1)
-            button.layer.shadowOpacity = 0.8
-            button.layer.shadowRadius = 3
-        }
+        button.backgroundColor = UIColor(named: ColorName.PantoneYellow)! // UIColor(named: ColorName.LightYellow)!
+        button.setTitleColor(UIColor(named: ColorName.VeryDarkBlue)!, for: .normal)
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline) // UIFont(name: FONTNAME.ThemeBold, size: 16)
         }
         
         return button
     }
     
-    class func invertedYellowButton(largeFont: Bool = false, shadow: Bool = false) -> ConfirmationButton {
+    class func invertedYellowButton(largeFont: Bool = false) -> ConfirmationButton {
         
         let button = ConfirmationButton()
         
         button.backgroundColor = UIColor.clear
-        button.setTitleColor(UIColor(named: "LightYellow")!, for: .normal)
-        button.layer.borderColor = UIColor(named: "LightYellow")!.cgColor
+        button.setTitleColor(UIColor(named: ColorName.LightYellow)!, for: .normal)
+        button.layer.borderColor = UIColor(named: ColorName.LightYellow)!.cgColor
         button.layer.borderWidth = 1.0
-        if shadow {
-            button.layer.shadowColor = UIColor.lightGray.cgColor
-            button.layer.shadowOffset = CGSize(width: 0, height: 1)
-            button.layer.shadowOpacity = shadowed ? 0.8 : 0.0
-            button.layer.shadowRadius = 3
-        }
         
         if largeFont {
-            button.titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 16)
+            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline) // UIFont(name: FONTNAME.ThemeBlack, size: 16)
         }
         
         return button
@@ -157,7 +139,7 @@ extension ConfirmationButton {
     class func themeButton() -> ConfirmationButton {
         
         let button = ConfirmationButton()
-        button.backgroundColor = COLOR.Theme
+        button.backgroundColor = UIColor(named: ColorName.Theme)!
         button.setTitleColor(UIColor.white, for: .normal)
         return button
     }

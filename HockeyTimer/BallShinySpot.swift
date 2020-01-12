@@ -19,7 +19,7 @@ class BallShinySpot: CALayer {
     private let designWidth: CGFloat = 40
     private let designHeight: CGFloat = 40
     
-    var color: UIColor = COLOR.BallShining {
+    var color: UIColor = UIColor(named: ColorName.BallShining)! {
         didSet {
             setNeedsDisplay()
         }

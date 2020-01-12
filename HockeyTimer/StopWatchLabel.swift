@@ -19,7 +19,7 @@ class StopWatchLabel: UIView {
             setNeedsLayout()
         }
     }
-    var textColor: UIColor = UIColor.white {
+    var textColor: UIColor = UIColor(named: ColorName.VeryDarkBlue_White)! {
         didSet {
             label.textColor = textColor
             setNeedsDisplay()
@@ -68,7 +68,7 @@ class StopWatchLabel: UIView {
     private func setup() {
         
         // Configure self
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         isUserInteractionEnabled = false
         
         // Add label
@@ -88,7 +88,7 @@ class StopWatchLabel: UIView {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.clear
+        label.backgroundColor = .clear
         label.textColor = textColor
         label.text = text
         label.textAlignment = alignment

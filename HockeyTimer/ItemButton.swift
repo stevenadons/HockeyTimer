@@ -79,5 +79,15 @@ class ItemButton: UIButton {
         layer.cornerRadius = bounds.height / 2
         buttonLayer.frame = bounds
     }
+    
+    
+    // MARK: - Public Methods
+    
+    func setColor(_ color: UIColor) {
+        
+        self.shapeColor = color
+        buttonLayer.setColor(color)
+    }
+
 
 }

@@ -31,7 +31,7 @@ class StopWatchControlIcon: UIView {
         }
     }
     
-    var color: UIColor = UIColor.white {
+    var color: UIColor = .white {
         didSet {
             setNeedsLayout()
         }
@@ -140,7 +140,7 @@ class StopWatchControlIcon: UIView {
     private func setup() {
         
         // Configure self
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = false
         

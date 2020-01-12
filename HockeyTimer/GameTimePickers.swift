@@ -42,7 +42,7 @@ class GameTimePickers: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        backgroundColor = COLOR.Olive
+        backgroundColor = UIColor(named: ColorName.Olive)!
         layer.shadowRadius = 6
         
         xLabel = UILabel()

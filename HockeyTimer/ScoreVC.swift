@@ -57,7 +57,12 @@ class ScoreVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = COLOR.White
+        
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
+        view.backgroundColor = .systemBackground
         view.clipsToBounds = true
         setupViews()
         addObservers()
@@ -75,18 +80,18 @@ class ScoreVC: PanArrowVC {
         editModeButton.addTarget(self, action: #selector(editModeButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(editModeButton)
         
-        confirmationButton = ConfirmationButton.blueButton(shadow: true)
+        confirmationButton = ConfirmationButton.blueButton()
         confirmationButton.alpha = 0.0
         confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(confirmationButton)
         
-        panArrowUp.color = UIColor(named: "LightYellow")!
-        panArrowDown.color = UIColor(named: "LightYellow")!
+        panArrowUp.color = UIColor(named: ColorName.LightYellow)!
+        panArrowDown.color = UIColor(named: ColorName.LightYellow)!
         panArrowUpLabel.text = LS_TITLE_STOPWATCH
         panArrowDownLabel.text = LS_TITLE_DOCUMENTS
-        panArrowUpLabel.textColor = UIColor(named: "VeryDarkBlue")!
-        panArrowDownLabel.textColor = UIColor(named: "VeryDarkBlue")!
+        panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+        panArrowDownLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
         
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
         let pitchContainerOffset = UIDevice.whenDeviceIs(small: 20, normal: 0, big: -50)

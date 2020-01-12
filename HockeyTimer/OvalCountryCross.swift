@@ -14,13 +14,13 @@ class OvalCountryCross: CALayer {
     
     // MARK: - Properties
     
-    var shapeColor: UIColor = UIColor.white {
+    var shapeColor: UIColor = UIColor(named: ColorName.OliveText)! {
         didSet {
             shape.strokeColor = shapeColor.cgColor
             shape.setNeedsDisplay()
         }
     }
-    var bgColor: UIColor = UIColor.clear {
+    var bgColor: UIColor = .clear {
         didSet {
             backgroundColor = bgColor.cgColor
             setNeedsDisplay()
@@ -32,8 +32,14 @@ class OvalCountryCross: CALayer {
     private let designHeight: CGFloat = 44
     
     
-    
     // MARK: - Initializing
+    
+    init(color: UIColor) {
+        
+        super.init()
+        self.shapeColor = color
+        setup()
+    }
     
     override init() {
         
@@ -68,10 +74,20 @@ class OvalCountryCross: CALayer {
     override func layoutSublayers() {
         
         super.layoutSublayers()
+        
         cornerRadius = min(bounds.width, bounds.height) / 2
         shape.position = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         shape.bounds = bounds
         shape.path = createPath().cgPath
+    }
+    
+    
+    // MARK: - Public Methods
+
+    func setColor(_ color: UIColor) {
+        
+        self.shapeColor = color
+        shape.strokeColor = color.cgColor
     }
     
     

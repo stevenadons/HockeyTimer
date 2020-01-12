@@ -36,7 +36,7 @@ class PitchBackgroundLayer: CALayer {
         
         // Set up sublayers
         edge = createEdge(path: edgePath())
-        center = createCenter(path: centerPath(), color: UIColor(named: "VeryDarkBlue")!)
+        center = createCenter(path: centerPath(), color: UIColor(named: ColorName.VeryDarkBlue)!)
         striping = createStriping(path: stripingPath())
         
         // Add sublayers
@@ -79,6 +79,11 @@ class PitchBackgroundLayer: CALayer {
         edge.setNeedsDisplay()
     }
     
+    func setColor(_ color: UIColor) {
+        
+        center.fillColor = color.cgColor
+    }
+    
     
     // MARK: - Methods to create shapes (Class Methods)
     
@@ -87,9 +92,9 @@ class PitchBackgroundLayer: CALayer {
         let shape = CAShapeLayer()
         
         shape.path = path.cgPath
-        shape.strokeColor = UIColor.clear.cgColor //UIColor(named: "LightYellow")!.cgColor
+        shape.strokeColor = UIColor.clear.cgColor
         shape.lineWidth = 6.0
-        shape.fillColor = UIColor(named: "DarkBlue")!.cgColor
+        shape.fillColor = UIColor(named: ColorName.DarkBlue)!.cgColor
         shape.allowsEdgeAntialiasing = true
         
         return shape
@@ -109,7 +114,7 @@ class PitchBackgroundLayer: CALayer {
         
         shape.path = path.cgPath
         shape.strokeColor = UIColor.white.cgColor
-        shape.lineWidth = 1.0
+        shape.lineWidth = 2
         shape.fillColor = color.cgColor
         shape.allowsEdgeAntialiasing = true
         
@@ -130,7 +135,7 @@ class PitchBackgroundLayer: CALayer {
         
         shape.path = path.cgPath
         shape.strokeColor = UIColor.white.cgColor
-        shape.lineWidth = 1.0
+        shape.lineWidth = 2
         shape.allowsEdgeAntialiasing = true
         
         return shape

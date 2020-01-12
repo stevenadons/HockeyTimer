@@ -17,7 +17,7 @@ class PanArrowLayer: CALayer {
     private let designWidth: CGFloat = 44
     private let designHeight: CGFloat = 22
     
-    var color: UIColor = UIColor(named: "DarkBlue")! {
+    var color: UIColor = UIColor(named: ColorName.DarkBlue)! {
         didSet {
             setNeedsDisplay()
         }

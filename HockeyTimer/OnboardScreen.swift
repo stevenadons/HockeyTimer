@@ -73,11 +73,11 @@ class OnboardScreen: UIView {
     
     private func setup() {
         
-        backgroundColor = UIColor.white
+        backgroundColor = .systemBackground
         
         logo = createLabel(bold: true, fontSize: 24)
         logo.font = UIFont(name: FONTNAME.ThemeBlack, size: 24)
-        logo.textColor = UIColor(named: "VeryDarkBlue")!
+        logo.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
         addSubview(logo)
         
         graphics = UIView()
@@ -86,7 +86,7 @@ class OnboardScreen: UIView {
         
         title = createLabel(bold: true, fontSize: 24)
         title.font = UIFont(name: FONTNAME.ThemeBlack, size: 24)
-        title.textColor = UIColor(named: "VeryDarkBlue")!
+        title.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
         addSubview(title)
         
         body = UITextView()
@@ -94,8 +94,8 @@ class OnboardScreen: UIView {
         body.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
         body.isUserInteractionEnabled = false
         body.textAlignment = .center
-        body.textColor = UIColor(named: "VeryDarkBlue")!
-        body.backgroundColor = UIColor.clear
+        body.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+        body.backgroundColor = .clear
         body.translatesAutoresizingMaskIntoConstraints = false
         addSubview(body)
     }
@@ -108,7 +108,7 @@ class OnboardScreen: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
-        label.textColor = UIColor.cyan
+        label.textColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }

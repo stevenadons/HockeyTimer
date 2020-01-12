@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.backgroundColor = UIColor(named: "VeryDarkBlue")!
+        self.window?.backgroundColor = UIColor(named: ColorName.VeryDarkBlue)!
         var startViewController: UIViewController
         
         // For testing purposes to test onboarding
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         
         // Standard one time onboarding
-        if (UserDefaults.standard.value(forKey: USERDEFAULTSKEY.ShouldNotOnboard) as? String) == nil {
+        if (UserDefaults.standard.value(forKey: UserDefaultsKey.ShouldNotOnboard) as? String) == nil {
             startViewController = OnboardingVC()
         } else {
             startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
@@ -59,9 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
         
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeOverdue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
 
         return true
     }
@@ -76,27 +76,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("applicationDidEnterBackground runningSecondsToGo is \(runningSecondsToGo)")
 
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeOverdue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
 
         print("applicationDidEnterBackground runningSecondsOverdue is \(runningSecondsOverdue)")
 
         guard timerIsRunning else { return }
         if runningSecondsToGo > 0 {
             let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
-            UserDefaults.standard.set(endTime, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
+            UserDefaults.standard.set(endTime, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
             print("applicationDidEnterBackground did store endTime in \(runningSecondsToGo) seconds")
             UserNotificationHandler.sharedHandler.scheduleNotification(within: Double(runningSecondsToGo))
 
         } else if runningSecondsOverdue > 0 {
             let startTime = NSDate().addingTimeInterval(Double(-runningSecondsOverdue))
-            UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
+            UserDefaults.standard.set(startTime, forKey: UserDefaultsKey.TimerStartTimeOverdue)
             print("applicationDidEnterBackground did store startTime \(runningSecondsOverdue) ago - runningSecondsOverdue")
 
         } else if runningSecondsCountingUp > 0 {
             let startTime = NSDate().addingTimeInterval(Double(-runningSecondsCountingUp))
-            UserDefaults.standard.set(startTime, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+            UserDefaults.standard.set(startTime, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
             print("applicationDidEnterBackground did store startTime \(runningSecondsCountingUp) ago - runningSecondsCountingUp")
         }
     }
@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         runningSecondsOverdue = 0
         runningSecondsCountingUp = 0
 
-        if let storedEndTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground) as? NSDate {
+        if let storedEndTime = UserDefaults.standard.value(forKey: UserDefaultsKey.TimerEndTimeWhenInBackground) as? NSDate {
             // Restoring from formerly running countdown
             if storedEndTime.timeIntervalSinceNow >= 0 {
                 // Countdown should still be running
@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("applicationWillEnterForeground - case 2 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
 
-        } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeOverdue) as? NSDate {
+        } else if let storedStartTime = UserDefaults.standard.value(forKey: UserDefaultsKey.TimerStartTimeOverdue) as? NSDate {
             // Restoring from formerly overdue countup
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Overdue countup should resume
@@ -134,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("applicationWillEnterForeground - case 3 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
 
-        } else if let storedStartTime = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp) as? NSDate {
+        } else if let storedStartTime = UserDefaults.standard.value(forKey: UserDefaultsKey.TimerStartTimeCountingUp) as? NSDate {
             // Restoring from formerly counting up
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Countup should resume
@@ -155,9 +155,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerEndTimeWhenInBackground)
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeOverdue)
-        UserDefaults.standard.set(nil, forKey: USERDEFAULTSKEY.TimerStartTimeCountingUp)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeOverdue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
         
         UserNotificationHandler.sharedHandler.cancelAllNotificationRequests()
     }
@@ -167,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     class func checkIfInPremiumMode(ifNot completionHandler: () -> Void) {
         
-        let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
         if !inPremiumMode {
             completionHandler()
         }
@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let productIdentifier = products![0].productIdentifier
                     let productPurchased = Products.store.isProductPurchased(productIdentifier)
                     if productPurchased {
-                        UserDefaults.standard.set(true, forKey: USERDEFAULTSKEY.PremiumMode)
+                        UserDefaults.standard.set(true, forKey: UserDefaultsKey.PremiumMode)
                     } 
                 }
             }

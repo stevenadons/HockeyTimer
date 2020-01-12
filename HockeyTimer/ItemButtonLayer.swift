@@ -107,4 +107,12 @@ class ItemButtonLayer: CALayer {
         return shape
     }
    
+    
+    // MARK: - Public Methods
+
+    func setColor(_ color: UIColor) {
+        
+        self.shapeColor = color
+        shape.strokeColor = color.cgColor
+    }
 }

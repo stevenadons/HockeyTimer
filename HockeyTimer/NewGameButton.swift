@@ -33,10 +33,6 @@ class NewGameButton: UIButton {
         
         backgroundColor = UIColor.clear
         translatesAutoresizingMaskIntoConstraints = false
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowOpacity = shadowed ? 0.8 : 0.0
-        layer.shadowRadius = 3
         
         shapeLayer = NewGameButtonLayer()
         layer.addSublayer(shapeLayer)

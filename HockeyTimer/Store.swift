@@ -189,7 +189,7 @@ extension Store: SKPaymentTransactionObserver {
         
         purchasedProductIdentifiers.insert(identifier)
         UserDefaults.standard.set(true, forKey: identifier)
-        UserDefaults.standard.set(true, forKey: USERDEFAULTSKEY.PremiumMode)
+        UserDefaults.standard.set(true, forKey: UserDefaultsKey.PremiumMode)
         
         NotificationCenter.default.post(name: .PurchaseNotification, object: identifier)
         NotificationCenter.default.post(name: .TransactionEndedNotification, object: nil)

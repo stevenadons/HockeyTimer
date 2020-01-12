@@ -19,7 +19,7 @@ class CountryLabelButton: UIButton {
             setNeedsDisplay()
         }
     }
-    var color: UIColor = UIColor.white {
+    var color: UIColor = UIColor(named: ColorName.OliveText)! {
         didSet {
             setTitleColor(color, for: .normal)
             setNeedsDisplay()
@@ -43,7 +43,7 @@ class CountryLabelButton: UIButton {
     
     private func setup() {
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
         if let font = UIFont(name: FONTNAME.ThemeBold, size: 16) {

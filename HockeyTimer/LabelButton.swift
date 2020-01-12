@@ -19,7 +19,7 @@ class LabelButton: UIButton {
             setNeedsDisplay()
         }
     }
-    var color: UIColor = UIColor.white {
+    var color: UIColor = UIColor(named: ColorName.OliveText)! {
         didSet {
             setTitleColor(color, for: .normal)
             setNeedsDisplay()
@@ -46,7 +46,7 @@ class LabelButton: UIButton {
         backgroundColor = UIColor.clear
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
-        titleLabel?.font = UIFont(name: "Lato-Bold", size: 16)
+        titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         contentHorizontalAlignment = .left
     }
     

@@ -19,7 +19,7 @@ class MiniStopWatch: UIView {
             durationLabel.setNeedsDisplay()
         }
     }
-    var color: UIColor = UIColor(named: "DarkBlue")! {
+    var color: UIColor = UIColor(named: ColorName.DarkBlue)! {
         didSet {
             core.backgroundColor = color.cgColor
             core.setNeedsDisplay()

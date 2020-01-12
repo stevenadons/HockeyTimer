@@ -25,29 +25,30 @@ class DurationCard: UIButton {
         didSet {
             switch duration {
             case .Nine:
-                backgroundColor = UIColor(named: "Olive")
-                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
+                backgroundColor = UIColor(named: ColorName.Olive)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             case .Ten:
-                backgroundColor = UIColor(named: "DarkBlue")
-                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
+                backgroundColor = UIColor(named: ColorName.DarkBlue)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             case .Twelve:
-                backgroundColor = UIColor(named: "VeryDarkBlue")!
-                miniStopWatch.color = UIColor(named: "DarkGray")!
+                backgroundColor = UIColor(named: ColorName.VeryDarkBlue_Red)!
+                miniStopWatch.color = UIColor(named: ColorName.DarkGray_VeryDarkBlue)!
             case .Fifteen:
-                backgroundColor = UIColor(named: "LightYellow")!
-                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
+                backgroundColor = UIColor(named: ColorName.LightYellow)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             case .Twenty:
-                backgroundColor = UIColor(named: "LightBlue")!
-                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
+                backgroundColor = UIColor(named: ColorName.LightBlue)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+                ageLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
             case .TwentyFive:
-                backgroundColor = UIColor(named: "Olive")
-                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
+                backgroundColor = UIColor(named: ColorName.Olive)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             case .Thirty:
-                backgroundColor = UIColor(named: "DarkBlue")
-                miniStopWatch.color = UIColor(named: "VeryDarkBlue")!
+                backgroundColor = UIColor(named: ColorName.DarkBlue)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             case .ThirtyFive:
-                backgroundColor = UIColor(named: "VeryDarkBlue")!
-                miniStopWatch.color = UIColor(named: "DarkGray")!
+                backgroundColor = UIColor(named: ColorName.VeryDarkBlue_Red)!
+                miniStopWatch.color = UIColor(named: ColorName.DarkGray_VeryDarkBlue)!
             }
             ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? "error"
             miniStopWatch.duration = duration
@@ -86,17 +87,11 @@ class DurationCard: UIButton {
         super.traitCollectionDidChange(previousTraitCollection)
         miniStopWatch.setNeedsLayout()
     }
+    
     private func setup() {
         
-        backgroundColor = UIColor.cyan
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
-        
-        layer.borderColor = COLOR.Theme.cgColor
-        layer.borderWidth = 0
-        layer.shadowColor = UIColor(named: "DarkGray")!.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowOpacity = shadowed ? 0.8 : 0.0
-        layer.shadowRadius = 3
         
         miniStopWatch = MiniStopWatch()
         miniStopWatch.duration = duration
@@ -120,7 +115,7 @@ class DurationCard: UIButton {
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
-        label.textColor = (backgroundColor == UIColor(named: "LightBlue")!) ? UIColor(named: "VeryDarkBlue")! : UIColor.white
+        label.textColor = (backgroundColor == UIColor(named: ColorName.LightBlue)!) ? UIColor(named: ColorName.VeryDarkBlue)! : UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label

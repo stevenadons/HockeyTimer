@@ -44,7 +44,7 @@ class ButtonLabel: UILabel {
         
         backgroundColor = UIColor.clear
         text = title
-        font = UIFont(name: "Lato-Bold", size: 16)
+        font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         adjustsFontSizeToFitWidth = true
         isUserInteractionEnabled = false
         textAlignment = .right

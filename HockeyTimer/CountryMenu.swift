@@ -34,9 +34,10 @@ class CountryMenu: UIView {
     private var labelNames: [String]!
     private var capitalsStrings: [String]!
     private var selected: Int!
-    private var hasBorder: Bool!
     private var leftSide: Bool!
-    
+    private var condensedColor: UIColor = .white
+    private var foldOutColor: UIColor = UIColor(named: ColorName.OliveText)!
+
     private var menuButton: OvalCountryButton!
     private var buttons: [OvalCountryButton]!
     private var labels: [CountryLabelButton]!
@@ -54,17 +55,18 @@ class CountryMenu: UIView {
     
     // MARK: - Initializing
     
-    convenience init(inView containingView: UIView, delegate: CountryMenuDelegate, labelNames: [String], capitalsStrings: [String], hasBorder: Bool = false, leftSide: Bool = false, selected: Int? = 0) {
+    convenience init(inView containingView: UIView, condensedColor: UIColor, foldOutColor: UIColor, delegate: CountryMenuDelegate, labelNames: [String], capitalsStrings: [String], leftSide: Bool = false, selected: Int? = 0) {
         
         self.init()
         
         self.frame = containingView.frame
         self.center = containingView.center
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
+        self.condensedColor = condensedColor
+        self.foldOutColor = foldOutColor
         self.delegate = delegate
         self.labelNames = labelNames
         self.capitalsStrings = capitalsStrings
-        self.hasBorder = hasBorder
         self.leftSide = leftSide
         self.selected = selected
         
@@ -75,7 +77,7 @@ class CountryMenu: UIView {
         if let selectedInt = selected, selectedInt < capitalsStrings.count {
             menuButtonCapitals = capitalsStrings[selectedInt]
         }
-        menuButton = OvalCountryButton(capitals: menuButtonCapitals, hasBorder: self.hasBorder)
+        menuButton = OvalCountryButton(capitals: menuButtonCapitals, color: condensedColor, crossColor: foldOutColor)
         menuButton.addTarget(self, action: #selector(handleMenuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         addSubview(menuButton)
         
@@ -83,7 +85,7 @@ class CountryMenu: UIView {
         
         for index in 0..<capitalsStrings.count {
             
-            let button = OvalCountryButton(capitals: capitalsStrings[index])
+            let button = OvalCountryButton(capitals: capitalsStrings[index], color: foldOutColor, crossColor: foldOutColor)
             button.tag = index
             button.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             if index == 0 {
@@ -138,6 +140,11 @@ class CountryMenu: UIView {
             let y = buttons[index].frame.origin.y + (buttons[index].bounds.height - labels[index].bounds.height) / 2
             labels[index].frame.origin = CGPoint(x: xLabel, y: y)
         }
+        
+        menuButton.setColor(condensedColor, crossColor: foldOutColor)
+        buttons.forEach {
+            $0.setColor(foldOutColor, crossColor: foldOutColor)
+        }
     }
     
     private func windUp() {
@@ -184,7 +191,7 @@ class CountryMenu: UIView {
         
         if animated {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
-                self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+                self.backgroundColor = UIColor.systemBackground
                 self.buttons.forEach {
                     $0.transform = .identity
                 }
@@ -197,7 +204,7 @@ class CountryMenu: UIView {
             })
             
         } else {
-            backgroundColor = UIColor.black.withAlphaComponent(0.8)
+            backgroundColor = UIColor.systemBackground
             buttons.forEach {
                 $0.transform = .identity
             }
@@ -233,7 +240,7 @@ class CountryMenu: UIView {
                 }
             }
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.0, options: [], animations: {
-                self.backgroundColor = UIColor.clear
+                self.backgroundColor = .clear
                 for index in 0..<self.buttons.count {
                     let y = -CGFloat(index + 1) * (self.padding + self.buttons[0].bounds.height)
                     self.buttons[index].transform = CGAffineTransform(translationX: 0, y: y)
@@ -244,7 +251,7 @@ class CountryMenu: UIView {
             buttons.forEach {
                 $0.alpha = 0.0
             }
-            self.backgroundColor = UIColor.clear
+            self.backgroundColor = .clear
             for index in 0..<self.buttons.count {
                 let y = -CGFloat(index + 1) * (self.padding + self.buttons[0].bounds.height)
                 self.buttons[index].transform = CGAffineTransform(translationX: 0, y: y)
@@ -258,7 +265,7 @@ class CountryMenu: UIView {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
-        if backgroundColor == UIColor.clear {
+        if backgroundColor == .clear {
             // If menu not collapsed: only return subviews
             var hitTestView = super.hitTest(point, with: event)
             if hitTestView == self {

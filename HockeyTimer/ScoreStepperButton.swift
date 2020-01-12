@@ -24,7 +24,7 @@ class ScoreStepperButton: UIButton {
     private var shape: ScoreStepperButtonLayer!
     private var type: ScoreStepperButtonType = .Minus
     
-    var bgColor: UIColor = COLOR.LightRed {
+    var bgColor: UIColor = UIColor(named: ColorName.LightRed)! {
         didSet {
             setNeedsDisplay()
         }
@@ -43,9 +43,9 @@ class ScoreStepperButton: UIButton {
         
         switch type {
         case .Minus:
-            bgColor = COLOR.LightRed
+            bgColor = UIColor(named: ColorName.LightRed)!
         case .Plus:
-            bgColor = UIColor(named: "DarkBlue")!
+            bgColor = UIColor(named: ColorName.DarkBlue)!
         }
         backgroundColor = bgColor
         translatesAutoresizingMaskIntoConstraints = false

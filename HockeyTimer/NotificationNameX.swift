@@ -15,6 +15,8 @@ extension Notification.Name {
     static let CurrentTimerPositionLoaded = Notification.Name("CurrentTimerPositionLoaded")
     static let PurchaseNotification = Notification.Name("PurchaseNotification")
     static let TransactionEndedNotification = Notification.Name("TransactionEndedNotification")
+    static let AwakeFromNotification = Notification.Name("AwakeFromNotification")
+
 //    static let AccessToPremiumNotification = Notification.Name("AccessToPremiumNotification")
 
 }

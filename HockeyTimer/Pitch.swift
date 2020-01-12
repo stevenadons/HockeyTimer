@@ -64,7 +64,7 @@ class Pitch: UIView {
     
     private func setup() {
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         
         background = PitchBackgroundLayer()
@@ -195,6 +195,7 @@ class Pitch: UIView {
         background.hideEdge()
         homeScoreLabel.text = "2"
         awayScoreLabel.text = "1"
+        background.setColor(UIColor(named: ColorName.DarkBlue)!)
     }
     
     func animateScoreOnboarding(completion: (() -> Void)?) {
@@ -245,7 +246,7 @@ class Pitch: UIView {
         }) { (finished) in
             label.text = text
             label.transform = CGAffineTransform(scaleX: 3.5, y: 3.5)
-            label.textColor = UIColor(named: "LightYellow")!
+            label.textColor = UIColor(named: ColorName.LightYellow)!
             UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [], animations: {
                 label.transform = CGAffineTransform.identity
             }, completion: { (finished) in

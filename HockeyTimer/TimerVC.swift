@@ -9,20 +9,16 @@
 import UIKit
 import AudioToolbox
 
-protocol StopWatchDelegate: class {
-    
-    func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?)
-    func handleTappedForNewGame()
-}
 
 class TimerVC: PanArrowVC {
 
     
     // MARK: - Properties
     
-    private var resetButton: NewGameButtonIconOnly!
+    private var resetButton: UIButton!
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
+    private var cardTimerPanel: CardTimerPanel!
 
     private var duration: Duration = .TwentyFive
     private var numberOfPeriods: NumberOfPeriods = .Halves
@@ -33,11 +29,11 @@ class TimerVC: PanArrowVC {
         }
     }
     var delegate: TimerVCDelegate?
+    
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
 
     var message: String = ""
     
-    private var button: UIButton!
     
         
     // MARK: - Loading
@@ -45,7 +41,12 @@ class TimerVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "VeryDarkBlue")!
+        
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
+        view.backgroundColor = .systemBackground
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
@@ -54,7 +55,12 @@ class TimerVC: PanArrowVC {
     
     private func setupViews() {
         
-        resetButton = NewGameButtonIconOnly()
+        resetButton = UIButton()
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
+        let tintColor = UIColor(named: ColorName.OliveText)!
+        let resetImage = UIImage(systemName: "arrow.2.circlepath", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
+        resetButton.setImage(resetImage, for: .normal)
         resetButton.alpha = 0.0
         resetButton.addTarget(self, action: #selector(resetButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(resetButton)
@@ -65,26 +71,32 @@ class TimerVC: PanArrowVC {
         stopWatch = StopWatch(delegate: self, game: game)
         stopWatch.translatesAutoresizingMaskIntoConstraints = false
         stopWatchContainer.addSubview(stopWatch)
+        
+        cardTimerPanel = CardTimerPanel()
+        cardTimerPanel.delegate = self
+        if !FeatureFlags.cards {
+            cardTimerPanel.alpha = 0.0
+        }
+        view.addSubview(cardTimerPanel)
 
-        panArrowUp.color = UIColor(named: "LightYellow")!
-        panArrowDown.color = UIColor(named: "LightYellow")!
+        panArrowUp.color = UIColor(named: ColorName.LightYellow)!
+        panArrowDown.color = UIColor(named: ColorName.LightYellow)!
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)
         liftPanArrowDownLabelUp()
         
-        button = UIButton(type: .roundedRect)
-        button.setTitle("Card", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        view.addSubview(button)
+        let resetButtonWidth: CGFloat = 44
+        let resetButtonHeight: CGFloat = 44
+        let resetButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
+        let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
         
         NSLayoutConstraint.activate([
             
-            resetButton.widthAnchor.constraint(equalToConstant: 44),
-            resetButton.heightAnchor.constraint(equalToConstant: 44),
-            resetButton.topAnchor.constraint(equalTo: stopWatch.bottomAnchor, constant: 20),
-            resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            resetButton.widthAnchor.constraint(equalToConstant: resetButtonWidth),
+            resetButton.heightAnchor.constraint(equalToConstant: resetButtonHeight),
+            resetButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: resetButtonTopInset),
+            resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -resetButtonHorInset),
 
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), 
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
@@ -96,21 +108,16 @@ class TimerVC: PanArrowVC {
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
             stopWatch.centerYAnchor.constraint(equalTo: stopWatchContainer.centerYAnchor),
             
-            button.topAnchor.constraint(equalTo: stopWatch.bottomAnchor, constant: 20),
-            button.heightAnchor.constraint(equalToConstant: 50),
-            button.widthAnchor.constraint(equalToConstant: 150),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            cardTimerPanel.topAnchor.constraint(equalTo: stopWatchContainer.bottomAnchor, constant: 50),
+            cardTimerPanel.heightAnchor.constraint(equalToConstant: 76),
+            cardTimerPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             ])
         
         hideIcons()
     }
     
-    @objc private func buttonTapped() {
-        
-        let addCardTimerVC = AddCardTimerVC(title: "Add timer for a card")
-        present(addCardTimerVC, animated: true, completion: nil)
-    }
     
     private func addObservers() {
         
@@ -153,6 +160,7 @@ class TimerVC: PanArrowVC {
     @objc fileprivate func handleNewGame() {
         
         game = pageVC?.game
+        cardTimerPanel.deleteAllCards()
         stopWatch?.reset(withGame: game)
         panArrowDownLabel.text = "0 - 0"
         hideIcons()
@@ -165,21 +173,21 @@ class TimerVC: PanArrowVC {
         }
     }
     
-    private func createNewGame() {
+    func createNewGame() {
         
-        if let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
+        if let minutes = UserDefaults.standard.value(forKey: UserDefaultsKey.Duration) as? Int {
             if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
             }
         }
-        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.NumberOfPeriods) as? Int {
+        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: UserDefaultsKey.NumberOfPeriods) as? Int {
             if let enumCase = NumberOfPeriods(rawValue: savedNumberOfPeriods) {
                 numberOfPeriods = enumCase
             }
         }
         game = HockeyGame(duration: duration, numberOfPeriods: numberOfPeriods)
-        print("TimerVC.createNewGame created game with numberOfPeriods \(numberOfPeriods)")
         pageVC?.game = game
+        cardTimerPanel.deleteAllCards()
         NotificationCenter.default.post(name: .NewGame, object: nil)
     }
     
@@ -202,7 +210,7 @@ class TimerVC: PanArrowVC {
     
     private func handleRequestNewGameConfirmed() {
         
-        let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
         if inPremiumMode {
             handleConfirmationNewGame()
             
@@ -266,7 +274,24 @@ extension TimerVC: StopWatchDelegate {
         
         showAlertNewGame()
     }
+    
+    func minusOneSecond() {
+        
+        cardTimerPanel.minusOneSecond()
+    }
+}
 
+
+extension TimerVC: CardTimerPanelDelegate {
+    
+    func shouldAddCard() {
+        
+        let vc = AddCardTimerVC(okAction: { (cardType, minutes) in
+            let card = Card(type: cardType)
+            self.cardTimerPanel.add(card, minutes: minutes)
+        }, cancelAction: nil)
+        present(vc, animated: true, completion: nil)
+    }
 }
 
 

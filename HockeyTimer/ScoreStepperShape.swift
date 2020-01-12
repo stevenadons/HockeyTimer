@@ -17,7 +17,7 @@ class ScoreStepperShape: UIView {
     var shape: CAShapeLayer!
     var path: UIBezierPath!
     let lineWidth: CGFloat = 2.0
-    var color: UIColor = UIColor(named: "LightYellow")! {
+    var color: UIColor = UIColor(named: ColorName.LightYellow)! {
         didSet {
             shape.setNeedsLayout()
         }
@@ -67,7 +67,7 @@ class ScoreStepperShape: UIView {
         super.layoutSubviews()
         layoutOrAnimateSublayers()
         
-        shape.fillColor = UIColor(named: "LightYellow")!.cgColor
+        shape.fillColor = UIColor(named: ColorName.LightYellow)!.cgColor
     }
     
     

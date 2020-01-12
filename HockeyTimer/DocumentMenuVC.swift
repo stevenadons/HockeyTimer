@@ -31,6 +31,11 @@ class DocumentMenuVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
         setup()
     }
     
@@ -49,7 +54,7 @@ class DocumentMenuVC: PanArrowVC {
     
     private func setup() {
         
-        view.backgroundColor = UIColor(named: "Olive")
+        view.backgroundColor = UIColor(named: ColorName.Olive)!
         
         rulesList = RulesList(delegate: self, country: SELECTED_COUNTRY)
         rulesList.backgroundColor = UIColor.clear
@@ -60,7 +65,7 @@ class DocumentMenuVC: PanArrowVC {
         panArrowDown.alpha = 0.0
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
-        panArrowUpLabel.textColor = UIColor(named: "VeryDarkBlue")!
+        panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
         
         reportButton = UIButton()
         reportButton.translatesAutoresizingMaskIntoConstraints = false
@@ -98,12 +103,16 @@ class DocumentMenuVC: PanArrowVC {
             ])
         
         countryMenu = CountryMenu(inView: view,
+                                  condensedColor: .white,
+                                  foldOutColor: UIColor(named: ColorName.OliveText)!,
                                   delegate: self,
                                   labelNames: Country.allNames(),
                                   capitalsStrings: Country.allCapitals(),
                                   selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
         
         settingsMenu = DotMenu(inView: view,
+                               condensedColor: .white,
+                               foldOutColor: UIColor(named: ColorName.OliveText)!,
                                delegate: self,
                                labelNames: [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT])
     }
@@ -156,7 +165,7 @@ extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
         let version = LS_EMAIL_VERSION + appVersion
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
         let build = " - " + LS_EMAIL_BUILD + buildNumber
-        let premiumSuffix = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode) ? "P" : ""
+        let premiumSuffix = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) ? "P" : ""
         let country = " - " + SELECTED_COUNTRY.capitals
         let iOS = " - " + LS_EMAIL_IOS + UIDevice.current.systemVersion
         let dataStatus = "<br>" + CountryDataManager.shared.statusString()
@@ -314,7 +323,7 @@ extension DocumentMenuVC: UIActivityItemSource {
         let metadata = LPLinkMetadata()
         metadata.originalURL = productURL
         metadata.url = metadata.originalURL
-        metadata.title = "Share Simonitron"
+        metadata.title = "Share HockeyUpp"
         metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-Spotlight-40@3x", withExtension: "png"))
         return metadata
     }

@@ -28,10 +28,10 @@ class NewGameButtonLayer: CALayer {
         circles = createShape(path: createPath())
         addSublayer(circles)
         arrow1 = createShape(path: createArrow1())
-        arrow1.fillColor = UIColor(named: "DarkBlue")!.lighter(by: 30).cgColor
+        arrow1.fillColor = UIColor(named: ColorName.DarkBlue)!.lighter(by: 30).cgColor
         addSublayer(arrow1)
         arrow2 = createShape(path: createArrow2())
-        arrow2.fillColor = UIColor(named: "DarkBlue")!.lighter(by: 30).cgColor
+        arrow2.fillColor = UIColor(named: ColorName.DarkBlue)!.lighter(by: 30).cgColor
         addSublayer(arrow2)
     }
     
@@ -62,7 +62,7 @@ class NewGameButtonLayer: CALayer {
         let shape = CAShapeLayer()
         shape.path = path.cgPath
         shape.lineWidth = 1.5
-        shape.strokeColor = UIColor(named: "DarkBlue")!.cgColor
+        shape.strokeColor = UIColor(named: ColorName.DarkBlue)!.cgColor
         shape.fillColor = UIColor.clear.cgColor
         shape.allowsEdgeAntialiasing = true
         return shape

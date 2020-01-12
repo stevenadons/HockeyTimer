@@ -9,13 +9,11 @@
 import UIKit
 import AudioToolbox
 
-
-protocol StopWatchTimerDelegate: class {
+protocol StopWatchDelegate: class {
     
-    func handleTickCountDown()
-    func handleTickCountUp()
-    func handleTimerReset()
-    func handleReachedZero()
+    func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?)
+    func handleTappedForNewGame()
+    func minusOneSecond()
 }
 
 
@@ -27,7 +25,7 @@ class StopWatch: UIControl {
     var game: HockeyGame! {
         didSet {
             updateLabels()
-            resetTimeLabel(withColor: UIColor.white, alpha: 1)
+            resetTimeLabel(withColor: .label, alpha: 1)
         }
     }
     
@@ -59,12 +57,14 @@ class StopWatch: UIControl {
     fileprivate var haptic: UINotificationFeedbackGenerator?
     fileprivate var impactHaptic: UIImpactFeedbackGenerator?
     
-    private let progressBarWidth: CGFloat = 18
+    private let progressBarWidth: CGFloat = 22
     private let progressBarStrokeInsetRatio: CGFloat = 0.01
     
     private var squareSide: CGFloat {
         return min(self.bounds.width, self.bounds.height)
     }
+    
+    private let progressBarColor: UIColor = UIColor(named: ColorName.VeryDarkBlue_White)!
     
     
     
@@ -99,7 +99,7 @@ class StopWatch: UIControl {
     
     private func setUp() {
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         
         squareContainer = CALayer()
         squareContainer.backgroundColor = UIColor.clear.cgColor
@@ -109,11 +109,11 @@ class StopWatch: UIControl {
         
         progressZone = CAShapeLayer()
         progressZone.strokeColor = UIColor.clear.cgColor
-        progressZone.fillColor = UIColor(named: "DarkGray")!.cgColor
+        progressZone.fillColor = UIColor(named: ColorName.ProgressZone)!.cgColor
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = UIColor(named: "VeryDarkBlue")!.cgColor
+        core.backgroundColor = UIColor.systemBackground.cgColor
         squareContainer.addSublayer(core)
         
         progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
@@ -131,7 +131,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(progressBarFourthQuarter)
         
         icon = StopWatchControlIcon(icon: .PlayIcon)
-        icon.color = UIColor(named: "DarkBlue")!
+        icon.color = UIColor(named: ColorName.StopWatchIcon)!
         addSubview(icon)
         
         timer = StopWatchTimer(delegate: self, game: game)
@@ -141,12 +141,14 @@ class StopWatch: UIControl {
         
         durationLabel = StopWatchSmallLabel()
         addSubview(durationLabel)
+        
         messageLabel = StopWatchSmallLabel()
         messageLabel.adjustsFontSizeToFitWidth = true
         messageLabel.numberOfLines = 0
         message = LS_NEWGAME
         messageLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
         addSubview(messageLabel)
+        
         periodLabel = StopWatchSmallLabel()
         periodLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
         addSubview(periodLabel)
@@ -189,6 +191,17 @@ class StopWatch: UIControl {
             ])
         
         updateLabels()
+        
+        core.backgroundColor = UIColor.systemBackground.cgColor
+        progressZone.fillColor = UIColor(named: ColorName.ProgressZone)!.cgColor
+        
+        [progressBarFirstHalf, progressBarSecondHalf, progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter].forEach {
+            $0.strokeColor = progressBarColor.cgColor
+        }
+        
+        [timeLabel, messageLabel, periodLabel, durationLabel].forEach {
+            $0?.setNeedsLayout()
+        }
     }
     
     private func updateLabels() {
@@ -293,8 +306,8 @@ class StopWatch: UIControl {
         periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
         periodLabel.alpha = 1.0
         updateProgressBars()
-        resetTimeLabel(withColor: UIColor.white, alpha: 1)
-        setProgressBarsColor(to: UIColor.white)
+        resetTimeLabel(withColor: .label, alpha: 1)
+        setProgressBarsColor(to: progressBarColor)
         icon.icon = .PlayIcon
         setNeedsLayout()
     }
@@ -424,7 +437,7 @@ class StopWatch: UIControl {
         
         let shape = CAShapeLayer()
         
-        shape.strokeColor = UIColor.white.cgColor
+        shape.strokeColor = progressBarColor.cgColor
         shape.lineWidth = progressBarWidth
         shape.lineCap = CAShapeLayerLineCap.butt
         shape.lineJoin = CAShapeLayerLineJoin.miter
@@ -554,7 +567,7 @@ class StopWatch: UIControl {
             // Start Half or Resume after pausing
             timer.startCountDown()
             game.status = .Running
-            JukeBox.instance.prepareSound(SOUND.BeepBeep)
+            JukeBox.instance.prepareSound(Sound.BeepBeep)
             icon.change(to: .PauseIcon)
             message = ""
             delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
@@ -606,9 +619,9 @@ class StopWatch: UIControl {
                 
             }
             
-            resetTimeLabel(withColor: UIColor.white, alpha: 1)
+            resetTimeLabel(withColor: .label, alpha: 1)
             JukeBox.instance.stopPlayingAll()
-            JukeBox.instance.removeSound(SOUND.BeepBeep)
+            JukeBox.instance.removeSound(Sound.BeepBeep)
             
         case .NoIcon:
             delegate?.handleTappedForNewGame()
@@ -643,7 +656,7 @@ class StopWatch: UIControl {
     private func endQ4RunningInOvertime() {
         
         game.status = .Finished
-        setProgressBarsColor(to: UIColor.clear)
+        setProgressBarsColor(to: .clear)
         periodLabel.alpha = 0.0
         icon.change(to: .NoIcon)
         message = LS_FULLTIME
@@ -662,7 +675,7 @@ class StopWatch: UIControl {
     private func endH2RunningInOvertime() {
         
         game.status = .Finished
-        setProgressBarsColor(to: UIColor.clear)
+        setProgressBarsColor(to: .clear)
         periodLabel.alpha = 0.0
         icon.change(to: .NoIcon)
         message = LS_FULLTIME
@@ -674,7 +687,7 @@ class StopWatch: UIControl {
         game.half = .Second
         periodLabel.text = LS_SECONDHALFLABEL
         timer.reset(withGame: game)
-        setProgressBarsColor(to: UIColor.white)
+        setProgressBarsColor(to: progressBarColor)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -689,7 +702,7 @@ class StopWatch: UIControl {
         game.quarter = .Second
         periodLabel.text = "Q2"
         timer.reset(withGame: game)
-        setProgressBarsColor(to: UIColor.white)
+        setProgressBarsColor(to: progressBarColor)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -704,7 +717,7 @@ class StopWatch: UIControl {
         game.quarter = .Third
         periodLabel.text = "Q3"
         timer.reset(withGame: game)
-        setProgressBarsColor(to: UIColor.white)
+        setProgressBarsColor(to: progressBarColor)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -719,7 +732,7 @@ class StopWatch: UIControl {
         game.quarter = .Fourth
         periodLabel.text = "Q4"
         timer.reset(withGame: game)
-        setProgressBarsColor(to: UIColor.white)
+        setProgressBarsColor(to: progressBarColor)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
@@ -767,7 +780,7 @@ class StopWatch: UIControl {
         
         haptic?.notificationOccurred(.warning)
         haptic = nil
-        JukeBox.instance.playSound(SOUND.BeepBeep)
+        JukeBox.instance.playSound(Sound.BeepBeep)
         prepareHapticIfNeeded()
     }
     
@@ -799,6 +812,7 @@ extension StopWatch: StopWatchTimerDelegate {
         syncTimerPosition()
         timeLabel.text = stopWatchLabelTimeString()
         showTimeLabel()
+        delegate.minusOneSecond()
         updateProgressBars()
         beepInOvertime()
     }
@@ -830,12 +844,12 @@ extension StopWatch: StopWatchTimerDelegate {
         haptic?.notificationOccurred(.warning)
         haptic = nil
         
-        JukeBox.instance.playSound(SOUND.BeepBeep)
+        JukeBox.instance.playSound(Sound.BeepBeep)
         prepareHapticIfNeeded()
         updateProgressBars()
         runningSecondsToGo = 0
         message = LS_OVERTIME
-        resetTimeLabel(withColor: UIColor(named: "LightYellow")!, alpha: 1)
+        resetTimeLabel(withColor: UIColor(named: ColorName.LightYellow)!, alpha: 1)
         icon.change(to: .StopIcon)
         delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
     }

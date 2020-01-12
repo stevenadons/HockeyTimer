@@ -55,6 +55,10 @@ class SimpleAlertVC: UIViewController {
         
         super.viewDidLoad()
         
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .crossDissolve
         
@@ -64,14 +68,14 @@ class SimpleAlertVC: UIViewController {
     
     private func setupUI() {
         
-        view.backgroundColor = UIColor(named: "VeryDarkBlue")!
+        view.backgroundColor = UIColor.systemBackground
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText ?? ""
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = COLOR.White
+        titleLabel.textColor = UIColor.label
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
@@ -81,7 +85,7 @@ class SimpleAlertVC: UIViewController {
         textLabel.text = text
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 18)
         textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.textColor = COLOR.White
+        textLabel.textColor = UIColor.label
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textLabel)

@@ -30,7 +30,7 @@ class PhoneView: UIView {
     
     private func setup() {
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         
         notification = UIImageView()

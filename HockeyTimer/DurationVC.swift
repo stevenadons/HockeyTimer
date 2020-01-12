@@ -20,6 +20,7 @@ class DurationVC: PanArrowVC {
     fileprivate var countryMenu: CountryMenu!
     fileprivate var pauseAtQuarterSwitch: UISwitch!
     fileprivate var pauseAtQuarterLabel: UILabel!
+    
     fileprivate var cards: [DurationCard] = []
     
     fileprivate var skipAnimations: Bool = false
@@ -38,7 +39,12 @@ class DurationVC: PanArrowVC {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
+        view.backgroundColor = UIColor.systemBackground
 
         setupViews()
         
@@ -111,16 +117,17 @@ class DurationVC: PanArrowVC {
         view.insertSubview(cancelView, at: 0)
         
         panArrowUp.alpha = 0.0
-        panArrowDown.color = UIColor(named: "LightYellow")!
+        panArrowDown.color = UIColor(named: ColorName.LightYellow)!
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
-        panArrowDownLabel.textColor = UIColor(named: "VeryDarkBlue")!
+        panArrowDownLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
         
         countryMenu = CountryMenu(inView: view,
+                                  condensedColor: UIColor(named: ColorName.OliveText)!,
+                                  foldOutColor: UIColor(named: ColorName.OliveText)!,
                                   delegate: self,
                                   labelNames: Country.allNames(),
                                   capitalsStrings: Country.allCapitals(),
-                                  hasBorder: true,
                                   leftSide: true,
                                   selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
         countryMenu.translatesAutoresizingMaskIntoConstraints = false
@@ -129,14 +136,14 @@ class DurationVC: PanArrowVC {
         pauseAtQuarterSwitch.translatesAutoresizingMaskIntoConstraints = false
         setPauseAtQuarterSwitch()
         pauseAtQuarterSwitch.addTarget(self, action: #selector(handleSwitch(pauseSwitch:)), for: [.valueChanged])
-        pauseAtQuarterSwitch.tintColor = UIColor(named: "Olive")
-        pauseAtQuarterSwitch.thumbTintColor = UIColor(named: "Olive")
-        pauseAtQuarterSwitch.onTintColor = UIColor(named: "LightYellow")!
+        pauseAtQuarterSwitch.tintColor = UIColor(named: ColorName.OliveText)!
+        pauseAtQuarterSwitch.thumbTintColor = UIColor(named: ColorName.OliveText)!
+        pauseAtQuarterSwitch.onTintColor = UIColor(named: ColorName.LightYellow)!
         view.insertSubview(pauseAtQuarterSwitch, belowSubview: countryMenu)
         
         pauseAtQuarterLabel = UILabel()
         pauseAtQuarterLabel.translatesAutoresizingMaskIntoConstraints = false
-        pauseAtQuarterLabel.textColor = COLOR.Olive.darker(by: 40)
+        pauseAtQuarterLabel.textColor = UIColor(named: ColorName.OliveText)
         pauseAtQuarterLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 15)
         pauseAtQuarterLabel.text = LS_GAME_IN_QUARTERS
         pauseAtQuarterLabel.numberOfLines = 0
@@ -280,7 +287,7 @@ class DurationVC: PanArrowVC {
             return
         }
         
-        let inPremiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
         guard !inPremiumMode else {
             handleSelection(card: sender)
             return

@@ -9,6 +9,15 @@
 import UIKit
 
 
+protocol StopWatchTimerDelegate: class {
+    
+    func handleTickCountDown()
+    func handleTickCountUp()
+    func handleTimerReset()
+    func handleReachedZero()
+}
+
+
 class StopWatchTimer {
     
     

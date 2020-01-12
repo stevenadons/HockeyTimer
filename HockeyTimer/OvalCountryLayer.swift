@@ -14,24 +14,35 @@ class OvalCountryLayer: CALayer {
     // MARK: - Properties
     
     private var shape: CAShapeLayer!
-    private var hasBorder: Bool!
     private let designWidth: CGFloat = 44
     private let designHeight: CGFloat = 44
-    
+    private var color: UIColor = .white
     
     
     // MARK: - Initializing
     
-    convenience init(hasBorder: Bool = false) {
+    init(color: UIColor) {
         
-        self.init()
-        convenienceSet(hasBorder: hasBorder)
+        super.init()
+        self.color = color
         setup()
     }
     
-    private func convenienceSet(hasBorder: Bool = false) {
+    override init(layer: Any) {
         
-        self.hasBorder = hasBorder
+        super.init(layer: layer)
+        setup()
+    }
+    
+    override init() {
+        
+        super.init()
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setup() {
@@ -49,12 +60,21 @@ class OvalCountryLayer: CALayer {
     override func layoutSublayers() {
         
         super.layoutSublayers()
+        
         shape.position = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         shape.bounds = bounds
         shape.path = createPath().cgPath
     }
     
     
+    // MARK: - Public Methods
+    
+    func setColor(_ color: UIColor) {
+        
+        self.color = color
+        shape.strokeColor = color.cgColor
+    }
+        
     
     // MARK: - Methods to create shapes
     
@@ -64,8 +84,8 @@ class OvalCountryLayer: CALayer {
         
         shape.path = createPath().cgPath
         shape.lineWidth = 1
-        shape.strokeColor = hasBorder ? COLOR.Olive.darker(by: 40).cgColor : UIColor.clear.cgColor
-        shape.fillColor = UIColor.white.cgColor
+        shape.strokeColor = color.cgColor
+        shape.fillColor = UIColor.clear.cgColor
         shape.allowsEdgeAntialiasing = true
         
         return shape

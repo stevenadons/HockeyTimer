@@ -23,6 +23,10 @@ class TestingVC: UIViewController {
         
         super.viewDidLoad()
         
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
         view.backgroundColor = UIColor.black
         
         premiumLabel = createLabel("Premium Mode")
@@ -55,7 +59,7 @@ class TestingVC: UIViewController {
         
         super.viewWillAppear(animated)
         
-        let premiumMode = UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode)
+        let premiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
         premiumSwitch.setOn(premiumMode, animated: false)
     }
     
@@ -64,7 +68,7 @@ class TestingVC: UIViewController {
     
     @objc private func handlePremiumMode(swtch: UISwitch) {
         
-        UserDefaults.standard.set(swtch.isOn, forKey: USERDEFAULTSKEY.PremiumMode)
+        UserDefaults.standard.set(swtch.isOn, forKey: UserDefaultsKey.PremiumMode)
     }
     
     @objc private func back() {

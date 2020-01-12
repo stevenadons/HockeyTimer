@@ -34,7 +34,7 @@ class EditScoreButton: UIButton {
     
     private func setup() {
         
-        backgroundColor = UIColor(named: "DarkBlue")!
+        backgroundColor = UIColor(named: ColorName.DarkBlue)!
         translatesAutoresizingMaskIntoConstraints = false
         
         shape = EditScoreButtonLayer()

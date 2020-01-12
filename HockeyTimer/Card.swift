@@ -1,19 +1,22 @@
 //
 //  Card.swift
-//  HockeyTimer
+//  ProbeerselUICollectionView
 //
-//  Created by Steven Adons on 01/01/2020.
+//  Created by Steven Adons on 04/01/2020.
 //  Copyright © 2020 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-
-enum Card {
+struct Card {
     
-    case green
-    case yellow
-    case red
+    
+    // MARK: - Properties
+
+    var type: CardType
+    
+    
+    // MARK: - Public Methods
     
     func pathInSize(_ size: CGSize) -> UIBezierPath {
                 
@@ -26,11 +29,11 @@ enum Card {
         
         var path = UIBezierPath()
         
-        switch self {
+        switch type {
         case .green:
             
             let pointA = CGPoint(x: outsideRadius, y: yOffset)
-            let pointB = CGPoint(x: 0, y: height * 0.75 + yOffset)
+            let pointB = CGPoint(x: 0, y: height - (outsideRadius / 2) + yOffset)
             let pointC = CGPoint(x: width - pointB.x, y: pointB.y)
             
             let pointA1 = CGPoint(x: pointA.x - cornerRadius * (sqrt(3) / 2), y: pointA.y + cornerRadius * 1.5)
@@ -65,15 +68,23 @@ enum Card {
         return path
     }
     
+    
     func color() -> UIColor {
         
-        switch self {
+        switch type {
         case .green:
-            return UIColor.systemGreen
+            return UIColor(named: ColorName.PantoneGreenLight)!
         case .yellow:
-            return UIColor.systemYellow
+            return UIColor(named: ColorName.PantoneYellow)!
         default:
-            return UIColor.systemRed
+            return UIColor(named: ColorName.PantoneRed)!
         }
     }
+}
+
+
+extension Card: Hashable {
+    
+    
+    
 }

@@ -90,15 +90,15 @@ class RulesList: UIView {
                     // Color
                     var button = RulesButton(rules: groupOfRulesArray[innerIndex])
                     if outerIndex % 5 == 0 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: "LightYellow")!, titleColor: UIColor(named: "VeryDarkBlue")!)
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.LightYellow)!, titleColor: UIColor(named: ColorName.VeryDarkBlue)!)
                     } else if outerIndex % 5 == 1 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: "DarkBlue")!, titleColor: UIColor.white)
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.DarkBlue)!, titleColor: UIColor.white)
                     } else if outerIndex % 5 == 2 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor.white, titleColor: UIColor(named: "VeryDarkBlue")!)
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor.white, titleColor: UIColor(named: ColorName.VeryDarkBlue)!)
                     } else if outerIndex % 5 == 3 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: "VeryDarkBlue")!, titleColor: UIColor.white)
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.VeryDarkBlue)!, titleColor: UIColor.white)
                     } else if outerIndex % 5 == 4 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: "LightBlue")!, titleColor: UIColor(named: "VeryDarkBlue")!)
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.LightBlue)!, titleColor: UIColor(named: ColorName.VeryDarkBlue)!)
                     }
                     button.addTarget(self, action: #selector(handleButtonTapped(sender:forEvent:)), for: [.touchUpInside])
                     addSubview(button)

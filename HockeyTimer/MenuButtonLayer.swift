@@ -19,7 +19,7 @@ class MenuButtonLayer: CALayer {
             shape.setNeedsDisplay()
         }
     }
-    var bgColor: UIColor = UIColor.cyan {
+    var bgColor: UIColor = .clear {
         didSet {
             backgroundColor = bgColor.cgColor
             setNeedsDisplay()
@@ -37,6 +37,13 @@ class MenuButtonLayer: CALayer {
     override init() {
         
         super.init()
+        setup()
+    }
+    
+    init(color: UIColor) {
+        
+        super.init()
+        self.shapeColor = color
         setup()
     }
     
@@ -73,6 +80,14 @@ class MenuButtonLayer: CALayer {
         shape.path = createPath().cgPath
     }
     
+    
+    // MARK: - Public Methods
+    
+    func setColor(_ color: UIColor) {
+        
+        self.shapeColor = color
+        shape.strokeColor = color.cgColor
+    }
     
     
     // MARK: - Methods to create shapes

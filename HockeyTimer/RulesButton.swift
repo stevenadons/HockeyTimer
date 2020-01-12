@@ -60,10 +60,6 @@ class RulesButton: UIButton {
         backgroundColor = UIColor.clear
         setTitleColor(UIColor.black, for: .normal)
         titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 15)
-        layer.shadowColor = UIColor(named: "DarkGray")!.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowOpacity = shadowed ? 0.8 : 0.0
-        layer.shadowRadius = 3
     }
     
     override func layoutSubviews() {

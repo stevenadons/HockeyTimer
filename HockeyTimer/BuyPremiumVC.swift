@@ -66,6 +66,10 @@ class BuyPremiumVC: UIViewController {
         
         super.viewDidLoad()
         
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
         
@@ -96,14 +100,14 @@ class BuyPremiumVC: UIViewController {
     
     private func setupUI() {
         
-        view.backgroundColor = UIColor(named: "VeryDarkBlue")!
+        view.backgroundColor = .systemBackground
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = COLOR.White
+        titleLabel.textColor = UIColor(named: ColorName.White)!
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
@@ -113,7 +117,7 @@ class BuyPremiumVC: UIViewController {
         textLabel.text = text
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.textColor = COLOR.White
+        textLabel.textColor = UIColor(named: ColorName.White)!
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textLabel)
@@ -139,7 +143,7 @@ class BuyPremiumVC: UIViewController {
         }
         view.addSubview(buyPremiumButton)
         
-        cancelButton = ConfirmationButton.invertedYellowButton(largeFont: true)
+        cancelButton = ConfirmationButton.redButton(largeFont: true)
         cancelButton.setTitle(LS_BUYPREMIUM_CANCELBUTTON, for: .normal)
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: [.touchUpInside])
         view.addSubview(cancelButton)

@@ -25,14 +25,14 @@ class MaskWithActivityIndicator: UIView {
     private var loadingView: UIView!
     private let loadingViewWidth: Int = 80
     private let loadingViewHeight: Int = 80
-    private let loadingViewColor: UIColor = UIColor(named: "DarkBlue")!
+    private let loadingViewColor: UIColor = UIColor(named: ColorName.DarkBlue)!
     private let loadingViewAlpha: CGFloat = 1.0 // 0.7
     private let loadingViewCornerRadius: CGFloat = 10
     
     private var activityIndicatorView: UIActivityIndicatorView!
     private let activityIndicatorViewWidth: Int = 40
     private let activityIndicatorViewHeight: Int = 40
-    private let activityIndicatorViewStyle: UIActivityIndicatorView.Style = .whiteLarge
+    private let activityIndicatorViewStyle: UIActivityIndicatorView.Style = .large
     
     convenience init(inView containingView: UIView) {
         

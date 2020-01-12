@@ -16,7 +16,7 @@ class PageVC: UIPageViewController {
     
     // MARK: - Properties
     
-    var game: HockeyGame!
+    var game: HockeyGame! 
     var existingTimerVC: TimerVC?
     var existingScoreVC: ScoreVC?
     private var mask: Mask?
@@ -39,20 +39,24 @@ class PageVC: UIPageViewController {
         dataSource = self
         delegate = self
         
-        if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.ShouldNotOnboard) {
-            view.backgroundColor = UIColor(named: "VeryDarkBlue")!
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.ShouldNotOnboard) {
+            view.backgroundColor = UIColor(named: ColorName.VeryDarkBlue)!
         } else {
             view.backgroundColor = UIColor.white // should be same color as underlying onboarding screens
         }
         
         var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
-        if UserDefaults.standard.bool(forKey: USERDEFAULTSKEY.PremiumMode), let minutes = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.Duration) as? Int {
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode), let minutes = UserDefaults.standard.value(forKey: UserDefaultsKey.Duration) as? Int {
             if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
             }
         }
         var numberOfPeriods: NumberOfPeriods = .Halves
-        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: USERDEFAULTSKEY.NumberOfPeriods) as? Int {
+        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: UserDefaultsKey.NumberOfPeriods) as? Int {
             if let enumCase = NumberOfPeriods(rawValue: savedNumberOfPeriods) {
                 numberOfPeriods = enumCase
             }
@@ -79,7 +83,7 @@ class PageVC: UIPageViewController {
         
         super.viewWillAppear(animated)
         if !askToNotificationsAlreadyShown {
-            mask = Mask(color: UIColor(named: "VeryDarkBlue")!, inView: view)
+            mask = Mask(color: UIColor(named: ColorName.VeryDarkBlue)!, inView: view)
         }
     }
     
@@ -272,10 +276,10 @@ extension PageVC: UIPageViewControllerDelegate {
             // From DurationVC to TimerVC
             if durationVC.selectedDuration != nil && timerVC.game.duration != durationVC.selectedDuration {
                 // Duration changed
-                UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: USERDEFAULTSKEY.Duration)
+                UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: UserDefaultsKey.Duration)
                 if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
                     // Number of Periods also changed
-                    UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: USERDEFAULTSKEY.NumberOfPeriods)
+                    UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: UserDefaultsKey.NumberOfPeriods)
                     game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
                 } else {
                     // Only Duration changed
@@ -284,13 +288,13 @@ extension PageVC: UIPageViewControllerDelegate {
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             } else if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
                 // Only Number of Periods changed
-                UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: USERDEFAULTSKEY.NumberOfPeriods)
+                UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: UserDefaultsKey.NumberOfPeriods)
                 game = HockeyGame(duration: timerVC.game.duration, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             }
             
         } else if let _ = pageViewController.viewControllers?.first as? ScoreVC, let _ = pendingViewControllers.first as? DocumentMenuVC {
-            view.backgroundColor = UIColor(named: "Olive")
+            view.backgroundColor = UIColor(named: ColorName.Olive)!
         }
         
         prepareHapticIfNeeded()

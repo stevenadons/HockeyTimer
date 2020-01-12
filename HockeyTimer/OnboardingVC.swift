@@ -33,18 +33,24 @@ class OnboardingVC: UIViewController {
     // MARK: - Public methods
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        if !FeatureFlags.darkModeCanBeEnabled {
+            overrideUserInterfaceStyle = .light
+        }
+        
         setup()
         setupSlides()
     }
     
     private func setup() {
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .systemBackground
         
         scrollView = UIScrollView()
         scrollView.frame = self.view.bounds
-        scrollView.backgroundColor = UIColor.clear
+        scrollView.backgroundColor = .clear
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
@@ -53,18 +59,17 @@ class OnboardingVC: UIViewController {
         pageControl = UIPageControl()
         pageControl.numberOfPages = numberOfPages
         pageControl.currentPage = previousPage
-        pageControl.pageIndicatorTintColor = UIColor(named: "DarkBlue")!
-        pageControl.currentPageIndicatorTintColor = UIColor(named: "LightYellow")!
+        pageControl.pageIndicatorTintColor = UIColor(named: ColorName.DarkBlueText)!
+        pageControl.currentPageIndicatorTintColor = UIColor(named: ColorName.LightYellow)!
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pageControl)
         
         dismissButton = UIButton()
-        dismissButton.backgroundColor = UIColor.orange
         dismissButton.addTarget(self, action: #selector(handleDismiss(sender:)), for: [.touchUpInside])
         dismissButton.alpha = 0.0
-        dismissButton.backgroundColor = UIColor.clear
+        dismissButton.backgroundColor = .clear
         dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 17)
-        dismissButton.setTitleColor(UIColor(named: "DarkBlue")!, for: .normal)
+        dismissButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
         dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
@@ -90,17 +95,20 @@ class OnboardingVC: UIViewController {
     private func setupSlides() {
         
         slide1 = OnboardScreen()
-        slide1.backgroundColor = UIColor.white
+        slide1.backgroundColor = .clear
         slide1.title.text = LS_TITLE_ONBOARDINGSLIDE1
         slide1.body.text = LS_BODY_ONBOARDINGSLIDE1
         scrollView.addSubview(slide1)
         
         stopWatch = StopWatch()
-        stopWatch.simplifyForOnboarding(bgColor: UIColor.white, iconColor: UIColor(named: "LightYellow")!, timeColor: UIColor(named: "VeryDarkBlue")!, progressZoneColor: UIColor(named: "DarkBlue")!)
+        stopWatch.simplifyForOnboarding(bgColor: UIColor.white,
+                                        iconColor: UIColor(named: ColorName.StopWatchIcon)!,
+                                        timeColor: UIColor(named: ColorName.VeryDarkBlue_White)!,
+                                        progressZoneColor: UIColor(named: ColorName.DarkBlue)!)
         slide1.graphics.addSubview(stopWatch)
         
         slide2 = OnboardScreen()
-        slide2.backgroundColor = UIColor.white
+        slide2.backgroundColor = .clear
         slide2.title.text = LS_TITLE_ONBOARDINGSLIDE2
         slide2.body.text = LS_BODY_ONBOARDINGSLIDE2
         scrollView.addSubview(slide2)
@@ -110,7 +118,7 @@ class OnboardingVC: UIViewController {
         slide2.graphics.addSubview(pitch)
         
         slide3 = OnboardScreen()
-        slide3.backgroundColor = UIColor.white
+        slide3.backgroundColor = .clear
         slide3.title.text = LS_TITLE_ONBOARDINGSLIDE3
         slide3.body.text = LS_BODY_ONBOARDINGSLIDE3
         scrollView.addSubview(slide3)
@@ -133,6 +141,8 @@ class OnboardingVC: UIViewController {
         setPhoneViewFrame()
         view.bringSubviewToFront(pageControl)
         view.bringSubviewToFront(dismissButton)
+        
+        stopWatch.setNeedsLayout()
     }
     
     private func setStopWatchFrame() {
@@ -170,7 +180,7 @@ class OnboardingVC: UIViewController {
     
     @objc private func handleDismiss(sender: UIButton) {
         
-        UserDefaults.standard.set(USERDEFAULTSKEY.ShouldNotOnboard, forKey: USERDEFAULTSKEY.ShouldNotOnboard)
+        UserDefaults.standard.set(UserDefaultsKey.ShouldNotOnboard, forKey: UserDefaultsKey.ShouldNotOnboard)
         
         let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         startViewController.modalTransitionStyle = .crossDissolve

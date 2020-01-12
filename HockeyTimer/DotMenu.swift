@@ -32,6 +32,8 @@ class DotMenu: UIView {
     
     private weak var delegate: DotMenuDelegate?
     private var labelNames: [String]!
+    private var condensedColor: UIColor = .white
+    private var foldOutColor: UIColor = UIColor(named: ColorName.OliveText)!
    
     private var menuButton: MenuButton!
     private var buttons: [ItemButton]!
@@ -50,20 +52,22 @@ class DotMenu: UIView {
     
     // MARK: - Initializing
     
-    convenience init(inView containingView: UIView, delegate: DotMenuDelegate, labelNames: [String]) {
+    convenience init(inView containingView: UIView, condensedColor: UIColor, foldOutColor: UIColor, delegate: DotMenuDelegate, labelNames: [String]) {
         
         self.init()
         
         self.frame = containingView.frame
         self.center = containingView.center
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = .clear
+        self.condensedColor = condensedColor
+        self.foldOutColor = foldOutColor
         self.delegate = delegate
         self.labelNames = labelNames
 
         tap = UITapGestureRecognizer(target: self, action: #selector(hideButtons))
         addGestureRecognizer(tap)
         
-        menuButton = MenuButton(shapeColor: UIColor.white, bgColor: UIColor.clear)
+        menuButton = MenuButton(color: condensedColor, crossColor: foldOutColor)
         menuButton.addTarget(self, action: #selector(handleMenuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         menuButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         menuButton.frame.origin = CGPoint(x: horInset, y: topInset)
@@ -83,7 +87,7 @@ class DotMenu: UIView {
                 path = pathDocumentButton(buttonWidth: buttonWidth, buttonHeight: buttonHeight)
             }
             
-            let button = ItemButton(shapeColor: UIColor.white, bgColor: UIColor.clear, path: path)
+            let button = ItemButton(shapeColor: foldOutColor, bgColor: .clear, path: path)
             button.tag = index
             button.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
@@ -158,7 +162,7 @@ class DotMenu: UIView {
         
         if animated {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
-                self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+                self.backgroundColor = .systemBackground
                 self.buttons.forEach {
                     $0.transform = .identity
                     $0.alpha = 1.0
@@ -172,7 +176,7 @@ class DotMenu: UIView {
             })
             
         } else {
-            backgroundColor = UIColor.black.withAlphaComponent(0.8)
+            backgroundColor = .systemBackground
             buttons.forEach {
                 $0.transform = .identity
                 $0.alpha = 1.0
@@ -186,6 +190,20 @@ class DotMenu: UIView {
         delegate?.dotMenuDidShowButtons()
         
     }
+    
+    
+    // MARK: - Layout
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        menuButton.setColor(condensedColor, crossColor: foldOutColor)
+        buttons.forEach {
+            $0.setColor(foldOutColor)
+        }
+    }
+
     
     
     // MARK: - Public Methods
@@ -203,7 +221,7 @@ class DotMenu: UIView {
         
         if animated {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.0, options: [], animations: {
-                self.backgroundColor = UIColor.clear
+                self.backgroundColor = .clear
                 self.menuButton.reset()
                 for index in 0..<self.buttons.count {
                     let y = -CGFloat(index + 1) * (self.padding + self.buttons[0].bounds.height)
@@ -213,7 +231,7 @@ class DotMenu: UIView {
             }, completion: nil)
             
         } else {
-            backgroundColor = UIColor.clear
+            backgroundColor = .clear
             for index in 0..<self.buttons.count {
                 let y = -CGFloat(index + 1) * (self.padding + self.buttons[0].bounds.height)
                 buttons[index].transform = CGAffineTransform(translationX: 0, y: y)
@@ -229,7 +247,7 @@ class DotMenu: UIView {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
-        if backgroundColor == UIColor.clear {
+        if backgroundColor == .clear {
             // If menu not collapsed: only return subviews
             var hitTestView = super.hitTest(point, with: event)
             if hitTestView == self {

@@ -13,18 +13,19 @@ class MenuButton: UIButton {
     
     // MARK: - Properties
     
-    var shapeColor: UIColor = UIColor.black {
+    var shapeColor: UIColor = .black {
         didSet {
             buttonLayer.shapeColor = shapeColor
             buttonLayer.setNeedsDisplay()
         }
     }
-    var bgColor: UIColor = UIColor.cyan {
+    var bgColor: UIColor = .clear {
         didSet {
             buttonLayer.bgColor = bgColor
             buttonLayer.setNeedsDisplay()
         }
     }
+    private var crossColor: UIColor = .white
     
     private var buttonLayer: MenuButtonLayer!
     private var buttonLayerCross: MenuButtonLayerCross!
@@ -32,6 +33,12 @@ class MenuButton: UIButton {
     
     
     // MARK: - Initializing
+    
+    init(color: UIColor, crossColor: UIColor) {
+        
+        self.init()
+        setColor(color, crossColor: crossColor)
+    }
     
     override init(frame: CGRect) {
         
@@ -117,6 +124,14 @@ class MenuButton: UIButton {
             self.buttonLayer.add(animationOpacity, forKey: "opacity")
             self.buttonLayer.opacity = 1.0
         }
+    }
+    
+    func setColor(_ color: UIColor, crossColor: UIColor) {
+        
+        self.shapeColor = color
+        self.crossColor = crossColor
+        buttonLayer.setColor(color)
+        buttonLayerCross.setColor(crossColor)
     }
 
 }

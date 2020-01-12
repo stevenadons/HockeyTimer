@@ -1,14 +1,15 @@
 //
-//  ChooseCardView.swift
-//  HockeyTimer
+//  CardView.swift
+//  ProbeerselUICollectionView
 //
-//  Created by Steven Adons on 01/01/2020.
+//  Created by Steven Adons on 05/01/2020.
 //  Copyright © 2020 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class ChooseCardView: UIButton {
+
+class CardView: UIButton {
     
     
     // MARK: - Properties
@@ -16,18 +17,9 @@ class ChooseCardView: UIButton {
     private var graphics: CAShapeLayer!
     private var card: Card!
     
-    private var insetFactor: CGFloat {
-        switch card {
-        case .green:
-            return 0.1
-        default:
-            return 0.2
-        }
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 100, height: 120)
     }
-    
-    private let highlightedColor: UIColor = UIColor(named: "LightBlue")!
-    private let standardColor: UIColor = UIColor(named: "DarkGray")!
-   
     
     
     // MARK: - Init
@@ -48,36 +40,44 @@ class ChooseCardView: UIButton {
     private func setup() {
         
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = standardColor
-        
+        clipsToBounds = true
+        backgroundColor = .secondarySystemBackground
+        layer.cornerRadius = 8
+        layer.borderColor = card.color().cgColor
+
         graphics = CAShapeLayer()
         graphics.path = card.pathInSize(.zero).cgPath
         graphics.fillColor = card.color().cgColor
         graphics.lineCap = .round
         layer.addSublayer(graphics)
-        
-        layer.cornerRadius = 12
     }
-    
     
     override func layoutSubviews() {
         
         super.layoutSubviews()
-        let graphicsBounds = bounds.insetBy(dx: bounds.width * insetFactor, dy: bounds.height * insetFactor)
-        let path = card.pathInSize(graphicsBounds.size)
-        let translate = CGAffineTransform(translationX: bounds.width * insetFactor, y: bounds.height * insetFactor)
+        
+        let ratio: CGFloat = card.type == .green ? 0.6 : 0.45
+        let graphicsSide = min(bounds.width, bounds.height) * ratio
+        let graphicsSize = CGSize(width: graphicsSide, height: graphicsSide)
+        let path = card.pathInSize(graphicsSize)
+        let cardYOffset = card.type == .green ? bounds.height * 0.225 : bounds.height * 0.3
+        let cardXOffset = (bounds.width - graphicsSide) / 2
+        let translate = CGAffineTransform(translationX: cardXOffset, y: cardYOffset)
         path.apply(translate)
         graphics.path = path.cgPath
     }
     
     
-    
     // MARK: - Public Methods
-    
+   
     func highlightBackground(_ bool: Bool) {
         
-        backgroundColor = bool ? highlightedColor : standardColor
+        layer.borderWidth = bool ? 3 : 0
     }
+    
+    
+    // MARK: - Private Methods
+    
     
     
 }
