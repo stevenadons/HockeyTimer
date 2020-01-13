@@ -21,7 +21,7 @@ class AddCardTimerVC: UIViewController {
     private var okButton: UIButton!
     private var cancelButton: UIButton!
     
-    private var titleText: String = "Color"
+    private var titleText: String = "Card"
     private var okButtonText: String = "OK"
     private var cancelButtonText: String = "Cancel"
     
@@ -112,7 +112,8 @@ class AddCardTimerVC: UIViewController {
         
         let buttonHeight: CGFloat = 54
         let horInset: CGFloat = 50
-        let buttonsPadding: CGFloat = 20
+        let buttonsHorInset: CGFloat = 20
+        let buttonsPadding: CGFloat = 16
         
         NSLayoutConstraint.activate([
             
@@ -130,13 +131,13 @@ class AddCardTimerVC: UIViewController {
             cardPanel.heightAnchor.constraint(equalToConstant: cardPanelHeight),
             cardPanel.bottomAnchor.constraint(equalTo: minutesPanel.topAnchor, constant: -panelsPadding),
             
-            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset / 2),
+            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonsHorInset),
             cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -buttonsPadding / 2),
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             cancelButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: buttonsPadding / 2),
-            okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset / 2),
+            okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonsHorInset),
             okButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
             okButton.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor),
             
@@ -243,7 +244,7 @@ extension AddCardTimerVC: ChooseCardPanelDelegate {
         case .red:
             minutesPanel.dehighlightAll()
             windUp(animated: true)
-            titleLabel.text = "Color"
+            titleLabel.text = "Card"
             return
         case .yellow:
             minutesPanel.highlight(5)

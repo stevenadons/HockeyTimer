@@ -89,7 +89,7 @@ class TimerVC: PanArrowVC {
         let resetButtonWidth: CGFloat = 44
         let resetButtonHeight: CGFloat = 44
         let resetButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
-        let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
+        let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 8, normal: 22, big: 22)
         
         NSLayoutConstraint.activate([
             

@@ -67,7 +67,7 @@ let LS_BUYPREMIUM_OK = NSLocalizedString("OK", comment: "OK button when respondi
 
 let LS_ALLOW_NOTIFICATIONS_TITLE = NSLocalizedString("Allow Notifications", comment: "Title of modal VC")
 let LS_ALLOW_NOTIFICATIONS_GO_TO_SETTINGS = NSLocalizedString("HockeyUpp sends notification at the exact time the game ends. Open Settings and enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
-let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp will send a notification at the exact time the game ends. Enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
+let LS_ALLOW_NOTIFICATIONS_ALLOW_NOTIFICATIONS = NSLocalizedString("HockeyUpp will send you a notification at the exact time the game ends. Enable Notifications to get this warning.", comment: "Text in modal VC to allow notifications")
 let LS_ALLOW_NOTIFICATIONS_OK_LET_ME_ALLOW = NSLocalizedString("OK, let me allow", comment: "Confirmation button when enabling notifications.")
 let LS_ALLOW_NOTIFICATIONS_NOT_NOW = NSLocalizedString("Not now", comment: "Cancel button when enabling notifications.")
 

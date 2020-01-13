@@ -96,7 +96,7 @@ class RulesList: UIView {
                     } else if outerIndex % 5 == 2 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor.white, titleColor: UIColor(named: ColorName.VeryDarkBlue)!)
                     } else if outerIndex % 5 == 3 {
-                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.VeryDarkBlue)!, titleColor: UIColor.white)
+                        button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.VeryDarkBlue_Red)!, titleColor: UIColor.white)
                     } else if outerIndex % 5 == 4 {
                         button = RulesButton.button(rules: groupOfRulesArray[innerIndex], color: UIColor(named: ColorName.LightBlue)!, titleColor: UIColor(named: ColorName.VeryDarkBlue)!)
                     }

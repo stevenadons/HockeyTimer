@@ -137,13 +137,13 @@ class SimpleAlertVC: UIViewController {
                 
                 okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
                 okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
-                okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -18),
+                okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -16),
                 okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
                 
                 cancelButton!.leadingAnchor.constraint(equalTo: okButton.leadingAnchor),
                 cancelButton!.trailingAnchor.constraint(equalTo: okButton.trailingAnchor),
                 cancelButton!.heightAnchor.constraint(equalTo: okButton.heightAnchor),
-                cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+                cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -horInset),
                 
                 ])
         
@@ -154,7 +154,7 @@ class SimpleAlertVC: UIViewController {
                 okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
                 okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
                 okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-                okButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+                okButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -horInset),
                 
                 ])
         }

@@ -116,7 +116,7 @@ class MiniStopWatch: UIView {
         shape.lineCap = CAShapeLayerLineCap.butt
         shape.lineJoin = CAShapeLayerLineJoin.miter
         shape.fillColor = UIColor.clear.cgColor
-        shape.position = CGPoint.zero
+        shape.position = .zero
         shape.strokeStart = 0.0
         shape.strokeEnd = 0.0
         shape.contentsScale = UIScreen.main.scale

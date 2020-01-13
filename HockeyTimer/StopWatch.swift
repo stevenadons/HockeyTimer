@@ -140,6 +140,7 @@ class StopWatch: UIControl {
         addSubview(timeLabel)
         
         durationLabel = StopWatchSmallLabel()
+        durationLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
         addSubview(durationLabel)
         
         messageLabel = StopWatchSmallLabel()
@@ -202,6 +203,8 @@ class StopWatch: UIControl {
         [timeLabel, messageLabel, periodLabel, durationLabel].forEach {
             $0?.setNeedsLayout()
         }
+        
+        timeLabel.setNeedsLayout()
     }
     
     private func updateLabels() {

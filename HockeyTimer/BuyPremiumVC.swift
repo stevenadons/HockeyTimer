@@ -107,7 +107,7 @@ class BuyPremiumVC: UIViewController {
         titleLabel.text = titleText
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = UIColor(named: ColorName.White)!
+        titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
@@ -117,7 +117,7 @@ class BuyPremiumVC: UIViewController {
         textLabel.text = text
         textLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.textColor = UIColor(named: ColorName.White)!
+        textLabel.textColor = .label
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(textLabel)
@@ -164,7 +164,7 @@ class BuyPremiumVC: UIViewController {
         let lastRange = NSRange(location: firstRange.length, length: plainTitle.count - firstRange.length)
         attributedTitle.addAttribute(.font, value: UIFont(name: FONTNAME.ThemeBlack, size: 13)!, range: lastRange)
         let fullRange = NSRange(location: 0, length: plainTitle.count)
-        attributedTitle.addAttribute(.foregroundColor, value: UIColor.lightGray.lighter(), range: fullRange)
+        attributedTitle.addAttribute(.foregroundColor, value: UIColor.secondaryLabel, range: fullRange)
         restorePurchaseButton.setAttributedTitle(attributedTitle, for: .normal)
         
         view.addSubview(restorePurchaseButton)

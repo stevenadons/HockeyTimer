@@ -14,6 +14,7 @@ enum FONTNAME {
     static let ThemeBold = "Lato-Bold"
     static let ThemeRegular = "Lato-Regular"
     static let Numbers = "HelveticaNeue-Bold"
+
 }
 
 

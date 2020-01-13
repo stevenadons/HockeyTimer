@@ -87,6 +87,7 @@ class StopWatchLabel: UIView {
     private func label(text: String, alignment: NSTextAlignment) -> UILabel {
         
         let label = UILabel()
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
         label.textColor = textColor
@@ -95,6 +96,7 @@ class StopWatchLabel: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
         label.font = UIFont(name: FONTNAME.Numbers, size: 48)
+        
         return label
     }
     

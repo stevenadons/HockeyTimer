@@ -60,7 +60,7 @@
 "Please check your internet connection." = "Controleer of je verbinding hebt met internet.";
 
 "Allow Notifications" = "Activeer meldingen";
-"HockeyUpp will send a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
+"HockeyUpp will send you a notification at the exact time the game ends. Enable Notifications to get this warning." = "HockeyUpp stuurt je een melding wanneer de wedstrijd eindigt. Activeer berichtgevingen voor HockeyUpp.";
 "OK, let me allow" = "OK, activeer meldingen";
 "Not now" = "Later";
 

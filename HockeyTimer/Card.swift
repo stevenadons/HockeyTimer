@@ -22,7 +22,7 @@ struct Card {
                 
         let width = size.width
         let height = size.height
-        let cornerRadius: CGFloat = min(width, height) * 8 / 100
+        let cornerRadius: CGFloat = min(width, height) * 6 / 100
         let outsideRadius: CGFloat = min(width, height) / 2
         let rect = CGRect(origin: .zero, size: size)
         let yOffset = outsideRadius / 8

@@ -9,7 +9,6 @@
 import UIKit
 import MessageUI
 import LinkPresentation
-//import PDFKit
 
 
 class DocumentMenuVC: PanArrowVC {
@@ -54,7 +53,7 @@ class DocumentMenuVC: PanArrowVC {
     
     private func setup() {
         
-        view.backgroundColor = UIColor(named: ColorName.Olive)!
+        view.backgroundColor = UIColor(named: ColorName.Olive_Black)!
         
         rulesList = RulesList(delegate: self, country: SELECTED_COUNTRY)
         rulesList.backgroundColor = UIColor.clear
@@ -327,7 +326,4 @@ extension DocumentMenuVC: UIActivityItemSource {
         metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-Spotlight-40@3x", withExtension: "png"))
         return metadata
     }
-    
-    
-    
 }

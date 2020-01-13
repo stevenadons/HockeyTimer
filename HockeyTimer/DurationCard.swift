@@ -47,8 +47,8 @@ class DurationCard: UIButton {
                 backgroundColor = UIColor(named: ColorName.DarkBlue)!
                 miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             case .ThirtyFive:
-                backgroundColor = UIColor(named: ColorName.VeryDarkBlue_Red)!
-                miniStopWatch.color = UIColor(named: ColorName.DarkGray_VeryDarkBlue)!
+                backgroundColor = UIColor(named: ColorName.PantoneRed)!
+                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
             }
             ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? "error"
             miniStopWatch.duration = duration
