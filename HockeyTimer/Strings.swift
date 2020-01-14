@@ -41,7 +41,7 @@ let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button f
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")
 
-let LS_TITLE_GAMETIME = NSLocalizedString("Set New Time", comment: "title for navigating")
+let LS_TITLE_GAMETIME = NSLocalizedString("Change Time", comment: "title for navigating")
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
@@ -101,8 +101,8 @@ let LS_COUNTRY_INTERNATIONAL = NSLocalizedString("International", comment: "Dura
 let LS_COUNTRY_IN2HOCKEY = NSLocalizedString("In2Hockey", comment: "Durationcard description")
 let LS_COUNTRY_MASTERS_MAMIS_PAPIS = NSLocalizedString("Master & M/P", comment: "Durationcard description")
 
-let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write review", comment: "Setting")
-let LS_SETTINGS_SHARE = NSLocalizedString("Share app", comment: "Setting")
+let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "Setting")
+let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
 let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
 
 let LS_REPORT_ERROR = NSLocalizedString("Report a broken link", comment: "Setting")

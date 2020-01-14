@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Customized: chooses which viewcontroller to show first
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.backgroundColor = UIColor(named: ColorName.VeryDarkBlue)!
+        self.window?.backgroundColor = .systemBackground
         var startViewController: UIViewController
         
         // For testing purposes to test onboarding

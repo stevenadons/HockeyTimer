@@ -18,7 +18,8 @@ class DocumentMenuVC: PanArrowVC {
     
     private var rulesList: RulesList!
     private var countryMenu: CountryMenu!
-    private var settingsMenu: DotMenu!
+//    private var settingsMenu: DotMenu!
+    private var settingsMenu: MainMenu!
     private var reportButton: UIButton!
     
     private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
@@ -109,11 +110,12 @@ class DocumentMenuVC: PanArrowVC {
                                   capitalsStrings: Country.allCapitals(),
                                   selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
         
-        settingsMenu = DotMenu(inView: view,
-                               condensedColor: .white,
-                               foldOutColor: UIColor(named: ColorName.OliveText)!,
-                               delegate: self,
-                               labelNames: [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT])
+        settingsMenu = MainMenu(inView: view, condensedColor: .white, foldOutColor: UIColor(named: ColorName.OliveText)!, delegate: self)
+//        settingsMenu = DotMenu(inView: view,
+//                               condensedColor: .white,
+//                               foldOutColor: UIColor(named: ColorName.OliveText)!,
+//                               delegate: self,
+//                               labelNames: [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT])
     }
     
     
@@ -294,6 +296,51 @@ extension DocumentMenuVC: DotMenuDelegate {
     }
 }
 
+extension DocumentMenuVC: MainMenuDelegate {
+    
+    func mainMenuMainButtonTapped() {
+        
+        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex < countryIndex {
+            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
+        }
+    }
+    
+    func mainMenuOtherButtonTapped(buttonNumber: Int) {
+        
+        switch buttonNumber {
+        case 0:
+            // Write review
+            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
+            components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
+            guard let writeReviewURL = components?.url else { return }
+            UIApplication.shared.open(writeReviewURL)
+            
+        case 1:
+            // Share app
+            // Conform to UIActivityItemSource for custom activityItems
+            let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+            present(activityViewController, animated: true, completion: nil)
+        
+        case 2:
+            // Send email
+            sendEmail()
+        
+        default:
+            print("default")
+        }
+    }
+    
+    func mainMenuDidShowButtons() {
+        
+        pageVC?.showBackgroundMask()
+        
+    }
+    
+    func mainMenuWillHideButtons() {
+        
+        pageVC?.hideBackgroundMask()
+    }
+}
 
 extension DocumentMenuVC: UIActivityItemSource {
     

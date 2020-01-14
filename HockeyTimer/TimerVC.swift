@@ -57,7 +57,7 @@ class TimerVC: PanArrowVC {
         
         resetButton = UIButton()
         resetButton.translatesAutoresizingMaskIntoConstraints = false
-        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
         let tintColor = UIColor(named: ColorName.OliveText)!
         let resetImage = UIImage(systemName: "arrow.2.circlepath", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
         resetButton.setImage(resetImage, for: .normal)
@@ -84,6 +84,8 @@ class TimerVC: PanArrowVC {
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)
+        panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+        panArrowDownLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
         liftPanArrowDownLabelUp()
         
         let resetButtonWidth: CGFloat = 44

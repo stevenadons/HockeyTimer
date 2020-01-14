@@ -34,7 +34,8 @@ enum ColorName {
     static let LightYellow = "LightYellow"
     static let LightBlue = "LightBlue"
     
+    static let StopWatchCore = "StopWatchCore"
     static let StopWatchIcon = "StopWatchIcon"
-    static let ProgressZone = "ProgressZone"
+    static let StopWatchProgressZone = "StopWatchProgressZone"
 
 }

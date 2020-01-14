@@ -57,7 +57,7 @@ class StopWatch: UIControl {
     fileprivate var haptic: UINotificationFeedbackGenerator?
     fileprivate var impactHaptic: UIImpactFeedbackGenerator?
     
-    private let progressBarWidth: CGFloat = 22
+    private let progressBarWidth: CGFloat = 20
     private let progressBarStrokeInsetRatio: CGFloat = 0.01
     
     private var squareSide: CGFloat {
@@ -109,11 +109,11 @@ class StopWatch: UIControl {
         
         progressZone = CAShapeLayer()
         progressZone.strokeColor = UIColor.clear.cgColor
-        progressZone.fillColor = UIColor(named: ColorName.ProgressZone)!.cgColor
+        progressZone.fillColor = UIColor(named: ColorName.StopWatchProgressZone)!.cgColor
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = UIColor.systemBackground.cgColor
+        core.backgroundColor = UIColor(named: ColorName.StopWatchCore)!.cgColor
         squareContainer.addSublayer(core)
         
         progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
@@ -193,8 +193,8 @@ class StopWatch: UIControl {
         
         updateLabels()
         
-        core.backgroundColor = UIColor.systemBackground.cgColor
-        progressZone.fillColor = UIColor(named: ColorName.ProgressZone)!.cgColor
+        core.backgroundColor = UIColor(named: ColorName.StopWatchCore)!.cgColor
+        progressZone.fillColor = UIColor(named: ColorName.StopWatchProgressZone)!.cgColor
         
         [progressBarFirstHalf, progressBarSecondHalf, progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter].forEach {
             $0.strokeColor = progressBarColor.cgColor

@@ -45,6 +45,7 @@
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
 
 "Set New Time" = "Tijd instellen";
+"Change Time" = "Tijd instellen";
 "Rules" = "Spelregels";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
@@ -94,8 +95,8 @@
 "In2Hockey" = "In2Hockey";
 "Master & M/P" = "Master en M/P";
 
-"Write review" = "Schrijf recensie";
-"Share app" = "Delen";
+"Write a review" = "Schrijf een recensie";
+"Share the app" = "Deel de app";
 "Contact us" = "Contacteer ons";
 
 "Report a broken link" = "Meld een foute link";
