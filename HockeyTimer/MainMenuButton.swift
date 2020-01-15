@@ -13,31 +13,20 @@ class MainMenuButton: UIButton {
     
     // MARK: - Properties
     
-    var shapeColor: UIColor = .black {
-        didSet {
-            hamburger.shapeColor = shapeColor
-            hamburger.setNeedsDisplay()
-        }
-    }
-    var bgColor: UIColor = .clear {
-        didSet {
-            hamburger.bgColor = bgColor
-            hamburger.setNeedsDisplay()
-        }
-    }
+    private var hamburgerColor: UIColor = .black
     private var crossColor: UIColor = .white
     
-    private var hamburger: MainMenuButtonHamburgerLayer!
-    private var cross: MainMenuButtonCrossLayer!
+    private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+    private var showingCross: Bool = false
     
     
     
     // MARK: - Initializing
     
-    init(color: UIColor, crossColor: UIColor) {
+    convenience init(hamburgerColor: UIColor, crossColor: UIColor) {
         
-        self.init()
-        setColor(color, crossColor: crossColor)
+        self.init(frame: .zero)
+        setColor(hamburgerColor: hamburgerColor, crossColor: crossColor)
     }
     
     override init(frame: CGRect) {
@@ -54,84 +43,43 @@ class MainMenuButton: UIButton {
     
     private func setup() {
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = true
         
-        hamburger = MainMenuButtonHamburgerLayer()
-        layer.addSublayer(hamburger)
-        
-        cross = MainMenuButtonCrossLayer()
-        cross.opacity = 0.0
-        layer.addSublayer(cross)
-    }
-    
-    convenience init(shapeColor: UIColor, bgColor: UIColor) {
-        
-        self.init()
-        convenienceSet(shapeColor: shapeColor, bgColor: bgColor)
-    }
-    
-    private func convenienceSet(shapeColor: UIColor, bgColor: UIColor) {
-        
-        self.shapeColor = shapeColor
-        self.bgColor = bgColor
+        showHamburger()
     }
     
     
     
     // MARK: - Layout and draw methods
     
-    override func layoutSubviews() {
-        
-        super.layoutSubviews()
-        layer.cornerRadius = bounds.height / 2
-        hamburger.frame = bounds
-        cross.frame = bounds
-    }
+  
     
     
     // MARK: - User Methods
     
-    func invert() {
+    func showCross() {
         
-        CATransaction.setDisableActions(true)
-        hamburger.opacity = 0.0
-        CATransaction.setDisableActions(false)
-        
-        let deadline = DispatchTime.now() + 0.2
-        DispatchQueue.main.asyncAfter(deadline: deadline) {
-            let animationOpacity = CABasicAnimation(keyPath: "opacity")
-            animationOpacity.duration = 0.2
-            animationOpacity.fromValue = 0.0
-            animationOpacity.toValue = 1.0
-            self.cross.add(animationOpacity, forKey: "opacity")
-            self.cross.opacity = 1.0
-        }
+        let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(crossColor, renderingMode: .alwaysOriginal)
+        setImage(image, for: .normal)
+        showingCross = true
     }
     
-    func reset() {
+    func showHamburger() {
         
-        CATransaction.setDisableActions(true)
-        cross.opacity = 0.0
-        CATransaction.setDisableActions(false)
-        
-        let deadline = DispatchTime.now() + 0.05
-        DispatchQueue.main.asyncAfter(deadline: deadline) {
-            let animationOpacity = CABasicAnimation(keyPath: "opacity")
-            animationOpacity.duration = 0.2
-            animationOpacity.fromValue = 0.0
-            animationOpacity.toValue = 1.0
-            self.hamburger.add(animationOpacity, forKey: "opacity")
-            self.hamburger.opacity = 1.0
-        }
+        let image = UIImage(systemName: "line.horizontal.3", withConfiguration: configuration)?.withTintColor(hamburgerColor, renderingMode: .alwaysOriginal)
+        setImage(image, for: .normal)
+        showingCross = false
     }
     
-    func setColor(_ color: UIColor, crossColor: UIColor) {
+    func setColor(hamburgerColor: UIColor, crossColor: UIColor) {
         
-        self.shapeColor = color
+        self.hamburgerColor = hamburgerColor
         self.crossColor = crossColor
-        hamburger.setColor(color)
-        cross.setColor(crossColor)
+        if showingCross {
+            showCross()
+        } else {
+            showHamburger()
+        }
     }
-
 }

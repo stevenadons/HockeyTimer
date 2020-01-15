@@ -17,6 +17,7 @@ enum ColorName {
     static let OliveText = "OliveText"
     static let Olive_Black = "Olive_Black"
     static let White = "White"
+    static let White_LightYellow = "White_LightYellow"
     static let PantoneGreenLight = "PantoneGreenLight"
     static let PantoneYellow = "PantoneYellow"
     static let PantoneRed = "PantoneRed"
@@ -32,6 +33,7 @@ enum ColorName {
 
     static let LightRed = "LightRed"
     static let LightYellow = "LightYellow"
+    static let LightYellow_White = "LightYellow_White"
     static let LightBlue = "LightBlue"
     
     static let StopWatchCore = "StopWatchCore"

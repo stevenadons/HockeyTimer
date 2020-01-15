@@ -46,7 +46,7 @@ class TimerVC: PanArrowVC {
             overrideUserInterfaceStyle = .light
         }
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: ColorName.Olive_Black)!
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
@@ -58,7 +58,7 @@ class TimerVC: PanArrowVC {
         resetButton = UIButton()
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let tintColor = UIColor(named: ColorName.OliveText)!
+        let tintColor = UIColor.white
         let resetImage = UIImage(systemName: "arrow.2.circlepath", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
         resetButton.setImage(resetImage, for: .normal)
         resetButton.alpha = 0.0
@@ -79,13 +79,13 @@ class TimerVC: PanArrowVC {
         }
         view.addSubview(cardTimerPanel)
 
-        panArrowUp.color = UIColor(named: ColorName.LightYellow)!
-        panArrowDown.color = UIColor(named: ColorName.LightYellow)!
+        panArrowUp.color = UIColor(named: ColorName.White_LightYellow)!
+        panArrowDown.color = UIColor(named: ColorName.White_LightYellow)!
+        panArrowUpLabel.textColor = .white
+        panArrowDownLabel.textColor = .white
         panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
-        panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 20)
-        panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
-        panArrowDownLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+        panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()
         
         let resetButtonWidth: CGFloat = 44

@@ -64,7 +64,7 @@ class StopWatch: UIControl {
         return min(self.bounds.width, self.bounds.height)
     }
     
-    private let progressBarColor: UIColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+    private let progressBarColor: UIColor = .white // UIColor(named: ColorName.VeryDarkBlue_White)!
     
     
     

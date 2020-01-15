@@ -23,22 +23,24 @@ class MainMenu: UIView {
     // MARK: - Properties
     
     private weak var delegate: MainMenuDelegate?
-    private var labelNames: [String] = [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT]
+    private var labelNames: [String] = [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT, "Dark Mode", "Light Mode", "Privacy Policy"]
+    private let switchFlags: [Bool] = [false, false, false, true, true, false]
     private var condensedColor: UIColor = .white
     private var foldOutColor: UIColor = UIColor(named: ColorName.OliveText)!
    
     private var menu: MainMenuButton!
-    private var itemButtons: [UIButton]!
-    private var itemLabels: [MainMenuItemLabel]!
+    private var itemButtons: [UIButton] = []
+    private var itemLabels: [MainMenuItemLabel] = []
+    private var uiSwitches: [UISwitch] = []
     
     private var tap: UITapGestureRecognizer!
    
     private let buttonWidth: CGFloat = 44
     private let buttonHeight: CGFloat = 44
-    private let horInset: CGFloat = UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
+    private let horInset: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 25, big: 25) // UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
     private var topInset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 45, big: 45)
     private let labelHeight: CGFloat = 25
-    private let padding: CGFloat = 18
+    private let padding: CGFloat = 16
     private let labelInset: CGFloat = 18
     
     
@@ -58,24 +60,29 @@ class MainMenu: UIView {
         tap = UITapGestureRecognizer(target: self, action: #selector(hideButtons))
         addGestureRecognizer(tap)
         
-        menu = MainMenuButton(color: condensedColor, crossColor: foldOutColor)
+        menu = MainMenuButton(hamburgerColor: condensedColor, crossColor: foldOutColor)
         menu.addTarget(self, action: #selector(handleMenuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         menu.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
         menu.frame.origin = CGPoint(x: horInset, y: topInset)
         addSubview(menu)
+                
+        createItemButtons()
+        createLabelButtons()
+        createUISwitches()
         
-        itemButtons = []
+        windUp()
         
-        for index in 0..<labelNames.count {
+        containingView.addSubview(self)
+    }
+    
+    private func createItemButtons() {
+        
+        for index in 0 ..< labelNames.count {
             
             let button = UIButton()
             button.setImage(imageAtPosition(index), for: .normal)
             button.tag = index
             button.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-            button.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
-            let baseY = menu.frame.origin.y + menu.bounds.height + padding
-            let y = baseY + CGFloat(index) * (button.bounds.height + padding)
-            button.frame.origin = CGPoint(x: horInset, y: y)
             if index == 0 {
                 insertSubview(button, belowSubview: menu)
             } else {
@@ -83,21 +90,16 @@ class MainMenu: UIView {
             }
             itemButtons.append(button)
         }
+    }
+    
+    private func createLabelButtons() {
         
-        let labelWidth = UIScreen.main.bounds.width * 0.9 - buttonWidth - labelInset - horInset
-        let xLabel = horInset + buttonWidth + labelInset
-        
-        itemLabels = []
-        
-        for index in 0..<labelNames.count {
+        for index in 0 ..< labelNames.count {
             
             let labelButton = MainMenuItemLabel()
             labelButton.tag = index
             labelButton.addTarget(self, action: #selector(handleOtherButtonTapped(sender:forEvent:)), for: [.touchUpInside])
             labelButton.isUserInteractionEnabled = false
-            labelButton.frame = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
-            let y = itemButtons[index].frame.origin.y + (itemButtons[index].bounds.height - labelButton.bounds.height) / 2
-            labelButton.frame.origin = CGPoint(x: xLabel, y: y)
             if index == 0 {
                 insertSubview(labelButton, belowSubview: menu)
             } else {
@@ -105,32 +107,59 @@ class MainMenu: UIView {
             }
             itemLabels.append(labelButton)
         }
+    }
+    
+    private func createUISwitches() {
         
-        windUp()
-        
-        containingView.addSubview(self)
+        for index in 0 ..< labelNames.count {
+            
+            let uiSwitch = UISwitch()
+            uiSwitch.tag = index
+            uiSwitch.addTarget(self, action: #selector(handleSwitch(uiSwitch:)), for: [.valueChanged])
+            uiSwitch.tintColor = UIColor(named: ColorName.OliveText)!
+            uiSwitch.thumbTintColor = UIColor(named: ColorName.OliveText)!
+            uiSwitch.onTintColor = UIColor(named: ColorName.LightYellow)!
+            uiSwitch.isUserInteractionEnabled = false
+            if index == 0 {
+                insertSubview(uiSwitch, belowSubview: menu)
+            } else {
+                insertSubview(uiSwitch, belowSubview: uiSwitches[index - 1])
+            }
+            uiSwitches.append(uiSwitch)
+        }
     }
     
     private func windUp() {
         
         for index in 0..<itemButtons.count {
-            let y = -CGFloat(index + 1) * (padding + itemButtons[0].bounds.height)
-            itemButtons[index].transform = CGAffineTransform(translationX: 0, y: y)
+            
+            let yItemButton = -CGFloat(index + 1) * (padding + itemButtons[0].bounds.height)
+            itemButtons[index].transform = CGAffineTransform(translationX: 0, y: yItemButton)
             itemButtons[index].alpha = 0.0
+
+            uiSwitches[index].alpha = 0.0
         }
     }
     
     private func imageAtPosition(_ int: Int) -> UIImage {
         
-        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        var systemName: String
         switch int {
         case 0:
-            return (UIImage(systemName: "square.and.pencil", withConfiguration: configuration)?.withTintColor(foldOutColor, renderingMode: .alwaysOriginal))!
+            systemName = "square.and.pencil"
         case 1:
-            return (UIImage(systemName: "square.and.arrow.up", withConfiguration: configuration)?.withTintColor(foldOutColor, renderingMode: .alwaysOriginal))!
+            systemName = "square.and.arrow.up"
+        case 2:
+            systemName = "envelope"
+        case 3:
+            systemName = "aspectratio.fill"
+        case 4:
+            systemName = "aspectratio"
         default:
-            return (UIImage(systemName: "envelope", withConfiguration: configuration)?.withTintColor(foldOutColor, renderingMode: .alwaysOriginal))!
+            systemName = "checkmark.shield"
         }
+        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        return (UIImage(systemName: systemName, withConfiguration: configuration)?.withTintColor(foldOutColor, renderingMode: .alwaysOriginal))!
     }
     
     
@@ -153,7 +182,7 @@ class MainMenu: UIView {
     
     private func showButtons(animated: Bool = true) {
         
-        menu.invert()
+        menu.showCross()
         
         if animated {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
@@ -164,9 +193,16 @@ class MainMenu: UIView {
                 }
                 
             }, completion: {(finished) in
-                for index in 0..<self.itemLabels.count {
+                for index in 0 ..< self.itemLabels.count {
+                    
                     self.itemLabels[index].grow(text: self.labelNames[index], duration: 0.1)
                     self.itemLabels[index].isUserInteractionEnabled = true
+                    
+                    UIView.animate(withDuration: 0.2, delay: 0.2, options: .curveEaseIn, animations: {
+                        self.uiSwitches[index].alpha = self.switchFlags[index] ? 1.0 : 0.0
+                    }) { (finished) in
+                        self.uiSwitches[index].isUserInteractionEnabled = self.switchFlags[index]
+                    }
                 }
             })
             
@@ -179,11 +215,11 @@ class MainMenu: UIView {
             for index in 0..<self.itemLabels.count {
                 self.itemLabels[index].grow(text: self.labelNames[index], duration: 0.1)
                 self.itemLabels[index].isUserInteractionEnabled = true
+                self.uiSwitches[index].alpha = self.switchFlags[index] ? 1.0 : 0.0
+                self.uiSwitches[index].isUserInteractionEnabled = self.switchFlags[index]
             }
         }
-        
         delegate?.mainMenuDidShowButtons()
-        
     }
     
     
@@ -193,14 +229,51 @@ class MainMenu: UIView {
         
         super.layoutSubviews()
         
-        menu.setColor(condensedColor, crossColor: foldOutColor)
-        for index in 0..<itemButtons.count {
+        for index in 0 ..< itemButtons.count {
+            
             let image = imageAtPosition(index)
             itemButtons[index].setImage(image, for: .normal)
+            
+            uiSwitches[index].tintColor = UIColor(named: ColorName.OliveText)!
+            uiSwitches[index].thumbTintColor = UIColor(named: ColorName.OliveText)!
+            uiSwitches[index].onTintColor = UIColor(named: ColorName.LightYellow)!
+        }
+        
+        menu.setColor(hamburgerColor: condensedColor, crossColor: foldOutColor)
+        positionElements()
+    }
+    
+    private func positionElements() {
+        
+        let uiSwitchWidth: CGFloat = 80
+        let labelWidth = bounds.width - horInset - buttonWidth - labelInset - labelInset / 2 - uiSwitchWidth - horInset
+        let xLabel = horInset + buttonWidth + labelInset
+        let xUISwitch = horInset + buttonWidth + labelInset + labelWidth + labelInset / 2
+
+        for index in 0 ..< labelNames.count {
+            
+            let button = itemButtons[index]
+            let yButton = menu.frame.origin.y + menu.bounds.height + padding + CGFloat(index) * (button.bounds.height + padding)
+            button.frame = CGRect(x: horInset, y: yButton, width: buttonWidth, height: buttonHeight)
+            
+            let label = itemLabels[index]
+            let yLabel = button.frame.origin.y + (button.bounds.height - label.bounds.height) / 2
+            label.frame = CGRect(x: xLabel, y: yLabel, width: labelWidth, height: labelHeight)
+            
+            let uiSwitch = uiSwitches[index]
+            let yUISwitch = button.frame.origin.y + (button.bounds.height - uiSwitch.bounds.height) / 2
+            uiSwitch.frame = CGRect(x: xUISwitch, y: yUISwitch, width: uiSwitchWidth, height: 60)
         }
     }
-
     
+    
+    // MARK: - Touch
+    
+    @objc private func handleSwitch(uiSwitch: UISwitch) {
+        
+        print("switch")
+    }
+
     
     // MARK: - Public Methods
 
@@ -214,26 +287,44 @@ class MainMenu: UIView {
             $0.title = ""
             $0.isUserInteractionEnabled = false
         }
+        uiSwitches.forEach {
+            $0.alpha = 0.0
+            $0.isUserInteractionEnabled = false
+        }
         
         if animated {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.0, options: [], animations: {
                 self.backgroundColor = .clear
-                self.menu.reset()
-                for index in 0..<self.itemButtons.count {
-                    let y = -CGFloat(index + 1) * (self.padding + self.itemButtons[0].bounds.height)
-                    self.itemButtons[index].transform = CGAffineTransform(translationX: 0, y: y)
+                self.menu.showHamburger()
+                for index in 0 ..< self.itemButtons.count {
+                    
+                    let yItemButton = -CGFloat(index + 1) * (self.padding + self.itemButtons[0].bounds.height)
+                    self.itemButtons[index].transform = CGAffineTransform(translationX: 0, y: yItemButton)
                     self.itemButtons[index].alpha = 0.0
+                    
+                    let yUISwitch = -CGFloat(index + 1) * (self.padding + self.uiSwitches[0].bounds.height)
+                    self.uiSwitches[index].transform = CGAffineTransform(translationX: 0, y: yUISwitch)
+                    self.uiSwitches[index].alpha = 0.0
+                    self.uiSwitches[index].isUserInteractionEnabled = false
                 }
             }, completion: nil)
             
         } else {
+            
             backgroundColor = .clear
             for index in 0..<self.itemButtons.count {
-                let y = -CGFloat(index + 1) * (self.padding + self.itemButtons[0].bounds.height)
-                itemButtons[index].transform = CGAffineTransform(translationX: 0, y: y)
+                
+                let yItemButton = -CGFloat(index + 1) * (padding + itemButtons[0].bounds.height)
+                itemButtons[index].transform = CGAffineTransform(translationX: 0, y: yItemButton)
                 itemButtons[index].alpha = 0.0
+                
+                let yUISwitch = -CGFloat(index + 1) * (padding + uiSwitches[0].bounds.height)
+                uiSwitches[index].transform = CGAffineTransform(translationX: 0, y: yUISwitch)
+                uiSwitches[index].alpha = 0.0
+                uiSwitches[index].isUserInteractionEnabled = false
+                
             }
-            menu.reset()
+            menu.showHamburger()
         }
         
     }

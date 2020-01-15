@@ -61,7 +61,7 @@ class DocumentMenuVC: PanArrowVC {
         view.addSubview(rulesList)
         view.sendSubviewToBack(rulesList)
         
-        panArrowUp.color = UIColor.white
+        panArrowUp.color = .white
         panArrowDown.alpha = 0.0
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
@@ -249,52 +249,6 @@ extension DocumentMenuVC: CountryMenuDelegate {
     }
 }
 
-
-extension DocumentMenuVC: DotMenuDelegate {
-    
-    func handleDotMenuMainButtonTapped() {
-        
-        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex < countryIndex {
-            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
-        }
-    }
-    
-    func handleDotMenuOtherButtonTapped(buttonNumber: Int) {
-        
-        switch buttonNumber {
-        case 0:
-            // Write review
-            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
-            components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
-            guard let writeReviewURL = components?.url else { return }
-            UIApplication.shared.open(writeReviewURL)
-            
-        case 1:
-            // Share app
-            // Conform to UIActivityItemSource for custom activityItems
-            let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
-            present(activityViewController, animated: true, completion: nil)
-        
-        case 2:
-            // Send email
-            sendEmail()
-        
-        default:
-            print("default")
-        }
-    }
-    
-    func dotMenuDidShowButtons() {
-        
-        pageVC?.showBackgroundMask()
-        
-    }
-    
-    func dotMenuWillHideButtons() {
-        
-        pageVC?.hideBackgroundMask()
-    }
-}
 
 extension DocumentMenuVC: MainMenuDelegate {
     
