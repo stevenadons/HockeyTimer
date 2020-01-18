@@ -60,7 +60,7 @@ class SimpleAlertVC: UIViewController {
         }
         
         modalPresentationStyle = .overCurrentContext
-        modalTransitionStyle = .crossDissolve
+        modalTransitionStyle = .coverVertical
         
         setupUI()
         addConstraints()
@@ -73,7 +73,7 @@ class SimpleAlertVC: UIViewController {
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText ?? ""
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = UIColor.label
         titleLabel.textAlignment = .center

@@ -18,6 +18,8 @@ class Store: NSObject  {
     
     // MARK: - Properties
     
+    private (set) var appStoreCountry: String?
+    
     private let productIdentifiers: Set<ProductIdentifier>
     private var purchasedProductIdentifiers: Set<ProductIdentifier> = []
     private var request: SKProductsRequest?
@@ -104,6 +106,13 @@ extension Store: SKProductsRequestDelegate {
         
         for p in products {
             print("Found product: \(p.productIdentifier) \(p.localizedTitle) \(p.price.floatValue)")
+        }
+        
+        // Set appStoreCountry
+        guard !products.isEmpty else { return }
+        let appStoreLocale = products[0].priceLocale
+        if let regionCode = appStoreLocale.regionCode {
+            appStoreCountry = (appStoreLocale as NSLocale).displayName(forKey: .countryCode, value: regionCode)
         }
     }
     

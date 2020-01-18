@@ -15,7 +15,7 @@ class TimerVC: PanArrowVC {
     
     // MARK: - Properties
     
-    private var resetButton: UIButton!
+    private var resetButton: TopButton!
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
     private var cardTimerPanel: CardTimerPanel!
@@ -55,12 +55,7 @@ class TimerVC: PanArrowVC {
     
     private func setupViews() {
         
-        resetButton = UIButton()
-        resetButton.translatesAutoresizingMaskIntoConstraints = false
-        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let tintColor = UIColor.white
-        let resetImage = UIImage(systemName: "arrow.2.circlepath", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
-        resetButton.setImage(resetImage, for: .normal)
+        resetButton = TopButton(imageName: "arrow.2.circlepath", tintColor: .white)
         resetButton.alpha = 0.0
         resetButton.addTarget(self, action: #selector(resetButtonTapped(sender:forEvent:)), for: [.touchUpInside])
         view.addSubview(resetButton)
@@ -88,15 +83,13 @@ class TimerVC: PanArrowVC {
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()
         
-        let resetButtonWidth: CGFloat = 44
-        let resetButtonHeight: CGFloat = 44
         let resetButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
         let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 8, normal: 22, big: 22)
         
         NSLayoutConstraint.activate([
             
-            resetButton.widthAnchor.constraint(equalToConstant: resetButtonWidth),
-            resetButton.heightAnchor.constraint(equalToConstant: resetButtonHeight),
+            resetButton.widthAnchor.constraint(equalToConstant: resetButton.standardWidth),
+            resetButton.heightAnchor.constraint(equalToConstant: resetButton.standardHeight),
             resetButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: resetButtonTopInset),
             resetButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -resetButtonHorInset),
 

@@ -57,9 +57,8 @@ class AddCardTimerVC: UIViewController {
         if !FeatureFlags.darkModeCanBeEnabled {
             overrideUserInterfaceStyle = .light
         }
-        
         modalPresentationStyle = .overCurrentContext
-        modalTransitionStyle = .crossDissolve
+        modalTransitionStyle = .coverVertical
         
         setupUI()
         addConstraints()
@@ -75,12 +74,12 @@ class AddCardTimerVC: UIViewController {
     
     private func setupUI() {
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = UIColor(named: ColorName.DarkBlueText)!
         titleLabel.textAlignment = .center

@@ -19,15 +19,15 @@
 		4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */; };
 		4F3F397B22B9673000BC0141 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F397A22B9673000BC0141 /* UpdateManager.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
+		4F492EAF23D3096700980818 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F492EAE23D3096700980818 /* MenuVC.swift */; };
+		4F492EB123D363F100980818 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F492EB023D363F100980818 /* UIButton.swift */; };
+		4F492EB323D3653100980818 /* TopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F492EB223D3653100980818 /* TopButton.swift */; };
 		4F4D5E5322F3524E00701504 /* StopWatchTimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D5E5222F3524E00701504 /* StopWatchTimerState.swift */; };
 		4F4D5E5522F3554D00701504 /* HockeyGameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */; };
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F7C876322B2CDC300828B8A /* CountryLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C876222B2CDC300828B8A /* CountryLabelButton.swift */; };
-		4F82FB8F23CE6CD100624687 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82FB8E23CE6CD100624687 /* MainMenu.swift */; };
-		4F82FB9123CE6D5000624687 /* MainMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82FB9023CE6D5000624687 /* MainMenuButton.swift */; };
-		4F82FB9B23CE6F4300624687 /* MainMenuItemLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82FB9A23CE6F4300624687 /* MainMenuItemLabel.swift */; };
 		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
 		4F8470CB22AEA12200D71989 /* CountryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470CA22AEA12200D71989 /* CountryMenu.swift */; };
 		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
@@ -132,15 +132,15 @@
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4F3F62711F64745A00D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4F492EAE23D3096700980818 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		4F492EB023D363F100980818 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		4F492EB223D3653100980818 /* TopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButton.swift; sourceTree = "<group>"; };
 		4F4D5E5222F3524E00701504 /* StopWatchTimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchTimerState.swift; sourceTree = "<group>"; };
 		4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyGameStatus.swift; sourceTree = "<group>"; };
 		4F6342A322916E0A002F49B4 /* NotificationNameX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameX.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F7C876222B2CDC300828B8A /* CountryLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryLabelButton.swift; sourceTree = "<group>"; };
-		4F82FB8E23CE6CD100624687 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		4F82FB9023CE6D5000624687 /* MainMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuButton.swift; sourceTree = "<group>"; };
-		4F82FB9A23CE6F4300624687 /* MainMenuItemLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuItemLabel.swift; sourceTree = "<group>"; };
 		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		4F8470CA22AEA12200D71989 /* CountryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryMenu.swift; sourceTree = "<group>"; };
 		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
@@ -284,16 +284,6 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		4F82FB8D23CE6CC000624687 /* MainMenu */ = {
-			isa = PBXGroup;
-			children = (
-				4F82FB8E23CE6CD100624687 /* MainMenu.swift */,
-				4F82FB9023CE6D5000624687 /* MainMenuButton.swift */,
-				4F82FB9A23CE6F4300624687 /* MainMenuItemLabel.swift */,
-			);
-			name = MainMenu;
-			sourceTree = "<group>";
-		};
 		4F8470C922AEA0EA00D71989 /* CountryMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +407,7 @@
 				4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */,
 				4F93F58623C9DA8500C93561 /* AddCardTimerVC.swift */,
 				4F3A11D822F89FE600E643CB /* TestingVC.swift */,
+				4F492EAE23D3096700980818 /* MenuVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -425,9 +416,9 @@
 			isa = PBXGroup;
 			children = (
 				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
+				4F492EB223D3653100980818 /* TopButton.swift */,
 				4F29B287239D7E0E002115B7 /* GameTimePickers */,
 				4F8470C922AEA0EA00D71989 /* CountryMenu */,
-				4F82FB8D23CE6CC000624687 /* MainMenu */,
 				4F780A8B1FD0906D00DB1021 /* Phone */,
 				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
@@ -557,6 +548,7 @@
 				4FB4BEB91F515EEA003B1259 /* Color.swift */,
 				4F6342A322916E0A002F49B4 /* NotificationNameX.swift */,
 				4F37FBF122AD3FD200D2E236 /* UIDevice.swift */,
+				4F492EB023D363F100980818 /* UIButton.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -786,20 +778,20 @@
 				4F8AFCE92291C84E00D975A1 /* SimpleAlertVC.swift in Sources */,
 				4FB4BE9C1F515CEC003B1259 /* NewGameButtonLayer.swift in Sources */,
 				4F29B289239D7F20002115B7 /* GameTimePickers.swift in Sources */,
-				4F82FB9123CE6D5000624687 /* MainMenuButton.swift in Sources */,
 				4FB4BE921F515C49003B1259 /* Ball.swift in Sources */,
 				4F93F59523CA394200C93561 /* UserDefaultsKey.swift in Sources */,
+				4F492EB123D363F100980818 /* UIButton.swift in Sources */,
 				4F8D08BA23243A8A0062A58F /* LocalDataManager.swift in Sources */,
 				4F93F58023C9DA5100C93561 /* CardView.swift in Sources */,
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
+				4F492EB323D3653100980818 /* TopButton.swift in Sources */,
 				4F93F57B23C9DA3100C93561 /* CardTimerPanel.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */,
 				4F93F59323CA38F400C93561 /* FeatureFlags.swift in Sources */,
 				4FD3722A22A6EC1D00A45757 /* Rules.swift in Sources */,
 				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
-				4F82FB8F23CE6CD100624687 /* MainMenu.swift in Sources */,
 				4F29B28B239D8114002115B7 /* LeftPickerDataSource.swift in Sources */,
 				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
 				4F93F58A23C9DA8F00C93561 /* CardType.swift in Sources */,
@@ -812,6 +804,7 @@
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
+				4F492EAF23D3096700980818 /* MenuVC.swift in Sources */,
 				4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
 				4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */,
@@ -871,7 +864,6 @@
 				4F4D5E5522F3554D00701504 /* HockeyGameStatus.swift in Sources */,
 				4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */,
 				4F3A11D922F89FE600E643CB /* TestingVC.swift in Sources */,
-				4F82FB9B23CE6F4300624687 /* MainMenuItemLabel.swift in Sources */,
 				4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */,
 				4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */,
 				4FD3722822A6D61000A45757 /* Country.swift in Sources */,

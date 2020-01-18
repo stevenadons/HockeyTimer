@@ -43,7 +43,7 @@ class MinutesView: UIButton {
         
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = .systemBackground
         layer.borderColor = highlightColor.cgColor
 
         timeLabel = UILabel()

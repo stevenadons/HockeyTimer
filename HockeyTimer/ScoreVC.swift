@@ -70,6 +70,8 @@ class ScoreVC: PanArrowVC {
     
     private func setupViews() {
         
+        menuButton.setColor(UIColor(named: ColorName.OliveText)!)
+        
         pitchContainer = ContainerView()
         view.addSubview(pitchContainer)
         pitch = Pitch(delegate: self)

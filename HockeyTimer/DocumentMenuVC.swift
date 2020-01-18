@@ -18,8 +18,6 @@ class DocumentMenuVC: PanArrowVC {
     
     private var rulesList: RulesList!
     private var countryMenu: CountryMenu!
-//    private var settingsMenu: DotMenu!
-    private var settingsMenu: MainMenu!
     private var reportButton: UIButton!
     
     private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
@@ -109,13 +107,6 @@ class DocumentMenuVC: PanArrowVC {
                                   labelNames: Country.allNames(),
                                   capitalsStrings: Country.allCapitals(),
                                   selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
-        
-        settingsMenu = MainMenu(inView: view, condensedColor: .white, foldOutColor: UIColor(named: ColorName.OliveText)!, delegate: self)
-//        settingsMenu = DotMenu(inView: view,
-//                               condensedColor: .white,
-//                               foldOutColor: UIColor(named: ColorName.OliveText)!,
-//                               delegate: self,
-//                               labelNames: [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT])
     }
     
     
@@ -125,7 +116,6 @@ class DocumentMenuVC: PanArrowVC {
     func hideMenus() {
         
         countryMenu.hideButtons(animated: false)
-        settingsMenu.hideButtons(animated: false)
     }
     
     func animateFlyIn() {
@@ -138,66 +128,68 @@ class DocumentMenuVC: PanArrowVC {
     
     @objc private func reportButtonTapped() {
         
-        sendEmail()
-    }
-
-    
-    
-}
-
-
-extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
-    
-    func sendEmail() {
-        
         if MFMailComposeViewController.canSendMail() {
-            let body = emailBody()
+            let body = emailBody(withAddedString: emailString())
             presentEmail(body: body)
-
+            
         } else {
             showEmailAlert()
         }
     }
     
-    private func emailBody() -> String {
+    
+    // MARK: - Private Methods
+    
+    private func emailBody(withAddedString added: String) -> String {
         
-        let sentence = "<p>" + LS_EMAIL_SENTENCE + "</p><br><br><br><br><hr>"
-        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0"
-        let version = LS_EMAIL_VERSION + appVersion
-        let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
-        let build = " - " + LS_EMAIL_BUILD + buildNumber
-        let premiumSuffix = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) ? "P" : ""
-        let country = " - " + SELECTED_COUNTRY.capitals
-        let iOS = " - " + LS_EMAIL_IOS + UIDevice.current.systemVersion
-        let dataStatus = "<br>" + CountryDataManager.shared.statusString()
+        var body = "<p>" + "We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users." + "</p><br><br><br><br>"
+        body += added
+        return body
+    }
+    
+    private func emailString() -> String {
         
-        return sentence + version + build + premiumSuffix + country + iOS + dataStatus
+        var result = "<hr>"
+        
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "*.*"
+        let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "*"
+        let premium = ""
+        #warning("add next line")
+            // UserDefaults.standard.bool(forKey: UserDefaultKey.PremiumMode) ? "P" : ""
+        result += "Version " + appVersion + premium + " - Build " + buildNumber
+        
+        let iosVersion = UIDevice.current.systemVersion
+        let add = result.count > 4 ? " - iOS " + iosVersion : "iOS " + iosVersion
+        result += add
+        
+        let country = Products.store.appStoreCountry ?? "Unknown country"
+        result += result.count > 4 ? " - Country " + country : "Country " + country
+        
+        return result
     }
     
     private func presentEmail(body: String) {
-        
+
         let mail = MFMailComposeViewController()
+        
         mail.mailComposeDelegate = self
         mail.setToRecipients(["tocommit.appbuilders@gmail.com"])
         mail.setSubject(LS_EMAIL_SUBJECT)
         mail.setMessageBody(body, isHTML: true)
-        
+
         present(mail, animated: true)
     }
-    
+
     private func showEmailAlert() {
-        
+
         let alert = UIAlertController(title: LS_EMAIL_EMAILERROR_TITLE, message: LS_EMAIL_EMAILERROR_TEXT, preferredStyle: .alert)
         let ok = UIAlertAction(title: LS_BUYPREMIUM_OK, style: .default, handler: nil)
         alert.addAction(ok)
-        
+
         present(alert, animated: true, completion: nil)
     }
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        
-        controller.dismiss(animated: true)
-    }
+
+
 }
 
 
@@ -223,9 +215,9 @@ extension DocumentMenuVC: CountryMenuDelegate {
     
     func handleCountryMenuMainButtonTapped() {
         
-        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex > countryIndex {
-            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
-        }
+//        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex > countryIndex {
+//            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
+//        }
         
     }
     
@@ -250,81 +242,15 @@ extension DocumentMenuVC: CountryMenuDelegate {
 }
 
 
-extension DocumentMenuVC: MainMenuDelegate {
+// MARK: - MFMailComposeViewControllerDelegate
+
+extension DocumentMenuVC: MFMailComposeViewControllerDelegate {
     
-    func mainMenuMainButtonTapped() {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
-        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex < countryIndex {
-            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
-        }
-    }
-    
-    func mainMenuOtherButtonTapped(buttonNumber: Int) {
-        
-        switch buttonNumber {
-        case 0:
-            // Write review
-            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
-            components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
-            guard let writeReviewURL = components?.url else { return }
-            UIApplication.shared.open(writeReviewURL)
-            
-        case 1:
-            // Share app
-            // Conform to UIActivityItemSource for custom activityItems
-            let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
-            present(activityViewController, animated: true, completion: nil)
-        
-        case 2:
-            // Send email
-            sendEmail()
-        
-        default:
-            print("default")
-        }
-    }
-    
-    func mainMenuDidShowButtons() {
-        
-        pageVC?.showBackgroundMask()
-        
-    }
-    
-    func mainMenuWillHideButtons() {
-        
-        pageVC?.hideBackgroundMask()
+        controller.dismiss(animated: true)
     }
 }
 
-extension DocumentMenuVC: UIActivityItemSource {
-    
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        
-        return productURL
 
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        
-        if activityType == .postToTwitter {
-            return "Download #HockeyUpp on the App Store"
-        }
-        return productURL
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-        
-        return "HockeyUpp - Your field hockey companion"
-    }
-    
-    @available(iOS 13.0, *)
-    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-        
-        let metadata = LPLinkMetadata()
-        metadata.originalURL = productURL
-        metadata.url = metadata.originalURL
-        metadata.title = "Share HockeyUpp"
-        metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-Spotlight-40@3x", withExtension: "png"))
-        return metadata
-    }
-}
+

@@ -109,6 +109,8 @@ class DurationVC: PanArrowVC {
     
     private func setupViews() {
         
+        menuButton.setColor(UIColor(named: ColorName.OliveText)!)
+        
         cancelView = UIButton()
         cancelView.addTarget(self, action: #selector(cancelViewTapped(sender:forEvent:)), for: [.touchUpInside])
         cancelView.translatesAutoresizingMaskIntoConstraints = false

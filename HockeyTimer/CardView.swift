@@ -41,7 +41,7 @@ class CardView: UIButton {
         
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = .systemBackground
         layer.cornerRadius = 8
         layer.borderColor = card.color().cgColor
 

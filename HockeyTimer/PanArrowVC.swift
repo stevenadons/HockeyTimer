@@ -17,6 +17,7 @@ class PanArrowVC: UIViewController {
     var panArrowDown: PanArrow!
     var panArrowUpLabel: UILabel!
     var panArrowDownLabel: UILabel!
+    var menuButton: TopButton!
     
     private var panArrowDownLabelPadding: CGFloat = 2
     
@@ -68,6 +69,10 @@ class PanArrowVC: UIViewController {
         
         panArrowDown.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
         panArrowDownLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(downTapped(sender:))))
+        
+        menuButton = TopButton(imageName: "line.horizontal.3", tintColor: .white)
+        menuButton.addTarget(self, action: #selector(menuButtonTapped(sender:forEvent:)), for: [.touchUpInside])
+        view.addSubview(menuButton)
     }
     
     
@@ -77,6 +82,9 @@ class PanArrowVC: UIViewController {
         
         let arrowPaddingTop: CGFloat = 16
         let arrowPaddingBottom: CGFloat = 18
+        
+        let menuButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
+        let menuButtonBottomInset: CGFloat = UIDevice.whenDeviceIs(small: 8, normal: 22, big: 22)
         
         NSLayoutConstraint.activate([
             
@@ -100,6 +108,11 @@ class PanArrowVC: UIViewController {
             panArrowDownLabel.bottomAnchor.constraint(equalTo: panArrowDown.topAnchor, constant: -panArrowDownLabelPadding),
             panArrowDownLabel.heightAnchor.constraint(equalToConstant: 20),
             
+            menuButton.widthAnchor.constraint(equalToConstant: menuButton.standardWidth),
+            menuButton.heightAnchor.constraint(equalToConstant: menuButton.standardHeight),
+            menuButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -menuButtonBottomInset),
+            menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -menuButtonHorInset),
+            
             ])
     }
     
@@ -120,6 +133,11 @@ class PanArrowVC: UIViewController {
         pageVC.setViewControllers([downVC], direction: .forward, animated: true, completion: nil)
     }
     
+    @objc private func menuButtonTapped(sender: TopButton, forEvent event: UIEvent) {
+        
+        let vc = MenuVC(titleText: "Settings")
+        present(vc, animated: true, completion: nil)
+    }
     
     // MARK: - Public Methods
     

@@ -101,9 +101,23 @@ let LS_COUNTRY_INTERNATIONAL = NSLocalizedString("International", comment: "Dura
 let LS_COUNTRY_IN2HOCKEY = NSLocalizedString("In2Hockey", comment: "Durationcard description")
 let LS_COUNTRY_MASTERS_MAMIS_PAPIS = NSLocalizedString("Master & M/P", comment: "Durationcard description")
 
+#warning("to delete")
 let LS_SETTINGS_WRITE_A_REVIEW = NSLocalizedString("Write a review", comment: "Setting")
 let LS_SETTINGS_SHARE = NSLocalizedString("Share the app", comment: "Setting")
 let LS_SETTINGS_CONTACT = NSLocalizedString("Contact us", comment: "Setting")
+
+let LS_MENU_SHARE = NSLocalizedString("Share", comment: "Menu")
+let LS_MENU_SHARE_THE_APP = NSLocalizedString("Share the app", comment: "Menu")
+let LS_MENU_CONTACT_US = NSLocalizedString("Contact us", comment: "Menu")
+let LS_MENU_WRITE_AN_EMAIL = NSLocalizedString("Send us an email", comment: "Menu")
+let LS_MENU_REVIEW = NSLocalizedString("Review", comment: "Menu")
+let LS_MENU_WRITE_A_REVIEW = NSLocalizedString("Write a review in the App Store", comment: "Menu")
+let LS_MENU_DARK_MODE = NSLocalizedString("Dark mode", comment: "Menu")
+let LS_MENU_DISPLAY_DARK_MODE = NSLocalizedString("Display the app in dark mode", comment: "Menu")
+let LS_MENU_LIGHT_MODE = NSLocalizedString("Light mode", comment: "Menu")
+let LS_MENU_DISPLAY_LIGHT_MODE = NSLocalizedString("Display the app in light mode", comment: "Menu")
+let LS_MENU_PRIVACY_POLICY = NSLocalizedString("Privacy policy", comment: "Menu")
+let LS_MENU_LINK_TO_WEBSITE = NSLocalizedString("Link to website", comment: "Menu")
 
 let LS_REPORT_ERROR = NSLocalizedString("Report a broken link", comment: "Setting")
 
