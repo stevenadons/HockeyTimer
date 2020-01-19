@@ -62,17 +62,15 @@ class OnboardingVC: UIViewController {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pageControl)
         
-        dismissButton = UIButton()
+        dismissButton = ConfirmationButton.blueButton(largeFont: true)
+        dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
         dismissButton.addTarget(self, action: #selector(handleDismiss(sender:)), for: [.touchUpInside])
         dismissButton.alpha = 0.0
-        dismissButton.backgroundColor = .clear
-        dismissButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBlack, size: 17)
-        dismissButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
-        dismissButton.setTitle(LS_BUTTON_ONBOARDDISMISS, for: .normal)
-        dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
         
-        let dismissButtonConstant = UIDevice.whenDeviceIs(small: 10, normal: 40, big: 60)
+        let dismissButtonConstant = UIDevice.whenDeviceIs(small: 10, normal: 18, big: 18)
+        let buttonHeight: CGFloat = 54
+        let horInset: CGFloat = 35
         
         NSLayoutConstraint.activate([
             
@@ -81,9 +79,9 @@ class OnboardingVC: UIViewController {
             pageControl.heightAnchor.constraint(equalToConstant: 35),
             pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             
-            dismissButton.widthAnchor.constraint(equalToConstant: 130),
-            dismissButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dismissButton.heightAnchor.constraint(equalToConstant: 35),
+            dismissButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
+            dismissButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
+            dismissButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             dismissButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -dismissButtonConstant),
             
             ])
@@ -138,6 +136,9 @@ class OnboardingVC: UIViewController {
         setPhoneViewFrame()
         view.bringSubviewToFront(pageControl)
         view.bringSubviewToFront(dismissButton)
+        
+        pageControl.pageIndicatorTintColor = UIColor(named: ColorName.DarkBlueText)!
+        pageControl.currentPageIndicatorTintColor = UIColor(named: ColorName.LightYellow)!
         
         stopWatch.setNeedsLayout()
     }

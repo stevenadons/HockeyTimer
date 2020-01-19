@@ -22,6 +22,7 @@ enum ColorName {
     static let PantoneYellow = "PantoneYellow"
     static let PantoneRed = "PantoneRed"
     static let PantoneRed_Label = "PantoneRed_Label"
+    static let PantoneRed_LightYellow = "PantoneRed_LightYellow"
 
     static let DarkRed = "DarkRed"
     static let DarkBlue = "DarkBlue"

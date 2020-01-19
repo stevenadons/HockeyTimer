@@ -70,8 +70,6 @@ class TimerVC: PanArrowVC {
         }
         view.addSubview(cardTimerPanel)
 
-        panArrowUp.color = UIColor(named: ColorName.PantoneRed_Label)!
-        panArrowDown.color = UIColor(named: ColorName.PantoneRed_Label)!
         panArrowUpLabel.textColor = .white
         panArrowDownLabel.textColor = .white
         panArrowUpLabel.text = LS_TITLE_GAMETIME
@@ -128,9 +126,9 @@ class TimerVC: PanArrowVC {
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
-        panArrowUp.color = UIColor(named: ColorName.PantoneRed_Label)!
+        panArrowUp.color = UIColor(named: ColorName.PantoneRed_LightYellow)!
         panArrowUp.setNeedsLayout()
-        panArrowDown.color = UIColor(named: ColorName.PantoneRed_Label)!
+        panArrowDown.color = UIColor(named: ColorName.PantoneRed_LightYellow)!
         panArrowDown.setNeedsLayout()
     }
     
@@ -272,8 +270,7 @@ extension TimerVC: CardTimerPanelDelegate {
     
     func shouldAddCard() {
         
-        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
-        if inPremiumMode {
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) {
             showAddTimerVC()
             
         } else {

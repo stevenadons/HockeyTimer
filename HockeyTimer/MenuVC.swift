@@ -92,7 +92,7 @@ class MenuVC: UIViewController {
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText ?? ""
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = .label
         titleLabel.textAlignment = .center
@@ -129,7 +129,6 @@ class MenuVC: UIViewController {
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.heightAnchor.constraint(equalToConstant: 30),
             
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -418,9 +417,9 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundColor = .secondarySystemBackground
         cell.textLabel?.textColor = .label
-        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
         cell.detailTextLabel?.textColor = .secondaryLabel
-        cell.detailTextLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
+        cell.detailTextLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 15)
         cell.selectionStyle = .none
         
         if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
@@ -448,34 +447,22 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
-            
-            switch feedbackText[indexPath.row] {
-            case LS_MENU_SHARE:
-                shareApp()
-            case LS_MENU_CONTACT_US:
-                contactUs()
-            case LS_MENU_REVIEW:
-                writeAReview()
-            case LS_MENU_PRIVACY_POLICY:
-                linkToPrivacyPolicy()
-            default:
-                fatalError("Did select menu item which does not exist")
-            }
-            
-        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_DARK_MODE {
-            
-            switch darkModeText[indexPath.row] {
-            case LS_MENU_DARK:
-                print("dark mode")
-            case LS_MENU_LIGHT:
-                print("light mode")
-            default:
-                fatalError("Did select menu item which does not exist")
-            }
+        guard headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK else {
+            return
         }
         
-        
+        switch feedbackText[indexPath.row] {
+        case LS_MENU_SHARE:
+            shareApp()
+        case LS_MENU_CONTACT_US:
+            contactUs()
+        case LS_MENU_REVIEW:
+            writeAReview()
+        case LS_MENU_PRIVACY_POLICY:
+            linkToPrivacyPolicy()
+        default:
+            fatalError("Did select menu item which does not exist")
+        }
     }
 }
 

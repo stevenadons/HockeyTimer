@@ -17,7 +17,7 @@ class DocumentMenuVC: PanArrowVC {
     // MARK: - Properties
     
     private var rulesList: RulesList!
-    private var countryMenu: CountryMenu!
+    private var countryButton: OvalCountryButton!
     private var reportButton: UIButton!
     
     private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
@@ -61,6 +61,11 @@ class DocumentMenuVC: PanArrowVC {
         panArrowDownLabel.alpha = 0.0
         panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
         
+        countryButton = OvalCountryButton(capitals: SELECTED_COUNTRY.capitals, color: .white, crossColor: .white)
+        countryButton.translatesAutoresizingMaskIntoConstraints = false
+        countryButton.addTarget(self, action: #selector(countryButtonTapped), for: .touchUpInside)
+        view.addSubview(countryButton)
+        
         reportButton = UIButton()
         reportButton.translatesAutoresizingMaskIntoConstraints = false
         reportButton.titleLabel?.numberOfLines = 0
@@ -83,7 +88,11 @@ class DocumentMenuVC: PanArrowVC {
         view.addSubview(reportButton)
         
         let reportConstant: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 12, big: 18)
-        
+        let buttonWidth: CGFloat = 44
+        let buttonHeight: CGFloat = 44
+        let buttonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
+        let buttonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 45, big: 45)
+
         NSLayoutConstraint.activate([
             
             rulesList.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -94,25 +103,17 @@ class DocumentMenuVC: PanArrowVC {
             reportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             reportButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -reportConstant),
             
+            countryButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
+            countryButton.widthAnchor.constraint(equalToConstant: buttonWidth),
+            countryButton.topAnchor.constraint(equalTo: view.topAnchor, constant: buttonTopInset),
+            countryButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            
             ])
-        
-        countryMenu = CountryMenu(inView: view,
-                                  condensedColor: .white,
-                                  foldOutColor: UIColor(named: ColorName.OliveText)!,
-                                  delegate: self,
-                                  labelNames: Country.allNames(),
-                                  capitalsStrings: Country.allCapitals(),
-                                  selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
     }
     
     
     
     // MARK: - Public Methods
-    
-    func hideMenus() {
-        
-        countryMenu.hideButtons(animated: false)
-    }
     
     func animateFlyIn() {
         
@@ -131,6 +132,15 @@ class DocumentMenuVC: PanArrowVC {
         } else {
             showEmailAlert()
         }
+    }
+    
+    @objc private func countryButtonTapped() {
+        
+        let vc = CountryVC(titleText: "Country", onDismiss: {
+            self.rulesList.setCountry(SELECTED_COUNTRY)
+            self.countryButton.setCapitals(SELECTED_COUNTRY.capitals)
+        })
+        present(vc, animated: true, completion: nil)
     }
     
     
@@ -202,38 +212,6 @@ extension DocumentMenuVC: RulesListDelegate {
         if url != nil {
             UIApplication.shared.open(url!)
         }
-    }
-}
-
-
-
-extension DocumentMenuVC: CountryMenuDelegate {
-    
-    func handleCountryMenuMainButtonTapped() {
-        
-//        if let settingsIndex = view.subviews.firstIndex(of: settingsMenu), let countryIndex = view.subviews.firstIndex(of: countryMenu), settingsIndex > countryIndex {
-//            view.exchangeSubview(at: settingsIndex, withSubviewAt: countryIndex)
-//        }
-        
-    }
-    
-    func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
-        
-        guard CountryDataManager.shared.countries[buttonNumber] != SELECTED_COUNTRY else { return }
-        
-        SELECTED_COUNTRY = CountryDataManager.shared.countries[buttonNumber]
-        rulesList.setCountry(SELECTED_COUNTRY)
-    }
-    
-    func didShowButtons() {
-        
-        pageVC?.showBackgroundMask()
-        
-    }
-    
-    func willHideButtons() {
-        
-        pageVC?.hideBackgroundMask()
     }
 }
 

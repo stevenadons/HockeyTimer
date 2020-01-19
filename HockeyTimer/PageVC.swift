@@ -23,7 +23,6 @@ class PageVC: UIPageViewController {
     var existingScoreVC: ScoreVC?
     private var mask: Mask?
     private var backgroundMask: UIView!
-//    private var menu: DotMenu!
     
     private var messageManager: RemoteMessageManager!
     private var updateManager: UpdateManager!
@@ -51,7 +50,7 @@ class PageVC: UIPageViewController {
         view.backgroundColor = .systemBackground
         
         var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
-        if UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode), let minutes = UserDefaults.standard.value(forKey: UserDefaultsKey.Duration) as? Int {
+        if let minutes = UserDefaults.standard.value(forKey: UserDefaultsKey.Duration) as? Int {
             if let enumCase = Duration(rawValue: minutes) {
                 duration = enumCase
             }
@@ -63,7 +62,6 @@ class PageVC: UIPageViewController {
             }
         }
         game = HockeyGame(duration: duration, numberOfPeriods: numberOfPeriods)
-        print("PageVC did set game with numberOfPeriods: \(numberOfPeriods)")
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
@@ -74,12 +72,6 @@ class PageVC: UIPageViewController {
         view.addSubview(backgroundMask)
         view.sendSubviewToBack(backgroundMask)
         hideBackgroundMask()
-        
-//        menu = DotMenu(inView: view,
-//                       condensedColor: UIColor(named: ColorName.OliveText)!,
-//                       foldOutColor: UIColor(named: ColorName.OliveText)!,
-//                       delegate: self,
-//                       labelNames: [LS_SETTINGS_WRITE_A_REVIEW, LS_SETTINGS_SHARE, LS_SETTINGS_CONTACT])
         
         messageManager = RemoteMessageManager(fromViewcontroller: self, messageURL: "https://raw.githubusercontent.com/stevenadons/RemoteJSON/master/hockeyUppMessage")
         updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
@@ -300,10 +292,6 @@ extension PageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
-        if let documentVC = pageViewController.viewControllers?.first as? DocumentMenuVC {
-            documentVC.hideMenus()
-        }
-        
         if let _ = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
             
             // From TimerVC to DurationVC
@@ -368,139 +356,3 @@ extension PageVC: UIPageViewControllerDelegate {
         }
     }
 }
-
-//extension PageVC: DotMenuDelegate {
-//
-//    func handleDotMenuMainButtonTapped() {
-//
-//        print("nothing")
-//    }
-//
-//    func handleDotMenuOtherButtonTapped(buttonNumber: Int) {
-//
-//        switch buttonNumber {
-//        case 0:
-//            // Write review
-//            var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
-//            components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
-//            guard let writeReviewURL = components?.url else { return }
-//            UIApplication.shared.open(writeReviewURL)
-//
-//        case 1:
-//            // Share app
-//            // Conform to UIActivityItemSource for custom activityItems
-//            let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
-//            present(activityViewController, animated: true, completion: nil)
-//
-//        case 2:
-//            // Send email
-//            sendEmail()
-//
-//        default:
-//            print("default")
-//        }
-//    }
-//
-//    func dotMenuDidShowButtons() {
-//
-//        showBackgroundMask()
-//
-//    }
-//
-//    func dotMenuWillHideButtons() {
-//
-//        hideBackgroundMask()
-//    }
-//
-//}
-//
-//
-//extension PageVC: MFMailComposeViewControllerDelegate {
-//
-//    func sendEmail() {
-//
-//        if MFMailComposeViewController.canSendMail() {
-//            let body = emailBody()
-//            presentEmail(body: body)
-//
-//        } else {
-//            showEmailAlert()
-//        }
-//    }
-//
-//    private func emailBody() -> String {
-//
-//        let sentence = "<p>" + LS_EMAIL_SENTENCE + "</p><br><br><br><br><hr>"
-//        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.0"
-//        let version = LS_EMAIL_VERSION + appVersion
-//        let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "0"
-//        let build = " - " + LS_EMAIL_BUILD + buildNumber
-//        let premiumSuffix = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) ? "P" : ""
-//        let country = " - " + SELECTED_COUNTRY.capitals
-//        let iOS = " - " + LS_EMAIL_IOS + UIDevice.current.systemVersion
-//        let dataStatus = "<br>" + CountryDataManager.shared.statusString()
-//
-//        return sentence + version + build + premiumSuffix + country + iOS + dataStatus
-//    }
-//
-//    private func presentEmail(body: String) {
-//
-//        let mail = MFMailComposeViewController()
-//        mail.mailComposeDelegate = self
-//        mail.setToRecipients(["tocommit.appbuilders@gmail.com"])
-//        mail.setSubject(LS_EMAIL_SUBJECT)
-//        mail.setMessageBody(body, isHTML: true)
-//
-//        present(mail, animated: true)
-//    }
-//
-//    private func showEmailAlert() {
-//
-//        let alert = UIAlertController(title: LS_EMAIL_EMAILERROR_TITLE, message: LS_EMAIL_EMAILERROR_TEXT, preferredStyle: .alert)
-//        let ok = UIAlertAction(title: LS_BUYPREMIUM_OK, style: .default, handler: nil)
-//        alert.addAction(ok)
-//
-//        present(alert, animated: true, completion: nil)
-//    }
-//
-//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-//
-//        controller.dismiss(animated: true)
-//    }
-//}
-//
-//
-//
-//extension PageVC: UIActivityItemSource {
-//
-//    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-//
-//        return productURL
-//
-//    }
-//
-//    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-//
-//        if activityType == .postToTwitter {
-//            return "Download #HockeyUpp on the App Store"
-//        }
-//        return productURL
-//    }
-//
-//    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-//
-//        return "HockeyUpp - Your field hockey companion"
-//    }
-//
-//    @available(iOS 13.0, *)
-//    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
-//
-//        let metadata = LPLinkMetadata()
-//        metadata.originalURL = productURL
-//        metadata.url = metadata.originalURL
-//        metadata.title = "Share HockeyUpp"
-//        metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-Spotlight-40@3x", withExtension: "png"))
-//        return metadata
-//    }
-//}
-

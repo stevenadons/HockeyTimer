@@ -25,6 +25,9 @@ class CountryLabelButton: UIButton {
             setNeedsDisplay()
         }
     }
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 44, height: 44)
+    }
     
     
     // MARK: - Initializing

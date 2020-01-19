@@ -203,9 +203,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let ud = UserDefaults.standard
         
-        guard ud.bool(forKey: UserDefaultsKey.AlwaysDarkMode) || ud.bool(forKey: UserDefaultsKey.AlwaysLightMode) || ud.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) else {
-            ud.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
-            return
+//        guard ud.bool(forKey: UserDefaultsKey.AlwaysDarkMode) || ud.bool(forKey: UserDefaultsKey.AlwaysLightMode) || ud.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) else {
+//            ud.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
+//            return
+//        }
+        
+        if !ud.bool(forKey: UserDefaultsKey.PremiumMode) {
+            ud.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
         }
     }
 

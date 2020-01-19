@@ -72,7 +72,7 @@ class SimpleAlertVC: UIViewController {
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText ?? ""
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = UIColor.label
         titleLabel.textAlignment = .center
@@ -121,7 +121,6 @@ class SimpleAlertVC: UIViewController {
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.heightAnchor.constraint(equalToConstant: 30),
             
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset * 1.5),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset * 1.5),

@@ -16,20 +16,20 @@ class DurationVC: PanArrowVC {
     var selectedDuration: Duration?
     var selectedNumberOfPeriods: NumberOfPeriods?
     
-    fileprivate var cancelView: UIButton!
-    fileprivate var countryMenu: CountryMenu!
-    fileprivate var pauseAtQuarterSwitch: UISwitch!
-    fileprivate var pauseAtQuarterLabel: UILabel!
+    private var cancelView: UIButton!
+    private var pauseAtQuarterSwitch: UISwitch!
+    private var pauseAtQuarterLabel: UILabel!
+    private var countryButton: OvalCountryButton!
     
-    fileprivate var cards: [DurationCard] = []
+    private var cards: [DurationCard] = []
     
-    fileprivate var skipAnimations: Bool = false
-    fileprivate var pauseSwitchLeadingConstraint: NSLayoutConstraint!
+    private var skipAnimations: Bool = false
+    private var pauseSwitchLeadingConstraint: NSLayoutConstraint!
 
-    fileprivate var padding: CGFloat {
+    private var padding: CGFloat {
         return (UIDevice.deviceSize != .small && cards.count > 4) ? 18 : 12
     }
-    fileprivate  var cardWidth: CGFloat {
+    private  var cardWidth: CGFloat {
         return view.bounds.width * 140 / 375
     }
     
@@ -82,8 +82,6 @@ class DurationVC: PanArrowVC {
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        
-        countryMenu.hideButtons(animated: false)
         pageVC?.hideBackgroundMask()
     }
     
@@ -114,21 +112,16 @@ class DurationVC: PanArrowVC {
         cancelView.isUserInteractionEnabled = false
         view.insertSubview(cancelView, at: 0)
         
+        countryButton = OvalCountryButton(capitals: SELECTED_COUNTRY.capitals, color: UIColor(named: ColorName.OliveText)!, crossColor: .white)
+        countryButton.translatesAutoresizingMaskIntoConstraints = false
+        countryButton.addTarget(self, action: #selector(countryButtonTapped), for: .touchUpInside)
+        view.addSubview(countryButton)
+        
         panArrowUp.alpha = 0.0
         panArrowDown.color = UIColor(named: ColorName.LightYellow)!
         panArrowUpLabel.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
         panArrowDownLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
-        
-        countryMenu = CountryMenu(inView: view,
-                                  condensedColor: UIColor(named: ColorName.OliveText)!,
-                                  foldOutColor: UIColor(named: ColorName.OliveText)!,
-                                  delegate: self,
-                                  labelNames: Country.allNames(),
-                                  capitalsStrings: Country.allCapitals(),
-                                  leftSide: true,
-                                  selected: CountryDataManager.shared.countries.firstIndex(of: SELECTED_COUNTRY))
-        countryMenu.translatesAutoresizingMaskIntoConstraints = false
         
         pauseAtQuarterSwitch = UISwitch()
         pauseAtQuarterSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +130,7 @@ class DurationVC: PanArrowVC {
         pauseAtQuarterSwitch.tintColor = UIColor(named: ColorName.OliveText)!
         pauseAtQuarterSwitch.thumbTintColor = UIColor(named: ColorName.OliveText)!
         pauseAtQuarterSwitch.onTintColor = UIColor(named: ColorName.LightYellow)!
-        view.insertSubview(pauseAtQuarterSwitch, belowSubview: countryMenu)
+        view.addSubview(pauseAtQuarterSwitch)
         
         pauseAtQuarterLabel = UILabel()
         pauseAtQuarterLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -146,24 +139,29 @@ class DurationVC: PanArrowVC {
         pauseAtQuarterLabel.text = LS_GAME_IN_QUARTERS
         pauseAtQuarterLabel.numberOfLines = 0
         pauseAtQuarterLabel.textAlignment = .right
-        view.insertSubview(pauseAtQuarterLabel, belowSubview: countryMenu)
+        view.addSubview(pauseAtQuarterLabel)
         
         for index in 0..<SELECTED_COUNTRY.durations.count {
             let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            view.insertSubview(card, belowSubview: countryMenu)
+            view.addSubview(card)
         }
         
         pauseSwitchLeadingConstraint = NSLayoutConstraint(item: pauseAtQuarterSwitch as Any, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -42)
         let switchTopInset: CGFloat = UIDevice.whenDeviceIs(small: 36, normal: 51, big: 51)
         
+        let buttonWidth: CGFloat = 44
+        let buttonHeight: CGFloat = 44
+        let buttonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
+        let buttonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 45, big: 45)
+        
         NSLayoutConstraint.activate([
             
-            countryMenu.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            countryMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            countryMenu.topAnchor.constraint(equalTo: view.topAnchor),
-            countryMenu.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            countryButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
+            countryButton.widthAnchor.constraint(equalToConstant: buttonWidth),
+            countryButton.topAnchor.constraint(equalTo: view.topAnchor, constant: buttonTopInset),
+            countryButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             cancelView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cancelView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -273,6 +271,25 @@ class DurationVC: PanArrowVC {
             self.present(askConfirmationVC, animated: true, completion: nil)
         }
     }
+    
+    private func buildCards() {
+        
+        for card in cards {
+            card.removeFromSuperview()
+        }
+        
+        cards = []
+        
+        for index in 0..<SELECTED_COUNTRY.durations.count {
+            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
+            cards.append(card)
+            card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
+            card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
+            view.addSubview(card)
+        }
+        
+        addCardConstraints()
+    }
    
     
     // MARK: - Touch Methods
@@ -294,44 +311,53 @@ class DurationVC: PanArrowVC {
         selectedDuration = nil
     }
     
+    @objc private func countryButtonTapped() {
+        
+        let vc = CountryVC(titleText: "Country", onDismiss: {
+            self.buildCards()
+            self.countryButton.setCapitals(SELECTED_COUNTRY.capitals)
+        })
+        present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 
-extension DurationVC: CountryMenuDelegate {
-    
-    func handleCountryMenuMainButtonTapped() { }
-    
-    func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
-        
-        guard CountryDataManager.shared.countries[buttonNumber] != SELECTED_COUNTRY else { return }
-        SELECTED_COUNTRY = CountryDataManager.shared.countries[buttonNumber]
-        
-        for card in cards {
-            card.removeFromSuperview()
-        }
-        
-        cards = []
-        
-        for index in 0..<SELECTED_COUNTRY.durations.count {
-            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
-            cards.append(card)
-            card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
-            view.insertSubview(card, belowSubview: countryMenu)
-        }
-        
-        addCardConstraints()
-    }
-    
-    func didShowButtons() {
-        
-        pageVC?.showBackgroundMask()
-    }
-    
-    func willHideButtons() {
-        
-        pageVC?.hideBackgroundMask()
-    }
-}
+//extension DurationVC: CountryMenuDelegate {
+//    
+//    func handleCountryMenuMainButtonTapped() { }
+//    
+//    func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
+//        
+//        guard CountryDataManager.shared.countries[buttonNumber] != SELECTED_COUNTRY else { return }
+//        SELECTED_COUNTRY = CountryDataManager.shared.countries[buttonNumber]
+//        
+//        for card in cards {
+//            card.removeFromSuperview()
+//        }
+//        
+//        cards = []
+//        
+//        for index in 0..<SELECTED_COUNTRY.durations.count {
+//            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
+//            cards.append(card)
+//            card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
+//            card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
+//            view.addSubview(card)
+//        }
+//        
+//        addCardConstraints()
+//    }
+//    
+//    func didShowButtons() {
+//        
+//        pageVC?.showBackgroundMask()
+//    }
+//    
+//    func willHideButtons() {
+//        
+//        pageVC?.hideBackgroundMask()
+//    }
+//}
 
 

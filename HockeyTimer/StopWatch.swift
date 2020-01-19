@@ -317,7 +317,7 @@ class StopWatch: UIControl {
     
     func simplifyForOnboarding(bgColor: UIColor, iconColor: UIColor, timeColor: UIColor, progressZoneColor: UIColor) {
         
-        let simpleGame = HockeyGame(duration: .Thirty, numberOfPeriods: .Halves)
+        let simpleGame = HockeyGame(duration: .ThirtyFive, numberOfPeriods: .Halves)
         reset(withGame: simpleGame)
         messageLabel.alpha = 0.0
         periodLabel.alpha = 0.0
@@ -326,7 +326,7 @@ class StopWatch: UIControl {
         core.backgroundColor = bgColor.cgColor
         icon.color = iconColor
         timeLabel.textColor = timeColor
-        timeLabel.setFont(font: UIFont(name: FONTNAME.ThemeBlack, size: 44)!)
+        timeLabel.setFont(font: UIFont(name: FONTNAME.ThemeBlack, size: 40)!)
         progressZone.fillColor = progressZoneColor.cgColor
     }
     

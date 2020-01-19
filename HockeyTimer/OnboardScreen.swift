@@ -85,13 +85,13 @@ class OnboardScreen: UIView {
         addSubview(graphics)
         
         title = createLabel(bold: true, fontSize: 24)
-        title.font = UIFont(name: FONTNAME.ThemeBlack, size: 24)
+        title.font = UIFont(name: FONTNAME.ThemeBold, size: 24)
         title.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
         addSubview(title)
         
         body = UITextView()
         body.text = ""
-        body.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
+        body.font = UIFont(name: FONTNAME.ThemeRegular, size: 17)
         body.isUserInteractionEnabled = false
         body.textAlignment = .center
         body.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
@@ -138,7 +138,7 @@ class OnboardScreen: UIView {
             
             body.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             body.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-            body.topAnchor.constraint(equalTo: title.bottomAnchor),
+            body.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 8),
             body.heightAnchor.constraint(equalToConstant: 125),
             
             ])

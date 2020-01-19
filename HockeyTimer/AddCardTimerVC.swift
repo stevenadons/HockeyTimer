@@ -79,7 +79,7 @@ class AddCardTimerVC: UIViewController {
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText
-        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
+        titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = .label
         titleLabel.textAlignment = .center
@@ -117,7 +117,6 @@ class AddCardTimerVC: UIViewController {
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.heightAnchor.constraint(equalToConstant: 30),
             
             minutesPanel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -minutesYOffset),
             minutesPanel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -24),
