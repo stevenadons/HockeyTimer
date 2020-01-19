@@ -23,9 +23,9 @@ class ThreeCards: CALayer {
     private let yellowCard: Card = Card(type: .yellow)
     private let redCard: Card = Card(type: .red)
     
-    private let grayScaleGreen: UIColor = UIColor(named: ColorName.White)!
-    private let grayScaleYellow: UIColor = UIColor(named: ColorName.DarkGray)!
-    private let grayScaleRed: UIColor = UIColor(named: ColorName.DarkBlue)!
+    private let grayScaleGreen: UIColor = UIColor(named: ColorName.GrayScaleGreenCard)!
+    private let grayScaleYellow: UIColor = UIColor(named: ColorName.GrayScaleYellowCard)!
+    private let grayScaleRed: UIColor = UIColor(named: ColorName.GrayScaleRedCard)!
 
     
     

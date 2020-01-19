@@ -22,26 +22,31 @@ class MenuVC: UIViewController {
     
     private var titleText: String?
     
-    private var actionTitles: [String] = [LS_MENU_SHARE,
+    private let feedbackText: [String] = [LS_MENU_SHARE,
                                           LS_MENU_CONTACT_US,
                                           LS_MENU_REVIEW,
-                                          LS_MENU_PRIVACY_POLICY,
-                                          LS_MENU_DARK_MODE,
-                                          LS_MENU_LIGHT_MODE]
+                                          LS_MENU_PRIVACY_POLICY]
     
-    private var actionSubtitles: [String] = [LS_MENU_SHARE_THE_APP,
-                                             LS_MENU_WRITE_AN_EMAIL,
-                                             LS_MENU_WRITE_A_REVIEW,
-                                             LS_MENU_LINK_TO_WEBSITE,
-                                             LS_MENU_DISPLAY_DARK_MODE,
-                                             LS_MENU_DISPLAY_LIGHT_MODE,]
+    private let feedbackDetailText: [String] = [LS_MENU_SHARE_THE_APP,
+                                                LS_MENU_WRITE_AN_EMAIL,
+                                                LS_MENU_WRITE_A_REVIEW,
+                                                LS_MENU_LINK_TO_WEBSITE]
     
-    private var imageSystemNames: [String] = ["square.and.arrow.up",
-                                              "envelope",
-                                              "square.and.pencil",
-                                              "checkmark.shield",
-                                              "",
-                                              ""]
+    private let feedbackImageNames: [String] = ["square.and.arrow.up",
+                                                "envelope",
+                                                "square.and.pencil",
+                                                "checkmark.shield"]
+    
+    private let darkModeText: [String] = [LS_MENU_DARK,
+                                          LS_MENU_LIGHT,
+                                          LS_MENU_PHONE_SETTINGS]
+    
+    private let darkModeDetailText: [String] = [LS_MENU_ALWAYS_DARK,
+                                                LS_MENU_NEVER_DARK,
+                                                LS_MENU_FOLLOW_PHONE_SETTINGS]
+    
+    private let headerTitles: [String] = [LS_MENU_HEADER_FEEDBACK,
+                                          LS_MENU_HEADER_DARK_MODE]
     
     private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
     private let websiteURLString = "https://stevenadons.wixsite.com/hockeyupp"
@@ -83,14 +88,14 @@ class MenuVC: UIViewController {
     
     private func setupUI() {
         
-        view.backgroundColor = UIColor.secondarySystemBackground
+        view.backgroundColor = .systemBackground
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText ?? ""
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = UIColor(named: ColorName.DarkBlueText)!
+        titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
@@ -100,8 +105,7 @@ class MenuVC: UIViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = .zero
-        tableView.separatorColor = .secondarySystemBackground
-        tableView.bounces = false
+        tableView.separatorColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         // Make the viewcontroller dismissable by swiping down
@@ -112,7 +116,8 @@ class MenuVC: UIViewController {
         doneButton = UIButton()
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
-        let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(UIColor(named: ColorName.DarkBlueText)!, renderingMode: .alwaysOriginal)
+        let tintColor = UIColor(named: ColorName.DarkBlue)!
+        let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
         doneButton.setImage(image, for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         view.addSubview(doneButton)
@@ -142,12 +147,12 @@ class MenuVC: UIViewController {
     
     @objc private func switchChanged(_ item: UISwitch) {
        
-        if item.tag == actionTitles.firstIndex(of: LS_MENU_DARK_MODE) {
-            // activate dark mode
-            
-        } else if item.tag == actionTitles.firstIndex(of: LS_MENU_LIGHT_MODE) {
-            // activate light mode
-        }
+//        if item.tag == feedbackText.firstIndex(of: LS_MENU_DARK_MODE) {
+//            // activate dark mode
+//
+//        } else if item.tag == feedbackText.firstIndex(of: LS_MENU_LIGHT_MODE) {
+//            // activate light mode
+//        }
     }
     
     @objc private func doneButtonTapped() {
@@ -200,26 +205,20 @@ class MenuVC: UIViewController {
     
     private func toggleFor(_ actionTitle: String, tag: Int) -> UISwitch? {
         
-        guard actionTitle.contains("mode") else {
-            return nil
-        }
-        
         let toggle = UISwitch()
         
-        toggle.tintColor = UIColor(named: ColorName.OliveText)!
-        toggle.thumbTintColor = UIColor(named: ColorName.OliveText)!
         toggle.onTintColor = UIColor(named: ColorName.LightYellow)!
         toggle.tag = tag
         toggle.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
         
-        if actionTitle.contains("Dark mode") {
-            let on = traitCollection.userInterfaceStyle == .dark
-            toggle.setOn(on, animated: false)
-        }
-        if actionTitle.contains("Light mode") {
-            let on = traitCollection.userInterfaceStyle != .dark
-            toggle.setOn(on, animated: false)
-        }
+//        if actionTitle.contains("Dark mode") {
+//            let on = traitCollection.userInterfaceStyle == .dark
+//            toggle.setOn(on, animated: false)
+//        }
+//        if actionTitle.contains("Light mode") {
+//            let on = traitCollection.userInterfaceStyle != .dark
+//            toggle.setOn(on, animated: false)
+//        }
         
         return toggle
     }
@@ -277,29 +276,54 @@ class MenuVC: UIViewController {
 
 extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return headerTitles.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return actionTitles.count
+        if headerTitles[section] == LS_MENU_HEADER_FEEDBACK {
+            return feedbackText.count
+            
+        } else if headerTitles[section] == LS_MENU_HEADER_DARK_MODE {
+            return darkModeText.count
+        }
+        return 9999
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return headerTitles[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         
-        cell.backgroundColor = .systemBackground
-        cell.textLabel?.text = actionTitles[indexPath.row]
+        cell.backgroundColor = .secondarySystemBackground
         cell.textLabel?.textColor = .label
-        cell.detailTextLabel?.text = actionSubtitles[indexPath.row]
         cell.detailTextLabel?.textColor = .secondaryLabel
         cell.selectionStyle = .none
-        cell.accessoryView = toggleFor(actionTitles[indexPath.row], tag: indexPath.row)
         
-        let imageName = imageSystemNames[indexPath.row]
-        let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .medium, scale: .large)
-        if let image = UIImage(systemName: imageName, withConfiguration: config) {
-            let imageView = UIImageView(image: image)
-            imageView.tintColor = .label
-            cell.accessoryView = imageView
+        if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
+            
+            cell.textLabel?.text = feedbackText[indexPath.row]
+            cell.detailTextLabel?.text = feedbackDetailText[indexPath.row]
+            
+            let imageName = feedbackImageNames[indexPath.row]
+            let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .medium, scale: .large)
+            if let image = UIImage(systemName: imageName, withConfiguration: config) {
+                let imageView = UIImageView(image: image)
+                imageView.tintColor = UIColor(named: ColorName.DarkBlue)!
+                cell.accessoryView = imageView
+            }
+            
+        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_DARK_MODE {
+            
+            cell.textLabel?.text = darkModeText[indexPath.row]
+            cell.detailTextLabel?.text = darkModeDetailText[indexPath.row]
+            cell.accessoryView = toggleFor(feedbackText[indexPath.row], tag: indexPath.row)
         }
 
         return cell
@@ -307,22 +331,34 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        switch indexPath.row {
-        case actionTitles.firstIndex(of: LS_MENU_SHARE):
-            shareApp()
-        case actionTitles.firstIndex(of: LS_MENU_CONTACT_US):
-            contactUs()
-        case actionTitles.firstIndex(of: LS_MENU_REVIEW):
-            writeAReview()
-        case actionTitles.firstIndex(of: LS_MENU_DARK_MODE):
-            print("dark mode")
-        case actionTitles.firstIndex(of: LS_MENU_LIGHT_MODE):
-            print("light mode")
-        case actionTitles.firstIndex(of: LS_MENU_PRIVACY_POLICY):
-            linkToPrivacyPolicy()
-        default:
-            fatalError("Did select menu item which does not exist")
+        if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
+            
+            switch feedbackText[indexPath.row] {
+            case LS_MENU_SHARE:
+                shareApp()
+            case LS_MENU_CONTACT_US:
+                contactUs()
+            case LS_MENU_REVIEW:
+                writeAReview()
+            case LS_MENU_PRIVACY_POLICY:
+                linkToPrivacyPolicy()
+            default:
+                fatalError("Did select menu item which does not exist")
+            }
+            
+        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_DARK_MODE {
+            
+            switch darkModeText[indexPath.row] {
+            case LS_MENU_DARK:
+                print("dark mode")
+            case LS_MENU_LIGHT:
+                print("light mode")
+            default:
+                fatalError("Did select menu item which does not exist")
+            }
         }
+        
+        
     }
 }
 

@@ -75,8 +75,8 @@ class ChooseMinutesPanel: UIView {
         
         super.layoutSubviews()
         
-        let horPadding: CGFloat = 30
-        let vertPadding: CGFloat = 26
+        let horPadding: CGFloat = 28
+        let vertPadding: CGFloat = 24
         let buttonHeight: CGFloat = min(75, (bounds.width - horPadding) / 2, (bounds.height - vertPadding) / 2)
         
         NSLayoutConstraint.activate([

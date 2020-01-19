@@ -21,17 +21,17 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
     
     // MARK: - Private Methods
     
-    private func takeSnapShot() {
+    
+    
+    // MARK: - Public Methods
+    
+    func takeSnapShot() {
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, CardTimer>()
         snapshot.appendSections([0])
         snapshot.appendItems(timers, toSection: 0)
         apply(snapshot)
     }
-
-
-    
-    // MARK: - Public Methods
     
     func configureWithAddCardCell() {
         

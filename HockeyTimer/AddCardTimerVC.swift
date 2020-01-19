@@ -26,10 +26,10 @@ class AddCardTimerVC: UIViewController {
     private var cancelButtonText: String = "Cancel"
     
     private var minutesYOffset: CGFloat {
-        return view.bounds.height * 0.05
+        return view.bounds.height * 0.1
     }
     private let cardPanelHeight: CGFloat = 100
-    private let panelsPadding: CGFloat = 60
+    private let panelsPadding: CGFloat = 40
     
     private var okAction: ((CardType, Int) -> Void)?
     private var cancelAction: (() -> Void)?
@@ -68,20 +68,20 @@ class AddCardTimerVC: UIViewController {
         
         super.viewWillAppear(animated)
         windUp(animated: false)
-        okButton.alpha = 0.3
+        okButton.alpha = 0.0
         okButton.isUserInteractionEnabled = false
     }
     
     private func setupUI() {
         
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .systemBackground
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = titleText
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 32)
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.textColor = UIColor(named: ColorName.DarkBlueText)!
+        titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
@@ -110,9 +110,8 @@ class AddCardTimerVC: UIViewController {
     private func addConstraints() {
         
         let buttonHeight: CGFloat = 54
+        let buttonHorInset: CGFloat = 35
         let horInset: CGFloat = 50
-        let buttonsHorInset: CGFloat = 20
-        let buttonsPadding: CGFloat = 16
         
         NSLayoutConstraint.activate([
             
@@ -121,7 +120,7 @@ class AddCardTimerVC: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 30),
             
             minutesPanel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -minutesYOffset),
-            minutesPanel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
+            minutesPanel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -24),
             minutesPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),
             minutesPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horInset),
             
@@ -130,15 +129,15 @@ class AddCardTimerVC: UIViewController {
             cardPanel.heightAnchor.constraint(equalToConstant: cardPanelHeight),
             cardPanel.bottomAnchor.constraint(equalTo: minutesPanel.topAnchor, constant: -panelsPadding),
             
-            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonsHorInset),
-            cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -buttonsPadding / 2),
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            cancelButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+            okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
+            okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
+            okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -16),
+            okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
-            okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: buttonsPadding / 2),
-            okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonsHorInset),
-            okButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
-            okButton.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor),
+            cancelButton!.leadingAnchor.constraint(equalTo: okButton.leadingAnchor),
+            cancelButton!.trailingAnchor.constraint(equalTo: okButton.trailingAnchor),
+            cancelButton!.heightAnchor.constraint(equalTo: okButton.heightAnchor),
+            cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonHorInset),
             
             ])
         
@@ -236,7 +235,7 @@ extension AddCardTimerVC: ChooseCardPanelDelegate {
             minutesPanel.setHighlightColor(fakeCard.color())
         }
         
-        okButton.alpha = (cardPanel.selectedType == CardType.red) ? 1.0 : 0.3
+        okButton.alpha = (cardPanel.selectedType == CardType.red) ? 1.0 : 0.0
         okButton.isUserInteractionEnabled = (cardPanel.selectedType == CardType.red) ? true : false
         
         switch cardPanel.selectedType {

@@ -46,7 +46,7 @@ class TimerVC: PanArrowVC {
             overrideUserInterfaceStyle = .light
         }
         
-        view.backgroundColor = UIColor(named: ColorName.Olive_Black)!
+        view.backgroundColor = UIColor(named: ColorName.LightYellow_Black)! 
         view.clipsToBounds = true
         game = pageVC?.game
         setupViews()
@@ -74,8 +74,8 @@ class TimerVC: PanArrowVC {
         }
         view.addSubview(cardTimerPanel)
 
-        panArrowUp.color = UIColor(named: ColorName.White_LightYellow)!
-        panArrowDown.color = UIColor(named: ColorName.White_LightYellow)!
+        panArrowUp.color = UIColor(named: ColorName.PantoneRed_Label)!
+        panArrowDown.color = UIColor(named: ColorName.PantoneRed_Label)!
         panArrowUpLabel.textColor = .white
         panArrowDownLabel.textColor = .white
         panArrowUpLabel.text = LS_TITLE_GAMETIME
@@ -128,6 +128,15 @@ class TimerVC: PanArrowVC {
     
     
     // MARK: - Drawing and laying out
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        panArrowUp.color = UIColor(named: ColorName.PantoneRed_Label)!
+        panArrowUp.setNeedsLayout()
+        panArrowDown.color = UIColor(named: ColorName.PantoneRed_Label)!
+        panArrowDown.setNeedsLayout()
+    }
     
     
     

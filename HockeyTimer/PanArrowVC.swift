@@ -83,7 +83,7 @@ class PanArrowVC: UIViewController {
         let arrowPaddingTop: CGFloat = 16
         let arrowPaddingBottom: CGFloat = 18
         
-        let menuButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
+        let menuButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 24, normal: 28, big: 28)
         let menuButtonBottomInset: CGFloat = UIDevice.whenDeviceIs(small: 8, normal: 22, big: 22)
         
         NSLayoutConstraint.activate([

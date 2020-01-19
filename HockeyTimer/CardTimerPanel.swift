@@ -83,6 +83,8 @@ class CardTimerPanel: UIView {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
         
         ])
+        
+        dataSource.takeSnapShot()
     }
     
     

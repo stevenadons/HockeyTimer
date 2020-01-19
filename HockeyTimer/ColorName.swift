@@ -21,6 +21,7 @@ enum ColorName {
     static let PantoneGreenLight = "PantoneGreenLight"
     static let PantoneYellow = "PantoneYellow"
     static let PantoneRed = "PantoneRed"
+    static let PantoneRed_Label = "PantoneRed_Label"
 
     static let DarkRed = "DarkRed"
     static let DarkBlue = "DarkBlue"
@@ -34,10 +35,15 @@ enum ColorName {
     static let LightRed = "LightRed"
     static let LightYellow = "LightYellow"
     static let LightYellow_White = "LightYellow_White"
+    static let LightYellow_Black = "LightYellow_Black"
     static let LightBlue = "LightBlue"
     
     static let StopWatchCore = "StopWatchCore"
     static let StopWatchIcon = "StopWatchIcon"
     static let StopWatchProgressZone = "StopWatchProgressZone"
+    
+    static let GrayScaleGreenCard = "GrayScaleGreenCard"
+    static let GrayScaleYellowCard = "GrayScaleYellowCard"
+    static let GrayScaleRedCard = "GrayScaleRedCard"
 
 }

@@ -101,12 +101,17 @@
 "Send us an email" = "Stuur ons een email";
 "Review" = "Recensie";
 "Write a review in the App Store" = "Beoordeling in de App Store";
-"Dark mode" = "Donkere modus";
-"Display the app in dark mode" = "Toon de app in donkere modus";
-"Light mode" = "Lichte modus";
-"Display the app in light mode" = "Toon de app in lichte modus";
 "Privacy policy" = "Privacybeleid";
 "Link to website" = "Link naar de website";
+"Dark" = "Donker";
+"Always show in dark mode" = "Altijd in donkere modus";
+"Light" = "Licht";
+"Never show in dark mode" = "Nooit in donkere modus";
+"Phone settings" = "Volgens instellingen";
+"Follow your phone settings" = "Volg je telefooninstellingen";
+
+"Feedback" = "Feedback";
+"Dark mode" = "Donkere modus";
 
 "Write a review" = "Schrijf een recensie";
 "Share the app" = "Deel de app";

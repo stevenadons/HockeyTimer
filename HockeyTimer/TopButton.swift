@@ -18,7 +18,7 @@ class TopButton: UIButton {
     let standardWidth: CGFloat = 44
     let standardHeight: CGFloat = 44
     
-    private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+    private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
     
     
     // MARK: - Init

@@ -113,7 +113,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = UIColor(named: ColorName.StopWatchCore)!.cgColor
+        core.backgroundColor = UIColor.white.cgColor // UIColor(named: ColorName.StopWatchCore)!.cgColor
         squareContainer.addSublayer(core)
         
         progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
@@ -852,7 +852,7 @@ extension StopWatch: StopWatchTimerDelegate {
         updateProgressBars()
         runningSecondsToGo = 0
         message = LS_OVERTIME
-        resetTimeLabel(withColor: UIColor(named: ColorName.LightYellow)!, alpha: 1)
+        resetTimeLabel(withColor: UIColor(named: ColorName.PantoneRed)!, alpha: 1)
         icon.change(to: .StopIcon)
         delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
     }
