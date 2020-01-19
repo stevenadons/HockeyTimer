@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        #warning("testing")
 //        UserDefaults.standard.set(true, forKey: USERDEFAULTSKEY.PremiumMode)
         
+        firstTimeSetDarkModeSettings()
+        
         AppDelegate.checkIfInPremiumMode(ifNot: {
             AppDelegate.downloadInAppProducts()
             GADMobileAds.sharedInstance().start(completionHandler: nil)
@@ -193,4 +195,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    
+    // MARK: - Dark Mode
+    
+    private func firstTimeSetDarkModeSettings() {
+        
+        let ud = UserDefaults.standard
+        
+        guard ud.bool(forKey: UserDefaultsKey.AlwaysDarkMode) || ud.bool(forKey: UserDefaultsKey.AlwaysLightMode) || ud.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) else {
+            ud.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+            return
+        }
+    }
+
 }

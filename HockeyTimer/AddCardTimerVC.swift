@@ -54,9 +54,9 @@ class AddCardTimerVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
+        checkDarkMode()
+        addObservers()
+        
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
         
@@ -140,7 +140,16 @@ class AddCardTimerVC: UIViewController {
             cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonHorInset),
             
             ])
+    }
+    
+    private func addObservers() {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Private Methods
@@ -195,6 +204,18 @@ class AddCardTimerVC: UIViewController {
         button.layer.cornerRadius = 8
         
         return button
+    }
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
     }
     
     

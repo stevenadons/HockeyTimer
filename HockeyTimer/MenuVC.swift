@@ -70,9 +70,8 @@ class MenuVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
+        checkDarkMode()
+        addObservers()
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
@@ -120,6 +119,7 @@ class MenuVC: UIViewController {
         let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
         doneButton.setImage(image, for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        doneButton.alpha = 0.0
         view.addSubview(doneButton)
     }
     
@@ -142,17 +142,87 @@ class MenuVC: UIViewController {
             ])
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // MARK: - Touch Methods
     
     @objc private func switchChanged(_ item: UISwitch) {
-       
-//        if item.tag == feedbackText.firstIndex(of: LS_MENU_DARK_MODE) {
-//            // activate dark mode
-//
-//        } else if item.tag == feedbackText.firstIndex(of: LS_MENU_LIGHT_MODE) {
-//            // activate light mode
-//        }
+        
+        guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
+            
+            item.setOn(!item.isOn, animated: true)
+            
+            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_DARK_MODE, text: LS_BUYPREMIUM_TEXT_DARK_MODE, showFirstButton: false, afterDismiss: { earned in
+                if earned {
+                    item.setOn(!item.isOn, animated: true)
+                }
+            })
+            present(buyPremiumVC, animated: true, completion: nil)
+            
+            return
+        }
+        
+        if item.isOn {
+            
+            switch darkModeText[item.tag] {
+            case LS_MENU_DARK:
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysDarkMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+
+            case LS_MENU_LIGHT:
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+
+            case LS_MENU_PHONE_SETTINGS:
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+                
+            default:
+                fatalError("Did select menu item which does not exist")
+            }
+            
+        } else {
+            
+            switch darkModeText[item.tag] {
+            case LS_MENU_DARK:
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+
+            case LS_MENU_LIGHT:
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+
+            case LS_MENU_PHONE_SETTINGS:
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysDarkMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
+                UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+                
+            default:
+                fatalError("Did select menu item which does not exist")
+            }
+        }
+        setToggles()
+        NotificationCenter.default.post(name: .DarkModeSettingsChanged, object: nil)
     }
     
     @objc private func doneButtonTapped() {
@@ -203,6 +273,36 @@ class MenuVC: UIViewController {
     
     // MARK: - Private Methods
     
+    private func setToggles() {
+        
+        guard let section = headerTitles.firstIndex(of: LS_MENU_HEADER_DARK_MODE) else {
+            return
+        }
+        
+        for index in 0 ..< darkModeText.count {
+            
+            guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: section)), let accessoryView = cell.accessoryView, accessoryView.isKind(of: UISwitch.self) else {
+                return
+            }
+            
+            let toggle = accessoryView as! UISwitch
+            
+            switch darkModeText[index] {
+            case LS_MENU_DARK:
+                let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode)
+                toggle.setOn(on, animated: false)
+            case LS_MENU_LIGHT:
+                let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode)
+                toggle.setOn(on, animated: false)
+            case LS_MENU_PHONE_SETTINGS:
+                let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+                toggle.setOn(on, animated: false)
+            default:
+                fatalError("Did select menu item which does not exist")
+            }
+        }
+    }
+    
     private func toggleFor(_ actionTitle: String, tag: Int) -> UISwitch? {
         
         let toggle = UISwitch()
@@ -211,15 +311,20 @@ class MenuVC: UIViewController {
         toggle.tag = tag
         toggle.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
         
-//        if actionTitle.contains("Dark mode") {
-//            let on = traitCollection.userInterfaceStyle == .dark
-//            toggle.setOn(on, animated: false)
-//        }
-//        if actionTitle.contains("Light mode") {
-//            let on = traitCollection.userInterfaceStyle != .dark
-//            toggle.setOn(on, animated: false)
-//        }
-        
+        switch darkModeText[tag] {
+        case LS_MENU_DARK:
+            let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode)
+            toggle.setOn(on, animated: false)
+        case LS_MENU_LIGHT:
+            let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode)
+            toggle.setOn(on, animated: false)
+        case LS_MENU_PHONE_SETTINGS:
+            let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
+            toggle.setOn(on, animated: false)
+        default:
+            fatalError("Did select menu item which does not exist")
+        }
+
         return toggle
     }
     
@@ -236,9 +341,7 @@ class MenuVC: UIViewController {
         
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "*.*"
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "*"
-        let premium = ""
-        #warning("add next line")
-            // UserDefaults.standard.bool(forKey: UserDefaultKey.PremiumMode) ? "P" : ""
+        let premium = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) ? "P" : ""
         result += "Version " + appVersion + premium + " - Build " + buildNumber
         
         let iosVersion = UIDevice.current.systemVersion
@@ -270,6 +373,18 @@ class MenuVC: UIViewController {
         alert.addAction(ok)
 
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
     }
 }
 
@@ -303,7 +418,9 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.backgroundColor = .secondarySystemBackground
         cell.textLabel?.textColor = .label
+        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         cell.detailTextLabel?.textColor = .secondaryLabel
+        cell.detailTextLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
         cell.selectionStyle = .none
         
         if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {

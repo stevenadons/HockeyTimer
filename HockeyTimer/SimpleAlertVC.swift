@@ -55,9 +55,8 @@ class SimpleAlertVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
+        checkDarkMode()
+        addObservers()
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
@@ -160,6 +159,22 @@ class SimpleAlertVC: UIViewController {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // MARK: - Touch Methods
     
@@ -180,6 +195,22 @@ class SimpleAlertVC: UIViewController {
             })
         }
     }
+    
+    
+    // MARK: - Private Methods
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
+    }
+
 }
 
 

@@ -30,10 +30,6 @@ class DocumentMenuVC: PanArrowVC {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
-        
         setup()
     }
     

@@ -23,9 +23,8 @@ class TestingVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
+        checkDarkMode()
+        addObservers()
         
         view.backgroundColor = UIColor.black
         
@@ -63,6 +62,22 @@ class TestingVC: UIViewController {
         premiumSwitch.setOn(premiumMode, animated: false)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // MARK: - Actions
     
@@ -93,7 +108,6 @@ class TestingVC: UIViewController {
         return label
     }
     
-    
     private func createSwitch(_ selector: Selector) -> UISwitch {
         
         let swtch = UISwitch()
@@ -103,7 +117,6 @@ class TestingVC: UIViewController {
         
         return swtch
     }
-    
     
     private func createButton(title: String, selector: Selector) -> UIButton {
         
@@ -117,6 +130,18 @@ class TestingVC: UIViewController {
         button.layer.cornerRadius = 25
         
         return button
+    }
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
     }
 
     

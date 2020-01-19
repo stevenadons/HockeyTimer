@@ -30,6 +30,7 @@ class BuyPremiumVC: UIViewController {
     private var products: [SKProduct] = []
     private var titleText: String!
     private var text: String!
+    private var shouldShowFirstButton: Bool = true
     
     private var interstitial: GADInterstitial?
     private var isShowingInterstitial: Bool = false
@@ -49,11 +50,12 @@ class BuyPremiumVC: UIViewController {
 
     // MARK: - Life Cycle
     
-    init(title: String, text: String, afterDismiss: ((Bool) -> Void)? = nil) {
+    init(title: String, text: String, showFirstButton: Bool, afterDismiss: ((Bool) -> Void)? = nil) {
         
         self.afterDismiss = afterDismiss
         self.titleText = title
         self.text = text
+        self.shouldShowFirstButton = showFirstButton
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -66,9 +68,8 @@ class BuyPremiumVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
+        checkDarkMode()
+        addObservers()
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
@@ -131,6 +132,7 @@ class BuyPremiumVC: UIViewController {
         let buttonTitle = LS_BUYPREMIUM_WATCHADBUTTON + " (" + formattedPrice + ")"
         watchAdButton.setTitle(buttonTitle, for: .normal)
         watchAdButton.addTarget(self, action: #selector(watchAdTapped), for: [.touchUpInside])
+        watchAdButton.alpha = shouldShowFirstButton ? 1.0 : 0.0
         view.addSubview(watchAdButton)
         
         buyPremiumButton = ConfirmationButton.blueButton(largeFont: true)
@@ -232,6 +234,11 @@ class BuyPremiumVC: UIViewController {
                                                selector: #selector(handleTransactionEndedNotification),
                                                name: .TransactionEndedNotification,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(checkDarkMode),
+                                               name: .DarkModeSettingsChanged, object:
+            nil)
     }
     
     deinit {
@@ -244,7 +251,6 @@ class BuyPremiumVC: UIViewController {
         
     }
     
-    
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(animated)
@@ -252,6 +258,12 @@ class BuyPremiumVC: UIViewController {
         if !isShowingInterstitial {
             afterDismiss?(rewardEarned)
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
     }
     
     
@@ -298,6 +310,22 @@ class BuyPremiumVC: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }
     }
+    
+    
+    // MARK: - Private Methods
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
+    }
+
     
     
     // MARK: - GAD Interstitial

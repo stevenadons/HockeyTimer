@@ -36,10 +36,8 @@ class OnboardingVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
-        
+        checkDarkMode()
+        addObservers()
         setup()
         setupSlides()
     }
@@ -89,7 +87,6 @@ class OnboardingVC: UIViewController {
             dismissButton.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -dismissButtonConstant),
             
             ])
-        
     }
     
     private func setupSlides() {
@@ -145,6 +142,38 @@ class OnboardingVC: UIViewController {
         stopWatch.setNeedsLayout()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    // MARK: - Touch methods
+    
+    @objc private func handleDismiss(sender: UIButton) {
+        
+        UserDefaults.standard.set(UserDefaultsKey.ShouldNotOnboard, forKey: UserDefaultsKey.ShouldNotOnboard)
+        
+        let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
+        startViewController.modalTransitionStyle = .crossDissolve
+        startViewController.modalPresentationStyle = .fullScreen
+        present(startViewController, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - Private Methods
+    
     private func setStopWatchFrame() {
         
         let graphicsSide = min(slide1.graphics.bounds.width, slide1.graphics.bounds.height)
@@ -176,17 +205,18 @@ class OnboardingVC: UIViewController {
     }
     
     
-    // MARK: - Touch methods
-    
-    @objc private func handleDismiss(sender: UIButton) {
+    @objc private func checkDarkMode() {
         
-        UserDefaults.standard.set(UserDefaultsKey.ShouldNotOnboard, forKey: UserDefaultsKey.ShouldNotOnboard)
-        
-        let startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
-        startViewController.modalTransitionStyle = .crossDissolve
-        startViewController.modalPresentationStyle = .fullScreen
-        present(startViewController, animated: true, completion: nil)
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
     }
+
 }
 
 

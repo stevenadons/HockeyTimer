@@ -42,10 +42,6 @@ class TimerVC: PanArrowVC {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
-        
         view.backgroundColor = UIColor(named: ColorName.LightYellow_Black)! 
         view.clipsToBounds = true
         game = pageVC?.game
@@ -197,33 +193,18 @@ class TimerVC: PanArrowVC {
     
     private func showBuyPremiumVC(onProgressionEarned: ((Bool) -> Void)?) {
     
-        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_NEW_GAME, text: LS_BUYPREMIUM_TEXT_NEW_GAME, afterDismiss: onProgressionEarned)
+        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: true, afterDismiss: onProgressionEarned)
         present(buyPremiumVC, animated: true, completion: nil)
     }
     
     private func showAlertNewGame() {
         
         let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGNEWGAME_TEXT, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: {
-            self.handleRequestNewGameConfirmed()
+            self.handleConfirmationNewGame()
         }, cancelAction: nil)
         
         DispatchQueue.main.async {
             self.present(askConfirmationVC, animated: true, completion: nil)
-        }
-    }
-    
-    private func handleRequestNewGameConfirmed() {
-        
-        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
-        if inPremiumMode {
-            handleConfirmationNewGame()
-            
-        } else {
-            showBuyPremiumVC(onProgressionEarned: { earned in
-                if earned {
-                    self.handleConfirmationNewGame()
-                }
-            })
         }
     }
     
@@ -236,6 +217,7 @@ class TimerVC: PanArrowVC {
             handleNewGame()
         }
     }
+    
     
     
     // MARK: - Touch Methods
@@ -289,6 +271,21 @@ extension TimerVC: StopWatchDelegate {
 extension TimerVC: CardTimerPanelDelegate {
     
     func shouldAddCard() {
+        
+        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
+        if inPremiumMode {
+            showAddTimerVC()
+            
+        } else {
+            showBuyPremiumVC(onProgressionEarned: { earned in
+                if earned {
+                    self.showAddTimerVC()
+                }
+            })
+        }
+    }
+    
+    private func showAddTimerVC() {
         
         let vc = AddCardTimerVC(okAction: { (cardType, minutes) in
             let card = Card(type: cardType)

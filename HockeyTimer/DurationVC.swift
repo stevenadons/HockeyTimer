@@ -40,10 +40,6 @@ class DurationVC: PanArrowVC {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
-        
         view.backgroundColor = UIColor.systemBackground
 
         setupViews()
@@ -288,24 +284,7 @@ class DurationVC: PanArrowVC {
             clearSelectedDuration()
             return
         }
-        
-        let inPremiumMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode)
-        guard !inPremiumMode else {
-            handleSelection(card: sender)
-            return
-        }
-        
-        // App in Basic Mode: present option to buy premium or watch ad
-        let actions: (Bool) -> Void = { [sender] rewardEarned in
-            if rewardEarned {
-                self.handleSelection(card: sender)
-                self.skipAnimations = false
-            }
-        }
-        
-        skipAnimations = true
-        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME , text: LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME, afterDismiss: actions)
-        present(buyPremiumVC, animated: true, completion: nil)
+        handleSelection(card: sender)
     }
     
     @objc private func cancelViewTapped(sender: UIButton, forEvent event: UIEvent) {

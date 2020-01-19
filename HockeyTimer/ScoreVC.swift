@@ -58,10 +58,6 @@ class ScoreVC: PanArrowVC {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
-        
         view.backgroundColor = .systemBackground
         view.clipsToBounds = true
         setupViews()

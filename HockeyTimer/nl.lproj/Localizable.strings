@@ -104,9 +104,9 @@
 "Privacy policy" = "Privacybeleid";
 "Link to website" = "Link naar de website";
 "Dark" = "Donker";
-"Always show in dark mode" = "Altijd in donkere modus";
+"Always show dark mode" = "Altijd in donkere modus";
 "Light" = "Licht";
-"Never show in dark mode" = "Nooit in donkere modus";
+"Never show dark mode" = "Nooit in donkere modus";
 "Phone settings" = "Volgens instellingen";
 "Follow your phone settings" = "Volg je telefooninstellingen";
 

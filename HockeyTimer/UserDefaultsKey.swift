@@ -18,4 +18,7 @@ enum UserDefaultsKey {
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
     static let PremiumMode = "PremiumMode"
     static let CountryIndex = "CountryIndex"
+    static let AlwaysDarkMode = "AlwaysDarkMode"
+    static let AlwaysLightMode = "AlwaysLightMode"
+    static let DarkModeFollowsPhoneSettings = "DarkModeFollowsPhoneSettings"
 }

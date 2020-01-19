@@ -37,9 +37,8 @@ class PanArrowVC: UIViewController {
         
         super.viewDidLoad()
         
-        if !FeatureFlags.darkModeCanBeEnabled {
-            overrideUserInterfaceStyle = .light
-        }
+        checkDarkMode()
+        addObservers()
         
         panArrowUp = PanArrow()
         view.addSubview(panArrowUp)
@@ -116,6 +115,22 @@ class PanArrowVC: UIViewController {
             ])
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // MARK: - Touch Methods
     
@@ -139,6 +154,7 @@ class PanArrowVC: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
+    
     // MARK: - Public Methods
     
     func liftPanArrowDownLabelUp() {
@@ -146,5 +162,19 @@ class PanArrowVC: UIViewController {
         panArrowDownLabelPadding = 8
         
     }
-
+    
+    
+    // MARK: - Private Methods
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
+    }
 }
