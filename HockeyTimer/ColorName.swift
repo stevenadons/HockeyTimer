@@ -42,7 +42,8 @@ enum ColorName {
     static let StopWatchCore = "StopWatchCore"
     static let StopWatchIcon = "StopWatchIcon"
     static let StopWatchProgressZone = "StopWatchProgressZone"
-    
+    static let TimerZoneFade = "TimerZoneFade"
+
     static let GrayScaleGreenCard = "GrayScaleGreenCard"
     static let GrayScaleYellowCard = "GrayScaleYellowCard"
     static let GrayScaleRedCard = "GrayScaleRedCard"

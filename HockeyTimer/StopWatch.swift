@@ -25,7 +25,7 @@ class StopWatch: UIControl {
     var game: HockeyGame! {
         didSet {
             updateLabels()
-            resetTimeLabel(withColor: .label, alpha: 1)
+            resetTimeLabel(withColor: timeLabel.standardColor, alpha: 1) // .label
         }
     }
     
@@ -309,7 +309,7 @@ class StopWatch: UIControl {
         periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
         periodLabel.alpha = 1.0
         updateProgressBars()
-        resetTimeLabel(withColor: .label, alpha: 1)
+        resetTimeLabel(withColor: timeLabel.standardColor, alpha: 1) // .label
         setProgressBarsColor(to: progressBarColor)
         icon.icon = .PlayIcon
         setNeedsLayout()
@@ -622,7 +622,7 @@ class StopWatch: UIControl {
                 
             }
             
-            resetTimeLabel(withColor: .label, alpha: 1)
+            resetTimeLabel(withColor: timeLabel.standardColor, alpha: 1) // .label
             JukeBox.instance.stopPlayingAll()
             JukeBox.instance.removeSound(Sound.BeepBeep)
             

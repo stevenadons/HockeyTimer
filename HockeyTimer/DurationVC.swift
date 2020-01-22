@@ -149,18 +149,19 @@ class DurationVC: PanArrowVC {
         }
         
         pauseSwitchLeadingConstraint = NSLayoutConstraint(item: pauseAtQuarterSwitch as Any, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -42)
-        let switchTopInset: CGFloat = UIDevice.whenDeviceIs(small: 36, normal: 51, big: 51)
         
         let buttonWidth: CGFloat = 44
         let buttonHeight: CGFloat = 44
         let buttonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
-        let buttonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 45, big: 45)
+        let buttonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 0, normal: 12, big: 12)
+        let switchTopInset: CGFloat = buttonTopInset + 6
+
         
         NSLayoutConstraint.activate([
             
             countryButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
             countryButton.widthAnchor.constraint(equalToConstant: buttonWidth),
-            countryButton.topAnchor.constraint(equalTo: view.topAnchor, constant: buttonTopInset),
+            countryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: buttonTopInset),
             countryButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             cancelView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -168,7 +169,7 @@ class DurationVC: PanArrowVC {
             cancelView.topAnchor.constraint(equalTo: view.topAnchor),
             cancelView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            pauseAtQuarterSwitch.topAnchor.constraint(equalTo: view.topAnchor, constant: switchTopInset),
+            pauseAtQuarterSwitch.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: switchTopInset),
             pauseSwitchLeadingConstraint,
             
             pauseAtQuarterLabel.trailingAnchor.constraint(equalTo: pauseAtQuarterSwitch.leadingAnchor, constant: -11),
@@ -319,45 +320,4 @@ class DurationVC: PanArrowVC {
         })
         present(vc, animated: true, completion: nil)
     }
-    
 }
-
-
-//extension DurationVC: CountryMenuDelegate {
-//    
-//    func handleCountryMenuMainButtonTapped() { }
-//    
-//    func handleCountryMenuOtherButtonTapped(buttonNumber: Int) {
-//        
-//        guard CountryDataManager.shared.countries[buttonNumber] != SELECTED_COUNTRY else { return }
-//        SELECTED_COUNTRY = CountryDataManager.shared.countries[buttonNumber]
-//        
-//        for card in cards {
-//            card.removeFromSuperview()
-//        }
-//        
-//        cards = []
-//        
-//        for index in 0..<SELECTED_COUNTRY.durations.count {
-//            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
-//            cards.append(card)
-//            card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-//            card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
-//            view.addSubview(card)
-//        }
-//        
-//        addCardConstraints()
-//    }
-//    
-//    func didShowButtons() {
-//        
-//        pageVC?.showBackgroundMask()
-//    }
-//    
-//    func willHideButtons() {
-//        
-//        pageVC?.hideBackgroundMask()
-//    }
-//}
-
-

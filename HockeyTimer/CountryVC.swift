@@ -89,22 +89,24 @@ class CountryVC: UIViewController {
     private func addConstraints() {
         
         let buttonHeight: CGFloat = 54
-        let horInset: CGFloat = 35
+        let buttonHorInset: CGFloat = 24
+        let tableViewHorInset: CGFloat = 9
         
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tableViewHorInset),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tableViewHorInset),
             tableView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -16),
             
-            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
-            cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
+            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
+            cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
             cancelButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -horInset),
+            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonHorInset),
             
             ])
     }
@@ -185,9 +187,6 @@ extension CountryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        guard CountryDataManager.shared.countries[indexPath.row] != SELECTED_COUNTRY else {
-//            return
-//        }
         SELECTED_COUNTRY = CountryDataManager.shared.countries[indexPath.row]
         dismiss(animated: true, completion: nil)
     }

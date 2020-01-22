@@ -34,6 +34,8 @@ var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
 var runningCountingUp: Bool = false
 var runningDuration: Duration = .Twenty
+var allCardsSecondsToGo: [Int] = []
+
 var shouldRestoreFromBackground: Bool = false
 var appStoreProducts: [SKProduct] = []
 var shadowed: Bool = false

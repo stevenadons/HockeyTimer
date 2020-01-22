@@ -34,7 +34,6 @@ class TimerVC: PanArrowVC {
 
     var message: String = ""
     
-    
         
     // MARK: - Loading
     
@@ -78,8 +77,8 @@ class TimerVC: PanArrowVC {
         liftPanArrowDownLabelUp()
         
         let resetButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
-        let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 8, normal: 22, big: 22)
-        
+        let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 0, normal: 12, big: 12)
+
         NSLayoutConstraint.activate([
             
             resetButton.widthAnchor.constraint(equalToConstant: resetButton.standardWidth),
@@ -153,6 +152,7 @@ class TimerVC: PanArrowVC {
     @objc fileprivate func updateAfterRestoringFromBackground() {
         
         stopWatch.updateAfterRestoringFromBackground()
+        cardTimerPanel.updateAfterRestoringFromBackground()
     }
     
     @objc fileprivate func handleNewGame() {

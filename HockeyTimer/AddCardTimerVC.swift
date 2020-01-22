@@ -116,8 +116,9 @@ class AddCardTimerVC: UIViewController {
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+
             minutesPanel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -minutesYOffset),
             minutesPanel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -24),
             minutesPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),

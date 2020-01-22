@@ -13,7 +13,11 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
     
     // MARK: - Properties
     
-    private var timers: [CardTimer] = []
+    private var timers: [CardTimer] = [] {
+        didSet {
+            updateGlobalSecondsToGo()
+        }
+    }
     
     var count: Int {
         return timers.count
@@ -21,6 +25,12 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
     
     // MARK: - Private Methods
     
+    private func updateGlobalSecondsToGo() {
+        
+        allCardsSecondsToGo = timers.map {
+            $0.secondsToGo
+        }
+    }
     
     
     // MARK: - Public Methods
@@ -74,6 +84,17 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
         
         timers.forEach {
             $0.minusOneSecond()
+        }
+        updateGlobalSecondsToGo()
+    }
+    
+    func updateAfterRestoringFromBackground() {
+        
+        guard allCardsSecondsToGo.count == timers.count else {
+            return
+        }
+        for index in 0 ..< timers.count {
+            timers[index].setSecondsToGo(allCardsSecondsToGo[index])
         }
     }
 }

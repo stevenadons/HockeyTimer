@@ -24,7 +24,7 @@ class CardTimer: UIView {
     private var timerZone: UIView!
     private var timeLabel: UILabel!
     private var card: Card!
-    private var secondsToGo: Int!
+    private (set) var secondsToGo: Int!
     private weak var delegate: CardTimerDelegate?
     private var haptic: UINotificationFeedbackGenerator?
 
@@ -61,7 +61,6 @@ class CardTimer: UIView {
         
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private func setup() {
         
@@ -132,15 +131,13 @@ class CardTimer: UIView {
             return
         }
         secondsToGo -= 1
-        timeLabel.text = updatedTimeString()
-        if secondsToGo == 0 {
-            fade()
-            doHaptic()
-            JukeBox.instance.playSound(Sound.Alarm)
-        } else if secondsToGo == 2 {
-            prepareHaptic()
-            JukeBox.instance.prepareSound(Sound.Alarm)
-        }
+        updateUIWithNewSeconds()
+    }
+    
+    func setSecondsToGo(_ int: Int) {
+        
+        secondsToGo = int
+        updateUIWithNewSeconds()
     }
     
     
@@ -173,9 +170,22 @@ class CardTimer: UIView {
         return timeString
     }
     
+    private func updateUIWithNewSeconds() {
+        
+        timeLabel.text = updatedTimeString()
+        if secondsToGo == 0 {
+            fade()
+            doHaptic()
+            JukeBox.instance.playSound(Sound.Alarm)
+        } else if secondsToGo == 2 {
+            prepareHaptic()
+            JukeBox.instance.prepareSound(Sound.Alarm)
+        }
+    }
+    
     private func fade() {
         
-        timerZone.backgroundColor = .systemGray2
+        timerZone.backgroundColor = UIColor(named: ColorName.TimerZoneFade)!
         graphics.opacity = 0.4
         timeLabel.alpha = 0.5
     }

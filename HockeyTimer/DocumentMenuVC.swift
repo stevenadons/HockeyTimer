@@ -91,7 +91,7 @@ class DocumentMenuVC: PanArrowVC {
         let buttonWidth: CGFloat = 44
         let buttonHeight: CGFloat = 44
         let buttonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 37, normal: 42, big: 42)
-        let buttonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 45, big: 45)
+        let buttonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 0, normal: 12, big: 12)
 
         NSLayoutConstraint.activate([
             
@@ -105,7 +105,7 @@ class DocumentMenuVC: PanArrowVC {
             
             countryButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
             countryButton.widthAnchor.constraint(equalToConstant: buttonWidth),
-            countryButton.topAnchor.constraint(equalTo: view.topAnchor, constant: buttonTopInset),
+            countryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: buttonTopInset),
             countryButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             ])

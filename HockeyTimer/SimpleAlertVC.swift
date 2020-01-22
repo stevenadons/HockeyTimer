@@ -120,12 +120,13 @@ class SimpleAlertVC: UIViewController {
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+
             textLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset * 1.5),
             textLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset * 1.5),
             textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            textLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -60),
+            textLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -15),
             
             ])
         

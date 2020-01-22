@@ -109,6 +109,11 @@ class CardTimerPanel: UIView {
         
         dataSource.minusOneSecond()
     }
+    
+    func updateAfterRestoringFromBackground() {
+        
+        dataSource.updateAfterRestoringFromBackground()
+    }
  
 }
 

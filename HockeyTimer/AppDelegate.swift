@@ -64,7 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeOverdue)
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
-
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.CardEndTimesWhenInBackground)
+        
         return true
     }
     
@@ -81,15 +82,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeOverdue)
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.CardEndTimesWhenInBackground)
 
         print("applicationDidEnterBackground runningSecondsOverdue is \(runningSecondsOverdue)")
 
         guard timerIsRunning else { return }
+        
         if runningSecondsToGo > 0 {
+            
+            // Update memory of game time
             let endTime = NSDate().addingTimeInterval(Double(runningSecondsToGo))
             UserDefaults.standard.set(endTime, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
             print("applicationDidEnterBackground did store endTime in \(runningSecondsToGo) seconds")
-            UserNotificationHandler.sharedHandler.scheduleNotification(within: Double(runningSecondsToGo))
+            UserNotificationHandler.sharedHandler.scheduleNotification(text: LS_NOTIFICATION_RUNNING_IN_OVERTIME, within: Double(runningSecondsToGo))
+            
+            // Update memory of pending cards
+            guard !allCardsSecondsToGo.isEmpty else {
+                return
+            }
+            var cardEndTimes: [NSDate] = []
+            for cardSecondsToGo in allCardsSecondsToGo {
+                let cardEndTime = NSDate().addingTimeInterval(Double(cardSecondsToGo))
+                cardEndTimes.append(cardEndTime)
+                if cardSecondsToGo > 0 {
+                    print("Planning notification in \(cardSecondsToGo) seconds")
+                    UserNotificationHandler.sharedHandler.scheduleNotification(text: LS_NOTIFICATION_CARD_HAS_ENDED, within: Double(cardSecondsToGo))
+                }
+            }
+            UserDefaults.standard.set(cardEndTimes, forKey: UserDefaultsKey.CardEndTimesWhenInBackground)
+            print("applicationDidEnterBackground did store card endTimes in \(cardEndTimes) seconds")
 
         } else if runningSecondsOverdue > 0 {
             let startTime = NSDate().addingTimeInterval(Double(-runningSecondsOverdue))
@@ -113,6 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         runningSecondsCountingUp = 0
 
         if let storedEndTime = UserDefaults.standard.value(forKey: UserDefaultsKey.TimerEndTimeWhenInBackground) as? NSDate {
+            
             // Restoring from formerly running countdown
             if storedEndTime.timeIntervalSinceNow >= 0 {
                 // Countdown should still be running
@@ -126,8 +148,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 runningSecondsOverdue = Int(Date().timeIntervalSince(storedEndTime as Date))
                 print("applicationWillEnterForeground - case 2 - did set runningSecondsOverdue to \(runningSecondsOverdue)")
             }
+            
+            // Restoring card end times
+            if let cardEndTimes = UserDefaults.standard.object(forKey: UserDefaultsKey.CardEndTimesWhenInBackground) as? [NSDate] {
+                var newAllCardsSecondsToGo: [Int] = []
+                for cardEndTime in cardEndTimes {
+                    let calculatedSecondsToGo = Int(cardEndTime.timeIntervalSinceNow)
+                    let cardSecondsToGo = max(calculatedSecondsToGo, 0)
+                    newAllCardsSecondsToGo.append(cardSecondsToGo)
+                }
+                allCardsSecondsToGo = newAllCardsSecondsToGo
+                print("applicationWillEnterForeground - case 1 - did set allCardsSecondsToGo to \(allCardsSecondsToGo)")
+            }
 
         } else if let storedStartTime = UserDefaults.standard.value(forKey: UserDefaultsKey.TimerStartTimeOverdue) as? NSDate {
+            
             // Restoring from formerly overdue countup
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Overdue countup should resume
@@ -137,6 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
         } else if let storedStartTime = UserDefaults.standard.value(forKey: UserDefaultsKey.TimerStartTimeCountingUp) as? NSDate {
+            
             // Restoring from formerly counting up
             if storedStartTime.timeIntervalSinceNow < 0 {
                 // Countup should resume
@@ -160,6 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerEndTimeWhenInBackground)
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeOverdue)
         UserDefaults.standard.set(nil, forKey: UserDefaultsKey.TimerStartTimeCountingUp)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.CardEndTimesWhenInBackground)
         
         UserNotificationHandler.sharedHandler.cancelAllNotificationRequests()
     }
@@ -201,15 +238,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func firstTimeSetDarkModeSettings() {
         
-        let ud = UserDefaults.standard
-        
-//        guard ud.bool(forKey: UserDefaultsKey.AlwaysDarkMode) || ud.bool(forKey: UserDefaultsKey.AlwaysLightMode) || ud.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) else {
-//            ud.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
-//            return
-//        }
-        
-        if !ud.bool(forKey: UserDefaultsKey.PremiumMode) {
-            ud.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
+        if !UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) {
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
         }
     }
 

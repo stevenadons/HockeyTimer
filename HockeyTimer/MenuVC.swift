@@ -18,7 +18,6 @@ class MenuVC: UIViewController {
     
     private var titleLabel: UILabel!
     private var tableView: UITableView!
-    private var doneButton: UIButton!
     
     private var titleText: String?
     
@@ -70,6 +69,7 @@ class MenuVC: UIViewController {
         
         super.viewDidLoad()
         
+        checkToggles()
         checkDarkMode()
         addObservers()
         
@@ -107,36 +107,27 @@ class MenuVC: UIViewController {
         tableView.separatorColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         // Make the viewcontroller dismissable by swiping down
         // Setting isScrollEnabled to false will not work for this
         tableView.panGestureRecognizer.isEnabled = false
         view.addSubview(tableView)
-        
-        doneButton = UIButton()
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
-        let tintColor = UIColor(named: ColorName.DarkBlue)!
-        let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(tintColor, renderingMode: .alwaysOriginal)
-        doneButton.setImage(image, for: .normal)
-        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
-        doneButton.alpha = 0.0
-        view.addSubview(doneButton)
     }
     
     private func addConstraints() {
         
+        let tableViewHorInset: CGFloat = 9
+        
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tableViewHorInset),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tableViewHorInset),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
-            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18)
             
             ])
     }
@@ -224,13 +215,6 @@ class MenuVC: UIViewController {
         NotificationCenter.default.post(name: .DarkModeSettingsChanged, object: nil)
     }
     
-    @objc private func doneButtonTapped() {
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        }
-    }
-    
     
     // MARK: - Actions
 
@@ -274,6 +258,8 @@ class MenuVC: UIViewController {
     
     private func setToggles() {
         
+        checkToggles()
+
         guard let section = headerTitles.firstIndex(of: LS_MENU_HEADER_DARK_MODE) else {
             return
         }
@@ -299,6 +285,18 @@ class MenuVC: UIViewController {
             default:
                 fatalError("Did select menu item which does not exist")
             }
+        }
+    }
+    
+    private func checkToggles() {
+        
+        let darkMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) ? 1 : 0
+        let lightMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) ? 1 : 0
+        let phoneMode = UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) ? 1 : 0
+        if darkMode + lightMode + phoneMode != 1 {
+            UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
+            UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
         }
     }
     

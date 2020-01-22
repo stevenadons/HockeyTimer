@@ -16,6 +16,7 @@ enum UserDefaultsKey {
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"
     static let TimerStartTimeCountingUp = "TimerStartTimeCountingUp"
+    static let CardEndTimesWhenInBackground = "CardEndTimesWhenInBackground"
     static let PremiumMode = "PremiumMode"
     static let CountryIndex = "CountryIndex"
     static let AlwaysDarkMode = "AlwaysDarkMode"

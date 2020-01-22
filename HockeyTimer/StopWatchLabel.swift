@@ -19,12 +19,13 @@ class StopWatchLabel: UIView {
             setNeedsLayout()
         }
     }
-    var textColor: UIColor = UIColor(named: ColorName.VeryDarkBlue_White)! {
+    var textColor: UIColor = .white { //UIColor(named: ColorName.VeryDarkBlue_White)!
         didSet {
             label.textColor = textColor
             setNeedsDisplay()
         }
     }
+    private (set) var standardColor: UIColor = .white
     
     private var label: UILabel!
     
