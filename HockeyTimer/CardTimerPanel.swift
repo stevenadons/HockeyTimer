@@ -69,6 +69,7 @@ class CardTimerPanel: UIView {
             return cell
         })
         dataSource.configureWithAddCardCell()
+        dataSource.takeSnapShot()
     }
     
     override func layoutSubviews() {

@@ -78,6 +78,7 @@ class TimerVC: PanArrowVC {
         
         let resetButtonHorInset: CGFloat = UIDevice.whenDeviceIs(small: 28, normal: 32, big: 32)
         let resetButtonTopInset: CGFloat = UIDevice.whenDeviceIs(small: 0, normal: 12, big: 12)
+        let stopWatchExtraYOffset: CGFloat = UIDevice.whenDeviceIs(small: 30, normal: 30, big: 55)
 
         NSLayoutConstraint.activate([
             
@@ -89,7 +90,7 @@ class TimerVC: PanArrowVC {
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), 
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2 - 30),
+            stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2 - stopWatchExtraYOffset),
             
             stopWatch.widthAnchor.constraint(equalTo: stopWatchContainer.widthAnchor),
             stopWatch.heightAnchor.constraint(equalTo: stopWatchContainer.heightAnchor),

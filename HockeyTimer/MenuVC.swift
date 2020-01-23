@@ -26,24 +26,15 @@ class MenuVC: UIViewController {
                                           LS_MENU_REVIEW,
                                           LS_MENU_PRIVACY_POLICY]
     
-    private let feedbackDetailText: [String] = [LS_MENU_SHARE_THE_APP,
-                                                LS_MENU_WRITE_AN_EMAIL,
-                                                LS_MENU_WRITE_A_REVIEW,
-                                                LS_MENU_LINK_TO_WEBSITE]
-    
     private let feedbackImageNames: [String] = ["square.and.arrow.up",
                                                 "envelope",
                                                 "square.and.pencil",
                                                 "checkmark.shield"]
     
-    private let darkModeText: [String] = [LS_MENU_DARK,
-                                          LS_MENU_LIGHT,
-                                          LS_MENU_PHONE_SETTINGS]
-    
-    private let darkModeDetailText: [String] = [LS_MENU_ALWAYS_DARK,
-                                                LS_MENU_NEVER_DARK,
-                                                LS_MENU_FOLLOW_PHONE_SETTINGS]
-    
+    private let darkModeText: [String] = [LS_MENU_ALWAYS_DARK,
+                                          LS_MENU_NEVER_DARK,
+                                          LS_MENU_WHEN_PHONE_IN_DARK]
+   
     private let headerTitles: [String] = [LS_MENU_HEADER_FEEDBACK,
                                           LS_MENU_HEADER_DARK_MODE]
     
@@ -124,7 +115,7 @@ class MenuVC: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
 
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tableViewHorInset),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tableViewHorInset),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -170,17 +161,17 @@ class MenuVC: UIViewController {
         if item.isOn {
             
             switch darkModeText[item.tag] {
-            case LS_MENU_DARK:
+            case LS_MENU_ALWAYS_DARK:
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysDarkMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
 
-            case LS_MENU_LIGHT:
+            case LS_MENU_NEVER_DARK:
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysLightMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
 
-            case LS_MENU_PHONE_SETTINGS:
+            case LS_MENU_WHEN_PHONE_IN_DARK:
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
@@ -192,17 +183,17 @@ class MenuVC: UIViewController {
         } else {
             
             switch darkModeText[item.tag] {
-            case LS_MENU_DARK:
+            case LS_MENU_ALWAYS_DARK:
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
 
-            case LS_MENU_LIGHT:
+            case LS_MENU_NEVER_DARK:
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysDarkMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
 
-            case LS_MENU_PHONE_SETTINGS:
+            case LS_MENU_WHEN_PHONE_IN_DARK:
                 UserDefaults.standard.set(true, forKey: UserDefaultsKey.AlwaysDarkMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.AlwaysLightMode)
                 UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
@@ -273,13 +264,13 @@ class MenuVC: UIViewController {
             let toggle = accessoryView as! UISwitch
             
             switch darkModeText[index] {
-            case LS_MENU_DARK:
+            case LS_MENU_ALWAYS_DARK:
                 let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode)
                 toggle.setOn(on, animated: false)
-            case LS_MENU_LIGHT:
+            case LS_MENU_NEVER_DARK:
                 let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode)
                 toggle.setOn(on, animated: false)
-            case LS_MENU_PHONE_SETTINGS:
+            case LS_MENU_WHEN_PHONE_IN_DARK:
                 let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
                 toggle.setOn(on, animated: false)
             default:
@@ -309,13 +300,13 @@ class MenuVC: UIViewController {
         toggle.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
         
         switch darkModeText[tag] {
-        case LS_MENU_DARK:
+        case LS_MENU_ALWAYS_DARK:
             let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode)
             toggle.setOn(on, animated: false)
-        case LS_MENU_LIGHT:
+        case LS_MENU_NEVER_DARK:
             let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode)
             toggle.setOn(on, animated: false)
-        case LS_MENU_PHONE_SETTINGS:
+        case LS_MENU_WHEN_PHONE_IN_DARK:
             let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
             toggle.setOn(on, animated: false)
         default:
@@ -411,19 +402,18 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let fontSize = UIDevice.whenDeviceIs(small: 15, normal: 17, big: 17)
+
         cell.backgroundColor = .secondarySystemBackground
         cell.textLabel?.textColor = .label
-        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
-        cell.detailTextLabel?.textColor = .secondaryLabel
-        cell.detailTextLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: 15)
+        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: fontSize)
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.selectionStyle = .none
         
         if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
             
             cell.textLabel?.text = feedbackText[indexPath.row]
-            cell.detailTextLabel?.text = feedbackDetailText[indexPath.row]
             
             let imageName = feedbackImageNames[indexPath.row]
             let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .medium, scale: .large)
@@ -436,11 +426,15 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         } else if headerTitles[indexPath.section] == LS_MENU_HEADER_DARK_MODE {
             
             cell.textLabel?.text = darkModeText[indexPath.row]
-            cell.detailTextLabel?.text = darkModeDetailText[indexPath.row]
             cell.accessoryView = toggleFor(feedbackText[indexPath.row], tag: indexPath.row)
         }
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 52
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

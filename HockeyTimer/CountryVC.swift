@@ -91,6 +91,7 @@ class CountryVC: UIViewController {
         let buttonHeight: CGFloat = 54
         let buttonHorInset: CGFloat = 24
         let tableViewHorInset: CGFloat = 9
+        let padding: CGFloat = UIDevice.whenDeviceIs(small: 15, normal: 30, big: 30)
         
         NSLayoutConstraint.activate([
             
@@ -98,7 +99,7 @@ class CountryVC: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
 
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tableViewHorInset),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tableViewHorInset),
             tableView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -16),
@@ -183,7 +184,6 @@ extension CountryVC: UITableViewDelegate, UITableViewDataSource {
         
         return 55
     }
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

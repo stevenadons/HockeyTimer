@@ -113,7 +113,7 @@ class StopWatch: UIControl {
         squareContainer.addSublayer(progressZone)
         
         core = CALayer()
-        core.backgroundColor = UIColor.white.cgColor // UIColor(named: ColorName.StopWatchCore)!.cgColor
+        core.backgroundColor = UIColor.systemBackground.cgColor
         squareContainer.addSublayer(core)
         
         progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
@@ -193,7 +193,7 @@ class StopWatch: UIControl {
         
         updateLabels()
         
-        core.backgroundColor = UIColor(named: ColorName.StopWatchCore)!.cgColor
+        core.backgroundColor = UIColor.systemBackground.cgColor
         progressZone.fillColor = UIColor(named: ColorName.StopWatchProgressZone)!.cgColor
         
         [progressBarFirstHalf, progressBarSecondHalf, progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter].forEach {

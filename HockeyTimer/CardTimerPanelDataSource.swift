@@ -46,10 +46,8 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
     func configureWithAddCardCell() {
         
         let dummyCard = Card(type: .green)
-        let addCardTimer = CardTimer(card: dummyCard, minutes: 999, delegate: self, isDummyForAddCard: true)
+        let addCardTimer = CardTimer(card: dummyCard, minutes: 9999, delegate: self, isDummyForAddCard: true)
         timers.append(addCardTimer)
-        
-        takeSnapShot()
     }
     
     func addTimerFor(_ card: Card, minutes: Int) {

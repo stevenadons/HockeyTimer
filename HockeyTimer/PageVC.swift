@@ -302,7 +302,7 @@ extension PageVC: UIPageViewControllerDelegate {
         } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
             
             // From DurationVC to TimerVC
-            if durationVC.selectedDuration != nil && timerVC.game.duration != durationVC.selectedDuration {
+            if durationVC.selectedDuration != nil && (timerVC.game.duration != durationVC.selectedDuration) {
                 // Duration changed
                 UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: UserDefaultsKey.Duration)
                 if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {

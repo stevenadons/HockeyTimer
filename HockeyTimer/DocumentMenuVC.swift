@@ -159,9 +159,7 @@ class DocumentMenuVC: PanArrowVC {
         
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "*.*"
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "*"
-        let premium = ""
-        #warning("add next line")
-            // UserDefaults.standard.bool(forKey: UserDefaultKey.PremiumMode) ? "P" : ""
+        let premium = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) ? "P" : ""
         result += "Version " + appVersion + premium + " - Build " + buildNumber
         
         let iosVersion = UIDevice.current.systemVersion

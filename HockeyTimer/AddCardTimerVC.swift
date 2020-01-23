@@ -29,7 +29,7 @@ class AddCardTimerVC: UIViewController {
         return view.bounds.height * 0.1
     }
     private let cardPanelHeight: CGFloat = 100
-    private let panelsPadding: CGFloat = 40
+    private let panelsPadding: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 40, big: 40)
     
     private var okAction: ((CardType, Int) -> Void)?
     private var cancelAction: (() -> Void)?
