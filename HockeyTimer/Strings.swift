@@ -31,7 +31,7 @@ let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notifica
 let LS_NOTIFICATION_DEFER = NSLocalizedString("Remind me in 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
 let LS_NOTIFICATION_RUNNING_IN_OVERTIME = NSLocalizedString("Running in overtime", comment: "Content for notification when app in background")
-let LS_NOTIFICATION_CARD_HAS_ENDED = NSLocalizedString("Card penalty time has ended", comment: "Content for notification when app in background")
+let LS_NOTIFICATION_CARD_HAS_ENDED = NSLocalizedString("Penalty card: time has ended", comment: "Content for notification when app in background")
 let LS_GAME_IN_QUARTERS = NSLocalizedString("Game in quarters", comment: "Title for switch")
 
 let LS_BUTTON_CANCEL = NSLocalizedString("Cancel", comment: "Cancel message")
@@ -59,7 +59,7 @@ let LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME = NSLocalizedString("Watch one ad to con
 let LS_BUYPREMIUM_TEXT_NEW_GAME = NSLocalizedString("Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment.", comment: "Text of buy premium VC")
 let LS_BUYPREMIUM_TITLE_DARK_MODE = NSLocalizedString("Dark Mode Settings", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TEXT_DARK_MODE = NSLocalizedString("To change the dark mode settings, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can keep track of green, yellow and red cards.", comment: "Title of buy premium VC")
-let LS_BUYPREMIUM_TITLE_CARD = NSLocalizedString("Add Card", comment: "Title of buy premium VC")
+let LS_BUYPREMIUM_TITLE_CARD = NSLocalizedString("Penalty Card", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TEXT_CARD = NSLocalizedString("To keep track of green, yellow and red cards (including penalty timing) watch one ad, or upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can change the dark mode settings.", comment: "Title of buy premium VC")
 
 let LS_BUYPREMIUM_BUYBUTTON = NSLocalizedString("Buy Premium", comment: "Buy button in buypremium VC")

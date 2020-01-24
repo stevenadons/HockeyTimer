@@ -57,14 +57,15 @@ class StopWatch: UIControl {
     fileprivate var haptic: UINotificationFeedbackGenerator?
     fileprivate var impactHaptic: UIImpactFeedbackGenerator?
     
-    private let progressBarWidth: CGFloat = 20
+    private let progressBarWidth: CGFloat = 14
+    private let progressZoneWidth: CGFloat = 20
     private let progressBarStrokeInsetRatio: CGFloat = 0.01
     
     private var squareSide: CGFloat {
         return min(self.bounds.width, self.bounds.height)
     }
     
-    private let progressBarColor: UIColor = .white // UIColor(named: ColorName.VeryDarkBlue_White)!
+    private let progressBarColor: UIColor = .white
     
     
     
@@ -165,13 +166,19 @@ class StopWatch: UIControl {
     override func layoutSubviews() {
         
         squareContainer.frame = bounds.insetBy(dx: (bounds.width - squareSide) / 2, dy: (bounds.height - squareSide) / 2)
+        
         progressZone.frame = squareContainer.bounds
         progressZone.path = UIBezierPath(ovalIn: progressZone.bounds).cgPath
-        core.frame = squareContainer.bounds.insetBy(dx: progressBarWidth, dy: progressBarWidth)
+        
+        core.frame = squareContainer.bounds.insetBy(dx: progressZoneWidth, dy: progressZoneWidth)
         core.cornerRadius = core.bounds.width / 2
+        
         updateProgressBars()
+        
         icon.frame = bounds.insetBy(dx: (130 * bounds.width / 230) / 2, dy: (130 * bounds.height / 230) / 2)
+        
         timeLabel.frame = bounds.insetBy(dx: bounds.width * 0.15, dy: bounds.height * 0.35)
+        
         NSLayoutConstraint.activate([
             
             messageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 90/230),
@@ -442,8 +449,8 @@ class StopWatch: UIControl {
         
         shape.strokeColor = progressBarColor.cgColor
         shape.lineWidth = progressBarWidth
-        shape.lineCap = CAShapeLayerLineCap.butt
-        shape.lineJoin = CAShapeLayerLineJoin.miter
+        shape.lineCap = .round
+        shape.lineJoin = .miter
         shape.fillColor = UIColor.clear.cgColor
         shape.position = CGPoint.zero
         shape.strokeStart = progressBarStrokeInsetRatio
@@ -460,11 +467,11 @@ class StopWatch: UIControl {
         
         switch half {
         case .First:
-            path.move(to: CGPoint(x: bounds.width / 2, y: progressBarWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: -.pi/2, endAngle: .pi/2, clockwise: true)
+            path.move(to: CGPoint(x: bounds.width / 2, y: progressZoneWidth / 2))
+            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: -.pi/2, endAngle: .pi/2, clockwise: true)
         case .Second:
-            path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressBarWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: .pi/2, endAngle: -.pi/2, clockwise: true)
+            path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressZoneWidth / 2))
+            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: .pi/2, endAngle: -.pi/2, clockwise: true)
         }
         
         return path
@@ -476,17 +483,17 @@ class StopWatch: UIControl {
         
         switch quarter {
         case .First:
-            path.move(to: CGPoint(x: bounds.width / 2, y: progressBarWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: -.pi/2, endAngle: 0, clockwise: true)
+            path.move(to: CGPoint(x: bounds.width / 2, y: progressZoneWidth / 2))
+            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: -.pi/2, endAngle: 0, clockwise: true)
         case .Second:
-            path.move(to: CGPoint(x: bounds.width - progressBarWidth / 2, y: bounds.height / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: 0, endAngle: .pi/2, clockwise: true)
+            path.move(to: CGPoint(x: bounds.width - progressZoneWidth / 2, y: bounds.height / 2))
+            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: 0, endAngle: .pi/2, clockwise: true)
         case .Third:
-            path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressBarWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: .pi/2, endAngle: .pi, clockwise: true)
+            path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressZoneWidth / 2))
+            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: .pi/2, endAngle: .pi, clockwise: true)
         case .Fourth:
-            path.move(to: CGPoint(x: progressBarWidth / 2, y: bounds.height / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressBarWidth / 2), startAngle: .pi, endAngle: -.pi/2, clockwise: true)
+            path.move(to: CGPoint(x: progressZoneWidth / 2, y: bounds.height / 2))
+            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: .pi, endAngle: -.pi/2, clockwise: true)
         }
         
         return path

@@ -168,13 +168,11 @@ class StopWatchTimer {
         let newMinutesInPeriod = Int(normalMinutesInHalf * multiplier)
         self.totalSecondsInPeriod = newMinutesInPeriod
         self.totalSecondsToGo = newMinutesInPeriod
-        print("SWTimer - resetTime - totalSecondsToGo set to \(totalSecondsToGo)")
     }
 
     @objc private func tickCountDown() {
         
         guard UIApplication.shared.applicationState != .background else { return }
-        print("SWTimer - tickCountDown - StopWatchTimer.totalSecondsToGo is \(totalSecondsToGo)")
         
         if totalSecondsToGo >= 1 {
             // Count down
@@ -191,7 +189,6 @@ class StopWatchTimer {
         } else {
             // Overdue - count up
             totalSecondsOverdue += 1
-            print("StopWatchTimer.totalSecondsOverdue set to \(totalSecondsOverdue)")
             delegate.handleTickCountDown()
         }
     }
@@ -199,7 +196,6 @@ class StopWatchTimer {
     @objc private func tickCountUp() {
         
         guard UIApplication.shared.applicationState != .background else { return }
-        print("SWTimer - tickCountUp - StopWatchTimer.totalSecondsOverdue is \(totalSecondsOverdue) - totalSecondsCountingUp is \(totalSecondsCountingUp)")
 
         if state == .Overdue {
             totalSecondsOverdue += 1
