@@ -19,13 +19,13 @@ class TimerVC: PanArrowVC {
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
     private var cardTimerPanel: CardTimerPanel!
-
-    private var duration: Duration = .TwentyFive
-    private var numberOfPeriods: NumberOfPeriods = .Halves
+    private var minutes: Int = HockeyGame.standardMinutes
+    private var periods: Int = HockeyGame.standardPeriods
+    
     var game: HockeyGame! {
         didSet {
             guard game != nil else { return }
-            duration = game.duration
+            minutes = game.minutes
         }
     }
     var delegate: TimerVCDelegate?
@@ -173,18 +173,13 @@ class TimerVC: PanArrowVC {
     }
     
     func createNewGame() {
+
+        let savedMinutes = UserDefaults.standard.integer(forKey: UserDefaultsKey.Minutes)
+        let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardMinutes
+        let savedPeriods = UserDefaults.standard.integer(forKey: UserDefaultsKey.Periods)
+        let periods = savedPeriods > 0 ? savedPeriods : HockeyGame.standardPeriods
+        game = HockeyGame(minutes: minutes, periods: periods)
         
-        if let minutes = UserDefaults.standard.value(forKey: UserDefaultsKey.Duration) as? Int {
-            if let enumCase = Duration(rawValue: minutes) {
-                duration = enumCase
-            }
-        }
-        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: UserDefaultsKey.NumberOfPeriods) as? Int {
-            if let enumCase = NumberOfPeriods(rawValue: savedNumberOfPeriods) {
-                numberOfPeriods = enumCase
-            }
-        }
-        game = HockeyGame(duration: duration, numberOfPeriods: numberOfPeriods)
         pageVC?.game = game
         cardTimerPanel.deleteAllCards()
         NotificationCenter.default.post(name: .NewGame, object: nil)

@@ -33,7 +33,7 @@ var runningSecondsToGo: Int = 0
 var runningSecondsOverdue: Int = 0
 var runningSecondsCountingUp: Int = 0
 var runningCountingUp: Bool = false
-var runningDuration: Duration = .Twenty
+var runningMinutes: Int = HockeyGame.standardMinutes
 var allCardsSecondsToGo: [Int] = []
 
 var shouldRestoreFromBackground: Bool = false

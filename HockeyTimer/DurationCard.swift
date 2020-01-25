@@ -21,37 +21,11 @@ class DurationCard: UIButton {
             ageLabel.setNeedsDisplay()
         }
     }
-    var duration: Duration = .TwentyFive {
+    var minutes: Int = HockeyGame.standardMinutes {
         didSet {
-            switch duration {
-            case .Nine:
-                backgroundColor = UIColor(named: ColorName.Olive)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-            case .Ten:
-                backgroundColor = UIColor(named: ColorName.DarkBlue)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-            case .Twelve:
-                backgroundColor = UIColor(named: ColorName.VeryDarkBlue_Red)!
-                miniStopWatch.color = UIColor(named: ColorName.DarkGray_VeryDarkBlue)!
-            case .Fifteen:
-                backgroundColor = UIColor(named: ColorName.LightYellow)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-            case .Twenty:
-                backgroundColor = UIColor(named: ColorName.LightBlue)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-                ageLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
-            case .TwentyFive:
-                backgroundColor = UIColor(named: ColorName.Olive)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-            case .Thirty:
-                backgroundColor = UIColor(named: ColorName.DarkBlue)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-            case .ThirtyFive:
-                backgroundColor = UIColor(named: ColorName.PantoneRed)!
-                miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
-            }
-            ageString = SELECTED_COUNTRY.durationStringFor(duration) ?? "error"
-            miniStopWatch.duration = duration
+            updateColorsWith(minutes: minutes)
+            ageString = SELECTED_COUNTRY.minutesStringFor(minutes) ?? ""
+            miniStopWatch.minutes = minutes
             miniStopWatch.setNeedsDisplay()
         }
     }
@@ -71,15 +45,15 @@ class DurationCard: UIButton {
         setup()
     }
     
-    convenience init(duration: Duration) {
+    convenience init(minutes: Int) {
         
         self.init()
-        convenienceSet(duration: duration)
+        convenienceSet(minutes: minutes)
     }
     
-    private func convenienceSet(duration: Duration) {
+    private func convenienceSet(minutes: Int) {
         
-        self.duration = duration
+        self.minutes = minutes
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -94,12 +68,12 @@ class DurationCard: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         
         miniStopWatch = MiniStopWatch()
-        miniStopWatch.duration = duration
+        miniStopWatch.minutes = minutes
         addSubview(miniStopWatch)
         
         ageLabel = createAgeLabel(title: ageString)
-        if duration == .Twenty {
-            ageLabel.textColor = UIColor(named: "DarkBlue")
+        if backgroundColor == UIColor(named: ColorName.LightBlue)! {
+            ageLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
         }
         addSubview(ageLabel)
         
@@ -173,16 +147,15 @@ class DurationCard: UIButton {
         }
     }
     
-    func setDuration(_ duration: Duration, durationString: String, animated: Bool, delay: Double) {
+    func setMinutes(_ minutes: Int, minutesString: String, animated: Bool, delay: Double) {
         
         if animated {
             windUp()
         }
         
-        self.duration = duration
-        miniStopWatch.setDuration(duration)
-        ageString = durationString
-        
+        self.minutes = minutes
+        miniStopWatch.setMinutes(minutes)
+        ageString = minutesString
         if animated {
             popup(delay: delay)
         }
@@ -191,11 +164,44 @@ class DurationCard: UIButton {
     
     // MARK: - Private Methods
     
-    fileprivate func animateMiniStopWatch(duration: Double) {
+    private func animateMiniStopWatch(duration: Double) {
         
         miniStopWatch.animateProgress(duration: duration)
     }
     
+    private func updateColorsWith(minutes: Int) {
+        
+        switch minutes {
+        case 0 ..< 10:
+            backgroundColor = UIColor(named: ColorName.Olive)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        case 10 ..< 12:
+            backgroundColor = UIColor(named: ColorName.DarkBlue)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        case 12 ..< 15:
+            backgroundColor = UIColor(named: ColorName.VeryDarkBlue_Red)!
+            miniStopWatch.color = UIColor(named: ColorName.DarkGray_VeryDarkBlue)!
+        case 15 ..< 20:
+            backgroundColor = UIColor(named: ColorName.LightYellow)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        case 20 ..< 25:
+            backgroundColor = UIColor(named: ColorName.LightBlue)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+            ageLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
+        case 25 ..< 30:
+            backgroundColor = UIColor(named: ColorName.Olive)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        case 30 ..< 35:
+            backgroundColor = UIColor(named: ColorName.DarkBlue)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        case 35 ... 99999:
+            backgroundColor = UIColor(named: ColorName.PantoneRed)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        default:
+            backgroundColor = UIColor(named: ColorName.Olive)!
+            miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        }
+    }
 }
 
 

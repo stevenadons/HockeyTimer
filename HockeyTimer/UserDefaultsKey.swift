@@ -10,8 +10,11 @@ import Foundation
 
 enum UserDefaultsKey {
     
-    static let Duration = "Duration"
-    static let NumberOfPeriods = "NumberOfPeriods"
+//    static let Duration = "Duration"
+//    static let NumberOfPeriods = "NumberOfPeriods"
+    static let Minutes = "Minutes"
+    static let Periods = "Periods"
+    
     static let ShouldNotOnboard = "ShouldNotOnboard"
     static let TimerEndTimeWhenInBackground = "TimerEndTimeWhenInBackground"
     static let TimerStartTimeOverdue = "TimerStartTimeOverdue"

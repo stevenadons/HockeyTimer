@@ -8,8 +8,6 @@
 
 import UIKit
 import AudioToolbox
-//import MessageUI
-//import LinkPresentation
 
 
 // Set this PageVC as initial viewcontroller in AppDelegate
@@ -49,19 +47,11 @@ class PageVC: UIPageViewController {
         
         view.backgroundColor = .systemBackground
         
-        var duration: Duration = SELECTED_COUNTRY.durations.randomElement()!
-        if let minutes = UserDefaults.standard.value(forKey: UserDefaultsKey.Duration) as? Int {
-            if let enumCase = Duration(rawValue: minutes) {
-                duration = enumCase
-            }
-        }
-        var numberOfPeriods: NumberOfPeriods = .Halves
-        if let savedNumberOfPeriods = UserDefaults.standard.value(forKey: UserDefaultsKey.NumberOfPeriods) as? Int {
-            if let enumCase = NumberOfPeriods(rawValue: savedNumberOfPeriods) {
-                numberOfPeriods = enumCase
-            }
-        }
-        game = HockeyGame(duration: duration, numberOfPeriods: numberOfPeriods)
+        let savedMinutes = UserDefaults.standard.integer(forKey: UserDefaultsKey.Minutes)
+        let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardMinutes
+        let savedPeriods = UserDefaults.standard.integer(forKey: UserDefaultsKey.Periods)
+        let periods = savedPeriods > 0 ? savedPeriods : HockeyGame.standardPeriods
+        game = HockeyGame(minutes: minutes, periods: periods)
         
         let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
@@ -296,28 +286,28 @@ extension PageVC: UIPageViewControllerDelegate {
             
             // From TimerVC to DurationVC
             view.backgroundColor = .systemBackground
-            durationVC.selectedDuration = nil
-            durationVC.selectedNumberOfPeriods = nil
+            durationVC.selectedMinutes = nil
+            durationVC.selectedPeriods = nil
             
         } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
             
             // From DurationVC to TimerVC
-            if durationVC.selectedDuration != nil && (timerVC.game.duration != durationVC.selectedDuration) {
+            if durationVC.selectedMinutes != nil && (timerVC.game.minutes != durationVC.selectedMinutes) {
                 // Duration changed
-                UserDefaults.standard.set(durationVC.selectedDuration!.rawValue, forKey: UserDefaultsKey.Duration)
-                if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
+                UserDefaults.standard.set(durationVC.selectedMinutes!, forKey: UserDefaultsKey.Minutes)
+                if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
                     // Number of Periods also changed
-                    UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: UserDefaultsKey.NumberOfPeriods)
-                    game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
+                    UserDefaults.standard.set(durationVC.selectedPeriods, forKey: UserDefaultsKey.Periods)
+                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: durationVC.selectedPeriods!)
                 } else {
                     // Only Duration changed
-                    game = HockeyGame(duration: durationVC.selectedDuration!, numberOfPeriods: game.numberOfPeriods)
+                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: game.periods)
                 }
                 NotificationCenter.default.post(name: .NewGame, object: nil)
-            } else if durationVC.selectedNumberOfPeriods != nil && timerVC.game.numberOfPeriods != durationVC.selectedNumberOfPeriods {
+            } else if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
                 // Only Number of Periods changed
-                UserDefaults.standard.set(durationVC.selectedNumberOfPeriods!.rawValue, forKey: UserDefaultsKey.NumberOfPeriods)
-                game = HockeyGame(duration: timerVC.game.duration, numberOfPeriods: durationVC.selectedNumberOfPeriods!)
+                UserDefaults.standard.set(durationVC.selectedPeriods!, forKey: UserDefaultsKey.Periods)
+                game = HockeyGame(minutes: timerVC.game.minutes, periods: durationVC.selectedPeriods!)
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             }
             

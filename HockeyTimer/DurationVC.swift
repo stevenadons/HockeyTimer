@@ -13,8 +13,8 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Properties
     
-    var selectedDuration: Duration?
-    var selectedNumberOfPeriods: NumberOfPeriods?
+    var selectedMinutes: Int?
+    var selectedPeriods: Int?
     
     private var cancelView: UIButton!
     private var pauseAtQuarterSwitch: UISwitch!
@@ -141,8 +141,8 @@ class DurationVC: PanArrowVC {
         pauseAtQuarterLabel.textAlignment = .right
         view.addSubview(pauseAtQuarterLabel)
         
-        for index in 0..<SELECTED_COUNTRY.durations.count {
-            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
+        for index in 0 ..< SELECTED_COUNTRY.minutes.count {
+            let card = DurationCard(minutes: SELECTED_COUNTRY.minutes[index])
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
             view.addSubview(card)
@@ -215,7 +215,7 @@ class DurationVC: PanArrowVC {
     func clearSelectedDuration() {
         
         cards.forEach { $0.alpha = 1.0 }
-        selectedDuration = nil
+        selectedMinutes = nil
     }
     
     
@@ -225,19 +225,19 @@ class DurationVC: PanArrowVC {
     
     private func setPauseAtQuarterSwitch() {
         
-        let nop = selectedNumberOfPeriods ?? pageVC?.game.numberOfPeriods
-        
-        if nop == NumberOfPeriods.Quarters {
+        let nop = selectedPeriods ?? pageVC?.game.periods
+        if nop == 4 {
             pauseAtQuarterSwitch.setOn(true, animated: false)
         } else {
             pauseAtQuarterSwitch.setOn(false, animated: false)
         }
+
     }
     
     private func handleSelection(card: DurationCard) {
         
         self.cancelView.isUserInteractionEnabled = true
-        selectedDuration = card.duration
+        selectedMinutes = card.minutes
         card.alpha = 1.0
         UIView.animate(withDuration: 0.2, animations: {
             self.cards.forEach {
@@ -250,7 +250,7 @@ class DurationVC: PanArrowVC {
     
     @objc private func handleSwitch(pauseSwitch: UISwitch) {
         
-        selectedNumberOfPeriods = pauseSwitch.isOn ? .Quarters : .Halves
+        selectedPeriods = pauseSwitch.isOn ? 4 : 2
         if pageVC?.game.status != HockeyGameStatus.WaitingToStart {
             showAlertNewGame()
         }
@@ -264,7 +264,7 @@ class DurationVC: PanArrowVC {
         }, cancelAction: {
             let newSwitchPosition = self.pauseAtQuarterSwitch.isOn
             self.pauseAtQuarterSwitch.setOn(!newSwitchPosition, animated: true)
-            self.selectedNumberOfPeriods = nil
+            self.selectedPeriods = nil
             self.skipAnimations = false
         })
         
@@ -281,11 +281,12 @@ class DurationVC: PanArrowVC {
         
         cards = []
         
-        for index in 0..<SELECTED_COUNTRY.durations.count {
-            let card = DurationCard(duration: SELECTED_COUNTRY.durations[index])
+        for index in 0..<SELECTED_COUNTRY.minutes.count {
+            let minutes = SELECTED_COUNTRY.minutes[index]
+            let card = DurationCard(minutes: minutes)
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            card.setDuration(SELECTED_COUNTRY.durations[index], durationString: SELECTED_COUNTRY.durationStrings[index], animated: true, delay: 0.1 * Double(index))
+            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], animated: true, delay: 0.1 * Double(index))
             view.addSubview(card)
         }
         
@@ -297,7 +298,7 @@ class DurationVC: PanArrowVC {
     
     @objc private func handleCardTapped(sender: DurationCard, forEvent event: UIEvent) {
         
-        if sender.duration == selectedDuration {
+        if sender.minutes == selectedMinutes { // sender.duration == selectedDuration
             // user tapped twice on same card
             clearSelectedDuration()
             return
@@ -309,7 +310,7 @@ class DurationVC: PanArrowVC {
         
         cancelView.isUserInteractionEnabled = false
         cards.forEach { $0.alpha = 1.0 }
-        selectedDuration = nil
+        selectedMinutes = nil
     }
     
     @objc private func countryButtonTapped() {

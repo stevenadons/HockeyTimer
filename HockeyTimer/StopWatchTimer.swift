@@ -68,9 +68,9 @@ class StopWatchTimer {
             resetTime()
         }
     }
-    
-    private var totalSecondsInPeriod: Int = Duration.Twenty.rawValue
-    var totalSecondsToGo: Int = Duration.Twenty.rawValue
+
+    private var totalSecondsInPeriod: Int = HockeyGame.standardMinutes * 60
+    var totalSecondsToGo: Int = HockeyGame.standardMinutes * 60
     var totalSecondsOverdue: Int = 0
     var totalSecondsCountingUp: Int = 0
     
@@ -90,7 +90,7 @@ class StopWatchTimer {
     
     func set(game: HockeyGame) {
         
-        print("SWT - set(game) with game \(game.numberOfPeriods) - will call resetTime")
+        print("SWT - set(game) with game \(game.periods) - will call resetTime")
         self.game = game
         resetTime()
     }
@@ -151,7 +151,7 @@ class StopWatchTimer {
         self.game = game
         delegate.handleTimerReset()
         state = .WaitingToStart
-        print("SWTimer - game set with \(game.numberOfPeriods)")
+        print("SWTimer - game set with \(game.periods)")
     }
     
     
@@ -159,15 +159,12 @@ class StopWatchTimer {
     // MARK: - Private Methods
     
     private func resetTime() {
-        
-//        #warning("testing")
-//        let normalMinutesInHalf = Double(game.duration.rawValue * 6)
-        let normalMinutesInHalf = Double(game.duration.rawValue * 60)
-        
-        let multiplier = 2.0 / Double(game.numberOfPeriods.rawValue)
-        let newMinutesInPeriod = Int(normalMinutesInHalf * multiplier)
-        self.totalSecondsInPeriod = newMinutesInPeriod
-        self.totalSecondsToGo = newMinutesInPeriod
+
+        let normalSecondsInHalf = Double(game.minutes * 60)
+        let multiplier = 2.0 / Double(game.periods)
+        let newSecondsInPeriod = Int(normalSecondsInHalf * multiplier)
+        self.totalSecondsInPeriod = newSecondsInPeriod
+        self.totalSecondsToGo = newSecondsInPeriod
     }
 
     @objc private func tickCountDown() {

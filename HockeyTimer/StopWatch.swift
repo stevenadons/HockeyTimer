@@ -36,30 +36,32 @@ class StopWatch: UIControl {
         }
     }
 
-    fileprivate var delegate: StopWatchDelegate!
+    private var delegate: StopWatchDelegate!
     var timer: StopWatchTimer!
-    fileprivate var icon: StopWatchControlIcon!
-    fileprivate var timeLabel: StopWatchLabel!
+    private var icon: StopWatchControlIcon!
+    private var timeLabel: StopWatchLabel!
 
     private var squareContainer: CALayer!
     private var progressZone: CAShapeLayer!
     private var core: CALayer!
-    fileprivate var progressBarFirstHalf: CAShapeLayer!
-    fileprivate var progressBarSecondHalf: CAShapeLayer!
-    fileprivate var progressBarFirstQuarter: CAShapeLayer!
-    fileprivate var progressBarSecondQuarter: CAShapeLayer!
-    fileprivate var progressBarThirdQuarter: CAShapeLayer!
-    fileprivate var progressBarFourthQuarter: CAShapeLayer!
+    
+    private var progressBars: [CAShapeLayer]!
+    
     private var messageLabel: UILabel!
-    fileprivate var periodLabel: UILabel!
+    private var periodLabel: UILabel!
     private var durationLabel: UILabel!
     
-    fileprivate var haptic: UINotificationFeedbackGenerator?
-    fileprivate var impactHaptic: UIImpactFeedbackGenerator?
+    private var haptic: UINotificationFeedbackGenerator?
+    private var impactHaptic: UIImpactFeedbackGenerator?
     
     private let progressBarWidth: CGFloat = 14
     private let progressZoneWidth: CGFloat = 20
-    private let progressBarStrokeInsetRatio: CGFloat = 0.01
+    private var progressBarStrokeInsetRatio: CGFloat {
+        let roundPart: CGFloat = progressBarWidth / 2
+        let segmentAngle: CGFloat = (2 * .pi) / CGFloat(game.periods)
+        let segmentLength: CGFloat = segmentAngle * (squareSide - progressBarWidth / 2)
+        return roundPart * 2.75 / segmentLength
+    }
     
     private var squareSide: CGFloat {
         return min(self.bounds.width, self.bounds.height)
@@ -74,14 +76,14 @@ class StopWatch: UIControl {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        game = HockeyGame(duration: .TwentyFive, numberOfPeriods: .Halves)
+        game = HockeyGame(minutes: HockeyGame.standardMinutes, periods: HockeyGame.standardPeriods)
         setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        game = HockeyGame(duration: .TwentyFive, numberOfPeriods: .Halves)
+        game = HockeyGame(minutes: HockeyGame.standardMinutes, periods: HockeyGame.standardPeriods)
         setUp()
     }
     
@@ -90,11 +92,11 @@ class StopWatch: UIControl {
         self.init()
         self.delegate = delegate
         self.game = game
-        print("SW init will call timer.set with game \(game.numberOfPeriods)")
+        print("SW init will call timer.set with game \(game.periods)")
         timer.set(game: game)
         runningSecondsToGo = timer.totalSecondsToGo
         updateLabels()
-        periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
+        periodLabel.text = (game.periods == 4) ? "Q1" : LS_FIRSTHALFLABEL
         setNeedsLayout()
     }
     
@@ -117,19 +119,7 @@ class StopWatch: UIControl {
         core.backgroundColor = UIColor.systemBackground.cgColor
         squareContainer.addSublayer(core)
         
-        progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
-        squareContainer.addSublayer(progressBarFirstHalf)
-        progressBarSecondHalf = progressBarLayer(for: HalfGame.Second)
-        squareContainer.addSublayer(progressBarSecondHalf)
-        
-        progressBarFirstQuarter = progressBarLayer(for: QuarterGame.First)
-        squareContainer.addSublayer(progressBarFirstQuarter)
-        progressBarSecondQuarter = progressBarLayer(for: QuarterGame.Second)
-        squareContainer.addSublayer(progressBarSecondQuarter)
-        progressBarThirdQuarter = progressBarLayer(for: QuarterGame.Third)
-        squareContainer.addSublayer(progressBarThirdQuarter)
-        progressBarFourthQuarter = progressBarLayer(for: QuarterGame.Fourth)
-        squareContainer.addSublayer(progressBarFourthQuarter)
+        progressBars = createProgressBars()
         
         icon = StopWatchControlIcon(icon: .PlayIcon)
         icon.color = UIColor(named: ColorName.StopWatchIcon)!
@@ -202,8 +192,8 @@ class StopWatch: UIControl {
         
         core.backgroundColor = UIColor.systemBackground.cgColor
         progressZone.fillColor = UIColor(named: ColorName.StopWatchProgressZone)!.cgColor
-        
-        [progressBarFirstHalf, progressBarSecondHalf, progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter].forEach {
+
+        progressBars.forEach {
             $0.strokeColor = progressBarColor.cgColor
         }
         
@@ -222,15 +212,17 @@ class StopWatch: UIControl {
     
     private func updateDurationLabel() {
         
-        let numberOfPeriods = "\(game.numberOfPeriods.rawValue)"
+        let numberOfPeriods = "\(game.periods)"
         var minutesString = ""
-        if game.numberOfPeriods == .Halves {
-            minutesString = "\(game.duration.rawValue) min"
+        if game.periods == 2 { // game.numberOfPeriods == .Halves
+            minutesString = "\(game.minutes) min"
             
         } else {
-            let denominator = game.numberOfPeriods.rawValue / 2
-            let minutes = game.duration.withOneDecimalWhenDividedBy(denominator: denominator)
-            minutesString = (minutes - minutes.rounded() == 0) ? "\(Int(minutes.rounded())) min" : "\(minutes) min"
+            let denominator = game.periods / 2 // game.numberOfPeriods.rawValue / 2
+            let dividedDouble = Double(game.minutes) / Double(denominator)
+            let minutesWithOneDecimal = (dividedDouble * 10).rounded() / 10
+            minutesString = (minutesWithOneDecimal - minutesWithOneDecimal.rounded() == 0) ? "\(Int(minutesWithOneDecimal.rounded())) min" : "\(minutesWithOneDecimal) min"
+
         }
         durationLabel.text = numberOfPeriods + "x" + minutesString
         durationLabel.setNeedsDisplay()
@@ -264,11 +256,7 @@ class StopWatch: UIControl {
                 timer.totalSecondsCountingUp = runningSecondsCountingUp
             }
             updateProgressBars()
-            if game.numberOfPeriods == .Quarters {
-                periodLabel.text = "Q\(game.quarter.rawValue)"
-            } else {
-                periodLabel.text = (game.half == .First) ? LS_FIRSTHALFLABEL : LS_SECONDHALFLABEL
-            }
+            periodLabel.text = game.periodString
             updateTimeLabel()
             showTimeLabel()
             shouldRestoreFromBackground = false
@@ -313,7 +301,7 @@ class StopWatch: UIControl {
         timer.reset(withGame: game)
         updateLabels()
         message = LS_NEWGAME
-        periodLabel.text = (game.numberOfPeriods == .Quarters) ? "Q1" : LS_FIRSTHALFLABEL
+        periodLabel.text = (game.periods == 4) ? "Q1" : LS_FIRSTHALFLABEL
         periodLabel.alpha = 1.0
         updateProgressBars()
         resetTimeLabel(withColor: timeLabel.standardColor, alpha: 1) // .label
@@ -324,7 +312,7 @@ class StopWatch: UIControl {
     
     func simplifyForOnboarding(bgColor: UIColor, iconColor: UIColor, timeColor: UIColor, progressZoneColor: UIColor) {
         
-        let simpleGame = HockeyGame(duration: .ThirtyFive, numberOfPeriods: .Halves)
+        let simpleGame = HockeyGame(minutes: HockeyGame.standardMinutes, periods: HockeyGame.standardPeriods)
         reset(withGame: simpleGame)
         messageLabel.alpha = 0.0
         periodLabel.alpha = 0.0
@@ -352,94 +340,45 @@ class StopWatch: UIControl {
     }
     
     
-    
-    // MARK: - Private methods
-    
-    @objc fileprivate func updateProgressBars() {
-        
-        if game.numberOfPeriods == .Quarters {
-            updateProgressBarsQuarterGame()
-        } else {
-            updateProgressBarsHalfGame()
-        }
-    }
-    
-    private func updateProgressBarsHalfGame() {
-        
-        [progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter, progressBarFirstHalf, progressBarSecondHalf].forEach {
-            $0?.removeFromSuperlayer()
-        }
-        
-        progressBarFirstHalf = progressBarLayer(for: HalfGame.First)
-        progressBarFirstHalf.strokeEnd = (game.half == .Second) ? strokeEndPosition(progress: 1) : strokeEndPosition(progress: timer.progressCappedAt1)
-        squareContainer.addSublayer(progressBarFirstHalf)
-        
-        progressBarSecondHalf = progressBarLayer(for: HalfGame.Second)
-        progressBarSecondHalf.strokeEnd = (game.half == .First) ? strokeEndPosition(progress: 0) : strokeEndPosition(progress: timer.progressCappedAt1)
-        squareContainer.addSublayer(progressBarSecondHalf)
-    }
-    
-    private func updateProgressBarsQuarterGame() {
-        
-        [progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter, progressBarFirstHalf, progressBarSecondHalf].forEach {
-            $0?.removeFromSuperlayer()
-        }
-        
-        progressBarFirstQuarter = progressBarLayer(for: QuarterGame.First)
-        switch game.quarter {
-        case .First:
-            progressBarFirstQuarter.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
-        case .Second, .Third, .Fourth:
-            progressBarFirstQuarter.strokeEnd = strokeEndPosition(progress: 1)
-        }
-        squareContainer.addSublayer(progressBarFirstQuarter)
-        
-        progressBarSecondQuarter = progressBarLayer(for: QuarterGame.Second)
-        switch game.quarter {
-        case .First:
-            progressBarSecondQuarter.strokeEnd = strokeEndPosition(progress: 0)
-        case .Second:
-            progressBarSecondQuarter.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
-        case .Third, .Fourth:
-            progressBarSecondQuarter.strokeEnd = strokeEndPosition(progress: 1)
-        }
-        squareContainer.addSublayer(progressBarSecondQuarter)
-        
-        progressBarThirdQuarter = progressBarLayer(for: QuarterGame.Third)
-        switch game.quarter {
-        case .First, .Second:
-            progressBarThirdQuarter.strokeEnd = strokeEndPosition(progress: 0)
-        case .Third:
-            progressBarThirdQuarter.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
-        case .Fourth:
-            progressBarThirdQuarter.strokeEnd = strokeEndPosition(progress: 1)
-        }
-        squareContainer.addSublayer(progressBarThirdQuarter)
-        
-        progressBarFourthQuarter = progressBarLayer(for: QuarterGame.Fourth)
-        switch game.quarter {
-        case .First, .Second, .Third:
-            progressBarFourthQuarter.strokeEnd = strokeEndPosition(progress: 0)
-        case .Fourth:
-            progressBarFourthQuarter.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
-        }
-        squareContainer.addSublayer(progressBarFourthQuarter)
-    }
-    
-    
     // MARK: - Progress Bar Methods
-    
-    private func progressBarLayer(for half: HalfGame) -> CAShapeLayer {
+
+    @objc fileprivate func updateProgressBars() {
+
+        progressBars.forEach {
+            $0.removeFromSuperlayer()
+        }
+        progressBars = createProgressBars()
         
-        let shape = progressBarLayer()
-        shape.path = progressBarPath(for: half).cgPath
-        return shape
+        for index in 1 ... progressBars.count {
+            let bar = progressBars[index - 1]
+            switch index {
+            case ..<game.currentPeriod:
+                bar.strokeEnd = strokeEndPosition(progress: 1)
+            case game.currentPeriod:
+                bar.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
+            case (game.currentPeriod + 1)...:
+                bar.strokeEnd = strokeEndPosition(progress: 0)
+            default:
+                fatalError("Trying to access incorrect index")
+            }
+        }
     }
     
-    private func progressBarLayer(for quarter: QuarterGame) -> CAShapeLayer {
+    private func createProgressBars() -> [CAShapeLayer] {
+        
+        var result: [CAShapeLayer] = []
+        for index in 1 ... game.periods {
+            let bar = progressBarLayer(forPeriod: index)
+            squareContainer.addSublayer(bar)
+            result.append(bar)
+        }
+        return result
+    }
+    
+    private func progressBarLayer(forPeriod period: Int) -> CAShapeLayer {
         
         let shape = progressBarLayer()
-        shape.path = progressBarPath(for: quarter).cgPath
+        shape.path = progressBarPath(forPeriod: period).cgPath
         return shape
     }
     
@@ -461,42 +400,16 @@ class StopWatch: UIControl {
     }
     
     
-    private func progressBarPath(for half: HalfGame) -> UIBezierPath {
+    private func progressBarPath(forPeriod period: Int) -> UIBezierPath {
         
-        let path = UIBezierPath()
+        let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        let radius: CGFloat = squareSide / 2 - progressZoneWidth / 2
+        let segmentAngle: CGFloat = (2 * .pi) / CGFloat(game.periods)
+        let zeroAngle: CGFloat = (.pi / 2) * (-1)
+        let startAngle: CGFloat = zeroAngle + segmentAngle * CGFloat(period - 1)
+        let endAngle: CGFloat = startAngle + segmentAngle
         
-        switch half {
-        case .First:
-            path.move(to: CGPoint(x: bounds.width / 2, y: progressZoneWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: -.pi/2, endAngle: .pi/2, clockwise: true)
-        case .Second:
-            path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressZoneWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: .pi/2, endAngle: -.pi/2, clockwise: true)
-        }
-        
-        return path
-    }
-    
-    private func progressBarPath(for quarter: QuarterGame) -> UIBezierPath {
-        
-        let path = UIBezierPath()
-        
-        switch quarter {
-        case .First:
-            path.move(to: CGPoint(x: bounds.width / 2, y: progressZoneWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: -.pi/2, endAngle: 0, clockwise: true)
-        case .Second:
-            path.move(to: CGPoint(x: bounds.width - progressZoneWidth / 2, y: bounds.height / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: 0, endAngle: .pi/2, clockwise: true)
-        case .Third:
-            path.move(to: CGPoint(x: bounds.width / 2, y: bounds.height - progressZoneWidth / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: .pi/2, endAngle: .pi, clockwise: true)
-        case .Fourth:
-            path.move(to: CGPoint(x: progressZoneWidth / 2, y: bounds.height / 2))
-            path.addArc(withCenter: CGPoint(x: bounds.width / 2, y: bounds.height / 2), radius: (squareSide / 2 - progressZoneWidth / 2), startAngle: .pi, endAngle: -.pi/2, clockwise: true)
-        }
-        
-        return path
+        return UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
     }
     
     private func strokeEndPosition(progress: CGFloat) -> CGFloat {
@@ -564,7 +477,6 @@ class StopWatch: UIControl {
         }
     }
     
-    
     private func handleTap() {
         
         prepareImpactHapticIfNeeded()
@@ -597,36 +509,12 @@ class StopWatch: UIControl {
             
             if game.status == .Running {
                 // Game running in overtime
-                if game.numberOfPeriods == .Quarters {
-                    switch game.quarter {
-                    case .First:
-                        endQ1RunningInOvertime()
-                    case .Second:
-                        endQ2RunningInOvertime()
-                    case .Third:
-                        endQ3RunningInOvertime()
-                    case .Fourth:
-                        endQ4RunningInOvertime()
-                    }
-                } else {
-                    if game.half == .First {
-                        endH1RunningInOvertime()
-                    } else {
-                        endH2RunningInOvertime()
-                    }
-                }
+                dismissOvertime()
                 delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: nil)
 
-            } else if game.status == .HalfTime {
-                setReadyForH2()
-            } else if game.status == .EndOfQuarter1 {
-                setReadyForQ2()
-            } else if game.status == .EndOfQuarter2 {
-                setReadyForQ3()
-            } else if game.status == .EndOfQuarter3 {
-                setReadyForQ4()
-            } else if game.status == .Finished {
-                
+            } else if game.status == .EndOfPeriod {
+                // Overtime dismissed
+                getReadyForNextPeriod()
             }
             
             resetTimeLabel(withColor: timeLabel.standardColor, alpha: 1) // .label
@@ -638,115 +526,48 @@ class StopWatch: UIControl {
         }
     }
     
-    private func endQ1RunningInOvertime() {
+    private func dismissOvertime() {
         
-        game.status = .EndOfQuarter1
-        timer.startCountUp()
-        periodLabel.alpha = 0.0
-        message = LS_ENDOFFIRSTQUARTER
+        if game.currentPeriod == game.periods {
+            dismissFullGameOvertime()
+        } else {
+            dismissPeriodOvertime()
+        }
     }
     
-    private func endQ2RunningInOvertime() {
+    private func dismissPeriodOvertime() {
         
-        game.status = .EndOfQuarter2
-        timer.startCountUp()
+        game.status = .EndOfPeriod
         periodLabel.alpha = 0.0
-        message = LS_HALFTIME
-        scheduleRequestReview()
+        message = game.endOfPeriodMessage
+        
+        timer.startCountUp()
     }
     
-    private func endQ3RunningInOvertime() {
-        
-        game.status = .EndOfQuarter3
-        timer.startCountUp()
-        periodLabel.alpha = 0.0
-        message = LS_ENDOFTHIRDQUARTER
-    }
-    
-    private func endQ4RunningInOvertime() {
+    private func dismissFullGameOvertime() {
         
         game.status = .Finished
-        setProgressBarsColor(to: .clear)
         periodLabel.alpha = 0.0
+        message = game.endOfPeriodMessage
+
         icon.change(to: .NoIcon)
-        message = LS_FULLTIME
-        scheduleRequestReview()
-    }
-    
-    private func endH1RunningInOvertime() {
-        
-        game.status = .HalfTime
-        timer.startCountUp()
-        periodLabel.alpha = 0.0
-        message = LS_HALFTIME
-        scheduleRequestReview()
-    }
-    
-    private func endH2RunningInOvertime() {
-        
-        game.status = .Finished
         setProgressBarsColor(to: .clear)
-        periodLabel.alpha = 0.0
-        icon.change(to: .NoIcon)
-        message = LS_FULLTIME
         scheduleRequestReview()
     }
     
-    private func setReadyForH2() {
+    private func getReadyForNextPeriod() {
         
-        game.half = .Second
-        periodLabel.text = LS_SECONDHALFLABEL
+        guard game.currentPeriod <= game.periods else {
+            fatalError("Game in period exceeding total number of periods")
+        }
+        game.currentPeriod += 1
+        periodLabel.text = game.periodString
         timer.reset(withGame: game)
         setProgressBarsColor(to: progressBarColor)
         if durationLabel.alpha > 0 {
             periodLabel.alpha = 1.0
         }
-        message = LS_READYFORH2
-        delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: {
-            self.icon.change(to: .PlayIcon)
-        })
-    }
-    
-    private func setReadyForQ2() {
-        
-        game.quarter = .Second
-        periodLabel.text = "Q2"
-        timer.reset(withGame: game)
-        setProgressBarsColor(to: progressBarColor)
-        if durationLabel.alpha > 0 {
-            periodLabel.alpha = 1.0
-        }
-        message = LS_READYFORQ2
-        delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: {
-            self.icon.change(to: .PlayIcon)
-        })
-    }
-    
-    private func setReadyForQ3() {
-        
-        game.quarter = .Third
-        periodLabel.text = "Q3"
-        timer.reset(withGame: game)
-        setProgressBarsColor(to: progressBarColor)
-        if durationLabel.alpha > 0 {
-            periodLabel.alpha = 1.0
-        }
-        message = LS_READYFORQ3
-        delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: {
-            self.icon.change(to: .PlayIcon)
-        })
-    }
-    
-    private func setReadyForQ4() {
-        
-        game.quarter = .Fourth
-        periodLabel.text = "Q4"
-        timer.reset(withGame: game)
-        setProgressBarsColor(to: progressBarColor)
-        if durationLabel.alpha > 0 {
-            periodLabel.alpha = 1.0
-        }
-        message = LS_READYFORQ4
+        message = game.readyForNextPeriodMessage
         delegate?.handleTimerStateChange(stopWatchTimer: timer, completionHandler: {
             self.icon.change(to: .PlayIcon)
         })
@@ -761,7 +582,7 @@ class StopWatch: UIControl {
         }
     }
     
-    fileprivate func resetTimeLabel(withColor color: UIColor, alpha: CGFloat) {
+    private func resetTimeLabel(withColor color: UIColor, alpha: CGFloat) {
         
         timeLabel.textColor = color
         timeLabel.alpha = alpha
@@ -769,11 +590,11 @@ class StopWatch: UIControl {
         showTimeLabel()
     }
     
-    fileprivate func setProgressBarsColor(to newColor: UIColor) {
+    private func setProgressBarsColor(to newColor: UIColor) {
         
-        [progressBarFirstQuarter, progressBarSecondQuarter, progressBarThirdQuarter, progressBarFourthQuarter].forEach {
-            $0?.strokeColor = newColor.cgColor
-            $0?.setNeedsDisplay()
+        progressBars.forEach {
+            $0.strokeColor = newColor.cgColor
+            $0.setNeedsDisplay()
         }
     }
     
@@ -796,7 +617,7 @@ class StopWatch: UIControl {
     
     // MARK: - Haptic
     
-    fileprivate func prepareHapticIfNeeded() {
+    private func prepareHapticIfNeeded() {
         guard #available(iOS 10.0, *) else { return }
         if haptic == nil {
             haptic = UINotificationFeedbackGenerator()
@@ -804,7 +625,7 @@ class StopWatch: UIControl {
         }
     }
     
-    fileprivate func prepareImpactHapticIfNeeded() {
+    private func prepareImpactHapticIfNeeded() {
         guard #available(iOS 10.0, *) else { return }
         if impactHaptic == nil {
             impactHaptic = UIImpactFeedbackGenerator(style: .medium)

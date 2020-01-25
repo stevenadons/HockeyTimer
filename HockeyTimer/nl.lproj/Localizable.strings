@@ -13,10 +13,12 @@
 "Half Time" = "Halftime";
 "Q1 Ended" = "Einde Q1";
 "Q3 Ended" = "Einde Q3";
+"End of period" = "Einde periode";
 "Ready for H2" = "Klaar voor H2";
 "Ready for Q2" = "Klaar voor Q2";
 "Ready for Q3" = "Klaar voor Q3";
 "Ready for Q4" = "Klaar voor Q4";
+"Ready for P" = "Klaar voor P";
 "Full Time" = "Wedstrijd afgelopen";
 "H1" = "H1";
 "H2" = "H2";

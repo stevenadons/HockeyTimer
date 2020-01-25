@@ -8,9 +8,8 @@
 
 import Foundation
 
-
-enum NumberOfPeriods: Int {
-    
-    case Halves = 2
-    case Quarters = 4
-}
+//enum NumberOfPeriods: Int {
+//    
+//    case Halves = 2
+//    case Quarters = 4
+//}

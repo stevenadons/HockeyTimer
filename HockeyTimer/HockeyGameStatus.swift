@@ -13,10 +13,7 @@ enum HockeyGameStatus: String {
     case WaitingToStart = "WaitingToStart"
     case Running = "Running"
     case Pausing = "Pausing"
-    case HalfTime = "HalfTime"
-    case EndOfQuarter1 = "EndOfQuarter1"
-    case EndOfQuarter2 = "EndOfQuarter2"
-    case EndOfQuarter3 = "EndOfQuarter3"
+    case EndOfPeriod = "EndOfPeriod"
     case Finished = "Finished"
 }
 

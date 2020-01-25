@@ -13,9 +13,15 @@ class MiniStopWatch: UIView {
     
     // MARK: - Properties
     
-    var duration: Duration = .TwentyFive {
+//    var duration: Duration = .TwentyFive {
+//        didSet {
+//            durationLabel.text = duration.abbreviation
+//            durationLabel.setNeedsDisplay()
+//        }
+//    }
+    var minutes: Int = HockeyGame.standardMinutes {
         didSet {
-            durationLabel.text = duration.abbreviation
+            durationLabel.text = "\(minutes)m"
             durationLabel.setNeedsDisplay()
         }
     }
@@ -25,7 +31,6 @@ class MiniStopWatch: UIView {
             core.setNeedsDisplay()
         }
     }
-    
     
     private var squareContainer: CALayer!
     private var progressZone: CAShapeLayer!
@@ -82,7 +87,8 @@ class MiniStopWatch: UIView {
         
         timesLabel = stopWatchLabel(text: "2x", bold: false)
         addSubview(timesLabel)
-        durationLabel = stopWatchLabel(text: duration.abbreviation, bold: true)
+//        durationLabel = stopWatchLabel(text: duration.abbreviation, bold: true)
+        durationLabel = stopWatchLabel(text: "\(minutes)m", bold: true)
         addSubview(durationLabel)
     }
     
@@ -171,13 +177,16 @@ class MiniStopWatch: UIView {
     func animateProgress(duration: Double) {
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = duration * Double(self.duration.rawValue) / 30.0
+//        animation.duration = duration * Double(self.duration.rawValue) / 30.0
+        animation.duration = duration * Double(minutes) / 30.0
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.fromValue = 0.0
-        animation.toValue = CGFloat(Double(self.duration.rawValue) / 60.0)
+//        animation.toValue = CGFloat(Double(self.duration.rawValue) / 60.0)
+        animation.toValue = CGFloat(Double(minutes) / 60.0)
         progressBar.add(animation, forKey: "timer effect")
         CATransaction.setDisableActions(true)
-        progressBar.strokeEnd = CGFloat(Double(self.duration.rawValue) / 60.0)
+//        progressBar.strokeEnd = CGFloat(Double(self.duration.rawValue) / 60.0)
+        progressBar.strokeEnd = CGFloat(Double(minutes) / 60.0)
         CATransaction.setDisableActions(false)
     }
     
@@ -189,9 +198,14 @@ class MiniStopWatch: UIView {
         progressBar.setNeedsDisplay()
     }
     
-    func setDuration(_ duration: Duration) {
-        
-        durationLabel.text = duration.abbreviation
+//    func setDuration(_ duration: Duration) {
+//
+//        durationLabel.text = duration.abbreviation
+//    }
+    
+    func setMinutes(_ minutes: Int) {
+            
+        durationLabel.text = "\(minutes)m"
     }
     
     

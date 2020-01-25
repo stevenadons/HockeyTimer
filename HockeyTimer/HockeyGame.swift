@@ -14,18 +14,18 @@ enum Player {
     case Home, Away
 }
 
-enum HalfGame {
-    
-    case First, Second
-}
-
-enum QuarterGame: Int {
-    
-    case First = 1
-    case Second = 2
-    case Third = 3
-    case Fourth = 4
-}
+//enum HalfGame {
+//
+//    case First, Second
+//}
+//
+//enum QuarterGame: Int {
+//
+//    case First = 1
+//    case Second = 2
+//    case Third = 3
+//    case Fourth = 4
+//}
 
 
 class HockeyGame {
@@ -35,27 +35,125 @@ class HockeyGame {
     
     private(set) var homeScore: Int = 0
     private(set) var awayScore: Int = 0
-    private(set) var numberOfPeriods: NumberOfPeriods = .Halves
-    var half: HalfGame = .First
-    var quarter: QuarterGame = .First
+    
+//    var half: HalfGame = .First
+//    var quarter: QuarterGame = .First
     var status: HockeyGameStatus = .WaitingToStart
-    var duration: Duration = .Twenty {
-        didSet {
-            runningDuration = duration
-        }
-    }
+
     private(set) var lastScored: Player?
     
+    var currentPeriod: Int = 1
+    var periods: Int = 2
+    var minutes: Int = HockeyGame.standardMinutes {
+        didSet {
+            runningMinutes = minutes
+        }
+    }
     
+    static let standardMinutes: Int = 35
+    static let standardPeriods: Int = 2
+    
+    
+    // MARK: - Calculated Properties
+    
+    var periodString: String {
+        switch periods {
+        case 2:
+            switch currentPeriod {
+            case 1:
+                return LS_FIRSTHALFLABEL
+            case 2:
+                return LS_SECONDHALFLABEL
+            default:
+                fatalError("Trying to get message for period > number of periods")
+            }
+        case 4:
+            switch currentPeriod {
+            case 1:
+                return LS_FIRSTQUARTERLABEL
+            case 2:
+                return LS_SECONDQUARTERLABEL
+            case 3:
+                return LS_THIRDQUARTERLABEL
+            case 4:
+                return LS_FOURTHQUARTERLABEL
+            default:
+                fatalError("Trying to get message for period > number of periods")
+            }
+        default:
+            return "P\(currentPeriod)"
+        }
+        return ""
+    }
+    
+    var endOfPeriodMessage: String {
+        if status == .Finished && (currentPeriod == periods) {
+            return LS_FULLTIME
+            
+        } else if status == .EndOfPeriod {
+            if currentPeriod * 2 == periods {
+                return LS_HALFTIME
+                
+            } else if periods == 4 {
+                if currentPeriod == 1 {
+                    return LS_ENDOFFIRSTQUARTER
+                } else if currentPeriod == 3 {
+                    return LS_ENDOFTHIRDQUARTER
+                }
+            } else {
+                return LS_ENDOFPERIOD
+            }
+        }
+        return ""
+    }
+    
+    var readyForNextPeriodMessage: String {
+        guard currentPeriod <= periods else {
+            return ""
+        }
+        switch periods {
+        case 2:
+            switch currentPeriod {
+            case 1:
+                return LS_NEWGAME
+            case 2:
+                return LS_READYFORH2
+            default:
+                fatalError("Trying to get message for period > number of periods")
+            }
+        case 4:
+            switch currentPeriod {
+            case 1:
+                return LS_NEWGAME
+            case 2:
+                return LS_READYFORQ2
+            case 3:
+                return LS_READYFORQ3
+            case 4:
+                return LS_READYFORQ4
+            default:
+                fatalError("Trying to get message for period > number of periods")
+            }
+        default:
+            if currentPeriod == 1 {
+                return LS_NEWGAME
+            } else {
+                return LS_READYFORP + String(currentPeriod)
+            }
+        }
+        return ""
+    }
+    
+    
+
     
     // MARK: - Initializing
 
-    convenience init(duration: Duration, numberOfPeriods: NumberOfPeriods) {
+    convenience init(minutes: Int, periods: Int) {
         
         self.init()
-        self.duration = duration
-        self.numberOfPeriods = numberOfPeriods
-        runningDuration = duration
+        self.minutes = minutes
+        self.periods = periods
     }
     
     

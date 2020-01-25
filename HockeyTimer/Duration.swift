@@ -8,32 +8,31 @@
 
 import Foundation
 
-
-enum Duration: Int, CaseIterable {
-    
-    case Nine = 9
-    case Ten = 10
-    case Twelve = 12
-    case Fifteen = 15
-    case Twenty = 20
-    case TwentyFive = 25
-    case Thirty = 30
-    case ThirtyFive = 35
-    
-    var abbreviation: String {
-        return "\(rawValue)m"
-    }
-    func withOneDecimalWhenDividedBy(denominator: Int) -> Double {
-        let dividedDouble = Double(self.rawValue) / Double(denominator)
-        return (dividedDouble * 10).rounded() / 10
-    }
-}
-
-extension Duration: Codable, Hashable {
-    
-    func hash(into hasher: inout Hasher) {
-        
-        hasher.combine(rawValue)
-    }
-}
+//enum Duration: Int, CaseIterable {
+//    
+//    case Nine = 9
+//    case Ten = 10
+//    case Twelve = 12
+//    case Fifteen = 15
+//    case Twenty = 20
+//    case TwentyFive = 25
+//    case Thirty = 30
+//    case ThirtyFive = 35
+//    
+//    var abbreviation: String {
+//        return "\(rawValue)m"
+//    }
+//    func withOneDecimalWhenDividedBy(denominator: Int) -> Double {
+//        let dividedDouble = Double(self.rawValue) / Double(denominator)
+//        return (dividedDouble * 10).rounded() / 10
+//    }
+//}
+//
+//extension Duration: Codable, Hashable {
+//    
+//    func hash(into hasher: inout Hasher) {
+//        
+//        hasher.combine(rawValue)
+//    }
+//}
 
