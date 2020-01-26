@@ -29,6 +29,12 @@
 		4F4D5E5322F3524E00701504 /* StopWatchTimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D5E5222F3524E00701504 /* StopWatchTimerState.swift */; };
 		4F4D5E5522F3554D00701504 /* HockeyGameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */; };
 		4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6342A322916E0A002F49B4 /* NotificationNameX.swift */; };
+		4F6869BD23DC9016003F89C1 /* RulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869BC23DC9016003F89C1 /* RulesVC.swift */; };
+		4F6869BF23DC9204003F89C1 /* RulesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */; };
+		4F6869C123DC9294003F89C1 /* RulesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C023DC9294003F89C1 /* RulesCell.swift */; };
+		4F6869C323DCAC21003F89C1 /* GameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */; };
+		4F6869C523DCAD22003F89C1 /* GameTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C423DCAD22003F89C1 /* GameTimeCell.swift */; };
+		4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
@@ -104,7 +110,6 @@
 		4FD3722822A6D61000A45757 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722722A6D61000A45757 /* Country.swift */; };
 		4FD3722A22A6EC1D00A45757 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722922A6EC1D00A45757 /* Rules.swift */; };
 		4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */; };
-		4FD3722F22A6F5E700A45757 /* RulesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722E22A6F5E700A45757 /* RulesList.swift */; };
 		4FD3723122A6F5F400A45757 /* RulesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3723022A6F5F400A45757 /* RulesButton.swift */; };
 		4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */; };
 		4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */; };
@@ -142,6 +147,12 @@
 		4F4D5E5222F3524E00701504 /* StopWatchTimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchTimerState.swift; sourceTree = "<group>"; };
 		4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyGameStatus.swift; sourceTree = "<group>"; };
 		4F6342A322916E0A002F49B4 /* NotificationNameX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameX.swift; sourceTree = "<group>"; };
+		4F6869BC23DC9016003F89C1 /* RulesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesVC.swift; sourceTree = "<group>"; };
+		4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesDataSource.swift; sourceTree = "<group>"; };
+		4F6869C023DC9294003F89C1 /* RulesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCell.swift; sourceTree = "<group>"; };
+		4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeVC.swift; sourceTree = "<group>"; };
+		4F6869C423DCAD22003F89C1 /* GameTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCell.swift; sourceTree = "<group>"; };
+		4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeDataSource.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
@@ -219,7 +230,6 @@
 		4FD3722722A6D61000A45757 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		4FD3722922A6EC1D00A45757 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOfRules.swift; sourceTree = "<group>"; };
-		4FD3722E22A6F5E700A45757 /* RulesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesList.swift; sourceTree = "<group>"; };
 		4FD3723022A6F5F400A45757 /* RulesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesButton.swift; sourceTree = "<group>"; };
 		4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessageView.swift; sourceTree = "<group>"; };
 		4FE97DA62299BE5E00EC53F9 /* EditScoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScoreButton.swift; sourceTree = "<group>"; };
@@ -266,12 +276,14 @@
 			name = GameTimePickers;
 			sourceTree = "<group>";
 		};
-		4F492EB623D4CF7300980818 /* TableViewCells */ = {
+		4F492EB623D4CF7300980818 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				4F492EB723D4CFA300980818 /* CountryCell.swift */,
+				4F6869C023DC9294003F89C1 /* RulesCell.swift */,
+				4F6869C423DCAD22003F89C1 /* GameTimeCell.swift */,
 			);
-			name = TableViewCells;
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		4F780A8B1FD0906D00DB1021 /* Phone */ = {
@@ -415,6 +427,8 @@
 				4F3A11D822F89FE600E643CB /* TestingVC.swift */,
 				4F492EAE23D3096700980818 /* MenuVC.swift */,
 				4F492EB423D4B84600980818 /* CountryVC.swift */,
+				4F6869BC23DC9016003F89C1 /* RulesVC.swift */,
+				4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -431,7 +445,7 @@
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
 				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
-				4FD3722D22A6F5D800A45757 /* RulesList */,
+				4FD3722D22A6F5D800A45757 /* RulesButton */,
 				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
 				4FB4BE951F515C89003B1259 /* IconButtons */,
 				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
@@ -440,7 +454,7 @@
 				4F93F57123C9D9BE00C93561 /* CardTimerPanel */,
 				4F93F57223C9D9E900C93561 /* ChooseCardPanel */,
 				4F93F57323C9D9F500C93561 /* ChooseMinutesPanel */,
-				4F492EB623D4CF7300980818 /* TableViewCells */,
+				4F492EB623D4CF7300980818 /* Cells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -546,6 +560,8 @@
 				4F93F59023CA38B900C93561 /* Sound.swift */,
 				4F93F59223CA38F400C93561 /* FeatureFlags.swift */,
 				4F93F59423CA394200C93561 /* UserDefaultsKey.swift */,
+				4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */,
+				4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -579,13 +595,12 @@
 			name = DurationCard;
 			sourceTree = "<group>";
 		};
-		4FD3722D22A6F5D800A45757 /* RulesList */ = {
+		4FD3722D22A6F5D800A45757 /* RulesButton */ = {
 			isa = PBXGroup;
 			children = (
-				4FD3722E22A6F5E700A45757 /* RulesList.swift */,
 				4FD3723022A6F5F400A45757 /* RulesButton.swift */,
 			);
-			name = RulesList;
+			name = RulesButton;
 			sourceTree = "<group>";
 		};
 		4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */ = {
@@ -806,11 +821,14 @@
 				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
 				4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */,
+				4F6869C123DC9294003F89C1 /* RulesCell.swift in Sources */,
 				4FE97DA72299BE5E00EC53F9 /* EditScoreButton.swift in Sources */,
+				4F6869BD23DC9016003F89C1 /* RulesVC.swift in Sources */,
 				4F492EB823D4CFA300980818 /* CountryCell.swift in Sources */,
 				4F93F58523C9DA5700C93561 /* MinutesView.swift in Sources */,
 				4F93F58D23C9E10A00C93561 /* ColorName.swift in Sources */,
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
+				4F6869BF23DC9204003F89C1 /* RulesDataSource.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4F492EAF23D3096700980818 /* MenuVC.swift in Sources */,
@@ -823,6 +841,7 @@
 				4F93F59123CA38B900C93561 /* Sound.swift in Sources */,
 				4F8D08B823243A7A0062A58F /* CountryDataManager.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
+				4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */,
 				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
 				4F93F57D23C9DA3600C93561 /* ThreeCards.swift in Sources */,
@@ -834,11 +853,13 @@
 				4FB042E3232979DF00EBEC99 /* MinimumIOSVersionManager.swift in Sources */,
 				4FFC758B2348F8760049C815 /* RemoteMessageManager.swift in Sources */,
 				4F93F58723C9DA8500C93561 /* AddCardTimerVC.swift in Sources */,
+				4F6869C323DCAC21003F89C1 /* GameTimeVC.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
 				4F93F58423C9DA5700C93561 /* ChooseMinutesPanel.swift in Sources */,
 				4F93F58123C9DA5100C93561 /* ChooseCardPanel.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */,
+				4F6869C523DCAD22003F89C1 /* GameTimeCell.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
 				4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */,
@@ -877,7 +898,6 @@
 				4FD3722822A6D61000A45757 /* Country.swift in Sources */,
 				4F93F58F23C9E13700C93561 /* FontName.swift in Sources */,
 				4F9FC5D61F5335410003C2FF /* PanArrowLabelFactory.swift in Sources */,
-				4FD3722F22A6F5E700A45757 /* RulesList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

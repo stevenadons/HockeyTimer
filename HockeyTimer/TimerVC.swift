@@ -221,6 +221,40 @@ class TimerVC: PanArrowVC {
         showAlertNewGame()
     }
     
+    override func gameTimeButtonTapped(sender: TopButton, forEvent event: UIEvent) {
+        
+        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME) { (shouldStartNewGame, selectedMinutes, selectedPeriods) in
+            
+            guard shouldStartNewGame else {
+                return
+            }
+            
+            if selectedMinutes != nil && (self.game.minutes != selectedMinutes) {
+                // Game Time Changed
+                UserDefaults.standard.set(selectedMinutes!, forKey: UserDefaultsKey.Minutes)
+                
+                if selectedPeriods != nil && (self.game.periods != selectedPeriods) {
+                    // Number of Periods also changed
+                    UserDefaults.standard.set(selectedPeriods, forKey: UserDefaultsKey.Periods)
+                    self.pageVC?.game = HockeyGame(minutes: selectedMinutes!, periods: selectedPeriods!)
+                    
+                } else {
+                    // Only Duration changed
+                    self.pageVC?.game = HockeyGame(minutes: selectedMinutes!, periods: self.game.periods)
+                }
+                NotificationCenter.default.post(name: .NewGame, object: nil)
+                
+            } else if selectedPeriods != nil && (self.game.periods != selectedPeriods) {
+                // Only Number of Periods changed
+                UserDefaults.standard.set(selectedPeriods!, forKey: UserDefaultsKey.Periods)
+                self.pageVC?.game = HockeyGame(minutes: self.game.minutes, periods: selectedPeriods!)
+                NotificationCenter.default.post(name: .NewGame, object: nil)
+            }
+        }
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Public Methods
 

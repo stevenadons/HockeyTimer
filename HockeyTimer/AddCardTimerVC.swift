@@ -14,16 +14,14 @@ class AddCardTimerVC: UIViewController {
     // MARK: - Properties
     
     private var titleLabel: UILabel!
-    
     private var cardPanel: ChooseCardPanel!
     private var minutesPanel: ChooseMinutesPanel!
-    
     private var okButton: UIButton!
     private var cancelButton: UIButton!
     
-    private var titleText: String = "Card"
-    private var okButtonText: String = "OK"
-    private var cancelButtonText: String = "Cancel"
+    private var titleText: String = LS_TITLE_PENALTY_CARD
+    private var okButtonText: String = LS_BUYPREMIUM_OK
+    private var cancelButtonText: String = LS_BUTTON_CANCEL
     
     private var minutesYOffset: CGFloat {
         return view.bounds.height * 0.1
@@ -33,6 +31,7 @@ class AddCardTimerVC: UIViewController {
     
     private var okAction: ((CardType, Int) -> Void)?
     private var cancelAction: (() -> Void)?
+    private var haptic: UISelectionFeedbackGenerator?
     
     
     // MARK: - Life Cycle
@@ -69,7 +68,6 @@ class AddCardTimerVC: UIViewController {
         super.viewWillAppear(animated)
         windUp(animated: false)
         okButton.alpha = 0.0
-        okButton.isUserInteractionEnabled = false
     }
     
     private func setupUI() {
@@ -109,8 +107,10 @@ class AddCardTimerVC: UIViewController {
     
     private func addConstraints() {
         
-        let buttonHeight: CGFloat = 54
-        let buttonHorInset: CGFloat = 35
+        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 50, big: 54)
+        let buttonHorInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
+        let buttonBottomInset: CGFloat = UIDevice.whenDeviceIs(small: 12, normal: 16, big: 20)
+        let buttonPadding: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 12, big: 16)
         let horInset: CGFloat = 50
         
         NSLayoutConstraint.activate([
@@ -131,13 +131,13 @@ class AddCardTimerVC: UIViewController {
             
             okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
             okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
-            okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -16),
+            okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -buttonPadding),
             okButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             cancelButton!.leadingAnchor.constraint(equalTo: okButton.leadingAnchor),
             cancelButton!.trailingAnchor.constraint(equalTo: okButton.trailingAnchor),
             cancelButton!.heightAnchor.constraint(equalTo: okButton.heightAnchor),
-            cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonHorInset),
+            cancelButton!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonBottomInset),
             
             ])
     }
@@ -244,6 +244,22 @@ class AddCardTimerVC: UIViewController {
             })
         }
     }
+    
+    // MARK: - Haptic
+    
+    private func prepareHaptic() {
+        
+        if haptic == nil {
+            haptic = UISelectionFeedbackGenerator()
+            haptic!.prepare()
+        }
+    }
+    
+    private func doHaptic() {
+        
+        haptic?.selectionChanged()
+        haptic = nil
+    }
 }
 
 
@@ -251,19 +267,22 @@ extension AddCardTimerVC: ChooseCardPanelDelegate {
     
     func didSelectCard() {
         
+        doHaptic()
+        
         if let selectedType = cardPanel.selectedType {
             let fakeCard = Card(type: selectedType)
             minutesPanel.setHighlightColor(fakeCard.color())
         }
         
         okButton.alpha = (cardPanel.selectedType == CardType.red) ? 1.0 : 0.0
-        okButton.isUserInteractionEnabled = (cardPanel.selectedType == CardType.red) ? true : false
+        
+        prepareHaptic()
         
         switch cardPanel.selectedType {
         case .red:
             minutesPanel.dehighlightAll()
             windUp(animated: true)
-            titleLabel.text = "Card"
+            titleLabel.text = LS_TITLE_PENALTY_CARD
             return
         case .yellow:
             minutesPanel.highlight(5)
@@ -282,8 +301,11 @@ extension AddCardTimerVC: ChooseMinutesPanelDelegate {
     
     func didSelectMinutes() {
         
+        doHaptic()
+        
         okButton.alpha = 1.0
-        okButton.isUserInteractionEnabled = true
+        
+        prepareHaptic()
     }
 }
 

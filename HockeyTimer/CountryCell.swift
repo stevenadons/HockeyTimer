@@ -32,6 +32,7 @@ class CountryCell: UITableViewCell {
         
         oval = OvalCountryButton(capitals: "ZZZ", color: .white, crossColor: .white)
         oval.translatesAutoresizingMaskIntoConstraints = false
+        oval.isUserInteractionEnabled = false
         addSubview(oval)
         
         countryLabel = UILabel()

@@ -21,6 +21,7 @@ class CardTimerPanel: UIView {
     // MARK: - Properties
     
     private var collectionView: UICollectionView!
+    
     private var dataSource: CardTimerPanelDataSource!
     weak var delegate: CardTimerPanelDelegate?
     

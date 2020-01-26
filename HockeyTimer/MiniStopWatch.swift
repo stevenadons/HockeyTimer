@@ -124,7 +124,7 @@ class MiniStopWatch: UIView {
         shape.fillColor = UIColor.clear.cgColor
         shape.position = .zero
         shape.strokeStart = 0.0
-        shape.strokeEnd = 0.0
+        shape.strokeEnd = CGFloat(Double(minutes) / 60.0)
         shape.contentsScale = UIScreen.main.scale
         shape.path = progressBarPath().cgPath
         
@@ -177,15 +177,12 @@ class MiniStopWatch: UIView {
     func animateProgress(duration: Double) {
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-//        animation.duration = duration * Double(self.duration.rawValue) / 30.0
         animation.duration = duration * Double(minutes) / 30.0
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.fromValue = 0.0
-//        animation.toValue = CGFloat(Double(self.duration.rawValue) / 60.0)
         animation.toValue = CGFloat(Double(minutes) / 60.0)
         progressBar.add(animation, forKey: "timer effect")
         CATransaction.setDisableActions(true)
-//        progressBar.strokeEnd = CGFloat(Double(self.duration.rawValue) / 60.0)
         progressBar.strokeEnd = CGFloat(Double(minutes) / 60.0)
         CATransaction.setDisableActions(false)
     }
@@ -197,11 +194,7 @@ class MiniStopWatch: UIView {
         CATransaction.setDisableActions(false)
         progressBar.setNeedsDisplay()
     }
-    
-//    func setDuration(_ duration: Duration) {
-//
-//        durationLabel.text = duration.abbreviation
-//    }
+
     
     func setMinutes(_ minutes: Int) {
             

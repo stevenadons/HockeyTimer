@@ -16,7 +16,7 @@ class CountryVC: UIViewController {
     
     private var titleLabel: UILabel!
     private var tableView: UITableView!
-    private var cancelButton: UIButton!
+    private var doneButton: UIButton!
 
     private var titleText: String?
     private let countries: [Country] = CountryDataManager.shared.countries
@@ -70,7 +70,7 @@ class CountryVC: UIViewController {
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
-        tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none // .singleLine
         tableView.separatorInset = .zero
         tableView.separatorColor = .systemBackground
         tableView.delegate = self
@@ -80,16 +80,17 @@ class CountryVC: UIViewController {
         tableView.panGestureRecognizer.isEnabled = false
         view.addSubview(tableView)
         
-        cancelButton = ConfirmationButton.redButton(largeFont: true)
-        cancelButton.setTitle(LS_BUTTON_CANCEL, for: .normal)
-        cancelButton.addTarget(self, action: #selector(cancelTapped), for: [.touchUpInside])
-        view.addSubview(cancelButton)
+        doneButton = UIButton()
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle(LS_BUTTON_DONE, for: .normal)
+        doneButton.addTarget(self, action: #selector(doneTapped), for: [.touchUpInside])
+        doneButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
+        doneButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        view.addSubview(doneButton)
     }
     
     private func addConstraints() {
         
-        let buttonHeight: CGFloat = 54
-        let buttonHorInset: CGFloat = 24
         let tableViewHorInset: CGFloat = 9
         let padding: CGFloat = UIDevice.whenDeviceIs(small: 15, normal: 30, big: 30)
         
@@ -102,12 +103,10 @@ class CountryVC: UIViewController {
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tableViewHorInset),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tableViewHorInset),
-            tableView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -16),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
-            cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
-            cancelButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonHorInset),
+            doneButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 14),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             
             ])
     }
@@ -137,7 +136,7 @@ class CountryVC: UIViewController {
     
     // MARK: - Touch Methods
     
-    @objc private func cancelTapped() {
+    @objc private func doneTapped() {
         
         DispatchQueue.main.async { [weak self] in
             self?.dismiss(animated: true, completion: nil)

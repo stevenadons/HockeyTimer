@@ -26,10 +26,8 @@ class PageVC: UIPageViewController {
     private var updateManager: UpdateManager!
     private var minimumIOSManager: MinimumIOSVersionManager!
     
-    fileprivate var askToNotificationsAlreadyShown: Bool = false
-    fileprivate var haptic: UISelectionFeedbackGenerator?
-    
-    private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
+    private var askToNotificationsAlreadyShown: Bool = false
+    private var haptic: UISelectionFeedbackGenerator?
 
     
     
@@ -227,9 +225,6 @@ extension PageVC: UIPageViewControllerDataSource {
             }
             nextVC = existingScoreVC
             
-        } else if let scoreVC = viewController as? ScoreVC {
-            existingScoreVC = scoreVC
-            nextVC = DocumentMenuVC(pageVC: self)
         }
         
         return nextVC
@@ -251,15 +246,6 @@ extension PageVC: UIPageViewControllerDataSource {
                 existingTimerVC = timerVC
             }
             earlierVC = existingTimerVC
-            
-        } else if let _ = viewController as? DocumentMenuVC {
-            if existingScoreVC == nil {
-                let scoreVC = ScoreVC(game: game)
-                scoreVC.pageVC = self
-                scoreVC.game = game
-                existingScoreVC = scoreVC
-            }
-            earlierVC = existingScoreVC
         }
         
         return earlierVC
@@ -267,7 +253,7 @@ extension PageVC: UIPageViewControllerDataSource {
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         
-        return 4
+        return 3
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
@@ -304,6 +290,7 @@ extension PageVC: UIPageViewControllerDelegate {
                     game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: game.periods)
                 }
                 NotificationCenter.default.post(name: .NewGame, object: nil)
+                
             } else if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
                 // Only Number of Periods changed
                 UserDefaults.standard.set(durationVC.selectedPeriods!, forKey: UserDefaultsKey.Periods)
@@ -311,8 +298,6 @@ extension PageVC: UIPageViewControllerDelegate {
                 NotificationCenter.default.post(name: .NewGame, object: nil)
             }
             
-        } else if let _ = pageViewController.viewControllers?.first as? ScoreVC, let _ = pendingViewControllers.first as? DocumentMenuVC {
-            view.backgroundColor = UIColor(named: ColorName.Olive_Black)!
         }
         
         prepareHapticIfNeeded()
@@ -323,11 +308,6 @@ extension PageVC: UIPageViewControllerDelegate {
         
         haptic?.selectionChanged()
         haptic = nil
-        
-        // To DocumentMenuVC
-        if let viewControllers = viewControllers, !viewControllers.isEmpty, let documentVC = viewControllers[0] as? DocumentMenuVC {
-            documentVC.animateFlyIn()
-        }
         
         // Away from DurationVC
         if !previousViewControllers.isEmpty, let durationVC = previousViewControllers[0] as? DurationVC {

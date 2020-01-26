@@ -105,10 +105,13 @@ class ChooseMinutesPanel: UIView {
     }
     
     
-    
     // MARK: - Touch
     
     @objc private func minutesViewTapped(_ minutesView: MinutesView) {
+        
+        guard minutesView != selectedMinutesView else {
+            return
+        }
         
         highlight(minutesView.minutes)
     }

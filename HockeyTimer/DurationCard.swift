@@ -13,9 +13,9 @@ class DurationCard: UIButton {
     
     // MARK: - Properties
     
-    fileprivate var miniStopWatch: MiniStopWatch!
-    fileprivate var ageLabel: UILabel!
-    fileprivate var ageString: String = "" {
+    private var miniStopWatch: MiniStopWatch!
+    private var ageLabel: UILabel!
+    private (set) var ageString: String = "" {
         didSet {
             ageLabel.text = ageString
             ageLabel.setNeedsDisplay()
@@ -77,7 +77,7 @@ class DurationCard: UIButton {
         }
         addSubview(ageLabel)
         
-        windUp()
+//        windUp()
     }
     
     private func createAgeLabel(title: String) -> UILabel {
@@ -91,6 +91,7 @@ class DurationCard: UIButton {
         label.textAlignment = .center
         label.textColor = (backgroundColor == UIColor(named: ColorName.LightBlue)!) ? UIColor(named: ColorName.VeryDarkBlue)! : UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
         
         return label
     }
@@ -103,6 +104,10 @@ class DurationCard: UIButton {
         
         super.layoutSubviews()
         
+        guard bounds.width != 0 && bounds.height != 0 else {
+            return
+        }
+        
         layer.cornerRadius = 8 * max(bounds.height, bounds.width) / 140
         
         NSLayoutConstraint.activate([
@@ -113,9 +118,8 @@ class DurationCard: UIButton {
             miniStopWatch.heightAnchor.constraint(equalTo: miniStopWatch.widthAnchor),
             
             ageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            ageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 120 / 140),
-            ageLabel.topAnchor.constraint(equalTo: centerYAnchor, constant: 38 * bounds.height / 140),
-            ageLabel.heightAnchor.constraint(equalToConstant: 25 * bounds.height / 140),
+            ageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8 * bounds.height / 140),
+            ageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
             
             ])
         

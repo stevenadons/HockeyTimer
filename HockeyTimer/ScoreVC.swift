@@ -67,7 +67,8 @@ class ScoreVC: PanArrowVC {
     private func setupViews() {
         
         menuButton.setColor(UIColor(named: ColorName.OliveText)!)
-        
+        rulesButton.setColor(UIColor(named: ColorName.OliveText)!)
+
         pitchContainer = ContainerView()
         view.addSubview(pitchContainer)
         pitch = Pitch(delegate: self)
@@ -85,11 +86,10 @@ class ScoreVC: PanArrowVC {
         view.addSubview(confirmationButton)
         
         panArrowUp.color = UIColor(named: ColorName.LightYellow)!
-        panArrowDown.color = UIColor(named: ColorName.LightYellow)!
         panArrowUpLabel.text = LS_TITLE_STOPWATCH
-        panArrowDownLabel.text = LS_TITLE_DOCUMENTS
         panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
-        panArrowDownLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+        panArrowDown.alpha = 0.0
+        panArrowDownLabel.alpha = 0.0
         
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
         let pitchContainerOffset = UIDevice.whenDeviceIs(small: 20, normal: 0, big: -50)

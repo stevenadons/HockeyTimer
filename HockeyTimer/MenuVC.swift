@@ -18,7 +18,8 @@ class MenuVC: UIViewController {
     
     private var titleLabel: UILabel!
     private var tableView: UITableView!
-    
+    private var doneButton: UIButton!
+
     private var titleText: String?
     
     private let feedbackText: [String] = [LS_MENU_SHARE,
@@ -93,7 +94,7 @@ class MenuVC: UIViewController {
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .clear
-        tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none
         tableView.separatorInset = .zero
         tableView.separatorColor = .systemBackground
         tableView.delegate = self
@@ -103,6 +104,14 @@ class MenuVC: UIViewController {
         // Setting isScrollEnabled to false will not work for this
         tableView.panGestureRecognizer.isEnabled = false
         view.addSubview(tableView)
+        
+        doneButton = UIButton()
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle(LS_BUTTON_DONE, for: .normal)
+        doneButton.addTarget(self, action: #selector(doneTapped), for: [.touchUpInside])
+        doneButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
+        doneButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        view.addSubview(doneButton)
     }
     
     private func addConstraints() {
@@ -119,6 +128,9 @@ class MenuVC: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: tableViewHorInset),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -tableViewHorInset),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            doneButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 14),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             
             ])
     }
@@ -141,6 +153,13 @@ class MenuVC: UIViewController {
     
     
     // MARK: - Touch Methods
+    
+    @objc private func doneTapped() {
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+    }
     
     @objc private func switchChanged(_ item: UISwitch) {
         

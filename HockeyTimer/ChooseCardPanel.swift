@@ -98,6 +98,10 @@ class ChooseCardPanel: UIView {
     
     @objc private func greenCardTapped() {
         
+        guard selectedType != .green else {
+            return
+        }
+        
         greenCard.highlightBackground(true)
         yellowCard.highlightBackground(false)
         redCard.highlightBackground(false)
@@ -108,6 +112,10 @@ class ChooseCardPanel: UIView {
     
     @objc private func yellowCardTapped() {
         
+        guard selectedType != .yellow else {
+            return
+        }
+        
         greenCard.highlightBackground(false)
         yellowCard.highlightBackground(true)
         redCard.highlightBackground(false)
@@ -117,6 +125,10 @@ class ChooseCardPanel: UIView {
     }
     
     @objc private func redCardTapped() {
+        
+        guard selectedType != .red else {
+            return
+        }
         
         greenCard.highlightBackground(false)
         yellowCard.highlightBackground(false)

@@ -186,8 +186,8 @@ class CardTimer: UIView {
     private func fade() {
         
         timerZone.backgroundColor = UIColor(named: ColorName.TimerZoneFade)!
-        graphics.opacity = 0.4
-        timeLabel.alpha = 0.5
+        graphics.opacity = 0.5
+        timeLabel.alpha = 0.6
     }
     
     
