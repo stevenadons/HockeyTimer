@@ -14,19 +14,6 @@ enum Player {
     case Home, Away
 }
 
-//enum HalfGame {
-//
-//    case First, Second
-//}
-//
-//enum QuarterGame: Int {
-//
-//    case First = 1
-//    case Second = 2
-//    case Third = 3
-//    case Fourth = 4
-//}
-
 
 class HockeyGame {
     
@@ -35,9 +22,7 @@ class HockeyGame {
     
     private(set) var homeScore: Int = 0
     private(set) var awayScore: Int = 0
-    
-//    var half: HalfGame = .First
-//    var quarter: QuarterGame = .First
+
     var status: HockeyGameStatus = .WaitingToStart
 
     private(set) var lastScored: Player?
@@ -145,7 +130,6 @@ class HockeyGame {
     }
     
     
-
     
     // MARK: - Initializing
 

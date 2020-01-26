@@ -10,8 +10,6 @@ import Foundation
 
 enum UserDefaultsKey {
     
-//    static let Duration = "Duration"
-//    static let NumberOfPeriods = "NumberOfPeriods"
     static let Minutes = "Minutes"
     static let Periods = "Periods"
     

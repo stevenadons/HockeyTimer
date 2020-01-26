@@ -13,16 +13,18 @@ class GameTimePickers: UIView {
     
     // MARK: - Properties
     
-    private var periodsPicker: UIPickerView!
-    private var minutesPicker: UIPickerView!
-    private var decimalMinutesPicker: UIPickerView!
+    private var periodsPicker: DecimalPickerView!
+    private var minutesPicker: DecimalPickerView!
     private var xLabel: UILabel!
-    private var decimalLabel: UILabel!
+    private var decimalButton: UIButton!
     
     private var periodsPickerDataSource: PickerDataSource!
     private var minutesPickerDataSource: PickerDataSource!
-    private var decimalMinutesPickerDataSource: PickerDataSource!
     
+    private (set) var inDecimalMode: Bool = false
+    
+    var selectedPeriods: Int?
+    var selectedMinutes: Int?
     
     
     // MARK: - Init
@@ -43,14 +45,7 @@ class GameTimePickers: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        xLabel = createLabel(text: "x")
-        addSubview(xLabel)
-        
-        #warning("should localize")
-        decimalLabel = createLabel(text: ",")
-        addSubview(decimalLabel)
-        
-        periodsPicker = UIPickerView()
+        periodsPicker = DecimalPickerView(inDecimalMode: false)
         periodsPicker.translatesAutoresizingMaskIntoConstraints = false
         periodsPicker.tag = 0
         let periodsData = [1, 2, 3, 4]
@@ -59,7 +54,7 @@ class GameTimePickers: UIView {
         periodsPicker.delegate = periodsPickerDataSource
         addSubview(periodsPicker)
 
-        minutesPicker = UIPickerView()
+        minutesPicker = DecimalPickerView(inDecimalMode: false)
         minutesPicker.translatesAutoresizingMaskIntoConstraints = false
         minutesPicker.tag = 1
         let minutesData = createMinutes()
@@ -68,14 +63,17 @@ class GameTimePickers: UIView {
         minutesPicker.delegate = minutesPickerDataSource
         addSubview(minutesPicker)
         
-        decimalMinutesPicker = UIPickerView()
-        decimalMinutesPicker.translatesAutoresizingMaskIntoConstraints = false
-        decimalMinutesPicker.tag = 2
-        let decimalMinutesData = [0, 5]
-        decimalMinutesPickerDataSource = PickerDataSource(data: decimalMinutesData)
-        decimalMinutesPicker.dataSource = decimalMinutesPickerDataSource
-        decimalMinutesPicker.delegate = decimalMinutesPickerDataSource
-        addSubview(decimalMinutesPicker)
+        xLabel = createLabel(text: "x")
+        addSubview(xLabel)
+        
+        decimalButton = UIButton()
+        decimalButton.translatesAutoresizingMaskIntoConstraints = false
+        decimalButton.titleLabel?.numberOfLines = 1
+        decimalButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)!
+        decimalButton.setTitleColor(.secondaryLabel, for: .normal)
+        decimalButton.addTarget(self, action: #selector(decimalButtonTapped), for: .touchUpInside)
+        decimalButton.setTitle(LS_BUTTON_ADD_HALF_MINUTE, for: .normal)
+        addSubview(decimalButton)
     }
     
     
@@ -83,45 +81,36 @@ class GameTimePickers: UIView {
         
         super.layoutSubviews()
         
-        let vertRatio: CGFloat = 0.8
-        let horInset: CGFloat = bounds.width * 0.05
-        let xLabelWidth: CGFloat = 25
-        let decimalLabelWidth: CGFloat = 10
-        let smallPickerRatio: CGFloat = 0.5
-        let veryBigPickerRatio: CGFloat = 1.5
-        let pickerWidth: CGFloat = (bounds.width - horInset * 2 - xLabelWidth - decimalLabelWidth) / (1 + smallPickerRatio + veryBigPickerRatio)
+        let vertRatio: CGFloat = 0.7
+        let xLabelWidth: CGFloat = 15
+        let pickerWidth: CGFloat = 120
         
         NSLayoutConstraint.activate([
         
-            periodsPicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horInset),
             periodsPicker.widthAnchor.constraint(equalToConstant: pickerWidth),
+            periodsPicker.trailingAnchor.constraint(equalTo: xLabel.leadingAnchor),
             periodsPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
             periodsPicker.heightAnchor.constraint(equalTo: heightAnchor, multiplier: vertRatio),
             
             xLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            xLabel.leadingAnchor.constraint(equalTo: periodsPicker.trailingAnchor),
+            xLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             xLabel.widthAnchor.constraint(equalToConstant: xLabelWidth),
 
             minutesPicker.leadingAnchor.constraint(equalTo: xLabel.trailingAnchor),
-            minutesPicker.widthAnchor.constraint(equalToConstant: pickerWidth * veryBigPickerRatio),
+            minutesPicker.widthAnchor.constraint(equalToConstant: pickerWidth),
             minutesPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
             minutesPicker.heightAnchor.constraint(equalTo: heightAnchor, multiplier: vertRatio),
             
-            decimalLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            decimalLabel.leadingAnchor.constraint(equalTo: minutesPicker.trailingAnchor),
-            decimalLabel.widthAnchor.constraint(equalToConstant: decimalLabelWidth),
+            decimalButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            decimalButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9),
             
-            decimalMinutesPicker.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor),
-            decimalMinutesPicker.widthAnchor.constraint(equalToConstant: pickerWidth * smallPickerRatio),
-            decimalMinutesPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
-            decimalMinutesPicker.heightAnchor.constraint(equalTo: heightAnchor, multiplier: vertRatio),
         ])
     }
     
     
     // MARK: - Public Methods
     
-    func setPickersTo(_ first: Int, second: Int, third: Int, animated: Bool) {
+    func setPickersTo(_ first: Int, second: Int, animated: Bool) {
         
         if let indexForFirst = periodsPickerDataSource.indexForNumber(first) {
             periodsPicker.selectRow(indexForFirst, inComponent: 0, animated: animated)
@@ -129,11 +118,21 @@ class GameTimePickers: UIView {
         if let indexForSecond = minutesPickerDataSource.indexForNumber(second) {
             minutesPicker.selectRow(indexForSecond, inComponent: 0, animated: animated)
         }
-        if let indexForThird = periodsPickerDataSource.indexForNumber(third) {
-            decimalMinutesPicker.selectRow(indexForThird, inComponent: 0, animated: animated)
-        }
     }
-
+    
+    // MARK: - Touch Methods
+    
+    @objc private func decimalButtonTapped() {
+        
+        let currentInDecimalMode = minutesPicker.inDecimalMode
+        minutesPicker.inDecimalMode = !currentInDecimalMode
+        let newTitle = minutesPicker.inDecimalMode ? LS_BUTTON_DELETE_HALF_MINUTE : LS_BUTTON_ADD_HALF_MINUTE
+        decimalButton.setTitle(newTitle, for: .normal)
+        
+        // Set current content as selected to trigger sending out a selection occurred notification
+        let currentRow = minutesPicker.selectedRow(inComponent: 0)
+        minutesPicker.selectRow(currentRow, inComponent: 0, animated: true)
+    }
     
     
     // MARK: - Private Methods
@@ -154,7 +153,7 @@ class GameTimePickers: UIView {
     private func createMinutes() -> [Int] {
         
         var result: [Int] = []
-        for int in 0 ... 35 {
+        for int in 0 ... 45 {
             result.append(int)
         }
         return result

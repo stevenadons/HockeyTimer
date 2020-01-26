@@ -33,7 +33,7 @@
 "Running in overtime" = "Tijd is verstreken";
 "Penalty card: time has ended" = "Strafkaart: tijd is verstreken";
 "Game in quarters" = "Wedstrijd in kwarten";
-"Set custom time" = "Andere tijd instellen";
+"Custom time" = "Andere tijd";
 
 "2 x Half" = "2 x Helft";
 "4 x Quarter" = "4 x Kwart";
@@ -48,6 +48,8 @@
 "Notifications" = "Meldingen";
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
 "Done" = "Gereed";
+"Add half minute" = "Halve minuut erbij";
+"Don't add half minute" = "Geen halve minuut erbij";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";

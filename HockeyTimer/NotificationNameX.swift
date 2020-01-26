@@ -17,6 +17,7 @@ extension Notification.Name {
     static let TransactionEndedNotification = Notification.Name("TransactionEndedNotification")
     static let AwakeFromNotification = Notification.Name("AwakeFromNotification")
     static let DarkModeSettingsChanged = Notification.Name("DarkModeSettingsChanged")
+    static let CustomTimeSelectionOccurred = Notification.Name("CustomTimeSelectionOccurred")
 
 //    static let AccessToPremiumNotification = Notification.Name("AccessToPremiumNotification")
 

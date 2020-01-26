@@ -20,8 +20,10 @@ class CustomGameTimeVC: UIViewController {
     private var doneButton: UIButton!
     private var pickers: GameTimePickers!
 
-    var selectedMinutes: Int?
-    var selectedPeriods: Int?
+    private var selectedMinutes: Int?
+    private var selectedPeriods: Int?
+    private var selectedMinutesAddHalf: Bool = false
+
     private var shouldPassSelection: Bool = false
     private var currentGameMinutes: Int!
     private var currentGamePeriods: Int!
@@ -97,7 +99,7 @@ class CustomGameTimeVC: UIViewController {
         pickers = GameTimePickers()
         pickers.translatesAutoresizingMaskIntoConstraints = false
         #warning("add decimal data")
-        pickers.setPickersTo(currentGamePeriods, second: currentGameMinutes, third: 0, animated: false)
+        pickers.setPickersTo(currentGamePeriods, second: currentGameMinutes, animated: false)
         view.addSubview(pickers)
     }
     
@@ -128,6 +130,25 @@ class CustomGameTimeVC: UIViewController {
     private func addObservers() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(forName: .CustomTimeSelectionOccurred, object: nil, queue: nil) { [weak self] (notification) in
+            
+            UIView.animate(withDuration: 0.2) {
+                self?.okButton.alpha = 1.0
+            }
+            guard let userInfo = notification.userInfo as? [String: Any] else {
+                return
+            }
+            if let periods = userInfo[GameTimePickersUserInfoKey.Periods] as? Int {
+                self?.selectedPeriods = periods
+            }
+            if let minutes = userInfo[GameTimePickersUserInfoKey.Minutes] as? Int {
+                self?.selectedMinutes = minutes
+            }
+            if let addHalf = userInfo[GameTimePickersUserInfoKey.AddHalf] as? Bool {
+                self?.selectedMinutesAddHalf = addHalf
+            }
+        }
     }
     
     deinit {
@@ -166,7 +187,7 @@ class CustomGameTimeVC: UIViewController {
             pickers.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             pickers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: buttonHorInset),
             pickers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -buttonHorInset),
-            pickers.heightAnchor.constraint(equalTo: pickers.widthAnchor, multiplier: 0.9),
+            pickers.heightAnchor.constraint(equalTo: pickers.widthAnchor, multiplier: 1),
 
             ])
     }
@@ -241,6 +262,13 @@ class CustomGameTimeVC: UIViewController {
             overrideUserInterfaceStyle = .light
         }
         view.setNeedsLayout()
+    }
+    
+    @objc private func customTimeSelectionOccurred() {
+        
+        UIView.animate(withDuration: 0.2) {
+            self.okButton.alpha = 1.0
+        }
     }
     
     

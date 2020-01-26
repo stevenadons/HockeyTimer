@@ -11,6 +11,8 @@
 		4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */; };
 		4F052B0923DDBCB000FAFCBF /* PickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */; };
 		4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */; };
+		4F052B0D23DDF66B00FAFCBF /* DecimalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0C23DDF66B00FAFCBF /* DecimalPickerView.swift */; };
+		4F052B1423DE043200FAFCBF /* GameTimePickersUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */; };
 		4F1C321722F6F19B00DC8D3A /* NumberOfPeriods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */; };
 		4F1C321922F75BA000DC8D3A /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */; };
 		4F28325F1FCF46F500E67FF7 /* UserNotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */; };
@@ -128,6 +130,8 @@
 		4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameTimeVC.swift; sourceTree = "<group>"; };
 		4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataSource.swift; sourceTree = "<group>"; };
 		4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerNumberView.swift; sourceTree = "<group>"; };
+		4F052B0C23DDF66B00FAFCBF /* DecimalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalPickerView.swift; sourceTree = "<group>"; };
+		4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimePickersUserInfoKey.swift; sourceTree = "<group>"; };
 		4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfPeriods.swift; sourceTree = "<group>"; };
 		4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4F28325E1FCF46F500E67FF7 /* UserNotificationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationsHandler.swift; path = "../../../Swift-files/Services/UserNotificationsHandler.swift"; sourceTree = "<group>"; };
@@ -272,8 +276,10 @@
 			isa = PBXGroup;
 			children = (
 				4F29B288239D7F20002115B7 /* GameTimePickers.swift */,
+				4F052B0C23DDF66B00FAFCBF /* DecimalPickerView.swift */,
 				4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */,
 				4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */,
+				4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */,
 			);
 			name = GameTimePickers;
 			sourceTree = "<group>";
@@ -809,6 +815,7 @@
 				4F492EB123D363F100980818 /* UIButton.swift in Sources */,
 				4F8D08BA23243A8A0062A58F /* LocalDataManager.swift in Sources */,
 				4F93F58023C9DA5100C93561 /* CardView.swift in Sources */,
+				4F052B0D23DDF66B00FAFCBF /* DecimalPickerView.swift in Sources */,
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4F492EB323D3653100980818 /* TopButton.swift in Sources */,
@@ -842,6 +849,7 @@
 				4FB4BE821F515BE6003B1259 /* StopWatchTimer.swift in Sources */,
 				4F93F59123CA38B900C93561 /* Sound.swift in Sources */,
 				4F8D08B823243A7A0062A58F /* CountryDataManager.swift in Sources */,
+				4F052B1423DE043200FAFCBF /* GameTimePickersUserInfoKey.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */,
 				4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */,

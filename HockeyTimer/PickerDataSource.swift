@@ -62,8 +62,7 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         
         var numberColor: UIColor
         var shapeColor: UIColor
-        var isSmall: Bool = false
-        var isVeryBig: Bool = false
+        var inDecimalMode: Bool = false
         
         switch pickerView.tag {
         case 0:
@@ -72,22 +71,39 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         case 1:
             numberColor = .white
             shapeColor = UIColor(named: ColorName.PantoneRed)!
-            isVeryBig = true
-        case 2:
-            numberColor = .white // UIColor(named: ColorName.VeryDarkBlue)!
-            shapeColor = UIColor(named: ColorName.PantoneYellow)!
-            isSmall = true
+            let decimalPickerView = pickerView as! DecimalPickerView
+            inDecimalMode = decimalPickerView.inDecimalMode
         default:
             fatalError("Did try to get data for pickerview exceeding max tag")
         }
         
-        return PickerNumberView(number: number, numberColor: numberColor, shapeColor: shapeColor, isSmall: isSmall, isVeryBig: isVeryBig)
+        return PickerNumberView(number: number, addHalf: inDecimalMode, numberColor: numberColor, shapeColor: shapeColor, isSmall: false, isVeryBig: false)
         
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         
         return 90
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        print("select")
+        
+        let pickerView = pickerView as! DecimalPickerView
+        
+        var userInfo: [String : Any] = [:]
+
+        if pickerView.tag == 0, let selectedPeriods = pickerView.selectedPeriods {
+            userInfo[GameTimePickersUserInfoKey.Periods] = selectedPeriods
+            
+        } else if pickerView.tag == 1, let selectedMinutes = pickerView.selectedMinutes {
+            userInfo[GameTimePickersUserInfoKey.Minutes] = selectedMinutes
+            userInfo[GameTimePickersUserInfoKey.AddHalf] = pickerView.inDecimalMode
+        }
+        
+        NotificationCenter.default.post(name: .CustomTimeSelectionOccurred, object: nil, userInfo: userInfo)
+
     }
     
 }
