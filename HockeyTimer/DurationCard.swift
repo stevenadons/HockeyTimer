@@ -76,8 +76,6 @@ class DurationCard: UIButton {
             ageLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
         }
         addSubview(ageLabel)
-        
-//        windUp()
     }
     
     private func createAgeLabel(title: String) -> UILabel {
@@ -85,7 +83,7 @@ class DurationCard: UIButton {
         let label = UILabel()
         
         label.text = title
-        label.font = UIFont(name: FONTNAME.ThemeBlack, size: 15)
+        label.font = UIFont(name: FONTNAME.ThemeBlack, size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center

@@ -53,7 +53,8 @@ let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented 
 
 let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "VC title")
 let LS_TITLE_COUNTRY = NSLocalizedString("Country", comment: "VC title")
-let LS_TITLE_PENALTY_CARD = NSLocalizedString("Card", comment: "VC title")
+let LS_TITLE_PENALTY_CARD = NSLocalizedString("Penalty Card", comment: "VC title")
+let LS_TITLE_CUSTOM_TIME = NSLocalizedString("Custom Time", comment: "VC title")
 let LS_TITLE_DOCUMENTS = NSLocalizedString("Rules", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")

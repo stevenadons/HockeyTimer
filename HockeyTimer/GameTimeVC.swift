@@ -25,6 +25,8 @@ class GameTimeVC: UIViewController {
     var selectedMinutes: Int?
     var selectedPeriods: Int?
     private var shouldPassSelection: Bool = false
+    private var currentGameMinutes: Int!
+    private var currentGamePeriods: Int!
 
     private var titleText: String?
     private var onDismiss: ((Bool, Int?, Int?) -> Void)?
@@ -42,9 +44,11 @@ class GameTimeVC: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(titleText: String? = nil, onDismiss: ((Bool, Int?, Int?) -> Void)? = nil) {
+    init(titleText: String? = nil, currentGamePeriods: Int, currentGameMinutes: Int, onDismiss: ((Bool, Int?, Int?) -> Void)? = nil) {
         
         self.titleText = titleText
+        self.currentGamePeriods = currentGamePeriods
+        self.currentGameMinutes = currentGameMinutes
         self.onDismiss = onDismiss
         super.init(nibName: nil, bundle: nil)
     }
@@ -282,7 +286,10 @@ class GameTimeVC: UIViewController {
     @objc private func otherTimeTapped() {
         
         clearSelectedDuration()
-        print("to do")
+        let vc = CustomGameTimeVC(titleText: LS_TITLE_CUSTOM_TIME, currentGamePeriods: currentGamePeriods, currentGameMinutes: currentGameMinutes) { (shouldPassSelection, selectedPeriods, selectedMinutes) in
+            #warning("add")
+        }
+        present(vc, animated: true, completion: nil)
     }
     
     @objc private func cancelTapped() {

@@ -223,7 +223,7 @@ class TimerVC: PanArrowVC {
     
     override func gameTimeButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME) { (shouldStartNewGame, selectedMinutes, selectedPeriods) in
+        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, currentGamePeriods: game.periods, currentGameMinutes: game.minutes) { (shouldStartNewGame, selectedMinutes, selectedPeriods) in
             
             guard shouldStartNewGame else {
                 return

@@ -104,7 +104,7 @@ class MiniStopWatch: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         if bold {
-            let size = UIDevice.whenDeviceIs(small: 15, normal: 17, big: 17)
+            let size = UIDevice.whenDeviceIs(small: 14, normal: 16, big: 16)
             label.font = UIFont(name: FONTNAME.ThemeBlack, size: size)
         } else {
             label.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
