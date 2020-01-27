@@ -47,8 +47,8 @@ let LS_BUTTON_UNDOGOAL = NSLocalizedString("Undo Goal", comment: "Message for un
 let LS_BUTTON_ONBOARDDISMISS = NSLocalizedString("OK got it", comment: "Button for ending onboarding")
 let LS_BUTTON_DONE = NSLocalizedString("Done", comment: "Button title")
 let LS_BUTTON_OTHER_TIME = NSLocalizedString("Custom time", comment: "Button Title")
-let LS_BUTTON_ADD_HALF_MINUTE = NSLocalizedString("Add half minute", comment: "Button Title")
-let LS_BUTTON_DELETE_HALF_MINUTE = NSLocalizedString("Don't add half minute", comment: "Button Title")
+let LS_BUTTON_ADD_HALF_MINUTE = NSLocalizedString("Add half a minute", comment: "Button Title")
+let LS_BUTTON_DELETE_HALF_MINUTE = NSLocalizedString("Don't add half a minute", comment: "Button Title")
 
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")

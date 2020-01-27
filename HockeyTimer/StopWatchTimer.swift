@@ -160,11 +160,8 @@ class StopWatchTimer {
     
     private func resetTime() {
 
-        let normalSecondsInHalf = Double(game.minutes * 60)
-        let multiplier = 2.0 / Double(game.periods)
-        let newSecondsInPeriod = Int(normalSecondsInHalf * multiplier)
-        self.totalSecondsInPeriod = newSecondsInPeriod
-        self.totalSecondsToGo = newSecondsInPeriod
+        self.totalSecondsInPeriod = Int(Double(game.minutes * 60) / Double(game.periods))
+        self.totalSecondsToGo = Int(Double(game.minutes * 60) / Double(game.periods))
     }
 
     @objc private func tickCountDown() {

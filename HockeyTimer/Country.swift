@@ -17,6 +17,7 @@ struct Country {
     private (set) var capitals: String!
     private (set) var localeRegionCode: String!
     private (set) var name: String!
+    private (set) var periods: [Int]!
     private (set) var minutes: [Int]!
     private (set) var minutesStrings: [String]!
     private (set) var groupsOfRules: [GroupOfRules]!
@@ -24,11 +25,12 @@ struct Country {
     
     // MARK: - Init
     
-    init(capitals: String, localeRegionCode: String, name: String, minutes: [Int], minutesStrings: [String], groupsOfRules: [GroupOfRules]) {
+    init(capitals: String, localeRegionCode: String, name: String, periods: [Int], minutes: [Int], minutesStrings: [String], groupsOfRules: [GroupOfRules]) {
         
         self.capitals = capitals
         self.localeRegionCode = localeRegionCode
         self.name = name
+        self.periods = periods
         self.minutes = minutes
         self.minutesStrings = minutesStrings
         self.groupsOfRules = groupsOfRules
@@ -99,7 +101,7 @@ extension Country: Equatable {
     
     static func == (lhs: Country, rhs: Country) -> Bool {
         
-        return (lhs.capitals == rhs.capitals) && (lhs.minutes == rhs.minutes) && (lhs.minutesStrings == rhs.minutesStrings)
+        return (lhs.capitals == rhs.capitals) && (lhs.minutes == rhs.minutes) && (lhs.minutesStrings == rhs.minutesStrings) && (lhs.periods == rhs.periods)
     }
 }
 

@@ -48,8 +48,8 @@
 "Notifications" = "Meldingen";
 "Get notified when timer ends." = "Ontvang een melding wanneer de tijd verstreken is.";
 "Done" = "Gereed";
-"Add half minute" = "Halve minuut erbij";
-"Don't add half minute" = "Geen halve minuut erbij";
+"Add half a minute" = "Halve minuut erbij";
+"Don't add half a minute" = "Geen halve minuut erbij";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";

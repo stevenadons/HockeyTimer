@@ -29,6 +29,12 @@ class DurationCard: UIButton {
             miniStopWatch.setNeedsDisplay()
         }
     }
+    var periods: Int = HockeyGame.standardPeriods {
+        didSet {
+            miniStopWatch.periods = periods
+            miniStopWatch.setNeedsDisplay()
+        }
+    }
     
 
     // MARK: - Initializing
@@ -45,15 +51,21 @@ class DurationCard: UIButton {
         setup()
     }
     
-    convenience init(minutes: Int) {
+    convenience init(minutes: Int, periods: Int) {
         
         self.init()
         convenienceSet(minutes: minutes)
+        convenienceSet(periods: periods)
     }
     
     private func convenienceSet(minutes: Int) {
         
         self.minutes = minutes
+    }
+    
+    private func convenienceSet(periods: Int) {
+        
+        self.periods = periods
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -87,7 +99,7 @@ class DurationCard: UIButton {
         label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.textAlignment = .center
-        label.textColor = (backgroundColor == UIColor(named: ColorName.LightBlue)!) ? UIColor(named: ColorName.VeryDarkBlue)! : UIColor.white
+        label.textColor = (backgroundColor == UIColor(named: ColorName.LightBlue)!) ? UIColor(named: ColorName.VeryDarkBlue)! : .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         
@@ -149,7 +161,7 @@ class DurationCard: UIButton {
         }
     }
     
-    func setMinutes(_ minutes: Int, minutesString: String, animated: Bool, delay: Double) {
+    func setMinutes(_ minutes: Int, minutesString: String, periods: Int, animated: Bool, delay: Double) {
         
         if animated {
             windUp()
@@ -157,9 +169,24 @@ class DurationCard: UIButton {
         
         self.minutes = minutes
         miniStopWatch.setMinutes(minutes)
+        self.periods = periods
+        miniStopWatch.setPeriods(periods)
         ageString = minutesString
         if animated {
             popup(delay: delay)
+        }
+    }
+    
+    func updateColor(_ bg: UIColor) {
+        
+        backgroundColor = bg
+        miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!
+        ageLabel.textColor = .white
+        
+        if bg == UIColor(named: ColorName.VeryDarkBlue_Red)! {
+            miniStopWatch.color = UIColor(named: ColorName.DarkGray_VeryDarkBlue)!
+        } else if bg == UIColor(named: ColorName.LightBlue)! {
+            ageLabel.textColor = UIColor(named: ColorName.VeryDarkBlue)!
         }
     }
     

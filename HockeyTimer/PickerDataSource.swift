@@ -88,16 +88,13 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        print("select")
-        
         let pickerView = pickerView as! DecimalPickerView
-        
         var userInfo: [String : Any] = [:]
 
-        if pickerView.tag == 0, let selectedPeriods = pickerView.selectedPeriods {
+        if pickerView.tag == 0, let selectedPeriods = numberAtIndex(row) {
             userInfo[GameTimePickersUserInfoKey.Periods] = selectedPeriods
             
-        } else if pickerView.tag == 1, let selectedMinutes = pickerView.selectedMinutes {
+        } else if pickerView.tag == 1, let selectedMinutes = numberAtIndex(row) {
             userInfo[GameTimePickersUserInfoKey.Minutes] = selectedMinutes
             userInfo[GameTimePickersUserInfoKey.AddHalf] = pickerView.inDecimalMode
         }

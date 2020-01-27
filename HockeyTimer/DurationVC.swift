@@ -143,7 +143,7 @@ class DurationVC: PanArrowVC {
         view.addSubview(pauseAtQuarterLabel)
         
         for index in 0 ..< SELECTED_COUNTRY.minutes.count {
-            let card = DurationCard(minutes: SELECTED_COUNTRY.minutes[index])
+            let card = DurationCard(minutes: SELECTED_COUNTRY.minutes[index], periods: SELECTED_COUNTRY.periods[index])
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
             view.addSubview(card)
@@ -284,10 +284,11 @@ class DurationVC: PanArrowVC {
         
         for index in 0..<SELECTED_COUNTRY.minutes.count {
             let minutes = SELECTED_COUNTRY.minutes[index]
-            let card = DurationCard(minutes: minutes)
+            let periods = SELECTED_COUNTRY.periods[index]
+            let card = DurationCard(minutes: minutes, periods: periods)
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], animated: true, delay: 0.1 * Double(index))
+            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], periods: periods, animated: true, delay: 0.1 * Double(index))
             view.addSubview(card)
         }
         

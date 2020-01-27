@@ -229,27 +229,13 @@ class TimerVC: PanArrowVC {
                 return
             }
             
-            if selectedMinutes != nil && (self.game.minutes != selectedMinutes) {
-                // Game Time Changed
-                UserDefaults.standard.set(selectedMinutes!, forKey: UserDefaultsKey.Minutes)
-                
-                if selectedPeriods != nil && (self.game.periods != selectedPeriods) {
-                    // Number of Periods also changed
-                    UserDefaults.standard.set(selectedPeriods, forKey: UserDefaultsKey.Periods)
-                    self.pageVC?.game = HockeyGame(minutes: selectedMinutes!, periods: selectedPeriods!)
-                    
-                } else {
-                    // Only Duration changed
-                    self.pageVC?.game = HockeyGame(minutes: selectedMinutes!, periods: self.game.periods)
-                }
-                NotificationCenter.default.post(name: .NewGame, object: nil)
-                
-            } else if selectedPeriods != nil && (self.game.periods != selectedPeriods) {
-                // Only Number of Periods changed
-                UserDefaults.standard.set(selectedPeriods!, forKey: UserDefaultsKey.Periods)
-                self.pageVC?.game = HockeyGame(minutes: self.game.minutes, periods: selectedPeriods!)
-                NotificationCenter.default.post(name: .NewGame, object: nil)
-            }
+            let newMinutes = selectedMinutes ?? self.game.minutes
+            let newPeriods = selectedPeriods ?? self.game.periods
+            UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
+            UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
+            self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
+            
+            NotificationCenter.default.post(name: .NewGame, object: nil)
         }
         
         present(vc, animated: true, completion: nil)
@@ -271,7 +257,6 @@ class TimerVC: PanArrowVC {
         panArrowDownLabel.text = "\(game.homeScore) - \(game.awayScore)"
     }
 }
-
 
 
 extension TimerVC: StopWatchDelegate {

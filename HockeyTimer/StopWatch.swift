@@ -213,17 +213,9 @@ class StopWatch: UIControl {
     private func updateDurationLabel() {
         
         let numberOfPeriods = "\(game.periods)"
-        var minutesString = ""
-        if game.periods == 2 { // game.numberOfPeriods == .Halves
-            minutesString = "\(game.minutes) min"
-            
-        } else {
-            let denominator = game.periods / 2 // game.numberOfPeriods.rawValue / 2
-            let dividedDouble = Double(game.minutes) / Double(denominator)
-            let minutesWithOneDecimal = (dividedDouble * 10).rounded() / 10
-            minutesString = (minutesWithOneDecimal - minutesWithOneDecimal.rounded() == 0) ? "\(Int(minutesWithOneDecimal.rounded())) min" : "\(minutesWithOneDecimal) min"
-
-        }
+        let periodMinutes = Double.maxOneDecimalDividing(game.minutes, by: game.periods)
+        let minutesString = periodMinutes.stringWithMaxOneDecimal + " min"
+        
         durationLabel.text = numberOfPeriods + "x" + minutesString
         durationLabel.setNeedsDisplay()
     }

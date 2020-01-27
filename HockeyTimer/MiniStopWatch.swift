@@ -13,16 +13,17 @@ class MiniStopWatch: UIView {
     
     // MARK: - Properties
     
-//    var duration: Duration = .TwentyFive {
-//        didSet {
-//            durationLabel.text = duration.abbreviation
-//            durationLabel.setNeedsDisplay()
-//        }
-//    }
     var minutes: Int = HockeyGame.standardMinutes {
         didSet {
-            durationLabel.text = "\(minutes)m"
+            let minutesPerPeriod = Double.maxOneDecimalDividing(minutes, by: periods)
+            durationLabel.text = minutesPerPeriod.stringWithMaxOneDecimal + "m"
             durationLabel.setNeedsDisplay()
+        }
+    }
+    var periods: Int = HockeyGame.standardPeriods {
+        didSet {
+            timesLabel.text = "\(periods)x"
+            timesLabel.setNeedsDisplay()
         }
     }
     var color: UIColor = UIColor(named: ColorName.DarkBlue)! {
@@ -85,10 +86,12 @@ class MiniStopWatch: UIView {
         progressBar = progressBarLayer()
         squareContainer.addSublayer(progressBar)
         
-        timesLabel = stopWatchLabel(text: "2x", bold: false)
+        timesLabel = stopWatchLabel(text: "\(periods)x", bold: false)
         addSubview(timesLabel)
-//        durationLabel = stopWatchLabel(text: duration.abbreviation, bold: true)
-        durationLabel = stopWatchLabel(text: "\(minutes)m", bold: true)
+        
+        let minutesPerPeriod = Double.maxOneDecimalDividing(minutes, by: periods)
+        let textString = minutesPerPeriod.stringWithMaxOneDecimal + "m"
+        durationLabel = stopWatchLabel(text: textString, bold: true)
         addSubview(durationLabel)
     }
     
@@ -104,7 +107,7 @@ class MiniStopWatch: UIView {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         if bold {
-            let size = UIDevice.whenDeviceIs(small: 14, normal: 16, big: 16)
+            let size = UIDevice.whenDeviceIs(small: 14, normal: 15, big: 16)
             label.font = UIFont(name: FONTNAME.ThemeBlack, size: size)
         } else {
             label.font = UIFont(name: FONTNAME.ThemeRegular, size: 14)
@@ -198,7 +201,12 @@ class MiniStopWatch: UIView {
     
     func setMinutes(_ minutes: Int) {
             
-        durationLabel.text = "\(minutes)m"
+        self.minutes = minutes
+    }
+    
+    func setPeriods(_ periods: Int) {
+            
+        self.periods = periods
     }
     
     

@@ -20,6 +20,7 @@
 		4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F37FBF122AD3FD200D2E236 /* UIDevice.swift */; };
 		4F3A11D922F89FE600E643CB /* TestingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3A11D822F89FE600E643CB /* TestingVC.swift */; };
 		4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */; };
+		4F3D1ED423DF77DF00A53272 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D1ED323DF77DF00A53272 /* Double.swift */; };
 		4F3F397B22B9673000BC0141 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F397A22B9673000BC0141 /* UpdateManager.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
 		4F492EAF23D3096700980818 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F492EAE23D3096700980818 /* MenuVC.swift */; };
@@ -36,7 +37,6 @@
 		4F6869BF23DC9204003F89C1 /* RulesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */; };
 		4F6869C123DC9294003F89C1 /* RulesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C023DC9294003F89C1 /* RulesCell.swift */; };
 		4F6869C323DCAC21003F89C1 /* GameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */; };
-		4F6869C523DCAD22003F89C1 /* GameTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C423DCAD22003F89C1 /* GameTimeCell.swift */; };
 		4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
@@ -139,6 +139,7 @@
 		4F37FBF122AD3FD200D2E236 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		4F3A11D822F89FE600E643CB /* TestingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingVC.swift; sourceTree = "<group>"; };
 		4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		4F3D1ED323DF77DF00A53272 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4F3F397A22B9673000BC0141 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		4F3F626F1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -157,7 +158,6 @@
 		4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesDataSource.swift; sourceTree = "<group>"; };
 		4F6869C023DC9294003F89C1 /* RulesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCell.swift; sourceTree = "<group>"; };
 		4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeVC.swift; sourceTree = "<group>"; };
-		4F6869C423DCAD22003F89C1 /* GameTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCell.swift; sourceTree = "<group>"; };
 		4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeDataSource.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
@@ -289,7 +289,6 @@
 			children = (
 				4F492EB723D4CFA300980818 /* CountryCell.swift */,
 				4F6869C023DC9294003F89C1 /* RulesCell.swift */,
-				4F6869C423DCAD22003F89C1 /* GameTimeCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -582,6 +581,7 @@
 				4F6342A322916E0A002F49B4 /* NotificationNameX.swift */,
 				4F37FBF122AD3FD200D2E236 /* UIDevice.swift */,
 				4F492EB023D363F100980818 /* UIButton.swift */,
+				4F3D1ED323DF77DF00A53272 /* Double.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -818,6 +818,7 @@
 				4F052B0D23DDF66B00FAFCBF /* DecimalPickerView.swift in Sources */,
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
+				4F3D1ED423DF77DF00A53272 /* Double.swift in Sources */,
 				4F492EB323D3653100980818 /* TopButton.swift in Sources */,
 				4F93F57B23C9DA3100C93561 /* CardTimerPanel.swift in Sources */,
 				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
@@ -869,7 +870,6 @@
 				4F93F58123C9DA5100C93561 /* ChooseCardPanel.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */,
-				4F6869C523DCAD22003F89C1 /* GameTimeCell.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
 				4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */,

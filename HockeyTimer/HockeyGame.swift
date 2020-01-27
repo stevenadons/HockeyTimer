@@ -35,7 +35,7 @@ class HockeyGame {
         }
     }
     
-    static let standardMinutes: Int = 35
+    static let standardMinutes: Int = 70
     static let standardPeriods: Int = 2
     
     

@@ -29,8 +29,8 @@ class GameTimeDataSource: UICollectionViewDiffableDataSource<Int, DurationCard> 
     func configureWith(_ country: Country) {
         
         for index in 0 ..< country.minutes.count {
-            let card = DurationCard(minutes: country.minutes[index])
-            card.setMinutes(country.minutes[index], minutesString: country.minutesStrings[index], animated: false, delay: 0.0)
+            let card = DurationCard(minutes: country.minutes[index], periods: country.periods[index])
+            card.setMinutes(country.minutes[index], minutesString: country.minutesStrings[index], periods: country.periods[index], animated: false, delay: 0.0)
             cards.append(card)
         }
     }

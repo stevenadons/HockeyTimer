@@ -86,39 +86,45 @@ class CountryDataManager {
         let australia = Country(capitals: "AUS",
                                 localeRegionCode: "AU",
                                 name: "Australia",
-                                minutes: [20, 35],
+                                periods: [4, 4],
+                                minutes: [40, 70],
                                 minutesStrings: ["Indoor", "Outdoor"],
                                 groupsOfRules: [])
         let belgium = Country(capitals: "B",
                               localeRegionCode: "BE",
                               name: "Belgium",
-                              minutes: [20, 25, 30, 35],
+                              periods: [2, 2, 2, 4],
+                              minutes: [40, 50, 60, 70],
                               minutesStrings: ["U7 - U8", "U9 - U10 - U11 - U12", "U14 - Ladies - Gents", "U16 - U19"],
                               groupsOfRules: [])
         #warning("change 1 back to 10")
         let germany = Country(capitals: "D",
                               localeRegionCode: "DE",
                               name: "Germany",
-                              minutes: [1, 15, 20, 25, 30, 35],
-                              minutesStrings: [LS_COUNTRY_YOUTH, LS_COUNTRY_YOUTH, LS_COUNTRY_INDOOR, LS_COUNTRY_YOUTH, LS_COUNTRY_GENERAL, LS_COUNTRY_INTERNATIONAL],
+                              periods: [4, 2, 2, 4],
+                              minutes: [40, 50, 60, 70],
+                              minutesStrings: [LS_COUNTRY_INDOOR, LS_COUNTRY_YOUTH, LS_COUNTRY_GENERAL, LS_COUNTRY_INTERNATIONAL],
                               groupsOfRules: [])
         let spain = Country(capitals: "E",
                             localeRegionCode: "ES",
                             name: "Spain",
-                            minutes: [20, 25, 30, 35],
+                            periods: [4, 2, 2, 4],
+                            minutes: [40, 50, 60, 70],
                             minutesStrings: [LS_COUNTRY_INDOOR, LS_COUNTRY_MASTERS_MAMIS_PAPIS, LS_COUNTRY_OUTDOOR, LS_COUNTRY_OUTDOOR],
                             groupsOfRules: [])
         let england = Country(capitals: "ENG",
                               localeRegionCode: "GB",
                               name: "England",
-                              minutes: [9, 12, 15, 20, 30, 35],
-                              minutesStrings: [LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_INDOOR, LS_COUNTRY_OUTDOOR, LS_COUNTRY_OUTDOOR],
+                              periods: [2, 4, 2, 4],
+                              minutes: [30, 40, 60, 70],
+                              minutesStrings: [LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_INDOOR, LS_COUNTRY_OUTDOOR, LS_COUNTRY_OUTDOOR],
                               groupsOfRules: [])
         let netherlands = Country(capitals: "NL",
                                   localeRegionCode: "NL",
                                   name: "Netherlands",
-                                  minutes: [15, 20, 25, 30, 35],
-                                  minutesStrings: [LS_COUNTRY_TEAMS_OF_3, LS_COUNTRY_INDOOR_AND_H, LS_COUNTRY_TEAMS_OF_6, LS_COUNTRY_TEAMS_OF_8, LS_COUNTRY_GENERAL],
+                                  periods: [2, 2, 2, 4],
+                                  minutes: [30, 50, 60, 70],
+                                  minutesStrings: [LS_COUNTRY_TEAMS_OF_3, LS_COUNTRY_TEAMS_OF_6, LS_COUNTRY_TEAMS_OF_8, LS_COUNTRY_GENERAL],
                                   groupsOfRules: [])
 
         countries = [australia, belgium, germany, spain, england, netherlands]
@@ -284,8 +290,7 @@ class CountryDataManager {
                             for index in 0 ..< countriesToUpdate!.count {
                                 if countriesToUpdate![index].capitals == capitals {
                                     let currentCountry = countriesToUpdate![index]
-                                    let updatedCountry = Country(capitals: capitals, localeRegionCode: currentCountry.localeRegionCode, name: currentCountry.name, minutes: currentCountry.minutes, minutesStrings: currentCountry.minutesStrings, groupsOfRules: resultGroupsOfRules)
-//                                    let updatedCountry = Country(capitals: capitals, localeRegionCode: currentCountry.localeRegionCode, name: currentCountry.name, durations: currentCountry.durations, durationStrings: currentCountry.durationStrings, groupsOfRules: resultGroupsOfRules)
+                                    let updatedCountry = Country(capitals: capitals, localeRegionCode: currentCountry.localeRegionCode, name: currentCountry.name, periods: currentCountry.periods, minutes: currentCountry.minutes, minutesStrings: currentCountry.minutesStrings, groupsOfRules: resultGroupsOfRules)
                                     resultCountries.remove(at: index)
                                     resultCountries.insert(updatedCountry, at: index)
                                 }

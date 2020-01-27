@@ -98,8 +98,13 @@ class CustomGameTimeVC: UIViewController {
         
         pickers = GameTimePickers()
         pickers.translatesAutoresizingMaskIntoConstraints = false
-        #warning("add decimal data")
-        pickers.setPickersTo(currentGamePeriods, second: currentGameMinutes, animated: false)
+        let minutesPerPeriod = Double.maxOneDecimalDividing(currentGameMinutes, by: currentGamePeriods)
+        if minutesPerPeriod.isInteger {
+            pickers.setPickersTo(currentGamePeriods, second: Int(minutesPerPeriod), animated: false)
+        } else {
+            pickers.setPickersTo(currentGamePeriods, second: Int(floor(minutesPerPeriod)), animated: false)
+            pickers.decimalButtonTapped()
+        }
         view.addSubview(pickers)
     }
     
@@ -139,14 +144,12 @@ class CustomGameTimeVC: UIViewController {
             guard let userInfo = notification.userInfo as? [String: Any] else {
                 return
             }
-            if let periods = userInfo[GameTimePickersUserInfoKey.Periods] as? Int {
+            print("Evaluating userInfo \(userInfo)")
+            if let periods = userInfo[GameTimePickersUserInfoKey.Periods] as? Int, let minutes = userInfo[GameTimePickersUserInfoKey.Minutes] as? Int, let addHalf = userInfo[GameTimePickersUserInfoKey.AddHalf] as? Bool {
                 self?.selectedPeriods = periods
-            }
-            if let minutes = userInfo[GameTimePickersUserInfoKey.Minutes] as? Int {
-                self?.selectedMinutes = minutes
-            }
-            if let addHalf = userInfo[GameTimePickersUserInfoKey.AddHalf] as? Bool {
+                self?.selectedMinutes = minutes * periods
                 self?.selectedMinutesAddHalf = addHalf
+                print("done")
             }
         }
     }
@@ -184,7 +187,7 @@ class CustomGameTimeVC: UIViewController {
             cancelButton.heightAnchor.constraint(equalTo: okButton.heightAnchor),
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -buttonBottomInset),
             
-            pickers.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            pickers.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 35),
             pickers.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: buttonHorInset),
             pickers.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -buttonHorInset),
             pickers.heightAnchor.constraint(equalTo: pickers.widthAnchor, multiplier: 1),
@@ -244,6 +247,7 @@ class CustomGameTimeVC: UIViewController {
     private func showAlertNewGame() {
         
         let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: nil, cancelAction: {
+            #warning("to test")
             self.selectedPeriods = nil
         })
         

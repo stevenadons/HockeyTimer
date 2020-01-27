@@ -15,7 +15,7 @@ class GameTimePickers: UIView {
     
     private var periodsPicker: DecimalPickerView!
     private var minutesPicker: DecimalPickerView!
-    private var xLabel: UILabel!
+    private var xButton: UIButton!
     private var decimalButton: UIButton!
     
     private var periodsPickerDataSource: PickerDataSource!
@@ -63,8 +63,9 @@ class GameTimePickers: UIView {
         minutesPicker.delegate = minutesPickerDataSource
         addSubview(minutesPicker)
         
-        xLabel = createLabel(text: "x")
-        addSubview(xLabel)
+        xButton = UIButton.createTopButton(imageName: "xmark", tintColor: .secondaryLabel)
+        xButton.isUserInteractionEnabled = false
+        addSubview(xButton)
         
         decimalButton = UIButton()
         decimalButton.translatesAutoresizingMaskIntoConstraints = false
@@ -82,21 +83,22 @@ class GameTimePickers: UIView {
         super.layoutSubviews()
         
         let vertRatio: CGFloat = 0.7
-        let xLabelWidth: CGFloat = 15
+        let xButtonWidth: CGFloat = 20
         let pickerWidth: CGFloat = 120
         
         NSLayoutConstraint.activate([
         
             periodsPicker.widthAnchor.constraint(equalToConstant: pickerWidth),
-            periodsPicker.trailingAnchor.constraint(equalTo: xLabel.leadingAnchor),
+            periodsPicker.trailingAnchor.constraint(equalTo: xButton.leadingAnchor),
             periodsPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
             periodsPicker.heightAnchor.constraint(equalTo: heightAnchor, multiplier: vertRatio),
             
-            xLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            xLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            xLabel.widthAnchor.constraint(equalToConstant: xLabelWidth),
+            xButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            xButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            xButton.widthAnchor.constraint(equalToConstant: xButtonWidth),
+            xButton.heightAnchor.constraint(equalToConstant: xButtonWidth),
 
-            minutesPicker.leadingAnchor.constraint(equalTo: xLabel.trailingAnchor),
+            minutesPicker.leadingAnchor.constraint(equalTo: xButton.trailingAnchor),
             minutesPicker.widthAnchor.constraint(equalToConstant: pickerWidth),
             minutesPicker.centerYAnchor.constraint(equalTo: centerYAnchor),
             minutesPicker.heightAnchor.constraint(equalTo: heightAnchor, multiplier: vertRatio),
@@ -122,16 +124,22 @@ class GameTimePickers: UIView {
     
     // MARK: - Touch Methods
     
-    @objc private func decimalButtonTapped() {
+    @objc func decimalButtonTapped() {
         
         let currentInDecimalMode = minutesPicker.inDecimalMode
         minutesPicker.inDecimalMode = !currentInDecimalMode
         let newTitle = minutesPicker.inDecimalMode ? LS_BUTTON_DELETE_HALF_MINUTE : LS_BUTTON_ADD_HALF_MINUTE
         decimalButton.setTitle(newTitle, for: .normal)
         
-        // Set current content as selected to trigger sending out a selection occurred notification
-        let currentRow = minutesPicker.selectedRow(inComponent: 0)
-        minutesPicker.selectRow(currentRow, inComponent: 0, animated: true)
+        // Pass info as selection occurred
+        let currentPeriodsRow = periodsPicker.selectedRow(inComponent: 0)
+        let currentMinutesRow = minutesPicker.selectedRow(inComponent: 0)
+        var userInfo: [String : Any] = [:]
+        userInfo[GameTimePickersUserInfoKey.Periods] = minutesPickerDataSource.numberAtIndex(currentPeriodsRow)
+        userInfo[GameTimePickersUserInfoKey.Minutes] = minutesPickerDataSource.numberAtIndex(currentMinutesRow)
+        userInfo[GameTimePickersUserInfoKey.AddHalf] = minutesPicker.inDecimalMode
+        print("did create userInfo: \(userInfo)")
+        NotificationCenter.default.post(name: .CustomTimeSelectionOccurred, object: nil, userInfo: userInfo)
     }
     
     

@@ -34,11 +34,12 @@ class GameTimeVC: UIViewController {
     private var skipAnimations: Bool = false
     private var haptic: UISelectionFeedbackGenerator?
 
+    private let buttonHorInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
     private var padding: CGFloat {
         return (UIDevice.deviceSize != .small && cards.count > 4) ? 18 : 12
     }
-    private  var cardWidth: CGFloat {
-        return view.bounds.width * 125 / 375
+    private var cardWidth: CGFloat {
+        return view.bounds.width * 0.35
     }
     
     
@@ -189,7 +190,6 @@ class GameTimeVC: UIViewController {
         let countryWidth: CGFloat = 44
         let countryHeight: CGFloat = 44
         let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 50, big: 54)
-        let buttonHorInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
         let buttonBottomInset: CGFloat = UIDevice.whenDeviceIs(small: 12, normal: 16, big: 20)
         let buttonPadding: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 12, big: 16)
         let countryTopInset: CGFloat = UIDevice.whenDeviceIs(small: 0, normal: 12, big: 12)
@@ -267,6 +267,7 @@ class GameTimeVC: UIViewController {
             $0.alpha = 1.0
         }
         selectedMinutes = nil
+        selectedPeriods = nil
         UIView.animate(withDuration: 0.2, animations: {
             self.okButton.alpha = 0.0
         })
@@ -286,8 +287,17 @@ class GameTimeVC: UIViewController {
     @objc private func otherTimeTapped() {
         
         clearSelectedDuration()
-        let vc = CustomGameTimeVC(titleText: LS_TITLE_CUSTOM_TIME, currentGamePeriods: currentGamePeriods, currentGameMinutes: currentGameMinutes) { (shouldPassSelection, selectedPeriods, selectedMinutes) in
-            #warning("add")
+        
+        let vc = CustomGameTimeVC(titleText: LS_TITLE_CUSTOM_TIME, currentGamePeriods: currentGamePeriods, currentGameMinutes: currentGameMinutes) { (shouldPassSelection, selectedMinutes, selectedPeriods) in
+            
+            if shouldPassSelection {
+                self.selectedMinutes = selectedMinutes
+                self.selectedPeriods = selectedPeriods
+                self.shouldPassSelection = true
+                DispatchQueue.main.async { [weak self] in
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }
         }
         present(vc, animated: true, completion: nil)
     }
@@ -312,7 +322,7 @@ class GameTimeVC: UIViewController {
         
         doHaptic()
         
-        if sender.minutes == selectedMinutes { 
+        if sender.minutes == selectedMinutes && sender.periods == selectedPeriods {
             // user tapped twice on same card
             clearSelectedDuration()
             prepareHaptic()
@@ -330,6 +340,7 @@ class GameTimeVC: UIViewController {
             $0.alpha = 1.0
         }
         selectedMinutes = nil
+        selectedPeriods = nil
         UIView.animate(withDuration: 0.2, animations: {
             self.okButton.alpha = 0.0
         })
@@ -375,11 +386,27 @@ class GameTimeVC: UIViewController {
         
         let numberOfCards = min(SELECTED_COUNTRY.minutes.count, 4)
         for index in 0 ..< numberOfCards {
+            
             let minutes = SELECTED_COUNTRY.minutes[index]
-            let card = DurationCard(minutes: minutes)
+            let periods = SELECTED_COUNTRY.periods[index]
+            let card = DurationCard(minutes: minutes, periods: periods)
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], animated: true, delay: 0.1 * Double(index))
+            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], periods: periods, animated: true, delay: 0.1 * Double(index))
+            
+            switch index % 4 {
+            case 0:
+                card.updateColor(UIColor(named: ColorName.Olive)!)
+            case 1:
+                card.updateColor(UIColor(named: ColorName.VeryDarkBlue_Red)!)
+            case 2:
+                card.updateColor(UIColor(named: ColorName.LightYellow)!)
+            case 3:
+                card.updateColor(UIColor(named: ColorName.LightBlue)!)
+            default:
+                fatalError("Trying to update card color with wrong index")
+            }
+            
             view.addSubview(card)
         }
         
@@ -390,6 +417,7 @@ class GameTimeVC: UIViewController {
         
         self.cancelView.isUserInteractionEnabled = true
         selectedMinutes = card.minutes
+        selectedPeriods = card.periods
         card.alpha = 1.0
         UIView.animate(withDuration: 0.2, animations: {
             self.cards.forEach {
