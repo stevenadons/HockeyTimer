@@ -19,13 +19,13 @@ class TimerVC: PanArrowVC {
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
     private var cardTimerPanel: CardTimerPanel!
-    private var minutes: Int = HockeyGame.standardMinutes
-    private var periods: Int = HockeyGame.standardPeriods
+    private var minutes: Double = HockeyGame.standardTotalMinutes
+    private var periods: Double = HockeyGame.standardPeriods
     
     var game: HockeyGame! {
         didSet {
             guard game != nil else { return }
-            minutes = game.minutes
+            minutes = game.totalMinutes
         }
     }
     var delegate: TimerVCDelegate?
@@ -174,9 +174,9 @@ class TimerVC: PanArrowVC {
     
     func createNewGame() {
 
-        let savedMinutes = UserDefaults.standard.integer(forKey: UserDefaultsKey.Minutes)
-        let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardMinutes
-        let savedPeriods = UserDefaults.standard.integer(forKey: UserDefaultsKey.Periods)
+        let savedMinutes = UserDefaults.standard.double(forKey: UserDefaultsKey.Minutes)
+        let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardTotalMinutes
+        let savedPeriods = UserDefaults.standard.double(forKey: UserDefaultsKey.Periods)
         let periods = savedPeriods > 0 ? savedPeriods : HockeyGame.standardPeriods
         game = HockeyGame(minutes: minutes, periods: periods)
         
@@ -191,10 +191,11 @@ class TimerVC: PanArrowVC {
         present(buyPremiumVC, animated: true, completion: nil)
     }
     
-    private func showAlertNewGame() {
+    private func showAlertNewGame(onOK: (() -> Void)?) {
         
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGNEWGAME_TEXT, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: {
-            self.handleConfirmationNewGame()
+        #warning("custom message : 2 cases")
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+            onOK?()
         }, cancelAction: nil)
         
         DispatchQueue.main.async {
@@ -218,25 +219,49 @@ class TimerVC: PanArrowVC {
     
     @objc private func resetButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
         
-        showAlertNewGame()
+        showAlertNewGame(onOK: {
+            self.handleConfirmationNewGame()
+        })
     }
     
     override func gameTimeButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, currentGamePeriods: game.periods, currentGameMinutes: game.minutes) { (shouldStartNewGame, selectedMinutes, selectedPeriods) in
+        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, periods: game.periods, totalMinutes: game.totalMinutes, onDismiss: { (shouldStartNewGame, totalMinutes, periods) in
+            
+            print("in completion handler after GameTimeVC with periods \(periods)")
             
             guard shouldStartNewGame else {
                 return
             }
+            guard totalMinutes != nil || periods != nil else {
+                return
+            }
             
-            let newMinutes = selectedMinutes ?? self.game.minutes
-            let newPeriods = selectedPeriods ?? self.game.periods
+            guard self.pageVC?.game.status == .WaitingToStart else {
+                self.showAlertNewGame(onOK: { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    let newMinutes = totalMinutes ?? self.game.totalMinutes
+                    let newPeriods = periods ?? self.game.periods
+                    UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
+                    UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
+                    self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
+                    NotificationCenter.default.post(name: .NewGame, object: nil)
+                })
+                return
+            }
+            
+            let newMinutes = totalMinutes ?? self.game.totalMinutes
+            let newPeriods = periods ?? self.game.periods
+            print("new periods is \(newPeriods)")
             UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
             UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
             self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
-            
             NotificationCenter.default.post(name: .NewGame, object: nil)
-        }
+        })
+        
         
         present(vc, animated: true, completion: nil)
     }
@@ -271,7 +296,9 @@ extension TimerVC: StopWatchDelegate {
     
     func handleTappedForNewGame() {
         
-        showAlertNewGame()
+        showAlertNewGame(onOK: {
+            self.handleConfirmationNewGame()
+        })
     }
     
     func minusOneSecond() {

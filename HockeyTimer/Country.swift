@@ -17,15 +17,15 @@ struct Country {
     private (set) var capitals: String!
     private (set) var localeRegionCode: String!
     private (set) var name: String!
-    private (set) var periods: [Int]!
-    private (set) var minutes: [Int]!
+    private (set) var periods: [Double]!
+    private (set) var minutes: [Double]!
     private (set) var minutesStrings: [String]!
     private (set) var groupsOfRules: [GroupOfRules]!
     
     
     // MARK: - Init
     
-    init(capitals: String, localeRegionCode: String, name: String, periods: [Int], minutes: [Int], minutesStrings: [String], groupsOfRules: [GroupOfRules]) {
+    init(capitals: String, localeRegionCode: String, name: String, periods: [Double], minutes: [Double], minutesStrings: [String], groupsOfRules: [GroupOfRules]) {
         
         self.capitals = capitals
         self.localeRegionCode = localeRegionCode
@@ -85,7 +85,7 @@ struct Country {
         LocalDataManager.delete(name)
     }
     
-    func minutesStringFor(_ minutes: Int) -> String? {
+    func minutesStringFor(_ minutes: Double) -> String? {
         
         if let index = self.minutes.firstIndex(of: minutes), index < minutesStrings.count {
             return minutesStrings[index]

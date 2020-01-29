@@ -12,5 +12,4 @@ enum GameTimePickersUserInfoKey {
     
     static let Periods = "Periods"
     static let Minutes = "Minutes"
-    static let AddHalf = "AddHalf"
 }

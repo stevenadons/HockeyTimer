@@ -27,16 +27,16 @@ class HockeyGame {
 
     private(set) var lastScored: Player?
     
-    var currentPeriod: Int = 1
-    var periods: Int = 2
-    var minutes: Int = HockeyGame.standardMinutes {
+    var currentPeriod: Double = 1.0
+    var periods: Double = 2.0
+    var totalMinutes: Double = HockeyGame.standardTotalMinutes {
         didSet {
-            runningMinutes = minutes
+            runningMinutes = totalMinutes
         }
     }
     
-    static let standardMinutes: Int = 70
-    static let standardPeriods: Int = 2
+    static let standardTotalMinutes: Double = 70.0
+    static let standardPeriods: Double = 2.0
     
     
     // MARK: - Calculated Properties
@@ -133,10 +133,10 @@ class HockeyGame {
     
     // MARK: - Initializing
 
-    convenience init(minutes: Int, periods: Int) {
+    convenience init(minutes: Double, periods: Double) {
         
         self.init()
-        self.minutes = minutes
+        self.totalMinutes = minutes
         self.periods = periods
     }
     

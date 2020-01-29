@@ -76,14 +76,14 @@ class StopWatch: UIControl {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        game = HockeyGame(minutes: HockeyGame.standardMinutes, periods: HockeyGame.standardPeriods)
+        game = HockeyGame(minutes: HockeyGame.standardTotalMinutes, periods: HockeyGame.standardPeriods)
         setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        game = HockeyGame(minutes: HockeyGame.standardMinutes, periods: HockeyGame.standardPeriods)
+        game = HockeyGame(minutes: HockeyGame.standardTotalMinutes, periods: HockeyGame.standardPeriods)
         setUp()
     }
     
@@ -212,8 +212,8 @@ class StopWatch: UIControl {
     
     private func updateDurationLabel() {
         
-        let numberOfPeriods = "\(game.periods)"
-        let periodMinutes = Double.maxOneDecimalDividing(game.minutes, by: game.periods)
+        let numberOfPeriods = "\(Int(game.periods))"
+        let periodMinutes = Double.maxOneDecimalDividing(game.totalMinutes, by: game.periods)
         let minutesString = periodMinutes.stringWithMaxOneDecimal + " min"
         
         durationLabel.text = numberOfPeriods + "x" + minutesString
@@ -304,7 +304,7 @@ class StopWatch: UIControl {
     
     func simplifyForOnboarding(bgColor: UIColor, iconColor: UIColor, timeColor: UIColor, progressZoneColor: UIColor) {
         
-        let simpleGame = HockeyGame(minutes: HockeyGame.standardMinutes, periods: HockeyGame.standardPeriods)
+        let simpleGame = HockeyGame(minutes: HockeyGame.standardTotalMinutes, periods: HockeyGame.standardPeriods)
         reset(withGame: simpleGame)
         messageLabel.alpha = 0.0
         periodLabel.alpha = 0.0
@@ -344,11 +344,11 @@ class StopWatch: UIControl {
         for index in 1 ... progressBars.count {
             let bar = progressBars[index - 1]
             switch index {
-            case ..<game.currentPeriod:
+            case ..<Int(game.currentPeriod):
                 bar.strokeEnd = strokeEndPosition(progress: 1)
-            case game.currentPeriod:
+            case Int(game.currentPeriod):
                 bar.strokeEnd = strokeEndPosition(progress: timer.progressCappedAt1)
-            case (game.currentPeriod + 1)...:
+            case (Int(game.currentPeriod) + 1)...:
                 bar.strokeEnd = strokeEndPosition(progress: 0)
             default:
                 fatalError("Trying to access incorrect index")
@@ -359,7 +359,7 @@ class StopWatch: UIControl {
     private func createProgressBars() -> [CAShapeLayer] {
         
         var result: [CAShapeLayer] = []
-        for index in 1 ... game.periods {
+        for index in 1 ... Int(game.periods) {
             let bar = progressBarLayer(forPeriod: index)
             squareContainer.addSublayer(bar)
             result.append(bar)

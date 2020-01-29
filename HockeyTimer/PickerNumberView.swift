@@ -18,8 +18,7 @@ class PickerNumberView: UIView {
     private var shape: UIView!
     private var path: UIBezierPath!
 
-    private var number: Int = 0
-    private var addHalf: Bool = false
+    private var number: Double = 0.0
     private var isSmall: Bool = false
     private var isVeryBig: Bool = false
     private var numberColor: UIColor = .systemBackground {
@@ -36,12 +35,11 @@ class PickerNumberView: UIView {
     
     // MARK: - Initializers
     
-    convenience init(number: Int, addHalf: Bool, numberColor: UIColor, shapeColor: UIColor, isSmall: Bool, isVeryBig: Bool) {
+    convenience init(number: Double, numberColor: UIColor, shapeColor: UIColor, isSmall: Bool, isVeryBig: Bool) {
         
         self.init()
         
         self.number = number
-        self.addHalf = addHalf
         self.numberColor = numberColor
         self.shapeColor = shapeColor
         self.isSmall = isSmall
@@ -68,10 +66,7 @@ class PickerNumberView: UIView {
         }
         numberLabel.font = UIFont(name: fontName, size: pointSize)
         numberLabel.textColor = numberColor
-        numberLabel.text = String(number)
-        if addHalf {
-            numberLabel.text! += ",5"
-        }
+        numberLabel.text = number.stringWithMaxOneDecimal
         addSubview(numberLabel)
     }
     

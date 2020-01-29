@@ -13,16 +13,16 @@ class MiniStopWatch: UIView {
     
     // MARK: - Properties
     
-    var minutes: Int = HockeyGame.standardMinutes {
+    var minutes: Double = HockeyGame.standardTotalMinutes {
         didSet {
             let minutesPerPeriod = Double.maxOneDecimalDividing(minutes, by: periods)
             durationLabel.text = minutesPerPeriod.stringWithMaxOneDecimal + "m"
             durationLabel.setNeedsDisplay()
         }
     }
-    var periods: Int = HockeyGame.standardPeriods {
+    var periods: Double = HockeyGame.standardPeriods {
         didSet {
-            timesLabel.text = "\(periods)x"
+            timesLabel.text = "\(Int(periods))x"
             timesLabel.setNeedsDisplay()
         }
     }
@@ -86,7 +86,7 @@ class MiniStopWatch: UIView {
         progressBar = progressBarLayer()
         squareContainer.addSublayer(progressBar)
         
-        timesLabel = stopWatchLabel(text: "\(periods)x", bold: false)
+        timesLabel = stopWatchLabel(text: "\(Int(periods))x", bold: false)
         addSubview(timesLabel)
         
         let minutesPerPeriod = Double.maxOneDecimalDividing(minutes, by: periods)
@@ -180,13 +180,13 @@ class MiniStopWatch: UIView {
     func animateProgress(duration: Double) {
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = duration * Double(minutes) / 30.0
+        animation.duration = duration * Double(minutes) / 60.0
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.fromValue = 0.0
-        animation.toValue = CGFloat(Double(minutes) / 60.0)
+        animation.toValue = CGFloat(Double(minutes) / 120.0)
         progressBar.add(animation, forKey: "timer effect")
         CATransaction.setDisableActions(true)
-        progressBar.strokeEnd = CGFloat(Double(minutes) / 60.0)
+        progressBar.strokeEnd = CGFloat(Double(minutes) / 120.0)
         CATransaction.setDisableActions(false)
     }
     
@@ -199,12 +199,12 @@ class MiniStopWatch: UIView {
     }
 
     
-    func setMinutes(_ minutes: Int) {
+    func setMinutes(_ minutes: Double) {
             
         self.minutes = minutes
     }
     
-    func setPeriods(_ periods: Int) {
+    func setPeriods(_ periods: Double) {
             
         self.periods = periods
     }

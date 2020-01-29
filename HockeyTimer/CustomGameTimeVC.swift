@@ -20,26 +20,24 @@ class CustomGameTimeVC: UIViewController {
     private var doneButton: UIButton!
     private var pickers: GameTimePickers!
 
-    private var selectedMinutes: Int?
-    private var selectedPeriods: Int?
-    private var selectedMinutesAddHalf: Bool = false
-
     private var shouldPassSelection: Bool = false
-    private var currentGameMinutes: Int!
-    private var currentGamePeriods: Int!
+    private var periods: Double!
+    private var minutesPerPeriod: Double!
+    private var totalMinutes: Double!
     
     private var titleText: String?
-    private var onDismiss: ((Bool, Int?, Int?) -> Void)?
+    private var onDismiss: ((Bool, Double?, Double?) -> Void)?
     private var haptic: UISelectionFeedbackGenerator?
 
     
     // MARK: - Life Cycle
     
-    init(titleText: String? = nil, currentGamePeriods: Int, currentGameMinutes: Int, onDismiss: ((Bool, Int?, Int?) -> Void)? = nil) {
+    init(titleText: String? = nil, periods: Double, totalMinutes: Double, onDismiss: ((Bool, Double?, Double?) -> Void)? = nil) {
         
         self.titleText = titleText
-        self.currentGamePeriods = currentGamePeriods
-        self.currentGameMinutes = currentGameMinutes
+        self.periods = periods
+        self.totalMinutes = totalMinutes
+        self.minutesPerPeriod = Double.maxOneDecimalDividing(totalMinutes, by: periods)
         self.onDismiss = onDismiss
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,13 +96,8 @@ class CustomGameTimeVC: UIViewController {
         
         pickers = GameTimePickers()
         pickers.translatesAutoresizingMaskIntoConstraints = false
-        let minutesPerPeriod = Double.maxOneDecimalDividing(currentGameMinutes, by: currentGamePeriods)
-        if minutesPerPeriod.isInteger {
-            pickers.setPickersTo(currentGamePeriods, second: Int(minutesPerPeriod), animated: false)
-        } else {
-            pickers.setPickersTo(currentGamePeriods, second: Int(floor(minutesPerPeriod)), animated: false)
-            pickers.decimalButtonTapped()
-        }
+        pickers.setPickersTo(periods, second: minutesPerPeriod, animated: false)
+//        pickers.decimalButtonTapped()
         view.addSubview(pickers)
     }
     
@@ -118,6 +111,7 @@ class CustomGameTimeVC: UIViewController {
         
         super.viewWillAppear(animated)
         okButton.alpha = 0.0
+        isModalInPresentation = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -129,7 +123,8 @@ class CustomGameTimeVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        onDismiss?(shouldPassSelection, selectedMinutes, selectedPeriods)
+        print("Will perform onDismiss with periods \(periods)")
+        onDismiss?(shouldPassSelection, totalMinutes, periods)
     }
     
     private func addObservers() {
@@ -138,18 +133,26 @@ class CustomGameTimeVC: UIViewController {
         
         NotificationCenter.default.addObserver(forName: .CustomTimeSelectionOccurred, object: nil, queue: nil) { [weak self] (notification) in
             
-            UIView.animate(withDuration: 0.2) {
-                self?.okButton.alpha = 1.0
+            guard let self = self else {
+                return
             }
+            UIView.animate(withDuration: 0.2, animations: {
+                self.okButton.alpha = 1.0
+            }, completion: { (finished) in
+                self.isModalInPresentation = true
+            })
             guard let userInfo = notification.userInfo as? [String: Any] else {
                 return
             }
             print("Evaluating userInfo \(userInfo)")
-            if let periods = userInfo[GameTimePickersUserInfoKey.Periods] as? Int, let minutes = userInfo[GameTimePickersUserInfoKey.Minutes] as? Int, let addHalf = userInfo[GameTimePickersUserInfoKey.AddHalf] as? Bool {
-                self?.selectedPeriods = periods
-                self?.selectedMinutes = minutes * periods
-                self?.selectedMinutesAddHalf = addHalf
-                print("done")
+            if let receivedPeriods = userInfo[GameTimePickersUserInfoKey.Periods] as? Double {
+                self.periods = receivedPeriods
+                self.minutesPerPeriod = Double.maxOneDecimalDividing(self.totalMinutes, by: self.periods)
+                print("Did set periods to \(self.periods)")
+            }
+            if let receivedMinutesPerPeriod = userInfo[GameTimePickersUserInfoKey.Minutes] as? Double {
+                self.minutesPerPeriod = receivedMinutesPerPeriod
+                self.totalMinutes = self.periods * self.minutesPerPeriod
             }
         }
     }
@@ -248,7 +251,7 @@ class CustomGameTimeVC: UIViewController {
         
         let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: nil, cancelAction: {
             #warning("to test")
-            self.selectedPeriods = nil
+            self.shouldPassSelection = false
         })
         
         DispatchQueue.main.async {
@@ -270,9 +273,11 @@ class CustomGameTimeVC: UIViewController {
     
     @objc private func customTimeSelectionOccurred() {
         
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.2, animations: {
             self.okButton.alpha = 1.0
-        }
+        }, completion: { (finished) in
+            self.isModalInPresentation = true
+        })
     }
     
     

@@ -45,9 +45,9 @@ class PageVC: UIPageViewController {
         
         view.backgroundColor = .systemBackground
         
-        let savedMinutes = UserDefaults.standard.integer(forKey: UserDefaultsKey.Minutes)
-        let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardMinutes
-        let savedPeriods = UserDefaults.standard.integer(forKey: UserDefaultsKey.Periods)
+        let savedMinutes = UserDefaults.standard.double(forKey: UserDefaultsKey.Minutes)
+        let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardTotalMinutes
+        let savedPeriods = UserDefaults.standard.double(forKey: UserDefaultsKey.Periods)
         let periods = savedPeriods > 0 ? savedPeriods : HockeyGame.standardPeriods
         game = HockeyGame(minutes: minutes, periods: periods)
         
@@ -277,26 +277,27 @@ extension PageVC: UIPageViewControllerDelegate {
             
         } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
             
-            // From DurationVC to TimerVC
-            if durationVC.selectedMinutes != nil && (timerVC.game.minutes != durationVC.selectedMinutes) {
-                // Duration changed
-                UserDefaults.standard.set(durationVC.selectedMinutes!, forKey: UserDefaultsKey.Minutes)
-                if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
-                    // Number of Periods also changed
-                    UserDefaults.standard.set(durationVC.selectedPeriods, forKey: UserDefaultsKey.Periods)
-                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: durationVC.selectedPeriods!)
-                } else {
-                    // Only Duration changed
-                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: game.periods)
-                }
-                NotificationCenter.default.post(name: .NewGame, object: nil)
-                
-            } else if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
-                // Only Number of Periods changed
-                UserDefaults.standard.set(durationVC.selectedPeriods!, forKey: UserDefaultsKey.Periods)
-                game = HockeyGame(minutes: timerVC.game.minutes, periods: durationVC.selectedPeriods!)
-                NotificationCenter.default.post(name: .NewGame, object: nil)
-            }
+            #warning("delete")
+//            // From DurationVC to TimerVC
+//            if durationVC.selectedMinutes != nil && (timerVC.game.totalMinutes != durationVC.selectedMinutes) {
+//                // Duration changed
+//                UserDefaults.standard.set(durationVC.selectedMinutes!, forKey: UserDefaultsKey.Minutes)
+//                if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
+//                    // Number of Periods also changed
+//                    UserDefaults.standard.set(durationVC.selectedPeriods, forKey: UserDefaultsKey.Periods)
+//                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: durationVC.selectedPeriods!)
+//                } else {
+//                    // Only Duration changed
+//                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: game.periods)
+//                }
+//                NotificationCenter.default.post(name: .NewGame, object: nil)
+//
+//            } else if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
+//                // Only Number of Periods changed
+//                UserDefaults.standard.set(durationVC.selectedPeriods!, forKey: UserDefaultsKey.Periods)
+//                game = HockeyGame(minutes: timerVC.game.totalMinutes, periods: durationVC.selectedPeriods!)
+//                NotificationCenter.default.post(name: .NewGame, object: nil)
+//            }
             
         }
         

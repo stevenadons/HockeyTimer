@@ -43,7 +43,7 @@ class GameTimeDataSource: UICollectionViewDiffableDataSource<Int, DurationCard> 
         apply(snapshot)
     }
     
-    func minutesFor(_ indexPath: IndexPath) -> Int {
+    func minutesFor(_ indexPath: IndexPath) -> Double {
         
         let card = cards[indexPath.row]
         return card.minutes

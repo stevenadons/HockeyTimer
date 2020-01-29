@@ -13,18 +13,13 @@ class GameTimePickers: UIView {
     
     // MARK: - Properties
     
-    private var periodsPicker: DecimalPickerView!
-    private var minutesPicker: DecimalPickerView!
+    private var periodsPicker: UIPickerView!
+    private var minutesPicker: UIPickerView!
     private var xButton: UIButton!
     private var decimalButton: UIButton!
     
     private var periodsPickerDataSource: PickerDataSource!
     private var minutesPickerDataSource: PickerDataSource!
-    
-    private (set) var inDecimalMode: Bool = false
-    
-    var selectedPeriods: Int?
-    var selectedMinutes: Int?
     
     
     // MARK: - Init
@@ -45,16 +40,16 @@ class GameTimePickers: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        periodsPicker = DecimalPickerView(inDecimalMode: false)
+        periodsPicker = UIPickerView()
         periodsPicker.translatesAutoresizingMaskIntoConstraints = false
         periodsPicker.tag = 0
-        let periodsData = [1, 2, 3, 4]
+        let periodsData: [Double] = [1, 2, 3, 4]
         periodsPickerDataSource = PickerDataSource(data: periodsData)
         periodsPicker.dataSource = periodsPickerDataSource
         periodsPicker.delegate = periodsPickerDataSource
         addSubview(periodsPicker)
 
-        minutesPicker = DecimalPickerView(inDecimalMode: false)
+        minutesPicker = UIPickerView()
         minutesPicker.translatesAutoresizingMaskIntoConstraints = false
         minutesPicker.tag = 1
         let minutesData = createMinutes()
@@ -112,7 +107,7 @@ class GameTimePickers: UIView {
     
     // MARK: - Public Methods
     
-    func setPickersTo(_ first: Int, second: Int, animated: Bool) {
+    func setPickersTo(_ first: Double, second: Double, animated: Bool) {
         
         if let indexForFirst = periodsPickerDataSource.indexForNumber(first) {
             periodsPicker.selectRow(indexForFirst, inComponent: 0, animated: animated)
@@ -126,10 +121,15 @@ class GameTimePickers: UIView {
     
     @objc func decimalButtonTapped() {
         
-        let currentInDecimalMode = minutesPicker.inDecimalMode
-        minutesPicker.inDecimalMode = !currentInDecimalMode
-        let newTitle = minutesPicker.inDecimalMode ? LS_BUTTON_DELETE_HALF_MINUTE : LS_BUTTON_ADD_HALF_MINUTE
-        decimalButton.setTitle(newTitle, for: .normal)
+        let minutesData = createMinutesAndAHalf()
+        minutesPickerDataSource = PickerDataSource(data: minutesData)
+        minutesPicker.reloadAllComponents()
+        
+        if minutesPickerDataSource.numberAtIndex(0)!.isInteger {
+            decimalButton.setTitle(LS_BUTTON_ADD_HALF_MINUTE, for: .normal)
+        } else {
+            decimalButton.setTitle(LS_BUTTON_DELETE_HALF_MINUTE, for: .normal)
+        }
         
         // Pass info as selection occurred
         let currentPeriodsRow = periodsPicker.selectedRow(inComponent: 0)
@@ -137,9 +137,22 @@ class GameTimePickers: UIView {
         var userInfo: [String : Any] = [:]
         userInfo[GameTimePickersUserInfoKey.Periods] = minutesPickerDataSource.numberAtIndex(currentPeriodsRow)
         userInfo[GameTimePickersUserInfoKey.Minutes] = minutesPickerDataSource.numberAtIndex(currentMinutesRow)
-        userInfo[GameTimePickersUserInfoKey.AddHalf] = minutesPicker.inDecimalMode
         print("did create userInfo: \(userInfo)")
         NotificationCenter.default.post(name: .CustomTimeSelectionOccurred, object: nil, userInfo: userInfo)
+    }
+    
+    private func switchToIntNumbers() {
+        
+        let minutesData = createMinutes()
+        minutesPickerDataSource = PickerDataSource(data: minutesData)
+        minutesPicker.reloadAllComponents()
+    }
+    
+    private func switchToHalfNumbers() {
+        
+        let minutesData = createMinutesAndAHalf()
+        minutesPickerDataSource = PickerDataSource(data: minutesData)
+        minutesPicker.reloadAllComponents()
     }
     
     
@@ -158,11 +171,21 @@ class GameTimePickers: UIView {
         return label
     }
     
-    private func createMinutes() -> [Int] {
+    private func createMinutes() -> [Double] {
         
-        var result: [Int] = []
+        var result: [Double] = []
         for int in 0 ... 45 {
-            result.append(int)
+            result.append(Double(int))
+        }
+        return result
+    }
+    
+    private func createMinutesAndAHalf() -> [Double] {
+        
+        var result: [Double] = []
+        for int in 0 ... 45 {
+            let doubleAndAHalf = Double(int) + 0.5
+            result.append(doubleAndAHalf)
         }
         return result
     }

@@ -69,8 +69,8 @@ class StopWatchTimer {
         }
     }
 
-    private var totalSecondsInPeriod: Int = HockeyGame.standardMinutes * 60
-    var totalSecondsToGo: Int = HockeyGame.standardMinutes * 60
+    private var totalSecondsInPeriod: Int = Int(HockeyGame.standardTotalMinutes * 60)
+    var totalSecondsToGo: Int = Int(HockeyGame.standardTotalMinutes * 60)
     var totalSecondsOverdue: Int = 0
     var totalSecondsCountingUp: Int = 0
     
@@ -160,8 +160,8 @@ class StopWatchTimer {
     
     private func resetTime() {
 
-        self.totalSecondsInPeriod = Int(Double(game.minutes * 60) / Double(game.periods))
-        self.totalSecondsToGo = Int(Double(game.minutes * 60) / Double(game.periods))
+        self.totalSecondsInPeriod = Int(Double(game.totalMinutes * 60) / Double(game.periods))
+        self.totalSecondsToGo = Int(Double(game.totalMinutes * 60) / Double(game.periods))
     }
 
     @objc private func tickCountDown() {

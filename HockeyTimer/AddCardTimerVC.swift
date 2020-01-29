@@ -66,8 +66,10 @@ class AddCardTimerVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
         windUp(animated: false)
         okButton.alpha = 0.0
+        isModalInPresentation = false
     }
     
     private func setupUI() {
@@ -274,7 +276,14 @@ extension AddCardTimerVC: ChooseCardPanelDelegate {
             minutesPanel.setHighlightColor(fakeCard.color())
         }
         
-        okButton.alpha = (cardPanel.selectedType == CardType.red) ? 1.0 : 0.0
+        if cardPanel.selectedType == CardType.red {
+            okButton.alpha = 1.0
+            isModalInPresentation = true
+        } else {
+            okButton.alpha = 0.0
+            isModalInPresentation = false
+        }
+        
         
         prepareHaptic()
         
@@ -304,6 +313,7 @@ extension AddCardTimerVC: ChooseMinutesPanelDelegate {
         doHaptic()
         
         okButton.alpha = 1.0
+        isModalInPresentation = true
         
         prepareHaptic()
     }

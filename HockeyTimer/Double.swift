@@ -28,8 +28,8 @@ extension Double {
         }
     }
     
-    static func maxOneDecimalDividing(_ upper: Int, by lower: Int) -> Double {
-        let fullCalculated = Double(upper) / Double(lower)
+    static func maxOneDecimalDividing(_ upper: Double, by lower: Double) -> Double {
+        let fullCalculated = upper / lower
         return fullCalculated.maxOneDecimal
     }
 }

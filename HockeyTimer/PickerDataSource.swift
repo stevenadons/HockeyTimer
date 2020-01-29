@@ -13,12 +13,12 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
 
     // MARK: - Properties
     
-    private var data: [Int]!
+    private var data: [Double]!
     
     
     // MARK: - Init
     
-    init(data: [Int]) {
+    init(data: [Double]) {
         
         super.init()
         self.data = data
@@ -27,7 +27,7 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - Public Methods
     
-    func numberAtIndex(_ index: Int) -> Int? {
+    func numberAtIndex(_ index: Int) -> Double? {
        
         guard index < data.count else {
             return nil
@@ -35,7 +35,7 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         return data[index]
     }
     
-    func indexForNumber(_ number: Int) -> Int? {
+    func indexForNumber(_ number: Double) -> Int? {
         
         return data.firstIndex(of: number)
     }
@@ -60,24 +60,19 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             fatalError("Trying to acces a too big index in pickerview datasource")
         }
         
-        var numberColor: UIColor
+        let numberColor: UIColor = .white
         var shapeColor: UIColor
-        var inDecimalMode: Bool = false
         
         switch pickerView.tag {
         case 0:
-            numberColor = .white
             shapeColor = UIColor(named: ColorName.DarkBlue)!
         case 1:
-            numberColor = .white
             shapeColor = UIColor(named: ColorName.PantoneRed)!
-            let decimalPickerView = pickerView as! DecimalPickerView
-            inDecimalMode = decimalPickerView.inDecimalMode
         default:
             fatalError("Did try to get data for pickerview exceeding max tag")
         }
         
-        return PickerNumberView(number: number, addHalf: inDecimalMode, numberColor: numberColor, shapeColor: shapeColor, isSmall: false, isVeryBig: false)
+        return PickerNumberView(number: number, numberColor: numberColor, shapeColor: shapeColor, isSmall: false, isVeryBig: false)
         
     }
     
@@ -88,7 +83,6 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let pickerView = pickerView as! DecimalPickerView
         var userInfo: [String : Any] = [:]
 
         if pickerView.tag == 0, let selectedPeriods = numberAtIndex(row) {
@@ -96,11 +90,10 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
             
         } else if pickerView.tag == 1, let selectedMinutes = numberAtIndex(row) {
             userInfo[GameTimePickersUserInfoKey.Minutes] = selectedMinutes
-            userInfo[GameTimePickersUserInfoKey.AddHalf] = pickerView.inDecimalMode
         }
         
         NotificationCenter.default.post(name: .CustomTimeSelectionOccurred, object: nil, userInfo: userInfo)
-
+        print("did post userinfo with periods \(numberAtIndex(row))")
     }
     
 }

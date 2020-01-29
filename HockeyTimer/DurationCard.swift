@@ -21,7 +21,7 @@ class DurationCard: UIButton {
             ageLabel.setNeedsDisplay()
         }
     }
-    var minutes: Int = HockeyGame.standardMinutes {
+    var minutes: Double = HockeyGame.standardTotalMinutes {
         didSet {
             updateColorsWith(minutes: minutes)
             ageString = SELECTED_COUNTRY.minutesStringFor(minutes) ?? ""
@@ -29,7 +29,7 @@ class DurationCard: UIButton {
             miniStopWatch.setNeedsDisplay()
         }
     }
-    var periods: Int = HockeyGame.standardPeriods {
+    var periods: Double = HockeyGame.standardPeriods {
         didSet {
             miniStopWatch.periods = periods
             miniStopWatch.setNeedsDisplay()
@@ -51,19 +51,19 @@ class DurationCard: UIButton {
         setup()
     }
     
-    convenience init(minutes: Int, periods: Int) {
+    convenience init(minutes: Double, periods: Double) {
         
         self.init()
         convenienceSet(minutes: minutes)
         convenienceSet(periods: periods)
     }
     
-    private func convenienceSet(minutes: Int) {
+    private func convenienceSet(minutes: Double) {
         
         self.minutes = minutes
     }
     
-    private func convenienceSet(periods: Int) {
+    private func convenienceSet(periods: Double) {
         
         self.periods = periods
     }
@@ -161,7 +161,7 @@ class DurationCard: UIButton {
         }
     }
     
-    func setMinutes(_ minutes: Int, minutesString: String, periods: Int, animated: Bool, delay: Double) {
+    func setMinutes(_ minutes: Double, minutesString: String, periods: Double, animated: Bool, delay: Double) {
         
         if animated {
             windUp()
@@ -198,9 +198,9 @@ class DurationCard: UIButton {
         miniStopWatch.animateProgress(duration: duration)
     }
     
-    private func updateColorsWith(minutes: Int) {
+    private func updateColorsWith(minutes: Double) {
         
-        switch minutes {
+        switch Int(minutes) {
         case 0 ..< 10:
             backgroundColor = UIColor(named: ColorName.Olive)!
             miniStopWatch.color = UIColor(named: ColorName.VeryDarkBlue)!

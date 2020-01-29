@@ -173,7 +173,7 @@ class PanArrowVC: UIViewController {
     
     @objc func gameTimeButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, currentGamePeriods: (pageVC?.game.periods)!, currentGameMinutes: (pageVC?.game.minutes)!, onDismiss: nil)
+        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, periods: (pageVC?.game.periods)!, totalMinutes: (pageVC?.game.totalMinutes)!, onDismiss: nil)
         present(vc, animated: true, completion: nil)
     }
     

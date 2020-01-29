@@ -13,8 +13,8 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Properties
     
-    var selectedMinutes: Int?
-    var selectedPeriods: Int?
+    var selectedMinutes: Double?
+    var selectedPeriods: Double?
     
     private var cancelView: UIButton!
     private var pauseAtQuarterSwitch: UISwitch!
@@ -224,14 +224,15 @@ class DurationVC: PanArrowVC {
     
     // MARK: - Private Methods
     
+    #warning("delete")
     private func setPauseAtQuarterSwitch() {
         
-        let nop = selectedPeriods ?? pageVC?.game.periods
-        if nop == 4 {
-            pauseAtQuarterSwitch.setOn(true, animated: false)
-        } else {
-            pauseAtQuarterSwitch.setOn(false, animated: false)
-        }
+//        let nop: Double = selectedPeriods ?? pageVC?.game.periods
+//        if nop == 4 {
+//            pauseAtQuarterSwitch.setOn(true, animated: false)
+//        } else {
+//            pauseAtQuarterSwitch.setOn(false, animated: false)
+//        }
 
     }
     
