@@ -15,6 +15,14 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private var data: [Double]!
     
+    var isHoldingDecimals: Bool {
+        if !data.isEmpty, !data[0].isInteger {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
     // MARK: - Init
     
@@ -93,7 +101,6 @@ class PickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
         }
         
         NotificationCenter.default.post(name: .CustomTimeSelectionOccurred, object: nil, userInfo: userInfo)
-        print("did post userinfo with periods \(numberAtIndex(row))")
     }
     
 }

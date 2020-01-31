@@ -43,8 +43,8 @@ class PageVC: UIPageViewController {
         checkDarkMode()
         addObservers()
         
-        view.backgroundColor = .systemBackground
-        
+        view.backgroundColor = UIColor(named: ColorName.LightYellow_Black)!
+
         let savedMinutes = UserDefaults.standard.double(forKey: UserDefaultsKey.Minutes)
         let minutes = savedMinutes > 0 ? savedMinutes : HockeyGame.standardTotalMinutes
         let savedPeriods = UserDefaults.standard.double(forKey: UserDefaultsKey.Periods)
@@ -209,13 +209,7 @@ extension PageVC: UIPageViewControllerDataSource {
         
         var nextVC: PanArrowVC? = nil
         
-        if let _ = viewController as? DurationVC {
-            if existingTimerVC == nil {
-                existingTimerVC = TimerVC(pageVC: self)
-            }
-            nextVC = existingTimerVC
-            
-        } else if let timerVC = viewController as? TimerVC {
+        if let timerVC = viewController as? TimerVC {
             existingTimerVC = timerVC
             if existingScoreVC == nil  {
                 let scoreVC = ScoreVC(game: game)
@@ -234,11 +228,7 @@ extension PageVC: UIPageViewControllerDataSource {
         
         var earlierVC: UIViewController? = nil
         
-        if let _ = viewController as? TimerVC {
-            let durationVC = DurationVC(pageVC: self)
-            earlierVC = durationVC
-            
-        } else if let scoreVC = viewController as? ScoreVC {
+        if let scoreVC = viewController as? ScoreVC {
             if existingTimerVC == nil {
                 let timerVC = TimerVC(pageVC: self)
                 timerVC.delegate = scoreVC
@@ -268,37 +258,10 @@ extension PageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         
-        if let _ = pageViewController.viewControllers?.first as? TimerVC, let durationVC = pendingViewControllers.first as? DurationVC {
-            
-            // From TimerVC to DurationVC
-            view.backgroundColor = .systemBackground
-            durationVC.selectedMinutes = nil
-            durationVC.selectedPeriods = nil
-            
-        } else if let durationVC = pageViewController.viewControllers?.first as? DurationVC, let timerVC = pendingViewControllers.first as? TimerVC {
-            
-            #warning("delete")
-//            // From DurationVC to TimerVC
-//            if durationVC.selectedMinutes != nil && (timerVC.game.totalMinutes != durationVC.selectedMinutes) {
-//                // Duration changed
-//                UserDefaults.standard.set(durationVC.selectedMinutes!, forKey: UserDefaultsKey.Minutes)
-//                if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
-//                    // Number of Periods also changed
-//                    UserDefaults.standard.set(durationVC.selectedPeriods, forKey: UserDefaultsKey.Periods)
-//                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: durationVC.selectedPeriods!)
-//                } else {
-//                    // Only Duration changed
-//                    game = HockeyGame(minutes: durationVC.selectedMinutes!, periods: game.periods)
-//                }
-//                NotificationCenter.default.post(name: .NewGame, object: nil)
-//
-//            } else if durationVC.selectedPeriods != nil && (timerVC.game.periods != durationVC.selectedPeriods) {
-//                // Only Number of Periods changed
-//                UserDefaults.standard.set(durationVC.selectedPeriods!, forKey: UserDefaultsKey.Periods)
-//                game = HockeyGame(minutes: timerVC.game.totalMinutes, periods: durationVC.selectedPeriods!)
-//                NotificationCenter.default.post(name: .NewGame, object: nil)
-//            }
-            
+        if let _ = pageViewController.viewControllers?.first as? TimerVC, let scoreVC = pendingViewControllers.first as? ScoreVC {
+            view.backgroundColor = scoreVC.view.backgroundColor
+        } else if let _ = pageViewController.viewControllers?.first as? ScoreVC, let timerVC = pendingViewControllers.first as? TimerVC {
+            view.backgroundColor = timerVC.view.backgroundColor
         }
         
         prepareHapticIfNeeded()
@@ -309,11 +272,6 @@ extension PageVC: UIPageViewControllerDelegate {
         
         haptic?.selectionChanged()
         haptic = nil
-        
-        // Away from DurationVC
-        if !previousViewControllers.isEmpty, let durationVC = previousViewControllers[0] as? DurationVC {
-            durationVC.clearSelectedDuration()
-        }
     }
     
     

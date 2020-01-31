@@ -94,6 +94,8 @@ class ScoreVC: PanArrowVC {
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
         let pitchContainerOffset = UIDevice.whenDeviceIs(small: 20, normal: 0, big: -50)
         let editModeOffset = UIDevice.whenDeviceIs(small: 18, normal: 24, big: 36)
+        let buttonHorInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
+        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 50, big: 54)
 
         NSLayoutConstraint.activate([
             
@@ -112,9 +114,9 @@ class ScoreVC: PanArrowVC {
             editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: editModeOffset),
             editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            confirmationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            confirmationButton.widthAnchor.constraint(equalToConstant: ConfirmationButton.fixedWidth),
-            confirmationButton.heightAnchor.constraint(equalToConstant: ConfirmationButton.fixedHeight),
+            confirmationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: buttonHorInset),
+            confirmationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -buttonHorInset),
+            confirmationButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             confirmationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -confirmationButtonConstant),
             
             ])

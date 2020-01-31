@@ -92,7 +92,7 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
             return
         }
         for index in 0 ..< timers.count {
-            timers[index].setSecondsToGo(allCardsSecondsToGo[index])
+            timers[index].setSecondsToGo(allCardsSecondsToGo[index], sound: false)
         }
     }
 }

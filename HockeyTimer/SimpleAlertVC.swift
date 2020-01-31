@@ -60,6 +60,7 @@ class SimpleAlertVC: UIViewController {
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
+        isModalInPresentation = true
         
         setupUI()
         addConstraints()

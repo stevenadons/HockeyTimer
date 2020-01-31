@@ -173,23 +173,20 @@ class PanArrowVC: UIViewController {
     
     @objc func gameTimeButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, periods: (pageVC?.game.periods)!, totalMinutes: (pageVC?.game.totalMinutes)!, onDismiss: nil)
+        let currentGameRunning = (pageVC?.game.status != .WaitingToStart)
+        let vc = GameTimeVC(currentPeriods: (pageVC?.game.periods)!, currentTotalMinutes: (pageVC?.game.totalMinutes)!, currentGameRunning: currentGameRunning, onDismiss: nil)
         present(vc, animated: true, completion: nil)
     }
     
     @objc private func menuButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        #warning("to translate")
-        let vc = MenuVC(titleText: "Settings")
+        let vc = MenuVC()
         present(vc, animated: true, completion: nil)
     }
     
     @objc private func rulesButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        #warning("to translate")
-        let vc = RulesVC(titleText: "Game Rules") {
-            print("rules VC dismissed")
-        }
+        let vc = RulesVC(onDismiss: nil)
         present(vc, animated: true, completion: nil)
     }
     

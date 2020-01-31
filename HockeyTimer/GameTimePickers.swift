@@ -18,8 +18,18 @@ class GameTimePickers: UIView {
     private var xButton: UIButton!
     private var decimalButton: UIButton!
     
-    private var periodsPickerDataSource: PickerDataSource!
-    private var minutesPickerDataSource: PickerDataSource!
+    private var periodsPickerDataSource: PickerDataSource! {
+        didSet {
+            periodsPicker.dataSource = periodsPickerDataSource
+            periodsPicker.delegate = periodsPickerDataSource
+        }
+    }
+    private var minutesPickerDataSource: PickerDataSource! {
+        didSet {
+            minutesPicker.dataSource = minutesPickerDataSource
+            minutesPicker.delegate = minutesPickerDataSource
+        }
+    }
     
     
     // MARK: - Init
@@ -45,8 +55,6 @@ class GameTimePickers: UIView {
         periodsPicker.tag = 0
         let periodsData: [Double] = [1, 2, 3, 4]
         periodsPickerDataSource = PickerDataSource(data: periodsData)
-        periodsPicker.dataSource = periodsPickerDataSource
-        periodsPicker.delegate = periodsPickerDataSource
         addSubview(periodsPicker)
 
         minutesPicker = UIPickerView()
@@ -54,8 +62,6 @@ class GameTimePickers: UIView {
         minutesPicker.tag = 1
         let minutesData = createMinutes()
         minutesPickerDataSource = PickerDataSource(data: minutesData)
-        minutesPicker.dataSource = minutesPickerDataSource
-        minutesPicker.delegate = minutesPickerDataSource
         addSubview(minutesPicker)
         
         xButton = UIButton.createTopButton(imageName: "xmark", tintColor: .secondaryLabel)
@@ -68,7 +74,11 @@ class GameTimePickers: UIView {
         decimalButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)!
         decimalButton.setTitleColor(.secondaryLabel, for: .normal)
         decimalButton.addTarget(self, action: #selector(decimalButtonTapped), for: .touchUpInside)
-        decimalButton.setTitle(LS_BUTTON_ADD_HALF_MINUTE, for: .normal)
+        if minutesPickerDataSource.isHoldingDecimals {
+            decimalButton.setTitle(LS_BUTTON_DELETE_HALF_MINUTE, for: .normal)
+        } else {
+            decimalButton.setTitle(LS_BUTTON_ADD_HALF_MINUTE, for: .normal)
+        }
         addSubview(decimalButton)
     }
     
@@ -109,6 +119,12 @@ class GameTimePickers: UIView {
     
     func setPickersTo(_ first: Double, second: Double, animated: Bool) {
         
+        // should check first for decimals or not
+        
+        if !second.isInteger {
+            switchToHalfNumbers()
+        }
+        
         if let indexForFirst = periodsPickerDataSource.indexForNumber(first) {
             periodsPicker.selectRow(indexForFirst, inComponent: 0, animated: animated)
         }
@@ -121,21 +137,20 @@ class GameTimePickers: UIView {
     
     @objc func decimalButtonTapped() {
         
-        let minutesData = createMinutesAndAHalf()
-        minutesPickerDataSource = PickerDataSource(data: minutesData)
-        minutesPicker.reloadAllComponents()
-        
-        if minutesPickerDataSource.numberAtIndex(0)!.isInteger {
-            decimalButton.setTitle(LS_BUTTON_ADD_HALF_MINUTE, for: .normal)
+        if minutesPickerDataSource.isHoldingDecimals {
+            switchToIntNumbers()
+
         } else {
-            decimalButton.setTitle(LS_BUTTON_DELETE_HALF_MINUTE, for: .normal)
+            switchToHalfNumbers()
         }
         
+        
         // Pass info as selection occurred
+        
         let currentPeriodsRow = periodsPicker.selectedRow(inComponent: 0)
         let currentMinutesRow = minutesPicker.selectedRow(inComponent: 0)
         var userInfo: [String : Any] = [:]
-        userInfo[GameTimePickersUserInfoKey.Periods] = minutesPickerDataSource.numberAtIndex(currentPeriodsRow)
+        userInfo[GameTimePickersUserInfoKey.Periods] = periodsPickerDataSource.numberAtIndex(currentPeriodsRow)
         userInfo[GameTimePickersUserInfoKey.Minutes] = minutesPickerDataSource.numberAtIndex(currentMinutesRow)
         print("did create userInfo: \(userInfo)")
         NotificationCenter.default.post(name: .CustomTimeSelectionOccurred, object: nil, userInfo: userInfo)
@@ -146,6 +161,7 @@ class GameTimePickers: UIView {
         let minutesData = createMinutes()
         minutesPickerDataSource = PickerDataSource(data: minutesData)
         minutesPicker.reloadAllComponents()
+        decimalButton.setTitle(LS_BUTTON_ADD_HALF_MINUTE, for: .normal)
     }
     
     private func switchToHalfNumbers() {
@@ -153,6 +169,7 @@ class GameTimePickers: UIView {
         let minutesData = createMinutesAndAHalf()
         minutesPickerDataSource = PickerDataSource(data: minutesData)
         minutesPicker.reloadAllComponents()
+        decimalButton.setTitle(LS_BUTTON_DELETE_HALF_MINUTE, for: .normal)
     }
     
     

@@ -69,9 +69,9 @@ class TimerVC: PanArrowVC {
         }
         view.addSubview(cardTimerPanel)
 
-        panArrowUpLabel.textColor = .white
+        panArrowUpLabel.alpha = 0.0
+        panArrowUp.alpha = 0.0
         panArrowDownLabel.textColor = .white
-        panArrowUpLabel.text = LS_TITLE_GAMETIME
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()
@@ -126,8 +126,6 @@ class TimerVC: PanArrowVC {
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
-        panArrowUp.color = UIColor(named: ColorName.PantoneRed_LightYellow)!
-        panArrowUp.setNeedsLayout()
         panArrowDown.color = UIColor(named: ColorName.PantoneRed_LightYellow)!
         panArrowDown.setNeedsLayout()
     }
@@ -226,42 +224,20 @@ class TimerVC: PanArrowVC {
     
     override func gameTimeButtonTapped(sender: TopButton, forEvent event: UIEvent) {
         
-        let vc = GameTimeVC(titleText: LS_TITLE_GAMETIME, periods: game.periods, totalMinutes: game.totalMinutes, onDismiss: { (shouldStartNewGame, totalMinutes, periods) in
+        let currentGameRunning = (game.status != .WaitingToStart)
+        let vc = GameTimeVC(currentPeriods: game.periods, currentTotalMinutes: game.totalMinutes, currentGameRunning: currentGameRunning, onDismiss: { (totalMinutes, periods) in
             
-            print("in completion handler after GameTimeVC with periods \(periods)")
-            
-            guard shouldStartNewGame else {
-                return
-            }
             guard totalMinutes != nil || periods != nil else {
-                return
-            }
-            
-            guard self.pageVC?.game.status == .WaitingToStart else {
-                self.showAlertNewGame(onOK: { [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    let newMinutes = totalMinutes ?? self.game.totalMinutes
-                    let newPeriods = periods ?? self.game.periods
-                    UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
-                    UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
-                    self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
-                    NotificationCenter.default.post(name: .NewGame, object: nil)
-                })
                 return
             }
             
             let newMinutes = totalMinutes ?? self.game.totalMinutes
             let newPeriods = periods ?? self.game.periods
-            print("new periods is \(newPeriods)")
             UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
             UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
             self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
             NotificationCenter.default.post(name: .NewGame, object: nil)
         })
-        
         
         present(vc, animated: true, completion: nil)
     }

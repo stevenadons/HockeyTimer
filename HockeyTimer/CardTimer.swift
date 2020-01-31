@@ -23,6 +23,7 @@ class CardTimer: UIView {
     private var graphics: CAShapeLayer!
     private var timerZone: UIView!
     private var timeLabel: UILabel!
+    
     private var card: Card!
     private (set) var secondsToGo: Int!
     private weak var delegate: CardTimerDelegate?
@@ -66,7 +67,7 @@ class CardTimer: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = .systemBackground
         layer.cornerRadius = 8
         
         let interaction = UIContextMenuInteraction(delegate: self)
@@ -131,13 +132,13 @@ class CardTimer: UIView {
             return
         }
         secondsToGo -= 1
-        updateUIWithNewSeconds()
+        updateUIWithNewSeconds(sound: true)
     }
     
-    func setSecondsToGo(_ int: Int) {
+    func setSecondsToGo(_ int: Int, sound: Bool) {
         
         secondsToGo = int
-        updateUIWithNewSeconds()
+        updateUIWithNewSeconds(sound: sound)
     }
     
     
@@ -170,13 +171,15 @@ class CardTimer: UIView {
         return timeString
     }
     
-    private func updateUIWithNewSeconds() {
+    private func updateUIWithNewSeconds(sound: Bool) {
         
         timeLabel.text = updatedTimeString()
         if secondsToGo == 0 {
             fade()
             doHaptic()
-            JukeBox.instance.playSound(Sound.Alarm)
+            if sound {
+                JukeBox.instance.playSound(Sound.Alarm)
+            }
         } else if secondsToGo == 2 {
             prepareHaptic()
             JukeBox.instance.prepareSound(Sound.Alarm)

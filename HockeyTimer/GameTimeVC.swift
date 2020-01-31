@@ -22,13 +22,16 @@ class GameTimeVC: UIViewController {
     private var countryButton: OvalCountryButton!
     private var doneButton: UIButton!
 
-    private var periods: Double!
-    private var minutesPerPeriod: Double!
-    private var totalMinutes: Double!
-    private var shouldPassSelection: Bool = false
+    private var selectedPeriods: Double?
+    private var selectedMinutesPerPeriod: Double?
+    private var selectedTotalMinutes: Double?
+    private var initialPeriods: Double!
+    private var initialMinutesPerPeriod: Double!
+    private var initialTotalMinutes: Double!
+    private var currentGameRunning: Bool!
 
     private var titleText: String?
-    private var onDismiss: ((Bool, Double?, Double?) -> Void)?
+    private var onDismiss: ((Double?, Double?) -> Void)?
     private var cards: [DurationCard] = []
     private var skipAnimations: Bool = false
     private var haptic: UISelectionFeedbackGenerator?
@@ -44,12 +47,13 @@ class GameTimeVC: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(titleText: String? = nil, periods: Double, totalMinutes: Double, onDismiss: ((Bool, Double?, Double?) -> Void)? = nil) {
+    init(currentPeriods: Double, currentTotalMinutes: Double, currentGameRunning: Bool, onDismiss: ((Double?, Double?) -> Void)? = nil) {
         
-        self.titleText = titleText
-        self.periods = periods
-        self.totalMinutes = totalMinutes
-        self.minutesPerPeriod = Double.maxOneDecimalDividing(totalMinutes, by: periods)
+        self.titleText = LS_TITLE_GAMETIME
+        self.initialPeriods = currentPeriods
+        self.initialTotalMinutes = currentTotalMinutes
+        self.initialMinutesPerPeriod = Double.maxOneDecimalDividing(currentTotalMinutes, by: currentPeriods)
+        self.currentGameRunning = currentGameRunning
         self.onDismiss = onDismiss
         super.init(nibName: nil, bundle: nil)
     }
@@ -161,8 +165,7 @@ class GameTimeVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
-        print("dismissing GameTimeVC with periods \(periods)")
-        onDismiss?(shouldPassSelection, totalMinutes, periods)
+        onDismiss?(selectedTotalMinutes, selectedPeriods)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -268,7 +271,9 @@ class GameTimeVC: UIViewController {
         cards.forEach {
             $0.alpha = 1.0
         }
-        shouldPassSelection = false
+        selectedPeriods = nil
+        selectedTotalMinutes = nil
+        selectedMinutesPerPeriod = nil
         UIView.animate(withDuration: 0.2, animations: {
             self.okButton.alpha = 0.0
         }, completion: { (finished) in
@@ -281,9 +286,28 @@ class GameTimeVC: UIViewController {
     
     @objc private func okTapped() {
         
-        shouldPassSelection = true
-        DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+        guard selectedPeriods != nil || selectedTotalMinutes != nil else {
+            DispatchQueue.main.async { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }
+            return
+        }
+        
+        if currentGameRunning {
+            showAlertNewGame(then: { (shouldProceed) in
+                if !shouldProceed {
+                    self.selectedPeriods = nil
+                    self.selectedTotalMinutes = nil
+                    self.selectedMinutesPerPeriod = nil
+                }
+                DispatchQueue.main.async { [weak self] in
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            })
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
@@ -291,26 +315,28 @@ class GameTimeVC: UIViewController {
         
         clearSelectedDuration()
         
-        let vc = CustomGameTimeVC(titleText: LS_TITLE_CUSTOM_TIME, periods: periods, totalMinutes: totalMinutes, onDismiss: { (shouldPassSelection, totalMinutes, periods) in
+        let periodsToPass: Double = selectedPeriods ?? initialPeriods
+        let totalMinutesToPass: Double = selectedTotalMinutes ?? initialTotalMinutes
+        
+        let vc = CustomGameTimeVC(currentPeriods: periodsToPass, currentTotalMinutes: totalMinutesToPass, currentGameRunning: currentGameRunning, onDismiss: { (selectedTotalMinutes, selectedPeriods) in
             
-            print("in completion handler with periods \(periods)")
-            
-            if shouldPassSelection {
-                self.totalMinutes = totalMinutes
-                self.periods = periods
-                self.shouldPassSelection = true
+            if selectedPeriods != nil || selectedTotalMinutes != nil {
+                self.selectedPeriods = selectedPeriods ?? self.initialPeriods
+                self.selectedTotalMinutes = selectedTotalMinutes ?? self.initialTotalMinutes
+                self.selectedMinutesPerPeriod = Double.maxOneDecimalDividing(self.selectedTotalMinutes!, by: self.selectedPeriods!)
                 DispatchQueue.main.async { [weak self] in
                     self?.dismiss(animated: true, completion: nil)
                 }
             }
         })
-        
         present(vc, animated: true, completion: nil)
     }
     
     @objc private func cancelTapped() {
         
-        shouldPassSelection = false
+        selectedPeriods = nil
+        selectedTotalMinutes = nil
+        selectedMinutesPerPeriod = nil
         DispatchQueue.main.async { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -318,17 +344,14 @@ class GameTimeVC: UIViewController {
     
     @objc private func doneTapped() {
         
-        shouldPassSelection = true
-        DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        }
+        okTapped()
     }
     
     @objc private func handleCardTapped(sender: DurationCard, forEvent event: UIEvent) {
         
         doHaptic()
         
-        if sender.minutes == totalMinutes && sender.periods == periods {
+        if sender.minutes == selectedTotalMinutes && sender.periods == selectedPeriods {
             // user tapped twice on same card
             clearSelectedDuration()
             prepareHaptic()
@@ -345,7 +368,9 @@ class GameTimeVC: UIViewController {
         cards.forEach {
             $0.alpha = 1.0
         }
-        shouldPassSelection = false
+        selectedPeriods = nil
+        selectedTotalMinutes = nil
+        selectedMinutesPerPeriod = nil
         UIView.animate(withDuration: 0.2, animations: {
             self.okButton.alpha = 0.0
         }, completion: { (finished) in
@@ -423,8 +448,9 @@ class GameTimeVC: UIViewController {
     private func handleSelection(card: DurationCard) {
         
         self.cancelView.isUserInteractionEnabled = true
-        self.periods = card.periods
-        self.totalMinutes = card.minutes
+        self.selectedPeriods = card.periods
+        self.selectedTotalMinutes = card.minutes
+        self.selectedMinutesPerPeriod = Double.maxOneDecimalDividing(card.minutes, by: card.periods)
         card.alpha = 1.0
         UIView.animate(withDuration: 0.2, animations: {
             self.cards.forEach {
@@ -440,16 +466,14 @@ class GameTimeVC: UIViewController {
         })
     }
     
-    private func showAlertNewGame() {
+    private func showAlertNewGame(then handler: ((Bool) -> Void)?) {
         
         skipAnimations = true
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: "OK", cancelButtonText: LS_BUTTON_CANCEL, okAction: {
-            self.skipAnimations = false
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+            handler?(true)
         }, cancelAction: {
-            self.shouldPassSelection = false
-            self.skipAnimations = false
+            handler?(false)
         })
-        
         DispatchQueue.main.async {
             self.present(askConfirmationVC, animated: true, completion: nil)
         }

@@ -23,7 +23,6 @@ class RulesVC: UIViewController {
     private var topStripe: UIView!
     private var bottomStripe: UIView!
 
-    private var titleText: String?
     private var dataSource: RulesDataSource!
 
     private var onDismiss: (() -> Void)?
@@ -43,9 +42,8 @@ class RulesVC: UIViewController {
     
     // MARK: - Life Cycle
     
-    init(titleText: String? = nil, onDismiss: (() -> Void)? = nil) {
+    init(onDismiss: (() -> Void)? = nil) {
         
-        self.titleText = titleText
         self.onDismiss = onDismiss
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,7 +72,7 @@ class RulesVC: UIViewController {
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
-        titleLabel.text = titleText ?? ""
+        titleLabel.text = LS_TITLE_GAME_RULES
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = .label

@@ -20,8 +20,6 @@ class MenuVC: UIViewController {
     private var tableView: UITableView!
     private var doneButton: UIButton!
 
-    private var titleText: String?
-    
     private let feedbackText: [String] = [LS_MENU_SHARE,
                                           LS_MENU_CONTACT_US,
                                           LS_MENU_REVIEW,
@@ -45,17 +43,6 @@ class MenuVC: UIViewController {
    
     
     // MARK: - Life Cycle
-    
-    init(titleText: String? = nil) {
-        
-        self.titleText = titleText
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         
@@ -83,7 +70,7 @@ class MenuVC: UIViewController {
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
-        titleLabel.text = titleText ?? ""
+        titleLabel.text = LS_TITLE_SETTINGS
         titleLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: 28)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = .label

@@ -6,7 +6,7 @@
 //  Copyright © 2020 StevenAdons. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Double {
     
@@ -28,8 +28,23 @@ extension Double {
         }
     }
     
+    
     static func maxOneDecimalDividing(_ upper: Double, by lower: Double) -> Double {
+        
         let fullCalculated = upper / lower
         return fullCalculated.maxOneDecimal
+    }
+    
+    func createFormattedString(size pointSize: CGFloat, decimalSize: CGFloat) -> NSMutableAttributedString {
+        
+        let digitAndDecimals: Int = isInteger ? 0 : 2
+        let rangeBeforeDigit = NSRange(location: 0, length: stringWithMaxOneDecimal.count - digitAndDecimals)
+        let rangeDigitAndDecimals = NSRange(location: stringWithMaxOneDecimal.count - digitAndDecimals, length: digitAndDecimals)
+        
+        let attributedString = NSMutableAttributedString(string: stringWithMaxOneDecimal)
+        attributedString.addAttribute(.font, value: UIFont(name: FONTNAME.Numbers, size: pointSize) as Any, range: rangeBeforeDigit)
+        attributedString.addAttribute(.font, value: UIFont(name: FONTNAME.Numbers, size: decimalSize) as Any, range: rangeDigitAndDecimals)
+        
+        return attributedString
     }
 }

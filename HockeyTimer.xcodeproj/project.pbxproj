@@ -11,7 +11,6 @@
 		4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */; };
 		4F052B0923DDBCB000FAFCBF /* PickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */; };
 		4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */; };
-		4F052B0D23DDF66B00FAFCBF /* DecimalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0C23DDF66B00FAFCBF /* DecimalPickerView.swift */; };
 		4F052B1423DE043200FAFCBF /* GameTimePickersUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */; };
 		4F1C321722F6F19B00DC8D3A /* NumberOfPeriods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */; };
 		4F1C321922F75BA000DC8D3A /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */; };
@@ -102,9 +101,7 @@
 		4FB4BEBA1F515EEA003B1259 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEB91F515EEA003B1259 /* Color.swift */; };
 		4FB4BEBC1F5160EF003B1259 /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */; };
 		4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF141F520D1C003B1259 /* PageVC.swift */; };
-		4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */; };
 		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
-		4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF241F5225B3003B1259 /* DurationVC.swift */; };
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
 		4FD3721E22A4267C00A45757 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721D22A4267C00A45757 /* Duration.swift */; };
@@ -130,7 +127,6 @@
 		4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameTimeVC.swift; sourceTree = "<group>"; };
 		4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataSource.swift; sourceTree = "<group>"; };
 		4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerNumberView.swift; sourceTree = "<group>"; };
-		4F052B0C23DDF66B00FAFCBF /* DecimalPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalPickerView.swift; sourceTree = "<group>"; };
 		4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimePickersUserInfoKey.swift; sourceTree = "<group>"; };
 		4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfPeriods.swift; sourceTree = "<group>"; };
 		4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
@@ -225,9 +221,7 @@
 		4FB4BEB91F515EEA003B1259 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
 		4FB4BF141F520D1C003B1259 /* PageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
-		4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentMenuVC.swift; sourceTree = "<group>"; };
 		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
-		4FB4BF241F5225B3003B1259 /* DurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationVC.swift; sourceTree = "<group>"; };
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
 		4FD3721D22A4267C00A45757 /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
@@ -276,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				4F29B288239D7F20002115B7 /* GameTimePickers.swift */,
-				4F052B0C23DDF66B00FAFCBF /* DecimalPickerView.swift */,
 				4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */,
 				4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */,
 				4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */,
@@ -424,10 +417,8 @@
 				4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */,
 				4FB4BF141F520D1C003B1259 /* PageVC.swift */,
 				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
-				4FB4BF241F5225B3003B1259 /* DurationVC.swift */,
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
 				4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */,
-				4FB4BF161F521F42003B1259 /* DocumentMenuVC.swift */,
 				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
 				4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */,
 				4F93F58623C9DA8500C93561 /* AddCardTimerVC.swift */,
@@ -815,13 +806,11 @@
 				4F492EB123D363F100980818 /* UIButton.swift in Sources */,
 				4F8D08BA23243A8A0062A58F /* LocalDataManager.swift in Sources */,
 				4F93F58023C9DA5100C93561 /* CardView.swift in Sources */,
-				4F052B0D23DDF66B00FAFCBF /* DecimalPickerView.swift in Sources */,
 				4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */,
 				4FB4BE9A1F515CDA003B1259 /* NewGameButtonIconOnly.swift in Sources */,
 				4F3D1ED423DF77DF00A53272 /* Double.swift in Sources */,
 				4F492EB323D3653100980818 /* TopButton.swift in Sources */,
 				4F93F57B23C9DA3100C93561 /* CardTimerPanel.swift in Sources */,
-				4FB4BF251F5225B3003B1259 /* DurationVC.swift in Sources */,
 				4FE97DA92299BE6A00EC53F9 /* EditScoreButtonLayer.swift in Sources */,
 				4F93F59323CA38F400C93561 /* FeatureFlags.swift in Sources */,
 				4FD3722A22A6EC1D00A45757 /* Rules.swift in Sources */,
@@ -881,7 +870,6 @@
 				4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
 				4F3F397B22B9673000BC0141 /* UpdateManager.swift in Sources */,
-				4FB4BF171F521F42003B1259 /* DocumentMenuVC.swift in Sources */,
 				4F8AFCE722919D1400D975A1 /* Products.swift in Sources */,
 				4FD3722022A6C7D900A45757 /* OvalCountryButton.swift in Sources */,
 				4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */,

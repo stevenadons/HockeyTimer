@@ -59,14 +59,13 @@ class PickerNumberView: UIView {
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.numberOfLines = 1
         numberLabel.textAlignment = .center
-        let fontName: String = isSmall ? FONTNAME.ThemeBold : FONTNAME.ThemeBlack
-        var pointSize: CGFloat = isSmall ? 18 : 26
+        var pointSize: CGFloat = isSmall ? 18 : 28
         if isVeryBig {
-            pointSize = 36
+            pointSize = 38
         }
-        numberLabel.font = UIFont(name: fontName, size: pointSize)
+        numberLabel.font = UIFont(name: FONTNAME.Numbers, size: pointSize)
         numberLabel.textColor = numberColor
-        numberLabel.text = number.stringWithMaxOneDecimal
+        numberLabel.attributedText = number.createFormattedString(size: pointSize, decimalSize: pointSize - 12)
         addSubview(numberLabel)
     }
     

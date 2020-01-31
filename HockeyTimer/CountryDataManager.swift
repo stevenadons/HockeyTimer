@@ -97,7 +97,6 @@ class CountryDataManager {
                               minutes: [40, 50, 60, 70],
                               minutesStrings: ["U7 - U8", "U9 - U10 - U11 - U12", "U14 - Ladies - Gents", "U16 - U19"],
                               groupsOfRules: [])
-        #warning("change 1 back to 10")
         let germany = Country(capitals: "D",
                               localeRegionCode: "DE",
                               name: "Germany",
