@@ -35,7 +35,8 @@ class DurationCard: UIButton {
             miniStopWatch.setNeedsDisplay()
         }
     }
-    
+    private let animationEnabled: Bool = false
+
 
     // MARK: - Initializing
     

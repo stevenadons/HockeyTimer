@@ -18,8 +18,8 @@ class PitchBackgroundLayer: CALayer {
     private var center: CAShapeLayer!
     private var striping: CAShapeLayer!
     
-    let outOfScreen: CGFloat = 0 // 5
-    let edgeWidth: CGFloat = 23
+    let outOfScreen: CGFloat = 0
+    let edgeWidth: CGFloat = 18
     
     
     // MARK: - Initializers
@@ -145,8 +145,8 @@ class PitchBackgroundLayer: CALayer {
         
         let path = UIBezierPath()
         
-        path.move(to: CGPoint(x: bounds.width / 2, y: 23))
-        path.addLine(to: CGPoint(x: bounds.width / 2, y: bounds.height - 23))
+        path.move(to: CGPoint(x: bounds.width / 2, y: edgeWidth))
+        path.addLine(to: CGPoint(x: bounds.width / 2, y: bounds.height - edgeWidth))
         
         return path
     }

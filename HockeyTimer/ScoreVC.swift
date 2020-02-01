@@ -31,13 +31,14 @@ class ScoreVC: PanArrowVC {
     
     var game: HockeyGame?
 
-    fileprivate var pitchContainer: ContainerView!
-    fileprivate var pitch: Pitch!
-    fileprivate var editModeButton: EditScoreButton!
-    fileprivate var confirmationButton: ConfirmationButton!
+    private var pitchContainer: ContainerView!
+    private var pitch: Pitch!
+    private var editButton: UIButton!
+    private var confirmationButton: ConfirmationButton!
 
-    fileprivate var inEditMode: Bool = false
-    fileprivate var messageTimer: Timer?
+
+    private var inEditMode: Bool = false
+    private var messageTimer: Timer?
     
     var message: String = "HELLO" {
         didSet {
@@ -48,10 +49,12 @@ class ScoreVC: PanArrowVC {
     
     // MARK: - Life Cycle
     
-    convenience init(game: HockeyGame) {
+    convenience init(game: HockeyGame, pageVC: PageVC, iconsAtTop: Bool) {
         
         self.init()
         self.game = game
+        self.pageVC = pageVC
+        self.iconsAtTop = iconsAtTop
     }
     
     override func viewDidLoad() {
@@ -66,8 +69,7 @@ class ScoreVC: PanArrowVC {
     
     private func setupViews() {
         
-        menuButton.setColor(UIColor(named: ColorName.OliveText)!)
-        rulesButton.setColor(UIColor(named: ColorName.OliveText)!)
+        gameTimeButton.alpha = 0.0
 
         pitchContainer = ContainerView()
         view.addSubview(pitchContainer)
@@ -75,9 +77,15 @@ class ScoreVC: PanArrowVC {
         pitch.isUserInteractionEnabled = true
         pitchContainer.addSubview(pitch)
         
-        editModeButton = EditScoreButton()
-        editModeButton.addTarget(self, action: #selector(editModeButtonTapped(sender:forEvent:)), for: [.touchUpInside])
-        view.addSubview(editModeButton)
+        editButton = UIButton()
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.titleLabel?.numberOfLines = 1
+        editButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)!
+        editButton.setTitleColor(.secondaryLabel, for: .normal)
+        editButton.addTarget(self, action: #selector(editButtonTapped(sender:forEvent:)), for: .touchUpInside)
+        let editTitle = inEditMode ? LS_BUTTON_DONT_EDIT_SCORE : LS_BUTTON_EDIT_SCORE
+        editButton.setTitle(editTitle, for: .normal)
+        view.addSubview(editButton)
         
         confirmationButton = ConfirmationButton.blueButton()
         confirmationButton.alpha = 0.0
@@ -92,27 +100,25 @@ class ScoreVC: PanArrowVC {
         panArrowDownLabel.alpha = 0.0
         
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
-        let pitchContainerOffset = UIDevice.whenDeviceIs(small: 20, normal: 0, big: -50)
-        let editModeOffset = UIDevice.whenDeviceIs(small: 18, normal: 24, big: 36)
+        let pitchContainerOffset = UIDevice.whenDeviceIs(small: 25, normal: 25, big: 55)
+        let editButtonOffset = UIDevice.whenDeviceIs(small: 12, normal: 16, big: 24)
         let buttonHorInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
         let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 50, big: 54)
 
         NSLayoutConstraint.activate([
             
-            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -60),
+            pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -70),
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pitchContainer.heightAnchor.constraint(equalTo: pitchContainer.widthAnchor, multiplier: 0.6),
-            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: pitchContainerOffset),
-            
+            pitchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -pitchContainerOffset),
+
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),
             pitch.heightAnchor.constraint(equalTo: pitchContainer.heightAnchor),
             pitch.centerYAnchor.constraint(equalTo: pitchContainer.centerYAnchor),
             
-            editModeButton.widthAnchor.constraint(equalToConstant: 44),
-            editModeButton.heightAnchor.constraint(equalToConstant: 44),
-            editModeButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: editModeOffset),
-            editModeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editButton.topAnchor.constraint(equalTo: pitch.bottomAnchor, constant: editButtonOffset),
+            editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             confirmationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: buttonHorInset),
             confirmationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -buttonHorInset),
@@ -154,13 +160,15 @@ class ScoreVC: PanArrowVC {
     
     // MARK: - Touch Methods
     
-    @objc private func editModeButtonTapped(sender: NewGameButtonIconOnly, forEvent event: UIEvent) {
+    @objc private func editButtonTapped(sender: UIButton, forEvent event: UIEvent) {
         
         inEditMode = !inEditMode
         pitch.toggleEditMode(on: inEditMode)
         if confirmationButton.alpha > 0 {
             hideConfirmationButton()
         }
+        let editTitle = inEditMode ? LS_BUTTON_DONT_EDIT_SCORE : LS_BUTTON_EDIT_SCORE
+        editButton.setTitle(editTitle, for: .normal)
     }
     
     @objc private func confirmationButtonTapped(sender: UIButton, forEvent event: UIEvent) {
@@ -180,7 +188,6 @@ class ScoreVC: PanArrowVC {
             }
         }
     }
-    
     
     
     // MARK: - Private Methods
@@ -204,7 +211,6 @@ class ScoreVC: PanArrowVC {
         game = pageVC?.game
         pitch.resetScores()
     }
-
 }
 
 

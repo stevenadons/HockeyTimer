@@ -413,7 +413,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
 
         cell.backgroundColor = .secondarySystemBackground
         cell.textLabel?.textColor = .label
-        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: fontSize)
+        cell.textLabel?.font = UIFont(name: FONTNAME.ThemeRegular, size: fontSize)
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.selectionStyle = .none
         

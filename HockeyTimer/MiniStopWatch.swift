@@ -47,7 +47,6 @@ class MiniStopWatch: UIView {
     }
     
     
-    
     // MARK: - Initializing
     
     override init(frame: CGRect) {
@@ -84,6 +83,7 @@ class MiniStopWatch: UIView {
         squareContainer.addSublayer(core)
         
         progressBar = progressBarLayer()
+        progressBar.strokeEnd = CGFloat(Double(minutes) / 120.0)
         squareContainer.addSublayer(progressBar)
         
         timesLabel = stopWatchLabel(text: "\(Int(periods))x", bold: false)
@@ -197,7 +197,6 @@ class MiniStopWatch: UIView {
         CATransaction.setDisableActions(false)
         progressBar.setNeedsDisplay()
     }
-
     
     func setMinutes(_ minutes: Double) {
             
@@ -208,7 +207,6 @@ class MiniStopWatch: UIView {
             
         self.periods = periods
     }
-    
     
 
 }

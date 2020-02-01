@@ -38,7 +38,7 @@ let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notifica
 let LS_NOTIFICATION_DEFER = NSLocalizedString("Remind me in 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
 let LS_NOTIFICATION_RUNNING_IN_OVERTIME = NSLocalizedString("Running in overtime", comment: "Content for notification when app in background")
-let LS_NOTIFICATION_CARD_HAS_ENDED = NSLocalizedString("Penalty card: time has ended", comment: "Content for notification when app in background")
+let LS_NOTIFICATION_CARD_HAS_ENDED = NSLocalizedString("Penalty time has ended", comment: "Content for notification when app in background")
 let LS_GAME_IN_QUARTERS = NSLocalizedString("Game in quarters", comment: "Title for switch")
 
 let LS_BUTTON_CANCEL = NSLocalizedString("Cancel", comment: "Cancel message")
@@ -49,6 +49,8 @@ let LS_BUTTON_DONE = NSLocalizedString("Done", comment: "Button title")
 let LS_BUTTON_OTHER_TIME = NSLocalizedString("Custom time", comment: "Button Title")
 let LS_BUTTON_ADD_HALF_MINUTE = NSLocalizedString("Add half a minute", comment: "Button Title")
 let LS_BUTTON_DELETE_HALF_MINUTE = NSLocalizedString("Don't add half a minute", comment: "Button Title")
+let LS_BUTTON_EDIT_SCORE = NSLocalizedString("Edit score manually", comment: "Button Title")
+let LS_BUTTON_DONT_EDIT_SCORE = NSLocalizedString("Don't edit manually", comment: "Button Title")
 
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")

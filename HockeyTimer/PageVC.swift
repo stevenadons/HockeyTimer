@@ -51,7 +51,7 @@ class PageVC: UIPageViewController {
         let periods = savedPeriods > 0 ? savedPeriods : HockeyGame.standardPeriods
         game = HockeyGame(minutes: minutes, periods: periods)
         
-        let startVC = TimerVC(pageVC: self)
+        let startVC = TimerVC(pageVC: self, iconsAtTop: true)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
         
         backgroundMask = UIView()
@@ -184,7 +184,7 @@ class PageVC: UIPageViewController {
     func scoreDidChange() {
         
         if existingTimerVC == nil, let scoreVC = viewControllers?.first as? ScoreVC {
-            let timerVC = TimerVC(pageVC: self)
+            let timerVC = TimerVC(pageVC: self, iconsAtTop: true)
             timerVC.delegate = scoreVC
             timerVC.game = game
             existingTimerVC = timerVC
@@ -212,7 +212,7 @@ extension PageVC: UIPageViewControllerDataSource {
         if let timerVC = viewController as? TimerVC {
             existingTimerVC = timerVC
             if existingScoreVC == nil  {
-                let scoreVC = ScoreVC(game: game)
+                let scoreVC = ScoreVC(game: game, pageVC: self, iconsAtTop: false)
                 scoreVC.pageVC = self
                 timerVC.delegate = scoreVC
                 existingScoreVC = scoreVC
@@ -230,7 +230,7 @@ extension PageVC: UIPageViewControllerDataSource {
         
         if let scoreVC = viewController as? ScoreVC {
             if existingTimerVC == nil {
-                let timerVC = TimerVC(pageVC: self)
+                let timerVC = TimerVC(pageVC: self, iconsAtTop: true)
                 timerVC.delegate = scoreVC
                 timerVC.game = game
                 existingTimerVC = timerVC

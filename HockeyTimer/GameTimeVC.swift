@@ -43,6 +43,7 @@ class GameTimeVC: UIViewController {
     private var cardWidth: CGFloat {
         return view.bounds.width * 0.33
     }
+    private let animationEnabled: Bool = false
     
     
     // MARK: - Life Cycle
@@ -150,7 +151,9 @@ class GameTimeVC: UIViewController {
                 
         super.viewDidAppear(animated)
         
-        guard !skipAnimations else { return }
+        guard !skipAnimations && animationEnabled else {
+            return
+        }
         for card in self.cards {
             if let index = self.cards.firstIndex(of: card) {
                 card.popup(delay: 0.1 * Double(index))
@@ -172,7 +175,9 @@ class GameTimeVC: UIViewController {
         
         super.viewDidDisappear(animated)
         
-        guard !skipAnimations else { return }
+        guard !skipAnimations && animationEnabled else {
+            return
+        }
         for card in self.cards {
             card.windUp()
         }
@@ -388,11 +393,6 @@ class GameTimeVC: UIViewController {
     }
     
     
-    // MARK: - Actions
-
-    
-    
-    
     // MARK: - Private Methods
     
     private func createButton(color: UIColor) -> UIButton {
@@ -424,7 +424,7 @@ class GameTimeVC: UIViewController {
             let card = DurationCard(minutes: minutes, periods: periods)
             cards.append(card)
             card.addTarget(self, action: #selector(handleCardTapped(sender:forEvent:)), for: [.touchUpInside])
-            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], periods: periods, animated: true, delay: 0.1 * Double(index))
+            card.setMinutes(minutes, minutesString: SELECTED_COUNTRY.minutesStrings[index], periods: periods, animated: animationEnabled, delay: 0.1 * Double(index))
             
             switch index % 4 {
             case 0:

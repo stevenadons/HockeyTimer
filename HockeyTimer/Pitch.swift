@@ -30,15 +30,15 @@ class Pitch: UIView {
     
     private var background: PitchBackgroundLayer!
     private var ball: Ball!
-    fileprivate var homeScoreLabel: UILabel!
-    fileprivate var awayScoreLabel: UILabel!
+    private var homeScoreLabel: UILabel!
+    private var awayScoreLabel: UILabel!
     
-    fileprivate var homeScoreStepper: ScoreStepper!
-    fileprivate var awayScoreStepper: ScoreStepper!
+    private var homeScoreStepper: ScoreStepper!
+    private var awayScoreStepper: ScoreStepper!
 
-    fileprivate var delegate: PitchDelegate?
-    fileprivate var homeScore: Int = 0
-    fileprivate var awayScore: Int = 0
+    private var delegate: PitchDelegate?
+    private var homeScore: Int = 0
+    private var awayScore: Int = 0
     
     
     

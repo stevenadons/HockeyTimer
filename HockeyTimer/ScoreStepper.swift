@@ -20,13 +20,13 @@ class ScoreStepper: UIView {
 
     // MARK: - Properties
     
-    fileprivate var shape: ScoreStepperShape!
-    fileprivate var minusButton: ScoreStepperButton!
-    fileprivate var plusButton: ScoreStepperButton!
-    fileprivate var scorelabel: UILabel!
-    fileprivate var delegate: ScoreStepperDelegate?
-    fileprivate(set) var type: ScoreStepperType = .Home
-    fileprivate var haptic: UISelectionFeedbackGenerator?
+    private var shape: ScoreStepperShape!
+    private var minusButton: ScoreStepperButton!
+    private var plusButton: ScoreStepperButton!
+    private var scorelabel: UILabel!
+    private var delegate: ScoreStepperDelegate?
+    private(set) var type: ScoreStepperType = .Home
+    private var haptic: UISelectionFeedbackGenerator?
     
     private let designHeight: CGFloat = 46
     private let inset: CGFloat = 1.0
@@ -90,10 +90,11 @@ class ScoreStepper: UIView {
         
         guard bounds.width * bounds.height != 0 else { return }
         
-        let horizontalOffset: CGFloat = 12.0 // 24
+        let horizontalOffset: CGFloat = 10.0
         let shapeWidth = bounds.width - (2 * horizontalOffset)
         let shapeHeight = shapeWidth / 3
         let verticalOffset = (bounds.height - shapeHeight) / 2
+        
         shape.frame = bounds.insetBy(dx: horizontalOffset, dy: verticalOffset)
         shape.setNeedsLayout()
         

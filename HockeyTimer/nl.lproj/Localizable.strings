@@ -31,7 +31,7 @@
 "Remind me in 1 minute" = "Herinner me na 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
 "Running in overtime" = "Tijd is verstreken";
-"Penalty card: time has ended" = "Strafkaart: tijd is verstreken";
+"Penalty time has ended" = "Straftijd is verstreken";
 "Game in quarters" = "Wedstrijd in kwarten";
 "Custom time" = "Andere tijd";
 
@@ -50,6 +50,8 @@
 "Done" = "Gereed";
 "Add half a minute" = "Halve minuut erbij";
 "Don't add half a minute" = "Geen halve minuut erbij";
+"Edit score manually" = "Manueel instellen";
+"Don't edit manually" = "Niet manueel instellen";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";

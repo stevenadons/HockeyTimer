@@ -39,6 +39,7 @@
 		4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
+		4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */; };
 		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
 		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
 		4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE122918BB200D975A1 /* SKProductX.swift */; };
@@ -157,6 +158,7 @@
 		4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeDataSource.swift; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
+		4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
 		4F8AFCE122918BB200D975A1 /* SKProductX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductX.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 			children = (
 				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
 				4F492EB223D3653100980818 /* TopButton.swift */,
+				4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */,
 				4F29B287239D7E0E002115B7 /* GameTimePickers */,
 				4F8470C922AEA0EA00D71989 /* OvalCountryButton */,
 				4F780A8B1FD0906D00DB1021 /* Phone */,
@@ -888,6 +891,7 @@
 				4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */,
 				4F492EBC23D4DB8C00980818 /* OvalCountryLayer.swift in Sources */,
 				4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */,
+				4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */,
 				4FF7FB331F655960001D4ED1 /* OnboardingVC.swift in Sources */,
 				4FB4BE8A1F515C1D003B1259 /* StopWatch.swift in Sources */,
 				4F4D5E5522F3554D00701504 /* HockeyGameStatus.swift in Sources */,

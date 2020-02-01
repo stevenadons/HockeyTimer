@@ -46,5 +46,10 @@ enum ColorName {
     static let GrayScaleGreenCard = "GrayScaleGreenCard"
     static let GrayScaleYellowCard = "GrayScaleYellowCard"
     static let GrayScaleRedCard = "GrayScaleRedCard"
+    
+    static let IconText = "IconText"
+    static let IconOnYellowBackground = "IconOnYellowBackground"
+    static let IconTextOnYellowBackground = "IconTextOnYellowBackground"
+
 
 }
