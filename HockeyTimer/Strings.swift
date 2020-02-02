@@ -123,6 +123,8 @@ let LS_COUNTRY_INTERNATIONAL = NSLocalizedString("International", comment: "Dura
 let LS_COUNTRY_IN2HOCKEY = NSLocalizedString("In2Hockey", comment: "Durationcard description")
 let LS_COUNTRY_MASTERS_MAMIS_PAPIS = NSLocalizedString("Master & M/P", comment: "Durationcard description")
 
+let LS_MENU_MINIMALISTIC_LOOK = NSLocalizedString("Minimalistic look", comment: "Menu")
+let LS_MENU_CHANGE_APP_ICON = NSLocalizedString("Change app icon", comment: "Menu")
 let LS_MENU_SHARE = NSLocalizedString("Share the app", comment: "Menu")
 let LS_MENU_CONTACT_US = NSLocalizedString("Contact us", comment: "Menu")
 let LS_MENU_REVIEW = NSLocalizedString("Review the app", comment: "Menu")
@@ -130,6 +132,7 @@ let LS_MENU_PRIVACY_POLICY = NSLocalizedString("Privacy policy", comment: "Menu"
 let LS_MENU_ALWAYS_DARK = NSLocalizedString("Always dark mode", comment: "Menu")
 let LS_MENU_NEVER_DARK = NSLocalizedString("Never dark mode", comment: "Menu")
 let LS_MENU_WHEN_PHONE_IN_DARK = NSLocalizedString("When phone in dark mode", comment: "Menu")
+let LS_MENU_HEADER_USER_SETTINGS = NSLocalizedString("User settings", comment: "Menu header title")
 let LS_MENU_HEADER_FEEDBACK = NSLocalizedString("Feedback", comment: "Menu header title")
 let LS_MENU_HEADER_DARK_MODE = NSLocalizedString("Dark mode", comment: "Menu header title")
 

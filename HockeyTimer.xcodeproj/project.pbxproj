@@ -40,6 +40,9 @@
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */; };
+		4F7FA98223E6CF1E00EC4BC9 /* CircularFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA97F23E6CF1D00EC4BC9 /* CircularFAB.swift */; };
+		4F7FA98323E6CF1E00EC4BC9 /* CircularFABItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA98023E6CF1D00EC4BC9 /* CircularFABItemButton.swift */; };
+		4F7FA98423E6CF1E00EC4BC9 /* CircularFABButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA98123E6CF1D00EC4BC9 /* CircularFABButton.swift */; };
 		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
 		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
 		4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE122918BB200D975A1 /* SKProductX.swift */; };
@@ -159,6 +162,9 @@
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
+		4F7FA97F23E6CF1D00EC4BC9 /* CircularFAB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularFAB.swift; sourceTree = "<group>"; };
+		4F7FA98023E6CF1D00EC4BC9 /* CircularFABItemButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularFABItemButton.swift; sourceTree = "<group>"; };
+		4F7FA98123E6CF1D00EC4BC9 /* CircularFABButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularFABButton.swift; sourceTree = "<group>"; };
 		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
 		4F8AFCE122918BB200D975A1 /* SKProductX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductX.swift; sourceTree = "<group>"; };
@@ -306,6 +312,16 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		4F7FA97E23E6CF1000EC4BC9 /* CircularFAB */ = {
+			isa = PBXGroup;
+			children = (
+				4F7FA97F23E6CF1D00EC4BC9 /* CircularFAB.swift */,
+				4F7FA98123E6CF1D00EC4BC9 /* CircularFABButton.swift */,
+				4F7FA98023E6CF1D00EC4BC9 /* CircularFABItemButton.swift */,
+			);
+			name = CircularFAB;
+			sourceTree = "<group>";
+		};
 		4F8470C922AEA0EA00D71989 /* OvalCountryButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,9 +453,9 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4F7FA97E23E6CF1000EC4BC9 /* CircularFAB */,
 				4FB4BE9F1F515D5C003B1259 /* ContainerView.swift */,
 				4F492EB223D3653100980818 /* TopButton.swift */,
-				4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */,
 				4F29B287239D7E0E002115B7 /* GameTimePickers */,
 				4F8470C922AEA0EA00D71989 /* OvalCountryButton */,
 				4F780A8B1FD0906D00DB1021 /* Phone */,
@@ -488,6 +504,7 @@
 		4FB4BE951F515C89003B1259 /* IconButtons */ = {
 			isa = PBXGroup;
 			children = (
+				4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */,
 				4FE97DA52299BE4400EC53F9 /* EditScore */,
 				4F9FC5CE1F5331840003C2FF /* PanArrow */,
 				4FB4BE961F515C96003B1259 /* NewGame */,
@@ -845,6 +862,7 @@
 				4F052B1423DE043200FAFCBF /* GameTimePickersUserInfoKey.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */,
+				4F7FA98423E6CF1E00EC4BC9 /* CircularFABButton.swift in Sources */,
 				4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */,
 				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
@@ -857,12 +875,14 @@
 				4FFC758B2348F8760049C815 /* RemoteMessageManager.swift in Sources */,
 				4F93F58723C9DA8500C93561 /* AddCardTimerVC.swift in Sources */,
 				4F6869C323DCAC21003F89C1 /* GameTimeVC.swift in Sources */,
+				4F7FA98223E6CF1E00EC4BC9 /* CircularFAB.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
 				4F93F58423C9DA5700C93561 /* ChooseMinutesPanel.swift in Sources */,
 				4F93F58123C9DA5100C93561 /* ChooseCardPanel.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
+				4F7FA98323E6CF1E00EC4BC9 /* CircularFABItemButton.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
 				4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */,
 				4F4D5E5322F3524E00701504 /* StopWatchTimerState.swift in Sources */,

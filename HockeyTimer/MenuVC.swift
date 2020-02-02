@@ -19,6 +19,17 @@ class MenuVC: UIViewController {
     private var titleLabel: UILabel!
     private var tableView: UITableView!
     private var doneButton: UIButton!
+    
+    private let headerTitles: [String] = [LS_MENU_HEADER_USER_SETTINGS,
+                                          LS_MENU_HEADER_DARK_MODE,
+                                          LS_MENU_HEADER_FEEDBACK]
+       
+    private let userSettingsText: [String] = [LS_MENU_MINIMALISTIC_LOOK,
+                                              LS_MENU_CHANGE_APP_ICON]
+    
+    private let darkModeText: [String] = [LS_MENU_ALWAYS_DARK,
+                                           LS_MENU_NEVER_DARK,
+                                           LS_MENU_WHEN_PHONE_IN_DARK]
 
     private let feedbackText: [String] = [LS_MENU_SHARE,
                                           LS_MENU_CONTACT_US,
@@ -29,13 +40,6 @@ class MenuVC: UIViewController {
                                                 "envelope",
                                                 "square.and.pencil",
                                                 "checkmark.shield"]
-    
-    private let darkModeText: [String] = [LS_MENU_ALWAYS_DARK,
-                                          LS_MENU_NEVER_DARK,
-                                          LS_MENU_WHEN_PHONE_IN_DARK]
-   
-    private let headerTitles: [String] = [LS_MENU_HEADER_FEEDBACK,
-                                          LS_MENU_HEADER_DARK_MODE]
     
     private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
     private let websiteURLString = "https://stevenadons.wixsite.com/hockeyupp"
@@ -150,6 +154,8 @@ class MenuVC: UIViewController {
     
     @objc private func switchChanged(_ item: UISwitch) {
         
+        #warning("to do")
+        
         guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
             
             item.setOn(!item.isOn, animated: true)
@@ -250,12 +256,24 @@ class MenuVC: UIViewController {
         }
     }
     
+    private func changeAppIcon() {
+        
+        
+    }
     
     // MARK: - Private Methods
     
     private func setToggles() {
         
         checkToggles()
+        
+        if let userSettingsSection = headerTitles.firstIndex(of: LS_MENU_HEADER_USER_SETTINGS), let minimalisticLookRow = userSettingsText.firstIndex(of: LS_MENU_MINIMALISTIC_LOOK) {
+            if let minLookCell = tableView.cellForRow(at: IndexPath(row: minimalisticLookRow, section: userSettingsSection)), let accessoryView = minLookCell.accessoryView, accessoryView.isKind(of: UISwitch.self) {
+                let toggle = accessoryView as! UISwitch
+                let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.MinimalisticLook)
+                toggle.setOn(on, animated: false)
+            }
+        }
 
         guard let section = headerTitles.firstIndex(of: LS_MENU_HEADER_DARK_MODE) else {
             return
@@ -297,7 +315,20 @@ class MenuVC: UIViewController {
         }
     }
     
-    private func toggleFor(_ actionTitle: String, tag: Int) -> UISwitch? {
+    private func toggleForMinimalisticLookCell() -> UISwitch? {
+        
+        let toggle = UISwitch()
+        
+        toggle.onTintColor = UIColor(named: ColorName.LightYellow)!
+        toggle.tag = 999
+        toggle.addTarget(self, action: #selector(switchChanged(_:)), for: .valueChanged)
+        let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.MinimalisticLook)
+        toggle.setOn(on, animated: false)
+
+        return toggle
+    }
+    
+    private func toggleForDarkModeCell(_ actionTitle: String, tag: Int) -> UISwitch? {
         
         let toggle = UISwitch()
         
@@ -392,13 +423,16 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if headerTitles[section] == LS_MENU_HEADER_FEEDBACK {
-            return feedbackText.count
-            
-        } else if headerTitles[section] == LS_MENU_HEADER_DARK_MODE {
+        switch headerTitles[section] {
+        case LS_MENU_HEADER_USER_SETTINGS:
+            return userSettingsText.count
+        case LS_MENU_HEADER_DARK_MODE:
             return darkModeText.count
+        case LS_MENU_HEADER_FEEDBACK:
+            return feedbackText.count
+        default:
+            fatalError("Trying to get header title for non existing header")
         }
-        return 9999
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -417,7 +451,22 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.selectionStyle = .none
         
-        if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
+        if headerTitles[indexPath.section] == LS_MENU_HEADER_USER_SETTINGS {
+            
+            cell.textLabel?.text = userSettingsText[indexPath.row]
+
+            if userSettingsText[indexPath.row] == LS_MENU_MINIMALISTIC_LOOK {
+                cell.accessoryView = toggleForMinimalisticLookCell()
+            } else if userSettingsText[indexPath.row] == LS_MENU_CHANGE_APP_ICON {
+                cell.accessoryType = .disclosureIndicator
+            }
+            
+        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_DARK_MODE {
+            
+            cell.textLabel?.text = darkModeText[indexPath.row]
+            cell.accessoryView = toggleForDarkModeCell(feedbackText[indexPath.row], tag: indexPath.row)
+            
+        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
             
             cell.textLabel?.text = feedbackText[indexPath.row]
             
@@ -428,11 +477,6 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 imageView.tintColor = UIColor(named: ColorName.DarkBlue)!
                 cell.accessoryView = imageView
             }
-            
-        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_DARK_MODE {
-            
-            cell.textLabel?.text = darkModeText[indexPath.row]
-            cell.accessoryView = toggleFor(feedbackText[indexPath.row], tag: indexPath.row)
         }
 
         return cell
@@ -445,21 +489,25 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK else {
-            return
-        }
-        
-        switch feedbackText[indexPath.row] {
-        case LS_MENU_SHARE:
-            shareApp()
-        case LS_MENU_CONTACT_US:
-            contactUs()
-        case LS_MENU_REVIEW:
-            writeAReview()
-        case LS_MENU_PRIVACY_POLICY:
-            linkToPrivacyPolicy()
-        default:
-            fatalError("Did select menu item which does not exist")
+        if headerTitles[indexPath.section] == LS_MENU_HEADER_USER_SETTINGS {
+            if userSettingsText[indexPath.row] == LS_MENU_CHANGE_APP_ICON {
+                changeAppIcon()
+            }
+            
+        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
+            
+            switch feedbackText[indexPath.row] {
+            case LS_MENU_SHARE:
+                shareApp()
+            case LS_MENU_CONTACT_US:
+                contactUs()
+            case LS_MENU_REVIEW:
+                writeAReview()
+            case LS_MENU_PRIVACY_POLICY:
+                linkToPrivacyPolicy()
+            default:
+                fatalError("Did select menu item which does not exist")
+            }
         }
     }
 }

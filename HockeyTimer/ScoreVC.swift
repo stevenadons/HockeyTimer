@@ -36,7 +36,6 @@ class ScoreVC: PanArrowVC {
     private var editButton: UIButton!
     private var confirmationButton: ConfirmationButton!
 
-
     private var inEditMode: Bool = false
     private var messageTimer: Timer?
     

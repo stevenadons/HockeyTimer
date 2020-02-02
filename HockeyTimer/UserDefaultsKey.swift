@@ -20,6 +20,7 @@ enum UserDefaultsKey {
     static let CardEndTimesWhenInBackground = "CardEndTimesWhenInBackground"
     static let PremiumMode = "PremiumMode"
     static let CountryIndex = "CountryIndex"
+    static let MinimalisticLook = "MinimalisticLook"
     static let AlwaysDarkMode = "AlwaysDarkMode"
     static let AlwaysLightMode = "AlwaysLightMode"
     static let DarkModeFollowsPhoneSettings = "DarkModeFollowsPhoneSettings"

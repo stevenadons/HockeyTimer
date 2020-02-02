@@ -112,6 +112,8 @@ class TimerVC: PanArrowVC {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAfterRestoringFromBackground), name: .CurrentTimerPositionLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleNewGame), name: .NewGame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleGoToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(circularFABWillOpen), name: .CircularFABWillOpen, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(circularFABDidClose), name: .CircularFABDidClose, object: nil)
     }
     
     deinit {
@@ -172,6 +174,18 @@ class TimerVC: PanArrowVC {
         }
     }
     
+    @objc private func circularFABWillOpen() {
+        
+        panArrowDown.alpha = 0.0
+        panArrowDownLabel.alpha = 0.0
+    }
+    
+    @objc private func circularFABDidClose() {
+        
+        panArrowDown.alpha = 1.0
+        panArrowDownLabel.alpha = 1.0
+    }
+    
     func createNewGame() {
 
         let savedMinutes = UserDefaults.standard.double(forKey: UserDefaultsKey.Minutes)
@@ -203,7 +217,11 @@ class TimerVC: PanArrowVC {
         }
     }
     
-    private func handleConfirmationNewGame() {
+    
+    // MARK: - Public Mehods
+
+    
+    func handleConfirmationNewGame() {
         
         createNewGame()
         if message == LS_WARNINGRESETGAME {
