@@ -178,6 +178,23 @@ class AppIconVC: UIViewController {
     
     @objc private func cardTapped(tappedCard: AppIconCard, forEvent event: UIEvent) {
         
+        guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
+            
+            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_APP_ICON, text: LS_BUYPREMIUM_TEXT_CHANGE_APP_ICON, showFirstButton: false, afterDismiss: { earned in
+                if earned {
+                    self.performChangeFor(tappedCard)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+            present(buyPremiumVC, animated: true, completion: nil)
+            return
+        }
+        performChangeFor(tappedCard)
+    }
+    
+    private func performChangeFor(_ tappedCard: AppIconCard) {
+        
         doHaptic()
         
         if tappedCard.imageName == standardIconImageName {
@@ -185,7 +202,6 @@ class AppIconVC: UIViewController {
         } else {
             UIApplication.shared.setAlternateIconName(tappedCard.imageName, completionHandler: nil)
         }
-        
         for card in cards {
             let highlight = (card == tappedCard)
             card.highlight(highlight)

@@ -73,7 +73,7 @@
 
 "Dark Mode" = "Donkere modus";
 "To have Dark Mode, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can change the app icon and keep track of penalty cards." = "Om donkere modus in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook het app-icoon instellen en strafkaarten bijhouden.";
-"Watch one ad to keep track of a penalty card (including timing). Or upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have dark mode and change the app icon." = "Bekijk één advertentie om een strafkaart te trekken, of upgrade naar premium mode met een eenmalige betaling.\n\nBovendien heb je dan ook donkere modus en kan je het app-icoon wijzigen.";
+"Adding penalty cards is possible in Premium Mode with a one time payment. Give it a try for free by watching just one ad.\n\nPremium Mode will also let you have dark mode and change the app icon." = "Strafkaarten toevoegen is mogelijk in premium mode met een eenmalige betaling. Probeer het gratis door één advertentie te bekijken.\n\nIn premium mode heb je daarnast ook nog donkere modus en kan je het app-icoon wijzigen.";
 "Change App Icon" = "Wijzig app-icoon";
 "To change the app icon, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have Dark Mode and keep track of penalty cards." = "Om het app-icoon in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook donkere modus instellen en strafkaarten bijhouden.";
 
@@ -124,7 +124,7 @@
 "Write a review in the App Store" = "Beoordeling in de App Store";
 "Privacy policy" = "Privacybeleid";
 "Always dark mode" = "Altijd donkere modus";
-"Never dark mode" = "Nooit donkere modus";
+"Always light mode" = "Altijd lichte modus";
 "When phone in dark mode" = "Als iPhone in donkere modus";
 
 "Feedback" = "Feedback";

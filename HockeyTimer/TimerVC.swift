@@ -89,7 +89,7 @@ class TimerVC: PanArrowVC {
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
             stopWatch.centerYAnchor.constraint(equalTo: stopWatchContainer.centerYAnchor),
             
-            cardTimerPanel.topAnchor.constraint(equalTo: stopWatchContainer.bottomAnchor, constant: 25),
+            cardTimerPanel.topAnchor.constraint(equalTo: stopWatchContainer.bottomAnchor, constant: 35),
             cardTimerPanel.heightAnchor.constraint(equalToConstant: 76),
             cardTimerPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -265,23 +265,9 @@ extension TimerVC: CardTimerPanelDelegate {
     
     func shouldAddCard() {
         
-        if UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) {
-            showAddTimerVC()
-            
-        } else {
-            showBuyPremiumVC(onProgressionEarned: { earned in
-                if earned {
-                    self.showAddTimerVC()
-                }
-            })
-        }
-    }
-    
-    private func showAddTimerVC() {
-        
-        let vc = AddCardTimerVC(okAction: { (cardType, minutes) in
+        let vc = AddCardTimerVC(okAction: { [weak self] (cardType, minutes) in
             let card = Card(type: cardType)
-            self.cardTimerPanel.add(card, minutes: minutes)
+            self?.cardTimerPanel.add(card, minutes: minutes)
         }, cancelAction: nil)
         present(vc, animated: true, completion: nil)
     }

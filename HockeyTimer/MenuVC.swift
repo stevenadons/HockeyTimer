@@ -255,18 +255,6 @@ class MenuVC: UIViewController {
     
     private func changeAppIcon() {
         
-        guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
-            
-            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_APP_ICON, text: LS_BUYPREMIUM_TEXT_CHANGE_APP_ICON, showFirstButton: false, afterDismiss: { earned in
-                if earned {
-                    let vc = AppIconVC()
-                    self.present(vc, animated: true, completion: nil)
-                }
-            })
-            present(buyPremiumVC, animated: true, completion: nil)
-            return
-        }
-        
         let vc = AppIconVC()
         present(vc, animated: true, completion: nil)
     }
@@ -489,24 +477,30 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if headerTitles[indexPath.section] == LS_MENU_HEADER_USER_SETTINGS {
-            if userSettingsText[indexPath.row] == LS_MENU_CHANGE_APP_ICON {
-                changeAppIcon()
-            }
+        // A short delay to avoid long delays (didSelectRow can be a slow method)
+        // https://stackoverflow.com/questions/27203324/unpredictable-delay-before-uipopovercontroller-appears-under-ios-8-1/27227446#27227446
+        let deadline = DispatchTime.now() + DispatchTimeInterval.milliseconds(50)
+        DispatchQueue.main.asyncAfter(deadline: deadline) { [unowned self] in
             
-        } else if headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
-            
-            switch feedbackText[indexPath.row] {
-            case LS_MENU_SHARE:
-                shareApp()
-            case LS_MENU_CONTACT_US:
-                contactUs()
-            case LS_MENU_REVIEW:
-                writeAReview()
-            case LS_MENU_PRIVACY_POLICY:
-                linkToPrivacyPolicy()
-            default:
-                fatalError("Did select menu item which does not exist")
+            if self.headerTitles[indexPath.section] == LS_MENU_HEADER_USER_SETTINGS {
+                if self.userSettingsText[indexPath.row] == LS_MENU_CHANGE_APP_ICON {
+                    self.changeAppIcon()
+                }
+                
+            } else if self.headerTitles[indexPath.section] == LS_MENU_HEADER_FEEDBACK {
+                
+                switch self.feedbackText[indexPath.row] {
+                case LS_MENU_SHARE:
+                    self.shareApp()
+                case LS_MENU_CONTACT_US:
+                    self.contactUs()
+                case LS_MENU_REVIEW:
+                    self.writeAReview()
+                case LS_MENU_PRIVACY_POLICY:
+                    self.linkToPrivacyPolicy()
+                default:
+                    fatalError("Did select menu item which does not exist")
+                }
             }
         }
     }

@@ -65,6 +65,7 @@ class OvalCountryLayer: CALayer {
         shape.bounds = bounds
         shape.path = createPath().cgPath
         shape.strokeColor = color.cgColor
+        shape.setNeedsLayout()
     }
     
     

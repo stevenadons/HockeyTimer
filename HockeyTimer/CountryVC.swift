@@ -186,8 +186,13 @@ extension CountryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        SELECTED_COUNTRY = CountryDataManager.shared.countries[indexPath.row]
-        dismiss(animated: true, completion: nil)
+        // A short delay to avoid long delays (didSelectRow can be a slow method)
+        // https://stackoverflow.com/questions/27203324/unpredictable-delay-before-uipopovercontroller-appears-under-ios-8-1/27227446#27227446
+        let deadline = DispatchTime.now() + DispatchTimeInterval.milliseconds(50)
+        DispatchQueue.main.asyncAfter(deadline: deadline) { [unowned self] in
+            SELECTED_COUNTRY = CountryDataManager.shared.countries[indexPath.row]
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
