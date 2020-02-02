@@ -56,8 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             startViewController = PageVC(transitionStyle: .scroll, navigationOrientation: .vertical)
         }
         
-        
-        
         self.window?.rootViewController = startViewController
         self.window?.makeKeyAndVisible()
         
@@ -244,5 +242,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(false, forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings)
         }
     }
-
 }

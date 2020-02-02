@@ -53,7 +53,7 @@ class PageVC: UIPageViewController {
         let periods = savedPeriods > 0 ? savedPeriods : HockeyGame.standardPeriods
         game = HockeyGame(minutes: minutes, periods: periods)
         
-        let startVC = TimerVC(pageVC: self, iconsAtTop: true)
+        let startVC = TimerVC(pageVC: self)
         setViewControllers([startVC], direction: .forward, animated: false, completion: nil)
         
         backgroundMask = UIView()
@@ -63,8 +63,9 @@ class PageVC: UIPageViewController {
         view.sendSubviewToBack(backgroundMask)
         hideBackgroundMask()
         
-        newGameButton = CircularFABButton.createStandardButton(imageName: "backward.end.fill")
+        newGameButton = CircularFABButton.createStandardButton(imageName: "backward.end")
         newGameButton.bgColor = UIColor(named: "DarkBlue")!
+        newGameButton.contentColor = .white
         newGameButton.addTarget(self, action: #selector(newGameTapped), for: .touchUpInside)
         view.addSubview(newGameButton)
         
@@ -103,7 +104,7 @@ class PageVC: UIPageViewController {
         
         super.viewDidLayoutSubviews()
         
-        let buttonDiameter: CGFloat = 56
+        let buttonDiameter: CGFloat = 54
         let rightInset: CGFloat = 28
         let bottomInset: CGFloat = 26
         
@@ -189,8 +190,7 @@ class PageVC: UIPageViewController {
     
     private func showAlertNewGame(onOK: (() -> Void)?) {
         
-        #warning("custom message : 2 cases")
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNING_NEWGAME_GAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
             onOK?()
         }, cancelAction: nil)
         
@@ -217,7 +217,7 @@ class PageVC: UIPageViewController {
     func scoreDidChange() {
         
         if existingTimerVC == nil, let scoreVC = viewControllers?.first as? ScoreVC {
-            let timerVC = TimerVC(pageVC: self, iconsAtTop: true)
+            let timerVC = TimerVC(pageVC: self)
             timerVC.delegate = scoreVC
             timerVC.game = game
             existingTimerVC = timerVC
@@ -259,7 +259,7 @@ extension PageVC: UIPageViewControllerDataSource {
         if let timerVC = viewController as? TimerVC {
             existingTimerVC = timerVC
             if existingScoreVC == nil  {
-                let scoreVC = ScoreVC(game: game, pageVC: self, iconsAtTop: false)
+                let scoreVC = ScoreVC(game: game, pageVC: self)
                 scoreVC.pageVC = self
                 timerVC.delegate = scoreVC
                 existingScoreVC = scoreVC
@@ -277,7 +277,7 @@ extension PageVC: UIPageViewControllerDataSource {
         
         if let scoreVC = viewController as? ScoreVC {
             if existingTimerVC == nil {
-                let timerVC = TimerVC(pageVC: self, iconsAtTop: true)
+                let timerVC = TimerVC(pageVC: self)
                 timerVC.delegate = scoreVC
                 timerVC.game = game
                 existingTimerVC = timerVC
@@ -317,7 +317,7 @@ extension PageVC: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
-        view.backgroundColor = pageViewController.view.backgroundColor
+        view.backgroundColor = viewControllers?.first?.view.backgroundColor
         
         haptic?.selectionChanged()
         haptic = nil

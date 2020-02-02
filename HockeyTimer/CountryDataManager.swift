@@ -95,7 +95,7 @@ class CountryDataManager {
                               name: "Belgium",
                               periods: [2, 2, 2, 4],
                               minutes: [40, 50, 60, 70],
-                              minutesStrings: ["U7 - U8", "U9 - U10 - U11 - U12", "U14 - Ladies - Gents", "U16 - U19"],
+                              minutesStrings: ["U7 - U8", "U9 - U10 - U11 - U12", "U14 - Ladies - Gents", "General"],
                               groupsOfRules: [])
         let germany = Country(capitals: "D",
                               localeRegionCode: "DE",

@@ -40,7 +40,7 @@ class CountryCell: UITableViewCell {
         countryLabel.numberOfLines = 1
         countryLabel.textAlignment = .left
         countryLabel.textColor = .label
-        countryLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 17)
+        countryLabel.font = UIFont(name: FONTNAME.ThemeRegular, size: 17)
         addSubview(countryLabel)
     }
     

@@ -48,12 +48,11 @@ class ScoreVC: PanArrowVC {
     
     // MARK: - Life Cycle
     
-    convenience init(game: HockeyGame, pageVC: PageVC, iconsAtTop: Bool) {
+    convenience init(game: HockeyGame, pageVC: PageVC) {
         
         self.init()
         self.game = game
         self.pageVC = pageVC
-        self.iconsAtTop = iconsAtTop
     }
     
     override func viewDidLoad() {
@@ -68,8 +67,6 @@ class ScoreVC: PanArrowVC {
     
     private func setupViews() {
         
-        gameTimeButton.alpha = 0.0
-
         pitchContainer = ContainerView()
         view.addSubview(pitchContainer)
         pitch = Pitch(delegate: self)
@@ -99,7 +96,7 @@ class ScoreVC: PanArrowVC {
         panArrowDownLabel.alpha = 0.0
         
         let confirmationButtonConstant = UIDevice.whenDeviceIs(small: 90, normal: 120, big: 120)
-        let pitchContainerOffset = UIDevice.whenDeviceIs(small: 25, normal: 25, big: 55)
+        let pitchContainerOffset = UIDevice.whenDeviceIs(small: 15, normal: 20, big: 40)
         let editButtonOffset = UIDevice.whenDeviceIs(small: 12, normal: 16, big: 24)
         let buttonHorInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
         let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 50, big: 54)
@@ -109,7 +106,7 @@ class ScoreVC: PanArrowVC {
             pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -70),
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pitchContainer.heightAnchor.constraint(equalTo: pitchContainer.widthAnchor, multiplier: 0.6),
-            pitchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -pitchContainerOffset),
+            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: pitchContainerOffset),
 
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),
@@ -129,10 +126,7 @@ class ScoreVC: PanArrowVC {
     
     private func addObservers() {
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleNewGame),
-                                               name: .NewGame,
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNewGame), name: .NewGame, object: nil)
     }
     
     deinit {

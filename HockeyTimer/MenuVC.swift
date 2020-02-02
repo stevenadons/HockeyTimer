@@ -24,8 +24,7 @@ class MenuVC: UIViewController {
                                           LS_MENU_HEADER_DARK_MODE,
                                           LS_MENU_HEADER_FEEDBACK]
        
-    private let userSettingsText: [String] = [LS_MENU_MINIMALISTIC_LOOK,
-                                              LS_MENU_CHANGE_APP_ICON]
+    private let userSettingsText: [String] = [LS_MENU_CHANGE_APP_ICON]
     
     private let darkModeText: [String] = [LS_MENU_ALWAYS_DARK,
                                            LS_MENU_NEVER_DARK,
@@ -154,8 +153,6 @@ class MenuVC: UIViewController {
     
     @objc private func switchChanged(_ item: UISwitch) {
         
-        #warning("to do")
-        
         guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
             
             item.setOn(!item.isOn, animated: true)
@@ -258,7 +255,20 @@ class MenuVC: UIViewController {
     
     private func changeAppIcon() {
         
+        guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
+            
+            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_APP_ICON, text: LS_BUYPREMIUM_TEXT_CHANGE_APP_ICON, showFirstButton: false, afterDismiss: { earned in
+                if earned {
+                    let vc = AppIconVC()
+                    self.present(vc, animated: true, completion: nil)
+                }
+            })
+            present(buyPremiumVC, animated: true, completion: nil)
+            return
+        }
         
+        let vc = AppIconVC()
+        present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -267,14 +277,6 @@ class MenuVC: UIViewController {
         
         checkToggles()
         
-        if let userSettingsSection = headerTitles.firstIndex(of: LS_MENU_HEADER_USER_SETTINGS), let minimalisticLookRow = userSettingsText.firstIndex(of: LS_MENU_MINIMALISTIC_LOOK) {
-            if let minLookCell = tableView.cellForRow(at: IndexPath(row: minimalisticLookRow, section: userSettingsSection)), let accessoryView = minLookCell.accessoryView, accessoryView.isKind(of: UISwitch.self) {
-                let toggle = accessoryView as! UISwitch
-                let on = UserDefaults.standard.bool(forKey: UserDefaultsKey.MinimalisticLook)
-                toggle.setOn(on, animated: false)
-            }
-        }
-
         guard let section = headerTitles.firstIndex(of: LS_MENU_HEADER_DARK_MODE) else {
             return
         }
@@ -455,9 +457,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
             
             cell.textLabel?.text = userSettingsText[indexPath.row]
 
-            if userSettingsText[indexPath.row] == LS_MENU_MINIMALISTIC_LOOK {
-                cell.accessoryView = toggleForMinimalisticLookCell()
-            } else if userSettingsText[indexPath.row] == LS_MENU_CHANGE_APP_ICON {
+            if userSettingsText[indexPath.row] == LS_MENU_CHANGE_APP_ICON {
                 cell.accessoryType = .disclosureIndicator
             }
             

@@ -37,7 +37,7 @@ class CircularFAB: UIView {
     private var delegate: CircularFABDelegate!
     
     private let itemButtonDiameter: CGFloat = 48
-    private let menuButtonDiameter: CGFloat = 56
+    private let menuButtonDiameter: CGFloat = 54
     private let menuButtonRightInset: CGFloat = 28
     private let menuButtonBottomInset: CGFloat = 26
     private let radius: CGFloat = 85

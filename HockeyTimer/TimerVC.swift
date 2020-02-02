@@ -30,7 +30,6 @@ class TimerVC: PanArrowVC {
     var delegate: TimerVCDelegate?
     
     private let initialObjectYOffset: CGFloat = UIScreen.main.bounds.height
-    private let resetButtonFadedAlpha: CGFloat = 1.0
 
     var message: String = ""
     
@@ -46,20 +45,17 @@ class TimerVC: PanArrowVC {
         game = pageVC?.game
         setupViews()
         addObservers()
+        
+        if FeatureFlags.secretGestureToTestingVC {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(secretTap))
+            tap.numberOfTapsRequired = 2
+            tap.numberOfTouchesRequired = 3
+            view.addGestureRecognizer(tap)
+        }
     }
     
     private func setupViews() {
         
-        let iconColor = UIColor.white
-        let textColor = UIColor(named: ColorName.PantoneRed)!
-        
-        gameTimeButton.setColor(iconColor: iconColor, textColor: textColor)
-        rulesButton.setColor(iconColor: iconColor, textColor: textColor)
-        menuButton.setColor(iconColor: iconColor, textColor: textColor)
-        resetButton.setColor(iconColor: iconColor, textColor: textColor)
-        resetButton.alpha = resetButtonFadedAlpha
-        resetButton.isUserInteractionEnabled = false
-
         stopWatchContainer = ContainerView()
         view.addSubview(stopWatchContainer)
         
@@ -80,16 +76,13 @@ class TimerVC: PanArrowVC {
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()
-        
-        let stopWatchExtraYOffset: CGFloat = 0
-//        let stopWatchExtraYOffset: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 10, big: 35)
 
         NSLayoutConstraint.activate([
             
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), 
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopWatchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50/2 - stopWatchExtraYOffset),
+            stopWatchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),
             
             stopWatch.widthAnchor.constraint(equalTo: stopWatchContainer.widthAnchor),
             stopWatch.heightAnchor.constraint(equalTo: stopWatchContainer.heightAnchor),
@@ -102,10 +95,7 @@ class TimerVC: PanArrowVC {
             cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             ])
-        
-        disableResetButton()
     }
-    
     
     private func addObservers() {
         
@@ -121,50 +111,43 @@ class TimerVC: PanArrowVC {
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     
     // MARK: - Drawing and laying out
     
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
-        panArrowDown.color = UIColor(named: ColorName.PantoneRed_LightYellow)!
+        panArrowDown.color = UIColor(named: ColorName.PantoneRed)!
+        panArrowDown.setNeedsLayout()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        panArrowDown.color = UIColor(named: ColorName.PantoneRed)!
         panArrowDown.setNeedsLayout()
     }
     
     
-    
     // MARK: - Private Methods
     
-    private func disableResetButton() {
-        
-        UIView.animate(withDuration: 0.2) {
-            self.resetButton.alpha = self.resetButtonFadedAlpha
-        }
-        resetButton.isUserInteractionEnabled = false
-    }
-    
-    private func enableResetButton() {
-        
-        UIView.animate(withDuration: 0.2) {
-            self.resetButton.alpha = 1.0
-        }
-        resetButton.isUserInteractionEnabled = true
-
-    }
-    
-    @objc fileprivate func updateAfterRestoringFromBackground() {
+    @objc private func updateAfterRestoringFromBackground() {
         
         stopWatch.updateAfterRestoringFromBackground()
         cardTimerPanel.updateAfterRestoringFromBackground()
     }
     
-    @objc fileprivate func handleNewGame() {
+    @objc private func handleNewGame() {
         
         game = pageVC?.game
         cardTimerPanel.deleteAllCards()
         stopWatch?.reset(withGame: game)
         panArrowDownLabel.text = "0 - 0"
-        disableResetButton()
     }
     
     @objc private func handleGoToBackground() {
@@ -207,8 +190,7 @@ class TimerVC: PanArrowVC {
     
     private func showAlertNewGame(onOK: (() -> Void)?) {
         
-        #warning("custom message : 2 cases")
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNING_NEWGAME_GAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
             onOK?()
         }, cancelAction: nil)
         
@@ -231,36 +213,14 @@ class TimerVC: PanArrowVC {
         }
     }
     
-    
-    
     // MARK: - Touch Methods
-        
-    override func resetButtonTapped(sender: IconButton, forEvent event: UIEvent) {
-        
-        showAlertNewGame(onOK: {
-            self.handleConfirmationNewGame()
-        })
-    }
     
-    override func gameTimeButtonTapped(sender: IconButton, forEvent event: UIEvent) {
+    @objc private func secretTap() {
         
-        let currentGameRunning = (game.status != .WaitingToStart)
-        let vc = GameTimeVC(currentPeriods: game.periods, currentTotalMinutes: game.totalMinutes, currentGameRunning: currentGameRunning, onDismiss: { (totalMinutes, periods) in
-            
-            guard totalMinutes != nil || periods != nil else {
-                return
-            }
-            
-            let newMinutes = totalMinutes ?? self.game.totalMinutes
-            let newPeriods = periods ?? self.game.periods
-            UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
-            UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
-            self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
-            NotificationCenter.default.post(name: .NewGame, object: nil)
-        })
-        
+        let vc = TestingVC()
         present(vc, animated: true, completion: nil)
     }
+        
     
     
     // MARK: - Public Methods
@@ -284,9 +244,6 @@ extension TimerVC: StopWatchDelegate {
     
     func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?) {
         
-        if stopWatchTimer.state != .WaitingToStart {
-            enableResetButton()
-        }
         completionHandler?()
     }
     

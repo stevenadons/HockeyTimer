@@ -469,7 +469,7 @@ class GameTimeVC: UIViewController {
     private func showAlertNewGame(then handler: ((Bool) -> Void)?) {
         
         skipAnimations = true
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNINGGAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNING_CHANGETIME_GAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
             handler?(true)
         }, cancelAction: {
             handler?(false)

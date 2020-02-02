@@ -26,7 +26,8 @@
 "CANCEL" = "ANNULEER";
 "New Game" = "Nieuwe wedstrijd";
 "Are you sure you want to start a new game?" = "Nieuwe wedstrijd.\nBen je zeker?";
-"Changing this setting is only possible for new games. Do you want to start a new game?" = "Dit is niet mogelijk voor lopende wedstrijden. Wil je een nieuwe wedstrijd starten?";
+"Currently a game is running. Do you want to start a new game?" = "Wil je een nieuwe wedstrijd starten?";
+"Changing the game time will end the running game. OK?" = "De huidige wedstrijd zal stoppen als je de tijd wijzigt. OK?";
 "OK" = "OK";
 "Remind me in 1 minute" = "Herinner me na 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
@@ -60,6 +61,7 @@
 "Custom Time" = "Tijd instellen";
 "Game Rules" = "Spelregels";
 "Settings" = "Instellingen";
+"App Icon" = "App-icoon";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
 
@@ -68,6 +70,13 @@
 "Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment." = "Bekijk één advertentie om een nieuwe wedstrijd te starten.\n\nUpgrade naar Premium (eenmalige betaling) om nieuwe wedstrijden te starten zonder advertenties.";
 "Buy Premium" = "Koop premium";
 "Watch One Ad" = "Bekijk één advertentie";
+
+"Dark Mode" = "Donkere modus";
+"To have Dark Mode, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can change the app icon and keep track of penalty cards." = "Om donkere modus in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook het app-icoon instellen en strafkaarten bijhouden.";
+"Watch one ad to keep track of a penalty card (including timing). Or upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have dark mode and change the app icon." = "Bekijk één advertentie om een strafkaart te trekken, of upgrade naar premium mode met een eenmalige betaling.\n\nBovendien heb je dan ook donkere modus en kan je het app-icoon wijzigen.";
+"Change App Icon" = "Wijzig app-icoon";
+"To change the app icon, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have Dark Mode and keep track of penalty cards." = "Om het app-icoon in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook donkere modus instellen en strafkaarten bijhouden.";
+
 "Cancel" = "Annuleer";
 "Already paid for premium? Restore Purchase." = "Al betaald voor premium? Aankoop herstellen.";
 "No Internet Connection" = "Geen internetverbinding";
@@ -108,7 +117,6 @@
 "In2Hockey" = "In2Hockey";
 "Master & M/P" = "Master en M/P";
 
-"Minimalistic look" = "Minimalistische modus";
 "Change app icon" = "Wijzig app icon";
 "Share the app" = "Deel de app";
 "Contact us" = "Contacteer ons";

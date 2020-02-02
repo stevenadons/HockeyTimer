@@ -154,6 +154,7 @@ class RulesVC: UIViewController {
         
         super.traitCollectionDidChange(previousTraitCollection)
         checkDarkMode()
+        countryButton.setNeedsLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
