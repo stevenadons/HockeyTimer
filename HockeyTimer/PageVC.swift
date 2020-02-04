@@ -63,7 +63,7 @@ class PageVC: UIPageViewController {
         view.sendSubviewToBack(backgroundMask)
         hideBackgroundMask()
         
-        newGameButton = CircularFABButton.createStandardButton(imageName: "backward.end")
+        newGameButton = CircularFABButton.createStandardButton(imageName: "arrow.2.circlepath.circle") // backward.end
         newGameButton.bgColor = UIColor(named: "DarkBlue")!
         newGameButton.contentColor = .white
         newGameButton.addTarget(self, action: #selector(newGameTapped), for: .touchUpInside)

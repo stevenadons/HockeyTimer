@@ -35,6 +35,11 @@ class RulesDataSource: UITableViewDiffableDataSource<Int, Rules> {
         }
     }
     
+    func configureToZero() {
+        
+        rules = [[]]
+    }
+    
     func takeSnapShot() {
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, Rules>()

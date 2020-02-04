@@ -247,6 +247,8 @@ class RulesVC: UIViewController {
     @objc private func countryButtonTapped() {
         
         let vc = CountryVC(titleText: LS_TITLE_COUNTRY, onDismiss: {
+            self.dataSource.configureToZero()
+            self.dataSource.takeSnapShot()
             self.dataSource.configure(SELECTED_COUNTRY)
             self.dataSource.takeSnapShot()
             self.countryButton.setCapitals(SELECTED_COUNTRY.capitals)

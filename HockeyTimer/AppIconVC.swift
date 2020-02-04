@@ -29,10 +29,10 @@ class AppIconVC: UIViewController {
     private let cardWidth: CGFloat = 100
     
     private var standardIconImageName: String {
-        return "Icon-60"
+        return "AppIconAlt2"
     }
     private var imageNames: [String] {
-        return [standardIconImageName, "AppIconAlt1", "AppIconAlt3", "AppIconAlt2", "AppIconAlt4", "AppIconAlt5"]
+        return [standardIconImageName, "AppIconAlt6", "AppIconAlt1", "AppIconAlt3", "AppIconAlt4", "AppIconAlt5"]
     }
     
     
@@ -183,9 +183,7 @@ class AppIconVC: UIViewController {
             let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_APP_ICON, text: LS_BUYPREMIUM_TEXT_CHANGE_APP_ICON, showFirstButton: false, afterDismiss: { earned in
                 if earned {
                     self.performChangeFor(tappedCard)
-                } else {
-                    self.dismiss(animated: true, completion: nil)
-                }
+                } 
             })
             present(buyPremiumVC, animated: true, completion: nil)
             return

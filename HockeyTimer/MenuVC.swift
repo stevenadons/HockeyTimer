@@ -533,7 +533,7 @@ extension MenuVC: UIActivityItemSource {
         metadata.originalURL = productURL
         metadata.url = metadata.originalURL
         metadata.title = "Share HockeyUpp"
-        metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-Spotlight-40@3x", withExtension: "png"))
+        metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "Icon-120", withExtension: "png"))
         return metadata
     }
 }

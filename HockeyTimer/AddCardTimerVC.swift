@@ -232,9 +232,7 @@ class AddCardTimerVC: UIViewController {
             let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: true, afterDismiss: { earned in
                 if earned {
                     self.performAddCardAction()
-                } else {
-                    self.dismiss(animated: true, completion: nil)
-                }
+                } 
             })
             present(buyPremiumVC, animated: true, completion: nil)
         }

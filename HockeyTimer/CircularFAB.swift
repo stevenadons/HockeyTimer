@@ -154,7 +154,7 @@ class CircularFAB: UIView {
         menuButton.showCloseImage()
         menuButton.bgColor = menuButtonCloseColor
         
-        let itemsOffset: CGFloat = itemButtonDiameter * 0.45
+        let itemsOffset: CGFloat = itemButtonDiameter * 0.55
         let circleRadius: CGFloat = radius + itemButtonDiameter / 2 + itemsOffset
         let menuButtonRadius: CGFloat = menuButtonDiameter / 2
         let scale = circleRadius / menuButtonRadius

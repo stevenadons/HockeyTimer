@@ -124,6 +124,10 @@
 		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
+		4FCC3BB423E9F6F900FB27E6 /* AppIconAlt6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB123E9F6F900FB27E6 /* AppIconAlt6@3x.png */; };
+		4FCC3BB523E9F6FA00FB27E6 /* AppIconAlt6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB223E9F6F900FB27E6 /* AppIconAlt6.png */; };
+		4FCC3BB623E9F6FA00FB27E6 /* AppIconAlt6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB323E9F6F900FB27E6 /* AppIconAlt6@2x.png */; };
+		4FCC3BBA23E9F87B00FB27E6 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB923E9F87A00FB27E6 /* Icon-120.png */; };
 		4FD3721E22A4267C00A45757 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721D22A4267C00A45757 /* Duration.swift */; };
 		4FD3722022A6C7D900A45757 /* OvalCountryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3721F22A6C7D900A45757 /* OvalCountryButton.swift */; };
 		4FD3722422A6CE2700A45757 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */; };
@@ -132,7 +136,6 @@
 		4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */; };
 		4FD3723122A6F5F400A45757 /* RulesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3723022A6F5F400A45757 /* RulesButton.swift */; };
 		4FDCCF2F1FCAD4E5002CC64A /* PopupMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */; };
-		4FEE5746239C0E7500F02BBB /* Icon-Spotlight-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE5745239C0E7500F02BBB /* Icon-Spotlight-40@3x.png */; };
 		4FF61A221F56077A005E5075 /* ScoreStepperShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */; };
 		4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */; };
 		4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */; };
@@ -262,6 +265,10 @@
 		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
+		4FCC3BB123E9F6F900FB27E6 /* AppIconAlt6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconAlt6@3x.png"; sourceTree = "<group>"; };
+		4FCC3BB223E9F6F900FB27E6 /* AppIconAlt6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconAlt6.png; sourceTree = "<group>"; };
+		4FCC3BB323E9F6F900FB27E6 /* AppIconAlt6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconAlt6@2x.png"; sourceTree = "<group>"; };
+		4FCC3BB923E9F87A00FB27E6 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-120.png"; path = "AppIcon/AppIconAlt2/Icon-120.png"; sourceTree = "<group>"; };
 		4FD3721D22A4267C00A45757 /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		4FD3721F22A6C7D900A45757 /* OvalCountryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalCountryButton.swift; sourceTree = "<group>"; };
 		4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -270,7 +277,6 @@
 		4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOfRules.swift; sourceTree = "<group>"; };
 		4FD3723022A6F5F400A45757 /* RulesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesButton.swift; sourceTree = "<group>"; };
 		4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessageView.swift; sourceTree = "<group>"; };
-		4FEE5745239C0E7500F02BBB /* Icon-Spotlight-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Spotlight-40@3x.png"; path = "AppIcon/Icon-Spotlight-40@3x.png"; sourceTree = "<group>"; };
 		4FF61A211F56077A005E5075 /* ScoreStepperShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperShape.swift; sourceTree = "<group>"; };
 		4FF7FB2D1F6549CF001D4ED1 /* JukeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JukeBox.swift; sourceTree = "<group>"; };
 		4FF7FB301F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StopWatchAlarmSound.mp3; sourceTree = "<group>"; };
@@ -353,12 +359,13 @@
 		4F7FA99423E6FE1200EC4BC9 /* AlternativeAppIcons */ = {
 			isa = PBXGroup;
 			children = (
-				4F7FA9BC23E7042A00EC4BC9 /* Standard */,
 				4F7FA99923E6FE4400EC4BC9 /* AppIconAlt1 */,
 				4F7FA99823E6FE3800EC4BC9 /* AppIconAlt2 */,
 				4F7FA99723E6FE3100EC4BC9 /* AppIconAlt3 */,
 				4F7FA99623E6FE2500EC4BC9 /* AppIconAlt4 */,
 				4F7FA99523E6FE1D00EC4BC9 /* AppIconAlt5 */,
+				4FCC3BB023E9F6E500FB27E6 /* AppIconAlt6 */,
+				4FCC3BB723E9F80C00FB27E6 /* AppIconAlt7 */,
 			);
 			name = AlternativeAppIcons;
 			sourceTree = "<group>";
@@ -411,16 +418,6 @@
 				4F7FA99C23E6FE5900EC4BC9 /* AppIconAlt1@3x.png */,
 			);
 			name = AppIconAlt1;
-			sourceTree = "<group>";
-		};
-		4F7FA9BC23E7042A00EC4BC9 /* Standard */ = {
-			isa = PBXGroup;
-			children = (
-				4F7FA9BD23E7044100EC4BC9 /* Icon-60.png */,
-				4F7FA9BE23E7044100EC4BC9 /* Icon-60@2x.png */,
-				4F7FA9BF23E7044100EC4BC9 /* Icon-60@3x.png */,
-			);
-			name = Standard;
 			sourceTree = "<group>";
 		};
 		4F7FA9C323E7072300EC4BC9 /* ContainerView */ = {
@@ -657,13 +654,13 @@
 		4FB4BEAB1F515DE7003B1259 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4FCC3BB823E9F85F00FB27E6 /* IconForSharesheet */,
 				4F7FA99423E6FE1200EC4BC9 /* AlternativeAppIcons */,
 				4F7AB4DC1F6857F8008F06DA /* Fonts */,
 				4FF7FB2F1F6549DC001D4ED1 /* Sounds */,
 				4FB4BEAC1F515E06003B1259 /* GlobalConstants.swift */,
 				4F3F62721F64745A00D8FEC5 /* Localizable.strings */,
 				4F8DB70A232D0D0000BFB156 /* HockeyUppLinks.json */,
-				4FEE5745239C0E7500F02BBB /* Icon-Spotlight-40@3x.png */,
 				4F93F59623CA397A00C93561 /* Strings.swift */,
 			);
 			name = Resources;
@@ -720,6 +717,34 @@
 				4FB4BF291F522644003B1259 /* MiniStopWatch.swift */,
 			);
 			name = DurationCard;
+			sourceTree = "<group>";
+		};
+		4FCC3BB023E9F6E500FB27E6 /* AppIconAlt6 */ = {
+			isa = PBXGroup;
+			children = (
+				4FCC3BB223E9F6F900FB27E6 /* AppIconAlt6.png */,
+				4FCC3BB323E9F6F900FB27E6 /* AppIconAlt6@2x.png */,
+				4FCC3BB123E9F6F900FB27E6 /* AppIconAlt6@3x.png */,
+			);
+			name = AppIconAlt6;
+			sourceTree = "<group>";
+		};
+		4FCC3BB723E9F80C00FB27E6 /* AppIconAlt7 */ = {
+			isa = PBXGroup;
+			children = (
+				4F7FA9BD23E7044100EC4BC9 /* Icon-60.png */,
+				4F7FA9BE23E7044100EC4BC9 /* Icon-60@2x.png */,
+				4F7FA9BF23E7044100EC4BC9 /* Icon-60@3x.png */,
+			);
+			name = AppIconAlt7;
+			sourceTree = "<group>";
+		};
+		4FCC3BB823E9F85F00FB27E6 /* IconForSharesheet */ = {
+			isa = PBXGroup;
+			children = (
+				4FCC3BB923E9F87A00FB27E6 /* Icon-120.png */,
+			);
+			name = IconForSharesheet;
 			sourceTree = "<group>";
 		};
 		4FD3722D22A6F5D800A45757 /* RulesButton */ = {
@@ -845,11 +870,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FD3722422A6CE2700A45757 /* Lato-Bold.ttf in Resources */,
+				4FCC3BBA23E9F87B00FB27E6 /* Icon-120.png in Resources */,
 				4F7FA9AB23E6FE7600EC4BC9 /* AppIconAlt3@2x.png in Resources */,
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
 				4F7FA9C123E7044100EC4BC9 /* Icon-60@2x.png in Resources */,
 				4F7FA9C223E7044100EC4BC9 /* Icon-60@3x.png in Resources */,
-				4FEE5746239C0E7500F02BBB /* Icon-Spotlight-40@3x.png in Resources */,
 				4F7FA9B723E6FE9600EC4BC9 /* AppIconAlt5@3x.png in Resources */,
 				4F7FA9B023E6FE8300EC4BC9 /* AppIconAlt4@2x.png in Resources */,
 				4FF7FB311F6549E5001D4ED1 /* StopWatchAlarmSound.mp3 in Resources */,
@@ -860,6 +885,7 @@
 				4F7FA99F23E6FE6100EC4BC9 /* AppIconAlt1@3x.png in Resources */,
 				4F1C321922F75BA000DC8D3A /* Lato-Regular.ttf in Resources */,
 				4F7FA99D23E6FE5D00EC4BC9 /* AppIconAlt1.png in Resources */,
+				4FCC3BB623E9F6FA00FB27E6 /* AppIconAlt6@2x.png in Resources */,
 				4F7FA9C023E7044100EC4BC9 /* Icon-60.png in Resources */,
 				4F7FA9A323E6FE6A00EC4BC9 /* AppIconAlt2.png in Resources */,
 				4F7FA9AF23E6FE8100EC4BC9 /* AppIconAlt4.png in Resources */,
@@ -871,8 +897,10 @@
 				4F7FA9A423E6FE6D00EC4BC9 /* AppIconAlt2@2x.png in Resources */,
 				4FB4BE711F515B3B003B1259 /* Assets.xcassets in Resources */,
 				4F8DB70B232D0D0000BFB156 /* HockeyUppLinks.json in Resources */,
+				4FCC3BB423E9F6F900FB27E6 /* AppIconAlt6@3x.png in Resources */,
 				4F7FA9A923E6FE7600EC4BC9 /* AppIconAlt3@3x.png in Resources */,
 				4FB4BE6F1F515B3B003B1259 /* Main.storyboard in Resources */,
+				4FCC3BB523E9F6FA00FB27E6 /* AppIconAlt6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1182,7 +1210,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = BrightAppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1203,7 +1231,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = BrightAppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
