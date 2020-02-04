@@ -221,6 +221,13 @@ class CustomGameTimeVC: UIViewController {
             return
         }
         
+        let okTotalMinutes: Double = selectedTotalMinutes ?? initialTotalMinutes
+        guard okTotalMinutes > 0.0 else {
+            let vc = SimpleAlertVC(titleText: LS_TITLE_WHOOPS, text: LS_WARNING_GAME_TIME_ZERO, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: nil, okAction: nil, cancelAction: nil)
+            present(vc, animated: true, completion: nil)
+            return
+        }
+        
         if currentGameRunning {
             showAlertNewGame(then: { (shouldProceed) in
                 if !shouldProceed {

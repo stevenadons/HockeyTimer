@@ -20,6 +20,7 @@ extension Notification.Name {
     static let CustomTimeSelectionOccurred = Notification.Name("CustomTimeSelectionOccurred")
     static let CircularFABWillOpen = Notification.Name("CircularFABWillOpen")
     static let CircularFABDidClose = Notification.Name("CircularFABDidClose")
+    static let GameStatusChanged = Notification.Name("GameStatusChanged")
 
 //    static let AccessToPremiumNotification = Notification.Name("AccessToPremiumNotification")
 

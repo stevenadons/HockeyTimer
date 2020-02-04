@@ -35,6 +35,8 @@ let LS_WARNINGNEWGAME_TITLE = NSLocalizedString("New Game", comment: "When stopw
 let LS_WARNINGNEWGAME_TEXT = NSLocalizedString("Are you sure you want to start a new game?", comment: "When reset button is tapped")
 let LS_WARNING_NEWGAME_GAMERUNNING = NSLocalizedString("Currently a game is running. Do you want to start a new game?", comment: "When user choooses new game")
 let LS_WARNING_CHANGETIME_GAMERUNNING = NSLocalizedString("Changing the game time will end the running game. OK?", comment: "When user changes game time")
+let LS_WARNING_GAME_TIME_ZERO = NSLocalizedString("It seems you set the game time to zero. That's no fun!", comment: "When user changes game time")
+
 let LS_NOTIFICATION_OK = NSLocalizedString("OK", comment: "OK action in notification when app in background")
 let LS_NOTIFICATION_DEFER = NSLocalizedString("Remind me in 1 minute", comment: "To defer app to foreground in notification")
 let LS_NOTIFICATION_TITLE = NSLocalizedString("Hockey Game", comment: "Title for notification when app in background")
@@ -65,6 +67,7 @@ let LS_TITLE_SETTINGS = NSLocalizedString("Settings", comment: "Title for naviga
 let LS_TITLE_APP_ICON = NSLocalizedString("App Icon", comment: "Title for navigating")
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
+let LS_TITLE_WHOOPS = NSLocalizedString("Whoops", comment: "Title when error")
 let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Easy to use", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE3 = NSLocalizedString("Notifications", comment: "Onboarding screen")

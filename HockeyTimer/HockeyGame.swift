@@ -23,7 +23,11 @@ class HockeyGame {
     private(set) var homeScore: Int = 0
     private(set) var awayScore: Int = 0
 
-    var status: HockeyGameStatus = .WaitingToStart
+    var status: HockeyGameStatus = .WaitingToStart {
+        didSet {
+            NotificationCenter.default.post(name: .GameStatusChanged, object: nil)
+        }
+    }
 
     private(set) var lastScored: Player?
     

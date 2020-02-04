@@ -16,7 +16,11 @@ class PageVC: UIPageViewController {
     
     // MARK: - Properties
     
-    var game: HockeyGame! 
+    var game: HockeyGame! {
+        didSet {
+            gameStatusChanged()
+        }
+    }
     var existingTimerVC: TimerVC?
     var existingScoreVC: ScoreVC?
     private var mask: Mask?
@@ -63,9 +67,10 @@ class PageVC: UIPageViewController {
         view.sendSubviewToBack(backgroundMask)
         hideBackgroundMask()
         
-        newGameButton = CircularFABButton.createStandardButton(imageName: "arrow.2.circlepath.circle") // backward.end
+        newGameButton = CircularFABButton.createStandardButton(imageName: "arrow.2.circlepath.circle")
         newGameButton.bgColor = UIColor(named: "DarkBlue")!
         newGameButton.contentColor = .white
+        newGameButton.alpha = 0.0
         newGameButton.addTarget(self, action: #selector(newGameTapped), for: .touchUpInside)
         view.addSubview(newGameButton)
         
@@ -123,6 +128,7 @@ class PageVC: UIPageViewController {
     private func addObservers() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(gameStatusChanged), name: .GameStatusChanged, object: nil)
     }
     
     deinit {
@@ -199,18 +205,6 @@ class PageVC: UIPageViewController {
         }
     }
     
-    @objc private func checkDarkMode() {
-        
-        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
-            overrideUserInterfaceStyle = .unspecified
-        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
-            overrideUserInterfaceStyle = .dark
-        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
-            overrideUserInterfaceStyle = .light
-        }
-        view.setNeedsLayout()
-    }
-    
     
     // MARK: - Public Methods
     
@@ -247,6 +241,29 @@ class PageVC: UIPageViewController {
             self.existingTimerVC?.handleConfirmationNewGame()
         })
     }
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
+    }
+        
+    @objc private func gameStatusChanged() {
+        
+        print("status: \(game.status)")
+        guard newGameButton != nil else {
+            return
+        }
+        newGameButton.alpha = (game.status == .WaitingToStart) ? 0.0 : 1.0
+    }
+
+    
 
 }
 

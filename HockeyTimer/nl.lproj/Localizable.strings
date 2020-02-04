@@ -28,6 +28,8 @@
 "Are you sure you want to start a new game?" = "Nieuwe wedstrijd.\nBen je zeker?";
 "Currently a game is running. Do you want to start a new game?" = "Wil je een nieuwe wedstrijd starten?";
 "Changing the game time will end the running game. OK?" = "De huidige wedstrijd zal stoppen als je de tijd wijzigt. OK?";
+"It seems you set the game time to zero. That's no fun!" = "Je hebt de tijd op nul gezet. Dat gaat niet.";
+
 "OK" = "OK";
 "Remind me in 1 minute" = "Herinner me na 1 minuut";
 "Hockey Game" = "Hockey wedstrijd";
@@ -64,6 +66,7 @@
 "App Icon" = "App-icoon";
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
+"Whoops" = "Oeps";
 
 "New Game" = "Nieuwe wedstrijd";
 "Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium (eenmalige betaling) om de tijd te wijzigen zonder advertenties.\n\nBovendien wordt je laatste wedstrijdduur dan steeds onthouden.";

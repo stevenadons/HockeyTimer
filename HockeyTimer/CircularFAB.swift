@@ -42,7 +42,7 @@ class CircularFAB: UIView {
     private let menuButtonBottomInset: CGFloat = 26
     private let radius: CGFloat = 85
     
-    private let circleColor: UIColor = .white
+    private let circleColor: UIColor = .clear
     private let circleBorderColor: UIColor = .clear
     private let menuButtonColor: UIColor = UIColor(named: "DarkBlue")!
     private let menuButtonContentColor: UIColor = .white
