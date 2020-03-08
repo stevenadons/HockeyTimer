@@ -92,9 +92,9 @@ class CardTimerPanel: UIView {
     
     // MARK: - Public Methods
     
-    func add(_ card: Card, minutes: Int) {
+    func add(_ card: Card, minutes: Int, team: Player?, player: Int?) {
         
-        dataSource.addTimerFor(card, minutes: minutes)
+        dataSource.addTimerFor(card, minutes: minutes, team: team, player: player)
     }
     
     func deleteLast() {

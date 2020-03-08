@@ -90,7 +90,7 @@ class TimerVC: PanArrowVC {
             stopWatch.centerYAnchor.constraint(equalTo: stopWatchContainer.centerYAnchor),
             
             cardTimerPanel.topAnchor.constraint(equalTo: stopWatchContainer.bottomAnchor, constant: 35),
-            cardTimerPanel.heightAnchor.constraint(equalToConstant: 76),
+            cardTimerPanel.heightAnchor.constraint(equalToConstant: 90),
             cardTimerPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
@@ -265,9 +265,9 @@ extension TimerVC: CardTimerPanelDelegate {
     
     func shouldAddCard() {
         
-        let vc = AddCardTimerVC(okAction: { [weak self] (cardType, minutes) in
+        let vc = AddCardTimerVC(okAction: { [weak self] (cardType, minutes, team, player) in
             let card = Card(type: cardType)
-            self?.cardTimerPanel.add(card, minutes: minutes)
+            self?.cardTimerPanel.add(card, minutes: minutes, team: team, player: player)
         }, cancelAction: nil)
         present(vc, animated: true, completion: nil)
     }

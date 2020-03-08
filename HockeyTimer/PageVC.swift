@@ -256,15 +256,14 @@ class PageVC: UIPageViewController {
         
     @objc private func gameStatusChanged() {
         
-        print("status: \(game.status)")
         guard newGameButton != nil else {
             return
         }
-        newGameButton.alpha = (game.status == .WaitingToStart) ? 0.0 : 1.0
+        let alpha: CGFloat = (game.status == .WaitingToStart) ? 0.0 : 1.0
+        UIView.animate(withDuration: 0.2) {
+            self.newGameButton.alpha = alpha
+        }
     }
-
-    
-
 }
 
 extension PageVC: UIPageViewControllerDataSource {

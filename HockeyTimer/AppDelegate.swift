@@ -95,9 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserNotificationHandler.sharedHandler.scheduleNotification(text: LS_NOTIFICATION_RUNNING_IN_OVERTIME, within: Double(runningSecondsToGo))
             
             // Update memory of pending cards
-            guard !allCardsSecondsToGo.isEmpty else {
-                return
-            }
+            guard !allCardsSecondsToGo.isEmpty else { return }
             var cardEndTimes: [NSDate] = []
             for cardSecondsToGo in allCardsSecondsToGo {
                 let cardEndTime = NSDate().addingTimeInterval(Double(cardSecondsToGo))

@@ -22,6 +22,10 @@
 "Full Time" = "Wedstrijd afgelopen";
 "H1" = "H1";
 "H2" = "H2";
+
+"Home" = "Thuis";
+"Guest" = "Gast";
+
 "RESET GAME" = "NIEUWE WEDSTRIJD";
 "CANCEL" = "ANNULEER";
 "New Game" = "Nieuwe wedstrijd";
@@ -55,11 +59,15 @@
 "Don't add half a minute" = "Geen halve minuut erbij";
 "Edit score manually" = "Manueel instellen";
 "Don't edit manually" = "Niet manueel instellen";
+"Log Player" = "Noteer speler";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";
 "Country" = "Land";
 "Penalty Card" = "Strafkaart";
+"Home or Guest" = "Thuis of gast";
+"Player" = "Speler";
+"Minutes" = "Minuten";
 "Custom Time" = "Tijd instellen";
 "Game Rules" = "Spelregels";
 "Settings" = "Instellingen";
@@ -67,6 +75,7 @@
 "Score" = "Score";
 "Stopwatch" = "Stopwatch";
 "Whoops" = "Oeps";
+"Share HockeyUpp" = "HockeyUpp delen";
 
 "New Game" = "Nieuwe wedstrijd";
 "Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium (eenmalige betaling) om de tijd te wijzigen zonder advertenties.\n\nBovendien wordt je laatste wedstrijdduur dan steeds onthouden.";
@@ -140,6 +149,8 @@
 "We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users." = "Laat je opmerking of suggestie weten. Zo draag je bij tot een verbetering van HockeyUpp voor alle gebruikers.";
 "Version " = "Versie ";
 "Build " = "Build ";
+"Country " = "Land ";
 "iOS " = "iOS ";
 "Email Error" = "Email";
 "An error occurred. Unable to open your email client." = "Er is een fout opgetreden. Kan het email-programma niet openen.";
+

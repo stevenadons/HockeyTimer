@@ -1,47 +1,44 @@
 //
-//  AddCardTimerVC.swift
+//  LogPlayerVC.swift
 //  HockeyTimer
 //
-//  Created by Steven Adons on 01/01/2020.
+//  Created by Steven Adons on 08/03/2020.
 //  Copyright © 2020 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class AddCardTimerVC: UIViewController {
+class LogPlayerVC: UIViewController {
     
     
     // MARK: - Properties
     
     private var titleLabel: UILabel!
-    private var cardPanel: ChooseCardPanel!
-    private var minutesPanel: ChooseMinutesPanel!
-    private var logPlayerButton: UIButton!
+    private var teamPanel: ChooseTeamPanel!
+    private var playerPicker: PlayerPicker!
     private var okButton: UIButton!
     private var cancelButton: UIButton!
     
     private var team: Player?
-    private var player: Int?
     
-    private var titleText: String = LS_TITLE_PENALTY_CARD
-    private var logPlayerButtonText: String = LS_BUTTON_LOG_PLAYER
+    private var titleText: String = LS_TITLE_HOME_OR_GUEST
     private var okButtonText: String = LS_BUYPREMIUM_OK
     private var cancelButtonText: String = LS_BUTTON_CANCEL
     
-    private var minutesYOffset: CGFloat {
+    private var pickerYOffset: CGFloat {
         return view.bounds.height * 0.1
     }
-    private let cardPanelHeight: CGFloat = 100
-    private let panelsPadding: CGFloat = UIDevice.whenDeviceIs(small: 16, normal: 32, big: 32)
+    private let teamPanelHeight: CGFloat = 100
+    private let panelsPadding: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 40, big: 40)
     
-    private var okAction: ((CardType, Int, Player?, Int?) -> Void)?
+    private var okAction: ((Player?, Int?) -> Void)?
     private var cancelAction: (() -> Void)?
     private var haptic: UISelectionFeedbackGenerator?
     
     
     // MARK: - Life Cycle
     
-    init(okAction: ((CardType, Int, Player?, Int?) -> Void)? = nil, cancelAction: (() -> Void)? = nil) {
+    init(okAction: ((Player?, Int?) -> Void)? = nil, cancelAction: (() -> Void)? = nil) {
         
         self.okAction = okAction
         self.cancelAction = cancelAction
@@ -63,6 +60,7 @@ class AddCardTimerVC: UIViewController {
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
+        isModalInPresentation = true
         
         setupUI()
         addConstraints()
@@ -74,8 +72,6 @@ class AddCardTimerVC: UIViewController {
         
         windUp(animated: false)
         okButton.alpha = 0.0
-        logPlayerButton.alpha = 0.0
-        isModalInPresentation = false
     }
     
     private func setupUI() {
@@ -92,20 +88,13 @@ class AddCardTimerVC: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
         
-        cardPanel = ChooseCardPanel()
-        cardPanel.delegate = self
-        view.addSubview(cardPanel)
+        teamPanel = ChooseTeamPanel()
+        teamPanel.delegate = self
+        view.addSubview(teamPanel)
         
-        minutesPanel = ChooseMinutesPanel()
-        minutesPanel.delegate = self
-        view.addSubview(minutesPanel)
-        
-        let logPlayerColor = UIColor(named: ColorName.DarkBlue)!
-        logPlayerButton = createButton(color: logPlayerColor)
-        logPlayerButton.setTitle(logPlayerButtonText, for: .normal)
-        logPlayerButton.addTarget(self, action: #selector(logPlayerTapped), for: [.touchUpInside])
-        view.addSubview(logPlayerButton)
-        
+        playerPicker = PlayerPicker()
+        view.addSubview(playerPicker)
+
         let okColor = UIColor(named: ColorName.PantoneYellow)!
         okButton = createButton(color: okColor)
         okButton.setTitle(okButtonText, for: .normal)
@@ -127,6 +116,8 @@ class AddCardTimerVC: UIViewController {
         let buttonBottomInset: CGFloat = UIDevice.whenDeviceIs(small: 12, normal: 16, big: 20)
         let buttonPadding: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 12, big: 16)
         let horInset: CGFloat = 50
+        let teamPanelCenterYOffset: CGFloat = view.bounds.height * 0.25
+        let playerPickerHeight: CGFloat = 225
         
         NSLayoutConstraint.activate([
             
@@ -134,21 +125,16 @@ class AddCardTimerVC: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
 
-            minutesPanel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -minutesYOffset),
-            minutesPanel.bottomAnchor.constraint(equalTo: logPlayerButton.topAnchor, constant: -36),
-            minutesPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),
-            minutesPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horInset),
+            teamPanel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: teamPanelCenterYOffset),
+            teamPanel.heightAnchor.constraint(equalToConstant: buttonHeight),
+            teamPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),
+            teamPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horInset),
             
-            cardPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),
-            cardPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horInset),
-            cardPanel.heightAnchor.constraint(equalToConstant: cardPanelHeight),
-            cardPanel.bottomAnchor.constraint(equalTo: minutesPanel.topAnchor, constant: -panelsPadding),
-            
-            logPlayerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
-            logPlayerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
-            logPlayerButton.bottomAnchor.constraint(equalTo: okButton!.topAnchor, constant: -buttonPadding),
-            logPlayerButton.heightAnchor.constraint(equalToConstant: buttonHeight),
-            
+            playerPicker.topAnchor.constraint(equalTo: teamPanel.bottomAnchor, constant: 16),
+            playerPicker.heightAnchor.constraint(equalToConstant: playerPickerHeight),
+            playerPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),
+            playerPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horInset),
+           
             okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
             okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
             okButton.bottomAnchor.constraint(equalTo: cancelButton!.topAnchor, constant: -buttonPadding),
@@ -172,6 +158,7 @@ class AddCardTimerVC: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    
     // MARK: - Private Methods
     
     private func windUp(animated: Bool) {
@@ -189,26 +176,26 @@ class AddCardTimerVC: UIViewController {
     
     private func windUpActions() {
         
-        let cardPanelY = minutesYOffset + panelsPadding + cardPanelHeight / 2 - 60
-        let minutesPanelY = view.bounds.height
+        let teamPanelY = pickerYOffset + panelsPadding + teamPanelHeight / 2 - 60
+        let pickerY = view.bounds.height
         
-        cardPanel.transform = CGAffineTransform(translationX: 0, y: cardPanelY)
-        minutesPanel.transform = CGAffineTransform(translationX: 0, y: minutesPanelY)
-        minutesPanel.alpha = 0.0
+        teamPanel.transform = CGAffineTransform(translationX: 0, y: teamPanelY)
+        playerPicker.transform = CGAffineTransform(translationX: 0, y: pickerY)
+        playerPicker.alpha = 0.0
     }
     
-    private func animateMinutesFlyIn() {
+    private func animatePickerFlyIn() {
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
-            self.cardPanel.transform = .identity
-            self.minutesPanel.transform = .identity
+            self.teamPanel.transform = .identity
+            self.playerPicker.transform = .identity
             
         }, completion: { _ in
-            self.titleLabel.text = LS_TITLE_MINUTES
+            self.titleLabel.text = LS_TITLE_PLAYER
         })
        
         UIView.animate(withDuration: 0.2, delay: 0.2, options: .curveEaseOut, animations: {
-            self.minutesPanel.alpha = 1.0
+            self.playerPicker.alpha = 1.0
             
         }, completion: nil)
     }
@@ -243,16 +230,10 @@ class AddCardTimerVC: UIViewController {
     
     @objc private func okTapped() {
         
-        if UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) {
-            performAddCardAction()
-            
-        } else {
-            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: true, afterDismiss: { earned in
-                if earned {
-                    self.performAddCardAction()
-                } 
+        DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true, completion: {
+                self?.okAction?(self?.team, self?.playerPicker.selectedPlayer)
             })
-            present(buyPremiumVC, animated: true, completion: nil)
         }
     }
     
@@ -265,29 +246,6 @@ class AddCardTimerVC: UIViewController {
         }
     }
     
-    @objc private func logPlayerTapped() {
-        
-        let vc = LogPlayerVC(okAction: { [weak self] (team, player) in
-            self?.team = team
-            self?.player = player
-        }, cancelAction: nil)
-        present(vc, animated: true, completion: nil)
-    }
-    
-    private func performAddCardAction() {
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true, completion: {
-                if let selectedType = self?.cardPanel.selectedType {
-                    if selectedType == .red {
-                        self?.okAction?(selectedType, 35, self?.team, self?.player)
-                    } else if let selectedMinutes = self?.minutesPanel.selectedMinutesView?.minutes {
-                        self?.okAction?(selectedType, selectedMinutes, self?.team, self?.player)
-                    }
-                }
-            })
-        }
-    }
     
     // MARK: - Haptic
     
@@ -307,60 +265,20 @@ class AddCardTimerVC: UIViewController {
 }
 
 
-extension AddCardTimerVC: ChooseCardPanelDelegate {
+extension LogPlayerVC: ChooseTeamPanelDelegate {
     
-    func didSelectCard() {
+    func didSelectTeam() {
         
         doHaptic()
         
-        if let selectedType = cardPanel.selectedType {
-            let fakeCard = Card(type: selectedType)
-            minutesPanel.setHighlightColor(fakeCard.color())
-        }
-        
-        if cardPanel.selectedType == CardType.red {
-            okButton.alpha = 1.0
-            logPlayerButton.alpha = 1.0
-            isModalInPresentation = true
-        } else {
-            okButton.alpha = 0.0
-            logPlayerButton.alpha = 0.0
-            isModalInPresentation = false
-        }
-        
-        
-        prepareHaptic()
-        
-        switch cardPanel.selectedType {
-        case .red:
-            minutesPanel.dehighlightAll()
-            windUp(animated: true)
-            titleLabel.text = LS_TITLE_PENALTY_CARD
-            return
-        case .yellow:
-            minutesPanel.highlight(5)
-        default: // .green
-            minutesPanel.highlight(2)
-        }
-        
-        if cardPanel.transform != .identity {
-            animateMinutesFlyIn()
-        }
-    }
-}
-
-
-extension AddCardTimerVC: ChooseMinutesPanelDelegate {
-    
-    func didSelectMinutes() {
-        
-        doHaptic()
-        
+        team = teamPanel.selectedTeam
         okButton.alpha = 1.0
-        logPlayerButton.alpha = 1.0
-        isModalInPresentation = true
         
         prepareHaptic()
+        
+        if teamPanel.transform != .identity {
+            animatePickerFlyIn()
+        }
     }
 }
 

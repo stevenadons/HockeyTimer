@@ -9,14 +9,7 @@
 import Foundation
 
 
-enum Player {
-    
-    case Home, Away
-}
-
-
 class HockeyGame {
-    
     
     // MARK: - Properties
     

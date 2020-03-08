@@ -30,6 +30,9 @@ let LS_SECONDQUARTERLABEL = NSLocalizedString("Q2", comment: "Time indication la
 let LS_THIRDQUARTERLABEL = NSLocalizedString("Q3", comment: "Time indication label")
 let LS_FOURTHQUARTERLABEL = NSLocalizedString("Q4", comment: "Time indication label")
 
+let LS_HOME_TEAM = NSLocalizedString("Home", comment: "Card annotation for penaltied team")
+let LS_AWAY_TEAM = NSLocalizedString("Guest", comment: "Card annotation for penaltied team")
+
 let LS_WARNINGRESETGAME = NSLocalizedString("New Game", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME_TITLE = NSLocalizedString("New Game", comment: "When stopwatch is tapped for new game")
 let LS_WARNINGNEWGAME_TEXT = NSLocalizedString("Are you sure you want to start a new game?", comment: "When reset button is tapped")
@@ -54,6 +57,7 @@ let LS_BUTTON_ADD_HALF_MINUTE = NSLocalizedString("Add half a minute", comment: 
 let LS_BUTTON_DELETE_HALF_MINUTE = NSLocalizedString("Don't add half a minute", comment: "Button Title")
 let LS_BUTTON_EDIT_SCORE = NSLocalizedString("Edit score manually", comment: "Button Title")
 let LS_BUTTON_DONT_EDIT_SCORE = NSLocalizedString("Don't edit manually", comment: "Button Title")
+let LS_BUTTON_LOG_PLAYER = NSLocalizedString("Log Player", comment: "Button Title")
 
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")
@@ -61,6 +65,9 @@ let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented 
 let LS_TITLE_GAMETIME = NSLocalizedString("Game Time", comment: "VC title")
 let LS_TITLE_COUNTRY = NSLocalizedString("Country", comment: "VC title")
 let LS_TITLE_PENALTY_CARD = NSLocalizedString("Penalty Card", comment: "VC title")
+let LS_TITLE_HOME_OR_GUEST = NSLocalizedString("Home or Guest", comment: "VC title")
+let LS_TITLE_PLAYER = NSLocalizedString("Player", comment: "VC title")
+let LS_TITLE_MINUTES = NSLocalizedString("Minutes", comment: "VC title")
 let LS_TITLE_CUSTOM_TIME = NSLocalizedString("Custom Time", comment: "VC title")
 let LS_TITLE_GAME_RULES = NSLocalizedString("Game Rules", comment: "Title for navigating")
 let LS_TITLE_SETTINGS = NSLocalizedString("Settings", comment: "Title for navigating")
@@ -68,6 +75,8 @@ let LS_TITLE_APP_ICON = NSLocalizedString("App Icon", comment: "Title for naviga
 let LS_TITLE_SCORE = NSLocalizedString("Score", comment: "Title for navigating")
 let LS_TITLE_STOPWATCH = NSLocalizedString("Stopwatch", comment: "Title for navigating")
 let LS_TITLE_WHOOPS = NSLocalizedString("Whoops", comment: "Title when error")
+let LS_TITLE_SHARE_HOCKEYUPP = NSLocalizedString("Share HockeyUpp", comment: "Message when sharing")
+
 let LS_TITLE_ONBOARDINGSLIDE1 = NSLocalizedString("Easy to use", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE2 = NSLocalizedString("Keep track of the score", comment: "Onboarding screen")
 let LS_TITLE_ONBOARDINGSLIDE3 = NSLocalizedString("Notifications", comment: "Onboarding screen")
@@ -149,6 +158,7 @@ let LS_EMAIL_SUBJECT = NSLocalizedString("HockeyUpp - Remark", comment: "Subject
 let LS_EMAIL_SENTENCE = NSLocalizedString("We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users.", comment: "First sentence in feedback email")
 let LS_EMAIL_VERSION = NSLocalizedString("Version ", comment: "Feedback email")
 let LS_EMAIL_BUILD = NSLocalizedString("Build ", comment: "Feedback email")
+let LS_EMAIL_COUNTRY = NSLocalizedString("Country ", comment: "Feedback email")
 let LS_EMAIL_IOS = NSLocalizedString("iOS ", comment: "Feedback email")
 let LS_EMAIL_EMAILERROR_TITLE = NSLocalizedString("Email Error", comment: "Alert when error in email")
 let LS_EMAIL_EMAILERROR_TEXT = NSLocalizedString("An error occurred. Unable to open your email client.", comment: "Alert when error in email")

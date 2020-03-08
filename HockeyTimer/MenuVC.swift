@@ -221,7 +221,7 @@ class MenuVC: UIViewController {
     private func shareApp() {
         
         // Conform to UIActivityItemSource for custom activityItems
-        let activityItem = "Share HockeyUpp"
+        let activityItem = LS_TITLE_SHARE_HOCKEYUPP
         let activityViewController = UIActivityViewController(activityItems: [activityItem, self], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
     }
@@ -345,7 +345,7 @@ class MenuVC: UIViewController {
     
     private func emailBody(withAddedString added: String) -> String {
         
-        var body = "<p>" + "We welcome your remark or suggestion, which could improve HockeyUpp for you and for all users." + "</p><br><br><br><br>"
+        var body = "<p>" + LS_EMAIL_SENTENCE + "</p><br><br><br><br>"
         body += added
         return body
     }
@@ -357,14 +357,14 @@ class MenuVC: UIViewController {
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "*.*"
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "*"
         let premium = UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) ? "P" : ""
-        result += "Version " + appVersion + premium + " - Build " + buildNumber
+        result += LS_EMAIL_VERSION + appVersion + premium + " - " + LS_EMAIL_BUILD + buildNumber
         
         let iosVersion = UIDevice.current.systemVersion
         let add = result.count > 4 ? " - iOS " + iosVersion : "iOS " + iosVersion
         result += add
         
         let country = Products.store.appStoreCountry ?? "Unknown country"
-        result += result.count > 4 ? " - Country " + country : "Country " + country
+        result += result.count > 4 ? " - " + LS_EMAIL_COUNTRY + country : LS_EMAIL_COUNTRY + country
         
         return result
     }

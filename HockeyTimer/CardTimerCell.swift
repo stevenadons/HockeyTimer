@@ -13,7 +13,7 @@ class CardTimerCell: UICollectionViewCell {
     
     // MARK: - Properties
 
-    private var timer: CardTimer?
+    private var timer: AnnotatedCardTimer?
     private var threeCards: ThreeCards?
     
     
@@ -42,7 +42,7 @@ class CardTimerCell: UICollectionViewCell {
     
     // MARK: - Public Methods
 
-    func configure(with cardTimer: CardTimer) {
+    func configure(with cardTimer: AnnotatedCardTimer) {
         
         if cardTimer.isDummyForAddCard {
             

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTimer> {
+class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, AnnotatedCardTimer> {
     
     
     // MARK: - Properties
     
-    private var timers: [CardTimer] = [] {
+    private var timers: [AnnotatedCardTimer] = [] {
         didSet {
             updateGlobalSecondsToGo()
         }
@@ -37,7 +37,7 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
     
     func takeSnapShot() {
         
-        var snapshot = NSDiffableDataSourceSnapshot<Int, CardTimer>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, AnnotatedCardTimer>()
         snapshot.appendSections([0])
         snapshot.appendItems(timers, toSection: 0)
         apply(snapshot)
@@ -46,13 +46,13 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
     func configureWithAddCardCell() {
         
         let dummyCard = Card(type: .green)
-        let addCardTimer = CardTimer(card: dummyCard, minutes: 9999, delegate: self, isDummyForAddCard: true)
+        let addCardTimer = AnnotatedCardTimer(card: dummyCard, minutes: 9999, delegate: self, isDummyForAddCard: true)
         timers.append(addCardTimer)
     }
     
-    func addTimerFor(_ card: Card, minutes: Int) {
+    func addTimerFor(_ card: Card, minutes: Int, team: Player?, player: Int?) {
         
-        let timer = CardTimer(card: card, minutes: minutes, delegate: self)
+        let timer = AnnotatedCardTimer(card: card, minutes: minutes, team: team, player: player, delegate: self)
         timers.insert(timer, at: timers.count - 1)
         
         takeSnapShot()
@@ -98,7 +98,7 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, CardTime
 }
 
 
-extension CardTimerPanelDataSource: CardTimerDelegate {
+extension CardTimerPanelDataSource: AnnotatedCardTimerDelegate {
     
     func deleteCardTimer() {
         
