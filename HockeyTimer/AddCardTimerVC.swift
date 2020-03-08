@@ -100,10 +100,13 @@ class AddCardTimerVC: UIViewController {
         minutesPanel.delegate = self
         view.addSubview(minutesPanel)
         
-        let logPlayerColor = UIColor(named: ColorName.DarkBlue)!
-        logPlayerButton = createButton(color: logPlayerColor)
+        logPlayerButton = UIButton()
+        logPlayerButton.translatesAutoresizingMaskIntoConstraints = false
+        logPlayerButton.titleLabel?.numberOfLines = 1
+        logPlayerButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)!
+        logPlayerButton.setTitleColor(.secondaryLabel, for: .normal)
+        logPlayerButton.addTarget(self, action: #selector(logPlayerTapped), for: .touchUpInside)
         logPlayerButton.setTitle(logPlayerButtonText, for: .normal)
-        logPlayerButton.addTarget(self, action: #selector(logPlayerTapped), for: [.touchUpInside])
         view.addSubview(logPlayerButton)
         
         let okColor = UIColor(named: ColorName.PantoneYellow)!
@@ -135,7 +138,7 @@ class AddCardTimerVC: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
 
             minutesPanel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -minutesYOffset),
-            minutesPanel.bottomAnchor.constraint(equalTo: logPlayerButton.topAnchor, constant: -36),
+            minutesPanel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -56),
             minutesPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horInset),
             minutesPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horInset),
             
@@ -144,10 +147,8 @@ class AddCardTimerVC: UIViewController {
             cardPanel.heightAnchor.constraint(equalToConstant: cardPanelHeight),
             cardPanel.bottomAnchor.constraint(equalTo: minutesPanel.topAnchor, constant: -panelsPadding),
             
-            logPlayerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
-            logPlayerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
+            logPlayerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logPlayerButton.bottomAnchor.constraint(equalTo: okButton!.topAnchor, constant: -buttonPadding),
-            logPlayerButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
             okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),

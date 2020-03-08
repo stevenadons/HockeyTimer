@@ -196,7 +196,7 @@ class PageVC: UIPageViewController {
     
     private func showAlertNewGame(onOK: (() -> Void)?) {
         
-        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNING_NEWGAME_GAMERUNNING, okButtonText: LS_BUYPREMIUM_OK, cancelButtonText: LS_BUTTON_CANCEL, okAction: {
+        let askConfirmationVC = SimpleAlertVC(titleText: LS_WARNINGNEWGAME_TITLE, text: LS_WARNING_NEWGAME_GAMERUNNING, okButtonText: LS_BUTTON_YES, cancelButtonText: LS_BUTTON_NO, okAction: {
             onOK?()
         }, cancelAction: nil)
         

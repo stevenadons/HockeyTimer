@@ -109,7 +109,7 @@ class AnnotatedCardTimer: UIView {
         
         var teamColor = UIColor(named: ColorName.DarkBlue)!
         if team == Player.Away {
-            teamColor = UIColor(named: ColorName.PantoneRed)!
+            teamColor = UIColor(named: ColorName.DarkBlue)! // PantoneRed
         }
         
         teamLabel = UILabel()
@@ -133,7 +133,7 @@ class AnnotatedCardTimer: UIView {
         playerLabel.textAlignment = .right
         playerLabel.adjustsFontSizeToFitWidth = true
         playerLabel.baselineAdjustment = .alignCenters
-        playerLabel.font = UIFont(name: "Helvetica-Bold", size: 14)
+        playerLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
         playerLabel.textColor = teamColor
         if let player = player {
             playerLabel.text = String(player)

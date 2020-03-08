@@ -60,13 +60,15 @@
 "Edit score manually" = "Manueel instellen";
 "Don't edit manually" = "Niet manueel instellen";
 "Log Player" = "Noteer speler";
+"Yes" = "Ja";
+"No" = "Neen";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";
 "Country" = "Land";
 "Penalty Card" = "Strafkaart";
 "Home or Guest" = "Thuis of gast";
-"Player" = "Speler";
+"Player Number" = "Rugnummer";
 "Minutes" = "Minuten";
 "Custom Time" = "Tijd instellen";
 "Game Rules" = "Spelregels";
@@ -85,7 +87,7 @@
 
 "Dark Mode" = "Donkere modus";
 "To have Dark Mode, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can change the app icon and keep track of penalty cards." = "Om donkere modus in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook het app-icoon instellen en strafkaarten bijhouden.";
-"Adding penalty cards can be done in Premium Mode with a one time payment. Give it a try for free by watching just one ad.\n\nPremium Mode will also let you have dark mode and change the app icon." = "Strafkaarten toevoegen is mogelijk in premium mode met een eenmalige betaling. Probeer het gratis door één advertentie te bekijken.\n\nIn premium mode heb je daarnast ook nog donkere modus en kan je het app-icoon wijzigen.";
+"Penalty cards can be added in Premium Mode with a one time payment. Give it a try for free by watching just one ad.\n\nPremium Mode will also let you have dark mode and change the app icon." = "Strafkaarten toevoegen is mogelijk in premium mode met een eenmalige betaling. Probeer het gratis door één advertentie te bekijken.\n\nIn premium mode heb je daarnast ook nog donkere modus en kan je het app-icoon wijzigen.";
 "Change App Icon" = "Wijzig app-icoon";
 "To change the app icon, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have Dark Mode and keep track of penalty cards." = "Om het app-icoon in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook donkere modus instellen en strafkaarten bijhouden.";
 
