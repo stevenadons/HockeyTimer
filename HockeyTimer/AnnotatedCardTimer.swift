@@ -107,6 +107,11 @@ class AnnotatedCardTimer: UIView {
         topRibbon.backgroundColor = .clear
         addSubview(topRibbon)
         
+        var teamColor = UIColor(named: ColorName.DarkBlue)!
+        if team == Player.Away {
+            teamColor = UIColor(named: ColorName.PantoneRed)!
+        }
+        
         teamLabel = UILabel()
         teamLabel.translatesAutoresizingMaskIntoConstraints = false
         teamLabel.textColor = UIColor(named: ColorName.DarkBlue)!
@@ -115,22 +120,22 @@ class AnnotatedCardTimer: UIView {
         teamLabel.adjustsFontSizeToFitWidth = true
         teamLabel.baselineAdjustment = .alignCenters
         teamLabel.font = UIFont(name: "Helvetica-Bold", size: 14)
+        teamLabel.textColor = teamColor
         if let team = team {
-            teamLabel.textColor = (team == Player.Away) ? UIColor(named: ColorName.PantoneRed)! : UIColor(named: ColorName.DarkBlue)!
             teamLabel.text = team.teamString() + " "
         }
         addSubview(teamLabel)
         
         playerLabel = UILabel()
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
-        playerLabel.textColor = UIColor(named: ColorName.DarkBlue)!
+        playerLabel.textColor = .white
         playerLabel.text = ""
         playerLabel.textAlignment = .right
         playerLabel.adjustsFontSizeToFitWidth = true
         playerLabel.baselineAdjustment = .alignCenters
         playerLabel.font = UIFont(name: "Helvetica-Bold", size: 14)
-        if let player = player, let team = team {
-            playerLabel.textColor = (team == Player.Away) ? UIColor(named: ColorName.PantoneRed)! : UIColor(named: ColorName.DarkBlue)!
+        playerLabel.textColor = teamColor
+        if let player = player {
             playerLabel.text = String(player)
         }
         addSubview(playerLabel)
@@ -153,6 +158,7 @@ class AnnotatedCardTimer: UIView {
         let translate = CGAffineTransform(translationX: cardXOffset, y: cardYOffset)
         path.apply(translate)
         graphics.path = path.cgPath
+        let numberSize: CGFloat = bounds.width * 0.3
         
         NSLayoutConstraint.activate([
             
@@ -172,10 +178,11 @@ class AnnotatedCardTimer: UIView {
             topRibbon.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             teamLabel.leadingAnchor.constraint(equalTo: topRibbon.leadingAnchor, constant: 6),
+            teamLabel.trailingAnchor.constraint(equalTo: playerLabel.leadingAnchor),
             teamLabel.topAnchor.constraint(equalTo: topRibbon.topAnchor),
             teamLabel.bottomAnchor.constraint(equalTo: topRibbon.bottomAnchor),
             
-            playerLabel.leadingAnchor.constraint(equalTo: teamLabel.trailingAnchor),
+            playerLabel.widthAnchor.constraint(equalToConstant: numberSize),
             playerLabel.trailingAnchor.constraint(equalTo: topRibbon.trailingAnchor, constant: -6),
             playerLabel.topAnchor.constraint(equalTo: topRibbon.topAnchor),
             playerLabel.bottomAnchor.constraint(equalTo: topRibbon.bottomAnchor),
@@ -248,11 +255,10 @@ class AnnotatedCardTimer: UIView {
     private func fade() {
         
         bottomRibbon.backgroundColor = UIColor(named: ColorName.TimerZoneFade)!
-        topRibbon.backgroundColor = UIColor(named: ColorName.TimerZoneFade)!
         graphics.opacity = 0.5
-        timeLabel.alpha = 0.6
-        teamLabel.alpha = 0.6
-        playerLabel.alpha = 0.6
+        timeLabel.alpha = 0.7
+        teamLabel.alpha = 0.7
+        playerLabel.alpha = 0.7
     }
     
     

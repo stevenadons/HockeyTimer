@@ -57,11 +57,10 @@ class PlayerPicker: UIView {
         super.layoutSubviews()
         
         let vertRatio: CGFloat = 0.9
-        let pickerWidth: CGFloat = 120
         
         NSLayoutConstraint.activate([
         
-            picker.widthAnchor.constraint(equalToConstant: pickerWidth),
+            picker.widthAnchor.constraint(equalTo: widthAnchor),
             picker.centerXAnchor.constraint(equalTo: centerXAnchor),
             picker.centerYAnchor.constraint(equalTo: centerYAnchor),
             picker.heightAnchor.constraint(equalTo: heightAnchor, multiplier: vertRatio),

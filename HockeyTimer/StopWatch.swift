@@ -96,7 +96,7 @@ class StopWatch: UIControl {
         timer.set(game: game)
         runningSecondsToGo = timer.totalSecondsToGo
         updateLabels()
-        periodLabel.text = (game.periods == 4) ? "Q1" : LS_FIRSTHALFLABEL
+        periodLabel.text = game.periodString
         setNeedsLayout()
     }
     
@@ -216,7 +216,7 @@ class StopWatch: UIControl {
         let periodMinutes = Double.maxOneDecimalDividing(game.totalMinutes, by: game.periods)
         let minutesString = periodMinutes.stringWithMaxOneDecimal + " min"
         
-        durationLabel.text = numberOfPeriods + "x" + minutesString
+        durationLabel.text = numberOfPeriods + " x " + minutesString
         durationLabel.setNeedsDisplay()
     }
     
@@ -293,7 +293,7 @@ class StopWatch: UIControl {
         timer.reset(withGame: game)
         updateLabels()
         message = LS_NEWGAME
-        periodLabel.text = (game.periods == 4) ? "Q1" : LS_FIRSTHALFLABEL
+        periodLabel.text = game.periodString
         periodLabel.alpha = 1.0
         updateProgressBars()
         resetTimeLabel(withColor: timeLabel.standardColor, alpha: 1) // .label

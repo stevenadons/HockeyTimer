@@ -63,7 +63,7 @@ class HockeyGame {
                 fatalError("Trying to get message for period > number of periods")
             }
         default:
-            return "P\(currentPeriod)"
+            return "P\(Int(currentPeriod))"
         }
         return ""
     }
