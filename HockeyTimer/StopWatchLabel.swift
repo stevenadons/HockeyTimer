@@ -19,13 +19,13 @@ class StopWatchLabel: UIView {
             setNeedsLayout()
         }
     }
-    var textColor: UIColor = UIColor(named: ColorName.VeryDarkBlue_White)! {
+    var textColor: UIColor = UIColor(named: ColorName.TimeLabel)! {
         didSet {
             label.textColor = textColor
             setNeedsDisplay()
         }
     }
-    private (set) var standardColor: UIColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+    private (set) var standardColor: UIColor = UIColor(named: ColorName.TimeLabel)!
     
     private var label: UILabel!
     
@@ -96,7 +96,7 @@ class StopWatchLabel: UIView {
         label.textAlignment = alignment
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
-        label.font = UIFont(name: FONTNAME.Numbers, size: 48)
+        label.font = UIFont(name: FONTNAME.Numbers, size: 54)
         
         return label
     }

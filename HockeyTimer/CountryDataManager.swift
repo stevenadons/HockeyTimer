@@ -81,52 +81,84 @@ class CountryDataManager {
     
     // MARK: - Private Methods
     
+    // Capitals as on oval country stickers:
+    // https://www.worldstandards.eu/cars/oval-stickers/
+    // LocaleRegionCode is Locale.regionCode:
+    // https://gist.github.com/jacobbubu/1836273
     private func initializeCountries() {
 
         let australia = Country(capitals: "AUS",
                                 localeRegionCode: "AU",
-                                name: "Australia",
+                                name: LS_COUNTRY_AUSTRALIA,
                                 periods: [4, 4],
                                 minutes: [40, 70],
                                 minutesStrings: ["Indoor", "Outdoor"],
                                 groupsOfRules: [])
         let belgium = Country(capitals: "B",
                               localeRegionCode: "BE",
-                              name: "Belgium",
+                              name: LS_COUNTRY_BELGIUM,
                               periods: [2, 2, 2, 4],
                               minutes: [40, 50, 60, 70],
                               minutesStrings: ["U7 - U8", "U9 - U10 - U11 - U12", "U14 - Ladies - Gents", "General"],
                               groupsOfRules: [])
         let germany = Country(capitals: "D",
                               localeRegionCode: "DE",
-                              name: "Germany",
+                              name: LS_COUNTRY_GERMANY,
                               periods: [4, 2, 2, 4],
                               minutes: [40, 50, 60, 70],
                               minutesStrings: [LS_COUNTRY_INDOOR, LS_COUNTRY_YOUTH, LS_COUNTRY_GENERAL, LS_COUNTRY_INTERNATIONAL],
                               groupsOfRules: [])
         let spain = Country(capitals: "E",
                             localeRegionCode: "ES",
-                            name: "Spain",
+                            name: LS_COUNTRY_SPAIN,
                             periods: [4, 2, 2, 4],
                             minutes: [40, 50, 60, 70],
                             minutesStrings: [LS_COUNTRY_INDOOR, LS_COUNTRY_MASTERS_MAMIS_PAPIS, LS_COUNTRY_OUTDOOR, LS_COUNTRY_OUTDOOR],
                             groupsOfRules: [])
         let england = Country(capitals: "ENG",
                               localeRegionCode: "GB",
-                              name: "England",
+                              name: LS_COUNTRY_ENGLAND,
                               periods: [2, 4, 2, 4],
                               minutes: [30, 40, 60, 70],
                               minutesStrings: [LS_COUNTRY_IN2HOCKEY, LS_COUNTRY_INDOOR, LS_COUNTRY_OUTDOOR, LS_COUNTRY_OUTDOOR],
                               groupsOfRules: [])
+        let france = Country(capitals: "F",
+                             localeRegionCode: "FR",
+                             name: LS_COUNTRY_FRANCE,
+                             periods: [4, 2, 3, 2],
+                             minutes: [60, 40, 45, 50],
+                             minutesStrings: [LS_COUNTRY_GENERAL, LS_COUNTRY_INDOOR, LS_COUNTRY_HOCKEY5, LS_COUNTRY_TEAMS_OF_8],
+                             groupsOfRules: [])
+        let india = Country(capitals: "IND",
+                            localeRegionCode: "IN",
+                            name: LS_COUNTRY_INDIA,
+                            periods: [4, 3, 4],
+                            minutes: [60, 30, 60],
+                            minutesStrings: [LS_COUNTRY_GENERAL, LS_COUNTRY_HOCKEY5S, LS_COUNTRY_TOURNAMENTS],
+                            groupsOfRules: [])
         let netherlands = Country(capitals: "NL",
                                   localeRegionCode: "NL",
-                                  name: "Netherlands",
+                                  name: LS_COUNTRY_NETHERLANDS,
                                   periods: [2, 2, 2, 4],
                                   minutes: [30, 50, 60, 70],
                                   minutesStrings: [LS_COUNTRY_TEAMS_OF_3, LS_COUNTRY_TEAMS_OF_6, LS_COUNTRY_TEAMS_OF_8, LS_COUNTRY_GENERAL],
                                   groupsOfRules: [])
+        let newZealand = Country(capitals: "NZ",
+                                 localeRegionCode: "NZ",
+                                 name: LS_COUNTRY_NEW_ZEALAND,
+                                 periods: [4, 4],
+                                 minutes: [60, 60],
+                                 minutesStrings: [LS_COUNTRY_GENERAL, LS_COUNTRY_SECONDARY_SCHOOLS],
+                                 groupsOfRules: [])
+        let argentina = Country(capitals: "RA",
+                                localeRegionCode: "AR",
+                                name: LS_COUNTRY_ARGENTINA,
+                                periods: [4, 4, 3, 4],
+                                minutes: [60, 40, 45, 60],
+                                minutesStrings: [LS_COUNTRY_GENERAL, LS_COUNTRY_INDOOR, LS_COUNTRY_HOCKEY5, LS_COUNTRY_CHAMPIONSHIPS],
+                                groupsOfRules: [])
 
-        countries = [australia, belgium, germany, spain, england, netherlands]
+        countries = [australia, belgium, germany, spain, england, france, india, netherlands, newZealand, argentina]
         status = .Initialized
     }
     

@@ -375,17 +375,16 @@ extension RulesVC: UITableViewDelegate {
         // https://stackoverflow.com/questions/27203324/unpredictable-delay-before-uipopovercontroller-appears-under-ios-8-1/27227446#27227446
         let deadline = DispatchTime.now() + DispatchTimeInterval.milliseconds(50)
         DispatchQueue.main.asyncAfter(deadline: deadline) {
-            
+
             guard let cell = tableView.cellForRow(at: indexPath) as? RulesCell else {
                 return
             }
             var url: URL? = cell.rules.url
-            if let specificUrls = cell.rules.specificLocaleUrls, let currentLanguage = Locale.current.languageCode, let specificUrl = specificUrls[currentLanguage] as? URL {
+            if let specificUrls = cell.rules.specificLocaleUrls, let currentLanguage = Bundle.main.preferredLocalizations.first, let specificUrl = specificUrls[currentLanguage] as? URL {
                 url = specificUrl
             }
-            if url != nil {
-                UIApplication.shared.open(url!)
-            }
+            guard url != nil else { return }
+            UIApplication.shared.open(url!)
         }
     }
 }

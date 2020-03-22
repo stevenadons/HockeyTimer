@@ -41,7 +41,7 @@ class MenuVC: UIViewController {
                                                 "checkmark.shield"]
     
     private let productURL = URL(string: "https://apps.apple.com/app/id1464432452")!
-    private let websiteURLString = "https://stevenadons.wixsite.com/hockeyupp"
+    private let websiteURLString = "https://hockeyupp.weebly.com/privacy-policy.html"
 
    
     

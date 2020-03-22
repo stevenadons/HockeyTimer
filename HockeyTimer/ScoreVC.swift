@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol TimerVCDelegate: class {
+protocol TimerVCDelegate: AnyObject {
     
     func resetGame()
 }
 
-protocol PitchDelegate: class {
+protocol PitchDelegate: AnyObject {
     
     func scoreHome()
     func scoreAway()
@@ -92,6 +92,7 @@ class ScoreVC: PanArrowVC {
         panArrowUp.color = UIColor(named: ColorName.LightYellow)!
         panArrowUpLabel.text = LS_TITLE_STOPWATCH
         panArrowUpLabel.textColor = UIColor(named: ColorName.VeryDarkBlue_White)!
+        panArrowDownLabel.font = UIFont(name: FONTNAME.Numbers, size: 14) 
         panArrowDown.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
         

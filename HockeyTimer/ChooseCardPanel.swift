@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChooseCardPanelDelegate: class {
+protocol ChooseCardPanelDelegate: AnyObject {
     
     func didSelectCard()
 }

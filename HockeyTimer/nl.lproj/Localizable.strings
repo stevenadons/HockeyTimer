@@ -115,9 +115,13 @@
 "Australia" = "Australië";
 "Belgium" = "België";
 "Netherlands" = "Nederland";
+"New Zealand" = "Nieuw-Zeeland";
 "Germany" = "Duitsland";
 "England" = "Engeland";
+"France" = "Frankrijk";
 "Spain" = "Spanje";
+"Argentina" = "Argentinië";
+"India" = "Indië";
 
 "Teams of 3 & H" = "3-tallen & H";
 "Teams of 6" = "6-tallen";
@@ -130,6 +134,11 @@
 "International" = "Internationaal";
 "In2Hockey" = "In2Hockey";
 "Master & M/P" = "Master en M/P";
+"Hockey5" = "Hockey5";
+"Hockey5s" = "Hockey5s";
+"Championships" = "Kampioenschappen";
+"Tournaments" = "Toernooien";
+"Sec. Schools" = "Secund. scholen";
 
 "Change app icon" = "Wijzig app icon";
 "Share the app" = "Deel de app";

@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol CardTimerPanelDelegate: class {
+protocol CardTimerPanelDelegate: AnyObject {
     
     func shouldAddCard()
 }

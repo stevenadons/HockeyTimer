@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-protocol StopWatchDelegate: class {
+protocol StopWatchDelegate: AnyObject {
     
     func handleTimerStateChange(stopWatchTimer: StopWatchTimer, completionHandler: (() -> Void)?)
     func handleTappedForNewGame()
@@ -131,18 +131,18 @@ class StopWatch: UIControl {
         addSubview(timeLabel)
         
         durationLabel = StopWatchSmallLabel()
-        durationLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
+        durationLabel.font = UIFont(name: FONTNAME.LessImportantNumbers, size: durationLabel.font.pointSize)
         addSubview(durationLabel)
         
         messageLabel = StopWatchSmallLabel()
         messageLabel.adjustsFontSizeToFitWidth = true
         messageLabel.numberOfLines = 0
         message = LS_NEWGAME
-        messageLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
+        messageLabel.font = UIFont(name: FONTNAME.LessImportantNumbers, size: durationLabel.font.pointSize)
         addSubview(messageLabel)
         
         periodLabel = StopWatchSmallLabel()
-        periodLabel.font = UIFont(name: FONTNAME.ThemeBlack, size: durationLabel.font.pointSize)
+        periodLabel.font = UIFont(name: FONTNAME.LessImportantNumbers, size: durationLabel.font.pointSize)
         addSubview(periodLabel)
         
         for subview in subviews {
@@ -216,7 +216,7 @@ class StopWatch: UIControl {
         let periodMinutes = Double.maxOneDecimalDividing(game.totalMinutes, by: game.periods)
         let minutesString = periodMinutes.stringWithMaxOneDecimal + " min"
         
-        durationLabel.text = numberOfPeriods + " x " + minutesString
+        durationLabel.text = numberOfPeriods + "x" + minutesString
         durationLabel.setNeedsDisplay()
     }
     

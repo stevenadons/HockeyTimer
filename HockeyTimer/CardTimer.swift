@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol CardTimerDelegate: class {
+protocol CardTimerDelegate: AnyObject {
     
     func deleteCardTimer()
 }

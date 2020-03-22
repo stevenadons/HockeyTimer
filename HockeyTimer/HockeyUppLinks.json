@@ -457,6 +457,159 @@
     },
     
     {
+      "countryCapitals": "F",
+      "groups": [
+        {
+          "group": "General",
+          "rules": [
+            {
+              "names": {
+                 "en": "General Outdoor Rules",
+                 "nl": "Veldhockey"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu/488-gazon-regles-jeu-edition-2017-2018-ffh/file.html",
+              "specificLocaleURLs": {}
+            },
+            {
+              "names": {
+                 "en": "General - Changes 2019",
+                 "nl": "Wijzigingen 2019"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu/695-note-relative-aux-regles-du-jeu-gazon-fih-2019/file.html",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Indoor",
+          "rules": [
+            {
+              "names": {
+                 "en": "Indoor",
+                 "nl": "Zaalhockey"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu/677-regles-jeu-salle-edition-2017-2018/file.html",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Hockey5",
+          "rules": [
+            {
+              "names": {
+                 "en": "Hockey5 FFH",
+                 "nl": "Hockey5 FFH"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu/89-regles-du-jeu-hockey5-version-francaise/file.html",
+              "specificLocaleURLs": {}
+            },
+            {
+              "names": {
+                 "en": "Hockey5 FIH",
+                 "nl": "Hockey5 FIH"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu/88-regles-du-jeu-hockey5-version-officielle-fih/file.html",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Teams of 8",
+          "rules": [
+            {
+              "names": {
+                 "en": "Teams of 8",
+                 "nl": "8-tallen"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu/87-regles-du-jeu-de-hockey-sur-gazon-a-8/file.html",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "More",
+          "rules": [
+            {
+              "names": {
+                 "en": "More",
+                 "nl": "Meer"
+              },
+              "url": "https://www.ffhockey.org/regles-du-jeu.html",
+              "specificLocaleURLs": {}
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "countryCapitals": "IND",
+      "groups": [
+        {
+          "group": "General",
+          "rules": [
+            {
+              "names": {
+                 "en": "FIH General Rules",
+                 "nl": "Algemene regels FIH"
+              },
+              "url": "https://www.hockeyindia.org/static-assets/waf-images/UploadFile/9a/d2/41/4532bc6d-22a5-47cf-ab86-78238c6dce57.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Hockey5s",
+          "rules": [
+            {
+              "names": {
+                 "en": "Hockey5s",
+                 "nl": "Hockey5s"
+              },
+              "url": "https://www.hockeyindia.org/static-assets/waf-images/UploadFile/9f/5b/ec/81d59422-34a4-43f3-9642-6a788770be97.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Tournaments",
+          "rules": [
+            {
+              "names": {
+                 "en": "FIH Tournament Regulations",
+                 "nl": "Regels Toernooien FIH"
+              },
+              "url": "https://www.hockeyindia.org/static-assets/waf-images/UploadFile/8b/4e/00/bfd9e99d-d038-4de8-8681-a272ec7edffe.pdf",
+              "specificLocaleURLs": {}
+            },
+            {
+              "names": {
+                 "en": "Variations India",
+                 "nl": "Verschillen Indië"
+              },
+              "url": "https://www.hockeyindia.org/static-assets/waf-images/UploadFile/4f/81/ad/270b0c26-3e7f-4158-aa8a-a687c57c9c75.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "More",
+          "rules": [
+            {
+              "names": {
+                 "en": "More",
+                 "nl": "Meer"
+              },
+              "url": "https://www.hockeyindia.org/technical/rules-and-regulations",
+              "specificLocaleURLs": {}
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
       "countryCapitals": "NL",
       "groups": [
         {
@@ -549,6 +702,131 @@
           ]
         }
       ]
+    },
+    
+    {
+      "countryCapitals": "NZ",
+      "groups": [
+        {
+          "group": "General",
+          "rules": [
+            {
+              "names": {
+                 "en": "FIH General Rules",
+                 "nl": "Algemene regels FIH"
+              },
+              "url": "http://www.fih.ch/inside-fih/our-official-documents/rules-of-hockey/",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Secondary Schools",
+          "rules": [
+            {
+              "names": {
+                 "en": "Secondary Schools",
+                 "nl": "Secundaire scholen"
+              },
+              "url": "http://hockeynz.co.nz/wp-content/uploads/2019/06/2019-National-Secondary-School-Tournament-Rules.pdf",
+              "specificLocaleURLs": {}
+            },
+            {
+              "names": {
+                 "en": "Changes 2019",
+                 "nl": "Wijzigingen 2019"
+              },
+              "url": "http://hockeynz.co.nz/wp-content/uploads/2019/06/Key-Changes-2019-National-Secondary-School-Tournament-Rules.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "More",
+          "rules": [
+            {
+              "names": {
+                 "en": "More",
+                 "nl": "Meer"
+              },
+              "url": "http://hockeynz.co.nz/about-us/resources/tournaments/",
+              "specificLocaleURLs": {}
+            }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "countryCapitals": "RA",
+      "groups": [
+        {
+          "group": "Outdoor",
+          "rules": [
+            {
+              "names": {
+                 "en": "Rules Outdoor",
+                 "nl": "Veldhockey"
+              },
+              "url": "https://www.cahockey.org.ar/media/reglamentos/Reglamento%20Hockey%20CAH.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Indoor",
+          "rules": [
+            {
+              "names": {
+                 "en": "Rules Indoor",
+                 "nl": "Zaalhockey"
+              },
+              "url": "https://www.cahockey.org.ar/media/reglamentos/Reglamento%20pista%20CAH%202019_OK.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Hockey5",
+          "rules": [
+            {
+              "names": {
+                 "en": "Hockey5",
+                 "nl": "Hockey5"
+              },
+              "url": "https://www.cahockey.org.ar/media/reglamentos/reglamentohockey5.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "Championships",
+          "rules": [
+            {
+              "names": {
+                 "en": "Championships",
+                 "nl": "Championships"
+              },
+              "url": "https://www.cahockey.org.ar/media/reglamentos/CIRCULAR%2012-2019-REGLAMENTO%20%20GENERAL%20DE%20CAMPEONATOS%202019%20CAH_1-.pdf",
+              "specificLocaleURLs": {}
+            }
+          ]
+        },
+        {
+          "group": "More",
+          "rules": [
+            {
+              "names": {
+                 "en": "More",
+                 "nl": "Meer"
+              },
+              "url": "https://www.cahockey.org.ar/reglamentos",
+              "specificLocaleURLs": {}
+            }
+          ]
+        }
+      ]
     }
+    
   ]
 }

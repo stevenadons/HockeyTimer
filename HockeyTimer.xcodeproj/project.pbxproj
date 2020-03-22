@@ -44,6 +44,8 @@
 		4F6869C123DC9294003F89C1 /* RulesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C023DC9294003F89C1 /* RulesCell.swift */; };
 		4F6869C323DCAC21003F89C1 /* GameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */; };
 		4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */; };
+		4F7321602427ADB7004B2F67 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F73215F2427ADB6004B2F67 /* Nunito-ExtraBold.ttf */; };
+		4F7321622427ADBF004B2F67 /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F7321612427ADBF004B2F67 /* Nunito-Black.ttf */; };
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */; };
@@ -191,6 +193,8 @@
 		4F6869C023DC9294003F89C1 /* RulesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesCell.swift; sourceTree = "<group>"; };
 		4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeVC.swift; sourceTree = "<group>"; };
 		4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeDataSource.swift; sourceTree = "<group>"; };
+		4F73215F2427ADB6004B2F67 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		4F7321612427ADBF004B2F67 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
@@ -376,6 +380,8 @@
 				4FD3722322A6CE2700A45757 /* Lato-Bold.ttf */,
 				4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */,
 				4F1C321822F75BA000DC8D3A /* Lato-Regular.ttf */,
+				4F73215F2427ADB6004B2F67 /* Nunito-ExtraBold.ttf */,
+				4F7321612427ADBF004B2F67 /* Nunito-Black.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -910,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FD3722422A6CE2700A45757 /* Lato-Bold.ttf in Resources */,
+				4F7321622427ADBF004B2F67 /* Nunito-Black.ttf in Resources */,
 				4FCC3BBA23E9F87B00FB27E6 /* Icon-120.png in Resources */,
 				4F7FA9AB23E6FE7600EC4BC9 /* AppIconAlt3@2x.png in Resources */,
 				4FB4BE741F515B3B003B1259 /* LaunchScreen.storyboard in Resources */,
@@ -922,6 +929,7 @@
 				4F7FA99E23E6FE5F00EC4BC9 /* AppIconAlt1@2x.png in Resources */,
 				4F7FA9B623E6FE9300EC4BC9 /* AppIconAlt5@2x.png in Resources */,
 				4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */,
+				4F7321602427ADB7004B2F67 /* Nunito-ExtraBold.ttf in Resources */,
 				4F7FA99F23E6FE6100EC4BC9 /* AppIconAlt1@3x.png in Resources */,
 				4F1C321922F75BA000DC8D3A /* Lato-Regular.ttf in Resources */,
 				4F7FA99D23E6FE5D00EC4BC9 /* AppIconAlt1.png in Resources */,
@@ -1262,12 +1270,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.DimpleBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1283,12 +1291,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SPB3WZT9KK;
 				INFOPLIST_FILE = HockeyTimer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stevenadons.DimpleBall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

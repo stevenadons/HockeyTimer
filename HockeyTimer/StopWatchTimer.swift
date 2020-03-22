@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol StopWatchTimerDelegate: class {
+protocol StopWatchTimerDelegate: AnyObject {
     
     func handleTickCountDown()
     func handleTickCountUp()

@@ -10,7 +10,7 @@ import UIKit
 
 let distanceMoveUp: CGFloat = 110
 
-protocol BallDelegate: class {
+protocol BallDelegate: AnyObject {
     
     func homeScored()
     func awayScored()

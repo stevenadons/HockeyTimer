@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChooseMinutesPanelDelegate: class {
+protocol ChooseMinutesPanelDelegate: AnyObject {
     
     func didSelectMinutes()
 }
