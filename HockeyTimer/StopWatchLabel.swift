@@ -96,7 +96,7 @@ class StopWatchLabel: UIView {
         label.textAlignment = alignment
         label.adjustsFontSizeToFitWidth = true
         label.baselineAdjustment = .alignCenters
-        label.font = UIFont(name: FONTNAME.Numbers, size: 54)
+        label.font = UIFont(name: FONTNAME.Numbers, size: 48)
         
         return label
     }

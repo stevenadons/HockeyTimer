@@ -59,9 +59,9 @@ class PickerNumberView: UIView {
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.numberOfLines = 1
         numberLabel.textAlignment = .center
-        var pointSize: CGFloat = isSmall ? 18 : 28
+        var pointSize: CGFloat = isSmall ? 26 : 36
         if isVeryBig {
-            pointSize = 38
+            pointSize = 46
         }
         numberLabel.font = UIFont(name: FONTNAME.Numbers, size: pointSize)
         numberLabel.textColor = numberColor

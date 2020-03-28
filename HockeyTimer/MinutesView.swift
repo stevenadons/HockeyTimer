@@ -53,7 +53,7 @@ class MinutesView: UIButton {
         timeLabel.textAlignment = .center
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.baselineAdjustment = .alignCenters
-        timeLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
+        timeLabel.font = UIFont(name: FONTNAME.Numbers, size: 28)
         addSubview(timeLabel)
     }
     

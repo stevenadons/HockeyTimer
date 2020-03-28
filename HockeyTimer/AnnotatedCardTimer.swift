@@ -99,7 +99,7 @@ class AnnotatedCardTimer: UIView {
         timeLabel.textAlignment = .center
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.baselineAdjustment = .alignCenters
-        timeLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
+        timeLabel.font = UIFont(name: FONTNAME.LessImportantNumbers, size: 17)
         addSubview(timeLabel)
         
         topRibbon = UIView()
@@ -107,20 +107,14 @@ class AnnotatedCardTimer: UIView {
         topRibbon.backgroundColor = .clear
         addSubview(topRibbon)
         
-        var teamColor = UIColor(named: ColorName.DarkBlue)!
-        if team == Player.Away {
-            teamColor = UIColor(named: ColorName.DarkBlue)! // PantoneRed
-        }
-        
         teamLabel = UILabel()
         teamLabel.translatesAutoresizingMaskIntoConstraints = false
-        teamLabel.textColor = UIColor(named: ColorName.DarkBlue)!
         teamLabel.text = ""
         teamLabel.textAlignment = .left
         teamLabel.adjustsFontSizeToFitWidth = true
         teamLabel.baselineAdjustment = .alignCenters
-        teamLabel.font = UIFont(name: "Helvetica-Bold", size: 14)
-        teamLabel.textColor = teamColor
+        teamLabel.font = UIFont(name: FONTNAME.LessImportantNumbers, size: 14)
+        teamLabel.textColor = UIColor(named: ColorName.DarkBlueText)!
         if let team = team {
             teamLabel.text = team.teamString() + " "
         }
@@ -133,8 +127,8 @@ class AnnotatedCardTimer: UIView {
         playerLabel.textAlignment = .right
         playerLabel.adjustsFontSizeToFitWidth = true
         playerLabel.baselineAdjustment = .alignCenters
-        playerLabel.font = UIFont(name: "Helvetica-Bold", size: 16)
-        playerLabel.textColor = teamColor
+        playerLabel.font = UIFont(name: FONTNAME.Numbers, size: 16)
+        playerLabel.textColor = UIColor(named: ColorName.DarkBlueText)!
         if let player = player {
             playerLabel.text = String(player)
         }

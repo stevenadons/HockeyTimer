@@ -18,7 +18,7 @@ class PlayerPickerView: UIView {
     private var path: UIBezierPath!
 
     private var number: Int = 0
-    private var numberColor: UIColor = .systemBackground {
+    private var numberColor: UIColor = .white {
         didSet {
             setNeedsLayout()
         }

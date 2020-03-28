@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-//        #warning("testing")
-//        UserDefaults.standard.set(true, forKey: UserDefaultsKey.PremiumMode)
+        #warning("testing")
+        UserDefaults.standard.set(true, forKey: UserDefaultsKey.PremiumMode)
         
         firstTimeSetDarkModeSettings()
         

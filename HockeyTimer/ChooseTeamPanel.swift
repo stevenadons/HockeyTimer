@@ -49,9 +49,9 @@ class ChooseTeamPanel: UIView {
         homeButton.backgroundColor = .secondarySystemBackground
         homeButton.layer.cornerRadius = 8
         homeButton.layer.borderColor = UIColor(named: ColorName.DarkBlue)!.cgColor
-        homeButton.setTitleColor(UIColor(named: ColorName.DarkBlue)!, for: .normal)
+        homeButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
         homeButton.setTitle(LS_HOME_TEAM, for: .normal)
-        homeButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        homeButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 18)
         homeButton.addTarget(self, action: #selector(homeButtonTapped), for: .touchUpInside)
         addSubview(homeButton)
         
@@ -60,9 +60,9 @@ class ChooseTeamPanel: UIView {
         awayButton.backgroundColor = .secondarySystemBackground
         awayButton.layer.cornerRadius = 8
         awayButton.layer.borderColor = UIColor(named: ColorName.DarkBlue)!.cgColor
-        awayButton.setTitleColor(UIColor(named: ColorName.DarkBlue)!, for: .normal)
+        awayButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
         awayButton.setTitle(LS_AWAY_TEAM, for: .normal)
-        awayButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        awayButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 18)
         awayButton.addTarget(self, action: #selector(awayButtonTapped), for: .touchUpInside)
         addSubview(awayButton)
     }
