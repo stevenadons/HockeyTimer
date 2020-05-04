@@ -83,7 +83,7 @@ class ScoreVC: PanArrowVC {
         editButton.setTitle(editTitle, for: .normal)
         view.addSubview(editButton)
         
-        confirmationButton = ConfirmationButton.blueButton()
+        confirmationButton = ConfirmationButton.yellowButton()
         confirmationButton.alpha = 0.0
         confirmationButton.setTitle(LS_BUTTON_BACK, for: .normal)
         confirmationButton.addTarget(self, action: #selector(confirmationButtonTapped(sender:forEvent:)), for: [.touchUpInside])
