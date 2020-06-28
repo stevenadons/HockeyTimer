@@ -478,7 +478,7 @@ class StopWatch: UIControl {
             
         case .PlayIcon:
             
-            // Start Half or Resume after pausing
+            // Start Period or Resume after pausing
             timer.startCountDown()
             game.status = .Running
             JukeBox.instance.prepareSound(Sound.BeepBeep)
@@ -636,6 +636,7 @@ extension StopWatch: StopWatchTimerDelegate {
         timeLabel.text = stopWatchLabelTimeString()
         showTimeLabel()
         delegate.minusOneSecond()
+        game.currentTimerProgressedToMinute(timer.currentMinute)
         updateProgressBars()
         beepInOvertime()
     }

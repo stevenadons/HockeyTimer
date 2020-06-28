@@ -9,7 +9,6 @@
 import UIKit
 import StoreKit
 import Network
-import GoogleMobileAds
 
 
 class BuyPremiumVC: UIViewController {
@@ -32,7 +31,6 @@ class BuyPremiumVC: UIViewController {
     private var text: String!
     private var shouldShowFirstButton: Bool = true
     
-    private var interstitial: GADInterstitial?
     private var isShowingInterstitial: Bool = false
 
     
@@ -77,7 +75,7 @@ class BuyPremiumVC: UIViewController {
         products = appStoreProducts
         
         AppDelegate.checkIfInPremiumMode(ifNot: {
-            self.interstitial = self.createAndLoadInterstitial()
+            print("not in premium mode")
         })
         
         setupUI()
@@ -86,18 +84,6 @@ class BuyPremiumVC: UIViewController {
         addObservers()
     }
     
-    private func createAndLoadInterstitial() -> GADInterstitial {
-        
-        // For testing
-//        #warning("interstitial in test mode")
-//        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        // For real
-        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-2043391878522550/9706444069")
-        
-        interstitial.delegate = self
-        interstitial.load(GADRequest())
-        return interstitial
-    }
     
     private func setupUI() {
         
@@ -293,10 +279,7 @@ class BuyPremiumVC: UIViewController {
     
     @objc private func watchAdTapped() {
         
-        rewardEarned = true
-        DispatchQueue.main.async {
-            self.showInterstitial()
-        }
+        
     }
     
     @objc private func restoreTapped() {
@@ -328,15 +311,7 @@ class BuyPremiumVC: UIViewController {
 
     
     
-    // MARK: - GAD Interstitial
-    
-    private func showInterstitial() {
-        
-        if let interstitial = interstitial, interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        }
-    }
-    
+  
     
     
     // MARK: - Notification Methods
@@ -358,25 +333,4 @@ class BuyPremiumVC: UIViewController {
         maskWithActivityIndicator?.removeFromSuperview()
     }
 }
-
-
-
-extension BuyPremiumVC: GADInterstitialDelegate {
-    
-    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
-        
-        isShowingInterstitial = true
-    }
-    
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-
-        isShowingInterstitial = false
-
-        // Most use cases: load a new interstitial here
-//        interstitial = createAndLoadInterstitial()
-
-        dismiss(animated: true, completion: nil)
-    }
-}
-
 

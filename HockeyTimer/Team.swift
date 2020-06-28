@@ -9,15 +9,14 @@
 import Foundation
 
 
-enum Player {
+enum Team {
     
     case Home
     case Away
     
-    
     func teamString() -> String {
         
-        if self == Player.Home {
+        if self == Team.Home {
             return LS_HOME_TEAM
         }
         return LS_AWAY_TEAM

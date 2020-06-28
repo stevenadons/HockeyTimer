@@ -20,8 +20,8 @@ class AddCardTimerVC: UIViewController {
     private var okButton: UIButton!
     private var cancelButton: UIButton!
     
-    private var team: Player?
-    private var player: Int?
+    private var team: Team?
+    private var player: String?
     
     private var titleText: String = LS_TITLE_PENALTY_CARD
     private var logPlayerButtonText: String = LS_BUTTON_LOG_PLAYER
@@ -34,14 +34,14 @@ class AddCardTimerVC: UIViewController {
     private let cardPanelHeight: CGFloat = 100
     private let panelsPadding: CGFloat = UIDevice.whenDeviceIs(small: 16, normal: 32, big: 32)
     
-    private var okAction: ((CardType, Int, Player?, Int?) -> Void)?
+    private var okAction: ((CardType, Int, Team?, String?) -> Void)?
     private var cancelAction: (() -> Void)?
     private var haptic: UISelectionFeedbackGenerator?
     
     
     // MARK: - Life Cycle
     
-    init(okAction: ((CardType, Int, Player?, Int?) -> Void)? = nil, cancelAction: (() -> Void)? = nil) {
+    init(okAction: ((CardType, Int, Team?, String?) -> Void)? = nil, cancelAction: (() -> Void)? = nil) {
         
         self.okAction = okAction
         self.cancelAction = cancelAction
@@ -148,7 +148,7 @@ class AddCardTimerVC: UIViewController {
             cardPanel.bottomAnchor.constraint(equalTo: minutesPanel.topAnchor, constant: -panelsPadding),
             
             logPlayerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logPlayerButton.bottomAnchor.constraint(equalTo: okButton!.topAnchor, constant: -buttonPadding),
+            logPlayerButton.bottomAnchor.constraint(equalTo: okButton!.topAnchor, constant: -buttonPadding * 1.5),
             
             okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonHorInset),
             okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -buttonHorInset),
@@ -248,7 +248,7 @@ class AddCardTimerVC: UIViewController {
             performAddCardAction()
             
         } else {
-            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: true, afterDismiss: { earned in
+            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: false, afterDismiss: { earned in
                 if earned {
                     self.performAddCardAction()
                 } 
@@ -271,6 +271,9 @@ class AddCardTimerVC: UIViewController {
         let vc = LogPlayerVC(okAction: { [weak self] (team, player) in
             self?.team = team
             self?.player = player
+            guard let team = team, let player = player else { return }
+            let buttonTitle = LS_ADDING_CARD_FOR + ": " + team.teamString() + " " + player
+            self?.logPlayerButton.setTitle(buttonTitle, for: .normal)
         }, cancelAction: nil)
         present(vc, animated: true, completion: nil)
     }

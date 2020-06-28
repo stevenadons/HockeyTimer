@@ -20,9 +20,9 @@ class PlayerPicker: UIView {
             picker.delegate = pickerDataSource
         }
     }
-    var selectedPlayer: Int? {
+    var selectedPlayer: String? {
         let index = picker.selectedRow(inComponent: 0) 
-        return pickerDataSource.numberAtIndex(index)
+        return pickerDataSource.itemAtIndex(index)
     }
     
     
@@ -46,7 +46,7 @@ class PlayerPicker: UIView {
         
         picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
-        let players: [Int] = createPlayers()
+        let players: [String] = createPlayers()
         pickerDataSource = PlayerPickerDataSource(data: players)
         addSubview(picker)
     }
@@ -80,11 +80,11 @@ class PlayerPicker: UIView {
     
     // MARK: - Private Methods
     
-    private func createPlayers() -> [Int] {
+    private func createPlayers() -> [String] {
         
-        var result: [Int] = []
+        var result: [String] = [LS_STAFF]
         for int in 1 ... 99 {
-            result.append(int)
+            result.append(String(int))
         }
         return result
     }

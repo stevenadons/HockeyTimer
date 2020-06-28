@@ -21,16 +21,17 @@ class HockeyGame {
             NotificationCenter.default.post(name: .GameStatusChanged, object: nil)
         }
     }
+    var currentMinute: Int {
+        let minutesPreviousPeriods = (totalMinutes / periods) * (currentPeriod - 1.0)
+        return Int(minutesPreviousPeriods) + currentMinuteInPeriod
+    }
+    private var currentMinuteInPeriod: Int = 1
 
-    private(set) var lastScored: Player?
+    private(set) var lastScored: Team?
     
     var currentPeriod: Double = 1.0
     var periods: Double = 2.0
-    var totalMinutes: Double = HockeyGame.standardTotalMinutes {
-        didSet {
-            runningMinutes = totalMinutes
-        }
-    }
+    var totalMinutes: Double = HockeyGame.standardTotalMinutes 
     
     static let standardTotalMinutes: Double = 70.0
     static let standardPeriods: Double = 2.0
@@ -164,5 +165,10 @@ class HockeyGame {
         if awayScore >= 1 {
             awayScore -= 1
         }
+    }
+    
+    func currentTimerProgressedToMinute(_ currentMinute: Int) {
+        
+        self.currentMinuteInPeriod = currentMinute
     }
 }

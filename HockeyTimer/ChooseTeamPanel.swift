@@ -23,7 +23,7 @@ class ChooseTeamPanel: UIView {
     private var awayButton: UIButton!
     
     weak var delegate: ChooseTeamPanelDelegate?
-    private (set) var selectedTeam: Player?
+    private (set) var selectedTeam: Team?
     
     
     // MARK: - Init
@@ -97,23 +97,23 @@ class ChooseTeamPanel: UIView {
     
     @objc private func homeButtonTapped() {
         
-        guard selectedTeam != Player.Home else { return }
+        guard selectedTeam != Team.Home else { return }
         
         homeButton.layer.borderWidth = 3
         awayButton.layer.borderWidth = 0
         
-        selectedTeam = Player.Home
+        selectedTeam = Team.Home
         delegate?.didSelectTeam()
     }
     
     @objc private func awayButtonTapped() {
         
-        guard selectedTeam != Player.Away else { return }
+        guard selectedTeam != Team.Away else { return }
         
         homeButton.layer.borderWidth = 0
         awayButton.layer.borderWidth = 3
         
-        selectedTeam = Player.Away
+        selectedTeam = Team.Away
         delegate?.didSelectTeam()
     }
     

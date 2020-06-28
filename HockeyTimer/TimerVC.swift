@@ -18,6 +18,7 @@ class TimerVC: PanArrowVC {
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
     private var cardTimerPanel: CardTimerPanel!
+    private var messageView: MessageView!
     private var minutes: Double = HockeyGame.standardTotalMinutes
     private var periods: Double = HockeyGame.standardPeriods
     
@@ -69,6 +70,10 @@ class TimerVC: PanArrowVC {
             cardTimerPanel.alpha = 0.0
         }
         view.addSubview(cardTimerPanel)
+        
+        messageView = MessageView()
+        messageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(messageView)
 
         panArrowUpLabel.alpha = 0.0
         panArrowUp.alpha = 0.0
@@ -82,7 +87,7 @@ class TimerVC: PanArrowVC {
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), 
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopWatchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),
+            stopWatchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 10), // 20
             
             stopWatch.widthAnchor.constraint(equalTo: stopWatchContainer.widthAnchor),
             stopWatch.heightAnchor.constraint(equalTo: stopWatchContainer.heightAnchor),
@@ -93,6 +98,10 @@ class TimerVC: PanArrowVC {
             cardTimerPanel.heightAnchor.constraint(equalToConstant: 90),
             cardTimerPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            messageView.topAnchor.constraint(equalTo: cardTimerPanel.bottomAnchor, constant: 16),
+            messageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            messageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95)
             
             ])
     }
@@ -184,7 +193,7 @@ class TimerVC: PanArrowVC {
     
     private func showBuyPremiumVC(onProgressionEarned: ((Bool) -> Void)?) {
     
-        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: true, afterDismiss: onProgressionEarned)
+        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: false, afterDismiss: onProgressionEarned)
         present(buyPremiumVC, animated: true, completion: nil)
     }
     
@@ -197,6 +206,11 @@ class TimerVC: PanArrowVC {
         DispatchQueue.main.async {
             self.present(askConfirmationVC, animated: true, completion: nil)
         }
+    }
+    
+    private func showLongPressMessage() {
+        
+        messageView.setMessage(LS_LONG_PRESS_PENALTY_CARD_MESSAGE)
     }
     
     
@@ -266,8 +280,13 @@ extension TimerVC: CardTimerPanelDelegate {
     func shouldAddCard() {
         
         let vc = AddCardTimerVC(okAction: { [weak self] (cardType, minutes, team, player) in
+            guard let self = self else { return }
             let card = Card(type: cardType)
-            self?.cardTimerPanel.add(card, minutes: minutes, team: team, player: player)
+            self.cardTimerPanel.add(card, minutes: minutes, cardDrawnAtMinute: self.game.currentMinute, team: team, player: player)
+            if !UserDefaults.standard.bool(forKey: UserDefaultsKey.DidShowLongPressPenaltyCardMessage) {
+                self.showLongPressMessage()
+                UserDefaults.standard.set(true, forKey: UserDefaultsKey.DidShowLongPressPenaltyCardMessage)
+            }
         }, cancelAction: nil)
         present(vc, animated: true, completion: nil)
     }

@@ -61,6 +61,10 @@ class StopWatchTimer {
     }
     
     var timer: Timer?
+    var currentMinute: Int {
+        let secondsElapsed = Double(totalSecondsInPeriod - totalSecondsToGo)
+        return Int(floor(secondsElapsed / 60)) + 1
+    }
     private var delegate: StopWatchTimerDelegate!
     private var game: HockeyGame! {
         didSet {

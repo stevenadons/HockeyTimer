@@ -46,13 +46,13 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, Annotate
     func configureWithAddCardCell() {
         
         let dummyCard = Card(type: .green)
-        let addCardTimer = AnnotatedCardTimer(card: dummyCard, minutes: 9999, delegate: self, isDummyForAddCard: true)
+        let addCardTimer = AnnotatedCardTimer(card: dummyCard, minutes: 9999, cardDrawnAtMinute: 1, delegate: self, isDummyForAddCard: true)
         timers.append(addCardTimer)
     }
     
-    func addTimerFor(_ card: Card, minutes: Int, team: Player?, player: Int?) {
+    func addTimerFor(_ card: Card, minutes: Int, cardDrawnAtMinute: Int, team: Team?, player: String?) {
         
-        let timer = AnnotatedCardTimer(card: card, minutes: minutes, team: team, player: player, delegate: self)
+        let timer = AnnotatedCardTimer(card: card, minutes: minutes, cardDrawnAtMinute: cardDrawnAtMinute, team: team, player: player, delegate: self)
         timers.insert(timer, at: timers.count - 1)
         
         takeSnapShot()

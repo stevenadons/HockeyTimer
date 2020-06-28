@@ -13,12 +13,12 @@ class PlayerPickerView: UIView {
     
     // MARK: - Properties
     
-    private var numberLabel: UILabel!
+    private var playerLabel: UILabel!
     private var shape: UIView!
     private var path: UIBezierPath!
 
-    private var number: Int = 0
-    private var numberColor: UIColor = .white {
+    private var player: String = "0"
+    private var playerColor: UIColor = .white {
         didSet {
             setNeedsLayout()
         }
@@ -32,12 +32,12 @@ class PlayerPickerView: UIView {
     
     // MARK: - Initializers
     
-    convenience init(number: Int, numberColor: UIColor, shapeColor: UIColor) {
+    convenience init(player: String, numberColor: UIColor, shapeColor: UIColor) {
         
         self.init()
         
-        self.number = number
-        self.numberColor = numberColor
+        self.player = player
+        self.playerColor = numberColor
         self.shapeColor = shapeColor
         
         setup()
@@ -50,14 +50,14 @@ class PlayerPickerView: UIView {
         shape.backgroundColor = shapeColor
         addSubview(shape)
         
-        numberLabel = UILabel()
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.numberOfLines = 1
-        numberLabel.textAlignment = .center
-        numberLabel.font = UIFont(name: FONTNAME.Numbers, size: 28)
-        numberLabel.textColor = numberColor
-        numberLabel.text = String(number)
-        addSubview(numberLabel)
+        playerLabel = UILabel()
+        playerLabel.translatesAutoresizingMaskIntoConstraints = false
+        playerLabel.numberOfLines = 1
+        playerLabel.textAlignment = .center
+        playerLabel.font = UIFont(name: FONTNAME.Numbers, size: 28)
+        playerLabel.textColor = playerColor
+        playerLabel.text = player
+        addSubview(playerLabel)
     }
     
     
@@ -67,7 +67,7 @@ class PlayerPickerView: UIView {
         
         super.layoutSubviews()
         
-        numberLabel.textColor = numberColor
+        playerLabel.textColor = playerColor
         shape.backgroundColor = shapeColor
         
         let shapeWidth = min(bounds.height, bounds.width) * 0.9
@@ -80,10 +80,10 @@ class PlayerPickerView: UIView {
             shape.centerYAnchor.constraint(equalTo: centerYAnchor),
             shape.heightAnchor.constraint(equalToConstant: shapeWidth),
         
-            numberLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            numberLabel.widthAnchor.constraint(equalTo: widthAnchor),
-            numberLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            numberLabel.heightAnchor.constraint(equalTo: heightAnchor),
+            playerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            playerLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            playerLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            playerLabel.heightAnchor.constraint(equalTo: heightAnchor),
         
         ])
     }

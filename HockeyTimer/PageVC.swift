@@ -68,7 +68,7 @@ class PageVC: UIPageViewController {
         hideBackgroundMask()
         
         newGameButton = CircularFABButton.createStandardButton(imageName: "arrow.2.circlepath.circle")
-        newGameButton.bgColor = UIColor(named: "DarkBlue")!
+        newGameButton.bgColor = UIColor(named: ColorName.DarkBlue)!
         newGameButton.contentColor = .white
         newGameButton.alpha = 0.0
         newGameButton.addTarget(self, action: #selector(newGameTapped), for: .touchUpInside)

@@ -24,4 +24,5 @@ enum UserDefaultsKey {
     static let AlwaysDarkMode = "AlwaysDarkMode"
     static let AlwaysLightMode = "AlwaysLightMode"
     static let DarkModeFollowsPhoneSettings = "DarkModeFollowsPhoneSettings"
+    static let DidShowLongPressPenaltyCardMessage = "DidShowLongPressPenaltyCardMessage"
 }

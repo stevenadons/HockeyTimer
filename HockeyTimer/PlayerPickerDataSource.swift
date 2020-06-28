@@ -13,13 +13,13 @@ class PlayerPickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDele
 
     // MARK: - Properties
     
-    private var data: [Int]!
+    private var data: [String]!
     
     
     
     // MARK: - Init
     
-    init(data: [Int]) {
+    init(data: [String]) {
         
         super.init()
         self.data = data
@@ -28,7 +28,7 @@ class PlayerPickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDele
     
     // MARK: - Public Methods
     
-    func numberAtIndex(_ index: Int) -> Int? {
+    func itemAtIndex(_ index: Int) -> String? {
        
         guard index < data.count else {
             return nil
@@ -36,9 +36,9 @@ class PlayerPickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDele
         return data[index]
     }
     
-    func indexForNumber(_ number: Int) -> Int? {
+    func indexForItem(_ string: String) -> Int? {
         
-        return data.firstIndex(of: number)
+        return data.firstIndex(of: string)
     }
 
     
@@ -57,12 +57,12 @@ class PlayerPickerDataSource: NSObject, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        guard let number = numberAtIndex(row) else {
+        guard let player = itemAtIndex(row) else {
             fatalError("Trying to acces a too big index in pickerview datasource")
         }
         let numberColor = UIColor.white
         let shapeColor = UIColor(named: ColorName.DarkBlue)!
-        return PlayerPickerView(number: number, numberColor: numberColor, shapeColor: shapeColor)
+        return PlayerPickerView(player: player, numberColor: numberColor, shapeColor: shapeColor)
         
     }
     

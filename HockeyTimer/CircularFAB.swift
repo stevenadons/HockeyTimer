@@ -44,10 +44,10 @@ class CircularFAB: UIView {
     
     private let circleColor: UIColor = .clear
     private let circleBorderColor: UIColor = .clear
-    private let menuButtonColor: UIColor = UIColor(named: "DarkBlue")!
+    private let menuButtonColor: UIColor = UIColor(named: ColorName.DarkBlue)!
     private let menuButtonContentColor: UIColor = .white
-    private let menuButtonCloseColor: UIColor = UIColor(named: "PantoneRed")!
-    private let itemButtonColor: UIColor = UIColor(named: "DarkBlue")!
+    private let menuButtonCloseColor: UIColor = UIColor(named: ColorName.PantoneRed)!
+    private let itemButtonColor: UIColor = UIColor(named: ColorName.DarkBlue)!
     private let itemButtonContentColor: UIColor = .white
     
     

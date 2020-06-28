@@ -32,6 +32,10 @@ let LS_FOURTHQUARTERLABEL = NSLocalizedString("Q4", comment: "Time indication la
 
 let LS_HOME_TEAM = NSLocalizedString("Home", comment: "Card annotation for penaltied team")
 let LS_AWAY_TEAM = NSLocalizedString("Guest", comment: "Card annotation for penaltied team")
+let LS_STAFF = NSLocalizedString("Staff", comment: "Name for staff getting a penalty card")
+let LS_ADDING_CARD_FOR = NSLocalizedString("Adding card for", comment: "Name for button when logging player with card")
+
+let LS_LONG_PRESS_PENALTY_CARD_MESSAGE = NSLocalizedString("Long press a penalty card to delete or show details.", comment: "Message on first penalty card")
 
 let LS_WARNINGRESETGAME = NSLocalizedString("New Game", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME_TITLE = NSLocalizedString("New Game", comment: "When stopwatch is tapped for new game")
@@ -60,6 +64,8 @@ let LS_BUTTON_DONT_EDIT_SCORE = NSLocalizedString("Don't edit manually", comment
 let LS_BUTTON_LOG_PLAYER = NSLocalizedString("Log Player", comment: "Button Title")
 let LS_BUTTON_YES = NSLocalizedString("Yes", comment: "Button Title")
 let LS_BUTTON_NO = NSLocalizedString("No", comment: "Button Title")
+let LS_BUTTON_DELETE = NSLocalizedString("Delete", comment: "Context Menu Item")
+let LS_BUTTON_DRAWN_AT_MINUTE = NSLocalizedString("Card Drawn at Minute", comment: "Context Menu Item")
 
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")
@@ -89,12 +95,10 @@ let LS_BODY_ONBOARDINGSLIDE3 = NSLocalizedString("Get notified when timer ends."
 
 let LS_BUYPREMIUM_TITLE_CHANGE_GAME_TIME = NSLocalizedString("Set New Time", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TITLE_NEW_GAME = NSLocalizedString("New Game", comment: "Title of buy premium VC")
-let LS_BUYPREMIUM_TEXT_CHANGE_GAME_TIME = NSLocalizedString("Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time.", comment: "Text of buy premium VC")
-let LS_BUYPREMIUM_TEXT_NEW_GAME = NSLocalizedString("Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment.", comment: "Text of buy premium VC")
 let LS_BUYPREMIUM_TITLE_DARK_MODE = NSLocalizedString("Dark Mode", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TEXT_DARK_MODE = NSLocalizedString("To have Dark Mode, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can change the app icon and keep track of penalty cards.", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TITLE_CARD = NSLocalizedString("Penalty Card", comment: "Title of buy premium VC")
-let LS_BUYPREMIUM_TEXT_CARD = NSLocalizedString("Penalty cards can be added in Premium Mode with a one time payment. Give it a try for free by watching just one ad.\n\nPremium Mode will also let you have dark mode and change the app icon.", comment: "Title of buy premium VC")
+let LS_BUYPREMIUM_TEXT_CARD = NSLocalizedString("Penalty cards can be added in Premium Mode with a one time payment.\n\nPremium Mode will also let you have dark mode and change the app icon.", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TITLE_CHANGE_APP_ICON = NSLocalizedString("Change App Icon", comment: "Title of buy premium VC")
 let LS_BUYPREMIUM_TEXT_CHANGE_APP_ICON = NSLocalizedString("To change the app icon, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have Dark Mode and keep track of penalty cards.", comment: "Title of buy premium VC")
 

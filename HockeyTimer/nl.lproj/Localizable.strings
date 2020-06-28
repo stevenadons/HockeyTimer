@@ -25,6 +25,10 @@
 
 "Home" = "Thuis";
 "Guest" = "Gast";
+"Staff" = "Staff";
+"Adding card for" = "Kaart voor";
+
+"Long press a penalty card to delete or show details." = "Tik lang op een strafkaart om te verwijderen of om details te zien";
 
 "RESET GAME" = "NIEUWE WEDSTRIJD";
 "CANCEL" = "ANNULEER";
@@ -62,6 +66,8 @@
 "Log Player" = "Noteer speler";
 "Yes" = "Ja";
 "No" = "Neen";
+"Delete" = "Verwijder";
+"Card Drawn at Minute" = "Kaart in minuut";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";
@@ -80,14 +86,12 @@
 "Share HockeyUpp" = "HockeyUpp delen";
 
 "New Game" = "Nieuwe wedstrijd";
-"Watch one ad to continue.\n\nTo change the game times without watching ads, upgrade to Premium Mode with a one time payment.\n\nIn addition, Premium Mode will hold track of your last game time." = "Bekijk één advertentie om door te gaan.\n\nUpgrade naar Premium (eenmalige betaling) om de tijd te wijzigen zonder advertenties.\n\nBovendien wordt je laatste wedstrijdduur dan steeds onthouden.";
-"Watch one ad to continue with new game.\n\nTo start new games without watching ads, upgrade to Premium Mode with a one time payment." = "Bekijk één advertentie om een nieuwe wedstrijd te starten.\n\nUpgrade naar Premium (eenmalige betaling) om nieuwe wedstrijden te starten zonder advertenties.";
 "Buy Premium" = "Koop premium";
 "Watch One Ad" = "Bekijk één advertentie";
 
 "Dark Mode" = "Donkere modus";
 "To have Dark Mode, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can change the app icon and keep track of penalty cards." = "Om donkere modus in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook het app-icoon instellen en strafkaarten bijhouden.";
-"Penalty cards can be added in Premium Mode with a one time payment. Give it a try for free by watching just one ad.\n\nPremium Mode will also let you have dark mode and change the app icon." = "Strafkaarten toevoegen is mogelijk in premium mode met een eenmalige betaling. Probeer het gratis door één advertentie te bekijken.\n\nIn premium mode heb je daarnast ook nog donkere modus en kan je het app-icoon wijzigen.";
+"Penalty cards can be added in Premium Mode with a one time payment.\n\nPremium Mode will also let you have dark mode and change the app icon." = "Strafkaarten toevoegen is mogelijk in premium mode met een eenmalige betaling.\n\nIn premium mode heb je daarnast ook nog donkere modus en kan je het app-icoon wijzigen.";
 "Change App Icon" = "Wijzig app-icoon";
 "To change the app icon, upgrade to Premium Mode with a one time payment.\n\nIn addition, in Premium Mode you can have Dark Mode and keep track of penalty cards." = "Om het app-icoon in te stellen, upgrade naar premium mode met een eenmalige betaling.\n\nBovendien kan je dan ook donkere modus instellen en strafkaarten bijhouden.";
 

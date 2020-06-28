@@ -19,7 +19,7 @@ class LogPlayerVC: UIViewController {
     private var okButton: UIButton!
     private var cancelButton: UIButton!
     
-    private var team: Player?
+    private var team: Team?
     
     private var titleText: String = LS_TITLE_HOME_OR_GUEST
     private var okButtonText: String = LS_BUYPREMIUM_OK
@@ -31,14 +31,14 @@ class LogPlayerVC: UIViewController {
     private let teamPanelHeight: CGFloat = 100
     private let panelsPadding: CGFloat = UIDevice.whenDeviceIs(small: 20, normal: 40, big: 40)
     
-    private var okAction: ((Player?, Int?) -> Void)?
+    private var okAction: ((Team?, String?) -> Void)?
     private var cancelAction: (() -> Void)?
     private var haptic: UISelectionFeedbackGenerator?
     
     
     // MARK: - Life Cycle
     
-    init(okAction: ((Player?, Int?) -> Void)? = nil, cancelAction: (() -> Void)? = nil) {
+    init(okAction: ((Team?, String?) -> Void)? = nil, cancelAction: (() -> Void)? = nil) {
         
         self.okAction = okAction
         self.cancelAction = cancelAction

@@ -29,8 +29,9 @@ class AnnotatedCardTimer: UIView {
     
     private var card: Card!
     private (set) var secondsToGo: Int!
-    private var team: Player?
-    private var player: Int?
+    private var team: Team?
+    private var player: String?
+    private var cardDrawnAtMinute: Int!
     
     private weak var delegate: AnnotatedCardTimerDelegate?
     private var haptic: UINotificationFeedbackGenerator?
@@ -52,12 +53,13 @@ class AnnotatedCardTimer: UIView {
     
     // MARK: - Init
     
-    init(card: Card, minutes: Int, team: Player? = nil, player: Int? = nil, delegate: AnnotatedCardTimerDelegate?, isDummyForAddCard: Bool = false) {
+    init(card: Card, minutes: Int, cardDrawnAtMinute: Int, team: Team? = nil, player: String? = nil, delegate: AnnotatedCardTimerDelegate?, isDummyForAddCard: Bool = false) {
         
         super.init(frame: .zero)
         
         self.card = card
         self.secondsToGo = minutes * 60
+        self.cardDrawnAtMinute = cardDrawnAtMinute
         self.team = team
         self.player = player
         self.delegate = delegate
@@ -130,7 +132,7 @@ class AnnotatedCardTimer: UIView {
         playerLabel.font = UIFont(name: FONTNAME.Numbers, size: 16)
         playerLabel.textColor = UIColor(named: ColorName.DarkBlueText)!
         if let player = player {
-            playerLabel.text = String(player)
+            playerLabel.text = player
         }
         addSubview(playerLabel)
     }
@@ -282,12 +284,17 @@ extension AnnotatedCardTimer: UIContextMenuInteractionDelegate {
         
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (elements) -> UIMenu? in
             
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+            let timeMessage = LS_BUTTON_DRAWN_AT_MINUTE + " " + String(self.cardDrawnAtMinute)
+            let time = UIAction(title: timeMessage) { (action) in
+                print("Tapped card drawn time")
+            }
+            
+            let delete = UIAction(title: LS_BUTTON_DELETE, image: UIImage(systemName: "trash"), attributes: .destructive) { action in
                 self.shouldDelete = true
                 self.delegate?.deleteCardTimer()
             }
             
-            let children: [UIMenuElement] = [delete]
+            let children: [UIMenuElement] = [time, delete]
             return UIMenu(title: "", image: nil, identifier: nil, options: [], children: children)
         }
         return configuration

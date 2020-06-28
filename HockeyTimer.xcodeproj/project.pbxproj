@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33AFC4AB40F48A92D2F8DF98 /* Pods_HockeyTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */; };
 		4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */; };
 		4F052B0923DDBCB000FAFCBF /* PickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0823DDBCB000FAFCBF /* PickerDataSource.swift */; };
 		4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B0A23DDC1D000FAFCBF /* PickerNumberView.swift */; };
 		4F052B1423DE043200FAFCBF /* GameTimePickersUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */; };
 		4F11E3F4241506080044B1B2 /* AnnotatedCardTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3F3241506080044B1B2 /* AnnotatedCardTimer.swift */; };
 		4F11E3F624150C260044B1B2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3F524150C260044B1B2 /* File.swift */; };
-		4F11E3F824150C420044B1B2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3F724150C420044B1B2 /* Player.swift */; };
+		4F11E3F824150C420044B1B2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3F724150C420044B1B2 /* Team.swift */; };
 		4F11E3FA241517CA0044B1B2 /* LogPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3F9241517CA0044B1B2 /* LogPlayerVC.swift */; };
 		4F11E3FD241518380044B1B2 /* ChooseTeamPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3FC241518380044B1B2 /* ChooseTeamPanel.swift */; };
 		4F11E40024151B6B0044B1B2 /* PlayerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11E3FF24151B6B0044B1B2 /* PlayerPicker.swift */; };
@@ -82,7 +81,6 @@
 		4F8D08BA23243A8A0062A58F /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D08B923243A8A0062A58F /* LocalDataManager.swift */; };
 		4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D08BB23243A900062A58F /* DataServiceURL.swift */; };
 		4F8DB70B232D0D0000BFB156 /* HockeyUppLinks.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F8DB70A232D0D0000BFB156 /* HockeyUppLinks.json */; };
-		4F93F57923C9DA2C00C93561 /* CardTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F93F57823C9DA2800C93561 /* CardTimer.swift */; };
 		4F93F57A23C9DA2F00C93561 /* CardTimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F93F57423C9DA2800C93561 /* CardTimerCell.swift */; };
 		4F93F57B23C9DA3100C93561 /* CardTimerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F93F57523C9DA2800C93561 /* CardTimerPanel.swift */; };
 		4F93F57C23C9DA3400C93561 /* CardTimerPanelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F93F57623C9DA2800C93561 /* CardTimerPanelDataSource.swift */; };
@@ -134,6 +132,9 @@
 		4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */; };
 		4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF271F522635003B1259 /* DurationCard.swift */; };
 		4FB4BF2A1F522644003B1259 /* MiniStopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BF291F522644003B1259 /* MiniStopWatch.swift */; };
+		4FB7668A24A8D760000BC80E /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7668924A8D760000BC80E /* MessageView.swift */; };
+		4FB7668D24A8D7AE000BC80E /* XButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7668B24A8D7AE000BC80E /* XButtonLayer.swift */; };
+		4FB7668E24A8D7AE000BC80E /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7668C24A8D7AE000BC80E /* XButton.swift */; };
 		4FCC3BB423E9F6F900FB27E6 /* AppIconAlt6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB123E9F6F900FB27E6 /* AppIconAlt6@3x.png */; };
 		4FCC3BB523E9F6FA00FB27E6 /* AppIconAlt6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB223E9F6F900FB27E6 /* AppIconAlt6.png */; };
 		4FCC3BB623E9F6FA00FB27E6 /* AppIconAlt6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FCC3BB323E9F6F900FB27E6 /* AppIconAlt6@2x.png */; };
@@ -161,7 +162,7 @@
 		4F052B1323DE043200FAFCBF /* GameTimePickersUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimePickersUserInfoKey.swift; sourceTree = "<group>"; };
 		4F11E3F3241506080044B1B2 /* AnnotatedCardTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedCardTimer.swift; sourceTree = "<group>"; };
 		4F11E3F524150C260044B1B2 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		4F11E3F724150C420044B1B2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		4F11E3F724150C420044B1B2 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		4F11E3F9241517CA0044B1B2 /* LogPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogPlayerVC.swift; sourceTree = "<group>"; };
 		4F11E3FC241518380044B1B2 /* ChooseTeamPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTeamPanel.swift; sourceTree = "<group>"; };
 		4F11E3FF24151B6B0044B1B2 /* PlayerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPicker.swift; sourceTree = "<group>"; };
@@ -235,7 +236,6 @@
 		4F93F57523C9DA2800C93561 /* CardTimerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTimerPanel.swift; sourceTree = "<group>"; };
 		4F93F57623C9DA2800C93561 /* CardTimerPanelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTimerPanelDataSource.swift; sourceTree = "<group>"; };
 		4F93F57723C9DA2800C93561 /* ThreeCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCards.swift; sourceTree = "<group>"; };
-		4F93F57823C9DA2800C93561 /* CardTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTimer.swift; sourceTree = "<group>"; };
 		4F93F57E23C9DA5000C93561 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		4F93F57F23C9DA5100C93561 /* ChooseCardPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCardPanel.swift; sourceTree = "<group>"; };
 		4F93F58223C9DA5600C93561 /* ChooseMinutesPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseMinutesPanel.swift; sourceTree = "<group>"; };
@@ -285,6 +285,9 @@
 		4FB4BF221F5221A1003B1259 /* MaskWithActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskWithActivityIndicator.swift; sourceTree = "<group>"; };
 		4FB4BF271F522635003B1259 /* DurationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
 		4FB4BF291F522644003B1259 /* MiniStopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniStopWatch.swift; sourceTree = "<group>"; };
+		4FB7668924A8D760000BC80E /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		4FB7668B24A8D7AE000BC80E /* XButtonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XButtonLayer.swift; sourceTree = "<group>"; };
+		4FB7668C24A8D7AE000BC80E /* XButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		4FCC3BB123E9F6F900FB27E6 /* AppIconAlt6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconAlt6@3x.png"; sourceTree = "<group>"; };
 		4FCC3BB223E9F6F900FB27E6 /* AppIconAlt6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconAlt6.png; sourceTree = "<group>"; };
 		4FCC3BB323E9F6F900FB27E6 /* AppIconAlt6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconAlt6@2x.png"; sourceTree = "<group>"; };
@@ -303,9 +306,6 @@
 		4FF7FB321F655960001D4ED1 /* OnboardingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		4FF7FB351F6559E8001D4ED1 /* OnboardScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardScreen.swift; sourceTree = "<group>"; };
 		4FFC758A2348F8760049C815 /* RemoteMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessageManager.swift; sourceTree = "<group>"; };
-		B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HockeyTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyTimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer.release.xcconfig"; sourceTree = "<group>"; };
-		D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +313,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33AFC4AB40F48A92D2F8DF98 /* Pods_HockeyTimer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +501,6 @@
 				4F93F57523C9DA2800C93561 /* CardTimerPanel.swift */,
 				4F93F57623C9DA2800C93561 /* CardTimerPanelDataSource.swift */,
 				4F93F57423C9DA2800C93561 /* CardTimerCell.swift */,
-				4F93F57823C9DA2800C93561 /* CardTimer.swift */,
 				4F93F57723C9DA2800C93561 /* ThreeCards.swift */,
 				4F11E3F3241506080044B1B2 /* AnnotatedCardTimer.swift */,
 			);
@@ -554,8 +552,6 @@
 			children = (
 				4FB4BE681F515B3B003B1259 /* HockeyTimer */,
 				4FB4BE671F515B3B003B1259 /* Products */,
-				DCA6DE515CB7D518DA4B6954 /* Pods */,
-				CA1336AFD4D7B8F7C806EDB2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -610,28 +606,29 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4F7FA9C323E7072300EC4BC9 /* ContainerView */,
-				4F7FA97E23E6CF1000EC4BC9 /* CircularFAB */,
-				4F29B287239D7E0E002115B7 /* GameTimePickers */,
-				4F11E3FE24151B560044B1B2 /* PlayerPicker */,
-				4F8470C922AEA0EA00D71989 /* OvalCountryButton */,
-				4F780A8B1FD0906D00DB1021 /* Phone */,
-				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
-				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
-				4FB4BF261F52261F003B1259 /* DurationCard */,
-				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
-				4FD3722D22A6F5D800A45757 /* RulesButton */,
-				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
-				4FB4BE951F515C89003B1259 /* IconButtons */,
-				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
-				4FB4BE801F515BB5003B1259 /* Pitch */,
-				4F9FC5D91F5344760003C2FF /* ScoreStepper */,
+				4F7FA9C423E7072F00EC4BC9 /* AppIconCard */,
 				4F93F57123C9D9BE00C93561 /* CardTimerPanel */,
+				4F492EB623D4CF7300980818 /* Cells */,
 				4F93F57223C9D9E900C93561 /* ChooseCardPanel */,
 				4F93F57323C9D9F500C93561 /* ChooseMinutesPanel */,
 				4F11E3FB241518190044B1B2 /* ChooseTeamPanel */,
-				4F492EB623D4CF7300980818 /* Cells */,
-				4F7FA9C423E7072F00EC4BC9 /* AppIconCard */,
+				4F7FA97E23E6CF1000EC4BC9 /* CircularFAB */,
+				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
+				4FB4BF261F52261F003B1259 /* DurationCard */,
+				4F7FA9C323E7072300EC4BC9 /* ContainerView */,
+				4F29B287239D7E0E002115B7 /* GameTimePickers */,
+				4FB4BE951F515C89003B1259 /* IconButtons */,
+				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
+				4FB7668824A8D748000BC80E /* MessageView */,
+				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
+				4F8470C922AEA0EA00D71989 /* OvalCountryButton */,
+				4F780A8B1FD0906D00DB1021 /* Phone */,
+				4FB4BE801F515BB5003B1259 /* Pitch */,
+				4F11E3FE24151B560044B1B2 /* PlayerPicker */,
+				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
+				4FD3722D22A6F5D800A45757 /* RulesButton */,
+				4F9FC5D91F5344760003C2FF /* ScoreStepper */,
+				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -713,7 +710,7 @@
 		4FB4BEAE1F515E11003B1259 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4F11E3F724150C420044B1B2 /* Player.swift */,
+				4F11E3F724150C420044B1B2 /* Team.swift */,
 				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
 				4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */,
 				4FD3721D22A4267C00A45757 /* Duration.swift */,
@@ -763,6 +760,16 @@
 				4FB4BF291F522644003B1259 /* MiniStopWatch.swift */,
 			);
 			name = DurationCard;
+			sourceTree = "<group>";
+		};
+		4FB7668824A8D748000BC80E /* MessageView */ = {
+			isa = PBXGroup;
+			children = (
+				4FB7668924A8D760000BC80E /* MessageView.swift */,
+				4FB7668C24A8D7AE000BC80E /* XButton.swift */,
+				4FB7668B24A8D7AE000BC80E /* XButtonLayer.swift */,
+			);
+			name = MessageView;
 			sourceTree = "<group>";
 		};
 		4FCC3BB023E9F6E500FB27E6 /* AppIconAlt6 */ = {
@@ -834,23 +841,6 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
-		CA1336AFD4D7B8F7C806EDB2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B734E60590F81F00D57943C8 /* Pods_HockeyTimer.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DCA6DE515CB7D518DA4B6954 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */,
-				C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -858,11 +848,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FB4BE781F515B3B003B1259 /* Build configuration list for PBXNativeTarget "HockeyTimer" */;
 			buildPhases = (
-				791C3F78CF7AFD95276D6669 /* [CP] Check Pods Manifest.lock */,
 				4FB4BE621F515B3B003B1259 /* Sources */,
 				4FB4BE631F515B3B003B1259 /* Frameworks */,
 				4FB4BE641F515B3B003B1259 /* Resources */,
-				A10F81FD9B924721C2FA85BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -954,53 +942,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		791C3F78CF7AFD95276D6669 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HockeyTimer-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A10F81FD9B924721C2FA85BA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HockeyTimer/Pods-HockeyTimer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		4FB4BE621F515B3B003B1259 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1049,6 +990,7 @@
 				4F052B1423DE043200FAFCBF /* GameTimePickersUserInfoKey.swift in Sources */,
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */,
+				4FB7668D24A8D7AE000BC80E /* XButtonLayer.swift in Sources */,
 				4F7FA98423E6CF1E00EC4BC9 /* CircularFABButton.swift in Sources */,
 				4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */,
 				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
@@ -1078,7 +1020,6 @@
 				4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */,
 				4F11E3FD241518380044B1B2 /* ChooseTeamPanel.swift in Sources */,
 				4F4D5E5322F3524E00701504 /* StopWatchTimerState.swift in Sources */,
-				4F93F57923C9DA2C00C93561 /* CardTimer.swift in Sources */,
 				4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */,
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FAFB20A2299539800CE11EE /* Mask.swift in Sources */,
@@ -1098,9 +1039,11 @@
 				4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */,
 				4F93F57C23C9DA3400C93561 /* CardTimerPanelDataSource.swift in Sources */,
 				4F052B0923DDBCB000FAFCBF /* PickerDataSource.swift in Sources */,
+				4FB7668E24A8D7AE000BC80E /* XButton.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
-				4F11E3F824150C420044B1B2 /* Player.swift in Sources */,
+				4F11E3F824150C420044B1B2 /* Team.swift in Sources */,
 				4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */,
+				4FB7668A24A8D760000BC80E /* MessageView.swift in Sources */,
 				4F492EBC23D4DB8C00980818 /* OvalCountryLayer.swift in Sources */,
 				4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */,
 				4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */,
@@ -1262,7 +1205,6 @@
 		};
 		4FB4BE791F515B3B003B1259 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D74366A374FDFD3B7C79D3E3 /* Pods-HockeyTimer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = BrightAppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1283,7 +1225,6 @@
 		};
 		4FB4BE7A1F515B3B003B1259 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C25D3688B54FA0EF8F1F5255 /* Pods-HockeyTimer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = BrightAppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
