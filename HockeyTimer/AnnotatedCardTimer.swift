@@ -27,11 +27,11 @@ class AnnotatedCardTimer: UIView {
     private var teamLabel: UILabel!
     private var playerLabel: UILabel!
     
-    private var card: Card!
+    private (set) var card: Card!
     private (set) var secondsToGo: Int!
-    private var team: Team?
-    private var player: String?
-    private var cardDrawnAtMinute: Int!
+    private (set) var team: Team?
+    private (set) var player: String?
+    private (set) var cardDrawnAtMinute: Int!
     
     private weak var delegate: AnnotatedCardTimerDelegate?
     private var haptic: UINotificationFeedbackGenerator?

@@ -25,6 +25,10 @@ class CardTimerPanel: UIView {
     private var dataSource: CardTimerPanelDataSource!
     weak var delegate: CardTimerPanelDelegate?
     
+    var timers: [AnnotatedCardTimer] {
+        return dataSource.timers
+    }
+    
     private let padding: CGFloat = 10
     private var itemWidth: CGFloat {
         return bounds.height * 0.8

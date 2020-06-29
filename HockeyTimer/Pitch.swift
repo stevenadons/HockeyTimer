@@ -303,7 +303,6 @@ extension Pitch: ScoreStepperDelegate {
             awayScore += 1
             awayScoreLabel.text = "\(awayScore)"
             delegate?.scoreAway()
-            
         }
     }
 }

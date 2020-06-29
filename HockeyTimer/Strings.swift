@@ -9,7 +9,6 @@
 import Foundation
 
 
-
 let LS_NEWGAME = NSLocalizedString("New Game", comment: "Overdue message")
 let LS_GAMEPAUSED = NSLocalizedString("Game Paused", comment: "Message when game is pausing")
 let LS_OVERTIME = NSLocalizedString("In Overtime", comment: "Time over message")
@@ -33,6 +32,7 @@ let LS_FOURTHQUARTERLABEL = NSLocalizedString("Q4", comment: "Time indication la
 let LS_HOME_TEAM = NSLocalizedString("Home", comment: "Card annotation for penaltied team")
 let LS_AWAY_TEAM = NSLocalizedString("Guest", comment: "Card annotation for penaltied team")
 let LS_STAFF = NSLocalizedString("Staff", comment: "Name for staff getting a penalty card")
+let LS_CAPTAIN = NSLocalizedString("Captain", comment: "Name for captain getting a penalty card")
 let LS_ADDING_CARD_FOR = NSLocalizedString("Adding card for", comment: "Name for button when logging player with card")
 
 let LS_LONG_PRESS_PENALTY_CARD_MESSAGE = NSLocalizedString("Long press a penalty card to delete or show details.", comment: "Message on first penalty card")
@@ -65,7 +65,7 @@ let LS_BUTTON_LOG_PLAYER = NSLocalizedString("Log Player", comment: "Button Titl
 let LS_BUTTON_YES = NSLocalizedString("Yes", comment: "Button Title")
 let LS_BUTTON_NO = NSLocalizedString("No", comment: "Button Title")
 let LS_BUTTON_DELETE = NSLocalizedString("Delete", comment: "Context Menu Item")
-let LS_BUTTON_DRAWN_AT_MINUTE = NSLocalizedString("Card Drawn at Minute", comment: "Context Menu Item")
+let LS_BUTTON_DRAWN_AT_MINUTE = NSLocalizedString("Card Drawn in Minute", comment: "Context Menu Item")
 
 let LS_HALVES = NSLocalizedString("2 x Half", comment: "Title in segmented control")
 let LS_QUARTERS = NSLocalizedString("4 x Quarter", comment: "Title in segmented control")

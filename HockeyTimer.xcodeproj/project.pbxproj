@@ -26,6 +26,10 @@
 		4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F37FBF122AD3FD200D2E236 /* UIDevice.swift */; };
 		4F3A11D922F89FE600E643CB /* TestingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3A11D822F89FE600E643CB /* TestingVC.swift */; };
 		4F3AAB9F22A9A85200ACD193 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */; };
+		4F3CDEA724A9DEEC005FE4F0 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3CDEA624A9DEEC005FE4F0 /* PDFCreator.swift */; };
+		4F3CDEA924A9F481005FE4F0 /* PDFVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3CDEA824A9F481005FE4F0 /* PDFVC.swift */; };
+		4F3CDEAB24AA0208005FE4F0 /* GameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3CDEAA24AA0208005FE4F0 /* GameEvent.swift */; };
+		4F3CDEAD24AA040C005FE4F0 /* GameEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3CDEAC24AA040C005FE4F0 /* GameEventType.swift */; };
 		4F3D1ED423DF77DF00A53272 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D1ED323DF77DF00A53272 /* Double.swift */; };
 		4F3F397B22B9673000BC0141 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F397A22B9673000BC0141 /* UpdateManager.swift */; };
 		4F3F62701F64745A00D8FEC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F62721F64745A00D8FEC5 /* Localizable.strings */; };
@@ -175,6 +179,10 @@
 		4F37FBF122AD3FD200D2E236 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		4F3A11D822F89FE600E643CB /* TestingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingVC.swift; sourceTree = "<group>"; };
 		4F3AAB9E22A9A85200ACD193 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		4F3CDEA624A9DEEC005FE4F0 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
+		4F3CDEA824A9F481005FE4F0 /* PDFVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFVC.swift; sourceTree = "<group>"; };
+		4F3CDEAA24AA0208005FE4F0 /* GameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvent.swift; sourceTree = "<group>"; };
+		4F3CDEAC24AA040C005FE4F0 /* GameEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventType.swift; sourceTree = "<group>"; };
 		4F3D1ED323DF77DF00A53272 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4F3F397A22B9673000BC0141 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		4F3F626E1F64745000D8FEC5 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
@@ -599,6 +607,7 @@
 				4F7FA9B823E6FFFC00EC4BC9 /* AppIconVC.swift */,
 				4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */,
 				4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */,
+				4F3CDEA824A9F481005FE4F0 /* PDFVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -676,6 +685,7 @@
 				4FFC758A2348F8760049C815 /* RemoteMessageManager.swift */,
 				4F3F397A22B9673000BC0141 /* UpdateManager.swift */,
 				4FB042E2232979DF00EBEC99 /* MinimumIOSVersionManager.swift */,
+				4F3CDEA624A9DEEC005FE4F0 /* PDFCreator.swift */,
 				4F8AFCE322919CEA00D975A1 /* In App Purchases */,
 				4F28325C1FCF468600E67FF7 /* UserNotificationsHandler */,
 				4FF7FB2C1F6549C3001D4ED1 /* JukeBox */,
@@ -710,24 +720,26 @@
 		4FB4BEAE1F515E11003B1259 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4F11E3F724150C420044B1B2 /* Team.swift */,
-				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
-				4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */,
-				4FD3721D22A4267C00A45757 /* Duration.swift */,
-				4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */,
-				4FD3722722A6D61000A45757 /* Country.swift */,
-				4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */,
-				4FD3722922A6EC1D00A45757 /* Rules.swift */,
 				4F93F58923C9DA8E00C93561 /* Card.swift */,
 				4F93F58823C9DA8E00C93561 /* CardType.swift */,
 				4F93F58C23C9E10A00C93561 /* ColorName.swift */,
-				4F93F58E23C9E13700C93561 /* FontName.swift */,
-				4F93F59023CA38B900C93561 /* Sound.swift */,
+				4FD3722722A6D61000A45757 /* Country.swift */,
+				4FD3721D22A4267C00A45757 /* Duration.swift */,
 				4F93F59223CA38F400C93561 /* FeatureFlags.swift */,
-				4F93F59423CA394200C93561 /* UserDefaultsKey.swift */,
-				4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */,
-				4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */,
 				4F11E3F524150C260044B1B2 /* File.swift */,
+				4F93F58E23C9E13700C93561 /* FontName.swift */,
+				4F3CDEAA24AA0208005FE4F0 /* GameEvent.swift */,
+				4F3CDEAC24AA040C005FE4F0 /* GameEventType.swift */,
+				4F6869C623DCAEF9003F89C1 /* GameTimeDataSource.swift */,
+				4FD3722B22A6ECC100A45757 /* GroupOfRules.swift */,
+				4FB4BEAF1F515E2F003B1259 /* HockeyGame.swift */,
+				4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */,
+				4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */,
+				4FD3722922A6EC1D00A45757 /* Rules.swift */,
+				4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */,
+				4F93F59023CA38B900C93561 /* Sound.swift */,
+				4F11E3F724150C420044B1B2 /* Team.swift */,
+				4F93F59423CA394200C93561 /* UserDefaultsKey.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -965,6 +977,7 @@
 				4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */,
 				4F11E40024151B6B0044B1B2 /* PlayerPicker.swift in Sources */,
 				4F8AFCE522919D0F00D975A1 /* Store.swift in Sources */,
+				4F3CDEAB24AA0208005FE4F0 /* GameEvent.swift in Sources */,
 				4F93F58A23C9DA8F00C93561 /* CardType.swift in Sources */,
 				4F6342A422916E0A002F49B4 /* NotificationNameX.swift in Sources */,
 				4FB4BEAA1F515DBE003B1259 /* ConfirmationButton.swift in Sources */,
@@ -992,6 +1005,7 @@
 				4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */,
 				4FB7668D24A8D7AE000BC80E /* XButtonLayer.swift in Sources */,
 				4F7FA98423E6CF1E00EC4BC9 /* CircularFABButton.swift in Sources */,
+				4F3CDEA924A9F481005FE4F0 /* PDFVC.swift in Sources */,
 				4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */,
 				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
 				4F11E40224151B9C0044B1B2 /* PlayerPickerDataSource.swift in Sources */,
@@ -1025,12 +1039,14 @@
 				4FAFB20A2299539800CE11EE /* Mask.swift in Sources */,
 				4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */,
 				4FB4BF151F520D1C003B1259 /* PageVC.swift in Sources */,
+				4F3CDEAD24AA040C005FE4F0 /* GameEventType.swift in Sources */,
 				4F3F397B22B9673000BC0141 /* UpdateManager.swift in Sources */,
 				4F8AFCE722919D1400D975A1 /* Products.swift in Sources */,
 				4FD3722022A6C7D900A45757 /* OvalCountryButton.swift in Sources */,
 				4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */,
 				4FB4BE8E1F515C38003B1259 /* PitchBackgroundLayer.swift in Sources */,
 				4F9FC5D81F53387D0003C2FF /* PanArrowVC.swift in Sources */,
+				4F3CDEA724A9DEEC005FE4F0 /* PDFCreator.swift in Sources */,
 				4F9FC5D01F5331B30003C2FF /* PanArrowLayer.swift in Sources */,
 				4F9FC5D21F5332760003C2FF /* PanArrow.swift in Sources */,
 				4FD3723122A6F5F400A45757 /* RulesButton.swift in Sources */,

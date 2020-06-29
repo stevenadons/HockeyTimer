@@ -82,7 +82,7 @@ class PlayerPicker: UIView {
     
     private func createPlayers() -> [String] {
         
-        var result: [String] = [LS_STAFF]
+        var result: [String] = [LS_CAPTAIN, LS_STAFF]
         for int in 1 ... 99 {
             result.append(String(int))
         }

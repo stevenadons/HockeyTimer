@@ -26,6 +26,7 @@
 "Home" = "Thuis";
 "Guest" = "Gast";
 "Staff" = "Staff";
+"Captain" = "Aanvoerder";
 "Adding card for" = "Kaart voor";
 
 "Long press a penalty card to delete or show details." = "Tik lang op een strafkaart om te verwijderen of om details te zien";
@@ -67,7 +68,7 @@
 "Yes" = "Ja";
 "No" = "Neen";
 "Delete" = "Verwijder";
-"Card Drawn at Minute" = "Kaart in minuut";
+"Card Drawn in Minute" = "Kaart in minuut";
 
 "Set New Time" = "Tijd instellen";
 "Game Time" = "Nieuwe tijd";

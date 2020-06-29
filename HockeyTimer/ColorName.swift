@@ -32,6 +32,7 @@ enum ColorName {
     static let VeryDarkBlue = "VeryDarkBlue"
     static let VeryDarkBlue_Red = "VeryDarkBlue_Red"
     static let VeryDarkBlue_White = "VeryDarkBlue_White"
+    static let MessageView = "MessageView"
 
     static let LightRed = "LightRed"
     static let LightYellow = "LightYellow"

@@ -480,6 +480,9 @@ class StopWatch: UIControl {
             
             // Start Period or Resume after pausing
             timer.startCountDown()
+            if game.status == .WaitingToStart {
+                game.logStartTime()
+            }
             game.status = .Running
             JukeBox.instance.prepareSound(Sound.BeepBeep)
             icon.change(to: .PauseIcon)
@@ -671,6 +674,9 @@ extension StopWatch: StopWatchTimerDelegate {
         JukeBox.instance.playSound(Sound.BeepBeep)
         prepareHapticIfNeeded()
         updateProgressBars()
+        if game.currentPeriod == game.periods {
+            game.logEndTime()
+        }
         runningSecondsToGo = 0
         message = LS_OVERTIME
         resetTimeLabel(withColor: UIColor(named: ColorName.PantoneRed)!, alpha: 1)

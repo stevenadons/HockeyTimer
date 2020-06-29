@@ -13,7 +13,7 @@ class CardTimerPanelDataSource: UICollectionViewDiffableDataSource<Int, Annotate
     
     // MARK: - Properties
     
-    private var timers: [AnnotatedCardTimer] = [] {
+    var timers: [AnnotatedCardTimer] = [] {
         didSet {
             updateGlobalSecondsToGo()
         }

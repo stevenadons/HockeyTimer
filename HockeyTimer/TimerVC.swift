@@ -15,6 +15,8 @@ class TimerVC: PanArrowVC {
     
     // MARK: - Properties
     
+    private var showGameSummaryButton: UIButton!
+    
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
     private var cardTimerPanel: CardTimerPanel!
@@ -57,6 +59,12 @@ class TimerVC: PanArrowVC {
     
     private func setupViews() {
         
+        showGameSummaryButton = UIButton()
+        showGameSummaryButton.translatesAutoresizingMaskIntoConstraints = false
+        showGameSummaryButton.setTitle("Show Summary", for: .normal)
+        showGameSummaryButton.addTarget(self, action: #selector(showReport), for: .touchUpInside)
+        view.addSubview(showGameSummaryButton)
+        
         stopWatchContainer = ContainerView()
         view.addSubview(stopWatchContainer)
         
@@ -83,6 +91,9 @@ class TimerVC: PanArrowVC {
         liftPanArrowDownLabelUp()
 
         NSLayoutConstraint.activate([
+            
+            showGameSummaryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showGameSummaryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), 
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
@@ -232,6 +243,19 @@ class TimerVC: PanArrowVC {
     @objc private func secretTap() {
         
         let vc = TestingVC()
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc private func showReport() {
+        
+        var timers: [AnnotatedCardTimer] = []
+        for index in 0..<(cardTimerPanel.timers.count - 1) {
+            timers.append(cardTimerPanel.timers[index])
+        }
+        game.logPenaltyCardsFrom(timers)
+        let pdfCreator = PDFCreator(game: game)
+        let gameSummary = pdfCreator.createReport()
+        let vc = PDFVC(data: gameSummary)
         present(vc, animated: true, completion: nil)
     }
         

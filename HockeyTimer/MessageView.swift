@@ -48,7 +48,7 @@ class MessageView: UIView {
         
         balloon = UIView()
         balloon.translatesAutoresizingMaskIntoConstraints = false
-        balloon.backgroundColor = UIColor(named: ColorName.PantoneRed)!
+        balloon.backgroundColor = UIColor(named: ColorName.MessageView)!
         balloon.layer.cornerRadius = 8
         addSubview(balloon)
 
