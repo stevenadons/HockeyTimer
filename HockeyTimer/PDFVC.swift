@@ -16,15 +16,21 @@ class PDFVC: UIViewController {
     
     private var pdfContainer: UIView!
     private var pdfView: PDFView!
+    private var game: HockeyGame!
     private var data: Data!
+    private var shareButton: UIButton!
+    private var doneButton: UIButton!
+
     
     
     // MARK: - Init
     
-    init(data: Data) {
+    init(game: HockeyGame) {
         
-        self.data = data
         super.init(nibName: nil, bundle: nil)
+        self.game = game
+        let pdfCreator = PDFCreator(game: game)
+        self.data = pdfCreator.createReport(overrideUserInterfaceStyle)
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +42,9 @@ class PDFVC: UIViewController {
         
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        checkDarkMode()
+        
+        view.backgroundColor = UIColor.black
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
@@ -51,6 +59,22 @@ class PDFVC: UIViewController {
         pdfView.document = PDFDocument(data: data)
         pdfView.autoScales = true
         pdfContainer.addSubview(pdfView)
+        
+        shareButton = UIButton()
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
+        let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: configuration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        shareButton.setImage(image, for: .normal)
+        shareButton.addTarget(self, action: #selector(shareTapped), for: [.touchUpInside])
+        view.addSubview(shareButton)
+        
+        doneButton = UIButton()
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle(LS_BUTTON_DONE, for: .normal)
+        doneButton.addTarget(self, action: #selector(doneTapped), for: [.touchUpInside])
+        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
+        view.addSubview(doneButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,7 +92,63 @@ class PDFVC: UIViewController {
             pdfView.trailingAnchor.constraint(equalTo: pdfContainer.trailingAnchor),
             pdfView.topAnchor.constraint(equalTo: pdfContainer.topAnchor),
             pdfView.bottomAnchor.constraint(equalTo: pdfContainer.bottomAnchor),
+            
+            shareButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 14),
+            shareButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
+            
+            doneButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 14),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
         ])
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        super.traitCollectionDidChange(previousTraitCollection)
+        checkDarkMode()
+        
+        let pdfCreator = PDFCreator(game: game)
+        self.data = pdfCreator.createReport(overrideUserInterfaceStyle)
+        pdfView.document = PDFDocument(data: data)
+    }
+    
+    private func addObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    // MARK: - Private Methods
+    
+    @objc private func checkDarkMode() {
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
+            overrideUserInterfaceStyle = .unspecified
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysDarkMode) {
+            overrideUserInterfaceStyle = .dark
+        } else if UserDefaults.standard.bool(forKey: UserDefaultsKey.AlwaysLightMode) {
+            overrideUserInterfaceStyle = .light
+        }
+        view.setNeedsLayout()
+    }
+
+    
+    // MARK: - Touch Methods
+    
+    @objc private func doneTapped() {
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func shareTapped() {
+        
+        
     }
     
 

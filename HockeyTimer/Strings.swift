@@ -36,6 +36,13 @@ let LS_CAPTAIN = NSLocalizedString("Captain", comment: "Name for captain getting
 let LS_ADDING_CARD_FOR = NSLocalizedString("Adding card for", comment: "Name for button when logging player with card")
 
 let LS_LONG_PRESS_PENALTY_CARD_MESSAGE = NSLocalizedString("Long press a penalty card to delete or show details.", comment: "Message on first penalty card")
+let LS_SHOW_GAME_REPORT = NSLocalizedString("Show Game Report", comment: "Button")
+let LS_GAME_READY_TO_START = NSLocalizedString("Game Ready to Start", comment: "Message in Empty Game Report")
+let LS_GAME_STARTED_AT = NSLocalizedString("Game Started at ", comment: "Game Report")
+let LS_GAME_ENDED_AT = NSLocalizedString("Game Ended at ", comment: "Game Report")
+let LS_GAME_IS_RUNNING = NSLocalizedString("Game is Running", comment: "Game Report")
+let LS_PLAYER = NSLocalizedString("Player", comment: "Game Report")
+let LS_GAME_REPORT_FOOTER = NSLocalizedString("HockeyUpp - Game Report", comment: "Game Report")
 
 let LS_WARNINGRESETGAME = NSLocalizedString("New Game", comment: "When reset button tapped")
 let LS_WARNINGNEWGAME_TITLE = NSLocalizedString("New Game", comment: "When stopwatch is tapped for new game")

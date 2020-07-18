@@ -23,9 +23,7 @@ protocol PitchDelegate: AnyObject {
 }
 
 
-
 class ScoreVC: PanArrowVC {
-    
     
     // MARK: - Properties
     
@@ -140,6 +138,7 @@ class ScoreVC: PanArrowVC {
         super.viewWillDisappear(animated)
         inEditMode = false
         pitch.toggleEditMode(on: false)
+        editButton.setTitle(LS_BUTTON_EDIT_SCORE, for: .normal)
     }
     
     

@@ -48,6 +48,7 @@ class PlayerPicker: UIView {
         picker.translatesAutoresizingMaskIntoConstraints = false
         let players: [String] = createPlayers()
         pickerDataSource = PlayerPickerDataSource(data: players)
+        picker.selectRow(2, inComponent: 0, animated: false)
         addSubview(picker)
     }
     

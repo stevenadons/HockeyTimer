@@ -110,7 +110,7 @@ extension ConfirmationButton {
         
         let button = ConfirmationButton()
         
-        button.backgroundColor = UIColor(named: ColorName.PantoneYellow)! // UIColor(named: ColorName.LightYellow)!
+        button.backgroundColor = UIColor(named: ColorName.LightYellow)! 
         button.setTitleColor(UIColor(named: ColorName.VeryDarkBlue)!, for: .normal)
         
         if largeFont {

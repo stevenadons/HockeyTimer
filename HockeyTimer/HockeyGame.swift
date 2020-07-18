@@ -30,7 +30,9 @@ class HockeyGame {
     private(set) var lastScored: Team?
     private(set) var startTime: Date?
     private(set) var endTime: Date?
-    private(set) var events: [GameEvent] = [] 
+//    private(set) var events: [GameEvent] = []
+    private(set) var goals: [Goal] = []
+    private(set) var penaltyCards: [PenaltyCard] = []
     
     var currentPeriod: Double = 1.0
     var periods: Double = 2.0
@@ -148,14 +150,14 @@ class HockeyGame {
         
         homeScore += 1
         lastScored = .Home
-        logGoal(team: .Home, homeScore: homeScore, awayScore: awayScore, inMinute: currentMinute)
+        logGoal(team: .Home, inMinute: currentMinute)
     }
     
     func awayScored() {
         
         awayScore += 1
         lastScored = .Away
-        logGoal(team: .Away, homeScore: homeScore, awayScore: awayScore, inMinute: currentMinute)
+        logGoal(team: .Away, inMinute: currentMinute)
     }
     
     func homeScoreMinusOne() {
@@ -163,7 +165,6 @@ class HockeyGame {
         if homeScore >= 1 {
             homeScore -= 1
         }
-        print("About to clear last home goal")
         clearLastGoal(.Home)
     }
     
@@ -194,69 +195,38 @@ class HockeyGame {
         
         clearAllPenaltyCards()
         for timer in timers {
-            let event = GameEvent.createFrom(timer)
-            events.append(event)
+            let penaltyCard = PenaltyCard(timer)
+            penaltyCards.append(penaltyCard)
+//            let event = GameEvent.createFrom(timer)
+//            events.append(event)
         }
     }
     
-    func logGoal(team: Team, homeScore: Int, awayScore: Int, inMinute: Int) {
+//    func logGoal(team: Team, homeScore: Int, awayScore: Int, inMinute: Int) {
+//
+//        let type = GameEventType.goal(team: team, homeScore: homeScore, awayScore: awayScore, inMinute: inMinute)
+//        let event = GameEvent(type: type)
+//        events.append(event)
+//    }
+    
+    func logGoal(team: Team, inMinute: Int) {
         
-        let type = GameEventType.goal(team: team, homeScore: homeScore, awayScore: awayScore, inMinute: inMinute)
-        let event = GameEvent(type: type)
-        events.append(event)
+        let goal = Goal(team: team, time: Date(), inMinute: inMinute)
+        goals.append(goal)
     }
     
     func clearLastGoal(_ team: Team) {
         
-        let filteredEvents = events.filter {
-            if case let GameEventType.goal(teamScore, _, _, _) = $0.type {
-                return teamScore == team
-            } else {
-                return false
-            }
+        let sortedGoals = goals.filter { $0.team == team }.sorted { $0.time < $1.time }
+        guard !sortedGoals.isEmpty else { return }
+        let removingGoal = sortedGoals.last!
+        if let index = goals.firstIndex(of: removingGoal) {
+            goals.remove(at: index)
         }
-        let sortedEvents = filteredEvents.sorted {
-            if team == .Home {
-                if case let GameEventType.goal(_, firstHomeScore, _, _) = $0.type {
-                    if case let GameEventType.goal(_, secondHomeScore, _, _) = $1.type {
-                        return firstHomeScore < secondHomeScore
-                    } else {
-                        fatalError("Error in sorting events")
-                    }
-                } else {
-                    fatalError("Error in sorting events")
-                }
-            } else {
-                if case let GameEventType.goal(_, _, firstAwayScore, _) = $0.type {
-                    if case let GameEventType.goal(_, _, secondAwayScore, _) = $1.type {
-                        return firstAwayScore < secondAwayScore
-                    } else {
-                        fatalError("Error in sorting events")
-                    }
-                } else {
-                    fatalError("Error in sorting events")
-                }
-            }
-        }
-        
-        guard !sortedEvents.isEmpty else { return }
-        let removingGoal = sortedEvents.last!
-        
-        if let index = events.firstIndex(of: removingGoal) {
-            events.remove(at: index)
-        }
-        
     }
     
     func clearAllPenaltyCards() {
         
-        let filteredEvents = events.filter {
-            if case GameEventType.penaltyCard(_, _, _, _) = $0.type {
-                return false
-            } else {
-                return true
-            }
-        }
-        events = filteredEvents
+        penaltyCards = []
     }
 }

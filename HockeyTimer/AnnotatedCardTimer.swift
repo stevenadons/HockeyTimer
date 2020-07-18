@@ -17,7 +17,6 @@ protocol AnnotatedCardTimerDelegate: AnyObject {
 
 class AnnotatedCardTimer: UIView {
     
-    
     // MARK: - Properties
     
     private var graphics: CAShapeLayer!
@@ -32,6 +31,7 @@ class AnnotatedCardTimer: UIView {
     private (set) var team: Team?
     private (set) var player: String?
     private (set) var cardDrawnAtMinute: Int!
+    private (set) var time: Date!
     
     private weak var delegate: AnnotatedCardTimerDelegate?
     private var haptic: UINotificationFeedbackGenerator?
@@ -64,6 +64,7 @@ class AnnotatedCardTimer: UIView {
         self.player = player
         self.delegate = delegate
         self.isDummyForAddCard = isDummyForAddCard
+        self.time = Date()
         
         setup()
     }

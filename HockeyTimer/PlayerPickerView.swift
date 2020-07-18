@@ -57,6 +57,7 @@ class PlayerPickerView: UIView {
         playerLabel.font = UIFont(name: FONTNAME.Numbers, size: 28)
         playerLabel.textColor = playerColor
         playerLabel.text = player
+        playerLabel.adjustsFontSizeToFitWidth = true
         addSubview(playerLabel)
     }
     
@@ -80,10 +81,10 @@ class PlayerPickerView: UIView {
             shape.centerYAnchor.constraint(equalTo: centerYAnchor),
             shape.heightAnchor.constraint(equalToConstant: shapeWidth),
         
-            playerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            playerLabel.widthAnchor.constraint(equalTo: widthAnchor),
-            playerLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            playerLabel.heightAnchor.constraint(equalTo: heightAnchor),
+            playerLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor, constant: 4),
+            playerLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -4),
+            playerLabel.centerYAnchor.constraint(equalTo: shape.centerYAnchor),
+            playerLabel.heightAnchor.constraint(equalTo: shape.heightAnchor),
         
         ])
     }

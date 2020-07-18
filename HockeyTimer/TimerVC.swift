@@ -15,7 +15,7 @@ class TimerVC: PanArrowVC {
     
     // MARK: - Properties
     
-    private var showGameSummaryButton: UIButton!
+    private var showGameReportButton: UIButton!
     
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
@@ -59,11 +59,14 @@ class TimerVC: PanArrowVC {
     
     private func setupViews() {
         
-        showGameSummaryButton = UIButton()
-        showGameSummaryButton.translatesAutoresizingMaskIntoConstraints = false
-        showGameSummaryButton.setTitle("Show Summary", for: .normal)
-        showGameSummaryButton.addTarget(self, action: #selector(showReport), for: .touchUpInside)
-        view.addSubview(showGameSummaryButton)
+        showGameReportButton = UIButton()
+        showGameReportButton.translatesAutoresizingMaskIntoConstraints = false
+        showGameReportButton.setTitle(LS_SHOW_GAME_REPORT, for: .normal)
+        showGameReportButton.titleLabel?.numberOfLines = 1
+        showGameReportButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)!
+        showGameReportButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
+        showGameReportButton.addTarget(self, action: #selector(showReport), for: .touchUpInside)
+        view.addSubview(showGameReportButton)
         
         stopWatchContainer = ContainerView()
         view.addSubview(stopWatchContainer)
@@ -92,10 +95,7 @@ class TimerVC: PanArrowVC {
 
         NSLayoutConstraint.activate([
             
-            showGameSummaryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            showGameSummaryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            
-            stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375), 
+            stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375),
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stopWatchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 10), // 20
@@ -109,6 +109,9 @@ class TimerVC: PanArrowVC {
             cardTimerPanel.heightAnchor.constraint(equalToConstant: 90),
             cardTimerPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            showGameReportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showGameReportButton.topAnchor.constraint(equalTo: cardTimerPanel.bottomAnchor, constant: 16),
             
             messageView.topAnchor.constraint(equalTo: cardTimerPanel.bottomAnchor, constant: 16),
             messageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -253,9 +256,7 @@ class TimerVC: PanArrowVC {
             timers.append(cardTimerPanel.timers[index])
         }
         game.logPenaltyCardsFrom(timers)
-        let pdfCreator = PDFCreator(game: game)
-        let gameSummary = pdfCreator.createReport()
-        let vc = PDFVC(data: gameSummary)
+        let vc = PDFVC(game: game)
         present(vc, animated: true, completion: nil)
     }
         

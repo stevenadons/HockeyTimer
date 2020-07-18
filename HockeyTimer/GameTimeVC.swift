@@ -104,7 +104,7 @@ class GameTimeVC: UIViewController {
         okButton.addTarget(self, action: #selector(okTapped), for: [.touchUpInside])
         view.addSubview(okButton)
         
-        let otherTimeColor = UIColor(named: ColorName.PantoneYellow)!
+        let otherTimeColor = UIColor(named: ColorName.LightYellow)!
         otherTimeButton = createButton(color: otherTimeColor)
         otherTimeButton.setTitleColor(UIColor(named: ColorName.VeryDarkBlue)!, for: .normal)
         otherTimeButton.setTitle(LS_BUTTON_OTHER_TIME, for: .normal)

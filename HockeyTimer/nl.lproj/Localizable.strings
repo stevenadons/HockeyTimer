@@ -30,6 +30,13 @@
 "Adding card for" = "Kaart voor";
 
 "Long press a penalty card to delete or show details." = "Tik lang op een strafkaart om te verwijderen of om details te zien";
+"Show Game Report" = "Toon wedstrijdformulier";
+"Game Ready to Start" = "Wedstrijd klaar voor aanvang";
+"Game Started at " = "Wedstrijd begonnen om ";
+"Game Ended at " = "Wedstrijd afgelopen om ";
+"Game is Running" = "Wedstrijd is bezig";
+"Player" = "Speler";
+"HockeyUpp - Game Report" = "HockeyUpp - Wedstrijdformulier";
 
 "RESET GAME" = "NIEUWE WEDSTRIJD";
 "CANCEL" = "ANNULEER";
