@@ -8,6 +8,8 @@
 
 import UIKit
 import PDFKit
+import LinkPresentation
+
 
 class PDFVC: UIViewController {
     
@@ -20,7 +22,6 @@ class PDFVC: UIViewController {
     private var data: Data!
     private var shareButton: UIButton!
     private var doneButton: UIButton!
-
     
     
     // MARK: - Init
@@ -44,7 +45,7 @@ class PDFVC: UIViewController {
         
         checkDarkMode()
         
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = .secondarySystemBackground
         
         modalPresentationStyle = .overCurrentContext
         modalTransitionStyle = .coverVertical
@@ -63,7 +64,7 @@ class PDFVC: UIViewController {
         shareButton = UIButton()
         shareButton.translatesAutoresizingMaskIntoConstraints = false
         let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: configuration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: configuration)?.withTintColor(UIColor(named: ColorName.DarkBlueText)!, renderingMode: .alwaysOriginal)
         shareButton.setImage(image, for: .normal)
         shareButton.addTarget(self, action: #selector(shareTapped), for: [.touchUpInside])
         view.addSubview(shareButton)
@@ -72,7 +73,7 @@ class PDFVC: UIViewController {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         doneButton.setTitle(LS_BUTTON_DONE, for: .normal)
         doneButton.addTarget(self, action: #selector(doneTapped), for: [.touchUpInside])
-        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
         doneButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 16)
         view.addSubview(doneButton)
     }
@@ -148,8 +149,36 @@ class PDFVC: UIViewController {
     
     @objc private func shareTapped() {
         
+        // Conform to UIActivityItemSource for custom activityItems
+        let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UIActivityItemSource
+
+extension PDFVC: UIActivityItemSource {
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         
+        return data as Any
     }
     
-
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        
+        return data
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        
+        return "HockeyUpp Game Report"
+    }
+    
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        
+        let metadata = LPLinkMetadata()
+        metadata.title = "Share Game Report"
+        metadata.imageProvider = NSItemProvider.init(contentsOf: Bundle.main.url(forResource: "AppIconAlt4@2x", withExtension: "png"))
+        return metadata
+    }
 }
