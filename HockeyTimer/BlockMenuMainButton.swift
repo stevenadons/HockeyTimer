@@ -1,14 +1,14 @@
 //
-//  CircularFABItemButton.swift
-//  CircularFAB
+//  BlockMenuMainButton.swift
+//  HockeyTimer
 //
-//  Created by Steven Adons on 01/02/2020.
+//  Created by Steven Adons on 19/07/2020.
 //  Copyright © 2020 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class CircularFABItemButton: UIButton {
+class BlockMenuMainButton: UIButton {
 
     
     // MARK: - Properties
@@ -32,8 +32,11 @@ class CircularFABItemButton: UIButton {
             }
         }
     }
+    var closeImageName: String = "xmark"
+    var isShowingHideImage: Bool = false
     
     private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
+
     
     
     // MARK: - Initializing
@@ -56,19 +59,17 @@ class CircularFABItemButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = true
     }
     
-    convenience init(shapeColor: UIColor, bgColor: UIColor, imageName: String) {
+    convenience init(shapeColor: UIColor, bgColor: UIColor) {
         
         self.init()
-        convenienceSet(shapeColor: shapeColor, bgColor: bgColor, imageName: imageName)
+        convenienceSet(shapeColor: shapeColor, bgColor: bgColor)
     }
     
-    private func convenienceSet(shapeColor: UIColor, bgColor: UIColor, imageName: String) {
+    private func convenienceSet(shapeColor: UIColor, bgColor: UIColor) {
         
         self.contentColor = shapeColor
         self.bgColor = bgColor
-        self.imageName = imageName
     }
-    
     
     
     // MARK: - Layout and draw methods
@@ -78,5 +79,35 @@ class CircularFABItemButton: UIButton {
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2
     }
+    
+    
+    // MARK: - User Methods
+    
+    func showCloseImage() {
+        
+        if let image = UIImage(systemName: closeImageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+            setImage(image, for: .normal)
+        }
+        isShowingHideImage = true
+    }
+    
+    func hideCloseImage() {
+        
+        if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+            setImage(image, for: .normal)
+        }
+        isShowingHideImage = false
+    }
+    
+    
+    // MARK: - Class Methods
+    
+    class func createStandardButton(imageName: String) -> BlockMenuMainButton {
+        
+        let button = BlockMenuMainButton(frame: .zero)
+        button.imageName = imageName
+        return button
+    }
+
 
 }

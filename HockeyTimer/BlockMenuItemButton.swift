@@ -1,14 +1,14 @@
 //
-//  CircularFABButton.swift
-//  CircularFAB
+//  BlockMenuItemButton.swift
+//  HockeyTimer
 //
-//  Created by Steven Adons on 01/02/2020.
+//  Created by Steven Adons on 19/07/2020.
 //  Copyright © 2020 StevenAdons. All rights reserved.
 //
 
 import UIKit
 
-class CircularFABButton: UIButton {
+class BlockMenuItemButton: UIButton {
 
     
     // MARK: - Properties
@@ -32,11 +32,8 @@ class CircularFABButton: UIButton {
             }
         }
     }
-    var closeImageName: String = "xmark"
-    var isShowingHideImage: Bool = false
     
     private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
-
     
     
     // MARK: - Initializing
@@ -59,16 +56,17 @@ class CircularFABButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = true
     }
     
-    convenience init(shapeColor: UIColor, bgColor: UIColor) {
+    convenience init(shapeColor: UIColor, bgColor: UIColor, imageName: String) {
         
         self.init()
-        convenienceSet(shapeColor: shapeColor, bgColor: bgColor)
+        convenienceSet(shapeColor: shapeColor, bgColor: bgColor, imageName: imageName)
     }
     
-    private func convenienceSet(shapeColor: UIColor, bgColor: UIColor) {
+    private func convenienceSet(shapeColor: UIColor, bgColor: UIColor, imageName: String) {
         
         self.contentColor = shapeColor
         self.bgColor = bgColor
+        self.imageName = imageName
     }
     
     
@@ -79,35 +77,5 @@ class CircularFABButton: UIButton {
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2
     }
-    
-    
-    // MARK: - User Methods
-    
-    func showCloseImage() {
-        
-        if let image = UIImage(systemName: closeImageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
-            setImage(image, for: .normal)
-        }
-        isShowingHideImage = true
-    }
-    
-    func hideCloseImage() {
-        
-        if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
-            setImage(image, for: .normal)
-        }
-        isShowingHideImage = false
-    }
-    
-    
-    // MARK: - Class Methods
-    
-    class func createStandardButton(imageName: String) -> CircularFABButton {
-        
-        let button = CircularFABButton(frame: .zero)
-        button.imageName = imageName
-        return button
-    }
-
 
 }

@@ -14,16 +14,20 @@ class TimerVC: PanArrowVC {
 
     
     // MARK: - Properties
-    
-    private var showGameReportButton: UIButton!
-    
+        
     private var stopWatchContainer: ContainerView!
     private var stopWatch: StopWatch!
     private var cardTimerPanel: CardTimerPanel!
     private var messageView: MessageView!
+    private var menu: BlockMenu!
+
     private var minutes: Double = HockeyGame.standardTotalMinutes
     private var periods: Double = HockeyGame.standardPeriods
-    
+    private let stopWatchContainerBottomInset: CGFloat = 10
+    private let cardTimerPanelTopInset: CGFloat = 35
+    private let cardTimerPanelHeight: CGFloat = 90
+    private let menuTopInset: CGFloat = 30
+
     var game: HockeyGame! {
         didSet {
             guard game != nil else { return }
@@ -59,15 +63,6 @@ class TimerVC: PanArrowVC {
     
     private func setupViews() {
         
-        showGameReportButton = UIButton()
-        showGameReportButton.translatesAutoresizingMaskIntoConstraints = false
-        showGameReportButton.setTitle(LS_SHOW_GAME_REPORT, for: .normal)
-        showGameReportButton.titleLabel?.numberOfLines = 1
-        showGameReportButton.titleLabel?.font = UIFont(name: FONTNAME.ThemeBold, size: 14)!
-        showGameReportButton.setTitleColor(UIColor(named: ColorName.DarkBlueText)!, for: .normal)
-        showGameReportButton.addTarget(self, action: #selector(showReport), for: .touchUpInside)
-        view.addSubview(showGameReportButton)
-        
         stopWatchContainer = ContainerView()
         view.addSubview(stopWatchContainer)
         
@@ -92,26 +87,28 @@ class TimerVC: PanArrowVC {
         panArrowDownLabel.text = "0 - 0"
         panArrowDownLabel.font = UIFont(name: FONTNAME.ThemeBold, size: 20)
         liftPanArrowDownLabelUp()
+        
+        let imageNames = ["arrow.2.circlepath.circle", "timer", "list.number", "doc.plaintext", "slider.horizontal.3"]
+        let centerX = UIScreen.main.bounds.width / 2.0
+        let centerY = UIScreen.main.bounds.height / 2.0 + stopWatchContainerBottomInset + cardTimerPanelTopInset + cardTimerPanelHeight + menuTopInset + BlockMenu.standardMainButtonDiameter / 2.0
+        menu = BlockMenu(inView: view, centerX: centerX, centerY: centerY, imageNames: imageNames, delegate: self)
 
         NSLayoutConstraint.activate([
             
             stopWatchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 240/375),
             stopWatchContainer.heightAnchor.constraint(equalTo: stopWatchContainer.widthAnchor, multiplier: 1),
             stopWatchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stopWatchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 10), // 20
+            stopWatchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: stopWatchContainerBottomInset),
             
             stopWatch.widthAnchor.constraint(equalTo: stopWatchContainer.widthAnchor),
             stopWatch.heightAnchor.constraint(equalTo: stopWatchContainer.heightAnchor),
             stopWatch.centerXAnchor.constraint(equalTo: stopWatchContainer.centerXAnchor),
             stopWatch.centerYAnchor.constraint(equalTo: stopWatchContainer.centerYAnchor),
             
-            cardTimerPanel.topAnchor.constraint(equalTo: stopWatchContainer.bottomAnchor, constant: 35),
-            cardTimerPanel.heightAnchor.constraint(equalToConstant: 90),
+            cardTimerPanel.topAnchor.constraint(equalTo: stopWatchContainer.bottomAnchor, constant: cardTimerPanelTopInset),
+            cardTimerPanel.heightAnchor.constraint(equalToConstant: cardTimerPanelHeight),
             cardTimerPanel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardTimerPanel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            showGameReportButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            showGameReportButton.topAnchor.constraint(equalTo: cardTimerPanel.bottomAnchor, constant: 16),
             
             messageView.topAnchor.constraint(equalTo: cardTimerPanel.bottomAnchor, constant: 16),
             messageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -125,18 +122,20 @@ class TimerVC: PanArrowVC {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAfterRestoringFromBackground), name: .CurrentTimerPositionLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleNewGame), name: .NewGame, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleGoToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(circularFABWillOpen), name: .CircularFABWillOpen, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(circularFABDidClose), name: .CircularFABDidClose, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(blockMenuWillOpen), name: .BlockMenuWillOpen, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(blockMenuDidClose), name: .BlockMenuDidClose, object: nil)
     }
     
     deinit {
         
         NotificationCenter.default.removeObserver(self)
     }
+  
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
         
+        menu.close()
+        super.viewDidDisappear(animated)
     }
     
     
@@ -180,13 +179,13 @@ class TimerVC: PanArrowVC {
         }
     }
     
-    @objc private func circularFABWillOpen() {
+    @objc private func blockMenuWillOpen() {
         
         panArrowDown.alpha = 0.0
         panArrowDownLabel.alpha = 0.0
     }
     
-    @objc private func circularFABDidClose() {
+    @objc private func blockMenuDidClose() {
         
         panArrowDown.alpha = 1.0
         panArrowDownLabel.alpha = 1.0
@@ -249,18 +248,6 @@ class TimerVC: PanArrowVC {
         present(vc, animated: true, completion: nil)
     }
     
-    @objc private func showReport() {
-        
-        var timers: [AnnotatedCardTimer] = []
-        for index in 0..<(cardTimerPanel.timers.count - 1) {
-            timers.append(cardTimerPanel.timers[index])
-        }
-        game.logPenaltyCardsFrom(timers)
-        let vc = PDFVC(game: game)
-        present(vc, animated: true, completion: nil)
-    }
-        
-    
     
     // MARK: - Public Methods
 
@@ -315,6 +302,74 @@ extension TimerVC: CardTimerPanelDelegate {
         }, cancelAction: nil)
         present(vc, animated: true, completion: nil)
     }
+}
+
+extension TimerVC: BlockMenuDelegate {
+    
+    func itemButtonTapped(buttonNumber: Int) {
+        
+        switch buttonNumber {
+        case 0:
+            menuNewGameTapped()
+        case 1:
+            menuGameTimeButtonTapped()
+        case 2:
+            menuShowReport()
+        case 3:
+            menuRulesButtonTapped()
+        case 4:
+            menuSettingsButtonTapped()
+        default:
+            fatalError("Trying to handle a circularFAB button exceeding set items")
+        }
+    }
+    
+    private func menuNewGameTapped() {
+        
+        guard game.status != .WaitingToStart else { return }
+        showAlertNewGame(onOK: { [weak self] in
+            self?.handleConfirmationNewGame()
+        })
+    }
+    
+    private func menuGameTimeButtonTapped() {
+        
+        let currentGameRunning = (game.status != .WaitingToStart)
+        let vc = GameTimeVC(currentPeriods: game.periods, currentTotalMinutes: game.totalMinutes, currentGameRunning: currentGameRunning, onDismiss: { (totalMinutes, periods) in
+            guard totalMinutes != nil || periods != nil else { return }
+            let newMinutes = totalMinutes ?? self.game.totalMinutes
+            let newPeriods = periods ?? self.game.periods
+            UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
+            UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
+            self.pageVC?.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
+            NotificationCenter.default.post(name: .NewGame, object: nil)
+        })
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func menuShowReport() {
+        
+        var timers: [AnnotatedCardTimer] = []
+        for index in 0..<(cardTimerPanel.timers.count - 1) {
+            timers.append(cardTimerPanel.timers[index])
+        }
+        game.logPenaltyCardsFrom(timers)
+        let vc = PDFVC(game: game)
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func menuRulesButtonTapped() {
+        
+        let vc = RulesVC(onDismiss: nil)
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func menuSettingsButtonTapped() {
+        
+        let vc = MenuVC()
+        present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 

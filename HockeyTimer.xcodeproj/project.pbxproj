@@ -50,9 +50,6 @@
 		4F780A8D1FD0909000DB1021 /* PhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F780A8C1FD0909000DB1021 /* PhoneView.swift */; };
 		4F7AB4E21F686AAE008F06DA /* BeepBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */; };
 		4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */; };
-		4F7FA98223E6CF1E00EC4BC9 /* CircularFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA97F23E6CF1D00EC4BC9 /* CircularFAB.swift */; };
-		4F7FA98323E6CF1E00EC4BC9 /* CircularFABItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA98023E6CF1D00EC4BC9 /* CircularFABItemButton.swift */; };
-		4F7FA98423E6CF1E00EC4BC9 /* CircularFABButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA98123E6CF1D00EC4BC9 /* CircularFABButton.swift */; };
 		4F7FA99D23E6FE5D00EC4BC9 /* AppIconAlt1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7FA99B23E6FE5800EC4BC9 /* AppIconAlt1.png */; };
 		4F7FA99E23E6FE5F00EC4BC9 /* AppIconAlt1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7FA99A23E6FE5800EC4BC9 /* AppIconAlt1@2x.png */; };
 		4F7FA99F23E6FE6100EC4BC9 /* AppIconAlt1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7FA99C23E6FE5900EC4BC9 /* AppIconAlt1@3x.png */; };
@@ -73,6 +70,10 @@
 		4F7FA9C023E7044100EC4BC9 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7FA9BD23E7044100EC4BC9 /* Icon-60.png */; };
 		4F7FA9C123E7044100EC4BC9 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7FA9BE23E7044100EC4BC9 /* Icon-60@2x.png */; };
 		4F7FA9C223E7044100EC4BC9 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F7FA9BF23E7044100EC4BC9 /* Icon-60@3x.png */; };
+		4F82E83424C46345003CE12A /* BlockMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82E83324C46345003CE12A /* BlockMenu.swift */; };
+		4F82E83624C46354003CE12A /* BlockMenuMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82E83524C46354003CE12A /* BlockMenuMainButton.swift */; };
+		4F82E83824C4635D003CE12A /* BlockMenuItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82E83724C4635D003CE12A /* BlockMenuItemButton.swift */; };
+		4F82E83A24C463C1003CE12A /* BlockMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82E83924C463C1003CE12A /* BlockMenuDelegate.swift */; };
 		4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */; };
 		4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */; };
 		4F8AFCE222918BB200D975A1 /* SKProductX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8AFCE122918BB200D975A1 /* SKProductX.swift */; };
@@ -206,9 +207,6 @@
 		4F780A8C1FD0909000DB1021 /* PhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneView.swift; sourceTree = "<group>"; };
 		4F7AB4E11F686AAE008F06DA /* BeepBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = BeepBeep.wav; sourceTree = "<group>"; };
 		4F7FA92A23E5CC0A00EC4BC9 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
-		4F7FA97F23E6CF1D00EC4BC9 /* CircularFAB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularFAB.swift; sourceTree = "<group>"; };
-		4F7FA98023E6CF1D00EC4BC9 /* CircularFABItemButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularFABItemButton.swift; sourceTree = "<group>"; };
-		4F7FA98123E6CF1D00EC4BC9 /* CircularFABButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularFABButton.swift; sourceTree = "<group>"; };
 		4F7FA99A23E6FE5800EC4BC9 /* AppIconAlt1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconAlt1@2x.png"; sourceTree = "<group>"; };
 		4F7FA99B23E6FE5800EC4BC9 /* AppIconAlt1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconAlt1.png; sourceTree = "<group>"; };
 		4F7FA99C23E6FE5900EC4BC9 /* AppIconAlt1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIconAlt1@3x.png"; sourceTree = "<group>"; };
@@ -229,6 +227,10 @@
 		4F7FA9BD23E7044100EC4BC9 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60.png"; path = "AppIcon/Icon-60.png"; sourceTree = "<group>"; };
 		4F7FA9BE23E7044100EC4BC9 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "AppIcon/Icon-60@2x.png"; sourceTree = "<group>"; };
 		4F7FA9BF23E7044100EC4BC9 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@3x.png"; path = "AppIcon/Icon-60@3x.png"; sourceTree = "<group>"; };
+		4F82E83324C46345003CE12A /* BlockMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMenu.swift; sourceTree = "<group>"; };
+		4F82E83524C46354003CE12A /* BlockMenuMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMenuMainButton.swift; sourceTree = "<group>"; };
+		4F82E83724C4635D003CE12A /* BlockMenuItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMenuItemButton.swift; sourceTree = "<group>"; };
+		4F82E83924C463C1003CE12A /* BlockMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMenuDelegate.swift; sourceTree = "<group>"; };
 		4F8470C722AE8C2500D71989 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyPremiumVC.swift; sourceTree = "<group>"; };
 		4F8AFCE122918BB200D975A1 /* SKProductX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductX.swift; sourceTree = "<group>"; };
@@ -395,16 +397,6 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		4F7FA97E23E6CF1000EC4BC9 /* CircularFAB */ = {
-			isa = PBXGroup;
-			children = (
-				4F7FA97F23E6CF1D00EC4BC9 /* CircularFAB.swift */,
-				4F7FA98123E6CF1D00EC4BC9 /* CircularFABButton.swift */,
-				4F7FA98023E6CF1D00EC4BC9 /* CircularFABItemButton.swift */,
-			);
-			name = CircularFAB;
-			sourceTree = "<group>";
-		};
 		4F7FA99423E6FE1200EC4BC9 /* AlternativeAppIcons */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +475,17 @@
 				4F7FA9BA23E700A600EC4BC9 /* AppIconCard.swift */,
 			);
 			name = AppIconCard;
+			sourceTree = "<group>";
+		};
+		4F82E83224C46333003CE12A /* BlockMenu */ = {
+			isa = PBXGroup;
+			children = (
+				4F82E83324C46345003CE12A /* BlockMenu.swift */,
+				4F82E83524C46354003CE12A /* BlockMenuMainButton.swift */,
+				4F82E83724C4635D003CE12A /* BlockMenuItemButton.swift */,
+				4F82E83924C463C1003CE12A /* BlockMenuDelegate.swift */,
+			);
+			name = BlockMenu;
 			sourceTree = "<group>";
 		};
 		4F8470C922AEA0EA00D71989 /* OvalCountryButton */ = {
@@ -617,13 +620,13 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4F82E83224C46333003CE12A /* BlockMenu */,
 				4F7FA9C423E7072F00EC4BC9 /* AppIconCard */,
 				4F93F57123C9D9BE00C93561 /* CardTimerPanel */,
 				4F492EB623D4CF7300980818 /* Cells */,
 				4F93F57223C9D9E900C93561 /* ChooseCardPanel */,
 				4F93F57323C9D9F500C93561 /* ChooseMinutesPanel */,
 				4F11E3FB241518190044B1B2 /* ChooseTeamPanel */,
-				4F7FA97E23E6CF1000EC4BC9 /* CircularFAB */,
 				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
 				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4F7FA9C323E7072300EC4BC9 /* ContainerView */,
@@ -993,9 +996,11 @@
 				4FB4BE941F515C4F003B1259 /* BallShinySpot.swift in Sources */,
 				4F6869BF23DC9204003F89C1 /* RulesDataSource.swift in Sources */,
 				4FB4BF231F5221A1003B1259 /* MaskWithActivityIndicator.swift in Sources */,
+				4F82E83A24C463C1003CE12A /* BlockMenuDelegate.swift in Sources */,
 				4FB4BE881F515C16003B1259 /* StopWatchControlIcon.swift in Sources */,
 				4F492EAF23D3096700980818 /* MenuVC.swift in Sources */,
 				4F8AFCE02291870900D975A1 /* BuyPremiumVC.swift in Sources */,
+				4F82E83424C46345003CE12A /* BlockMenu.swift in Sources */,
 				4FDE522024C318BE00AC5A1A /* Goal.swift in Sources */,
 				4F492EB523D4B84600980818 /* CountryVC.swift in Sources */,
 				4FB4BF281F522635003B1259 /* DurationCard.swift in Sources */,
@@ -1008,7 +1013,6 @@
 				4FB4BE841F515C08003B1259 /* StopWatchSmallLabel.swift in Sources */,
 				4F6869C723DCAEF9003F89C1 /* GameTimeDataSource.swift in Sources */,
 				4FB7668D24A8D7AE000BC80E /* XButtonLayer.swift in Sources */,
-				4F7FA98423E6CF1E00EC4BC9 /* CircularFABButton.swift in Sources */,
 				4F3CDEA924A9F481005FE4F0 /* PDFVC.swift in Sources */,
 				4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */,
 				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
@@ -1024,16 +1028,15 @@
 				4FFC758B2348F8760049C815 /* RemoteMessageManager.swift in Sources */,
 				4F93F58723C9DA8500C93561 /* AddCardTimerVC.swift in Sources */,
 				4F6869C323DCAC21003F89C1 /* GameTimeVC.swift in Sources */,
-				4F7FA98223E6CF1E00EC4BC9 /* CircularFAB.swift in Sources */,
 				4F9FC5DB1F53449A0003C2FF /* ScoreStepper.swift in Sources */,
 				4F7FA9BB23E700A600EC4BC9 /* AppIconCard.swift in Sources */,
 				4F93F58423C9DA5700C93561 /* ChooseMinutesPanel.swift in Sources */,
+				4F82E83624C46354003CE12A /* BlockMenuMainButton.swift in Sources */,
 				4F93F58123C9DA5100C93561 /* ChooseCardPanel.swift in Sources */,
 				4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */,
 				4F8470C822AE8C2500D71989 /* AppStoreReviewManager.swift in Sources */,
 				4F11E40424151C470044B1B2 /* PlayerPickerView.swift in Sources */,
 				4FB4BE861F515C0F003B1259 /* StopWatchLabel.swift in Sources */,
-				4F7FA98323E6CF1E00EC4BC9 /* CircularFABItemButton.swift in Sources */,
 				4FB4BEAD1F515E06003B1259 /* GlobalConstants.swift in Sources */,
 				4F8D08BC23243A900062A58F /* DataServiceURL.swift in Sources */,
 				4F11E3FD241518380044B1B2 /* ChooseTeamPanel.swift in Sources */,
@@ -1063,6 +1066,7 @@
 				4F11E3F824150C420044B1B2 /* Team.swift in Sources */,
 				4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */,
 				4FB7668A24A8D760000BC80E /* MessageView.swift in Sources */,
+				4F82E83824C4635D003CE12A /* BlockMenuItemButton.swift in Sources */,
 				4F492EBC23D4DB8C00980818 /* OvalCountryLayer.swift in Sources */,
 				4F37FBF222AD3FD200D2E236 /* UIDevice.swift in Sources */,
 				4F7FA92B23E5CC0A00EC4BC9 /* IconButton.swift in Sources */,

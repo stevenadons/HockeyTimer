@@ -16,17 +16,11 @@ class PageVC: UIPageViewController {
     
     // MARK: - Properties
     
-    var game: HockeyGame! {
-        didSet {
-            gameStatusChanged()
-        }
-    }
+    var game: HockeyGame!
     var existingTimerVC: TimerVC?
     var existingScoreVC: ScoreVC?
     private var mask: Mask?
     private var backgroundMask: UIView!
-    private var newGameButton: CircularFABButton!
-    private var circularFAB: CircularFAB!
     
     private var messageManager: RemoteMessageManager!
     private var updateManager: UpdateManager!
@@ -67,16 +61,6 @@ class PageVC: UIPageViewController {
         view.sendSubviewToBack(backgroundMask)
         hideBackgroundMask()
         
-        newGameButton = CircularFABButton.createStandardButton(imageName: "arrow.2.circlepath.circle")
-        newGameButton.bgColor = UIColor(named: ColorName.DarkBlue)!
-        newGameButton.contentColor = .white
-        newGameButton.alpha = 0.0
-        newGameButton.addTarget(self, action: #selector(newGameTapped), for: .touchUpInside)
-        view.addSubview(newGameButton)
-        
-        let imageNames = ["timer", "doc.plaintext", "slider.horizontal.3"]
-        circularFAB = CircularFAB(inView: view, imageNames: imageNames, delegate: self)
-        
         messageManager = RemoteMessageManager(fromViewcontroller: self, messageURL: "https://raw.githubusercontent.com/stevenadons/RemoteJSON/master/hockeyUppMessage")
         updateManager = UpdateManager(fromViewcontroller: self, appURL: "https://itunes.apple.com/app/apple-store/id1464432452?mt=8")
         minimumIOSManager = MinimumIOSVersionManager(fromViewcontroller: self)
@@ -105,20 +89,6 @@ class PageVC: UIPageViewController {
         })
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        super.viewDidLayoutSubviews()
-        
-        let buttonDiameter: CGFloat = 54
-        let rightInset: CGFloat = 28
-        let bottomInset: CGFloat = 26
-        
-        newGameButton.frame = CGRect(x: 0, y: 0, width: buttonDiameter, height: buttonDiameter)
-        let originX = rightInset
-        let originY = view.bounds.height - bottomInset - buttonDiameter
-        newGameButton.frame.origin = CGPoint(x: originX, y: originY)
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
         super.traitCollectionDidChange(previousTraitCollection)
@@ -128,7 +98,6 @@ class PageVC: UIPageViewController {
     private func addObservers() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkDarkMode), name: .DarkModeSettingsChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(gameStatusChanged), name: .GameStatusChanged, object: nil)
     }
     
     deinit {
@@ -231,17 +200,7 @@ class PageVC: UIPageViewController {
     
     
     // MARK: - Touch
-    
-    @objc private func newGameTapped() {
-        
-        guard let existingTimerVC = existingTimerVC, existingTimerVC.game.status != .WaitingToStart else {
-            return
-        }
-        showAlertNewGame(onOK: {
-            self.existingTimerVC?.handleConfirmationNewGame()
-        })
-    }
-    
+
     @objc private func checkDarkMode() {
         
         if UserDefaults.standard.bool(forKey: UserDefaultsKey.DarkModeFollowsPhoneSettings) {
@@ -252,17 +211,6 @@ class PageVC: UIPageViewController {
             overrideUserInterfaceStyle = .light
         }
         view.setNeedsLayout()
-    }
-        
-    @objc private func gameStatusChanged() {
-        
-        guard newGameButton != nil else {
-            return
-        }
-        let alpha: CGFloat = (game.status == .WaitingToStart) ? 0.0 : 1.0
-        UIView.animate(withDuration: 0.2) {
-            self.newGameButton.alpha = alpha
-        }
     }
 }
 
@@ -351,51 +299,4 @@ extension PageVC: UIPageViewControllerDelegate {
     }
 }
 
-
-extension PageVC: CircularFABDelegate {
-    
-    func itemButtonTapped(buttonNumber: Int) {
-        
-        switch buttonNumber {
-        case 0:
-            gameTimeButtonTapped()
-        case 1:
-            rulesButtonTapped()
-        case 2:
-            settingsButtonTapped()
-        default:
-            fatalError("Trying to handle a circularFAB button exceeding 3 items")
-        }
-    }
-    
-    private func gameTimeButtonTapped() {
-        
-        let currentGameRunning = (game.status != .WaitingToStart)
-        let vc = GameTimeVC(currentPeriods: game.periods, currentTotalMinutes: game.totalMinutes, currentGameRunning: currentGameRunning, onDismiss: { (totalMinutes, periods) in
-            
-            guard totalMinutes != nil || periods != nil else {
-                return
-            }
-            let newMinutes = totalMinutes ?? self.game.totalMinutes
-            let newPeriods = periods ?? self.game.periods
-            UserDefaults.standard.set(newMinutes, forKey: UserDefaultsKey.Minutes)
-            UserDefaults.standard.set(newPeriods, forKey: UserDefaultsKey.Periods)
-            self.game = HockeyGame(minutes: newMinutes, periods: newPeriods)
-            NotificationCenter.default.post(name: .NewGame, object: nil)
-        })
-        present(vc, animated: true, completion: nil)
-    }
-    
-    private func rulesButtonTapped() {
-        
-        let vc = RulesVC(onDismiss: nil)
-        present(vc, animated: true, completion: nil)
-    }
-    
-    private func settingsButtonTapped() {
-        
-        let vc = MenuVC()
-        present(vc, animated: true, completion: nil)
-    }
-}
 
