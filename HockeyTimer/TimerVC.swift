@@ -350,11 +350,14 @@ extension TimerVC: BlockMenuDelegate {
     
     private func menuShowReport() {
         
+        #warning("Replace buypremiumvc with this one")
         guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
-            let upgradeVC = UpgradeVC()
+            let feature1 = PremiumFeature(type: .GameReports, firstFeature: true)
+            let feature2 = PremiumFeature(type: .PenaltyCards, firstFeature: false)
+            let feature3 = PremiumFeature(type: .AppIcon, firstFeature: false)
+            let feature4 = PremiumFeature(type: .DarkMode, firstFeature: false)
+            let upgradeVC = UpgradeVC(features: [feature1, feature2, feature3, feature4])
             present(upgradeVC, animated: true, completion: nil)
-//            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_GAME_REPORT, text: LS_BUYPREMIUM_TEXT_GAME_REPORT, showFirstButton: false, afterDismiss: nil)
-//            present(buyPremiumVC, animated: true, completion: nil)
             return
         }
         

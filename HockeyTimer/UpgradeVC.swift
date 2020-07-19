@@ -18,16 +18,14 @@ class UpgradeVC: UIViewController {
     
     private var titleLabel: UILabel!
     private var scrollView: UIScrollView!
-    private var slide1: FeatureView!
-    private var slide2: FeatureView!
-    private var slide3: FeatureView!
-    private var slide4: FeatureView!
+    private var slides: [FeatureView] = []
     private var pageControl: UIPageControl!
     private var buyPremiumButton: UIButton!
     private var cancelButton: UIButton!
     private var restorePurchaseButton: UIButton!
     private var maskWithActivityIndicator: MaskWithActivityIndicator?
     
+    private var features: [PremiumFeature] = []
     private var afterDismiss: ((Bool) -> Void)?
     private var purchased: Bool = false
     private var products: [SKProduct] = []
@@ -47,8 +45,9 @@ class UpgradeVC: UIViewController {
 
     // MARK: - Life Cycle
     
-    init(afterDismiss: ((Bool) -> Void)? = nil) {
+    init(features: [PremiumFeature], afterDismiss: ((Bool) -> Void)? = nil) {
         
+        self.features = features
         self.afterDismiss = afterDismiss
         super.init(nibName: nil, bundle: nil)
     }
@@ -151,7 +150,7 @@ class UpgradeVC: UIViewController {
     
     private func addConstraints() {
         
-        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 54, big: 54)
+        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 52, big: 52)
         let horInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
         
         // Referring to view.safeAreaLayoutGuide will cause glitch for titleLabel
@@ -162,8 +161,8 @@ class UpgradeVC: UIViewController {
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
 
-            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            scrollView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: 0),
+            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
+            scrollView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: 8),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             
@@ -190,31 +189,11 @@ class UpgradeVC: UIViewController {
     
     private func setupSlides() {
         
-        let image = UIImage(named: "FeatureGraphicsAppIcon")!
-        
-        slide1 = FeatureView()
-        slide1.backgroundColor = .clear
-        slide1.body.text = "This is the first feature"
-        slide1.addImage(image: image)
-        scrollView.addSubview(slide1)
-        
-        slide2 = FeatureView()
-        slide2.backgroundColor = .clear
-        slide2.body.text = "This is the second feature"
-        slide2.addImage(image: image)
-        scrollView.addSubview(slide2)
-        
-        slide3 = FeatureView()
-        slide3.backgroundColor = .clear
-        slide3.body.text = "This is the third feature"
-        slide3.addImage(image: image)
-        scrollView.addSubview(slide3)
-        
-        slide4 = FeatureView()
-        slide4.backgroundColor = .clear
-        slide4.body.text = "This is the fourth feature"
-        slide4.addImage(image: image)
-        scrollView.addSubview(slide4)
+        for feature in features {
+            let slide = FeatureView(feature: feature)
+            slides.append(slide)
+            scrollView.addSubview(slide)
+        }
     }
     
     private func addNetworkMonitor() {
@@ -257,10 +236,9 @@ class UpgradeVC: UIViewController {
         let slideHeight = scrollView.frame.size.height
         
         scrollView.contentSize = CGSize(width: slideWidth * CGFloat(numberOfSlides), height: slideHeight)
-        slide1.frame = CGRect(x: 0, y: 0, width: slideWidth, height: slideHeight)
-        slide2.frame = CGRect(x: slideWidth, y: 0, width: slideWidth, height: slideHeight)
-        slide3.frame = CGRect(x: slideWidth * 2, y: 0, width: slideWidth, height: slideHeight)
-        slide4.frame = CGRect(x: slideWidth * 3, y: 0, width: slideWidth, height: slideHeight)
+        for index in 0..<slides.count {
+            slides[index].frame = CGRect(x: slideWidth * CGFloat(index), y: 0, width: slideWidth, height: slideHeight)
+        }
         view.bringSubviewToFront(pageControl)
         
         pageControl.pageIndicatorTintColor = UIColor(named: ColorName.DarkBlueText)!
@@ -291,7 +269,7 @@ class UpgradeVC: UIViewController {
         
         guard !products.isEmpty else { return }
         
-        if #available(iOS 12, *), networkMonitor.currentPath.status == .unsatisfied {
+        if networkMonitor.currentPath.status == .unsatisfied {
             
             let alert = UIAlertController(title: LS_BUYPREMIUM_NOINTERNET_TITLE,
                                           message: LS_BUYPREMIUM_CHECKCONNECTION_TITLE,

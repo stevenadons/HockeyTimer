@@ -111,6 +111,7 @@
 		4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */; };
 		4FA22BFA24C49C5B00BFEF6F /* UpgradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */; };
 		4FA22BFC24C49E4D00BFEF6F /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */; };
+		4FA22BFE24C4AD7300BFEF6F /* PremiumFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA22BFD24C4AD7300BFEF6F /* PremiumFeature.swift */; };
 		4FAFB20A2299539800CE11EE /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFB2092299539800CE11EE /* Mask.swift */; };
 		4FB042E3232979DF00EBEC99 /* MinimumIOSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB042E2232979DF00EBEC99 /* MinimumIOSVersionManager.swift */; };
 		4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE691F515B3B003B1259 /* AppDelegate.swift */; };
@@ -270,6 +271,7 @@
 		4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperLabelFactory.swift; sourceTree = "<group>"; };
 		4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeVC.swift; sourceTree = "<group>"; };
 		4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
+		4FA22BFD24C4AD7300BFEF6F /* PremiumFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFeature.swift; sourceTree = "<group>"; };
 		4FAFB2092299539800CE11EE /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		4FB042E2232979DF00EBEC99 /* MinimumIOSVersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumIOSVersionManager.swift; sourceTree = "<group>"; };
 		4FB4BE661F515B3B003B1259 /* HockeyTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HockeyTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -619,6 +621,7 @@
 				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
 				4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */,
 				4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */,
+				4FA22BFD24C4AD7300BFEF6F /* PremiumFeature.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				4FB7668E24A8D7AE000BC80E /* XButton.swift in Sources */,
 				4FF7FB2E1F6549CF001D4ED1 /* JukeBox.swift in Sources */,
 				4F11E3F824150C420044B1B2 /* Team.swift in Sources */,
+				4FA22BFE24C4AD7300BFEF6F /* PremiumFeature.swift in Sources */,
 				4F052B0B23DDC1D000FAFCBF /* PickerNumberView.swift in Sources */,
 				4FB7668A24A8D760000BC80E /* MessageView.swift in Sources */,
 				4F82E83824C4635D003CE12A /* BlockMenuItemButton.swift in Sources */,

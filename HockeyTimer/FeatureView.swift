@@ -8,6 +8,14 @@
 
 import UIKit
 
+
+protocol FeatureViewable {
+    
+    var image: UIImage { get }
+    var bodyText: String { get }
+}
+
+
 class FeatureView: UIView {
 
     // MARK: - Properties
@@ -28,32 +36,35 @@ class FeatureView: UIView {
         }
     }
     
+    private var feature: FeatureViewable!
+    
     
     // MARK: - Initializers
     
-    override init(frame: CGRect) {
+    init(feature: FeatureViewable) {
         
-        super.init(frame: frame)
+        super.init(frame: .zero)
+        self.feature = feature
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder: NSCoder) {
         
-        super.init(coder: aDecoder)
-        setup()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setup() {
         
-        backgroundColor = .systemBackground
+        backgroundColor = .clear
         
         graphics = UIImageView()
         graphics.translatesAutoresizingMaskIntoConstraints = false
         graphics.contentMode = .scaleAspectFit
+        graphics.image = feature.image
         addSubview(graphics)
         
         body = UILabel()
-        body.text = ""
+        body.text = feature.bodyText
         body.numberOfLines = 0
         body.font = UIFont(name: FONTNAME.ThemeRegular, size: 16)
         body.isUserInteractionEnabled = false
