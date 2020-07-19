@@ -105,7 +105,7 @@ class ScoreVC: PanArrowVC {
             pitchContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -70),
             pitchContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pitchContainer.heightAnchor.constraint(equalTo: pitchContainer.widthAnchor, multiplier: 0.6),
-            pitchContainer.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: pitchContainerOffset),
+            pitchContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -pitchContainerOffset),
 
             pitch.leadingAnchor.constraint(equalTo: pitchContainer.leadingAnchor),
             pitch.trailingAnchor.constraint(equalTo: pitchContainer.trailingAnchor),

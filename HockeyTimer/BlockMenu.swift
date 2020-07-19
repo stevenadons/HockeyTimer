@@ -25,8 +25,10 @@ class BlockMenu: UIView {
     
     private var mainButton: BlockMenuMainButton!
     private var itemButtons: [BlockMenuItemButton] = []
+    private var itemLabels: [UILabel] = []
     
     private var imageNames: [String]!
+    private var itemTitles: [String] = []
     private var delegate: BlockMenuDelegate!
     
     private let itemButtonDiameter: CGFloat = 48
@@ -34,9 +36,11 @@ class BlockMenu: UIView {
     static let standardMainButtonDiameter: CGFloat = 54
     private let mainButtonRightInset: CGFloat = 28
     private let mainButtonBottomInset: CGFloat = 26
-//    private let radius: CGFloat = 85
-    private let horGrid: CGFloat = 60
+    private let horGrid: CGFloat = 64
     private let vertPadding: CGFloat = 16
+    private let itemTitleWidth: CGFloat = 58
+    private let itemTitleHeight: CGFloat = 20
+    private let itemToLabelPadding: CGFloat = 4
     
     private let mainButtonColor: UIColor = UIColor(named: ColorName.DarkBlue)!
     private let mainButtonContentColor: UIColor = .white
@@ -47,7 +51,7 @@ class BlockMenu: UIView {
     
     // MARK: - Initializing
     
-    convenience init(inView containingView: UIView, centerX: CGFloat, centerY: CGFloat, imageNames: [String]!, delegate: BlockMenuDelegate) {
+    convenience init(inView containingView: UIView, centerX: CGFloat, centerY: CGFloat, imageNames: [String], itemTitles: [String], delegate: BlockMenuDelegate) {
         
         self.init()
         
@@ -55,6 +59,7 @@ class BlockMenu: UIView {
         self.center = containingView.center
         self.backgroundColor = UIColor.clear
         self.imageNames = imageNames
+        self.itemTitles = itemTitles
         self.delegate = delegate
         
         tap = UITapGestureRecognizer(target: self, action: #selector(close))
@@ -98,6 +103,20 @@ class BlockMenu: UIView {
             }
             itemButtons.append(itemButton)
             insertSubview(itemButton, belowSubview: mainButton)
+            
+            let label = UILabel()
+            label.numberOfLines = 1
+            label.text = index < itemTitles.count ? itemTitles[index] : ""
+            label.textColor = UIColor(named: ColorName.DarkBlueText)!
+            label.font = UIFont(name: FONTNAME.ThemeBold, size: 14)
+            label.adjustsFontSizeToFitWidth = true
+            label.textAlignment = .center
+            let labelX = itemButton.frame.origin.x - (itemTitleWidth - itemButton.frame.width) / 2.0
+            let labelY = itemButton.frame.origin.y + itemButton.frame.height + itemToLabelPadding
+            label.frame = CGRect(x: 0, y: 0, width: itemTitleWidth, height: itemTitleHeight)
+            label.frame.origin = CGPoint(x: labelX, y: labelY)
+            itemLabels.append(label)
+            insertSubview(label, belowSubview: mainButton)
         }
         
         windUp()
@@ -130,6 +149,7 @@ class BlockMenu: UIView {
                     itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
                 }
             }
+            itemLabels[index].alpha = 0.0
         }
     }
     
@@ -159,7 +179,9 @@ class BlockMenu: UIView {
             
             UIView.animate(withDuration: 0.2, delay: 0.05 * Double(index), usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: [], animations: {
                 self.itemButtons[index].transform = .identity
-            })
+            }) { (finished) in
+                self.itemLabels[index].alpha = finished ? 1.0 : 0.0
+            }
         }
     }
     
@@ -196,6 +218,7 @@ class BlockMenu: UIView {
                         itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
                     }
                 }
+                self.itemLabels[index].alpha = 0.0
             }
         }, completion: { (finished) in
             NotificationCenter.default.post(name: .BlockMenuDidClose, object: nil)

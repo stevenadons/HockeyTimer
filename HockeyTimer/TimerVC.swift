@@ -23,10 +23,10 @@ class TimerVC: PanArrowVC {
 
     private var minutes: Double = HockeyGame.standardTotalMinutes
     private var periods: Double = HockeyGame.standardPeriods
-    private let stopWatchContainerBottomInset: CGFloat = 10
+    private let stopWatchContainerBottomInset: CGFloat = -10 // 10
     private let cardTimerPanelTopInset: CGFloat = 35
     private let cardTimerPanelHeight: CGFloat = 90
-    private let menuTopInset: CGFloat = 30
+    private let menuTopInset: CGFloat = 36
 
     var game: HockeyGame! {
         didSet {
@@ -89,9 +89,10 @@ class TimerVC: PanArrowVC {
         liftPanArrowDownLabelUp()
         
         let imageNames = ["arrow.2.circlepath.circle", "timer", "list.number", "doc.plaintext", "slider.horizontal.3"]
+        let itemTitles = [LS_RESTART, LS_TIME, LS_REPORT, LS_RULES, LS_TITLE_SETTINGS]
         let centerX = UIScreen.main.bounds.width / 2.0
         let centerY = UIScreen.main.bounds.height / 2.0 + stopWatchContainerBottomInset + cardTimerPanelTopInset + cardTimerPanelHeight + menuTopInset + BlockMenu.standardMainButtonDiameter / 2.0
-        menu = BlockMenu(inView: view, centerX: centerX, centerY: centerY, imageNames: imageNames, delegate: self)
+        menu = BlockMenu(inView: view, centerX: centerX, centerY: centerY, imageNames: imageNames, itemTitles: itemTitles, delegate: self)
 
         NSLayoutConstraint.activate([
             
@@ -348,6 +349,14 @@ extension TimerVC: BlockMenuDelegate {
     }
     
     private func menuShowReport() {
+        
+        guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
+            let upgradeVC = UpgradeVC()
+            present(upgradeVC, animated: true, completion: nil)
+//            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_GAME_REPORT, text: LS_BUYPREMIUM_TEXT_GAME_REPORT, showFirstButton: false, afterDismiss: nil)
+//            present(buyPremiumVC, animated: true, completion: nil)
+            return
+        }
         
         var timers: [AnnotatedCardTimer] = []
         for index in 0..<(cardTimerPanel.timers.count - 1) {

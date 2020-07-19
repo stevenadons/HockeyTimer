@@ -109,6 +109,8 @@
 		4F9FC5DF1F5345D50003C2FF /* ScoreStepperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5DE1F5345D50003C2FF /* ScoreStepperButton.swift */; };
 		4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5E01F5346130003C2FF /* ScoreStepperButtonLayer.swift */; };
 		4F9FC5E51F534AB20003C2FF /* ScoreStepperLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */; };
+		4FA22BFA24C49C5B00BFEF6F /* UpgradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */; };
+		4FA22BFC24C49E4D00BFEF6F /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */; };
 		4FAFB20A2299539800CE11EE /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFB2092299539800CE11EE /* Mask.swift */; };
 		4FB042E3232979DF00EBEC99 /* MinimumIOSVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB042E2232979DF00EBEC99 /* MinimumIOSVersionManager.swift */; };
 		4FB4BE6A1F515B3B003B1259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4BE691F515B3B003B1259 /* AppDelegate.swift */; };
@@ -266,6 +268,8 @@
 		4F9FC5DE1F5345D50003C2FF /* ScoreStepperButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperButton.swift; sourceTree = "<group>"; };
 		4F9FC5E01F5346130003C2FF /* ScoreStepperButtonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperButtonLayer.swift; sourceTree = "<group>"; };
 		4F9FC5E41F534AB20003C2FF /* ScoreStepperLabelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreStepperLabelFactory.swift; sourceTree = "<group>"; };
+		4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeVC.swift; sourceTree = "<group>"; };
+		4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		4FAFB2092299539800CE11EE /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
 		4FB042E2232979DF00EBEC99 /* MinimumIOSVersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumIOSVersionManager.swift; sourceTree = "<group>"; };
 		4FB4BE661F515B3B003B1259 /* HockeyTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HockeyTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -601,7 +605,6 @@
 				4F9FC5D71F53387D0003C2FF /* PanArrowVC.swift */,
 				4FB4BE7C1F515B7D003B1259 /* TimerVC.swift */,
 				4FB4BEBB1F5160EF003B1259 /* ScoreVC.swift */,
-				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
 				4F8AFCE82291C84E00D975A1 /* SimpleAlertVC.swift */,
 				4F93F58623C9DA8500C93561 /* AddCardTimerVC.swift */,
 				4F11E3F9241517CA0044B1B2 /* LogPlayerVC.swift */,
@@ -613,6 +616,9 @@
 				4F6869C223DCAC21003F89C1 /* GameTimeVC.swift */,
 				4F052B0223DDBA1A00FAFCBF /* CustomGameTimeVC.swift */,
 				4F3CDEA824A9F481005FE4F0 /* PDFVC.swift */,
+				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
+				4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */,
+				4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -620,8 +626,8 @@
 		4FB4BE7E1F515B9C003B1259 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4F82E83224C46333003CE12A /* BlockMenu */,
 				4F7FA9C423E7072F00EC4BC9 /* AppIconCard */,
+				4F82E83224C46333003CE12A /* BlockMenu */,
 				4F93F57123C9D9BE00C93561 /* CardTimerPanel */,
 				4F492EB623D4CF7300980818 /* Cells */,
 				4F93F57223C9D9E900C93561 /* ChooseCardPanel */,
@@ -1016,6 +1022,7 @@
 				4F3CDEA924A9F481005FE4F0 /* PDFVC.swift in Sources */,
 				4F052B0323DDBA1A00FAFCBF /* CustomGameTimeVC.swift in Sources */,
 				4FD3721E22A4267C00A45757 /* Duration.swift in Sources */,
+				4FA22BFC24C49E4D00BFEF6F /* FeatureView.swift in Sources */,
 				4F11E40224151B9C0044B1B2 /* PlayerPickerDataSource.swift in Sources */,
 				4FB4BEA01F515D5C003B1259 /* ContainerView.swift in Sources */,
 				4F93F57D23C9DA3600C93561 /* ThreeCards.swift in Sources */,
@@ -1042,6 +1049,7 @@
 				4F11E3FD241518380044B1B2 /* ChooseTeamPanel.swift in Sources */,
 				4F4D5E5322F3524E00701504 /* StopWatchTimerState.swift in Sources */,
 				4F9FC5E11F5346130003C2FF /* ScoreStepperButtonLayer.swift in Sources */,
+				4FA22BFA24C49C5B00BFEF6F /* UpgradeVC.swift in Sources */,
 				4FB4BE8C1F515C30003B1259 /* Pitch.swift in Sources */,
 				4FAFB20A2299539800CE11EE /* Mask.swift in Sources */,
 				4FD3722C22A6ECC100A45757 /* GroupOfRules.swift in Sources */,

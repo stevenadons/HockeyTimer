@@ -109,7 +109,7 @@ class PDFVC: UIViewController {
         
         let pdfCreator = PDFCreator(game: game)
         self.data = pdfCreator.createReport(overrideUserInterfaceStyle)
-        pdfView.document = PDFDocument(data: data)
+        pdfView?.document = PDFDocument(data: data)
     }
     
     private func addObservers() {

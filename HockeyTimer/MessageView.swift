@@ -68,7 +68,6 @@ class MessageView: UIView {
     }
     
     
-    
     // MARK: - Layout and draw methods
     
     override func layoutSubviews() {
