@@ -110,9 +110,7 @@ let LS_UPGRADE_APP_ICON = NSLocalizedString("Choose any of your favorite app ico
 let LS_UPGRADE_GAME_REPORTS = NSLocalizedString("Automatically extract a game report in PDF.", comment: "Text in upgradeVC")
 let LS_UPGRADE_ONE_TIME_PAYMENT = NSLocalizedString("Upgrade to the premium app (one time payment).", comment: "Text in upgradeVC")
 
-#warning("delete")
 let LS_BUYPREMIUM_BUYBUTTON = NSLocalizedString("Buy Premium", comment: "Buy button in buypremium VC")
-//let LS_BUYPREMIUM_WATCHADBUTTON = NSLocalizedString("Watch One Ad", comment: "Watch ad button in buypremium VC")
 let LS_BUYPREMIUM_CANCELBUTTON = NSLocalizedString("Cancel", comment: "Cancel button in buypremium VC")
 let LS_BUYPREMIUM_RESTORELABEL = NSLocalizedString("Already paid for premium? Restore Purchase.", comment: "textbutton to restore in buypremium VC")
 let LS_BUYPREMIUM_NOINTERNET_TITLE = NSLocalizedString("No Internet Connection", comment: "Error message title when no internet connection in buypremium VC")

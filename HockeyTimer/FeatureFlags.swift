@@ -11,8 +11,8 @@ import Foundation
 
 struct FeatureFlags {
     
-    #warning("secret gesture enabled")
-    static let secretGestureToTestingVC = true
+//    #warning("secret gesture enabled")
+    static let secretGestureToTestingVC = false
     static let cards = true
     static let darkModeCanBeEnabled = true
 }
