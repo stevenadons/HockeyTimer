@@ -248,12 +248,12 @@ class AddCardTimerVC: UIViewController {
             performAddCardAction()
             
         } else {
-            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: false, afterDismiss: { earned in
-                if earned {
-                    self.performAddCardAction()
-                } 
-            })
-            present(buyPremiumVC, animated: true, completion: nil)
+            let feature1 = PremiumFeature(type: .PenaltyCards, firstFeature: true)
+            let feature2 = PremiumFeature(type: .GameReports, firstFeature: false)
+            let feature3 = PremiumFeature(type: .AppIcon, firstFeature: false)
+            let feature4 = PremiumFeature(type: .DarkMode, firstFeature: false)
+            let upgradeVC = UpgradeVC(features: [feature1, feature2, feature3, feature4])
+            present(upgradeVC, animated: true, completion: nil)
         }
     }
     

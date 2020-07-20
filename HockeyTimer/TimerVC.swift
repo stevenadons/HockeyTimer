@@ -90,8 +90,8 @@ class TimerVC: PanArrowVC {
         
         let imageNames = ["arrow.2.circlepath.circle", "timer", "list.number", "doc.plaintext", "slider.horizontal.3"]
         let itemTitles = [LS_RESTART, LS_TIME, LS_REPORT, LS_RULES, LS_TITLE_SETTINGS]
-        let centerX = UIScreen.main.bounds.width / 2.0
-        let centerY = UIScreen.main.bounds.height / 2.0 + stopWatchContainerBottomInset + cardTimerPanelTopInset + cardTimerPanelHeight + menuTopInset + BlockMenu.standardMainButtonDiameter / 2.0
+        let centerX = view.bounds.width - 28 - BlockMenu.standardMainButtonDiameter / 2.0
+        let centerY = view.bounds.height - 26 - BlockMenu.standardMainButtonDiameter / 2.0
         menu = BlockMenu(inView: view, centerX: centerX, centerY: centerY, imageNames: imageNames, itemTitles: itemTitles, delegate: self)
 
         NSLayoutConstraint.activate([
@@ -203,12 +203,6 @@ class TimerVC: PanArrowVC {
         pageVC?.game = game
         cardTimerPanel.deleteAllCards()
         NotificationCenter.default.post(name: .NewGame, object: nil)
-    }
-    
-    private func showBuyPremiumVC(onProgressionEarned: ((Bool) -> Void)?) {
-    
-        let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CARD, text: LS_BUYPREMIUM_TEXT_CARD, showFirstButton: false, afterDismiss: onProgressionEarned)
-        present(buyPremiumVC, animated: true, completion: nil)
     }
     
     private func showAlertNewGame(onOK: (() -> Void)?) {
@@ -350,7 +344,6 @@ extension TimerVC: BlockMenuDelegate {
     
     private func menuShowReport() {
         
-        #warning("Replace buypremiumvc with this one")
         guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
             let feature1 = PremiumFeature(type: .GameReports, firstFeature: true)
             let feature2 = PremiumFeature(type: .PenaltyCards, firstFeature: false)

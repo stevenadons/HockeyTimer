@@ -150,7 +150,8 @@ class UpgradeVC: UIViewController {
     
     private func addConstraints() {
         
-        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 52, big: 52)
+        let buttonHeight = UIDevice.whenDeviceIs(small: 44, normal: 50, big: 54)
+        let buttonPadding: CGFloat = UIDevice.whenDeviceIs(small: 10, normal: 12, big: 16)
         let horInset = UIDevice.whenDeviceIs(small: 20, normal: 35, big: 35)
         
         // Referring to view.safeAreaLayoutGuide will cause glitch for titleLabel
@@ -159,10 +160,10 @@ class UpgradeVC: UIViewController {
         NSLayoutConstraint.activate([
             
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
 
-            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
-            scrollView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: 8),
+            scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 26),
+            scrollView.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -6),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             
@@ -172,13 +173,13 @@ class UpgradeVC: UIViewController {
             
             buyPremiumButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: horInset),
             buyPremiumButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -horInset),
-            buyPremiumButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -12),
+            buyPremiumButton.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -buttonPadding),
             buyPremiumButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             cancelButton.leadingAnchor.constraint(equalTo: buyPremiumButton.leadingAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: buyPremiumButton.trailingAnchor),
             cancelButton.heightAnchor.constraint(equalTo: buyPremiumButton.heightAnchor),
-            cancelButton.bottomAnchor.constraint(equalTo: restorePurchaseButton.topAnchor, constant: -10),
+            cancelButton.bottomAnchor.constraint(equalTo: restorePurchaseButton.topAnchor, constant: -8),
             
             restorePurchaseButton.leadingAnchor.constraint(equalTo: buyPremiumButton.leadingAnchor),
             restorePurchaseButton.trailingAnchor.constraint(equalTo: buyPremiumButton.trailingAnchor),

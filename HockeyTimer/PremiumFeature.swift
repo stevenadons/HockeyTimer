@@ -24,25 +24,30 @@ struct PremiumFeature: FeatureViewable {
     var image: UIImage {
         switch type {
         case .DarkMode:
-            return UIImage(named: "FeatureGraphicsAppIcon")!
+            return UIImage(named: "FeatureDarkMode")!
         case .PenaltyCards:
-            return UIImage(named: "FeatureGraphicsAppIcon")!
+            return UIImage(named: "FeaturePenaltyCards")!
         case .AppIcon:
-            return UIImage(named: "FeatureGraphicsAppIcon")!
+            return UIImage(named: "FeatureAppIcons")!
         case .GameReports:
-            return UIImage(named: "FeatureGraphicsAppIcon")!
+            return UIImage(named: "FeatureGameReports")!
         }
     }
     var bodyText: String {
+        var string: String = ""
         switch type {
         case .DarkMode:
-            return firstFeature ? "In premium mode you can have dark mode" : "Enable dark mode"
+            string += LS_UPGRADE_DARK_MODE
         case .PenaltyCards:
-            return firstFeature ? "In premium mode you can have penalty cards" : "Enable penalty cards"
+            string +=  LS_UPGRADE_PENALTY_CARDS
         case .AppIcon:
-            return firstFeature ? "In premium mode you can have app icons" : "Enable app icons"
+            string +=  LS_UPGRADE_APP_ICON
         case .GameReports:
-            return firstFeature ? "In premium mode you can have game reports" : "Enable game reports"
+            string +=  LS_UPGRADE_GAME_REPORTS
         }
+        if firstFeature {
+            string += " " + LS_UPGRADE_ONE_TIME_PAYMENT
+        }
+        return string
     }
 }

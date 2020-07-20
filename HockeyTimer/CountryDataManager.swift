@@ -304,6 +304,9 @@ class CountryDataManager {
                                             // Make new Rules and add to result array
                                             let rules = Rules(name: name!, url: urlString!, specificLocaleUrls: specificLocaleUrls)
                                             resultArrayOfRules.append(rules)
+                                            if name == "College League" {
+                                                print("a")
+                                            }
                                         }
                                     }
                                 }

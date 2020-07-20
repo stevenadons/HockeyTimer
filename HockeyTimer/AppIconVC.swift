@@ -180,12 +180,16 @@ class AppIconVC: UIViewController {
         
         guard UserDefaults.standard.bool(forKey: UserDefaultsKey.PremiumMode) else {
             
-            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_CHANGE_APP_ICON, text: LS_BUYPREMIUM_TEXT_CHANGE_APP_ICON, showFirstButton: false, afterDismiss: { earned in
+            let feature1 = PremiumFeature(type: .AppIcon, firstFeature: true)
+            let feature2 = PremiumFeature(type: .DarkMode, firstFeature: false)
+            let feature3 = PremiumFeature(type: .PenaltyCards, firstFeature: false)
+            let feature4 = PremiumFeature(type: .GameReports, firstFeature: false)
+            let upgradeVC = UpgradeVC(features: [feature1, feature2, feature3, feature4], afterDismiss: { earned in
                 if earned {
                     self.performChangeFor(tappedCard)
-                } 
+                }
             })
-            present(buyPremiumVC, animated: true, completion: nil)
+            present(upgradeVC, animated: true, completion: nil)
             return
         }
         performChangeFor(tappedCard)

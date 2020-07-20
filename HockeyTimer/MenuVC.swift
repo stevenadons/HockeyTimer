@@ -157,13 +157,16 @@ class MenuVC: UIViewController {
             
             item.setOn(!item.isOn, animated: true)
             
-            let buyPremiumVC = BuyPremiumVC(title: LS_BUYPREMIUM_TITLE_DARK_MODE, text: LS_BUYPREMIUM_TEXT_DARK_MODE, showFirstButton: false, afterDismiss: { earned in
+            let feature1 = PremiumFeature(type: .DarkMode, firstFeature: true)
+            let feature2 = PremiumFeature(type: .AppIcon, firstFeature: false)
+            let feature3 = PremiumFeature(type: .PenaltyCards, firstFeature: false)
+            let feature4 = PremiumFeature(type: .GameReports, firstFeature: false)
+            let upgradeVC = UpgradeVC(features: [feature1, feature2, feature3, feature4], afterDismiss: { earned in
                 if earned {
                     item.setOn(!item.isOn, animated: true)
                 }
             })
-            present(buyPremiumVC, animated: true, completion: nil)
-            
+            present(upgradeVC, animated: true, completion: nil)
             return
         }
         

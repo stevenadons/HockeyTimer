@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 //        #warning("testing")
 //        UserDefaults.standard.set(true, forKey: UserDefaultsKey.PremiumMode)
+//        UserDefaults.standard.set(false, forKey: UserDefaultsKey.PremiumMode)
 //        UserDefaults.standard.set(false, forKey: UserDefaultsKey.DidShowLongPressPenaltyCardMessage)
         
         firstTimeSetDarkModeSettings()

@@ -383,14 +383,6 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		4F780A8B1FD0906D00DB1021 /* Phone */ = {
-			isa = PBXGroup;
-			children = (
-				4F780A8C1FD0909000DB1021 /* PhoneView.swift */,
-			);
-			name = Phone;
-			sourceTree = "<group>";
-		};
 		4F7AB4DC1F6857F8008F06DA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,8 +612,6 @@
 				4F3CDEA824A9F481005FE4F0 /* PDFVC.swift */,
 				4F8AFCDF2291870900D975A1 /* BuyPremiumVC.swift */,
 				4FA22BF924C49C5B00BFEF6F /* UpgradeVC.swift */,
-				4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */,
-				4FA22BFD24C4AD7300BFEF6F /* PremiumFeature.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -637,18 +627,19 @@
 				4F93F57323C9D9F500C93561 /* ChooseMinutesPanel */,
 				4F11E3FB241518190044B1B2 /* ChooseTeamPanel */,
 				4FB4BEA81F515D9D003B1259 /* ConfirmationButton */,
-				4FB4BF261F52261F003B1259 /* DurationCard */,
 				4F7FA9C323E7072300EC4BC9 /* ContainerView */,
+				4FB4BF261F52261F003B1259 /* DurationCard */,
+				4FA22BFB24C49E4D00BFEF6F /* FeatureView.swift */,
 				4F29B287239D7E0E002115B7 /* GameTimePickers */,
 				4FB4BE951F515C89003B1259 /* IconButtons */,
 				4FB4BF211F52218D003B1259 /* MaskWithActivityIndicator */,
 				4FB7668824A8D748000BC80E /* MessageView */,
 				4FF7FB341F6559DB001D4ED1 /* Onboarding */,
 				4F8470C922AEA0EA00D71989 /* OvalCountryButton */,
-				4F780A8B1FD0906D00DB1021 /* Phone */,
+				4F780A8C1FD0909000DB1021 /* PhoneView.swift */,
 				4FB4BE801F515BB5003B1259 /* Pitch */,
 				4F11E3FE24151B560044B1B2 /* PlayerPicker */,
-				4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */,
+				4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */,
 				4FD3722D22A6F5D800A45757 /* RulesButton */,
 				4F9FC5D91F5344760003C2FF /* ScoreStepper */,
 				4FB4BE7F1F515BA4003B1259 /* StopWatch */,
@@ -750,6 +741,7 @@
 				4F4D5E5422F3554D00701504 /* HockeyGameStatus.swift */,
 				4F1C321622F6F19B00DC8D3A /* NumberOfPeriods.swift */,
 				4FDE522324C3195700AC5A1A /* PenaltyCard.swift */,
+				4FA22BFD24C4AD7300BFEF6F /* PremiumFeature.swift */,
 				4FD3722922A6EC1D00A45757 /* Rules.swift */,
 				4F6869BE23DC9204003F89C1 /* RulesDataSource.swift */,
 				4F93F59023CA38B900C93561 /* Sound.swift */,
@@ -833,14 +825,6 @@
 				4FD3723022A6F5F400A45757 /* RulesButton.swift */,
 			);
 			name = RulesButton;
-			sourceTree = "<group>";
-		};
-		4FDCCF2D1FCAD4CD002CC64A /* PopupMessage */ = {
-			isa = PBXGroup;
-			children = (
-				4FDCCF2E1FCAD4E5002CC64A /* PopupMessageView.swift */,
-			);
-			name = PopupMessage;
 			sourceTree = "<group>";
 		};
 		4FF7FB2C1F6549C3001D4ED1 /* JukeBox */ = {

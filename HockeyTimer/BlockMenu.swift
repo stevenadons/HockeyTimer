@@ -37,7 +37,7 @@ class BlockMenu: UIView {
     private let mainButtonRightInset: CGFloat = 28
     private let mainButtonBottomInset: CGFloat = 26
     private let horGrid: CGFloat = 64
-    private let vertPadding: CGFloat = 16
+    private let vertPadding: CGFloat = 26
     private let itemTitleWidth: CGFloat = 58
     private let itemTitleHeight: CGFloat = 20
     private let itemToLabelPadding: CGFloat = 4
@@ -83,23 +83,16 @@ class BlockMenu: UIView {
             
             if imageNames.count == 1 {
                 let originX = mainButton.frame.origin.x
-                let originY = mainButton.frame.origin.y + (mainButtonDiameter - itemButtonDiameter) / 2 + vertPadding
+                let originY = mainButton.frame.origin.y - (mainButtonDiameter - itemButtonDiameter) / 2 - vertPadding
                 itemButton.frame.origin = CGPoint(x: originX, y: originY)
                 
             } else {
-                if imageNames.count.isMultiple(of: 2) {
-                    let firstRightIndex = imageNames.count / 2
-                    let firstRightIndexOriginX = mainButton.frame.origin.x + (mainButtonDiameter - itemButtonDiameter) / 2 + horGrid / 2
-                    let firstRightIndexOriginY = mainButton.frame.origin.y + mainButtonDiameter + vertPadding
-                    let originX = firstRightIndexOriginX + CGFloat(index - firstRightIndex) * horGrid
-                    itemButton.frame.origin = CGPoint(x: originX, y: firstRightIndexOriginY)
-                } else {
-                    let midIndex = (imageNames.count - 1) / 2
-                    let midIndexOriginX = mainButton.frame.origin.x + (mainButtonDiameter - itemButtonDiameter) / 2
-                    let midIndexOriginY = mainButton.frame.origin.y + mainButtonDiameter + vertPadding
-                    let originX = midIndexOriginX + CGFloat(index - midIndex) * horGrid
-                    itemButton.frame.origin = CGPoint(x: originX, y: midIndexOriginY)
-                }
+                let lastItemX = mainButton.frame.origin.x + (mainButtonDiameter - itemButtonDiameter) / 2
+                let firstItemX = bounds.width - lastItemX - itemButtonDiameter
+                let intervalX = (lastItemX - firstItemX) / CGFloat(imageNames.count - 1)
+                let originX = lastItemX - intervalX * CGFloat(imageNames.count - 1 - index)
+                let originY = mainButton.frame.origin.y - mainButtonDiameter - vertPadding
+                itemButton.frame.origin = CGPoint(x: originX, y: originY)
             }
             itemButtons.append(itemButton)
             insertSubview(itemButton, belowSubview: mainButton)
@@ -133,22 +126,18 @@ class BlockMenu: UIView {
             let itemButton = itemButtons[index]
             if itemButtons.count == 1 {
                 let translationX: CGFloat = 0.0
-                let translationY: CGFloat = -vertPadding
+                let translationY: CGFloat = vertPadding
                 itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
                 
             } else {
-                if itemButtons.count.isMultiple(of: 2) {
-                    let firstRightIndex = itemButtons.count / 2
-                    let translationX: CGFloat = -horGrid / 2 - CGFloat(index - firstRightIndex) * horGrid
-                    let translationY: CGFloat = -mainButtonDiameter - vertPadding
-                    itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
-                } else {
-                    let midIndex = (imageNames.count - 1) / 2
-                    let translationX: CGFloat = -CGFloat(index - midIndex) * horGrid
-                    let translationY: CGFloat = -mainButtonDiameter - vertPadding
-                    itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
-                }
+                let lastItemX = mainButton.frame.origin.x + (mainButtonDiameter - itemButtonDiameter) / 2
+                let firstItemX = bounds.width - lastItemX - itemButtonDiameter
+                let intervalX = (lastItemX - firstItemX) / CGFloat(imageNames.count - 1)
+                let translationX: CGFloat = intervalX * CGFloat(imageNames.count - 1 - index)
+                let translationY: CGFloat = mainButtonDiameter + vertPadding
+                itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
             }
+            itemButton.alpha = 0.0
             itemLabels[index].alpha = 0.0
         }
     }
@@ -177,8 +166,9 @@ class BlockMenu: UIView {
         
         for index in 0 ..< itemButtons.count {
             
-            UIView.animate(withDuration: 0.2, delay: 0.05 * Double(index), usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: [], animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: [], animations: {
                 self.itemButtons[index].transform = .identity
+                self.itemButtons[index].alpha = 1.0
             }) { (finished) in
                 self.itemLabels[index].alpha = finished ? 1.0 : 0.0
             }
@@ -202,29 +192,24 @@ class BlockMenu: UIView {
                 let itemButton = self.itemButtons[index]
                 if self.itemButtons.count == 1 {
                     let translationX: CGFloat = 0.0
-                    let translationY: CGFloat = -self.vertPadding
+                    let translationY: CGFloat = self.vertPadding
                     itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
                     
                 } else {
-                    if self.itemButtons.count.isMultiple(of: 2) {
-                        let firstRightIndex = self.itemButtons.count / 2
-                        let translationX: CGFloat = -self.horGrid / 2 - CGFloat(index - firstRightIndex) * self.horGrid
-                        let translationY: CGFloat = -self.mainButtonDiameter - self.vertPadding
-                        itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
-                    } else {
-                        let midIndex = (self.itemButtons.count - 1) / 2
-                        let translationX: CGFloat = -CGFloat(index - midIndex) * self.horGrid
-                        let translationY: CGFloat = -self.mainButtonDiameter - self.vertPadding
-                        itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
-                    }
+                    let lastItemX = self.mainButton.frame.origin.x + (self.mainButtonDiameter - self.itemButtonDiameter) / 2
+                    let firstItemX = self.bounds.width - lastItemX - self.itemButtonDiameter
+                    let intervalX = (lastItemX - firstItemX) / CGFloat(self.imageNames.count - 1)
+                    let translationX: CGFloat = intervalX * CGFloat(self.imageNames.count - 1 - index)
+                    let translationY: CGFloat = self.mainButtonDiameter + self.vertPadding
+                    itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
                 }
+                itemButton.alpha = 0.0
                 self.itemLabels[index].alpha = 0.0
             }
         }, completion: { (finished) in
             NotificationCenter.default.post(name: .BlockMenuDidClose, object: nil)
         })
     }
-    
     
     
     // MARK: - Touch Methods

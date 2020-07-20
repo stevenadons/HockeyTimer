@@ -83,10 +83,10 @@ class FeatureView: UIView {
         
         NSLayoutConstraint.activate([
             
-            graphics.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            graphics.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            graphics.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            graphics.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             graphics.topAnchor.constraint(equalTo: topAnchor),
-            graphics.bottomAnchor.constraint(equalTo: body.topAnchor),
+            graphics.bottomAnchor.constraint(equalTo: body.topAnchor, constant: -12),
             
             body.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             body.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
