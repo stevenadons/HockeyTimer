@@ -15,7 +15,7 @@ class BlockMenuMainButton: UIButton {
     
     var contentColor: UIColor = .systemBackground {
         didSet {
-            if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+            if let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
                 setImage(image, for: .normal)
             }
         }
@@ -27,7 +27,7 @@ class BlockMenuMainButton: UIButton {
     }
     var imageName: String = "line.horizontal.3" {
         didSet {
-            if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+            if let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
                 setImage(image, for: .normal)
             }
         }
@@ -35,7 +35,7 @@ class BlockMenuMainButton: UIButton {
     var closeImageName: String = "xmark"
     var isShowingHideImage: Bool = false
     
-    private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
+    private let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
 
     
     
@@ -85,7 +85,7 @@ class BlockMenuMainButton: UIButton {
     
     func showCloseImage() {
         
-        if let image = UIImage(systemName: closeImageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+        if let image = UIImage(systemName: closeImageName, withConfiguration: config)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
             setImage(image, for: .normal)
         }
         isShowingHideImage = true
@@ -93,7 +93,7 @@ class BlockMenuMainButton: UIButton {
     
     func hideCloseImage() {
         
-        if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+        if let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
             setImage(image, for: .normal)
         }
         isShowingHideImage = false

@@ -140,7 +140,7 @@ class CountryDataManager {
                                   localeRegionCode: "NL",
                                   name: LS_COUNTRY_NETHERLANDS,
                                   periods: [2, 2, 2, 4],
-                                  minutes: [30, 50, 60, 70],
+                                  minutes: [40, 50, 60, 70],
                                   minutesStrings: [LS_COUNTRY_TEAMS_OF_3, LS_COUNTRY_TEAMS_OF_6, LS_COUNTRY_TEAMS_OF_8, LS_COUNTRY_GENERAL],
                                   groupsOfRules: [])
         let newZealand = Country(capitals: "NZ",

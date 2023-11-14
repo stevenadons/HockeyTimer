@@ -37,9 +37,9 @@ class BlockMenu: UIView {
     private let mainButtonRightInset: CGFloat = 28
     private let mainButtonBottomInset: CGFloat = 26
     private let horGrid: CGFloat = 64
-    private let vertPadding: CGFloat = 26
+    private let vertPadding: CGFloat = 32
     private let itemTitleWidth: CGFloat = 58
-    private let itemTitleHeight: CGFloat = 20
+    private let itemTitleHeight: CGFloat = 16
     private let itemToLabelPadding: CGFloat = 4
     
     private let mainButtonColor: UIColor = UIColor(named: ColorName.DarkBlue)!
@@ -83,7 +83,7 @@ class BlockMenu: UIView {
             
             if imageNames.count == 1 {
                 let originX = mainButton.frame.origin.x
-                let originY = mainButton.frame.origin.y - (mainButtonDiameter - itemButtonDiameter) / 2 - vertPadding
+                let originY = mainButton.frame.origin.y
                 itemButton.frame.origin = CGPoint(x: originX, y: originY)
                 
             } else {
@@ -91,7 +91,7 @@ class BlockMenu: UIView {
                 let firstItemX = bounds.width - lastItemX - itemButtonDiameter
                 let intervalX = (lastItemX - firstItemX) / CGFloat(imageNames.count - 1)
                 let originX = lastItemX - intervalX * CGFloat(imageNames.count - 1 - index)
-                let originY = mainButton.frame.origin.y - mainButtonDiameter - vertPadding
+                let originY = mainButton.frame.origin.y - itemTitleHeight
                 itemButton.frame.origin = CGPoint(x: originX, y: originY)
             }
             itemButtons.append(itemButton)
@@ -120,13 +120,14 @@ class BlockMenu: UIView {
     private func windUp() {
         
         mainButton.hideCloseImage()
+        mainButton.bgColor = mainButtonColor
         
         for index in 0 ..< itemButtons.count {
             
             let itemButton = itemButtons[index]
             if itemButtons.count == 1 {
                 let translationX: CGFloat = 0.0
-                let translationY: CGFloat = vertPadding
+                let translationY: CGFloat = 0.0
                 itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
                 
             } else {
@@ -134,11 +135,14 @@ class BlockMenu: UIView {
                 let firstItemX = bounds.width - lastItemX - itemButtonDiameter
                 let intervalX = (lastItemX - firstItemX) / CGFloat(imageNames.count - 1)
                 let translationX: CGFloat = intervalX * CGFloat(imageNames.count - 1 - index)
-                let translationY: CGFloat = mainButtonDiameter + vertPadding
+                let translationY: CGFloat = 0.0
                 itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
             }
+            
             itemButton.alpha = 0.0
             itemLabels[index].alpha = 0.0
+            
+            mainButton.transform = .identity
         }
     }
     
@@ -169,6 +173,7 @@ class BlockMenu: UIView {
             UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: [], animations: {
                 self.itemButtons[index].transform = .identity
                 self.itemButtons[index].alpha = 1.0
+                self.mainButton.transform = CGAffineTransform(translationX: 0, y: -self.mainButtonDiameter - self.vertPadding)
             }) { (finished) in
                 self.itemLabels[index].alpha = finished ? 1.0 : 0.0
             }
@@ -180,33 +185,12 @@ class BlockMenu: UIView {
 
     @objc func close() {
         
-        mainButton.hideCloseImage()
-        mainButton.bgColor = mainButtonColor
-
-        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.0, options: [], animations: {
+        UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [], animations: {
             
-            self.backgroundColor = UIColor.clear
+            self.windUp()
             
-            for index in 0 ..< self.itemButtons.count {
-                
-                let itemButton = self.itemButtons[index]
-                if self.itemButtons.count == 1 {
-                    let translationX: CGFloat = 0.0
-                    let translationY: CGFloat = self.vertPadding
-                    itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
-                    
-                } else {
-                    let lastItemX = self.mainButton.frame.origin.x + (self.mainButtonDiameter - self.itemButtonDiameter) / 2
-                    let firstItemX = self.bounds.width - lastItemX - self.itemButtonDiameter
-                    let intervalX = (lastItemX - firstItemX) / CGFloat(self.imageNames.count - 1)
-                    let translationX: CGFloat = intervalX * CGFloat(self.imageNames.count - 1 - index)
-                    let translationY: CGFloat = self.mainButtonDiameter + self.vertPadding
-                    itemButton.transform = CGAffineTransform(translationX: translationX, y: translationY)
-                }
-                itemButton.alpha = 0.0
-                self.itemLabels[index].alpha = 0.0
-            }
         }, completion: { (finished) in
+            
             NotificationCenter.default.post(name: .BlockMenuDidClose, object: nil)
         })
     }

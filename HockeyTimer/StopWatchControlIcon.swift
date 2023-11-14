@@ -121,16 +121,24 @@ class StopWatchControlIcon: UIView {
     
     func change(to newIcon: StopWatchControlIcon.Icon) {
         
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
-            self.alpha = 0.0
-            self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        }) { (finished) in
-            self.icon = newIcon
-            UIView.animate(withDuration: 0.2, delay: 0.2, options: [.curveEaseOut], animations: {
-                self.alpha = 1.0
-                self.transform = CGAffineTransform.identity
-            })
-        }
+        self.alpha = 0.0
+        self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        self.icon = newIcon
+        UIView.animate(withDuration: 0.2, delay: 0.2, options: [.curveEaseOut], animations: {
+            self.alpha = 1.0
+            self.transform = CGAffineTransform.identity
+        })
+        
+//        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
+//            self.alpha = 0.0
+//            self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+//        }) { (finished) in
+//            self.icon = newIcon
+//            UIView.animate(withDuration: 0.2, delay: 0.2, options: [.curveEaseOut], animations: {
+//                self.alpha = 1.0
+//                self.transform = CGAffineTransform.identity
+//            })
+//        }
     }
     
     

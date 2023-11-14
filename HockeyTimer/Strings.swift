@@ -145,7 +145,7 @@ let LS_COUNTRY_INDIA = NSLocalizedString("India", comment: "Country name in pick
 let LS_COUNTRY_SPAIN = NSLocalizedString("Spain", comment: "Country name in picker")
 let LS_COUNTRY_ARGENTINA = NSLocalizedString("Argentina", comment: "Country name in picker")
 
-let LS_COUNTRY_TEAMS_OF_3 = NSLocalizedString("Teams of 3 & H", comment: "Durationcard description")
+let LS_COUNTRY_TEAMS_OF_3 = NSLocalizedString("Teams of 3", comment: "Durationcard description")
 let LS_COUNTRY_TEAMS_OF_6 = NSLocalizedString("Teams of 6", comment: "Durationcard description")
 let LS_COUNTRY_TEAMS_OF_8 = NSLocalizedString("Teams of 8", comment: "Durationcard description")
 let LS_COUNTRY_GENERAL = NSLocalizedString("General", comment: "Durationcard description")

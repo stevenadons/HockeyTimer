@@ -91,7 +91,7 @@ class TimerVC: PanArrowVC {
         let imageNames = ["arrow.2.circlepath.circle", "timer", "list.number", "doc.plaintext", "slider.horizontal.3"]
         let itemTitles = [LS_RESTART, LS_TIME, LS_REPORT, LS_RULES, LS_TITLE_SETTINGS]
         let centerX = view.bounds.width - 28 - BlockMenu.standardMainButtonDiameter / 2.0
-        let centerY = view.bounds.height - 26 - BlockMenu.standardMainButtonDiameter / 2.0
+        let centerY = view.bounds.height - 32 - BlockMenu.standardMainButtonDiameter / 2.0
         menu = BlockMenu(inView: view, centerX: centerX, centerY: centerY, imageNames: imageNames, itemTitles: itemTitles, delegate: self)
 
         NSLayoutConstraint.activate([

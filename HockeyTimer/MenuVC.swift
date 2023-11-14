@@ -224,8 +224,7 @@ class MenuVC: UIViewController {
     private func shareApp() {
         
         // Conform to UIActivityItemSource for custom activityItems
-        let activityItem = LS_TITLE_SHARE_HOCKEYUPP
-        let activityViewController = UIActivityViewController(activityItems: [activityItem, self], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [self], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
     }
     

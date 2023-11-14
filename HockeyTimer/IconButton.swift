@@ -24,7 +24,7 @@ class IconButton: UIButton {
     private let iconWidth: CGFloat = 24
     private let iconHeight: CGFloat = 24
     
-    private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
+    private let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
     
     static var standardWidth: CGFloat = 65
     static var standardHeight: CGFloat = 65
@@ -45,7 +45,7 @@ class IconButton: UIButton {
         
         iconImage = UIImageView()
         iconImage.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(iconColor, renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(iconColor, renderingMode: .alwaysOriginal)
         iconImage.image = image
         iconImage.contentMode = .scaleAspectFill
         addSubview(iconImage)
@@ -90,7 +90,7 @@ class IconButton: UIButton {
     func setColor(iconColor: UIColor, textColor: UIColor) {
         
         self.iconColor = iconColor
-        let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(iconColor, renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(iconColor, renderingMode: .alwaysOriginal)
         iconImage.image = image
         
         self.textColor = textColor

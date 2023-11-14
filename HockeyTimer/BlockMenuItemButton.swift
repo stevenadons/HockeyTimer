@@ -15,7 +15,7 @@ class BlockMenuItemButton: UIButton {
     
     var contentColor: UIColor = .systemBackground {
         didSet {
-            if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+            if let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
                 setImage(image, for: .normal)
             }
         }
@@ -27,13 +27,13 @@ class BlockMenuItemButton: UIButton {
     }
     var imageName: String = "line.horizontal.3" {
         didSet {
-            if let image = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
+            if let image = UIImage(systemName: imageName, withConfiguration: config)?.withTintColor(contentColor, renderingMode: .alwaysOriginal) {
                 setImage(image, for: .normal)
             }
         }
     }
     
-    private let configuration = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
+    private let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .large)
     
     
     // MARK: - Initializing
