@@ -55,6 +55,9 @@ class OnboardingVC: UIViewController {
         view.addSubview(scrollView)
         
         pageControl = UIPageControl()
+//        if #available(iOS 14, *) {
+//            pageControl.backgroundStyle = .minimal
+//        }
         pageControl.numberOfPages = numberOfPages
         pageControl.currentPage = previousPage
         pageControl.pageIndicatorTintColor = UIColor(named: ColorName.DarkBlueText)!
@@ -74,7 +77,7 @@ class OnboardingVC: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            pageControl.widthAnchor.constraint(equalToConstant: 50),
+            pageControl.widthAnchor.constraint(equalToConstant: 150),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 35),
             pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
